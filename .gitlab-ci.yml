@@ -1,7 +1,7 @@
 stages:
   - lint
-  - build
   - dependencies
+  - build
 
 install_dependencies:
   image: node:16-alpine

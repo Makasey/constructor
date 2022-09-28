@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'lavka-roz-frontend';
+  title = 'lavka-roz-frontend';3
+  42у2
 }
