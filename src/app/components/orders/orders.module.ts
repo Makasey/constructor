@@ -3,12 +3,11 @@ import {CommonModule} from "@angular/common";
 import {OrdersComponent} from "./orders.component";
 import {OrdersService} from "./orders.service";
 import {TableModule} from "../table/table.module";
-import {StatusComponent} from "../status/status.component";
+import {StatusModule} from "../status/status.module";
 
 @NgModule({
   declarations: [
     OrdersComponent,
-    StatusComponent,
   ],
   exports: [
     OrdersComponent,
@@ -16,9 +15,10 @@ import {StatusComponent} from "../status/status.component";
   imports: [
     CommonModule,
     TableModule,
+    StatusModule,
   ],
   providers: [
-    OrdersService
+    OrdersService,
   ],
 })
 
