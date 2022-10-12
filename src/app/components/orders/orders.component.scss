@@ -15,8 +15,7 @@
       display: flex;
     }
 
-    .purchase_wrapper {
-
+    .orders-table {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -25,16 +24,13 @@
       box-shadow: 0 4px 15px rgba(34, 42, 70, 0.08);
       border-radius: 10px;
 
-      .purchase_item {
+
+      .lz-table-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 15px 20px;
         gap: 5px;
-
-        &:not(:first-of-type) {
-          border-top: 1px solid #D0D2D7;
-        }
 
         &.head {
           background-color: #F4F5F7;
@@ -51,7 +47,7 @@
             font-size: 14px;
           }
 
-          .reminder_recipient {
+          .purchase_recipient {
             font-weight: 400;
           }
 
@@ -96,17 +92,33 @@
         }
 
         .purchase_review {
-          max-width: 65px;
+          max-width: 75px;
           text-decoration: none;
           color: #0093A2;
           background-color: transparent;
           border: none;
+          cursor: pointer;
+          border-radius: 4px;
+          transition-duration: 0.4s;
         }
+
+        .purchase_review:hover{
+          background-color: #0093A2;
+          color: white;
+        }
+
+
       }
     }
+  }
 
-    .none_purchase_item {
-      padding: 15px 20px;
-    }
+  .none_purchase_item {
+    padding: 15px 20px;
   }
 }
+
+
+
+
+
+

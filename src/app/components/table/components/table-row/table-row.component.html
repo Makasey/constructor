@@ -1,0 +1,36 @@
+<ng-container>
+  <ng-template [ngTemplateOutlet]="lzRowTemplate === 'head' ? headTemplate : bodyTemplate">
+  </ng-template>
+</ng-container>
+
+<ng-template #headTemplate>
+  <div class="lz-table-row head">
+    <ng-container *ngFor="let item of lzTableMeta; let i = index">
+      <div class="lz-table-head-item"
+           [ngClass]="lzTableMeta[i].customClass">
+        {{item.label}}
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #bodyTemplate>
+  <div class="lz-table-row"
+       *ngFor="let row of lzTableValues">
+    <ng-container *ngFor="let item of row | keyvalue; let i = index">
+      <div class="lz-table-row-item"
+           [ngClass]="lzTableMeta[i].customClass"
+           *ngIf="!!row[lzTableMeta[i].fieldKey]">
+        <ng-template
+          [ngTemplateOutlet]="lzTableMeta[i].templateKey ? lzTemplatesMap[lzTableMeta[i].templateKey!] : defaultTemplate"
+          [ngTemplateOutletContext]="{value: row[lzTableMeta[i].fieldKey], row: row}">
+        </ng-template>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #defaultTemplate
+             let-value="value">
+  <span class="lz-table-row-item-value">{{value}}</span>
+</ng-template>

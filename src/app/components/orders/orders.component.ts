@@ -1,79 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-
-type Order = {
-  id: string,
-  name: string,
-  delivery_date: string,
-  recipient: string,
-  status: StatusType,
-  amount: string
-}
-
-enum StatusType {
-  CANCEL = 'Cancel',
-  WAIT = 'Wait',
-  PAID = 'Paid'
-}
+import {Component, ViewEncapsulation} from '@angular/core';
+import {OrdersService} from "./orders.service";
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  styleUrls: ['./orders.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent {
 
-  public statusTypes = StatusType;
+  public ordersTableMeta = this.service.getTableMeta();
+  public ordersTableValues = this.service.getTableValues();
 
-  public orders: Array<Order> = [
-    {
-      id: "64587930",
-      name: "Букет малиновых роз",
-      delivery_date: "23.05.2021",
-      recipient: "Зиновьев Сергей",
-      status: StatusType.WAIT,
-      amount: "5739 ₽"
-    },
-    {
-      id: "64587930",
-      name: "Букет малиновых роз",
-      delivery_date: "23.05.2021",
-      recipient: "Зиновьев Сергей",
-      status: StatusType.CANCEL,
-      amount: "5739 ₽"
-    },
-    {
-      id: "64587930",
-      name: "Букет малиновых роз",
-      delivery_date: "23.05.2021",
-      recipient: "Зиновьев Сергей",
-      status: StatusType.PAID,
-      amount: "5739 ₽"
-    },
-    {
-      id: "64587930",
-      name: "Букет малиновых роз",
-      delivery_date: "23.05.2021",
-      recipient: "Зиновьев Сергей",
-      status: StatusType.PAID,
-      amount: "5739 ₽"
-    },
-    {
-      id: "64587930",
-      name: "Букет малиновых роз",
-      delivery_date: "23.05.2021",
-      recipient: "Зиновьев Сергей",
-      status: StatusType.PAID,
-      amount: "5739 ₽"
-    }
-  ]
-
-  constructor() {
+  constructor(private service: OrdersService) {
   }
 
   public _onAddReview() : void {
     console.log("Отзыв добавлен")
-  }
-
-  ngOnInit(): void {
   }
 }

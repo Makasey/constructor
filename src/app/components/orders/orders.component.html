@@ -1,53 +1,27 @@
 <div class="main-content">
   <div class="main-content_unit active">
     <h2 class="title">Личный кабинет</h2>
-    <div class="purchase_wrapper">
-      <div class="purchase_item head">
-        <h4 class="purchase_id">Номер заказа</h4>
-        <h4 class="purchase_name">Название</h4>
-        <h4 class="purchase_delivery_date">Дата доставки</h4>
-        <h4 class="purchase_recipient">Получатель</h4>
-        <h4 class="purchase_status">Статус</h4>
-        <h4 class="purchase_amount">Сумма</h4>
-        <a href="#" class="purchase_review"></a>
+
+    <lz-table class="orders-table"
+              [lzTableValues]="ordersTableValues"
+              [lzTableMeta]="ordersTableMeta"
+              [lzTemplatesMap]="{statusTemplate: statusTemplate, buttonTemplate: buttonTemplate}">
+    </lz-table>
+
+    <ng-template #buttonTemplate>
+      <button class="purchase_review"
+              (click)="_onAddReview()">Добавить отзыв
+      </button>
+    </ng-template>
+
+    <ng-template #statusTemplate
+                 let-value="value">
+      <div class="purchase_status">
+        <lz-status class="purchase_status"
+                   [status]="value">
+        </lz-status>
       </div>
+    </ng-template>
 
-      <ng-container *ngIf="orders.length; else emptyTemplate">
-      <div class="purchase_item"
-           *ngFor="let order of orders,let index = index">
-        <a href="#" class="purchase_id">{{order.id}}</a>
-        <h4 class="purchase_name">{{order.name}}</h4>
-        <h4 class="purchase_delivery_date">{{order.delivery_date}}</h4>
-        <h4 class="purchase_recipient">{{order.recipient}}</h4>
-
-        <div class="purchase_status"
-             [ngSwitch]="order.status">
-          <div *ngSwitchCase="statusTypes.CANCEL">
-            <span style="color: #E2195B">{{order.status}}</span>
-          </div>
-
-          <div *ngSwitchCase="statusTypes.WAIT">
-            <span style="color: #FFA500">{{order.status}}</span>
-          </div>
-
-          <div *ngSwitchCase="statusTypes.PAID">
-            <span style="color: #0093A2">{{order.status}}</span>
-          </div>
-
-        </div>
-
-        <h4 class="purchase_amount">{{order.amount}}</h4>
-        <button class="purchase_review"
-                (click)="_onAddReview()">Добавить отзыв</button>
-      </div>
-      </ng-container>
-
-      <ng-template #emptyTemplate>
-        <div class="none_purchase_item">
-          <h4>ИДИ КУПИ ЦВЕТЫ!!!</h4>
-        </div>
-      </ng-template>
-
-    </div>
   </div>
 </div>
