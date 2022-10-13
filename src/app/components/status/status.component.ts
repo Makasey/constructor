@@ -24,5 +24,4 @@ export class StatusComponent {
     [StatusType.CANCEL]: 'cancel',
     [StatusType.PAID]: 'paid',
   };
-
 }

@@ -14,8 +14,6 @@ import {TableRowComponent} from "./components/table-row/table-row.component";
   ],
   exports: [
     TableComponent,
-    TableHeadComponent,
-    TableBodyComponent,
   ],
   imports: [
     CommonModule,

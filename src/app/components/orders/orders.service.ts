@@ -88,7 +88,6 @@ export class OrdersService {
         customClass: 'purchase_amount',
       },
       {
-        label: '',
         fieldKey: 'review',
         templateKey: 'buttonTemplate',
         customClass: 'purchase_review',
