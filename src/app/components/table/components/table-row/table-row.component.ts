@@ -9,15 +9,15 @@ import {LZTableMeta, LZTableValues, LZTemplatesMap} from "../../types";
 export class TableRowComponent {
 
   @Input()
-  public tableMeta!: LZTableMeta[];
+  public lzTableMeta!: LZTableMeta[];
 
   @Input()
-  public tableValues!: LZTableValues[];
+  public lzTableValues!: LZTableValues[];
 
   @Input()
-  public templatesMap!: LZTemplatesMap;
+  public lzTemplatesMap!: LZTemplatesMap;
 
   @Input()
-  public rowTemplate!: string;
+  public lzRowTemplate!: string;
 }
 

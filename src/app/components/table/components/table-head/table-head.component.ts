@@ -9,5 +9,5 @@ import {LZTableMeta} from "../../types";
 export class TableHeadComponent {
 
   @Input()
-  public tableMeta!: LZTableMeta[];
+  public lzTableMeta!: LZTableMeta[];
 }

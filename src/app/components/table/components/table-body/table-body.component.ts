@@ -9,11 +9,11 @@ import {LZTableMeta, LZTableValues, LZTemplatesMap} from "../../types";
 
 export class TableBodyComponent {
   @Input()
-  public tableMeta!: LZTableMeta[];
+  public lzTableMeta!: LZTableMeta[];
 
   @Input()
-  public tableValues!: LZTableValues[];
+  public lzTableValues!: LZTableValues[];
 
   @Input()
-  public templatesMap!: LZTemplatesMap;
+  public lzTemplatesMap!: LZTemplatesMap;
 }

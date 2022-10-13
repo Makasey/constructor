@@ -1,13 +1,13 @@
 <ng-container>
-  <ng-template [ngTemplateOutlet]="rowTemplate === 'head' ? headTemplate : bodyTemplate">
+  <ng-template [ngTemplateOutlet]="lzRowTemplate === 'head' ? headTemplate : bodyTemplate">
   </ng-template>
 </ng-container>
 
 <ng-template #headTemplate>
   <div class="lz-table-row head">
-    <ng-container *ngFor="let item of tableMeta; let i = index">
+    <ng-container *ngFor="let item of lzTableMeta; let i = index">
       <div class="lz-table-head-item"
-           [ngClass]="tableMeta[i].customClass">
+           [ngClass]="lzTableMeta[i].customClass">
         {{item.label}}
       </div>
     </ng-container>
@@ -16,14 +16,14 @@
 
 <ng-template #bodyTemplate>
   <div class="lz-table-row"
-       *ngFor="let row of tableValues">
+       *ngFor="let row of lzTableValues">
     <ng-container *ngFor="let item of row | keyvalue; let i = index">
       <div class="lz-table-row-item"
-           [ngClass]="tableMeta[i].customClass"
-           *ngIf="!!row[tableMeta[i].fieldKey]">
+           [ngClass]="lzTableMeta[i].customClass"
+           *ngIf="!!row[lzTableMeta[i].fieldKey]">
         <ng-template
-          [ngTemplateOutlet]="tableMeta[i].templateKey ? templatesMap[tableMeta[i].templateKey!] : defaultTemplate"
-          [ngTemplateOutletContext]="{value: row[tableMeta[i].fieldKey], row: row}">
+          [ngTemplateOutlet]="lzTableMeta[i].templateKey ? lzTemplatesMap[lzTableMeta[i].templateKey!] : defaultTemplate"
+          [ngTemplateOutletContext]="{value: row[lzTableMeta[i].fieldKey], row: row}">
         </ng-template>
       </div>
     </ng-container>
