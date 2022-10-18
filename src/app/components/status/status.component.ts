@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export enum StatusType {
   CANCEL = 'Cancel',
@@ -8,6 +8,7 @@ export enum StatusType {
 
 @Component({
   selector: 'lz-status',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.scss'],
 })
