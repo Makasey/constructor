@@ -1,0 +1,30 @@
+{
+  "trailingComma": "all",
+  "htmlWhitespaceSensitivity": "strict",
+  "endOfLine": "auto",
+  "semi": true,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "jsxBracketSameLine": true,
+  "quoteProps": "as-needed",
+  "printWidth": 300,
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "*.component.html",
+      "options": {
+        "printWidth": 150
+      }
+    },
+    {
+      "files": [
+        "*.json",
+        ".prettierrc"
+      ],
+      "options": {
+        "tabWidth": 2
+      }
+    }
+  ]
+}

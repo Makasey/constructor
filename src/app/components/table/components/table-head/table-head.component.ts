@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
-import {LZTableMeta} from "../../types";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { LZTableMeta } from '../../types';
 
 @Component({
   selector: 'lz-table-head',
@@ -7,7 +7,6 @@ import {LZTableMeta} from "../../types";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeadComponent {
-
   @Input()
   public tableMeta!: LZTableMeta[];
 }

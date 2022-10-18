@@ -1,4 +1,4 @@
-import {TemplateRef} from "@angular/core";
+import { TemplateRef } from '@angular/core';
 
 export type LZTableMeta = Readonly<{
   label?: string;
@@ -12,5 +12,3 @@ export type LZTableValues = Readonly<{
 }>;
 
 export type LZTemplatesMap = Readonly<Record<string, TemplateRef<unknown>>>;
-
-

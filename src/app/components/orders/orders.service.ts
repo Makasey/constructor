@@ -1,57 +1,57 @@
-import {Injectable} from "@angular/core";
-import {LZTableMeta, LZTableValues} from "../table/types";
-import {StatusType} from "../status/status.component";
+import { Injectable } from '@angular/core';
+import { LZTableMeta, LZTableValues } from '../table/types';
+import { StatusType } from '../status/status.component';
 
 @Injectable()
 export class OrdersService {
-
   public getTableValues(): LZTableValues[] {
     return [
       {
-        id: "64587930",
-        name: "Букет малиновых роз",
-        delivery_date: "23.05.2021",
-        recipient: "Зиновьев Сергей",
+        id: '64587930',
+        name: 'Букет малиновых роз',
+        delivery_date: '23.05.2021',
+        recipient: 'Зиновьев Сергей',
         status: StatusType.WAIT,
-        amount: "5739 ₽",
+        amount: '5739 ₽',
         review: true,
       },
       {
-        id: "64587930",
-        name: "Букет малиновых роз",
-        delivery_date: "23.05.2021",
-        recipient: "Зиновьев Сергей",
+        id: '64587930',
+        name: 'Букет малиновых роз',
+        delivery_date: '23.05.2021',
+        recipient: 'Зиновьев Сергей',
         status: StatusType.CANCEL,
-        amount: "5739 ₽",
+        amount: '5739 ₽',
         review: true,
       },
       {
-        id: "64587930",
-        name: "Букет малиновых роз",
-        delivery_date: "23.05.2021",
-        recipient: "Зиновьев Сергей",
+        id: '64587930',
+        name: 'Букет малиновых роз',
+        delivery_date: '23.05.2021',
+        recipient: 'Зиновьев Сергей',
         status: StatusType.PAID,
-        amount: "5739 ₽",
+        amount: '5739 ₽',
         review: true,
       },
       {
-        id: "64587930",
-        name: "Букет малиновых роз",
-        delivery_date: "23.05.2021",
-        recipient: "Зиновьев Сергей",
+        id: '64587930',
+        name: 'Букет малиновых роз',
+        delivery_date: '23.05.2021',
+        recipient: 'Зиновьев Сергей',
         status: StatusType.PAID,
-        amount: "5739 ₽",
+        amount: '5739 ₽',
         review: true,
       },
       {
-        id: "64587930",
-        name: "Букет малиновых роз",
-        delivery_date: "23.05.2021",
-        recipient: "Зиновьев Сергей",
+        id: '64587930',
+        name: 'Букет малиновых роз',
+        delivery_date: '23.05.2021',
+        recipient: 'Зиновьев Сергей',
         status: StatusType.PAID,
-        amount: "5739 ₽",
+        amount: '5739 ₽',
         review: true,
-      }];
+      },
+    ];
   }
 
   public getTableMeta(): LZTableMeta[] {
@@ -91,6 +91,7 @@ export class OrdersService {
         fieldKey: 'review',
         templateKey: 'buttonTemplate',
         customClass: 'purchase_review',
-      }];
+      },
+    ];
   }
 }

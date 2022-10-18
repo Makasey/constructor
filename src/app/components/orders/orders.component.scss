@@ -20,10 +20,10 @@
       display: flex;
       flex-direction: column;
       margin: 0 auto;
-      border: 1px solid #F2F3F5;
+      border: 1px solid #f2f3f5;
       box-shadow: 0 4px 15px rgba(34, 42, 70, 0.08);
       border-radius: 10px;
-      font-family: "TT Norms Regular", sans-serif;
+      font-family: 'TT Norms Regular', sans-serif;
 
       .lz-table-row {
         display: flex;
@@ -31,10 +31,10 @@
         align-items: center;
         padding: 15px 20px;
         gap: 5px;
-        border-top: 1px solid #D0D2D7;
+        border-top: 1px solid #d0d2d7;
 
         &.head {
-          background-color: #F4F5F7;
+          background-color: #f4f5f7;
           border-radius: 10px 10px 0 0;
           border-top: none;
 
@@ -56,7 +56,6 @@
           .purchase_recipient {
             font-weight: 400;
           }
-
         }
 
         .purchase_id {
@@ -65,10 +64,13 @@
           font-weight: 400;
           font-size: 16px;
           text-decoration: none;
-          color: #0093A2;
+          color: #0093a2;
         }
 
-        .purchase_name, .purchase_delivery_date, .purchase_recipient, .purchase_review {
+        .purchase_name,
+        .purchase_delivery_date,
+        .purchase_recipient,
+        .purchase_review {
           width: 100%;
           font-weight: 400;
           font-size: 14px;
@@ -103,7 +105,7 @@
         .purchase_review {
           max-width: 75px;
           text-decoration: none;
-          color: #0093A2;
+          color: #0093a2;
           background-color: transparent;
           border: none;
           cursor: pointer;
@@ -111,11 +113,10 @@
           transition-duration: 0.4s;
         }
 
-        .purchase_review:hover{
-          background-color: #0093A2;
+        .purchase_review:hover {
+          background-color: #0093a2;
           color: white;
         }
-        
       }
     }
   }

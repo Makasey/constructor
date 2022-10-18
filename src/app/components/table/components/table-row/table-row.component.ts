@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, Input} from "@angular/core";
-import {LZTableMeta, LZTableValues, LZTemplatesMap} from "../../types";
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { LZTableMeta, LZTableValues, LZTemplatesMap } from '../../types';
 
 @Component({
   selector: 'lz-table-row',
@@ -7,7 +7,6 @@ import {LZTableMeta, LZTableValues, LZTemplatesMap} from "../../types";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowComponent {
-
   @Input()
   public tableMeta!: LZTableMeta[];
 
@@ -20,4 +19,3 @@ export class TableRowComponent {
   @Input()
   public rowTemplate!: string;
 }
-

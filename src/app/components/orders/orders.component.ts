@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {OrdersService} from "./orders.service";
+import { Component, ViewEncapsulation } from '@angular/core';
+import { OrdersService } from './orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -8,14 +8,12 @@ import {OrdersService} from "./orders.service";
   encapsulation: ViewEncapsulation.None,
 })
 export class OrdersComponent {
-
   public ordersTableMeta = this.service.getTableMeta();
   public ordersTableValues = this.service.getTableValues();
 
-  constructor(private service: OrdersService) {
-  }
+  constructor(private service: OrdersService) {}
 
-  public _onAddReview() : void {
-    console.log("Отзыв добавлен")
+  public _onAddReview(): void {
+    console.log('Отзыв добавлен');
   }
 }
