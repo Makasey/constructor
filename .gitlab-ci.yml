@@ -3,11 +3,24 @@ stages:
   - dependencies
   - build
 
+Lint Project:
+  image: node:16-alpine
+  stage: lint
+  script:
+    - npm link eslint@8.23.0
+    - npm run eslint:fix
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+
 Install dependencies:
   image: node:16-alpine
   stage: dependencies
   script:
-    - npm install
+    - npm install -force
   cache:
     key:
       files:
@@ -19,7 +32,7 @@ Build project:
   image: node:16-alpine
   stage: build
   script:
-    - npm link @angular/cli@11.2.6
+    - npm install -force
     - npm run build
   artifacts:
     paths:

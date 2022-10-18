@@ -2,26 +2,22 @@
   <div class="main-content_unit active">
     <h2 class="title">Личный кабинет</h2>
 
-    <lz-table class="orders-table"
-              [tableValues]="ordersTableValues"
-              [tableMeta]="ordersTableMeta"
-              [templatesMap]="{statusTemplate: statusTemplate, buttonTemplate: buttonTemplate}">
+    <lz-table
+      class="orders-table"
+      [tableValues]="ordersTableValues"
+      [tableMeta]="ordersTableMeta"
+      [templatesMap]="{ statusTemplate: statusTemplate, buttonTemplate: buttonTemplate }"
+    >
     </lz-table>
 
     <ng-template #buttonTemplate>
-      <button class="purchase_review"
-              (click)="_onAddReview()">Добавить отзыв
-      </button>
+      <button class="purchase_review" (click)="_onAddReview()">Добавить отзыв </button>
     </ng-template>
 
-    <ng-template #statusTemplate
-                 let-value="value">
+    <ng-template #statusTemplate let-value="value">
       <div class="purchase_status">
-        <lz-status class="purchase_status"
-                   [status]="value">
-        </lz-status>
+        <lz-status class="purchase_status" [status]="value"> </lz-status>
       </div>
     </ng-template>
-
   </div>
 </div>

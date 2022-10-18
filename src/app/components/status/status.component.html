@@ -1,14 +1,13 @@
-<div class="status_item"
-     [ngSwitch]="status">
+<div class="status_item" [ngSwitch]="status">
   <div *ngSwitchCase="statusTypes.CANCEL">
-    <span [ngClass]="statusTypeClasses[statusTypes.CANCEL]">{{status}}</span>
+    <span [ngClass]="statusTypeClasses[statusTypes.CANCEL]">{{ status }}</span>
   </div>
 
   <div *ngSwitchCase="statusTypes.WAIT">
-    <span [ngClass]="statusTypeClasses[statusTypes.WAIT]">{{status}}</span>
+    <span [ngClass]="statusTypeClasses[statusTypes.WAIT]">{{ status }}</span>
   </div>
 
   <div *ngSwitchCase="statusTypes.PAID">
-    <span [ngClass]="statusTypeClasses[statusTypes.PAID]">{{status}}</span>
+    <span [ngClass]="statusTypeClasses[statusTypes.PAID]">{{ status }}</span>
   </div>
 </div>
