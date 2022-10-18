@@ -20,7 +20,7 @@ Install dependencies:
   image: node:16-alpine
   stage: dependencies
   script:
-    - npm install
+    - npm install -force
   cache:
     key:
       files:
