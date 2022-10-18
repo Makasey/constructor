@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+    selector: "app-root",
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  public title = 'lavka-roz-frontend';
+    public title = "lavka-roz-frontend";
 }

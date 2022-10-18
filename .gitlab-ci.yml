@@ -3,6 +3,17 @@ stages:
   - dependencies
   - build
 
+Lint Project:
+  image: node:16-alpine
+  stage: lint
+  script: npm eslint:fix
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+
 Install dependencies:
   image: node:16-alpine
   stage: dependencies

@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LZTableMeta, LZTableValues, LZTemplatesMap } from '../../types';
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { LZTableMeta, LZTableValues, LZTemplatesMap } from "../../types";
 
 @Component({
-  selector: 'lz-table-row',
-  templateUrl: './table-row.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "lz-table-row",
+    templateUrl: "./table-row.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableRowComponent {
   @Input()
-  public tableMeta!: LZTableMeta[];
+    public tableMeta!: LZTableMeta[];
 
   @Input()
   public tableValues!: LZTableValues[];
