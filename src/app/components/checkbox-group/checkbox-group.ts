@@ -62,17 +62,12 @@ export class CheckboxGroup implements ControlValueAccessor {
     public toggleValue(selectedValue: number): void {
         const index = this.value.indexOf(selectedValue);
 
-        if (index > -1) {
-            this.value = [...this.value.slice(0, index), ...this.value.slice(index + 1)];
-        } else {
-            this.value = [...this.value, selectedValue];
-        }
+        index > -1
+          ? (this.value = [...this.value.slice(0, index), ...this.value.slice(index + 1)])
+          : (this.value = [...this.value, selectedValue]);
 
         this.onChange(this.value);
         this.onTouched();
-
-        // todo for test
-        console.log(this.value);
     }
 
     public isSelected(valueToCheck: number): boolean {
