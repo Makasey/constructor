@@ -44,7 +44,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
     @Input() public columnDirection: boolean = false;
 
     private value: number[] = [];
-    private onChange: (value: number[]) => unknown = (value: number[]) => undefined;
+    private onChange: (value: number[]) => void = (value: number[]) => undefined;
     private onTouched: () => unknown = () => ({});
 
     public writeValue(value: number[]): void {
