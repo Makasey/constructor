@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 export interface list {
@@ -7,19 +7,19 @@ export interface list {
 }
 
 @Component({
-    selector: "checkbox-group",
+    selector: "lz-checkbox-group",
     templateUrl: "./checkbox-group.html",
     styleUrls: ["./checkbox-group.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => CheckboxGroup),
+            useExisting: forwardRef(() => CheckboxGroupComponent),
             multi: true,
         },
     ],
 })
-export class CheckboxGroup implements ControlValueAccessor {
+export class CheckboxGroupComponent implements ControlValueAccessor {
     @Input() public list: list[] = [
         {
             label: "До 25 см",
@@ -39,13 +39,13 @@ export class CheckboxGroup implements ControlValueAccessor {
         },
     ];
 
-    @Input() label: string = "Диаметр букета";
+    @Input() public label: string = "Диаметр букета";
 
-    @Input() columnDirection: boolean = false;
+    @Input() public columnDirection: boolean = false;
 
     private value: number[] = [];
-    private onChange = (value: number[]) => {};
-    private onTouched = () => {};
+    private onChange: (value: number[]) => unknown = (value: number[]) => undefined;
+    private onTouched: () => unknown = () => ({});
 
     public writeValue(value: number[]): void {
         this.value = value;
@@ -63,8 +63,8 @@ export class CheckboxGroup implements ControlValueAccessor {
         const index = this.value.indexOf(selectedValue);
 
         index > -1
-          ? (this.value = [...this.value.slice(0, index), ...this.value.slice(index + 1)])
-          : (this.value = [...this.value, selectedValue]);
+            ? (this.value = [...this.value.slice(0, index), ...this.value.slice(index + 1)])
+            : (this.value = [...this.value, selectedValue]);
 
         this.onChange(this.value);
         this.onTouched();
