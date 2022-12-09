@@ -1,8 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import { TestService } from "./store";
-import { Observable, tap } from "rxjs";
-import { Product } from "../../types";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {Observable, tap} from "rxjs";
+import {Product} from "../../types";
+import {TestService} from "./store";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 
 export type ItemsWithId<T> = {
   items: T[];
@@ -14,13 +14,14 @@ export type ItemsWithId<T> = {
     selector: "app-test",
     templateUrl: "./test.component.html",
     styleUrls: ["./test.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestComponent implements OnInit {
     public products$: Observable<Product[]> = this.service.selectProducts().pipe(tap(console.log));
 
     constructor(private service: TestService) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.service.fetchProducts().pipe(untilDestroyed(this)).subscribe();
     }
 

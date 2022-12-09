@@ -2,10 +2,10 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 const routes: Routes = [
-  {
-    path: '',
-    loadChildren: () => import('./module/test/test.module').then(module => module.TestModule),
-  }
+    {
+        path: "",
+        loadChildren: () => import("./module/test/test.module").then(module => module.TestModule),
+    },
 ];
 
 @NgModule({

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { TestStore } from "./test.store";
-import { TestQuery } from "./test.query";
 import { Observable, tap } from "rxjs";
 import { Product } from "../../../types";
 import { ProductDataService } from "../../../core/data-service";
+import { TestQuery } from "./test.query";
+import { TestStore } from "./test.store";
 import { arrayAdd } from "@datorama/akita";
 
 @Injectable({
@@ -78,6 +78,6 @@ export class TestService {
     }
 
     public getProducts(): Product[] {
-      return this.query.getValue().products;
+        return this.query.getValue().products;
     }
 }
