@@ -194,6 +194,7 @@ module.exports = {
                 "@angular-eslint/sort-ngmodule-metadata-arrays": 1, //
                 "@angular-eslint/contextual-decorator": 2,
                 "@angular-eslint/no-pipe-impure": 2,
+                "@angular-eslint/no-input-rename": 0,
                 "@angular-eslint/prefer-on-push-component-change-detection": 2,
                 "@angular-eslint/component-max-inline-declarations": 2,
                 "@angular-eslint/no-conflicting-lifecycle": 1,
