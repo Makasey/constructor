@@ -8,4 +8,10 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
 })
 export class AppComponent {
     public title = "lavka-roz-frontend";
+
+    public preloadLoading = true;
+
+    public changePreloadVisibility(): void {
+      this.preloadLoading = !this.preloadLoading;
+    }
 }
