@@ -1,5 +1,5 @@
-import { Type } from "@angular/core";
 import { PreloadTableComponent } from "../../components/preload-background";
+import { Type } from "@angular/core";
 
 export enum PreloadBackgroundComponentKey {
     TABLE = "table",

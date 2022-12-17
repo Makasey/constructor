@@ -21,7 +21,7 @@ export class PreloadDirective implements OnChanges {
 
         if (this.loading) {
             const component = preloadBackgroundComponentsMap[this.preloadBackgroundType as PreloadBackgroundComponentKey];
-            if (!!component) {
+            if (component) {
                 const newInjector = Injector.create({
                     providers: [
                         {
@@ -38,7 +38,7 @@ export class PreloadDirective implements OnChanges {
 
                 (componentRef.instance as PreloadBackgroundComponent<unknown>).test = this.preloadConfig;
             } else {
-                throw Error('There is no component corresponding to the "' + this.preloadBackgroundType + '" key. Add it using the forRoot() method ' + "of the UMPreloadBackgroundModule module, or select a different one from the existing ones");
+                throw Error("There is no component corresponding to the \"" + this.preloadBackgroundType + "\" key. Add it using the forRoot() method " + "of the UMPreloadBackgroundModule module, or select a different one from the existing ones");
             }
         } else {
             this.viewContainerRef.createEmbeddedView(this.templateRef);

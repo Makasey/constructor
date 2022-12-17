@@ -12,6 +12,6 @@ export class AppComponent {
     public preloadLoading = true;
 
     public changePreloadVisibility(): void {
-      this.preloadLoading = !this.preloadLoading;
+        this.preloadLoading = !this.preloadLoading;
     }
 }
