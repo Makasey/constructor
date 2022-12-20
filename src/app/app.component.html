@@ -1,5 +1,24 @@
-<app-orders></app-orders>
+<ng-template [preloadBackground]="'tabl'" [preloadBackgroundConfig]="{ count: 1 }" [preloadBackgroundLoading]="preloadLoading">
+    <app-orders></app-orders>
+</ng-template>
 
+<!--
+<lz-checkbox-group *preloadBackground="123; loading preloadLoading" [columnDirection]="true"></lz-checkbox-group>
+    |
+    |
+    |
+   \/
+
+<ng-template [preloadBackground]="123" [preloadBackgroundLoading]="preloadLoading">
+  <lz-checkbox-group [columnDirection]="true"></lz-checkbox-group>
+</ng-template>
+-->
+
+<lz-checkbox-group *preloadBackground="'table'; loading: preloadLoading; config: { count: 1, columnCount: 2 }" [columnDirection]="true"></lz-checkbox-group>
 <lz-color-picker></lz-color-picker>
 <lz-checkbox-group [columnDirection]="true"></lz-checkbox-group>
 <lz-checkbox-group></lz-checkbox-group>
+
+<button (click)="changePreloadVisibility()"> Change preload visibility </button>
+
+<router-outlet></router-outlet>

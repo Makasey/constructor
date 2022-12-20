@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --port 4221",
+    "start": "ng serve --open --port 4220",
     "build": "ng build --aot --configuration development --build-optimizer --common-chunk --optimization",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -24,6 +24,9 @@
     "@angular/platform-browser": "^14.2.6",
     "@angular/platform-browser-dynamic": "^14.2.6",
     "@angular/router": "^14.2.6",
+    "@datorama/akita": "^7.1.1",
+    "@datorama/akita-ngdevtools": "^7.0.0",
+    "@ngneat/until-destroy": "^9.2.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
