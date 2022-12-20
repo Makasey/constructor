@@ -1,0 +1,20 @@
+<div class="color-picker"
+     [ngStyle]="{
+      'width.px': width
+     }"
+>
+  <div class="color-picker-label">
+    Цвета
+  </div>
+  <div class="color-picker-colors">
+      <div class="color-picker-item"
+        *ngFor="let color of colors; trackBy:checkChanges"
+      >
+        <div class="color-picker-item-color"
+             (click)="colorPick(color.color)"
+             [ngStyle]="{
+                backgroundColor: color.color
+             }"></div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.color-picker {
+
+  &-label {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    color: #1b1c21;
+    margin-bottom: 10px;
+  }
+
+  &-colors {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &-item {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #D0D2D7;
+    border-radius: 50%;
+    margin-left: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+
+    &-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-left: 4px;
+      margin-top: 4px;
+      box-shadow: 0 2px 5px rgba(13, 54, 84, 0.2);
+    }
+  }
+}
