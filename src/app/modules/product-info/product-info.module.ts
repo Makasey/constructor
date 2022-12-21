@@ -13,4 +13,4 @@ import { RouterModule} from "@angular/router";
     ],
     exports: [RouterModule, LzProductInfoComponent],
 })
-export class LzProductInfotModule { }
+export class LzProductInfoModule { }
