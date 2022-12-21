@@ -1,11 +1,35 @@
+import { CUSTOM_PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_BACKGROUND_CONFIG_TOKEN, PreloadCustomModuleConfig, preloadBackgroundComponentsMap, preloadBackgroundConfigFactory } from "./types";
 import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
+import { LzPreloadTableComponent } from "../../components/preload-background";
+import { ModuleWithProviders, NgModule } from "@angular/core";
 import { PreloadDirective } from "./preload.directive";
-import { PreloadTableComponent } from "../../components/preload-background";
 
 @NgModule({
-    exports: [PreloadDirective, PreloadTableComponent],
+    providers: [
+        {
+            useValue: preloadBackgroundComponentsMap,
+            provide: PRELOAD_BACKGROUND_CONFIG_TOKEN,
+        },
+    ],
+    declarations: [PreloadDirective, LzPreloadTableComponent],
     imports: [CommonModule],
-    declarations: [PreloadDirective, PreloadTableComponent],
+    exports: [LzPreloadTableComponent, PreloadDirective],
 })
-export class PreloadDirectiveModule {}
+export class PreloadDirectiveModule {
+    public static forRoot(moduleConfig: PreloadCustomModuleConfig = {}): ModuleWithProviders<PreloadDirectiveModule> {
+        return {
+            providers: [
+                {
+                    provide: CUSTOM_PRELOAD_BACKGROUND_CONFIG_TOKEN,
+                    useValue: moduleConfig.config,
+                },
+                {
+                    provide: PRELOAD_BACKGROUND_CONFIG_TOKEN,
+                    useFactory: preloadBackgroundConfigFactory,
+                    deps: [CUSTOM_PRELOAD_BACKGROUND_CONFIG_TOKEN],
+                },
+            ],
+            ngModule: PreloadDirectiveModule,
+        };
+    }
+}

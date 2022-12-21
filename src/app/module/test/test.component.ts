@@ -1,13 +1,13 @@
-import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
-import {Observable, tap} from "rxjs";
-import {Product} from "../../types";
-import {TestService} from "./store";
-import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { Product } from "../../types";
+import { TestService } from "./store";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 export type ItemsWithId<T> = {
-  items: T[];
-  id: number;
-}
+    items: T[];
+    id: number;
+};
 
 @UntilDestroy()
 @Component({
@@ -17,7 +17,7 @@ export type ItemsWithId<T> = {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestComponent implements OnInit {
-    public products$: Observable<Product[]> = this.service.selectProducts().pipe(tap(console.log));
+    public products$: Observable<Product[]> = this.service.selectProducts();
 
     constructor(private service: TestService) {}
 
