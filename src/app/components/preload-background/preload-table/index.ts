@@ -1,1 +1,1 @@
-export { PreloadTableComponent } from "./preload-table.component";
+export { LzPreloadTableComponent } from "./preload-table.component";
