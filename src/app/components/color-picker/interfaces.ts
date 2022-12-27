@@ -1,5 +1,5 @@
-export interface ColorsPicker {
-  id?: string | number,
-  label?: string,
+export interface Color {
+  id: string | number,
+  label: string,
   color: string,
 }

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { ColorsPicker } from "./interfaces";
-import { BasicColors } from "./initial";
+import { Color } from "./interfaces";
+import { basicColors } from "./initial";
 
 @Component({
   selector: 'lz-color-picker',
@@ -19,7 +19,7 @@ import { BasicColors } from "./initial";
 export class ColorPickerComponent implements ControlValueAccessor {
 
   @Input()
-  public colors: ColorsPicker[] = BasicColors;
+  public colors: Color[] = basicColors;
 
   @Input()
   public width: number = 250;
@@ -39,11 +39,9 @@ export class ColorPickerComponent implements ControlValueAccessor {
     this.value = value;
   }
 
-
-  public checkChanges(index: number, item: ColorsPicker): string {
+  public checkChanges(index: number, item: Color): string {
     return item.color;
   }
-
 
   colorPick(color: string) {
     this.onChange(color)
