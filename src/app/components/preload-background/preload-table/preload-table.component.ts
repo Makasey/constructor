@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from "@angular/core";
-import { PreloadBackgroundComponent } from "../../../directive/preload/types";
+import { PRELOAD_COMPONENTS_CONFIG } from "src/app/directive/preload/types";
 
 @Component({
-    selector: "app-preload-table",
+    selector: "lz-preload-table",
     templateUrl: "./preload-table.component.html",
     styleUrls: ["./preload-table.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreloadTableComponent implements OnInit, PreloadBackgroundComponent<unknown> {
-    public test: unknown;
-    constructor(@Inject("config") public config: Record<string, unknown>) {}
+export class LzPreloadTableComponent implements OnInit {
+    constructor(@Inject(PRELOAD_COMPONENTS_CONFIG) public config: Record<string, unknown>) {}
 
     public ngOnInit(): void {
-        console.log(this.config, this.test);
+        console.log("%c Config:", "color: red; font-size: 20px;", this.config);
     }
 }
