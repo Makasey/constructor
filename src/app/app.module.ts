@@ -8,10 +8,15 @@ import { LzProductInfoModule } from "./modules/product-info/product-info.module"
 import { NgModule } from "@angular/core";
 import { OrdersModule } from "./components/orders/orders.module";
 import { PreloadDirectiveModule } from "./directive/preload/preload.module";
+import {TestComponent} from "./module/test/test.component";
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AppRoutingModule, OrdersModule, CheckboxGroupModule, HttpClientModule, AkitaNgDevtools.forRoot(), PreloadDirectiveModule.forRoot(), LzProductInfoModule],
+    imports: [BrowserModule, AppRoutingModule, OrdersModule, CheckboxGroupModule, HttpClientModule, AkitaNgDevtools.forRoot(), PreloadDirectiveModule.forRoot({
+        config: {
+            "test": TestComponent,
+        },
+    }), LzProductInfoModule],
     providers: [],
     bootstrap: [AppComponent],
 })
