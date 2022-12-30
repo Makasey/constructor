@@ -1,8 +1,8 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
 import { CatalogComponent } from "./catalog.component";
-import { ProductModule } from "./product/product.module";
 import { CategoryCatalogModule } from "./category-catalog/category-catalog.module";
+import { NgModule } from "@angular/core";
+import { ProductModule } from "./product/product.module";
+import { RouterModule, Routes } from "@angular/router";
 
 const ROUTES: Routes = [
     {

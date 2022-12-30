@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
-import { AddressesRoutingModule } from './addresses-routing.module';
-import { AddressesComponent } from './addresses.component';
+import { AddressesComponent } from "./addresses.component";
+import { AddressesRoutingModule } from "./addresses-routing.module";
 
 
 @NgModule({
-  declarations: [
-    AddressesComponent
-  ],
-  imports: [
-    CommonModule,
-    AddressesRoutingModule
-  ]
+    declarations: [
+        AddressesComponent,
+    ],
+    imports: [
+        CommonModule,
+        AddressesRoutingModule,
+    ],
 })
 export class AddressesModule { }

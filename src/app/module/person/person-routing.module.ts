@@ -1,10 +1,10 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { PersonComponent } from "./person.component";
 import { AddressesModule } from "./module/addresses/addresses.module";
+import { NgModule } from "@angular/core";
+import { OrdersModule } from "./module/orders/orders.module";
+import { PersonComponent } from "./person.component";
+import { RouterModule, Routes } from "@angular/router";
 import { SalesModule } from "./module/sales/sales.module";
 import { SettingsModule } from "./module/settings/settings.module";
-import { OrdersModule } from "./module/orders/orders.module";
 
 const routes: Routes = [
     {

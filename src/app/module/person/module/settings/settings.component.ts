@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+    selector: "app-settings",
+    templateUrl: "./settings.component.html",
+    styleUrls: ["./settings.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SettingsComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class SettingsComponent {}

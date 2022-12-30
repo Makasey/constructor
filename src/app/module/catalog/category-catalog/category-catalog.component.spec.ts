@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CategoryCatalogComponent } from './category-catalog.component';
+import { CategoryCatalogComponent } from "./category-catalog.component";
 
-describe('CategoryCatalogComponent', () => {
-  let component: CategoryCatalogComponent;
-  let fixture: ComponentFixture<CategoryCatalogComponent>;
+describe("CategoryCatalogComponent", () => {
+    let component: CategoryCatalogComponent;
+    let fixture: ComponentFixture<CategoryCatalogComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CategoryCatalogComponent ]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [ CategoryCatalogComponent ],
+        })
+        .compileComponents();
 
-    fixture = TestBed.createComponent(CategoryCatalogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(CategoryCatalogComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it("should create", () => {
+        expect(component).toBeTruthy();
+    });
 });

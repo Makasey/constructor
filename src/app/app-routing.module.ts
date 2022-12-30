@@ -1,13 +1,13 @@
 import { BlogModule } from "./module/blog/blog.module";
+import {CatalogModule} from "./module/catalog/catalog.module";
 import { ContactModule } from "./module/contact/contact.module";
 import { HomeModule } from "./module/home/home.module";
 import { InfoModule } from "./module/info/info.module";
 import { NgModule } from "@angular/core";
 import { OrderModule } from "./module/order/order.module";
+import { PersonModule } from "./module/person/person.module";
 import { RouterModule, Routes } from "@angular/router";
 import { TestimonialsModule } from "./module/testimonials/testimonials.module";
-import { PersonModule } from "./module/person/person.module";
-import {CatalogModule} from "./module/catalog/catalog.module";
 
 const routes: Routes = [
     {
