@@ -3,15 +3,12 @@ import { NgModule } from "@angular/core";
 
 import { CategoryCatalogComponent } from "./category-catalog.component";
 import { CategoryCatalogRoutingModule } from "./category-catalog-routing.module";
-
+import { CatalogFiltersComponent } from "./components/catalog-filters/catalog-filters.component";
+import { CheckboxGroupModule } from "../../../components/checkbox-group/checkbox-group.module";
+import { CatalogProductsComponent } from "./components/catalog-products/catalog-products.component";
 
 @NgModule({
-    declarations: [
-        CategoryCatalogComponent,
-    ],
-    imports: [
-        CommonModule,
-        CategoryCatalogRoutingModule,
-    ],
+    declarations: [CategoryCatalogComponent, CatalogFiltersComponent, CatalogProductsComponent],
+    imports: [CommonModule, CategoryCatalogRoutingModule, CheckboxGroupModule],
 })
-export class CategoryCatalogModule { }
+export class CategoryCatalogModule {}

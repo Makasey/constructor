@@ -1,0 +1,23 @@
+.catalog-filters {
+    max-width: 280px;
+    width: 280px;
+    border: 1px solid #f2f3f5;
+    box-shadow: 0 0 20px rgba(34, 42, 70, 0.05);
+    border-radius: 5px;
+}
+
+.filters {
+    padding: 15px 0 0 20px;
+}
+
+.reset-filters {
+    margin-top: 20px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    color: #0093a2;
+    line-height: 1.5;
+    padding: 11px 0;
+    border: 1px solid #0093a2;
+    font-family: "TT Norms Medium", sans-serif;
+}

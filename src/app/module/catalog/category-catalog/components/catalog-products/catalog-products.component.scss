@@ -1,0 +1,51 @@
+.catalog-products {
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-header {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px 0;
+}
+
+.catalog-title {
+    margin: 0;
+    padding: 0;
+    font-size: 40px;
+    font-family: "Yeseva One", cursive;
+    line-height: 50px;
+    font-weight: 400;
+}
+
+.catalog-sort {
+    font-size: 14px;
+    color: #7d818e;
+    font-family: "TT Norms Medium", sans-serif;
+}
+
+.catalog-chips {
+    height: 50px;
+    background: #f2f6f7;
+    flex-basis: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.catalog-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.item {
+    // for test
+    border: 1px solid black;
+    width: 278px;
+    height: 433px;
+}

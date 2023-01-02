@@ -1,0 +1,25 @@
+.category-catalog {
+    padding: 20px 0 60px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1190px;
+    padding: 0 10px;
+}
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    background-color: #85cbd2;
+    height: 25px;
+}
+
+.catalog {
+    display: flex;
+    gap: 20px;
+}
