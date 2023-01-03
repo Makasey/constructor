@@ -30,11 +30,13 @@ export class PreloadDirective implements OnChanges {
                     ],
                     parent: this.injector,
                 });
+
                 // #FIXME Or we can mutate component instance to provide config
-                //const componentRef = this.viewContainerRef.createComponent(component, {
+                // const componentRef = this.viewContainerRef.createComponent(component, {
                 //    injector: newInjector,
                 // });
                 // (componentRef.instance as PreloadBackgroundComponent<unknown>).test = this.preloadConfig;
+
                 this.viewContainerRef.createComponent(component, {
                     injector: newInjector,
                 });
