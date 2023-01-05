@@ -1,0 +1,228 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "TT Norms Regular", sans-serif;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 5px;
+
+    &-image {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.hidden {
+            display: none;
+        }
+
+        img {
+            border-radius: 5px 5px 0 0;
+            width: 100%;
+        }
+    }
+
+    &-header {
+        width: 100%;
+        z-index: 1;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            visibility: hidden;
+            background-color: rgba(27, 28, 33, 0.5);
+            z-index: -1;
+        }
+
+        &:hover {
+            transition: 0.4s all;
+
+            .product-description,
+            .product-options {
+                visibility: visible;
+
+                z-index: 2;
+            }
+
+            &::before {
+                z-index: 0;
+                opacity: 1;
+                visibility: visible;
+                border-radius: 5px 5px 0 0;
+            }
+        }
+    }
+
+    &-description {
+        position: absolute;
+        inset: 0;
+        padding: 0 20px;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        visibility: hidden;
+        z-index: -1;
+        cursor: pointer;
+    }
+
+    &-options {
+        position: absolute;
+        top: 10px;
+        visibility: hidden;
+        z-index: -1;
+        left: 10px;
+        display: flex;
+        background-color: white;
+        padding: 5px;
+        gap: 5px;
+        border-radius: 5px;
+    }
+
+    &-option {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        img {
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    &-actions {
+        position: absolute;
+        gap: 10px;
+        right: 10px;
+        top: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-action {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        border-radius: 50%;
+        border: none;
+
+    }
+
+    &-info {
+        padding: 15px;
+        border: 1px solid #e2e4eb;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    &-title {
+        font-size: 16px;
+        font-family: "TT Norms Bold", sans-serif;
+        line-height: 22px;
+    }
+
+    &-rating {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20px;
+        font-family: "TT Norms Medium", sans-serif;
+
+        &-number {
+            margin-right: 5px;
+            margin-left: 9px;
+        }
+    }
+
+    &-sizes {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        color: #505567;
+
+        &-label {
+            font-size: 12px;
+            line-height: 16px;
+        }
+    }
+
+    &-size {
+        font-size: 12px;
+        line-height: 16px;
+        padding: 3px 10px;
+        border: 1px solid #d0d2d7;
+        border-radius: 5px;
+        font-family: "TT Norms Medium", sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #0093a2;
+        }
+    }
+
+    &-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-prices {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-price {
+        font-size: 16px;
+        line-height: 22px;
+        font-family: "TT Norms Bold", sans-serif;
+    }
+
+    .old-price {
+        font-size: 14px;
+        line-height: 18px;
+        color: #b0b2b9;
+        text-decoration: line-through #b0b2b9;
+        font-weight: 600;
+        font-family: "TT Norms Medium", sans-serif;
+    }
+
+    &-button {
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        color: #e2195b;
+        font-family: "TT Norms Medium", sans-serif;
+        border: 1px solid #e2195b;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #e2195b;
+            color: #ffffff;
+        }
+    }
+}
