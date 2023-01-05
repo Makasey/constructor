@@ -3,18 +3,24 @@
       'width.px': width
      }"
 >
-  <div class="color-picker-label">
+  <label class="color-picker-label">
     Цвета
-  </div>
+  </label>
   <div class="color-picker-colors">
       <div class="color-picker-item"
         *ngFor="let color of colors; trackBy:checkChanges"
+        [ngClass]="{ 'active': value === color.id }"
       >
-        <div class="color-picker-item-color"
-             (click)="colorPick(color.color)"
-             [ngStyle]="{
+        <label
+          class="color-picker-item-color"
+          [for]="color.id"
+          [ngStyle]="{
                 backgroundColor: color.color
-             }"></div>
+             }">
+          <input type="radio" name="colorPicker" [id]="color.id"
+                 (change)="colorPick(color)"
+          >
+        </label>
       </div>
   </div>
 </div>
