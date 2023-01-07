@@ -7,9 +7,10 @@ import { CatalogFiltersComponent } from "./components/catalog-filters/catalog-fi
 import { CheckboxGroupModule } from "../../../components/checkbox-group/checkbox-group.module";
 import { CatalogProductsComponent } from "./components/catalog-products/catalog-products.component";
 import { ProductCartModule } from '../../../components/product-cart/product-cart.module';
+import { RangeControllerModule } from '../../../components/range-controller/range-controller.module';
 
 @NgModule({
     declarations: [CategoryCatalogComponent, CatalogFiltersComponent, CatalogProductsComponent],
-    imports: [CommonModule, CategoryCatalogRoutingModule, CheckboxGroupModule, ProductCartModule],
+  imports: [CommonModule, CategoryCatalogRoutingModule, CheckboxGroupModule, ProductCartModule, RangeControllerModule],
 })
 export class CategoryCatalogModule {}
