@@ -1,9 +1,23 @@
 <div class="catalog-filters">
     <div class="filter-category"> filter-category add component </div>
     <div class="filters">
-        <lz-checkbox-group label="Состав букета"></lz-checkbox-group>
-        <lz-checkbox-group label="Высота букета"></lz-checkbox-group>
+        <hr>
+        <div class="filters-group">
+            <div class="filters-label">Цена</div>
+        </div>
+        <hr>
+        <div class="filters-group">
+            <div class="filters-label">Цвета</div>
+        </div>
+        <hr>
+        <div class="filters-group">
+            <div class="filters-label">Размер</div>
+            <lz-checkbox-group label="Состав букета"></lz-checkbox-group>
+            <lz-checkbox-group label="Высота букета"></lz-checkbox-group>
+        </div>
+        <hr>
         <lz-checkbox-group [columnDirection]="true" label="Состав"></lz-checkbox-group>
+        <hr>
         <lz-checkbox-group [columnDirection]="true" label="Кому"></lz-checkbox-group>
     </div>
     <button class="reset-filters">Очистить фильты</button>

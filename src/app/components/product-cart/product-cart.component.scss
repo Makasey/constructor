@@ -121,7 +121,6 @@
         background-color: white;
         border-radius: 50%;
         border: none;
-
     }
 
     &-info {
@@ -138,6 +137,12 @@
         font-size: 16px;
         font-family: "TT Norms Bold", sans-serif;
         line-height: 22px;
+    }
+
+    &-ratings {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     &-rating {
