@@ -121,6 +121,20 @@
         background-color: white;
         border-radius: 50%;
         border: none;
+        z-index: 3;
+        cursor: pointer;
+
+        &:hover {
+            .inside-path {
+                stroke: #0093a2;
+                fill: #ffffff;
+            }
+
+            svg path:not(.inside-path) {
+                fill: #0093a2;
+                stroke: #0093a2;
+            }
+        }
     }
 
     &-info {
@@ -145,7 +159,8 @@
         justify-content: space-between;
     }
 
-    &-rating, &-delivery {
+    &-rating,
+    &-delivery {
         display: flex;
         align-items: center;
         font-size: 14px;
@@ -182,6 +197,7 @@
 
         &:hover {
             background-color: #0093a2;
+            color: #ffffff;
         }
     }
 
@@ -228,6 +244,10 @@
         &:hover {
             background-color: #e2195b;
             color: #ffffff;
+
+            svg {
+                fill: #ffffff;
+            }
         }
     }
 }

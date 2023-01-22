@@ -41,4 +41,9 @@
     border: 1px solid #0093a2;
     font-family: "TT Norms Medium", sans-serif;
     cursor: pointer;
+
+    &:hover {
+        background-color: #0093a2;
+        color: #ffffff;
+    }
 }
