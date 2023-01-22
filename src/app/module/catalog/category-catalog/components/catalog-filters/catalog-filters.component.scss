@@ -1,17 +1,23 @@
 .catalog-filters {
     max-width: 280px;
     width: 280px;
-    border: 1px solid #f2f3f5;
-    box-shadow: 0 0 20px rgba(34, 42, 70, 0.05);
-    border-radius: 5px;
 }
 
 .filters {
     padding: 15px 20px 0 20px;
+    border: 1px solid #f2f3f5;
+    box-shadow: 0 0 20px rgba(34, 42, 70, 0.05);
+    border-radius: 5px;
 
-    hr {
-        margin: 15px 0;
-        border: 1px solid #e2e4eb;
+    &-group {
+        border-bottom: 1px solid #e2e4eb;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
     }
 
     &-label {
@@ -24,7 +30,7 @@
     }
 }
 
-.reset-filters {
+.btn-filters {
     margin-top: 20px;
     border-radius: 5px;
     width: 100%;

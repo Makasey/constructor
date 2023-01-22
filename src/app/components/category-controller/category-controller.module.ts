@@ -1,6 +1,6 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { CategoryControllerComponent } from "./category-controller.component";
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
 
 @NgModule({
     declarations: [CategoryControllerComponent],

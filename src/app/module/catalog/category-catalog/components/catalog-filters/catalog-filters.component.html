@@ -1,29 +1,35 @@
 <div class="catalog-filters">
-    <div class="filter-category"></div>
     <div class="filters">
         <div class="filters-group">
-            <div class="filters-label">Букеты из роз</div>
+            <h2 class="filters-label">Букеты из роз</h2>
             <lz-category-controller></lz-category-controller>
         </div>
-        <hr />
+
         <div class="filters-group">
-            <div class="filters-label">Цена</div>
+            <h2 class="filters-label">Цена</h2>
             <lz-range-controller></lz-range-controller>
         </div>
-        <hr />
+
         <div class="filters-group">
-            <div class="filters-label">Цвета</div>
+            <h2 class="filters-label">Цвета</h2>
         </div>
-        <hr />
+
         <div class="filters-group">
-            <div class="filters-label">Размер</div>
+            <h2 class="filters-label">Размер</h2>
             <lz-checkbox-group label="Состав букета"></lz-checkbox-group>
             <lz-checkbox-group label="Высота букета"></lz-checkbox-group>
         </div>
-        <hr>
-        <lz-checkbox-group [columnDirection]="true" label="Состав"></lz-checkbox-group>
-        <hr>
-        <lz-checkbox-group [columnDirection]="true" label="Кому"></lz-checkbox-group>
+
+        <div class="filters-group">
+            <h2 class="filters-label">Состав</h2>
+            <lz-checkbox-group [columnDirection]="true"></lz-checkbox-group>
+        </div>
+
+        <div class="filters-group">
+            <h2 class="filters-label">Кому</h2>
+            <lz-checkbox-group [columnDirection]="true"></lz-checkbox-group>
+        </div>
     </div>
-    <button class="reset-filters">Очистить фильты</button>
+    <button class="btn-filters">Применить фильты</button>
+    <button class="btn-filters">Очистить фильты</button>
 </div>

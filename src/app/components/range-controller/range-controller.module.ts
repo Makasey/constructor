@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { NgModule } from "@angular/core";
 import { RangeControllerComponent } from "./range-controller.component";
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [RangeControllerComponent],
     exports: [RangeControllerComponent],
-  imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule],
 })
 export class RangeControllerModule {}

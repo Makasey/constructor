@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 export interface CategoryList {
@@ -22,6 +22,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
     @Input() public set value(value: number) {
         this.item = value;
     }
+
     @Input() public list: CategoryList[] = [
         {
             label: "Местные розы",
@@ -36,6 +37,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
             value: 3,
         },
     ];
+
     @Output() public valueChange: EventEmitter<number> = new EventEmitter<number>();
 
     private item: number;

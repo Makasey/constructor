@@ -13,28 +13,30 @@
                 class="min-slider"
                 type="range"
                 id="min-range-price"
-                min="500"
-                max="22500"
+                [min]="minRangeFrom"
+                [max]="minRangeTo"
                 [(ngModel)]="min"
-                (ngModelChange)="valuesChange()" />
+                (ngModelChange)="valuesChange()"
+            />
         </label>
         <label for="max-range-price">
             <input
                 class="slider"
                 type="range"
                 id="max-range-price"
-                min="22500"
-                max="45500"
+                [min]="minRangeTo"
+                [max]="maxRangeTo"
                 [(ngModel)]="max"
-                (ngModelChange)="valuesChange()" />
+                (ngModelChange)="valuesChange()"
+            />
         </label>
         <span class="price-label min-price">
             от
-            <span class="rate"> 500 ₽ </span>
+            <span class="rate"> {{ minRate }} ₽ </span>
         </span>
         <span class="price-label max-price">
             до
-            <span class="rate"> 45 500 ₽ </span>
+            <span class="rate"> {{ maxRate }} ₽ </span>
         </span>
     </div>
 </div>

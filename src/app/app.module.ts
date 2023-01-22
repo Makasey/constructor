@@ -8,13 +8,13 @@ import { LzProductInfoModule } from "./modules/product-info/product-info.module"
 import { NgModule } from "@angular/core";
 import { OrdersModule } from "./components/orders/orders.module";
 import { PreloadDirectiveModule } from "./directive/preload/preload.module";
+import { RangeControllerModule } from "./components/range-controller/range-controller.module";
 import {TestComponent} from "./module/test/test.component";
-import { RangeControllerModule } from './components/range-controller/range-controller.module';
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
-      BrowserModule,
+        BrowserModule,
         AppRoutingModule,
         OrdersModule,
         CheckboxGroupModule,
@@ -22,10 +22,10 @@ import { RangeControllerModule } from './components/range-controller/range-contr
         HttpClientModule,
         AkitaNgDevtools.forRoot(),
         PreloadDirectiveModule.forRoot({
-        config: {
-            "test": TestComponent,
-        },
-    }), LzProductInfoModule],
+            config: {
+                "test": TestComponent,
+            },
+        }), LzProductInfoModule],
     providers: [],
     bootstrap: [AppComponent],
 })
