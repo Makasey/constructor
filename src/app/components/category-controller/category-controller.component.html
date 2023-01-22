@@ -1,3 +1,5 @@
-<ng-container *ngFor="let item of list">
-    <div class="category-item" (click)="changeValue(item.value)">{{ item.label }}</div>
-</ng-container>
+<div class="container">
+    <ng-container *ngFor="let item of list">
+        <button class="category-item" (click)="changeValue(item.value)">{{ item.label }}</button>
+    </ng-container>
+</div>
