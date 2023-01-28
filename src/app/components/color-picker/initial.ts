@@ -3,37 +3,37 @@ import { Color } from "./interfaces";
 export const basicColors: Color[] = [
   {
     id: 1,
-    label: '',
+    label: 'Тёмно-алый',
     color: '#CF2A27',
   },
   {
     id: 2,
-    label: '',
+    label: 'Красный',
     color: '#EE1516',
   },
   {
     id: 3,
-    label: '',
+    label: 'Бледно-розовый',
     color: '#FECEE0',
   },
   {
     id: 4,
-    label: '',
+    label: 'Розовато-лиловый Крайола',
     color: '#EB9CB7',
   },
   {
     id: 5,
-    label: '',
+    label: 'Умеренный оранжево-желтый',
     color: '#FB934D',
   },
   {
     id: 6,
-    label: '',
+    label: 'Насыщенный красно-оранжевый',
     color: '#FFBA60',
   },
   {
     id: 7,
-    label: '',
+    label: 'Космические сливки',
     color: '#FFF4E4',
   },
   {
@@ -43,32 +43,32 @@ export const basicColors: Color[] = [
   },
   {
     id: 9,
-    label: '',
+    label: 'Синяя лазурь (Лазурно-голубой)',
     color: '#2B50BE',
   },
   {
     id: 10,
-    label: '',
+    label: 'Васильковый',
     color: '#7C95EC',
   },
   {
     id: 11,
-    label: '',
+    label: 'Лазурно-серый (Зеленовато-синий)',
     color: '#008FA1',
   },
   {
     id: 12,
-    label: '',
+    label: 'Умеренный аспидный',
     color: '#9B7CE8',
   },
   {
     id: 13,
-    label: '',
+    label: 'Перламутровый',
     color: '#730E30',
   },
   {
     id: 14,
-    label: '',
+    label: 'Умеренный цвет орхидеи',
     color: '#C137D1',
   }
 ]

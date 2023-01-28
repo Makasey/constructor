@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, Input} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Color } from "./interfaces";
 import { basicColors } from "./initial";
@@ -18,18 +18,20 @@ import { basicColors } from "./initial";
 })
 export class ColorPickerComponent implements ControlValueAccessor {
 
+  @Output()
+  public onColorChange: EventEmitter<Color> = new EventEmitter<Color>();
+
   @Input()
   public colors: Color[] = basicColors;
 
   @Input()
   public width: number = 250;
 
-  constructor(private cdr: ChangeDetectorRef) {}
-  public value: string | number = 0;
-  private onChange: (value: string | number) => void = (value: string | number) => undefined;
+  public value: Color;
+  private onChange: (value: Color) => void = (value: Color) => undefined;
   private onTouched: () => unknown = () => ({});
 
-  public registerOnChange(fn: (value: string | number) => void): void {
+  public registerOnChange(fn: (value: Color) => void): void {
     this.onChange = fn;
   }
 
@@ -37,17 +39,17 @@ export class ColorPickerComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  public writeValue(value: string | number): void {
+  public writeValue(value: Color): void {
     this.value = value;
-    this.cdr.detectChanges();
+    this.onColorChange.emit(value);
   }
 
   public checkChanges(index: number, item: Color): string {
     return item.color;
   }
 
-  colorPick(color: Color) {
-    this.writeValue(color.id);
-    this.cdr.detectChanges();
+  public pickColor(color: Color) {
+    this.onChange(color);
+    this.writeValue(color)
   }
 }
