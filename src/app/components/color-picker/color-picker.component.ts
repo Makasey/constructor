@@ -41,7 +41,6 @@ export class ColorPickerComponent implements ControlValueAccessor {
 
   public writeValue(value: Color): void {
     this.value = value;
-    this.onColorChange.emit(value);
   }
 
   public checkChanges(index: number, item: Color): string {
@@ -50,6 +49,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
 
   public pickColor(color: Color) {
     this.onChange(color);
-    this.writeValue(color)
+    this.writeValue(color);
+    this.onColorChange.emit(color);
   }
 }
