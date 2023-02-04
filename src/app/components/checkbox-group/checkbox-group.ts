@@ -39,7 +39,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
         },
     ];
 
-    @Input() public label: string = "Диаметр букета";
+    @Input() public label: string;
 
     @Input() public columnDirection: boolean = false;
 
