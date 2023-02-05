@@ -1,0 +1,42 @@
+<div class="range-control">
+    <div class="price-fields-group">
+        <label for="min-price">
+            <input type="text" id="min-price" [(ngModel)]="min" />
+        </label>
+        <label for="max-price">
+            <input type="text" id="max-price" [(ngModel)]="max" />
+        </label>
+    </div>
+    <div class="price-range-controls">
+        <label for="min-range-price">
+            <input
+                class="min-slider"
+                type="range"
+                id="min-range-price"
+                [min]="minRangeFrom"
+                [max]="minRangeTo"
+                [(ngModel)]="min"
+                (ngModelChange)="valuesChange()"
+            />
+        </label>
+        <label for="max-range-price">
+            <input
+                class="slider"
+                type="range"
+                id="max-range-price"
+                [min]="minRangeTo"
+                [max]="maxRangeTo"
+                [(ngModel)]="max"
+                (ngModelChange)="valuesChange()"
+            />
+        </label>
+        <span class="price-label min-price">
+            от
+            <span class="rate"> {{ minRate }} ₽ </span>
+        </span>
+        <span class="price-label max-price">
+            до
+            <span class="rate"> {{ maxRate }} ₽ </span>
+        </span>
+    </div>
+</div>

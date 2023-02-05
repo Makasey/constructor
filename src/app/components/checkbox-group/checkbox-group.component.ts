@@ -1,15 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, forwardRef } from "@angular/core";
+import { CheckboxItem } from "./types";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-
-export interface list {
-    label: string;
-    value: number;
-}
 
 @Component({
     selector: "lz-checkbox-group",
-    templateUrl: "./checkbox-group.html",
-    styleUrls: ["./checkbox-group.scss"],
+    templateUrl: "./checkbox-group.component.html",
+    styleUrls: ["./checkbox-group.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
@@ -20,7 +16,7 @@ export interface list {
     ],
 })
 export class CheckboxGroupComponent implements ControlValueAccessor {
-    @Input() public list: list[] = [
+    @Input() public list: CheckboxItem[] = [
         {
             label: "До 25 см",
             value: 1,
@@ -39,12 +35,12 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
         },
     ];
 
-    @Input() public label: string = "Диаметр букета";
+    @Input() public label: string;
 
     @Input() public columnDirection: boolean = false;
 
     private value: number[] = [];
-    private onChange: (value: number[]) => void = (value: number[]) => undefined;
+    private onChange: (value: number[]) => void = () => undefined;
     private onTouched: () => unknown = () => ({});
 
     public writeValue(value: number[]): void {
@@ -62,9 +58,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
     public toggleValue(selectedValue: number): void {
         const index = this.value.indexOf(selectedValue);
 
-        index > -1
-            ? (this.value = [...this.value.slice(0, index), ...this.value.slice(index + 1)])
-            : (this.value = [...this.value, selectedValue]);
+        index > -1 ? (this.value = [...this.value.slice(0, index), ...this.value.slice(index + 1)]) : (this.value = [...this.value, selectedValue]);
 
         this.onChange(this.value);
         this.onTouched();
@@ -74,7 +68,7 @@ export class CheckboxGroupComponent implements ControlValueAccessor {
         return this.value.includes(valueToCheck);
     }
 
-    public checkChanges(index: number, item: list): number {
+    public checkChanges(index: number, item: CheckboxItem): number {
         return item.value;
     }
 }
