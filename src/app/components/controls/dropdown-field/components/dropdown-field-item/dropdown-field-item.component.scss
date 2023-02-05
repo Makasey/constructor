@@ -1,0 +1,9 @@
+.dropdown-list-item {
+  background-color: white;
+  padding: 20px;
+  border: 2px solid black;
+
+  &.active {
+    background-color: lightgray;
+  }
+}

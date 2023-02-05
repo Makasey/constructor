@@ -26,6 +26,7 @@
     "@angular/router": "^14.2.6",
     "@datorama/akita": "^7.1.1",
     "@datorama/akita-ngdevtools": "^7.0.0",
+    "@ngneat/forms-manager": "^2.5.0",
     "@ngneat/until-destroy": "^9.2.2",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",

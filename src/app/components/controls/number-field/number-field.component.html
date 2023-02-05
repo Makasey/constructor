@@ -1,0 +1,31 @@
+<ng-container>
+  <div class="form-control">
+    <label class="form-control-label number-field"
+           [for]="controlModel.id">
+      {{controlModel.options?.label}}
+      <input type="text"
+             class="form-control-input"
+             inputmode="numeric"
+             pattern="-?[0-9.]*"
+             min="-9007199254740991"
+             max="9007199254740991"
+             [attr.id]="controlModel.id"
+             [attr.required]="controlModel.required"
+             [attr.name]="controlModel.name"
+             [class.disabled]="disabled"
+             [disabled]="disabled"
+             [value]="_value"
+             (paste)="_onPasteValue($event)"
+             (blur)="_onBlur($event)"
+             (focus)="_onFocus($event)"
+             (input)="_onInput($event)"
+      />
+    </label>
+    <div class="form-control-errors"
+          *ngIf="(nativeControl.dirty) && (nativeControl.errors | keyvalue)?.length">
+      <ng-container *ngFor="let error of nativeControl.errors | keyvalue">
+        {{error.key}}
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

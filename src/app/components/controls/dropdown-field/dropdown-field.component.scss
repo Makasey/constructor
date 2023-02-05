@@ -1,0 +1,56 @@
+@import "./components/dropdown-field-item/dropdown-field-item.component";
+
+:root {
+    font-size: 18px;
+}
+
+.dropdown {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+
+    &-value {
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-align: left;
+    }
+
+    &-button {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        position: relative;
+        padding: 24px 8px 8px;
+        line-height: 1;
+        font-size: 18px;
+        width: 100%;
+        background: none;
+        border: 2px solid #000;
+        outline: none;
+    }
+
+    &-list {
+        --ap-dropdown-item-height: 65.5px;
+        --ap-dropdown-item-count: 3;
+        --ap-dropdown-height: calc(var(--ap-dropdown-item-count) * var(--ap-dropdown-item-height));
+
+        width: 100%;
+        max-height: var(--ap-dropdown-height);
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            width: 15px;
+            background-color: lightgray;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: gold;
+            border-radius: 20px;
+            border: 5px solid lightgray;
+        }
+    }
+}
