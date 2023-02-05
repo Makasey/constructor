@@ -1,3 +1,5 @@
+import { APFormControl, APFormOptions } from "../form";
+import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 import { TemplateRef, Type, ViewContainerRef } from "@angular/core";
 
@@ -53,3 +55,9 @@ export const DEFAULT_MODAL_CONFIG: ModalConfig = {
     context: null,
     id: "defaultModalId",
 };
+
+export type ControlTemplate = TemplateRef<{
+    controlModel: APFormControl;
+    formControl: FormControl;
+    options: APFormOptions;
+}>;

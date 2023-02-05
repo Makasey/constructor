@@ -1,0 +1,23 @@
+<div class="dropdown" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (focus)="_onDropdownFieldFocus()">
+    <button class="dropdown-button" type="button" (click)="_onToggleDropdownListVisibility($event)">
+        <span class="form-control-text" [class.focused]="_isDropdownItemsVisible || touched || _activeDropdownItems.length"> OPEN DROPDOWN </span>
+        <span class="dropdown-value">
+            {{ _activeDropdownItems | lzDropdownLabel }}
+        </span>
+    </button>
+</div>
+
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOpen]="_isDropdownItemsVisible"
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayHasBackdrop]="true"
+    (overlayOutsideClick)="_onCloseDropdownList()"
+>
+    <div class="dropdown-list">
+        <ng-container *ngFor="let item of items">
+            <ap-dropdown-field-item [item]="item" [active]="item.id | lzDropdownActive: _activeItems" (onItemClick)="_onDropdownItemChoose(item)">
+            </ap-dropdown-field-item>
+        </ng-container>
+    </div>
+</ng-template>

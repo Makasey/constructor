@@ -1,3 +1,4 @@
+import {APDropdownFieldModule} from "./components/controls";
 import { APP_REF } from "./core/app-ref";
 import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
@@ -22,6 +23,7 @@ import { environment } from "../environments/environment";
         CheckboxGroupModule,
         RangeControllerModule,
         HttpClientModule,
+        APDropdownFieldModule,
         ColorPickerModule,
         ModalModule,
         AkitaNgDevtools.forRoot(),
