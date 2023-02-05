@@ -1,0 +1,22 @@
+:host {
+    .modal {
+        &-overlay {
+            position: fixed;
+            width: 100%;
+            top: 100%;
+            inset: 0;
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        &-content {
+            max-width: 600px;
+            width: 100%;
+            background-color: #fff;
+            min-height: 680px;
+        }
+    }
+}
