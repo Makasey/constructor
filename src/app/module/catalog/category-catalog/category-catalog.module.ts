@@ -5,20 +5,10 @@ import { CatalogFiltersComponent } from "./components/catalog-filters/catalog-fi
 import { CatalogProductsComponent } from "./components/catalog-products/catalog-products.component";
 import { CategoryCatalogComponent } from "./category-catalog.component";
 import { CategoryCatalogRoutingModule } from "./category-catalog-routing.module";
-import { CategoryControllerModule } from "../../../components/category-controller/category-controller.module";
-import { CheckboxGroupModule } from "../../../components/checkbox-group/checkbox-group.module";
-import { ProductCartModule } from "../../../components/product-cart/product-cart.module";
-import { RangeControllerModule } from "../../../components/range-controller/range-controller.module";
+import { CategoryControllerModule, CheckboxGroupModule, ProductCardModule, RangeControllerModule } from "../../../components";
 
 @NgModule({
     declarations: [CategoryCatalogComponent, CatalogFiltersComponent, CatalogProductsComponent],
-    imports: [
-        CommonModule,
-        CategoryCatalogRoutingModule,
-        CheckboxGroupModule,
-        ProductCartModule,
-        RangeControllerModule,
-        CategoryControllerModule,
-    ],
+    imports: [CommonModule, CategoryCatalogRoutingModule, CheckboxGroupModule, ProductCardModule, RangeControllerModule, CategoryControllerModule],
 })
 export class CategoryCatalogModule {}
