@@ -1,0 +1,49 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.color-picker {
+    &-label {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        color: #1b1c21;
+    }
+
+    &-colors {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    &-item {
+        width: 24px;
+        height: 24px;
+        border: 1px solid #d0d2d7;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.active {
+            background-color: #d3eef5;
+        }
+
+        &-color {
+            display: flex;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(13, 54, 84, 0.2);
+        }
+
+        input {
+            display: none;
+        }
+    }
+}

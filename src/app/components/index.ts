@@ -18,3 +18,6 @@ export * from "./status";
 
 //Table component
 export * from "./table";
+
+//Color picker component
+export * from "./color-picker";
