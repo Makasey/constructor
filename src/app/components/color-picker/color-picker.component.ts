@@ -1,55 +1,61 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, forwardRef } from "@angular/core";
+import { Color, basicColors } from "./types";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { Color } from "./interfaces";
-import { basicColors } from "./initial";
 
 @Component({
-  selector: 'lz-color-picker',
-  templateUrl: './color-picker.component.html',
-  styleUrls: ['./color-picker.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => ColorPickerComponent),
-      multi: true,
-    },
-  ],
+    selector: "lz-color-picker",
+    templateUrl: "./color-picker.component.html",
+    styleUrls: ["./color-picker.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ColorPickerComponent),
+            multi: true,
+        },
+    ],
 })
 export class ColorPickerComponent implements ControlValueAccessor {
+    @Output()
+    public onColorChange: EventEmitter<Color> = new EventEmitter<Color>();
 
-  @Output()
-  public onColorChange: EventEmitter<Color> = new EventEmitter<Color>();
+    @Input()
+    public colors: Color[] = basicColors;
 
-  @Input()
-  public colors: Color[] = basicColors;
+    @Input()
+    public width: number = 250;
 
-  @Input()
-  public width: number = 250;
+    @HostBinding("class.color-picker")
+    public hostClass = true;
 
-  public value: Color;
-  private onChange: (value: Color) => void = (value: Color) => undefined;
-  private onTouched: () => unknown = () => ({});
+    @HostBinding("style.width.px")
+    public get colorPickerWidth(): number {
+        return this.width;
+    }
 
-  public registerOnChange(fn: (value: Color) => void): void {
-    this.onChange = fn;
-  }
+    public value: Color;
+    private onChange: (value: Color) => void = () => undefined;
+    private onTouched: () => unknown = () => ({});
 
-  public registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
+    public registerOnChange(fn: (value: Color) => void): void {
+        this.onChange = fn;
+    }
 
-  public writeValue(value: Color): void {
-    this.value = value;
-  }
+    public registerOnTouched(fn: () => void): void {
+        this.onTouched = fn;
+    }
 
-  public checkChanges(index: number, item: Color): string {
-    return item.color;
-  }
+    public writeValue(value: Color): void {
+        this.value = value;
+    }
 
-  public pickColor(color: Color) {
-    this.onChange(color);
-    this.writeValue(color);
-    this.onColorChange.emit(color);
-  }
+    public checkChanges(index: number, item: Color): string {
+        return item.color;
+    }
+
+    public pickColor(color: Color): void {
+        this.onChange(color);
+        this.writeValue(color);
+        this.onColorChange.emit(color);
+    }
 }
