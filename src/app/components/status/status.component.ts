@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-
-export enum StatusType {
-  CANCEL = "Cancel",
-  WAIT = "Wait",
-  PAID = "Paid",
-}
+import { StatusType } from "./types";
 
 @Component({
     selector: "lz-status",
@@ -13,14 +8,14 @@ export enum StatusType {
     styleUrls: ["./status.component.scss"],
 })
 export class StatusComponent {
-  @Input()
+    @Input()
     public status: unknown;
 
-  public statusTypes = StatusType;
+    public statusTypes = StatusType;
 
-  public statusTypeClasses: Record<StatusType, string> = {
-      [StatusType.WAIT]: "wait",
-      [StatusType.CANCEL]: "cancel",
-      [StatusType.PAID]: "paid",
-  };
+    public statusTypeClasses: Record<StatusType, string> = {
+        [StatusType.WAIT]: "wait",
+        [StatusType.CANCEL]: "cancel",
+        [StatusType.PAID]: "paid",
+    };
 }

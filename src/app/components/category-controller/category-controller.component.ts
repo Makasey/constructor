@@ -1,10 +1,7 @@
+import { CategoryListItem } from "./types";
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-export interface CategoryList {
-    label: string;
-    value: number;
-}
 @Component({
     selector: "lz-category-controller",
     templateUrl: "./category-controller.component.html",
@@ -23,7 +20,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
         this.item = value;
     }
 
-    @Input() public list: CategoryList[] = [
+    @Input() public list: CategoryListItem[] = [
         {
             label: "Местные розы",
             value: 1,
@@ -41,7 +38,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
     @Output() public valueChange: EventEmitter<number> = new EventEmitter<number>();
 
     private item: number;
-    private onChange: (value: number) => void = (value: number) => undefined;
+    private onChange: (value: number) => void = () => undefined;
     private onTouched: () => unknown = () => ({});
 
     public writeValue(value: number): void {
@@ -57,7 +54,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
     }
 
     public changeValue(value: number): void {
-        this.onChange && this.onChange(value);
+        this.onChange(value);
         this.valueChange.emit(value);
     }
 }

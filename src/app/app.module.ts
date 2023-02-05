@@ -2,14 +2,12 @@ import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserModule } from "@angular/platform-browser";
-import { CheckboxGroupModule } from "./components/checkbox-group/checkbox-group.module";
+import { CheckboxGroupModule, OrdersModule, RangeControllerModule } from "./components";
 import { HttpClientModule } from "@angular/common/http";
 import { LzProductInfoModule } from "./modules/product-info/product-info.module";
 import { NgModule } from "@angular/core";
-import { OrdersModule } from "./components/orders/orders.module";
 import { PreloadDirectiveModule } from "./directive/preload/preload.module";
-import { RangeControllerModule } from "./components/range-controller/range-controller.module";
-import {TestComponent} from "./module/test/test.component";
+import { TestComponent } from "./module/test/test.component";
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,9 +21,11 @@ import {TestComponent} from "./module/test/test.component";
         AkitaNgDevtools.forRoot(),
         PreloadDirectiveModule.forRoot({
             config: {
-                "test": TestComponent,
+                test: TestComponent,
             },
-        }), LzProductInfoModule],
+        }),
+        LzProductInfoModule,
+    ],
     providers: [],
     bootstrap: [AppComponent],
 })
