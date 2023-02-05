@@ -1,0 +1,22 @@
+<div class="modal-overlay" (click)="closeModal()">
+    <article class="modal-content" (click)="stopEventPropagation($event)">
+        <header class="modal-header">
+            <ng-template #modalHeader> </ng-template>
+        </header>
+        <section class="modal-body">
+            <ng-template hostModalContent> </ng-template>
+            <ng-container></ng-container>
+        </section>
+
+        <footer class="modal-footer">
+            <ng-template #modalFooter> </ng-template>
+        </footer>
+    </article>
+</div>
+
+<ng-template #defaultContent> 123213123 </ng-template>
+
+<ng-template #defaultFooterTemplate>
+    <!--  <button (click)="onCloseButtonClick()">Close</button>-->
+    <!--  <button (click)="onConfirmButtonClick()">Confirm</button>-->
+</ng-template>

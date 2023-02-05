@@ -13,7 +13,6 @@
     "strictPropertyInitialization": false,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
@@ -26,12 +25,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "newLine": "lf",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }

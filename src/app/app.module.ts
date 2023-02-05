@@ -1,13 +1,17 @@
+import { APP_REF } from "./core/app-ref";
+import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
 import { HttpClientModule } from "@angular/common/http";
+import { Injector, NgModule } from "@angular/core";
 import { LzProductInfoModule } from "./modules/product-info/product-info.module";
-import { NgModule } from "@angular/core";
+import { ModalModule } from "./components/modal";
 import { PreloadDirectiveModule } from "./directive/preload/preload.module";
 import { TestComponent } from "./module/test/test.component";
+import { environment } from "../environments/environment";
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +23,7 @@ import { TestComponent } from "./module/test/test.component";
         RangeControllerModule,
         HttpClientModule,
         ColorPickerModule,
+        ModalModule,
         AkitaNgDevtools.forRoot(),
         PreloadDirectiveModule.forRoot({
             config: {
@@ -27,7 +32,17 @@ import { TestComponent } from "./module/test/test.component";
         }),
         LzProductInfoModule,
     ],
-    providers: [],
+    providers: [
+        {
+            provide: AbstractNavigationService,
+            useClass: NavigationService,
+        },
+    ],
     bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+    constructor(private injector: Injector) {
+        APP_REF.injector = injector;
+        APP_REF.environment = environment;
+    }
+}
