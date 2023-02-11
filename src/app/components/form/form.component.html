@@ -1,59 +1,98 @@
-<form class="form"
-      [formGroup]="mainFormGroup"
-      (submit)="_onFormSubmit()">
-  <div class="form-controls">
-    <ng-container *ngIf="_convertedFormModel?.controls?.length">
-      <ng-container *ngFor="let control of _convertedFormModel.controls">
-        <ng-template [ngTemplateOutlet]="control.valueTemplateKey && _defaultTemplatesMap[control.valueTemplateKey]
-                    || defaultFieldTemplate"
-                     [ngTemplateOutletContext]="{
-                      controlModel: control,
-                      nativeControl: mainFormGroup!.get(control.name)
-                   }">
-        </ng-template>
-      </ng-container>
+<div class="form-inner">
+    <ng-container
+        [ngTemplateOutlet]="groupTemplate"
+        [ngTemplateOutletContext]="{
+            formModel: _convertedFormModel
+        }"
+    >
     </ng-container>
-  </div>
-  <button type="submit"
-          [disabled]="mainFormGroup?.untouched">
-    Submit Form
-  </button>
-</form>
+</div>
 
-
-<ng-template #textFieldTemplate
-             let-controlModel="controlModel"
-             let-nativeControl="nativeControl">
-  <ap-text-field [controlModel]="controlModel"
-                 [nativeControl]="nativeControl"
-                 [formControl]="nativeControl">
-  </ap-text-field>
+<ng-template #groupTemplate let-formModel="formModel" let-index="index">
+    <ng-container
+        *ngIf="formModel"
+        [ngTemplateOutlet]="defaultGroupTemplate"
+        [ngTemplateOutletContext]="{
+            formModel: formModel,
+            formGroup: formModel.path ? mainFormGroup?.get(formModel.path) : mainFormGroup,
+            defaultTemplate: defaultGroupTemplate,
+            index: index
+        }"
+    >
+    </ng-container>
+    <ng-container *ngIf="formModel?.innerGroups">
+        <ng-container
+            *ngFor="let group of formModel.innerGroups; let i = index"
+            [ngTemplateOutlet]="groupTemplate"
+            [ngTemplateOutletContext]="{
+                formModel: group,
+                index: i
+            }"
+        >
+        </ng-container>
+    </ng-container>
 </ng-template>
 
-
-<ng-template #numberFieldTemplate
-             let-controlModel="controlModel"
-             let-nativeControl="nativeControl">
-  <ap-number-field [controlModel]="controlModel"
-                 [nativeControl]="nativeControl"
-                 [formControl]="nativeControl">
-  </ap-number-field>
+<ng-template #defaultGroupTemplate let-formModel="formModel" let-formGroup="formGroup" let-index="index">
+    <div class="form__wrapper" *ngIf="formModel?.innerControls?.length">
+        <form class="form" [formGroup]="formGroup" (submit)="_onFormSubmit()">
+            <div class="form-controls">
+                <ng-container *ngIf="formModel.innerControls">
+                    <ng-container *ngFor="let control of formModel.innerControls">
+                        <div *ngIf="control && !control.hidden">
+                            <ng-template
+                                [ngTemplateOutlet]="
+                                    (control.valueTemplateKey && _defaultTemplatesMap[control.valueTemplateKey]) ||
+                                    defaultFieldTemplate
+                                "
+                                [ngTemplateOutletContext]="{
+                                    controlModel: control,
+                                    nativeControl: mainFormGroup!.get(control.path)
+                                }"
+                            >
+                            </ng-template>
+                        </div>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </form>
+    </div>
 </ng-template>
 
-<ng-template #dropdownFieldTemplate
-             let-controlModel="controlModel"
-             let-nativeControl="nativeControl">
-  <ap-dropdown-field [multi]="controlModel.options?.multi ?? false"
-                     [formControl]="nativeControl"
-                     [value]="controlModel.value || []"
-                     [items]="controlModel.options?.items ?? []">
-  </ap-dropdown-field>
+<ng-template #textFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <ap-text-field
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [formControl]="nativeControl"
+    ></ap-text-field>
 </ng-template>
 
-<ng-template #defaultFieldTemplate
-             let-controlModel="controlModel"
-             let-nativeControl="nativeControl">
-  <span class="form-default-text">
-    {{'label: ' + controlModel?.options.label}}
-  </span>
+<ng-template #numberFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <ap-number-field
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [formControl]="nativeControl"
+    ></ap-number-field>
+</ng-template>
+
+<ng-template #dropdownFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <ap-dropdown-field
+        [multi]="controlModel.options?.multi ?? false"
+        [formControl]="nativeControl"
+        [value]="controlModel.value || []"
+        [items]="controlModel.options?.items ?? []"
+    >
+    </ap-dropdown-field>
+</ng-template>
+
+<ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <span class="form-default-text">
+        {{ "label: " + controlModel?.options.label }}
+    </span>
+</ng-template>
+
+<ng-template #defaultHeaderTemplate let-formModel="formModel">
+    <div class="form__default-header _font-ui13-normal" *ngIf="formModel?.headerText">
+        {{ formModel.headerText }}
+    </div>
 </ng-template>

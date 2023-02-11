@@ -14,16 +14,7 @@
     {
       "files": "*.component.html",
       "options": {
-        "printWidth": 150
-      }
-    },
-    {
-      "files": [
-        "*.json",
-        ".prettierrc"
-      ],
-      "options": {
-        "tabWidth": 2
+        "printWidth": 120
       }
     }
   ]
