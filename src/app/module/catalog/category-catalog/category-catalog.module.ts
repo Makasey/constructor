@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
+import {APFormModule} from "../../../components/form";
 import { CatalogFiltersComponent } from "./components/catalog-filters/catalog-filters.component";
 import { CatalogProductsComponent } from "./components/catalog-products/catalog-products.component";
 import { CategoryCatalogComponent } from "./category-catalog.component";
@@ -15,6 +16,6 @@ import {
 
 @NgModule({
     declarations: [CategoryCatalogComponent, CatalogFiltersComponent, CatalogProductsComponent],
-    imports: [CommonModule, CategoryCatalogRoutingModule, CheckboxGroupModule, ProductCardModule, RangeControllerModule, CategoryControllerModule, ColorPickerModule],
+    imports: [CommonModule, CategoryCatalogRoutingModule, CheckboxGroupModule, ProductCardModule, RangeControllerModule, CategoryControllerModule, ColorPickerModule, APFormModule],
 })
 export class CategoryCatalogModule {}

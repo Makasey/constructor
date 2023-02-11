@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { APFormDefaultTemplateKeys, APFormModel } from "../../../../../components/form";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { NgFormsManager } from "@ngneat/forms-manager";
+import {Validators} from "@angular/forms";
 
 @Component({
     selector: "lz-catalog-filters",
@@ -6,4 +9,44 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     styleUrls: ["./catalog-filters.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogFiltersComponent {}
+export class CatalogFiltersComponent implements OnInit {
+    public formModel: APFormModel = {
+        id: crypto.randomUUID(),
+        name: "testFormModel",
+        innerGroups: [
+            {
+                id: crypto.randomUUID(),
+                name: "innerFormGroup",
+                controls: [
+                    {
+                        id: crypto.randomUUID(),
+                        name: "my-awesome-control-2",
+                        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+                        value: 12345,
+                        validators: [Validators.required, Validators.min(50), Validators.max(12000)],
+                    },
+                    {
+                        id: crypto.randomUUID(),
+                        name: "my-awesome-control-3",
+                        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+                        value: 12345,
+                    },
+                ],
+            },
+        ],
+        controls: [
+            {
+                id: crypto.randomUUID(),
+                name: "my-awesome-control",
+                valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
+                value: "12345",
+            },
+        ],
+    };
+
+    constructor(private formsManager: NgFormsManager) {}
+
+    public ngOnInit(): void {
+        this.formsManager.valueChanges("testFormModel").subscribe(console.log);
+    }
+}

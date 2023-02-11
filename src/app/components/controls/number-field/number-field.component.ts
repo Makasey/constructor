@@ -64,7 +64,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
         if (this._value === input.value) {
             return;
         }
-        console.log(input.value);
+
         const parsedValue = this.getNumbersFromString(input.value);
         this.updateValue(parsedValue, this._value);
         parsedValue ? (input.value = parsedValue) : (input.value = "");
@@ -95,15 +95,12 @@ export class APNumberFieldComponent implements ControlValueAccessor {
             newValue: value!,
             oldValue: +oldValue,
         });
-
-        console.log("VALUE", this._value, newValue, this.nativeControl.errors);
     }
 
     private getNumbersFromString(value: string): string {
         const regexp = new RegExp("-?[0-9.]*");
         const parsedValue = value.match(regexp)!.join("");
         const lastDotIndex = parsedValue.lastIndexOf(".");
-        console.log(parsedValue.slice(0, lastDotIndex));
         return parsedValue.indexOf(".") === lastDotIndex ? parsedValue : parsedValue.slice(0, lastDotIndex);
     }
 

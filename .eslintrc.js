@@ -69,7 +69,7 @@ module.exports = {
         {
             files: ["*.ts"],
             parserOptions: {
-                project: ["tsconfig.*?.json", "tsconfig.json", "express/tsconfig.json", "app/tsconfig.app.json", "libs/billing-ui-ng2/tsconfig.lib.json"],
+                project: ["tsconfig.*?.json", "tsconfig.json"],
                 createDefaultProgram: true,
             },
             plugins: ["sort-imports-es6-autofix", "billing-rmi-rules"],
@@ -85,17 +85,6 @@ module.exports = {
                 "no-invalid-regexp": 0,
                 "no-use-before-define": 0,
                 "no-duplicate-imports": 0,
-                "no-restricted-imports": [
-                    2,
-                    {
-                        paths: [
-                            {
-                                name: "@netcracker/ux-ng2",
-                                message: "Please use direct import instead.",
-                            },
-                        ],
-                    },
-                ],
                 "comma-dangle": [
                     "error",
                     {

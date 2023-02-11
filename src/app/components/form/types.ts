@@ -8,13 +8,28 @@ export enum APFormDefaultTemplateKeys {
 }
 
 export type APFormModel = {
-    id?: string;
+    id: string;
     name: string;
     styleClass?: string;
     upsertConfig?: UpsertConfig;
     headerText?: string;
-    controls: APFormControl[];
+    isFormArray?: boolean;
+    innerGroups?: APFormModel[];
+    controls: (APFormControl | APFormControl[])[];
 } & AbstractControlOptions;
+
+export interface ApFormInnerModel extends APFormModel {
+    readonly innerControls: ApFormControlInner[];
+    readonly gridAreas: string;
+    readonly path?: string[];
+    readonly innerGroups?: ApFormInnerModel[];
+    readonly firstColumnLength: number;
+}
+
+export interface ApFormControlInner extends APFormControl {
+    readonly path: string[];
+    readonly gridClass: string;
+}
 
 export type APFormControl<T = any> = {
     name: string;
@@ -25,7 +40,22 @@ export type APFormControl<T = any> = {
     disabled?: boolean;
     required?: boolean;
     options?: APFormOptions;
+    hidden?: boolean;
     styleClass?: string;
 } & AbstractControlOptions;
+
+export function gridAreasFromColumns(columns: { gridClass: string; }[][]): string {
+    const gridAreas = [];
+    let j = 0;
+    while (columns?.some(it => !!it[j])) {
+        let gridRow = columns.reduce((result, next) => {
+            return `${result}${next[j]?.gridClass ?? "."} `;
+        }, "");
+        gridRow = `"${gridRow.substring(0, gridRow.length - 1)}"`;
+        gridAreas.push(gridRow);
+        j++;
+    }
+    return gridAreas.join(" ");
+}
 
 export type APFormOptions = Record<string, unknown>;
