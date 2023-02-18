@@ -1,9 +1,13 @@
+import { BelongArrayPipe } from "../../pipes/belong-array.pipe";
 import { ColorPickerComponent } from "./color-picker.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 @NgModule({
-    declarations: [ColorPickerComponent],
+    declarations: [
+        ColorPickerComponent,
+        BelongArrayPipe,
+    ],
     exports: [ColorPickerComponent],
     imports: [CommonModule],
 })
