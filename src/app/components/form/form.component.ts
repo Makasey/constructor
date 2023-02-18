@@ -268,7 +268,6 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             this.mainFormGroup.updateValueAndValidity();
             return;
         }
-        console.log("CLICKED");
         this.submitForm.emit(this.mainFormGroup.value);
     }
 

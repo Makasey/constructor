@@ -1,7 +1,7 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "../../../../../components/form";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import {Validators} from "@angular/forms";
+import { Validators } from "@angular/forms";
 
 @Component({
     selector: "lz-catalog-filters",
@@ -28,8 +28,15 @@ export class CatalogFiltersComponent implements OnInit {
                     {
                         id: crypto.randomUUID(),
                         name: "my-awesome-control-3",
-                        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
-                        value: 12345,
+                        valueTemplateKey: APFormDefaultTemplateKeys.DROPDOWN_FIELD,
+                        value: [{ id: 1, label: "Petya" }],
+                        options: {
+                            multi: true,
+                            items: [
+                                { id: 1, label: "Petya" },
+                                { id: 2, label: "Vasya" },
+                            ],
+                        },
                     },
                 ],
             },

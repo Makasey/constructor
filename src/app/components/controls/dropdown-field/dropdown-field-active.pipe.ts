@@ -1,3 +1,4 @@
+import {APDropdownFieldItem} from "./types";
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
@@ -5,7 +6,8 @@ import { Pipe, PipeTransform } from "@angular/core";
     pure: true,
 })
 export class APDropdownFieldActivePipe implements PipeTransform {
-    public transform(id: string, items: { id: string; active: boolean; }[]): boolean {
-        return !!items.find(item => item.id === id)?.active;
+    public transform(id: string, items: APDropdownFieldItem[], valueKey: string): boolean {
+        console.log(items, valueKey);
+        return !!items.find(item => item[valueKey] === id);
     }
 }

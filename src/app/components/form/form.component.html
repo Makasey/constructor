@@ -80,6 +80,8 @@
         [multi]="controlModel.options?.multi ?? false"
         [formControl]="nativeControl"
         [value]="controlModel.value || []"
+        [selectValueKey]="controlModel.options?.selectValueKey"
+        [selectLabelKey]="controlModel.options?.selectLabelKey"
         [items]="controlModel.options?.items ?? []"
     >
     </ap-dropdown-field>
