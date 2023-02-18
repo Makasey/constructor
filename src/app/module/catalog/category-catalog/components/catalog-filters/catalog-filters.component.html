@@ -1,38 +1,7 @@
 <div class="catalog-filters">
     <div class="filters">
-        <div class="filters-group">
-            <h2 class="filters-label">Букеты из роз</h2>
-            <lz-category-controller></lz-category-controller>
-        </div>
-
-        <div class="filters-group">
-            <h2 class="filters-label">Цена</h2>
-            <lz-range-controller></lz-range-controller>
-        </div>
-
-        <div class="filters-group">
-            <h2 class="filters-label">Цвета</h2>
-            <lz-color-picker></lz-color-picker>
-        </div>
-
-        <div class="filters-group">
-            <h2 class="filters-label">Размер</h2>
-            <lz-checkbox-group label="Состав букета"></lz-checkbox-group>
-            <lz-checkbox-group label="Высота букета"></lz-checkbox-group>
-        </div>
-
-        <div class="filters-group">
-            <h2 class="filters-label">Состав</h2>
-            <lz-checkbox-group [columnDirection]="true"></lz-checkbox-group>
-        </div>
-
-        <div class="filters-group">
-            <h2 class="filters-label">Кому</h2>
-            <lz-checkbox-group [columnDirection]="true"></lz-checkbox-group>
-        </div>
+        <ap-form [formModel]="formModel"></ap-form>
     </div>
     <button class="btn-filters">Применить фильты</button>
     <button class="btn-filters">Очистить фильты</button>
-
-    <ap-form [formModel]="formModel"></ap-form>
 </div>

@@ -34,6 +34,26 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private dropdownField: ControlTemplate;
 
+    @ViewChild("categoryControllerTemplate", {
+        static: true,
+    })
+    private categoryControllerField: ControlTemplate;
+
+    @ViewChild("rangeFieldTemplate", {
+        static: true,
+    })
+    private rangeField: ControlTemplate;
+
+    @ViewChild("colorPickerTemplate", {
+        static: true,
+    })
+    private colorField: ControlTemplate;
+
+    @ViewChild("checkboxGroupTemplate", {
+        static: true,
+    })
+    private checkboxField: ControlTemplate;
+
     @Output()
     public submitForm: EventEmitter<any> = new EventEmitter<any>();
 
@@ -54,6 +74,10 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.TEXT_FIELD]: this.textField,
             [APFormDefaultTemplateKeys.NUMBER_FIELD]: this.numberField,
             [APFormDefaultTemplateKeys.DROPDOWN_FIELD]: this.dropdownField,
+            [APFormDefaultTemplateKeys.CATEGORY_CONTROLLER]: this.categoryControllerField,
+            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
+            [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
+            [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
         };
     }
 

@@ -5,6 +5,10 @@ export enum APFormDefaultTemplateKeys {
     TEXT_FIELD = "textFieldTemplate",
     NUMBER_FIELD = "numberFieldTemplate",
     DROPDOWN_FIELD = "dropdownFieldTemplate",
+    CATEGORY_CONTROLLER = "categoryControllerTemplate",
+    RANGE_FIELD = "rangeFieldTemplate",
+    COLOR_FIELD = "colorPickerTemplate",
+    CHECKBOX_FIELD = "checkboxGroupTemplate",
 }
 
 export type APFormModel = {

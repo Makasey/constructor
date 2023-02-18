@@ -59,7 +59,12 @@
     </div>
 </ng-template>
 
-<ng-template #textFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template
+    #textFieldTemplate
+    let-controlModel="controlModel"
+    let-nativeControl="nativeControl"
+    let-formModel="formModel"
+>
     <ap-text-field
         [controlModel]="controlModel"
         [nativeControl]="nativeControl"
@@ -94,5 +99,37 @@
 <ng-template #defaultHeaderTemplate let-formModel="formModel">
     <div class="form__default-header _font-ui13-normal" *ngIf="formModel?.headerText">
         {{ formModel.headerText }}
+    </div>
+</ng-template>
+
+<ng-template #categoryControllerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <div class="filters-group">
+        <h2 class="filters-title">{{controlModel.options.title}}</h2>
+        <lz-category-controller [formControl]="nativeControl"> </lz-category-controller>
+    </div>
+</ng-template>
+
+<ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <div class="filters-group">
+        <h2 class="filters-title">{{controlModel.options.title}}</h2>
+        <lz-range-controller [formControl]="nativeControl" [value]="controlModel.value"></lz-range-controller>
+    </div>
+</ng-template>
+
+<ng-template #colorPickerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <div class="filters-group">
+        <h2 class="filters-title">{{controlModel.options.title}}</h2>
+        <lz-color-picker [formControl]="nativeControl"></lz-color-picker>
+    </div>
+</ng-template>
+
+<ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <div class="filters-group">
+        <h2 class="filters-title">{{controlModel.options.title}}</h2>
+        <lz-checkbox-group
+            [label]="controlModel.options.label"
+            [columnDirection]="controlModel.options.columnDirection"
+            [formControl]="nativeControl">
+        </lz-checkbox-group>
     </div>
 </ng-template>
