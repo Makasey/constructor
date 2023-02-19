@@ -23,8 +23,10 @@ export class CatalogFiltersComponent implements OnInit {
                         name: "category-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.CATEGORY_CONTROLLER,
                         value: null,
+                        controlClass: "filters-group",
                         options: {
                             title: "Букеты из роз",
+                            titleClass: "filters-title",
                         },
                     },
                     {
@@ -35,8 +37,10 @@ export class CatalogFiltersComponent implements OnInit {
                             min: 1500,
                             max: 23000,
                         },
+                        controlClass: "filters-group",
                         options: {
                             title: "Цена",
+                            titleClass: "filters-title",
                         },
                     },
                     {
@@ -44,7 +48,9 @@ export class CatalogFiltersComponent implements OnInit {
                         name: "color-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
                         value: null,
+                        controlClass: "filters-group",
                         options: {
+                            titleClass: "filters-title",
                             title: "Цвета",
                         },
                     },
@@ -53,8 +59,10 @@ export class CatalogFiltersComponent implements OnInit {
                         name: "diameter-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.CHECKBOX_FIELD,
                         value: [],
+                        controlClass: "filters-group",
                         options: {
                             title: "Размер",
+                            titleClass: "filters-title",
                             label: "Диаметр букета",
                         },
                     },
@@ -63,6 +71,7 @@ export class CatalogFiltersComponent implements OnInit {
                         name: "height-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.CHECKBOX_FIELD,
                         value: [],
+                        controlClass: "filters-group",
                         options: {
                             label: "Высота букета",
                         },
@@ -72,18 +81,22 @@ export class CatalogFiltersComponent implements OnInit {
                         name: "composition-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.CHECKBOX_FIELD,
                         value: [],
+                        controlClass: "filters-group",
                         options: {
                             title: "Состав",
                             columnDirection: true,
+                            titleClass: "filters-title",
                         },
                     },
                     {
                         id: crypto.randomUUID(),
                         name: "for-someone-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.CHECKBOX_FIELD,
+                        controlClass: "filters-group",
                         value: [],
                         options: {
                             title: "Кому",
+                            titleClass: "filters-title",
                             columnDirection: true,
                         },
                     },

@@ -54,12 +54,22 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private checkboxField: ControlTemplate;
 
+    @Input()
+    public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
+        this._templatesMap = {
+            ...this._defaultTemplatesMap ?? {},
+            ...templatesMap ?? {},
+        };
+    }
+
     @Output()
     public submitForm: EventEmitter<any> = new EventEmitter<any>();
 
     public mainFormGroup: FormGroup | null = null;
 
     public _convertedFormModel: ApFormInnerModel;
+
+    public _templatesMap: Record<string, TemplateRef<unknown>>;
 
     public _defaultTemplatesMap: Record<APFormDefaultTemplateKeys | string, TemplateRef<ControlTemplate | any>>;
 
@@ -78,6 +88,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
             [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
             [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
+        };
+
+        this._templatesMap = {
+            ...this.templatesMap,
+            ...this._defaultTemplatesMap,
         };
     }
 
