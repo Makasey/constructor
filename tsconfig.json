@@ -8,6 +8,7 @@
     "strict": true,
     "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": false,
+    "suppressImplicitAnyIndexErrors": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "strictPropertyInitialization": false,

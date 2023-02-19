@@ -1,5 +1,5 @@
 import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
@@ -16,7 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
         },
     ],
 })
-export class APDropdownFieldComponent implements OnChanges, ControlValueAccessor {
+export class APDropdownFieldComponent implements ControlValueAccessor {
     @Input()
     public items: APDropdownFieldItem[] = [];
 
@@ -24,82 +24,58 @@ export class APDropdownFieldComponent implements OnChanges, ControlValueAccessor
     public multi = false;
 
     @Input()
-    public value: APDropdownFieldItem[] = [];
+    public set value(items: APDropdownFieldItem[] | APDropdownFieldItem) {
+        if (!Array.isArray(items)) {
+            this._value = [items];
+        } else {
+            this._value = items;
+        }
+    }
+
+    @Input()
+    public set selectValueKey(valueKey: string) {
+        if (valueKey) {
+            this._selectValueKey = valueKey;
+        }
+    }
+
+    @Input()
+    public set selectLabelKey(labelKey: string) {
+        if (labelKey) {
+            this._selectLabelKey = labelKey;
+        }
+    }
 
     @Output()
     public readonly onValueChange: EventEmitter<APDropdownFieldValueChangeEvent> = new EventEmitter<APDropdownFieldValueChangeEvent>();
 
     public _isDropdownItemsVisible = false;
 
-    public _activeDropdownItems: APDropdownFieldItem[] = [];
-
-    public _activeItems: { active: boolean; id: string; }[] = [];
-
     public disabled = false;
 
     public touched = false;
 
-    public _value: APDropdownFieldItem[] | null = [];
+    public _selectValueKey: string = "id";
+
+    public _selectLabelKey: string = "label";
+
+    public _value: APDropdownFieldItem[] = [];
 
     private onChange: (value: APDropdownFieldItem[]) => void = () => undefined;
 
     private onTouched: () => void;
 
-    constructor(private changeDetectionRef: ChangeDetectorRef) {}
-
-    public ngOnChanges(changes: SimpleChanges): void {
-        if (changes.value) {
-            const condition = Array.isArray(changes.value?.currentValue);
-            this._value = condition ? changes.value?.currentValue : [];
-            this._activeDropdownItems = Array.isArray(changes.value?.currentValue) ? changes.value.currentValue : [changes.value?.currentValue].filter(Boolean);
-
-            this._activeItems = this.items.map(item => {
-                return {
-                    id: item.id,
-                    active: !!this._value?.find(valueItem => valueItem.id === item.id),
-                };
-            });
-        }
-    }
-
     public _onDropdownItemChoose(item: APDropdownFieldItem): void {
-        const itemIndex = this._activeDropdownItems.findIndex(dropdownItem => dropdownItem.id === item.id);
-        const oldValue = this._activeDropdownItems.slice(0);
+        const oldValue = [...this._value];
 
-        if (this.multi) {
-            const index = this._activeItems.findIndex(activeItem => activeItem.id === item.id);
-            if (itemIndex === -1) {
-                this._activeDropdownItems = [...this._activeDropdownItems, item];
-                this._activeItems[index].active = true;
-            } else {
-                const copy = this._activeDropdownItems.slice(0);
-                copy.splice(itemIndex, 1);
-                this._activeItems[index].active = false;
-                this._activeDropdownItems = copy;
-            }
-        } else {
-            this._activeItems = this._activeItems.map(activeItem => {
-                return activeItem.id === item.id
-                    ? {
-                        ...activeItem,
-                        active: true,
-                    }
-                    : {
-                        ...activeItem,
-                        active: false,
-                    };
-            });
-            itemIndex === -1 ? (this._activeDropdownItems = [item]) : (this._activeDropdownItems = []);
-        }
-        this.changeDetectionRef.detectChanges();
-        this.writeValue(this._activeDropdownItems);
-        const valueChangeEventValue = {
-            newValue: this._activeDropdownItems,
+        this.multi ? this.processMultiDropdownMode(item) : this.processSingleDropdownMode(item);
+
+        this.writeValue(this._value);
+        this.onChange(this._value);
+        this.onValueChange.emit({
+            newValue: this._value,
             oldValue: oldValue,
-        };
-        this.onChange(this._activeDropdownItems);
-        //control.setValue(valueChangeEventValue)
-        this.onValueChange.emit(valueChangeEventValue);
+        });
     }
 
     public _onDropdownFieldFocus(): void {
@@ -119,8 +95,8 @@ export class APDropdownFieldComponent implements OnChanges, ControlValueAccessor
         this.disabled = isDisabled;
     }
 
-    public writeValue(value: APDropdownFieldItem | APDropdownFieldItem[] | null): void {
-        this._value = Array.isArray(value) ? value : value && [value];
+    public writeValue(value: APDropdownFieldItem | APDropdownFieldItem[]): void {
+        this._value = Array.isArray(value) ? [...value] : [value];
     }
 
     public _onToggleDropdownListVisibility(event: Event): void {
@@ -130,7 +106,19 @@ export class APDropdownFieldComponent implements OnChanges, ControlValueAccessor
     }
 
     public _onCloseDropdownList(): void {
-        console.log("TRIGGER");
+        this.touched = false;
+        this.onTouched();
         this._isDropdownItemsVisible = false;
+    }
+
+    private processSingleDropdownMode(item: APDropdownFieldItem): void {
+        const index = this._value.findIndex((dropdownItem: APDropdownFieldItem) => dropdownItem[this._selectValueKey] === item[this._selectValueKey]);
+
+        this._value = index === -1 ? [item] : [];
+    }
+
+    private processMultiDropdownMode(item: APDropdownFieldItem): void {
+        const index = this._value.findIndex((dropdownItem: APDropdownFieldItem) => dropdownItem[this._selectValueKey] === item[this._selectValueKey]);
+        this._value = index === -1 ? [...this._value, item] : this._value.filter(currentItem => currentItem[this._selectValueKey] !== item[this._selectValueKey]);
     }
 }
