@@ -1,7 +1,7 @@
-import { APFormDefaultTemplateKeys, APFormModel } from "../../../../../components/form";
+import { APFormDefaultTemplateKeys, APFormModel } from "src/app/components/form";
+
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { Validators } from "@angular/forms";
 
 @Component({
     selector: "lz-catalog-filters",
