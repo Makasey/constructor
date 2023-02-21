@@ -1,0 +1,13 @@
+<div class="lz-toastr-box-action">
+    <label for="dnd-mode">
+        Do not disturb
+        <input
+            type="checkbox"
+            id="dnd-mode"
+            name="dnd-mode"
+            [value]="_enabledDNDMode$ | async"
+            (change)="_changeEnableDNDMode($event)"
+        />
+    </label>
+</div>
+<lz-toastr-list></lz-toastr-list>

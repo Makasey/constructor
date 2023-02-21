@@ -5,10 +5,12 @@ import { AbstractProductDataService, ProductDataService } from "./core/data-serv
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
+import { LZToastrModule } from "./components/toastr/toastr.module";
 import { LzProductInfoModule } from "./modules/product-info/product-info.module";
 import { LzQuery } from "./core/store/lz.query";
 import { LzService } from "./core/store/lz.service";
@@ -30,7 +32,9 @@ import { environment } from "../environments/environment";
         APDropdownFieldModule,
         ColorPickerModule,
         ModalModule,
+        BrowserAnimationsModule,
         AkitaNgDevtools.forRoot(),
+        LZToastrModule.forRoot(),
         PreloadDirectiveModule.forRoot({
             config: {
                 test: TestComponent,

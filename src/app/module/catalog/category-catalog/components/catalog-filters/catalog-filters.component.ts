@@ -1,7 +1,10 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "src/app/components/form";
 
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { LZToastrItemType } from "../../../../../components/toastr/types";
+import { LZToastrService } from "../../../../../components/toastr/store/toastr.service";
 import { NgFormsManager } from "@ngneat/forms-manager";
+import { guid } from "@datorama/akita";
 
 @Component({
     selector: "lz-catalog-filters",
@@ -93,9 +96,18 @@ export class CatalogFiltersComponent implements OnInit {
         controls: [],
     };
 
-    constructor(private formsManager: NgFormsManager) {}
+    constructor(private formsManager: NgFormsManager, private toastrService: LZToastrService) {}
 
     public ngOnInit(): void {
         this.formsManager.valueChanges("filtersFormModel").subscribe(console.log);
+    }
+
+    public addNotification(): void {
+        this.toastrService.addToastrItem({
+            id: guid(),
+            title: "The best notification",
+            text: "Text bla bla bla...",
+            type: LZToastrItemType.SUCCESS,
+        });
     }
 }

@@ -1,0 +1,9 @@
+<div class="scroll">
+    <lz-toastr-item
+        *ngFor="let item of toastrItems$ | async; trackBy: _trackById"
+        [alwaysOnDisplay]="_alwaysOnDisplay$ | async"
+        [item]="item"
+        (onClose)="_removeItem(item.id)"
+        (onTimeExpired)="_hideItem(item.id)"
+    ></lz-toastr-item>
+</div>

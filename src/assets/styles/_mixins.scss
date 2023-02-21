@@ -1,0 +1,18 @@
+//@mixin font-face($file-name, $font-family, $font-weight: 400, $font-style: normal, $format: woff, $format-name: woff) {
+//    @font-face {
+//        font-family: $font-family;
+//        src: url("../fonts/#{font-family}/#{file-name}.#{format}") format("#{format-name}");
+//        font-weight: $font-weight;
+//        font-style: $font-style;
+//    }
+//}
+
+@mixin flexbox($flex-direction: unset, $align-items: unset, $justify-content: unset, $flex-wrap: unset, $gap: unset, $flex-grow: unset) {
+    display: flex;
+    flex-direction: $flex-direction;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    flex-wrap: $flex-wrap;
+    gap: $gap;
+    flex-grow: $flex-grow;
+}
