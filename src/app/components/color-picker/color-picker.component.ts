@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, forwardRef } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    HostBinding,
+    Input,
+    Output,
+    forwardRef,
+} from "@angular/core";
 import { Color, basicColors } from "./types";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -16,14 +24,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     ],
 })
 export class ColorPickerComponent implements ControlValueAccessor {
-    @Output()
-    public onColorChange: EventEmitter<Color> = new EventEmitter<Color>();
-
     @Input()
     public colors: Color[] = basicColors;
 
     @Input()
     public width: number = 250;
+
+    @Input()
+    public set value(value: Color[] | number[]) {
+        this.writeValue(value ?? []);
+    }
+
+    @Output()
+    public onColorChange: EventEmitter<Color[]> = new EventEmitter<Color[]>();
 
     @HostBinding("class.color-picker")
     public hostClass = true;
@@ -33,11 +46,11 @@ export class ColorPickerComponent implements ControlValueAccessor {
         return this.width;
     }
 
-    public value: Color;
-    private onChange: (value: Color) => void = () => undefined;
+    public _value: Color[];
+    private onChange: (value: Color[]) => void = () => undefined;
     private onTouched: () => unknown = () => ({});
 
-    public registerOnChange(fn: (value: Color) => void): void {
+    public registerOnChange(fn: (value: Color[]) => void): void {
         this.onChange = fn;
     }
 
@@ -45,8 +58,16 @@ export class ColorPickerComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
-    public writeValue(value: Color): void {
-        this.value = value;
+    public writeValue(value: Color[] | number[]): void {
+        const normalizedValue = value ?? [];
+        const currentValue: Color[] =
+            typeof normalizedValue[0] === "number"
+                ? (this.colors
+                .filter(color => (normalizedValue as number[]).includes(color.id))
+                .filter(Boolean) )
+                : (normalizedValue as Color[]);
+
+        this._value = [...currentValue];
     }
 
     public checkChanges(index: number, item: Color): string {
@@ -54,8 +75,20 @@ export class ColorPickerComponent implements ControlValueAccessor {
     }
 
     public pickColor(color: Color): void {
-        this.onChange(color);
-        this.writeValue(color);
-        this.onColorChange.emit(color);
+        const colors = this.getNewColors(color);
+
+        this.onChange(colors);
+        this.writeValue(colors);
+        this.onColorChange.emit(colors);
+    }
+
+    private getNewColors(value: Color): Color[] {
+        let result = this._value;
+
+        result = result.find(color => value.id === color.id)
+            ? result.filter(element => element.id !== value.id)
+            : [...result, value];
+
+        return result;
     }
 }

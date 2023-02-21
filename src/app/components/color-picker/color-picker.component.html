@@ -2,7 +2,7 @@
     <label
         class="color-picker-item"
         *ngFor="let color of colors; trackBy: checkChanges"
-        [ngClass]="{ active: value === color }"
+        [ngClass]="{ active: _value | lzBelongArray : color }"
         [title]="color.label"
         [for]="color.id"
     >
@@ -12,6 +12,6 @@
                 backgroundColor: color.color
             }"
         ></span>
-        <input type="radio" name="colorPicker" [id]="color.id" (change)="pickColor(color)" />
+        <input type="checkbox" name="colorPicker" [id]="color.id" (change)="pickColor(color)" />
     </label>
 </div>
