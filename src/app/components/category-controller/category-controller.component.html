@@ -1,5 +1,10 @@
 <div class="container">
     <ng-container *ngFor="let item of list">
-        <button class="category-item" (click)="changeValue(item.value)">{{ item.label }}</button>
+        <button
+            class="category-item"
+            (click)="changeValue(item.value)"
+            [ngClass]="{ active: item.value === category }"
+            >{{ item.label }}</button
+        >
     </ng-container>
 </div>
