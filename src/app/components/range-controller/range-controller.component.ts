@@ -46,8 +46,36 @@ export class RangeControllerComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
+    public checkMinRangeValue(): void {
+        const value = this.min;
+
+        if (value > this.minRangeTo) {
+            this.min = this.minRangeTo;
+        }
+
+        if (value < this.minRangeFrom) {
+            this.min = this.minRangeFrom;
+        }
+
+        this.valuesChange();
+    }
+
+    public checkMaxRangeValue(): void {
+        const value = this.max;
+
+        if (value > this.maxRangeTo) {
+            this.max = this.maxRangeTo;
+        }
+
+        if (value < this.minRangeTo) {
+            this.max = this.minRangeTo;
+        }
+
+        this.valuesChange();
+    }
+
     public valuesChange(): void {
-        this.onChange({ min: this.min, max: this.max });
-        this.changeValue.emit({ min: this.min, max: this.max });
+        this.onChange({ min: +this.min, max: +this.max });
+        this.changeValue.emit({ min: +this.min, max: +this.max });
     }
 }

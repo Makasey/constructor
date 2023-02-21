@@ -66,6 +66,10 @@
     border-bottom: 1px solid #e2e4eb;
     padding-bottom: 15px;
     margin-bottom: 15px;
+
+    &:last-child {
+        border-bottom: unset;
+    }
 }
 
 .filters-title {

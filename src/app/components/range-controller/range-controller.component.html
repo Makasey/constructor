@@ -1,10 +1,10 @@
 <div class="range-control">
     <div class="price-fields-group">
         <label for="min-price">
-            <input type="text" id="min-price" [(ngModel)]="min" />
+            <input type="text" id="min-price" [(ngModel)]="min" (change)="checkMinRangeValue()" />
         </label>
         <label for="max-price">
-            <input type="text" id="max-price" [(ngModel)]="max" />
+            <input type="text" id="max-price" [(ngModel)]="max" (change)="checkMaxRangeValue()" />
         </label>
     </div>
     <div class="price-range-controls">
@@ -16,7 +16,7 @@
                 [min]="minRangeFrom"
                 [max]="minRangeTo"
                 [(ngModel)]="min"
-                (ngModelChange)="valuesChange()"
+                (change)="valuesChange()"
             />
         </label>
         <label for="max-range-price">
@@ -27,7 +27,7 @@
                 [min]="minRangeTo"
                 [max]="maxRangeTo"
                 [(ngModel)]="max"
-                (ngModelChange)="valuesChange()"
+                (change)="valuesChange()"
             />
         </label>
         <span class="price-label min-price">
