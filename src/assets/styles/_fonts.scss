@@ -1,0 +1,65 @@
+@import "mixins.scss";
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-Thin.woff") format("woff");
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-ExtraLight.woff") format("woff");
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-Light.woff") format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-Bold.woff") format("woff");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-ExtraBold.woff") format("woff");
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TTNorms";
+    src: url("../fonts/TTNorms/TTNorms-Black.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+@font-face {
+  font-family: "TTNorms";
+  src: url("../fonts/TTNorms/TTNorms-Heavy.woff") format("woff");
+  font-weight: 1000;
+  font-style: normal;
+}
