@@ -77,6 +77,7 @@ export class CatalogFiltersComponent implements OnInit {
                         controlClass: "filters-group",
                         options: {
                             label: "Высота букета",
+
                         },
                     },
                     {
