@@ -50,7 +50,7 @@ export class CatalogFiltersComponent implements OnInit {
                         id: crypto.randomUUID(),
                         name: "color-flowers",
                         valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
-                        value: null,
+                        value: [],
                         controlClass: "filters-group",
                         options: {
                             titleClass: "filters-title",
@@ -77,7 +77,6 @@ export class CatalogFiltersComponent implements OnInit {
                         controlClass: "filters-group",
                         options: {
                             label: "Высота букета",
-
                         },
                     },
                     {

@@ -1,3 +1,4 @@
+import { Color } from "../components";
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
@@ -5,9 +6,7 @@ import { Pipe, PipeTransform } from "@angular/core";
     pure: true,
 })
 export class BelongArrayPipe implements PipeTransform {
-
-    public transform(array: unknown[], element: unknown): boolean {
-        return array.includes(element);
+    public transform(array: Color[], element: Color): boolean {
+        return !!array.find(item => item.id === element.id);
     }
-
 }

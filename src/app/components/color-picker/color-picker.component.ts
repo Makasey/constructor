@@ -24,14 +24,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
     ],
 })
 export class ColorPickerComponent implements ControlValueAccessor {
-    @Output()
-    public onColorChange: EventEmitter<Color[]> = new EventEmitter<Color[]>();
-
     @Input()
     public colors: Color[] = basicColors;
 
     @Input()
     public width: number = 250;
+
+    @Input()
+    public set value(value: Color[] | number[]) {
+        this.writeValue(value ?? []);
+    }
+
+    @Output()
+    public onColorChange: EventEmitter<Color[]> = new EventEmitter<Color[]>();
 
     @HostBinding("class.color-picker")
     public hostClass = true;
@@ -41,7 +46,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
         return this.width;
     }
 
-    public value: Color[];
+    public _value: Color[];
     private onChange: (value: Color[]) => void = () => undefined;
     private onTouched: () => unknown = () => ({});
 
@@ -53,8 +58,16 @@ export class ColorPickerComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
-    public writeValue(value: Color[]): void {
-        this.value = this.value ? [...value] : [];
+    public writeValue(value: Color[] | number[]): void {
+        const normalizedValue = value ?? [];
+        const currentValue: Color[] =
+            typeof normalizedValue[0] === "number"
+                ? (this.colors
+                .filter(color => (normalizedValue as number[]).includes(color.id))
+                .filter(Boolean) )
+                : (normalizedValue as Color[]);
+
+        this._value = [...currentValue];
     }
 
     public checkChanges(index: number, item: Color): string {
@@ -70,11 +83,11 @@ export class ColorPickerComponent implements ControlValueAccessor {
     }
 
     private getNewColors(value: Color): Color[] {
-        let result = this.value;
+        let result = this._value;
 
-        result = result.find(color => value.id === color.id) ?
-            result.filter(element => element.id !== value.id) :
-            [...result, value];
+        result = result.find(color => value.id === color.id)
+            ? result.filter(element => element.id !== value.id)
+            : [...result, value];
 
         return result;
     }
