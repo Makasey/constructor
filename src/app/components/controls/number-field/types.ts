@@ -1,13 +1,20 @@
 export type APNumberFieldValueChangeEvent = {
-  newValue: number;
-  oldValue: number;
-}
+    newValue: number;
+    oldValue: number;
+};
 
-export const defaultAPNumberFieldOptions = {
+export type ApNumberFormControlOptions = Readonly<{
+    label: string;
+    placeholder?: string;
+    disabled?: boolean;
+    min?: number;
+    max?: number;
+}>;
+
+export const defaultAPNumberFieldOptions: ApNumberFormControlOptions = {
     label: "",
     placeholder: "",
-    disabled: "",
-    maxLength: 15,
+    disabled: false,
     min: -9007199254740991,
     max: 9007199254740991,
 };

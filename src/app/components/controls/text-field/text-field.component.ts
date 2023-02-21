@@ -1,5 +1,5 @@
-import { APFormControl, APFormOptions } from "../../form";
-import { APTextFieldValueChangeEvent, defaultAPTextFieldOptions } from "./types";
+import { APFormControl } from "../../form";
+import { APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "./types";
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
@@ -38,7 +38,7 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
 
     public disabled = false;
 
-    public _options: APFormOptions;
+    public _options: ApTextFormControlOptions;
 
     public onChange: (value: string) => void;
 

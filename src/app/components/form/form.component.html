@@ -39,10 +39,13 @@
             <div class="form-controls">
                 <ng-container *ngIf="formModel.innerControls">
                     <ng-container *ngFor="let control of formModel.innerControls">
-                        <div *ngIf="control && !control.hidden">
+                        <div [ngClass]="control.controlClass" *ngIf="control && !control.hidden">
+                            <h2 [ngClass]="control.options?.titleClass" *ngIf="control.options?.title">{{
+                                control.options.title
+                            }}</h2>
                             <ng-template
                                 [ngTemplateOutlet]="
-                                    (control.valueTemplateKey && _defaultTemplatesMap[control.valueTemplateKey]) ||
+                                    (control.valueTemplateKey && _templatesMap[control.valueTemplateKey]) ||
                                     defaultFieldTemplate
                                 "
                                 [ngTemplateOutletContext]="{
@@ -59,7 +62,12 @@
     </div>
 </ng-template>
 
-<ng-template #textFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template
+    #textFieldTemplate
+    let-controlModel="controlModel"
+    let-nativeControl="nativeControl"
+    let-formModel="formModel"
+>
     <ap-text-field
         [controlModel]="controlModel"
         [nativeControl]="nativeControl"
@@ -80,6 +88,8 @@
         [multi]="controlModel.options?.multi ?? false"
         [formControl]="nativeControl"
         [value]="controlModel.value || []"
+        [selectValueKey]="controlModel.options?.selectValueKey"
+        [selectLabelKey]="controlModel.options?.selectLabelKey"
         [items]="controlModel.options?.items ?? []"
     >
     </ap-dropdown-field>
@@ -95,4 +105,25 @@
     <div class="form__default-header _font-ui13-normal" *ngIf="formModel?.headerText">
         {{ formModel.headerText }}
     </div>
+</ng-template>
+
+<ng-template #categoryControllerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-category-controller [formControl]="nativeControl"> </lz-category-controller>
+</ng-template>
+
+<ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-range-controller [formControl]="nativeControl" [value]="controlModel.value"></lz-range-controller>
+</ng-template>
+
+<ng-template #colorPickerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-color-picker [formControl]="nativeControl"></lz-color-picker>
+</ng-template>
+
+<ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-checkbox-group
+        [label]="controlModel.options.label"
+        [columnDirection]="controlModel.options.columnDirection"
+        [formControl]="nativeControl"
+    >
+    </lz-checkbox-group>
 </ng-template>
