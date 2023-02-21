@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 })
 export class CategoryControllerComponent implements ControlValueAccessor {
     @Input() public set value(value: number) {
-        this.item = value;
+        this.category = value;
     }
 
     @Input() public list: CategoryListItem[] = [
@@ -37,12 +37,12 @@ export class CategoryControllerComponent implements ControlValueAccessor {
 
     @Output() public valueChange: EventEmitter<number> = new EventEmitter<number>();
 
-    private item: number;
+    public category: number;
     private onChange: (value: number) => void = () => undefined;
     private onTouched: () => unknown = () => ({});
 
     public writeValue(value: number): void {
-        this.item = value;
+        this.category = value;
     }
 
     public registerOnChange(fn: (value: number) => void): void {
@@ -55,6 +55,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
 
     public changeValue(value: number): void {
         this.onChange(value);
+        this.writeValue(value);
         this.valueChange.emit(value);
     }
 }

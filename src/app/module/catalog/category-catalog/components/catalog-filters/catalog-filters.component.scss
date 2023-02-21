@@ -8,26 +8,6 @@
     border: 1px solid #f2f3f5;
     box-shadow: 0 0 20px rgba(34, 42, 70, 0.05);
     border-radius: 5px;
-
-    &-group {
-        border-bottom: 1px solid #e2e4eb;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-
-        &:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-    }
-
-    &-label {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 26px;
-        color: #1b1c21;
-        margin-bottom: 10px;
-    }
 }
 
 .btn-filters {

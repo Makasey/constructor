@@ -1,10 +1,17 @@
-
 export type APTextFieldValueChangeEvent = {
-  newValue: string;
-  oldValue: string;
-}
+    newValue: string;
+    oldValue: string;
+};
 
-export const defaultAPTextFieldOptions = {
+export type ApTextFormControlOptions = Readonly<{
+    label: string;
+    placeholder?: string;
+    disabled?: boolean;
+    maxLength?: number;
+    minLength?: number;
+}>;
+
+export const defaultAPTextFieldOptions: ApTextFormControlOptions = {
     label: "Text Field",
     placeholder: "",
     disabled: false,

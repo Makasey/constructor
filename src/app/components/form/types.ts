@@ -1,10 +1,16 @@
 import { AbstractControlOptions } from "@angular/forms";
+import { ApDropdownFormControlOptions } from "../controls/dropdown-field/types";
+import { ApNumberFormControlOptions, ApTextFormControlOptions } from "../controls";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 
 export enum APFormDefaultTemplateKeys {
     TEXT_FIELD = "textFieldTemplate",
     NUMBER_FIELD = "numberFieldTemplate",
     DROPDOWN_FIELD = "dropdownFieldTemplate",
+    CATEGORY_CONTROLLER = "categoryControllerTemplate",
+    RANGE_FIELD = "rangeFieldTemplate",
+    COLOR_FIELD = "colorPickerTemplate",
+    CHECKBOX_FIELD = "checkboxGroupTemplate",
 }
 
 export type APFormModel = {
@@ -41,6 +47,7 @@ export type APFormControl<T = any> = {
     required?: boolean;
     options?: APFormOptions;
     hidden?: boolean;
+    controlClass?: string;
     styleClass?: string;
 } & AbstractControlOptions;
 
@@ -58,4 +65,14 @@ export function gridAreasFromColumns(columns: { gridClass: string; }[][]): strin
     return gridAreas.join(" ");
 }
 
-export type APFormOptions = Record<string, unknown>;
+export type APFormOptions =
+    | Readonly<{
+          title?: string;
+          titleClass?: string;
+          label?: string;
+
+          [key: string]: unknown;
+      }>
+    | ApTextFormControlOptions
+    | ApNumberFormControlOptions
+    | ApDropdownFormControlOptions<unknown>;
