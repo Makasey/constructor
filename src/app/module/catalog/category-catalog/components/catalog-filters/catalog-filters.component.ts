@@ -12,7 +12,7 @@ import { guid } from "@datorama/akita";
     styleUrls: ["./catalog-filters.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogFiltersComponent extends AbstractModuleComponent implements OnInit {
+export class CatalogFiltersComponent extends AbstractModuleComponent<{ productId: string; }> implements OnInit {
     public _formModel$ = this.service.selectFilters();
 
     constructor(protected service: AbstractCatalogFiltersService, private formsManager: NgFormsManager, private toastrService: LZToastrService) {
@@ -20,7 +20,7 @@ export class CatalogFiltersComponent extends AbstractModuleComponent implements 
     }
 
     public ngOnInit(): void {
-        super.ngOnInit({productId: "12345"});
+        super.ngOnInit({ productId: "12345" });
         this.formsManager.valueChanges("filtersFormModel").subscribe(console.log);
     }
 

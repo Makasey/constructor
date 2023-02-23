@@ -14,7 +14,13 @@ export class PreloadDirective implements OnChanges {
     @Input("preloadBackgroundConfig")
     public preloadConfig: Record<string, unknown>;
 
-    constructor(private templateRef: TemplateRef<unknown>, private viewContainerRef: ViewContainerRef, private cdr: ChangeDetectorRef, private injector: Injector, @Inject(PRELOAD_BACKGROUND_CONFIG_TOKEN) private preloadBackgroundComponentsMap: Record<string, Type<unknown>>) {}
+    constructor(
+        private templateRef: TemplateRef<unknown>,
+        private viewContainerRef: ViewContainerRef,
+        private cdr: ChangeDetectorRef,
+        private injector: Injector,
+        @Inject(PRELOAD_BACKGROUND_CONFIG_TOKEN) private preloadBackgroundComponentsMap: Record<string, Type<unknown>>,
+    ) {}
 
     public ngOnChanges(): void {
         this.viewContainerRef.clear();
@@ -41,7 +47,11 @@ export class PreloadDirective implements OnChanges {
                     injector: newInjector,
                 });
             } else {
-                throw Error(`There is no component corresponding to the (${this.preloadBackgroundType}) key. Add it using the forRoot() method of the PreloadBackgroundModule module, or select a different one from the existing ones`);
+                throw Error(
+                    `There is no component corresponding to the (${this.preloadBackgroundType}) key.
+                     Add it using the forRoot() method of the PreloadBackgroundModule module, or select
+                     a different one from the existing ones`,
+                );
             }
         } else {
             this.viewContainerRef.createEmbeddedView(this.templateRef);
