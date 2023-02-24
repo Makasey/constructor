@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-
+import { ChangeDetectionStrategy, Component, ViewContainerRef } from "@angular/core";
+import { LZLoginComponent } from "./components/login/login.component";
+import { ModalService, ModalType } from "./components/modal";
 
 @Component({
     selector: "app-root",
@@ -12,7 +13,25 @@ export class AppComponent {
 
     public preloadLoading = true;
 
+    public id: string = "my-login-modal";
+
+    constructor(private modalService: ModalService, private viewContainerRef: ViewContainerRef) {}
+
     public changePreloadVisibility(): void {
         this.preloadLoading = !this.preloadLoading;
+    }
+
+    public openLoginModal(): void {
+        this.modalService.openModal<LZLoginComponent>({
+            id: this.id,
+            viewContainerRef: this.viewContainerRef,
+            contentType: ModalType.COMPONENT,
+            component: LZLoginComponent,
+            data: {
+                type: "login",
+            },
+            title: "Войти",
+            customClass: "login-modal",
+        });
     }
 }

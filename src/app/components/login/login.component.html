@@ -1,0 +1,13 @@
+<form [formGroup]="loginForm" class="form" (submit)="submitForm()">
+    <label class="form-control">
+        <span class="form-control-text">Email</span>
+        <input type="email" [formControlName]="loginFormControl.EMAIL" />
+    </label>
+
+    <label class="form-control">
+        <span class="form-control-text">Пароль</span>
+        <input type="password" [formControlName]="loginFormControl.PASSWORD" />
+    </label>
+
+    <button class="form-button" type="submit">Войти</button>
+</form>
