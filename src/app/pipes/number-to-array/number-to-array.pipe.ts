@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from "@angular/core";
     name: "lzNumberToArray",
 })
 export class NumberToArrayPipe implements PipeTransform {
-    public transform(value: number): unknown {
+    public transform(value: number): unknown[] {
         return new Array(value);
     }
 }
