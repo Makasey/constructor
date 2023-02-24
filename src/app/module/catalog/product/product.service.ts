@@ -14,7 +14,10 @@ export abstract class AbstractProductService extends AbstractModuleService {
 }
 
 @Injectable()
-export class DefaultProductService extends AbstractDefaultModuleService<LzStateKey.ROOT_STATE, { productId: number; }> implements AbstractProductService {
+export class DefaultProductService
+    extends AbstractDefaultModuleService<LzStateKey.ROOT_STATE, { productId: number; }>
+    implements AbstractProductService
+{
     constructor(protected query: LzQuery, protected service: LzService, private productDataService: AbstractProductDataService) {
         super(LzStateKey.ROOT_STATE, query, service);
     }

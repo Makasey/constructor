@@ -23,17 +23,17 @@ import { environment } from "../environments/environment";
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        BrowserModule,
-        AppRoutingModule,
-        OrdersModule,
-        CheckboxGroupModule,
-        RangeControllerModule,
-        HttpClientModule,
         APDropdownFieldModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        CheckboxGroupModule,
         ColorPickerModule,
+        HttpClientModule,
         ModalModule,
         LZLoginModule,
         BrowserAnimationsModule,
+        OrdersModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
         PreloadDirectiveModule.forRoot({
@@ -41,6 +41,7 @@ import { environment } from "../environments/environment";
                 test: TestComponent,
             },
         }),
+        RangeControllerModule,
     ],
     providers: [
         {
@@ -55,8 +56,8 @@ import { environment } from "../environments/environment";
             provide: LZAbstractAuthDataService,
             useClass: LZDefaultAuthDataService,
         },
-        LzService,
         LzQuery,
+        LzService,
         LzStore,
     ],
     bootstrap: [AppComponent],

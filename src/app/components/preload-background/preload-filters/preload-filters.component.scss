@@ -1,0 +1,52 @@
+.preload-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &-group-title {
+        width: 100px;
+        height: 28px;
+        background: #f3f0f0;
+        margin-bottom: 12px;
+        border-radius: 5px;
+    }
+
+    &-group-subtitle {
+        width: 140px;
+        height: 20px;
+        margin-left: 24px;
+        background: #f3f0f0;
+        border-radius: 5px;
+    }
+
+    &-group-input {
+        width: 100%;
+        border-radius: 5px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .checkbox-wrap {
+        width: 115px;
+        height: 20px;
+        display: flex;
+        gap: 10px;
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            background: #f3f0f0;
+            border-radius: 3px;
+        }
+
+        .label {
+            height: 20px;
+            width: 70px;
+            background: #f3f0f0;
+            border-radius: 3px;
+        }
+    }
+}

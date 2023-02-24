@@ -1,4 +1,5 @@
-import { ModuleState, RootModuleState, TableModuleState, UIDataState } from "../states/ui-states";
+import { APFormModel } from "../../../components/form";
+import { CatalogFiltersState, ModuleState, RootModuleState, TableModuleState, UIDataState } from "../states/ui-states";
 import { Product } from "../../../types";
 
 export function initialTableModuleState(): TableModuleState {
@@ -19,5 +20,12 @@ export function initialRootModuleState(): RootModuleState {
         ...initialModuleDataState(),
         ...initialTableModuleState(),
         product: {} as Product,
+    };
+}
+
+export function initialCatalogFiltersState(): CatalogFiltersState {
+    return {
+        ...initialModuleDataState(),
+        filters: {} as APFormModel,
     };
 }
