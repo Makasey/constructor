@@ -1,7 +1,7 @@
 import { APDropdownFieldModule } from "./components/controls";
 import { APP_REF } from "./core/app-ref";
 import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
-import { AbstractProductDataService, ProductDataService } from "./core/data-service";
+import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "./core/data-service";
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
@@ -10,6 +10,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
+import {LZLoginModule} from "./components/login/login.module";
 import { LZToastrModule } from "./components/toastr/toastr.module";
 import { LzQuery } from "./core/store/lz.query";
 import { LzService } from "./core/store/lz.service";
@@ -30,6 +31,8 @@ import { environment } from "../environments/environment";
         ColorPickerModule,
         HttpClientModule,
         ModalModule,
+        LZLoginModule,
+        BrowserAnimationsModule,
         OrdersModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
@@ -48,6 +51,10 @@ import { environment } from "../environments/environment";
         {
             provide: AbstractProductDataService,
             useClass: ProductDataService,
+        },
+        {
+            provide: LZAbstractAuthDataService,
+            useClass: LZDefaultAuthDataService,
         },
         LzQuery,
         LzService,

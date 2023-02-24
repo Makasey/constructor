@@ -1,8 +1,21 @@
-import { ApplicationRef, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type } from "@angular/core";
-import { DEFAULT_MODAL_CONFIG, ModalConfig, ModalType, ModalWithData } from "./types";
+import {
+    ApplicationRef,
+    ComponentRef,
+    EmbeddedViewRef,
+    Inject,
+    Injectable,
+    Injector,
+    Renderer2,
+    RendererFactory2,
+    TemplateRef,
+    Type,
+} from "@angular/core";
 import { DOCUMENT } from "@angular/common";
-import { ModalComponent } from "./modal.component";
+
 import { Subscription, tap } from "rxjs";
+
+import { DEFAULT_MODAL_CONFIG, ModalConfig, ModalType, ModalWithData } from "./types";
+import { ModalComponent } from "./modal.component";
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 
@@ -39,9 +52,13 @@ export class ModalService {
         this.renderer.addClass(this.documentRef.documentElement, NO_SCROLL_CLASS);
 
         modalWrapperRef.instance.config = Object.assign({ ...DEFAULT_MODAL_CONFIG }, { ...model });
-        this.modalMap[modalId] = {
-            ...this.modalMap[modalId],
-            modalWrapperRef: modalWrapperRef,
+
+        this.modalMap = {
+            ...this.modalMap,
+            [modalId]: {
+                ...this.modalMap[modalId],
+                modalWrapperRef: modalWrapperRef,
+            },
         };
 
         this.modalMap[modalId].closeSubscription = modalWrapperRef.instance.closeSubject$
@@ -77,6 +94,7 @@ export class ModalService {
 
                 this.renderer.removeClass(documentRef, NO_SCROLL_CLASS);
             }
+            modal.closeSubscription.unsubscribe();
             modal.modalWrapperRef.destroy();
         });
 
@@ -91,9 +109,12 @@ export class ModalService {
                 const item = this.modalMap[id];
                 const contentRef = componentRef.instance.hostView.viewContainerRef.createEmbeddedView(innerTemplate as TemplateRef<unknown>, context);
 
-                this.modalMap[id] = {
-                    ...item,
-                    contentRef: contentRef,
+                this.modalMap = {
+                    ...this.modalMap,
+                    [id]: {
+                        ...item,
+                        contentRef: contentRef,
+                    },
                 };
 
                 break;
@@ -118,10 +139,14 @@ export class ModalService {
                     (contentRef.instance as ModalWithData<unknown>).data = data;
                 }
 
-                this.modalMap[id] = {
-                    ...item,
-                    contentRef: contentRef,
+                this.modalMap = {
+                    ...this.modalMap,
+                    [id]: {
+                        ...item,
+                        contentRef: contentRef,
+                    },
                 };
+
                 break;
             }
 
@@ -132,9 +157,12 @@ export class ModalService {
 
                 const contentRef = componentRef.instance.hostView.viewContainerRef.createEmbeddedView(componentRef.instance.defaultContent);
 
-                this.modalMap[id] = {
-                    ...item,
-                    contentRef: contentRef,
+                this.modalMap = {
+                    ...this.modalMap,
+                    [id]: {
+                        ...item,
+                        contentRef: contentRef,
+                    },
                 };
 
                 break;
