@@ -11,7 +11,6 @@ import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerMo
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
 import { LZToastrModule } from "./components/toastr/toastr.module";
-import { LzProductInfoModule } from "./modules/product-info/product-info.module";
 import { LzQuery } from "./core/store/lz.query";
 import { LzService } from "./core/store/lz.service";
 import { LzStore } from "./core/store/lz.store";
@@ -30,7 +29,6 @@ import { environment } from "../environments/environment";
         CheckboxGroupModule,
         ColorPickerModule,
         HttpClientModule,
-        LzProductInfoModule,
         ModalModule,
         OrdersModule,
         AkitaNgDevtools.forRoot(),
