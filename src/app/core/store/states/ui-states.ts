@@ -1,3 +1,4 @@
+import { APFormModel } from "../../../components/form";
 import { LZTableMeta, LZTableValues } from "../../../components";
 import { Product } from "../../../types";
 
@@ -27,3 +28,7 @@ export type RootModuleState = Readonly<{
 }> &
     TableModuleState &
     ModuleState;
+
+export type CatalogFiltersState = Readonly<{
+  filters: APFormModel;
+}> & ModuleState;

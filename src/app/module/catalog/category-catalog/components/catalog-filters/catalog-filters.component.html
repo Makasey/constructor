@@ -1,7 +1,13 @@
-<div class="catalog-filters">
-    <div class="filters">
-        <ap-form [formModel]="formModel"></ap-form>
-    </div>
+ <div class="catalog-filters">
+    <ng-template
+        [preloadBackground]="'filter'"
+        [preloadBackgroundLoading]="_loading$ | async"
+        [preloadBackgroundConfig]="{ groupCount: 6, checkboxCount: 4 }"
+    >
+        <div class="filters">
+            <ap-form [formModel]="_formModel$ | async"></ap-form>
+        </div>
+    </ng-template>
     <button (click)="addNotification()" class="btn-filters">Применить фильты</button>
     <button class="btn-filters">Очистить фильты</button>
 </div>

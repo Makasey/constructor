@@ -1,12 +1,14 @@
 import { InjectionToken, Type } from "@angular/core";
-import { LzPreloadTableComponent } from "../../components/preload-background";
+import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/preload-background";
 
 export enum PreloadBackgroundComponentKey {
     TABLE = "table",
+    FILTER = "filter"
 }
 
 export const preloadBackgroundComponentsMap: PreloadBackgroundComponents = {
     [PreloadBackgroundComponentKey.TABLE]: LzPreloadTableComponent,
+    [PreloadBackgroundComponentKey.FILTER]: LzPreloadFiltersComponent,
 };
 
 // export interface PreloadBackgroundComponent<T> {

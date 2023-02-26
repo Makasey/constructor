@@ -3,6 +3,7 @@
 @import "@angular/cdk/overlay-prebuilt.css";
 
 @import "src/app/components/toastr/toastr.component";
+@import "src/app/components/modal/modal.component";
 
 /* You can add global styles to this file, and also import other style files */
 * {
@@ -110,4 +111,77 @@ button{
   align-items: center;
   font-family: 'TT Norms', sans-serif;
   font-size: 14px;
+}
+
+.login-modal {
+    .modal-title {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 600;
+        color: var(--main-color);
+    }
+
+    .modal-content {
+        max-width: 410px;
+        min-height: auto;
+        padding: 30px;
+        border-radius: 20px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-footer {
+        display: none;
+    }
+
+    .form {
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+
+        &-control {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            &-text {
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 500;
+                color: #353949;
+            }
+
+            input {
+                font-size: 16px;
+                line-height: 22px;
+                font-weight: 400;
+                color: #1b1c21;
+
+                padding: 12px 20px;
+
+                border: 1px solid #d0d2d7;
+                border-radius: 5px;
+            }
+        }
+
+        &-button {
+            width: 100%;
+            font-size: 16px;
+            line-height: 22px;
+            color: #fff;
+            text-align: center;
+            background-color: #0093a2;
+            border-radius: 5px;
+
+            padding: 13px 10px;
+        }
+    }
 }

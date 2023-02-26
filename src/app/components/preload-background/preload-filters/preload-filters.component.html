@@ -1,0 +1,10 @@
+<div *ngFor="let group of config.groupCount | lzNumberToArray">
+    <div class="preload-filter-group-title"></div>
+    <div class="preload-filter-group-subtitle"></div>
+    <div class="preload-filter-group-input">
+        <div class="checkbox-wrap" *ngFor="let checkbox of config.checkboxCount | lzNumberToArray">
+            <div class="checkbox"></div>
+            <div class="label"></div>
+        </div>
+    </div>
+</div>

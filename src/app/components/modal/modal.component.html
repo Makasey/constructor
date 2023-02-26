@@ -1,6 +1,7 @@
 <div class="modal-overlay" (click)="closeModal()">
     <article class="modal-content" (click)="stopEventPropagation($event)">
         <header class="modal-header">
+            <h2 class="modal-title">{{ config.title }}</h2>
             <ng-template #modalHeader> </ng-template>
         </header>
         <section class="modal-body">
