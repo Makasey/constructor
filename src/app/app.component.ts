@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewContainerRef } from "@angular/core";
-import { LZLoginComponent } from "./components/login/login.component";
-import { ModalService, ModalType } from "./components/modal";
+import { LZLoginComponent } from "./components/shared/login/login.component";
+import { ModalService, ModalType } from "./components/ui/modal";
 
 @Component({
     selector: "app-root",
@@ -32,6 +32,7 @@ export class AppComponent {
             },
             title: "Войти",
             customClass: "login-modal",
+            closeOnOutsideClick: true,
         });
     }
 }

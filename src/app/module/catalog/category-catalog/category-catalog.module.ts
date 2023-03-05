@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
-import { APFormModule } from "../../../components/form";
+import { APFormModule } from "src/app/components";
 import { CatalogProductsComponent } from "./components/catalog-products/catalog-products.component";
 import { CategoryCatalogComponent } from "./category-catalog.component";
 import { CategoryCatalogRoutingModule } from "./category-catalog-routing.module";

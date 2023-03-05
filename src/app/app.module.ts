@@ -1,4 +1,4 @@
-import { APDropdownFieldModule } from "./components/controls";
+import { APDropdownFieldModule } from "./components/ui/controls";
 import { APP_REF } from "./core/app-ref";
 import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
 import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "./core/data-service";
@@ -10,12 +10,13 @@ import { BrowserModule } from "@angular/platform-browser";
 import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
-import {LZLoginModule} from "./components/login/login.module";
-import { LZToastrModule } from "./components/toastr/toastr.module";
+import {LZLoginModule} from "./components/shared/login/login.module";
+import {LZSliderModule} from "./components/ui/slider/slider.module";
+import { LZToastrModule } from "./components/ui/toastr/toastr.module";
 import { LzQuery } from "./core/store/lz.query";
 import { LzService } from "./core/store/lz.service";
 import { LzStore } from "./core/store/lz.store";
-import { ModalModule } from "./components/modal";
+import { ModalModule } from "./components/ui/modal";
 import { PreloadDirectiveModule } from "./directive/preload/preload.module";
 import { TestComponent } from "./module/test/test.component";
 import { environment } from "../environments/environment";
@@ -42,6 +43,7 @@ import { environment } from "../environments/environment";
             },
         }),
         RangeControllerModule,
+        LZSliderModule,
     ],
     providers: [
         {
