@@ -1,4 +1,4 @@
-import { APFormModel } from "../../../components/form";
+import { APFormModel } from "../../../components";
 import { LZTableMeta, LZTableValues } from "../../../components";
 import { Product } from "../../../types";
 
