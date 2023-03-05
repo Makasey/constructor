@@ -1,0 +1,66 @@
+@import "./components/slider-item.component";
+
+.lz-slider {
+    max-width: var(--max-slider-width);
+    width: 100%;
+    min-height: 120px;
+    overflow-x: hidden;
+    display: flex;
+    position: relative;
+
+    &-wrapper {
+        width: fit-content;
+        transition: 0.9s transform;
+        will-change: transform;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+    &-item {
+        width: var(--slider-item-width);
+
+        &:nth-child(n) {
+            background-color: chocolate;
+        }
+
+        &:nth-child(2n) {
+            background-color: #d0d2d7;
+        }
+
+        &:nth-child(3n) {
+            background-color: #0093a2;
+        }
+
+        &:nth-child(4n) {
+            background-color: coral;
+        }
+    }
+
+    &-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: white;
+        color: var(--main-color);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+
+        &--left {
+            left: 20px;
+        }
+
+        &--right {
+            right: 20px;
+        }
+
+        &.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+    }
+}

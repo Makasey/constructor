@@ -1,23 +1,26 @@
 // Orders Component
-export * from "./orders";
+export * from "./ui/orders";
 
 //Checkbox group component
-export * from "./checkbox-group";
+export * from "./ui/checkbox-group";
 
 //Category controller component
-export * from "./category-controller";
+export * from "./ui/category-controller";
 
 //Product card component
-export * from "./product-card";
+export * from "./ui/product-card";
 
 //Range controller component
-export * from "./range-controller";
+export * from "./ui/range-controller";
 
 //Status component
-export * from "./status";
+export * from "./ui/status";
 
 //Table component
-export * from "./table";
+export * from "./ui/table";
 
 //Color picker component
-export * from "./color-picker";
+export * from "./ui/color-picker";
+
+//Form component
+export * from "./ui/form";

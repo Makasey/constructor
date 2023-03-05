@@ -1,5 +1,4 @@
-import { APFormModel } from "../../../components/form";
-import { LZTableMeta, LZTableValues } from "../../../components";
+import { APFormModel, LZTableMeta, LZTableValues } from "../../../components";
 import { Product } from "../../../types";
 
 export enum UIDataState {
@@ -30,5 +29,6 @@ export type RootModuleState = Readonly<{
     ModuleState;
 
 export type CatalogFiltersState = Readonly<{
-  filters: APFormModel;
-}> & ModuleState;
+    filters: APFormModel;
+}> &
+    ModuleState;

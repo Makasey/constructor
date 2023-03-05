@@ -6,7 +6,7 @@ import {
     preloadBackgroundConfigFactory,
 } from "./types";
 import { CommonModule } from "@angular/common";
-import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/preload-background";
+import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/ui/preload-background";
 import { ModuleWithProviders, NgModule } from "@angular/core";
 import { NumberToArrayModule } from "../../pipes/number-to-array/number-to-array.module";
 import { PreloadDirective } from "./preload.directive";
