@@ -1,6 +1,6 @@
 import { DayOfWeek } from "./enum";
-import { LZMonth } from "./classes/month";
 import { LZDay } from "./classes/day";
+import { LZMonth } from "./classes/month";
 
 const getMonthStartDaysOffset = (month: LZMonth, firstDayOfWeek: DayOfWeek): number => {
     const startMonthOffsetFromSunday = new Date(month.year, month.month, 1).getDay();

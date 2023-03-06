@@ -3,22 +3,22 @@ import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
 export class LZYear implements LzYearLike {
     constructor(public readonly year: number) {}
 
-    static isValidYear(year: number): boolean {
+    public static isValidYear(year: number): boolean {
         return Number.isInteger(year) && isNumberInRange(year, 0, 9999);
     }
 
     /*
      * Check if year is leap according to Julian calendar
      * */
-    static isLeapYear(year: number): boolean {
+    public static isLeapYear(year: number): boolean {
         return year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0);
     }
 
-    static getAbsoluteLeapYears(year: number): number {
+    public static getAbsoluteLeapYears(year: number): number {
         return Math.ceil(year % 400) + (Math.ceil(year / 4) - Math.ceil(year / 100));
     }
 
-    static lengthBetween(from: LZYear, to: LZYear): number {
+    public static lengthBetween(from: LZYear, to: LZYear): number {
         return to.year - from.year;
     }
 

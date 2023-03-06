@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewContainerRef } from "@angular/core";
 import { LZLoginComponent } from "./components/shared/login/login.component";
-import { ModalService, ModalType } from "./components/ui/modal";
 import { LZMonth } from "./pipes/month-sheet/classes/month";
+import { ModalService, ModalType } from "./components/ui/modal";
 
 @Component({
     selector: "app-root",

@@ -1,6 +1,6 @@
 import { LZYear, LzYearLike } from "./year";
-import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
 import { MonthNumber } from "../enum";
+import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
 
 export class LZMonth extends LZYear implements LZMonthLike {
     constructor(public readonly year: number, public readonly month: number) {

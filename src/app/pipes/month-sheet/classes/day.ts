@@ -1,11 +1,11 @@
-import { LZMonth, LZMonthLike } from "./month";
-import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
-import { LZYear } from "./year";
-import { LZDateMode } from "../types";
 import { DayOfWeek, MonthNumber } from "../enum";
+import { LZDateMode } from "../types";
+import { LZMonth, LZMonthLike } from "./month";
+import { LZYear } from "./year";
+import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
 
 export class LZDay extends LZMonth implements LZDayLike {
-    constructor(readonly year: number, readonly month: number, readonly day: number) {
+    constructor(public readonly year: number, public readonly month: number, public readonly day: number) {
         super(year, month);
     }
 
@@ -55,7 +55,7 @@ export class LZDay extends LZMonth implements LZDayLike {
         return Math.round((to.toLocalNativeDate().getTime() - from.toLocalNativeDate().getTime()) / (1000 * 60 * 60 * 24));
     }
 
-    public static parseRawDateString(date: string, dateMode: LZDateMode = "DMY"): { day: number; month: number; year: number } {
+    public static parseRawDateString(date: string, dateMode: LZDateMode = "DMY"): { day: number; month: number; year: number; } {
         switch (dateMode) {
             case "MDY": {
                 return {

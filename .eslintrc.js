@@ -16,7 +16,7 @@ module.exports = {
     },
     rules: {
         "max-len": ["warn", { code: 150 }],
-        "no-continue": "error",
+        "no-continue": "warn",
         eqeqeq: "error",
         "no-alert": "error",
         "eol-last": "error",

@@ -1,8 +1,8 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { LZMonth } from "./classes/month";
-import { getDayFromMonthRowCol } from "./utils";
-import { LZDay } from "./classes/day";
 import { DayOfWeek } from "./enum";
+import { LZDay } from "./classes/day";
+import { LZMonth } from "./classes/month";
+import { Pipe, PipeTransform } from "@angular/core";
+import { getDayFromMonthRowCol } from "./utils";
 
 @Pipe({
     name: "lzMonthSheet",
