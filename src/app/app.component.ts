@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewContainerRef } from "@angular/core";
 import { LZLoginComponent } from "./components/shared/login/login.component";
 import { ModalService, ModalType } from "./components/ui/modal";
+import { LZMonth } from "./pipes/month-sheet/classes/month";
 
 @Component({
     selector: "app-root",
@@ -10,6 +11,8 @@ import { ModalService, ModalType } from "./components/ui/modal";
 })
 export class AppComponent {
     public title = "lavka-roz-frontend";
+
+    public month = new LZMonth(2023, 2);
 
     public preloadLoading = true;
 

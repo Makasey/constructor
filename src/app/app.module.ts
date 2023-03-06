@@ -10,8 +10,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
-import {LZLoginModule} from "./components/shared/login/login.module";
-import {LZSliderModule} from "./components/ui/slider/slider.module";
+import { LZLoginModule } from "./components/shared/login/login.module";
+import { LZSliderModule } from "./components/ui/slider/slider.module";
 import { LZToastrModule } from "./components/ui/toastr/toastr.module";
 import { LzQuery } from "./core/store/lz.query";
 import { LzService } from "./core/store/lz.service";
@@ -20,6 +20,7 @@ import { ModalModule } from "./components/ui/modal";
 import { PreloadDirectiveModule } from "./directive/preload/preload.module";
 import { TestComponent } from "./module/test/test.component";
 import { environment } from "../environments/environment";
+import { LZMonthSheetPipeModule } from "./pipes/month-sheet/month-sheet.module";
 
 @NgModule({
     declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { environment } from "../environments/environment";
         OrdersModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
+        LZMonthSheetPipeModule,
         PreloadDirectiveModule.forRoot({
             config: {
                 test: TestComponent,

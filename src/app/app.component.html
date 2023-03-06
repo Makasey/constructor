@@ -22,7 +22,15 @@
 <router-outlet></router-outlet>
 <lz-toastr></lz-toastr>
 <button (click)="openLoginModal()">Open Modal</button>
-
+<article class="calendar">
+    <ng-container *ngFor="let week of month | lzMonthSheet : true">
+        <ng-container *ngFor="let day of week">
+            <div class="calendar-item">
+                {{ day.day }}
+            </div>
+        </ng-container>
+    </ng-container>
+</article>
 <div class="container">
     <lz-slider></lz-slider>
 </div>
