@@ -1,8 +1,8 @@
-import { DayOfWeek, MonthNumber } from "../enum";
-import { LZDateMode } from "../types";
+import { isNumberInRange, normalizeToIntNumber } from "src/app/utils";
+
+import { DayOfWeek, LZDateMode, MonthNumber } from "../types";
 import { LZMonth, LZMonthLike } from "./month";
 import { LZYear } from "./year";
-import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
 
 export class LZDay extends LZMonth implements LZDayLike {
     constructor(public readonly year: number, public readonly month: number, public readonly day: number) {

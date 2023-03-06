@@ -8,10 +8,11 @@ import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
+import { LZCalendarModule } from "./components/ui/calendar/calendar.module";
 import { LZLoginModule } from "./components/shared/login/login.module";
-import { LZMonthSheetPipeModule } from "./pipes/month-sheet/month-sheet.module";
 import { LZSliderModule } from "./components/ui/slider/slider.module";
 import { LZToastrModule } from "./components/ui/toastr/toastr.module";
 import { LzQuery } from "./core/store/lz.query";
@@ -36,9 +37,11 @@ import { environment } from "../environments/environment";
         LZLoginModule,
         BrowserAnimationsModule,
         OrdersModule,
+        ReactiveFormsModule,
+        FormsModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
-        LZMonthSheetPipeModule,
+        LZCalendarModule,
         PreloadDirectiveModule.forRoot({
             config: {
                 test: TestComponent,

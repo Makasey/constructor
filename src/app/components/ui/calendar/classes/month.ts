@@ -1,6 +1,7 @@
+import { isNumberInRange, normalizeToIntNumber } from "src/app/utils";
+
 import { LZYear, LzYearLike } from "./year";
-import { MonthNumber } from "../enum";
-import { isNumberInRange, normalizeToIntNumber } from "../../../utils";
+import { MonthNumber } from "../types";
 
 export class LZMonth extends LZYear implements LZMonthLike {
     constructor(public readonly year: number, public readonly month: number) {
@@ -109,6 +110,15 @@ export class LZMonth extends LZYear implements LZMonthLike {
 
     public toUtcNativeDate(): Date {
         return new Date(Date.UTC(this.year, this.month));
+    }
+
+    public toUserDateFormat(): string {
+        return this.toUtcNativeDate()
+        .toLocaleDateString("ru-RU", {
+            month: "long",
+            year: "numeric",
+        })
+        .slice(0, -2);
     }
 }
 

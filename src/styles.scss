@@ -5,6 +5,7 @@
 @import "app/components/ui/toastr/toastr.component";
 @import "app/components/ui/modal/modal.component";
 @import "app/components/ui/slider/slider.component";
+@import "app/components/ui/calendar/calendar.component";
 
 /* You can add global styles to this file, and also import other style files */
 * {
@@ -207,23 +208,5 @@ body {
 
             padding: 13px 10px;
         }
-    }
-}
-
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    max-width: 300px;
-    gap: 4px;
-    padding: 20px;
-
-    &-item {
-        border: 1px solid black;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 18px;
-        font-weight: 600;
-        padding: 10px;
     }
 }
