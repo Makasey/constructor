@@ -1,6 +1,23 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, HostBinding, HostListener, Injector, Input, NgZone, OnInit, Output, TemplateRef, ViewChild, ViewContainerRef } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Injector,
+    Input,
+    NgZone,
+    OnInit,
+    Output,
+    TemplateRef,
+    ViewChild,
+    ViewContainerRef,
+} from "@angular/core";
+
+import { fadeInAnimation, fadeOutAnimation } from "src/app/core/animations/animations";
+
 import { LZToastrItem } from "../../types";
-import { fadeInAnimation, fadeOutAnimation } from "../../../../../core/animations/animations";
 
 @Component({
     selector: "lz-toastr-item",

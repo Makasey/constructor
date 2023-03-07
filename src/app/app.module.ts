@@ -1,54 +1,34 @@
-import { APDropdownFieldModule } from "./components/ui/controls";
-import { APP_REF } from "./core/app-ref";
-import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
-import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "./core/data-service";
-import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
-import { AppComponent } from "./app.component";
-import { AppRoutingModule } from "./app-routing.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
-import { CheckboxGroupModule, ColorPickerModule, OrdersModule, RangeControllerModule } from "./components";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { Injector, NgModule } from "@angular/core";
-import { LZCalendarModule } from "./components/ui/calendar/calendar.module";
-import { LZLoginModule } from "./components/shared/login/login.module";
-import { LZSliderModule } from "./components/ui/slider/slider.module";
-import { LZToastrModule } from "./components/ui/toastr/toastr.module";
+
+import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
+
+import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app-routing.module";
+
+import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
+import { APP_REF } from "./core/app-ref";
+import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "./core/data-service";
 import { LzQuery } from "./core/store/lz.query";
 import { LzService } from "./core/store/lz.service";
 import { LzStore } from "./core/store/lz.store";
-import { ModalModule } from "./components/ui/modal";
-import { PreloadDirectiveModule } from "./directive/preload/preload.module";
-import { TestComponent } from "./module/test/test.component";
+import { LZCalendarModule, LZToastrModule } from "./components";
+
 import { environment } from "../environments/environment";
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        APDropdownFieldModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
-        CheckboxGroupModule,
-        ColorPickerModule,
         HttpClientModule,
-        ModalModule,
-        LZLoginModule,
         BrowserAnimationsModule,
-        OrdersModule,
-        ReactiveFormsModule,
-        FormsModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
         LZCalendarModule,
-        PreloadDirectiveModule.forRoot({
-            config: {
-                test: TestComponent,
-            },
-        }),
-        RangeControllerModule,
-        LZSliderModule,
     ],
     providers: [
         {

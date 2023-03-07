@@ -3,7 +3,7 @@ import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../compon
 
 export enum PreloadBackgroundComponentKey {
     TABLE = "table",
-    FILTER = "filter"
+    FILTER = "filter",
 }
 
 export const preloadBackgroundComponentsMap: PreloadBackgroundComponents = {

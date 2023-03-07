@@ -1,12 +1,6 @@
-import {APDropdownFieldItem} from "../../types";
-import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter, HostBinding,
-    Input,
-    Output,
-    ViewEncapsulation,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+
+import { APDropdownFieldItem } from "../../types";
 
 @Component({
     selector: "ap-dropdown-field-item",
@@ -16,20 +10,20 @@ import {
     styleUrls: ["./dropdown-field-item.component.scss"],
 })
 export class APDropdownFieldItemComponent {
-  @Input()
+    @Input()
     public active = false;
 
-  @Input()
-  public item: APDropdownFieldItem;
+    @Input()
+    public item: APDropdownFieldItem;
 
-  @Output()
-  public onItemClick: EventEmitter<APDropdownFieldItem> = new EventEmitter<APDropdownFieldItem>();
+    @Output()
+    public onItemClick: EventEmitter<APDropdownFieldItem> = new EventEmitter<APDropdownFieldItem>();
 
-  @HostBinding("class.dropdown-field-item")
-  public hostClass = true;
+    @HostBinding("class.dropdown-field-item")
+    public hostClass = true;
 
-  public _onItemClick(item: APDropdownFieldItem): void {
-      this.active = !this.active;
-      this.onItemClick.emit(item);
-  }
+    public _onItemClick(item: APDropdownFieldItem): void {
+        this.active = !this.active;
+        this.onItemClick.emit(item);
+    }
 }

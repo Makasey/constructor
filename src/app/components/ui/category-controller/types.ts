@@ -1,5 +1,4 @@
-
-export interface CategoryListItem{
-  label: string;
-  value: number;
+export interface CategoryListItem {
+    label: string;
+    value: number;
 }

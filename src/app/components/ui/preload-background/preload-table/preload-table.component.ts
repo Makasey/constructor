@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from "@angular/core";
+
 import { PRELOAD_COMPONENTS_CONFIG } from "src/app/directive/preload/types";
 
 @Component({

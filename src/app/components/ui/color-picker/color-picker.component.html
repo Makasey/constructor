@@ -2,7 +2,7 @@
     <label
         class="color-picker-item"
         *ngFor="let color of colors; trackBy: checkChanges"
-        [ngClass]="{ active: _value | lzBelongArray : color }"
+        [ngClass]="{ active: _value | lzBelongArray : color : 'id' }"
         [title]="color.label"
         [for]="color.id"
     >

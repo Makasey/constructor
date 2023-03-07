@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { LZMonthSheetPipe } from "./month-sheet.pipe";
 import { NgModule } from "@angular/core";
+
+import { LZMonthSheetPipe } from "./month-sheet.pipe";
 
 @NgModule({
     imports: [CommonModule],

@@ -1,7 +1,8 @@
-import { APFormControl } from "../../form";
-import { APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "./types";
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { APFormControl } from "../../form";
+import { APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "./types";
 
 @Component({
     selector: "ap-text-field",

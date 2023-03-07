@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import {FormControl} from "@angular/forms";
-import { LZDay } from "./components/ui/calendar/classes";
+
+import { LZDay } from "./components";
 
 @Component({
     selector: "app-root",
@@ -10,8 +10,6 @@ import { LZDay } from "./components/ui/calendar/classes";
 })
 export class AppComponent {
     public day = new LZDay(2023, 0, 12);
-
-    public dateControl = new FormControl(LZDay.currentLocal());
 
     public onValueChange(value: LZDay): void {
         console.log(value);

@@ -1,7 +1,9 @@
 import { AbstractControlOptions } from "@angular/forms";
+
+import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
+
 import { ApDropdownFormControlOptions } from "../controls/dropdown-field/types";
 import { ApNumberFormControlOptions, ApTextFormControlOptions } from "../controls";
-import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 
 export enum APFormDefaultTemplateKeys {
     TEXT_FIELD = "textFieldTemplate",
@@ -51,7 +53,7 @@ export type APFormControl<T = any> = {
     styleClass?: string;
 } & AbstractControlOptions;
 
-export function gridAreasFromColumns(columns: { gridClass: string; }[][]): string {
+export function gridAreasFromColumns(columns: { gridClass: string }[][]): string {
     const gridAreas = [];
     let j = 0;
     while (columns?.some(it => !!it[j])) {

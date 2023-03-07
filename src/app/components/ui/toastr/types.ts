@@ -1,6 +1,8 @@
-import { ActiveState, EntityState, ID } from "@datorama/akita";
 import { TemplateRef, Type } from "@angular/core";
-import { UIState } from "../../../types/common/common";
+
+import { ActiveState, EntityState, ID } from "@datorama/akita";
+
+import { UIState } from "src/app/types/common/common";
 
 export const LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE = "enableDNDMode";
 

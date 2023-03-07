@@ -1,3 +1,3 @@
-export * from "./types";
-export * from "./text-field.component";
-export * from "./text-field.module";
+export { ApTextFormControlOptions, defaultAPTextFieldOptions, APTextFieldValueChangeEvent } from "./types";
+export { APTextFieldComponent } from "./text-field.component";
+export { APTextFieldModule } from "./text-field.module";

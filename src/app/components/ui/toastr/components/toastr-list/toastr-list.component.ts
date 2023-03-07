@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
+
 import { ID } from "@datorama/akita";
+
+import { enterAnimation } from "src/app/core/animations/animations";
+
 import { LZToastrItem } from "../../types";
-import { LZToastrService } from "../../store/toastr.service";
-import { LzToastrQuery } from "../../store/toastr.query";
-import { enterAnimation } from "../../../../../core/animations/animations";
+import { LzToastrQuery, LZToastrService } from "../../store";
 
 @Component({
     selector: "lz-toastr-list",

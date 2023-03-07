@@ -1,8 +1,11 @@
-import { ID, Order, QueryConfig, QueryEntity } from "@datorama/akita";
 import { Injectable, TemplateRef } from "@angular/core";
+
+import { ID, Order, QueryConfig, QueryEntity } from "@datorama/akita";
+
+import { combineLatest, map } from "rxjs";
+
 import { LZToastrItem, LZToastrItemComponentType, LZToastrItemState } from "../types";
 import { LZToastrStore } from "./toastr.store";
-import { combineLatest, map } from "rxjs";
 
 @Injectable()
 @QueryConfig({
@@ -16,18 +19,21 @@ export class LzToastrQuery extends QueryEntity<LZToastrItemState, LZToastrItem> 
 
     public selectDNDMode$ = this.select(state => state.ui.enableDNDMode);
 
-    public templateRefMap: Map<ID, TemplateRef<unknown> | LZToastrItemComponentType> = new Map<ID, TemplateRef<unknown> | LZToastrItemComponentType>();
+    public templateRefMap: Map<ID, TemplateRef<unknown> | LZToastrItemComponentType> = new Map<
+        ID,
+        TemplateRef<unknown> | LZToastrItemComponentType
+    >();
 
     public selectToastrItems$ = combineLatest([this.selectAll(), this.selectAlwaysOnDisplay$]).pipe(
         map(([entities, alwaysOnDisplay]) => {
             return entities
-            .filter(entity => alwaysOnDisplay || entity.visibility)
-            .map(entity => {
-                return <LZToastrItem>{
-                    ...entity,
-                    template: this.templateRefMap.get(entity.id!),
-                };
-            });
+                .filter(entity => alwaysOnDisplay || entity.visibility)
+                .map(entity => {
+                    return <LZToastrItem>{
+                        ...entity,
+                        template: this.templateRefMap.get(entity.id!),
+                    };
+                });
         }),
     );
 
