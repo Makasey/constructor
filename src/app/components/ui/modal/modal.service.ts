@@ -62,9 +62,9 @@ export class ModalService {
         };
 
         this.modalMap[modalId].closeSubscription = modalWrapperRef.instance.closeSubject$
-            .asObservable()
-            .pipe(tap(() => this.closeModal(modalId)))
-            .subscribe(console.log);
+        .asObservable()
+        .pipe(tap(() => this.closeModal(modalId)))
+        .subscribe(console.log);
 
         return modalId;
     }

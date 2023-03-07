@@ -53,7 +53,7 @@ export type APFormControl<T = any> = {
     styleClass?: string;
 } & AbstractControlOptions;
 
-export function gridAreasFromColumns(columns: { gridClass: string }[][]): string {
+export function gridAreasFromColumns(columns: { gridClass: string; }[][]): string {
     const gridAreas = [];
     let j = 0;
     while (columns?.some(it => !!it[j])) {

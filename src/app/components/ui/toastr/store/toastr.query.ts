@@ -27,13 +27,13 @@ export class LzToastrQuery extends QueryEntity<LZToastrItemState, LZToastrItem> 
     public selectToastrItems$ = combineLatest([this.selectAll(), this.selectAlwaysOnDisplay$]).pipe(
         map(([entities, alwaysOnDisplay]) => {
             return entities
-                .filter(entity => alwaysOnDisplay || entity.visibility)
-                .map(entity => {
-                    return <LZToastrItem>{
-                        ...entity,
-                        template: this.templateRefMap.get(entity.id!),
-                    };
-                });
+            .filter(entity => alwaysOnDisplay || entity.visibility)
+            .map(entity => {
+                return <LZToastrItem>{
+                    ...entity,
+                    template: this.templateRefMap.get(entity.id!),
+                };
+            });
         }),
     );
 

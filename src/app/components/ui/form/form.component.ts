@@ -17,8 +17,8 @@ import {
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { UntilDestroy } from "@ngneat/until-destroy";
 
+import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
 import { ControlTemplate } from "../modal";
-import { APFormControl, ApFormControlInner, APFormDefaultTemplateKeys, ApFormInnerModel, APFormModel, gridAreasFromColumns } from "./types";
 
 @UntilDestroy()
 @Component({
@@ -199,11 +199,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             gridAreas: gridAreasFromColumns(resultControls?.map(its => its.filter(it => !it.hidden))),
             innerGroups:
                 formModel.innerGroups
-                    ?.filter(group => !!group)
-                    .map((group, i) => {
-                        const pathItem: string = formModel.isFormArray ? `${i}` : group.name;
-                        return this.normalizeFields(group, [...currentPath, pathItem]) ?? ({} as ApFormInnerModel);
-                    }) ?? [],
+                ?.filter(group => !!group)
+                .map((group, i) => {
+                    const pathItem: string = formModel.isFormArray ? `${i}` : group.name;
+                    return this.normalizeFields(group, [...currentPath, pathItem]) ?? ({} as ApFormInnerModel);
+                }) ?? [],
             path: currentPath.length > 0 ? currentPath : undefined,
             firstColumnLength: resultControls?.[0]?.length ?? 0,
         };
@@ -223,8 +223,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
                 const oldControl: APFormControl =
                     oldFormInner?.controls &&
                     ([] as APFormControl[])
-                        .concat(...oldFormInner.controls)
-                        .find((oldControl: APFormControl) => oldControl.name === innerControl.name)!;
+                    .concat(...oldFormInner.controls)
+                    .find((oldControl: APFormControl) => oldControl.name === innerControl.name)!;
                 if (oldControl && innerControl.valueTemplateKey !== oldControl.valueTemplateKey) {
                     formGroup.removeControl(innerControl.name);
                     formGroup.addControl(innerControl.name, formControl);

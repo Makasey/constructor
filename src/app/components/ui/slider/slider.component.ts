@@ -10,8 +10,8 @@ import {
     TemplateRef,
     ViewChild,
 } from "@angular/core";
+import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
 import { Observable, interval, tap } from "rxjs";
-import { lzDefaultItemClass, lzDefaultSliderConfig, LZSliderConfig, LZSliderItem, sliderItemWidthVariableName } from "./types";
 
 @Component({
     selector: "lz-slider",
@@ -21,13 +21,13 @@ import { lzDefaultItemClass, lzDefaultSliderConfig, LZSliderConfig, LZSliderItem
 export class LZSliderComponent implements OnInit {
     @Input()
     public items: LZSliderItem[] = [
-        { title: "12345" },
-        { title: "12345" },
-        { title: "12345" },
-        { title: "12345" },
-        { title: "12345" },
-        { title: "12345" },
-    ];
+            { title: "12345" },
+            { title: "12345" },
+            { title: "12345" },
+            { title: "12345" },
+            { title: "12345" },
+            { title: "12345" },
+        ];
 
     @Input()
     public itemTemplate: TemplateRef<unknown>;
