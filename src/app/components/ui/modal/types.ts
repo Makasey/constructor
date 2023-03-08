@@ -1,7 +1,9 @@
-import { APFormControl, APFormOptions } from "../form";
 import { FormControl } from "@angular/forms";
 import { InjectionToken, TemplateRef, Type, ViewContainerRef } from "@angular/core";
+
 import { Observable } from "rxjs";
+
+import { APFormControl, APFormOptions } from "../form";
 
 export interface ModalWithData<T> {
     data: T;

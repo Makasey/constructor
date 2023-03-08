@@ -1,6 +1,7 @@
-import { CheckboxGroupComponent } from "./checkbox-group.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+
+import { CheckboxGroupComponent } from "./checkbox-group.component";
 
 @NgModule({
     declarations: [CheckboxGroupComponent],

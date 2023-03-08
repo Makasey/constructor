@@ -1,6 +1,7 @@
-import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
 
 @Component({
     selector: "ap-dropdown-field",

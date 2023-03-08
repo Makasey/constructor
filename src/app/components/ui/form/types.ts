@@ -1,7 +1,9 @@
 import { AbstractControlOptions } from "@angular/forms";
+
+import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
+
 import { ApDropdownFormControlOptions } from "../controls/dropdown-field/types";
 import { ApNumberFormControlOptions, ApTextFormControlOptions } from "../controls";
-import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 
 export enum APFormDefaultTemplateKeys {
     TEXT_FIELD = "textFieldTemplate",

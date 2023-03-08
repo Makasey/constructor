@@ -1,3 +1,6 @@
+import { CommonModule } from "@angular/common";
+import { ModuleWithProviders, NgModule } from "@angular/core";
+
 import {
     CUSTOM_PRELOAD_BACKGROUND_CONFIG_TOKEN,
     PRELOAD_BACKGROUND_CONFIG_TOKEN,
@@ -5,10 +8,8 @@ import {
     preloadBackgroundComponentsMap,
     preloadBackgroundConfigFactory,
 } from "./types";
-import { CommonModule } from "@angular/common";
 import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/ui/preload-background";
-import { ModuleWithProviders, NgModule } from "@angular/core";
-import { NumberToArrayModule } from "../../pipes/number-to-array/number-to-array.module";
+import { NumberToArrayModule } from "../../pipes";
 import { PreloadDirective } from "./preload.directive";
 
 @NgModule({

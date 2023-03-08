@@ -45,3 +45,19 @@ export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): P
         return result;
     }, {});
 }
+
+export function normalizeToIntNumber(value: number, min: number, max: number): number {
+    if (value > max) {
+        return max;
+    }
+
+    if (value < min) {
+        return min;
+    }
+
+    return Math.round(value);
+}
+
+export function isNumberInRange(value: number, from: number, to: number): boolean {
+    return value >= from && value <= to;
+}

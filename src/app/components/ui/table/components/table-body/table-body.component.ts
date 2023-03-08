@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+
 import { LZTableMeta, LZTableValues, LZTemplatesMap } from "../../types";
 
 @Component({

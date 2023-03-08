@@ -1,5 +1,6 @@
-import {APDropdownFieldItem} from "./types";
 import { Pipe, PipeTransform } from "@angular/core";
+
+import { APDropdownFieldItem } from "./types";
 
 @Pipe({
     name: "lzDropdownActive",

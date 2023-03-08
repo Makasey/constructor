@@ -1,5 +1,6 @@
-import { LZInitVarDirective } from "./init-var.directive";
 import { NgModule } from "@angular/core";
+
+import { LZInitVarDirective } from "./init-var.directive";
 
 @NgModule({
     declarations: [LZInitVarDirective],

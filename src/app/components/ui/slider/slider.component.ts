@@ -10,6 +10,7 @@ import {
     TemplateRef,
     ViewChild,
 } from "@angular/core";
+import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
 import { Observable, interval, tap } from "rxjs";
 
 @Component({
@@ -19,7 +20,7 @@ import { Observable, interval, tap } from "rxjs";
 })
 export class LZSliderComponent implements OnInit {
     @Input()
-    public items: unknown[] = [
+    public items: LZSliderItem[] = [
             { title: "12345" },
             { title: "12345" },
             { title: "12345" },
@@ -32,10 +33,10 @@ export class LZSliderComponent implements OnInit {
     public itemTemplate: TemplateRef<unknown>;
 
     @Input()
-    public sliderConfig: Record<string, unknown> = { itemsPerPage: 2, itemsPerSlide: 1, timeout: 5000, autoSlide: false };
+    public sliderConfig: LZSliderConfig = lzDefaultSliderConfig;
 
     @Input()
-    public itemClass: string = "slider-item";
+    public itemClass: string = lzDefaultItemClass;
 
     @HostBinding("class.lz-slider")
     public hostClass = true;
@@ -93,15 +94,15 @@ export class LZSliderComponent implements OnInit {
         const { itemsPerPage, itemsPerSlide, autoSlide, timeout } = this.sliderConfig;
 
         if (autoSlide) {
-            this._sliderTimeout = timeout as number;
+            this._sliderTimeout = timeout;
             this.initAutoSlide();
         }
 
-        this._sliderItemsPerPage = itemsPerPage as number;
+        this._sliderItemsPerPage = itemsPerPage;
 
-        this._sliderItemsPerSlide = itemsPerSlide as number;
+        this._sliderItemsPerSlide = itemsPerSlide;
 
-        this._sliderItemWidth = this._sliderWidth / (itemsPerPage as number);
+        this._sliderItemWidth = this._sliderWidth / itemsPerPage;
 
         this.updateSliderItemWidth();
     }
@@ -117,7 +118,7 @@ export class LZSliderComponent implements OnInit {
     }
 
     private updateSliderItemWidth(): void {
-        this.renderer.setStyle(this.sliderRef.nativeElement, "--slider-item-width", this._sliderItemWidth + "px", RendererStyleFlags2.DashCase);
+        this.renderer.setStyle(this.sliderRef.nativeElement, sliderItemWidthVariableName, this._sliderItemWidth + "px", RendererStyleFlags2.DashCase);
     }
 
     private onNextItem(): void {

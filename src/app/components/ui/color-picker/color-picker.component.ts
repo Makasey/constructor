@@ -1,14 +1,7 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    HostBinding,
-    Input,
-    Output,
-    forwardRef,
-} from "@angular/core";
-import { Color, basicColors } from "./types";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { Color, basicColors } from "./types";
 
 @Component({
     selector: "lz-color-picker",
@@ -62,9 +55,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
         const normalizedValue = value ?? [];
         const currentValue: Color[] =
             typeof normalizedValue[0] === "number"
-                ? (this.colors
-                .filter(color => (normalizedValue as number[]).includes(color.id))
-                .filter(Boolean) )
+                ? this.colors.filter(color => (normalizedValue as number[]).includes(color.id)).filter(Boolean)
                 : (normalizedValue as Color[]);
 
         this._value = [...currentValue];
@@ -85,9 +76,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
     private getNewColors(value: Color): Color[] {
         let result = this._value;
 
-        result = result.find(color => value.id === color.id)
-            ? result.filter(element => element.id !== value.id)
-            : [...result, value];
+        result = result.find(color => value.id === color.id) ? result.filter(element => element.id !== value.id) : [...result, value];
 
         return result;
     }

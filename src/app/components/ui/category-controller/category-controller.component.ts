@@ -1,6 +1,7 @@
-import { CategoryListItem } from "./types";
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { CategoryListItem } from "./types";
 
 @Component({
     selector: "lz-category-controller",

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, forwardRef } from "@angular/core";
-import { CheckboxItem } from "./types";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+
+import { CheckboxItem } from "./types";
 
 @Component({
     selector: "lz-checkbox-group",

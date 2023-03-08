@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostBinding, TemplateRef, ViewChild, ViewEncapsulation } from "@angular/core";
+
+import { Subject } from "rxjs";
+
 import { HostModalContentDirective } from "./host-modal-content.directive";
 import { ModalConfig } from "./types";
-import { Subject } from "rxjs";
 
 @Component({
     selector: "ap-modal",

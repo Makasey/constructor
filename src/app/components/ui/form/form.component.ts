@@ -1,9 +1,24 @@
-import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from "@angular/core";
-import { ControlTemplate } from "../modal/types";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    SimpleChanges,
+    TemplateRef,
+    ViewChild,
+} from "@angular/core";
+
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { UntilDestroy } from "@ngneat/until-destroy";
+
+import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
+import { ControlTemplate } from "../modal";
 
 @UntilDestroy()
 @Component({
@@ -57,8 +72,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
         this._templatesMap = {
-            ...this._defaultTemplatesMap ?? {},
-            ...templatesMap ?? {},
+            ...(this._defaultTemplatesMap ?? {}),
+            ...(templatesMap ?? {}),
         };
     }
 
@@ -158,7 +173,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             return {
                 ...control,
                 path: path,
-                required: !control.required ? (Array.isArray(control.validators) ? control.validators.includes(Validators.required) : control.validators === Validators.required) : control.required,
+                required: !control.required
+                    ? Array.isArray(control.validators)
+                        ? control.validators.includes(Validators.required)
+                        : control.validators === Validators.required
+                    : control.required,
                 id: control.id ?? crypto.randomUUID(),
                 gridClass: String.fromCharCode(i++),
             };
@@ -168,7 +187,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             return controls.filter(it => !!it).map(normalizeControl);
         };
 
-        const resultControls: ApFormControlInner[][] = formModel.controls && (Array.isArray(formModel.controls[0]) ? (formModel.controls as APFormControl[][]) : [formModel.controls as APFormControl[]]).map(normalizeControls);
+        const resultControls: ApFormControlInner[][] =
+            formModel.controls &&
+            (Array.isArray(formModel.controls[0]) ? (formModel.controls as APFormControl[][]) : [formModel.controls as APFormControl[]]).map(
+                normalizeControls,
+            );
 
         return {
             ...formModel,
@@ -197,7 +220,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             } else {
                 const innerControlInstance = formGroup.get(innerControl.name)!;
                 innerControlInstance.setValidators(innerControl.validators ?? []);
-                const oldControl: APFormControl = oldFormInner?.controls && ([] as APFormControl[]).concat(...oldFormInner.controls).find((oldControl: APFormControl) => oldControl.name === innerControl.name)!;
+                const oldControl: APFormControl =
+                    oldFormInner?.controls &&
+                    ([] as APFormControl[])
+                    .concat(...oldFormInner.controls)
+                    .find((oldControl: APFormControl) => oldControl.name === innerControl.name)!;
                 if (oldControl && innerControl.valueTemplateKey !== oldControl.valueTemplateKey) {
                     formGroup.removeControl(innerControl.name);
                     formGroup.addControl(innerControl.name, formControl);
