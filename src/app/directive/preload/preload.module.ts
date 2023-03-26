@@ -8,7 +8,7 @@ import {
     preloadBackgroundComponentsMap,
     preloadBackgroundConfigFactory,
 } from "./types";
-import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/ui/preload-background";
+import { LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadProductComponent } from "../../components/ui/preload-background";
 import { NumberToArrayModule } from "../../pipes";
 import { PreloadDirective } from "./preload.directive";
 
@@ -19,9 +19,9 @@ import { PreloadDirective } from "./preload.directive";
             provide: PRELOAD_BACKGROUND_CONFIG_TOKEN,
         },
     ],
-    declarations: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective],
+    declarations: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective, PreloadProductComponent],
     imports: [CommonModule, NumberToArrayModule],
-    exports: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective],
+    exports: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective, PreloadProductComponent],
 })
 export class PreloadDirectiveModule {
     public static forRoot(moduleConfig: PreloadCustomModuleConfig = {}): ModuleWithProviders<PreloadDirectiveModule> {
