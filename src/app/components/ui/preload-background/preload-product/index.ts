@@ -1,1 +1,1 @@
-export { PreloadProductComponent } from "./preload-product.component";
+export { LzPreloadProductComponent } from "./lz-preload-product.component";

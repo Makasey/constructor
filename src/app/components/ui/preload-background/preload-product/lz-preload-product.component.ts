@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, Component, HostBinding, Inject, ViewEncapsulat
 import { PRELOAD_COMPONENTS_CONFIG } from "../../../../directive/preload";
 
 @Component({
-    selector: "app-preload-product",
-    templateUrl: "./preload-product.component.html",
-    styleUrls: ["./preload-product.component.scss"],
+    selector: "lz-preload-product",
+    templateUrl: "./lz-preload-product.component.html",
+    styleUrls: ["./lz-preload-product.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class PreloadProductComponent {
+export class LzPreloadProductComponent {
     constructor(@Inject(PRELOAD_COMPONENTS_CONFIG) public config: Record<string, number>) {}
 
     @HostBinding("class.preload-product")
