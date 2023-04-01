@@ -1,10 +1,15 @@
-import { AddressesModule } from "./module/addresses/addresses.module";
+
 import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+
+import { AccountModule } from "./module/account/account.module";
+import { AddressesModule } from "./module/addresses/addresses.module";
+import { NotifiationsModule } from "./module/notifiations/notifiations.module";
 import { OrdersModule } from "./module/orders/orders.module";
 import { PersonComponent } from "./person.component";
-import { RouterModule, Routes } from "@angular/router";
 import { SalesModule } from "./module/sales/sales.module";
 import { SettingsModule } from "./module/settings/settings.module";
+
 
 const routes: Routes = [
     {
@@ -14,7 +19,11 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                redirectTo: "orders",
+                redirectTo: "account",
+            },
+            {
+                path: "account",
+                loadChildren: (): Promise<typeof AccountModule> => import("./module/account/account.module").then(module => module.AccountModule),
             },
             {
                 path: "addresses",
@@ -27,6 +36,10 @@ const routes: Routes = [
             {
                 path: "settings",
                 loadChildren: (): Promise<typeof SettingsModule> => import("./module/settings/settings.module").then(module => module.SettingsModule),
+            },
+            {
+                path: "notifiations",
+                loadChildren: (): Promise<typeof NotifiationsModule> => import("./module/notifiations/notifiations.module").then(module => module.NotifiationsModule),
             },
             {
                 path: "sales",

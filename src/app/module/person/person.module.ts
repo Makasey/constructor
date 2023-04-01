@@ -8,6 +8,7 @@ import { PersonRoutingModule } from "./person-routing.module";
 @NgModule({
     declarations: [
         PersonComponent,
+
     ],
     imports: [
         CommonModule,
