@@ -1,10 +1,10 @@
 <div class="color-picker-colors">
     <label
-        class="color-picker-item"
         *ngFor="let color of colors; trackBy: checkChanges"
+        class="color-picker-item"
+        [for]="color.id"
         [ngClass]="{ active: _value | lzBelongArray : color : 'id' }"
         [title]="color.label"
-        [for]="color.id"
     >
         <span
             class="color-picker-item-color"

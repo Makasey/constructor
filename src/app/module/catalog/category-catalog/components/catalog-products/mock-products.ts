@@ -1,4 +1,4 @@
-import { Product } from "../../../../../types";
+import { Product } from "src/app/types";
 
 export const mockProducts: Product[] = [
     {
@@ -11,8 +11,8 @@ export const mockProducts: Product[] = [
         currencies: [
             {
                 id: 1,
-                currencyCode: "currencyCode1",
-                currencySymbol: "currencySymbol1",
+                code: "currencyCode1",
+                symbol: "currencySymbol1",
             },
         ],
         categories: [
@@ -47,8 +47,8 @@ export const mockProducts: Product[] = [
         currencies: [
             {
                 id: 1,
-                currencyCode: "currencyCode2",
-                currencySymbol: "currencySymbol2",
+                code: "currencyCode2",
+                symbol: "currencySymbol2",
             },
         ],
         categories: [
@@ -83,8 +83,8 @@ export const mockProducts: Product[] = [
         currencies: [
             {
                 id: 1,
-                currencyCode: "currencyCode3",
-                currencySymbol: "currencySymbol4",
+                code: "currencyCode3",
+                symbol: "currencySymbol4",
             },
         ],
         categories: [
@@ -119,8 +119,8 @@ export const mockProducts: Product[] = [
         currencies: [
             {
                 id: 1,
-                currencyCode: "currencyCode4",
-                currencySymbol: "currencySymbol4",
+                code: "currencyCode4",
+                symbol: "currencySymbol4",
             },
         ],
         categories: [
@@ -155,8 +155,8 @@ export const mockProducts: Product[] = [
         currencies: [
             {
                 id: 1,
-                currencyCode: "currencyCode5",
-                currencySymbol: "currencySymbol5",
+                code: "currencyCode5",
+                symbol: "currencySymbol5",
             },
         ],
         categories: [

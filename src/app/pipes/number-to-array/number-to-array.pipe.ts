@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from "@angular/core";
     pure: true,
 })
 export class NumberToArrayPipe implements PipeTransform {
-    public transform(value: number): unknown[] {
-        return new Array(value);
+    public transform(value: number): number[] {
+        return new Array(value).map((_, index) => index + 1);
     }
 }
