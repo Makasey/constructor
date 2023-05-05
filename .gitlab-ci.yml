@@ -1,20 +1,7 @@
 stages:
-    - lint
     - dependencies
     - build
-
-Lint Project:
-    image: node:16-alpine
-    stage: lint
-    script:
-        - npm link eslint
-        - npm install --legacy-peer-deps && npm run eslint:fix
-    cache:
-        key:
-            files:
-                - package-lock.json
-        paths:
-            - node_modules
+    - lint
 
 Install dependencies:
     image: node:16-alpine
@@ -44,3 +31,16 @@ Build project:
         paths:
             - node_modules
         policy: pull
+
+Lint Project:
+    image: node:16-alpine
+    stage: lint
+    script:
+        - npm link eslint
+        - npm install --legacy-peer-deps && npm run eslint:fix
+    cache:
+        key:
+            files:
+                - package-lock.json
+        paths:
+            - node_modules
