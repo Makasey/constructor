@@ -1,10 +1,22 @@
-import { TemplateRef, Type } from "@angular/core";
+import { InjectionToken, TemplateRef, Type } from "@angular/core";
 
 import { ActiveState, EntityState, ID } from "@datorama/akita";
 
 import { UIState } from "src/app/types/common/common";
 
 export const LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE = "enableDNDMode";
+
+export const EXISTING_TIME_TOKEN = new InjectionToken<number>("toastr-item EXISTING_TIME", {
+    factory(): number {
+        return 8000;
+    },
+});
+
+export const DISAPPEARING_TIME_TOKEN = new InjectionToken<number>("toastr-item DISAPPEARING_TIME", {
+    factory(): number {
+        return 5000;
+    },
+});
 
 export enum LZToastrItemType {
     INFO = "info",
