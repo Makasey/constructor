@@ -7,9 +7,8 @@ Lint Project:
     image: node:16-alpine
     stage: lint
     script:
-        - npm install --legacy-peer-deps
         - npm link eslint
-        - npm run eslint:fix
+        - npm install --legacy-peer-deps && npm run eslint:fix
     cache:
         key:
             files:
