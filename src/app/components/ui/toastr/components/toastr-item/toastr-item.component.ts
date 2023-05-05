@@ -18,7 +18,7 @@ import {
 
 import { fadeInAnimation, fadeOutAnimation } from "src/app/core/animations/animations";
 
-import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem } from "../../types";
+import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem, TOASTR_ITEM_OPTIONS_TOKEN } from "../../types";
 
 @Component({
     selector: "lz-toastr-item",
@@ -91,12 +91,14 @@ export class LZToastrItemComponent implements OnInit {
             if (itemTemplate instanceof TemplateRef) {
                 this.embeddedContainer.createEmbeddedView(itemTemplate, { context: this.item.context });
             } else {
-                const injector = Injector.create([
-                    {
-                        provide: "options",
-                        useValue: itemTemplate.options,
-                    },
-                ]);
+                const injector = Injector.create({
+                    providers: [
+                        {
+                            provide: TOASTR_ITEM_OPTIONS_TOKEN,
+                            useValue: itemTemplate.options,
+                        },
+                    ],
+                });
                 this.embeddedContainer.createComponent(itemTemplate.component, { index: 0, injector: injector });
             }
         }

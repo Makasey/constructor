@@ -12,6 +12,12 @@ export const EXISTING_TIME_TOKEN = new InjectionToken<number>("toastr-item EXIST
     },
 });
 
+export const TOASTR_ITEM_OPTIONS_TOKEN = new InjectionToken<Record<string, unknown>>("TOASTR_ITEM_OPTIONS_TOKEN", {
+    factory(): Record<string, unknown> {
+        return {};
+    },
+});
+
 export const DISAPPEARING_TIME_TOKEN = new InjectionToken<number>("toastr-item DISAPPEARING_TIME", {
     factory(): number {
         return 5000;
