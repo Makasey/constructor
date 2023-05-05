@@ -1,23 +1,24 @@
 import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    HostBinding,
-    HostListener,
-    Injector,
-    Input,
-    NgZone,
-    OnInit,
-    Output,
-    TemplateRef,
-    ViewChild,
-    ViewContainerRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  inject,
+  Injector,
+  Input,
+  NgZone,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
 } from "@angular/core";
 
 import { fadeInAnimation, fadeOutAnimation } from "src/app/core/animations/animations";
 
-import { LZToastrItem } from "../../types";
+import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem } from "../../types";
 
 @Component({
     selector: "lz-toastr-item",
@@ -39,10 +40,10 @@ export class LZToastrItemComponent implements OnInit {
     }
 
     @Output()
-    public onTimeExpired: EventEmitter<void> = new EventEmitter();
+    public readonly onTimeExpired: EventEmitter<void> = new EventEmitter();
 
     @Output()
-    public onClose: EventEmitter<void> = new EventEmitter();
+    public readonly onClose: EventEmitter<void> = new EventEmitter();
 
     @ViewChild("embedded", {
         read: ViewContainerRef,
@@ -51,13 +52,13 @@ export class LZToastrItemComponent implements OnInit {
     public embeddedContainer: ViewContainerRef;
 
     @HostBinding("@fadeIn")
-    public fadeInAnimation: boolean = true;
+    public fadeInAnimation = true;
 
     @HostBinding("@fadeOut")
-    public itemState: string = "open";
+    public itemState = "open";
 
     @HostBinding("class.lz-toastr-item")
-    public hostClass: boolean = true;
+    public hostClass = true;
 
     public get itemClass(): string {
         return this.item.customColor ? "" : `_${this.item.type}`;
@@ -65,10 +66,9 @@ export class LZToastrItemComponent implements OnInit {
 
     private _alwaysOnDisplay: boolean;
 
-    //TODO: @AlexProffe Add injection token for this
-    private readonly EXISTING_TIME: number = 8000;
+    private readonly EXISTING_TIME: number = inject(EXISTING_TIME_TOKEN);
 
-    private readonly DISAPPEARING_TIME: number = 5000;
+    private readonly DISAPPEARING_TIME: number = inject(DISAPPEARING_TIME_TOKEN);
 
     private startExistingTime: number;
 
