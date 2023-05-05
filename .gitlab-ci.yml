@@ -1,7 +1,7 @@
 stages:
+    - lint
     - dependencies
     - build
-    - lint
 
 Install dependencies:
     image: node:16-alpine
@@ -37,7 +37,6 @@ Lint Project:
     stage: lint
     script:
         - npm link eslint
-        - npm install --legacy-peer-deps && npm run eslint:fix
     cache:
         key:
             files:
