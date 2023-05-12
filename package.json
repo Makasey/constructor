@@ -1,6 +1,6 @@
 {
     "name": "lavka-roz-frontend",
-    "version": "0.0.0",
+    "version": "1.2.1",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --open --port 4220",
@@ -29,7 +29,6 @@
         "@ngneat/forms-manager": "^2.5.0",
         "@ngneat/until-destroy": "^10.0.0-beta.0",
         "rxjs": "~7.8.1",
-        "tslib": "^2.5.0",
         "zone.js": "~0.13.0"
     },
     "devDependencies": {
