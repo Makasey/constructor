@@ -5,10 +5,7 @@
         <div class="catalog-chips">catalog-chips add component</div>
     </div>
     <div class="catalog-grid">
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
+        <lz-product-cart *ngFor="let product of products$ | async; let index = index" [product]="product">
+        </lz-product-cart>
     </div>
 </div>

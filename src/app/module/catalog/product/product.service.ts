@@ -10,7 +10,7 @@ import { UIDataState } from "../../../core/store/states/ui-states";
 
 @Injectable()
 export abstract class AbstractProductService extends AbstractModuleService {
-    public abstract selectProduct(): Observable<Product>;
+    public abstract selectProduct(): Observable<Product[]>;
 }
 
 @Injectable()
@@ -30,14 +30,14 @@ export class DefaultProductService
                     return {
                         ...state,
                         dataState: UIDataState.LOADED,
-                        product: products as unknown as Product,
+                        products: products as unknown as Product[],
                     };
                 });
             }),
         );
     }
 
-    public selectProduct(): Observable<Product> {
-        return this.selectState(state => state.product);
+    public selectProduct(): Observable<Product[]> {
+        return this.selectState(state => state.products);
     }
 }

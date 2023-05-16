@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { Product } from "../../../types";
 
 @Component({
     selector: "lz-product-cart",
@@ -6,4 +7,6 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     styleUrls: ["./product-card.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductCardComponent {}
+export class ProductCardComponent {
+    @Input() public product: Product;
+}

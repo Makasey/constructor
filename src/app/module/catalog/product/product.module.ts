@@ -7,7 +7,7 @@ import { ProductRoutingModule } from "./product-routing.module";
 
 @NgModule({
     declarations: [ProductComponent],
-    imports: [ProductRoutingModule, CommonModule],
+    imports: [CommonModule, ProductRoutingModule],
     providers: [
         {
             provide: AbstractProductService,

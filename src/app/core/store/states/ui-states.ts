@@ -23,7 +23,7 @@ export type TableModuleState = Readonly<{
 }>;
 
 export type RootModuleState = Readonly<{
-    product: Product;
+    products: Product[];
 }> &
     TableModuleState &
     ModuleState;
