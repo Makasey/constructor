@@ -71,8 +71,8 @@
         </div>
         <div class="product-footer">
             <div class="product-prices">
-                <h3 class="product-price sale-price">{{product?.salePrice}} {{product?.currencies[0].symbol}}</h3>
-                <h3 class="product-price old-price">{{product?.price}} {{product?.currencies[0].symbol}}</h3>
+                <h3 class="product-price sale-price">{{_product()?.salePrice}} {{_product()?.currencies[0].symbol}}</h3>
+                <h3 class="product-price old-price">{{_product()?.price}} {{_product()?.currencies[0].symbol}}</h3>
             </div>
             <button class="product-button">
                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">

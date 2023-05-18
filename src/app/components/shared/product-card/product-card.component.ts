@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, signal } from "@angular/core";
 import { Product } from "../../../types";
 
 @Component({
@@ -8,5 +8,9 @@ import { Product } from "../../../types";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
-    @Input() public product: Product;
+    @Input() public set product(value: Product) {
+        this._product.set(value);
+    }
+
+    public _product = signal<Product>({} as Product);
 }
