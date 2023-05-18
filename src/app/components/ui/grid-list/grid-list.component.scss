@@ -1,0 +1,11 @@
+:host {
+    --columns-count: 5;
+    display: grid;
+    grid-template-rows: max-content;
+    place-items: center;
+    grid-template-columns: repeat(var(--columns-count), 1fr);
+
+    &.list-view {
+        grid-template-columns: 1fr;
+    }
+}
