@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, ViewEncapsulation } from "@angular/core";
-import { PRELOAD_COMPONENTS_CONFIG } from "../../../../directive/preload";
+import { PRELOAD_COMPONENTS_CONFIG } from "@shared-directives/preload";
 
 @Component({
     selector: "lz-preload-product",
