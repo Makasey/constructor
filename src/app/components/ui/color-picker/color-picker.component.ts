@@ -21,7 +21,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
     public colors: Color[] = basicColors;
 
     @Input()
-    public width: number = 250;
+    public width = 250;
 
     @Input()
     public set value(value: Color[] | number[]) {
@@ -29,7 +29,7 @@ export class ColorPickerComponent implements ControlValueAccessor {
     }
 
     @Output()
-    public onColorChange: EventEmitter<Color[]> = new EventEmitter<Color[]>();
+    public readonly onColorChange: EventEmitter<Color[]> = new EventEmitter<Color[]>();
 
     @HostBinding("class.color-picker")
     public hostClass = true;

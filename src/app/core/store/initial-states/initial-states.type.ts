@@ -1,6 +1,7 @@
-import { APFormModel } from "../../../components";
+import { APFormModel } from "@components/ui";
+import { Product } from "@shared-types/index";
+
 import { CatalogFiltersState, ModuleState, RootModuleState, TableModuleState, UIDataState } from "../states/ui-states";
-import { Product } from "../../../types";
 
 export function initialTableModuleState(): TableModuleState {
     return {

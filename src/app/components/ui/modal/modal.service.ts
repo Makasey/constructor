@@ -14,8 +14,9 @@ import { DOCUMENT } from "@angular/common";
 
 import { Subscription, tap } from "rxjs";
 
+import { ModalComponent } from "@components/ui";
+
 import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, ModalConfig, ModalType, ModalWithData } from "./types";
-import { ModalComponent } from "./modal.component";
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 

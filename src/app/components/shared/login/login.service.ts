@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { LZAbstractAuthDataService } from "../../../core/data-service";
-import { LZToastrItemType } from "../../ui/toastr/types";
-import { LZToastrService } from "../../ui/toastr/store/toastr.service";
-import { ModalService } from "../../ui/modal";
+
 import { Observable, catchError, of, tap } from "rxjs";
+
+import { LZAbstractAuthDataService } from "@core/data-service";
+import { LZToastrItemType, LZToastrService, ModalService } from "@components/ui";
 
 @Injectable()
 export abstract class LZAbstractLoginService {
@@ -18,7 +18,7 @@ export class LZDefaultLoginService extends LZAbstractLoginService {
 
     public login(email: string, password: string): Observable<unknown> {
         return this.authDataService.login({ email: email, password: password }).pipe(
-            tap(value => {
+            tap(() => {
                 this.toastrService.addToastrItem({
                     title: "Вы успешно вошли в аккаунт",
                     type: LZToastrItemType.SUCCESS,
@@ -29,9 +29,9 @@ export class LZDefaultLoginService extends LZAbstractLoginService {
             }),
             catchError(err => {
                 this.toastrService.addToastrItem({
-                    title: "Ошибка со статусом: " + err.error.status,
+                    title: "Ошибка со статусом: " + err.error?.status,
                     type: LZToastrItemType.ERROR,
-                    text: err.error.message,
+                    text: err.error?.message,
                 });
 
                 return of(err);

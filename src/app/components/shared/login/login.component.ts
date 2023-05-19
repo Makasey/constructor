@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, inject } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { LZAbstractLoginService } from "./login.service";
-import { LZToastrItemType } from "../../ui/toastr/types";
-import { LZToastrService } from "../../ui/toastr/store/toastr.service";
-import { LoginFormControl } from "./types";
-import { MODAL_DATA_TOKEN } from "../../ui/modal/types";
-import { ModalWithData } from "../../ui/modal";
+
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+
 import { guid } from "@datorama/akita";
+
+import { LZToastrItemType, LZToastrService, MODAL_DATA_TOKEN, ModalWithData } from "@components/ui";
+
+import { LZAbstractLoginService } from "./login.service";
+import { LoginFormControl } from "./types";
 
 @UntilDestroy()
 @Component({

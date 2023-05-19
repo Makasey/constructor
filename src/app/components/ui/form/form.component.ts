@@ -32,7 +32,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     public formModel: APFormModel;
 
     @HostBinding("class.ap-form")
-    public hostClass: boolean = true;
+    public hostClass = true;
 
     @ViewChild("textFieldTemplate", {
         static: true,
@@ -78,7 +78,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     @Output()
-    public submitForm: EventEmitter<any> = new EventEmitter<any>();
+    public readonly submitForm: EventEmitter<any> = new EventEmitter<any>();
 
     public mainFormGroup: FormGroup | null = null;
 
@@ -121,7 +121,6 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             } else {
                 this.mainFormGroup = this.convertToNativeGroup(this._convertedFormModel);
             }
-            console.log(this.mainFormGroup);
             this.registerGroupInFormsManager(this.formModel);
         }
     }

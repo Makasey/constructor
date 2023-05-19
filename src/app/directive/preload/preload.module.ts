@@ -9,7 +9,7 @@ import {
     preloadBackgroundConfigFactory,
 } from "./types";
 import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/ui/preload-background";
-import { NumberToArrayModule } from "../../pipes";
+import { NumberToArrayPipe } from "../../pipes";
 import { PreloadDirective } from "./preload.directive";
 
 @NgModule({
@@ -20,7 +20,7 @@ import { PreloadDirective } from "./preload.directive";
         },
     ],
     declarations: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective],
-    imports: [CommonModule, NumberToArrayModule],
+    imports: [CommonModule, NumberToArrayPipe],
     exports: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective],
 })
 export class PreloadDirectiveModule {
