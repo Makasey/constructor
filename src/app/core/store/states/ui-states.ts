@@ -32,3 +32,8 @@ export type CatalogFiltersState = Readonly<{
     filters: APFormModel;
 }> &
     ModuleState;
+
+export type CatalogProductsState = Readonly<{
+    products: Product[];
+}> &
+    ModuleState;

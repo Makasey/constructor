@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { Color } from "@components/ui";
 
 @Pipe({
     name: "lzBelongArray",
@@ -8,7 +7,7 @@ import { Color } from "@components/ui";
     standalone: true,
 })
 export class BelongArrayPipe implements PipeTransform {
-    public transform(array: Color[], element: Color, key: string): boolean {
-        return !!array.find(item => item[key] === element[key]);
+    public transform(array: unknown[], element: unknown, key: string): boolean {
+        return !!array.find(item => (item as Record<string, unknown>)[key] === (element as Record<string, unknown>)[key]);
     }
 }

@@ -10,6 +10,11 @@
         "eslint:fix": "eslint . --ext .ts,.js --fix --quiet",
         "eslint-all": "eslint . --ext .ts,.js --quiet"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "lint-staged": {
         "*.{ts,js}": "eslint --fix"
     },
