@@ -140,7 +140,7 @@ export class DefaultCatalogFiltersService
     }
 
     public applyFilters(): void {
-        void this.router.navigate([], { queryParams: { priceFrom: "eq(120)", priceTo: 20 } });
+        void this.router.navigate([], { queryParams: { priceFrom: "eq(120)", priceTo: "eq(20)" } });
     }
 
     public selectFilters(): Observable<APFormModel> {
