@@ -22,14 +22,22 @@ export class RangeControllerComponent implements ControlValueAccessor {
         this.max = value?.max;
     }
 
-    @Output() public changeValue: EventEmitter<Range> = new EventEmitter<Range>();
-    public min: number = 1500;
-    public max: number = 23000;
-    public minRangeFrom: number = 500;
-    public minRangeTo: number = 22500;
-    public maxRangeTo: number = 45500;
-    public minRate: number = 500;
-    public maxRate: number = 45500;
+    @Output() public readonly changeValue: EventEmitter<Range> = new EventEmitter<Range>();
+
+    public min = 1500;
+
+    public max = 23000;
+
+    public minRangeFrom = 500;
+
+    public minRangeTo = 22500;
+
+    public maxRangeTo = 45500;
+
+    public minRate = 500;
+
+    public maxRate = 45500;
+
     private range: Range;
 
     private onChange: (value: Range) => void = () => undefined;

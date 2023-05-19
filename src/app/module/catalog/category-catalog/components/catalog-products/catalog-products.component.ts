@@ -1,5 +1,3 @@
-import { AbstractModuleComponent } from "../../../../../core/abstract/abstract.service";
-import { AbstractProductService } from "../../../product/product.service";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 

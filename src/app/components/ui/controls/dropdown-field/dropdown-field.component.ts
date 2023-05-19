@@ -56,9 +56,9 @@ export class APDropdownFieldComponent implements ControlValueAccessor {
 
     public touched = false;
 
-    public _selectValueKey: string = "id";
+    public _selectValueKey = "id";
 
-    public _selectLabelKey: string = "label";
+    public _selectLabelKey = "label";
 
     public _value: APDropdownFieldItem[] = [];
 

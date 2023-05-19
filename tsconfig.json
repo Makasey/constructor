@@ -2,7 +2,7 @@
 {
     "compileOnSave": false,
     "compilerOptions": {
-        "baseUrl": "./",
+        "baseUrl": "./src",
         "outDir": "./dist/out-tsc",
         "forceConsistentCasingInFileNames": true,
         "strict": true,
@@ -22,10 +22,20 @@
         "module": "es2020",
         "lib": ["es2020", "dom"],
         "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
         "skipDefaultLibCheck": true,
         "newLine": "lf",
         "resolveJsonModule": true,
-        "useDefineForClassFields": false
+        "useDefineForClassFields": false,
+        "paths": {
+            "@core/*": ["app/core/*"],
+            "@components/*": ["app/components/*"],
+            "@modules/*": ["app/module/*"],
+            "@shared-pipes/*": ["app/pipes/*"],
+            "@shared-types/*": ["app/types/*"],
+            "@shared-utils/*": ["app/utils/*"],
+            "@shared-directives/*": ["app/directive/*"]
+        }
     },
     "angularCompilerOptions": {
         "fullTemplateTypeCheck": true,

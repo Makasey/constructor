@@ -10,7 +10,7 @@ export class PreloadDirective implements OnChanges {
     public preloadBackgroundType: string;
 
     @Input("preloadBackgroundLoading")
-    public loading: boolean = true;
+    public loading = true;
 
     @Input("preloadBackgroundConfig")
     public preloadConfig: Record<string, unknown>;

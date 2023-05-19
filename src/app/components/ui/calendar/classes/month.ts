@@ -1,4 +1,4 @@
-import { isNumberInRange, normalizeToIntNumber } from "src/app/utils";
+import { isNumberInRange, normalizeToIntNumber } from "app/utils";
 
 import { LZYear, LzYearLike } from "./year";
 import { MonthNumber } from "../types";

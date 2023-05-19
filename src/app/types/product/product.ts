@@ -5,13 +5,13 @@ export type Product = {
     salePrice: number | null;
     description: string;
     count: number;
-    currencies: ProductCurrency[];
+    currencies: Currency[];
     categories: ProductCategory[];
     options: ProductOption[];
     photos: ProductPhoto[];
 };
 
-export type ProductCurrency = {
+export type Currency = {
     id: number;
     code: string;
     symbol: string;

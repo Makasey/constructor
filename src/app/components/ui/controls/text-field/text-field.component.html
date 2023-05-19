@@ -1,34 +1,34 @@
 <ng-container>
-  <div class="form-control">
-    <label class="form-control-label text-field"
-           [for]="controlModel.id">
-    <span class="form-control-text"
-          [class.focused]="!!_value || touched || _options.placeholder">
-      {{_options.label}}
-    </span>
-      <input type="text"
-             class="form-control-input"
-             [attr.id]="controlModel.id"
-             [attr.placeholder]="_options.placeholder"
-             [attr.name]="controlModel.name"
-             [attr.maxlength]="_options?.maxLength"
-             [attr.minlength]="_options?.minLength"
-             [class.disabled]="disabled"
-             [disabled]="disabled"
-             [value]="_value"
-             (blur)="_onBlur($event)"
-             (focus)="_onFocus($event)"
-             (input)="_onInput($event)">
-    </label>
-    <div class="form-control-errors"
-         *ngIf="(nativeControl.dirty && !touched) && (nativeControl.errors | keyvalue)?.length">
-      <ng-container *ngFor="let error of nativeControl.errors | keyvalue">
-       <span class="form-control-error">
-          {{error.key}}
-       </span>
-      </ng-container>
+    <div class="form-control">
+        <label class="form-control-label text-field" [for]="controlModel.id">
+            <span class="form-control-text" [class.focused]="!!_value || touched || _options.placeholder">
+                {{ _options.label }}
+            </span>
+            <input
+                type="text"
+                class="form-control-input"
+                [attr.id]="controlModel.id"
+                [attr.placeholder]="_options.placeholder"
+                [attr.name]="controlModel.name"
+                [attr.maxlength]="_options?.maxLength"
+                [attr.minlength]="_options?.minLength"
+                [class.disabled]="disabled"
+                [disabled]="disabled"
+                [value]="_value"
+                (blur)="_onBlur($event)"
+                (focus)="_onFocus($event)"
+                (input)="_onInput($event)"
+            />
+        </label>
+        <div
+            class="form-control-errors"
+            *ngIf="nativeControl.dirty && !touched && (nativeControl.errors | keyvalue)?.length"
+        >
+            <ng-container *ngFor="let error of nativeControl.errors | keyvalue">
+                <span class="form-control-error">
+                    {{ error.key }}
+                </span>
+            </ng-container>
+        </div>
     </div>
-  </div>
 </ng-container>
-
-

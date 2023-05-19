@@ -8,6 +8,6 @@ import { LZTableMeta } from "../../types";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeadComponent {
-  @Input()
+    @Input()
     public tableMeta!: LZTableMeta[];
 }
