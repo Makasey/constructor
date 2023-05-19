@@ -25,7 +25,6 @@ import { environment } from "../environments/environment";
         BrowserAnimationsModule,
         BrowserModule,
         HttpClientModule,
-        BrowserAnimationsModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
         LZCalendarModule,

@@ -1,9 +1,10 @@
 export enum RoutePaths {
-    HOME = "/home",
+    HOME = "/",
 }
 
 export enum RouteParams {
     DIRECTION = "direction",
     SORT = "sort",
-    ROLE = "role"
+    LIMIT = "limit",
+    ROLE = "role",
 }

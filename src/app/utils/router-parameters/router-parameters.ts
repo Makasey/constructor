@@ -10,7 +10,7 @@ import { conditionsMap } from "../utils";
 export function getRouterParameters(...paramNames: string[]): Record<string, unknown> | unknown {
     const injector = APP_REF.injector as Injector;
     const queryParametersMap = injector.get(ActivatedRoute).root.snapshot.queryParamMap;
-    const queryMap = {} as Record<string, unknown>;
+    const queryMap: Record<string, unknown> = {};
 
     paramNames.forEach(param => {
         queryMap[param] = queryParametersMap.get(param);
@@ -24,7 +24,7 @@ export function selectRouterParameters(...paramNames: string[]): Observable<Reco
     const router = injector.get(ActivatedRoute);
     return router.root.queryParamMap.pipe(
         map(paramMap => {
-            const queryMap = {} as Record<string, unknown>;
+            const queryMap: Record<string, unknown> = {};
             paramNames.forEach(paramName => {
                 queryMap[paramName] = paramMap.get(paramName);
             });
