@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, ViewEncapsulation } from "@angular/core";
 
-import { PRELOAD_COMPONENTS_CONFIG } from "src/app/directive/preload";
+import { PRELOAD_COMPONENTS_CONFIG } from "app/directive/preload";
 
 @Component({
     selector: "lz-preload-filters",

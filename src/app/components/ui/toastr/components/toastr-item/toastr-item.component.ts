@@ -16,7 +16,7 @@ import {
     inject,
 } from "@angular/core";
 
-import { fadeInAnimation, fadeOutAnimation } from "src/app/core/animations/animations";
+import { fadeInAnimation, fadeOutAnimation } from "app/core/animations/animations";
 
 import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem, TOASTR_ITEM_OPTIONS_TOKEN } from "../../types";
 

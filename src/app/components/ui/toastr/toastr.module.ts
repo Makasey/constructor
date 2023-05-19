@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
 
-import { LZInitVarModule } from "src/app/directive/init-var/init-var.module";
+import { LZInitVarModule } from "app/directive/init-var/init-var.module";
 
 import { LZToastrBoxComponent, LZToastrItemComponent, LZToastrListComponent } from "./components";
 import { LZToastrComponent } from "./toastr.component";
