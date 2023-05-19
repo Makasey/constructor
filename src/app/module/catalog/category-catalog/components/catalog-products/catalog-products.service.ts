@@ -1,12 +1,12 @@
-import { AbstractDefaultModuleService, AbstractModuleService } from "src/app/core/abstract/abstract.service";
-import { AbstractProductDataService } from "src/app/core/data-service";
+import { AbstractDefaultModuleService, AbstractModuleService } from "@core/abstract/abstract.service";
+import { AbstractProductDataService } from "@core/data-service";
 import { Injectable } from "@angular/core";
-import { LzQuery } from "src/app/core/store/lz.query";
-import { LzService } from "src/app/core/store/lz.service";
-import { LzStateKey } from "src/app/core/store/lz.state";
+import { LzQuery } from "@core/store/lz.query";
+import { LzService } from "@core/store/lz.service";
+import { LzStateKey } from "@core/store/lz.state";
 import { Observable, tap } from "rxjs";
-import { Product } from "src/app/types";
-import { UIDataState } from "src/app/core/store/states/ui-states";
+import { Product } from "@shared-types/product/product";
+import { UIDataState } from "@core/store/states/ui-states";
 import { mockProducts } from "./mock-products";
 
 @Injectable()
