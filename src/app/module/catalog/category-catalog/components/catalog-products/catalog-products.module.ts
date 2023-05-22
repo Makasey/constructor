@@ -2,8 +2,8 @@ import { AbstractCatalogProductsService, DefaultCatalogProductsService } from ".
 import { CatalogProductsComponent } from "./catalog-products.component";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { PreloadDirectiveModule } from "src/app/directive/preload/preload.module";
-import { ProductCardModule } from "src/app/components";
+import { PreloadDirectiveModule } from "@shared-directives/preload/preload.module";
+import { ProductCardModule } from "@components/shared";
 
 @NgModule({
     declarations: [CatalogProductsComponent],

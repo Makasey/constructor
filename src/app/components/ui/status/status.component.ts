@@ -10,7 +10,7 @@ import { StatusType } from "./types";
 })
 export class StatusComponent {
     @Input()
-    public status: unknown;
+    public status: StatusType;
 
     public statusTypes = StatusType;
 

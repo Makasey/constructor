@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 
-import { enterAnimation } from "src/app/core/animations/animations";
+import { enterAnimation } from "app/core/animations/animations";
 
 import { LzToastrQuery } from "./store";
 

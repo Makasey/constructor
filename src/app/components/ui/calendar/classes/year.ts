@@ -1,4 +1,4 @@
-import { isNumberInRange, normalizeToIntNumber } from "src/app/utils";
+import { isNumberInRange, normalizeToIntNumber } from "app/utils";
 
 export class LZYear implements LzYearLike {
     constructor(public readonly year: number) {}

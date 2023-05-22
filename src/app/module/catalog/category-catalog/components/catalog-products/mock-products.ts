@@ -1,4 +1,4 @@
-import { Product } from "src/app/types";
+import { Product } from "@shared-types/index";
 
 export const mockProducts: Product[] = [
     {

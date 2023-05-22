@@ -5,6 +5,7 @@ interface InitVarContext<T> {
 
 @Directive({
     selector: "[initVar]",
+    standalone: true,
 })
 export class LZInitVarDirective<T> implements OnInit {
     private _context: InitVarContext<T> = { initVar: null! };

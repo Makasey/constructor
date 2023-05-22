@@ -9,8 +9,8 @@ import { APDropdownFieldItemComponent } from "./components/dropdown-field-item/d
 import { APDropdownFieldLabelPipe } from "./dropdown-field-label.pipe";
 
 @NgModule({
-    declarations: [APDropdownFieldComponent, APDropdownFieldActivePipe, APDropdownFieldItemComponent, APDropdownFieldLabelPipe],
-    imports: [CommonModule, ReactiveFormsModule, OverlayModule],
+    declarations: [APDropdownFieldActivePipe, APDropdownFieldComponent, APDropdownFieldItemComponent, APDropdownFieldLabelPipe],
+    imports: [CommonModule, OverlayModule, ReactiveFormsModule],
     exports: [APDropdownFieldComponent],
 })
 export class APDropdownFieldModule {}

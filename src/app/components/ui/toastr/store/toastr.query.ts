@@ -29,10 +29,10 @@ export class LzToastrQuery extends QueryEntity<LZToastrItemState, LZToastrItem> 
             return entities
             .filter(entity => alwaysOnDisplay || entity.visibility)
             .map(entity => {
-                return <LZToastrItem>{
+                return {
                     ...entity,
                     template: this.templateRefMap.get(entity.id!),
-                };
+                } as LZToastrItem;
             });
         }),
     );

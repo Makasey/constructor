@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { LZTableMeta, LZTableValues } from "../../ui/table";
-import { StatusType } from "../../ui/status";
+
+import { LZTableMeta, LZTableValues, StatusType } from "@components/ui";
 
 @Injectable()
 export class OrdersService {

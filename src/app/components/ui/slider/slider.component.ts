@@ -10,8 +10,10 @@ import {
     TemplateRef,
     ViewChild,
 } from "@angular/core";
-import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
+
 import { Observable, interval, tap } from "rxjs";
+
+import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
 
 @Component({
     selector: "lz-slider",

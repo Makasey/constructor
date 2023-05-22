@@ -21,7 +21,7 @@ export const lzInitialStateFunctions: InitialStateFunctions = {
 };
 
 export function createLZInitialState(): LzState {
-    return Object.keys(lzInitialStateFunctions).reduce((result, next) => {
+    return Object.keys(lzInitialStateFunctions).reduce((result, next: string) => {
         return {
             ...result,
             [next]: lzInitialStateFunctions[next] && lzInitialStateFunctions[next](),

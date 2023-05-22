@@ -1,8 +1,10 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
+
 @Pipe({
     name: "lzBelongArray",
     pure: true,
+    standalone: true,
 })
 export class BelongArrayPipe implements PipeTransform {
     public transform(array: unknown[], element: unknown, key: string): boolean {
