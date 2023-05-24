@@ -1,6 +1,6 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from "@angular/core";
 interface InitVarContext<T> {
-    initVar: T;
+    initVar: T | null;
 }
 
 @Directive({
@@ -8,7 +8,7 @@ interface InitVarContext<T> {
     standalone: true,
 })
 export class LZInitVarDirective<T> implements OnInit {
-    private _context: InitVarContext<T> = { initVar: null! };
+    private _context: InitVarContext<T> = { initVar: null };
 
     constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<InitVarContext<T>>) {}
 
