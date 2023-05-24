@@ -13,6 +13,10 @@ export class NavigationService extends AbstractNavigationService {
     };
 
     public buildLink(key: string, ids: Record<string, string | number> = {}): string {
+        if (!key) {
+            return "";
+        }
+
         if (!this.projectLinksMap[key]) {
             return "";
         }
