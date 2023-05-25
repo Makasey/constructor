@@ -11,16 +11,16 @@ import { LZGridItem, LZGridTemplatesMap, ViewModeTypes, columnsCountValiableName
     imports: [CommonModule],
 })
 export class LZGridListComponent {
-    @Input({required: true})
+    @Input({ required: true })
     public items: LZGridItem[];
 
-    @Input({required: true})
+    @Input({ required: true })
     public itemTemplatesMap: LZGridTemplatesMap;
 
-    @Input({required: true})
+    @Input({ required: true })
     public viewMode: ViewModeTypes = ViewModeTypes.CARD;
 
-    @Input()
+    @Input({ required: true })
     public set columns(value: number) {
         this.renderer.setStyle(this.host.nativeElement, columnsCountValiableName, value, RendererStyleFlags2.DashCase);
     }
