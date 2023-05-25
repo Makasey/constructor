@@ -25,13 +25,13 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
     public controlModel: APFormControl;
 
     @Output()
-    public onValueChange: EventEmitter<APTextFieldValueChangeEvent> = new EventEmitter<APTextFieldValueChangeEvent>();
+    public readonly onValueChange: EventEmitter<APTextFieldValueChangeEvent> = new EventEmitter<APTextFieldValueChangeEvent>();
 
     @Output()
-    public onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
     @Output()
-    public onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
     public _value: string;
 

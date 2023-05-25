@@ -11,6 +11,11 @@
         "eslint-all": "eslint . --ext .ts,.js --quiet",
         "prepare": "husky install"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "lint-staged": {
         "*.{ts,js}": "eslint --fix"
     },

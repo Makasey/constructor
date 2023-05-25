@@ -36,7 +36,7 @@ export class CategoryControllerComponent implements ControlValueAccessor {
         },
     ];
 
-    @Output() public valueChange: EventEmitter<number> = new EventEmitter<number>();
+    @Output() public readonly valueChange: EventEmitter<number> = new EventEmitter<number>();
 
     public category: number;
     private onChange: (value: number) => void = () => undefined;

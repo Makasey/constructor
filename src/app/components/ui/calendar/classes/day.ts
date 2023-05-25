@@ -1,4 +1,4 @@
-import { isNumberInRange, normalizeToIntNumber } from "src/app/utils";
+import { isNumberInRange, normalizeToIntNumber } from "app/utils";
 
 import { DayOfWeek, LZDateMode, MonthNumber } from "../types";
 import { LZMonth, LZMonthLike } from "./month";

@@ -7,7 +7,7 @@ import { TableHeadComponent } from "./components/table-head/table-head.component
 import { TableRowComponent } from "./components/table-row/table-row.component";
 
 @NgModule({
-    declarations: [TableComponent, TableBodyComponent, TableHeadComponent, TableRowComponent],
+    declarations: [TableBodyComponent, TableComponent, TableHeadComponent, TableRowComponent],
     exports: [TableComponent],
     imports: [CommonModule],
 })

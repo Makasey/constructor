@@ -1,0 +1,39 @@
+.preload-product {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+
+    &-cart {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 275px;
+        height: 400px;
+    }
+
+    &-header {
+        width: 100%;
+        height: 60%;
+        background: #f3f0f0;
+        border-radius: 10px;
+        margin-top: 10px;
+    }
+
+    &-info {
+        width: 100%;
+        height: 40%;
+    }
+
+    .info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        &-row {
+            width: 100%;
+            height: 30px;
+            background: #f3f0f0;
+            border-radius: 5px;
+        }
+    }
+}

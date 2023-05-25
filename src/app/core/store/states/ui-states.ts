@@ -1,5 +1,5 @@
-import { APFormModel, LZTableMeta, LZTableValues } from "../../../components";
-import { Product } from "../../../types";
+import { APFormModel, LZTableMeta, LZTableValues } from "@components/ui";
+import { Product } from "@shared-types/index";
 
 export enum UIDataState {
     INITIAL = "initial",
@@ -30,5 +30,10 @@ export type RootModuleState = Readonly<{
 
 export type CatalogFiltersState = Readonly<{
     filters: APFormModel;
+}> &
+    ModuleState;
+
+export type CatalogProductsState = Readonly<{
+    products: Product[];
 }> &
     ModuleState;

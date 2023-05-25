@@ -8,15 +8,16 @@ import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
-import { APP_REF } from "./core/app-ref";
-import { AbstractNavigationService, NavigationService } from "./core/navigation.service";
-import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "./core/data-service";
-import { LZCalendarModule, LZToastrModule } from "./components";
-import { LzQuery } from "./core/store/lz.query";
-import { LzService } from "./core/store/lz.service";
-import { LzStore } from "./core/store/lz.store";
+import { APP_REF } from "@core/app-ref";
+import { AbstractNavigationService, NavigationService } from "@core/navigation.service";
+import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "@core/data-service";
+import { LzQuery } from "@core/store/lz.query";
+import { LzService } from "@core/store/lz.service";
+import { LzStore } from "@core/store/lz.store";
 
-import { environment } from "../environments/environment";
+import { LZCalendarModule, LZToastrModule } from "./components";
+
+import { environment } from "environments/environment";
 
 @NgModule({
     declarations: [AppComponent],
@@ -25,7 +26,6 @@ import { environment } from "../environments/environment";
         BrowserAnimationsModule,
         BrowserModule,
         HttpClientModule,
-        BrowserAnimationsModule,
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
         LZCalendarModule,

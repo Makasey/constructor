@@ -1,3 +1,5 @@
+import { AbstractCatalogProductsService } from "./catalog-products.service";
+import { AbstractModuleComponent } from "@core/abstract/abstract.service";
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 
 @Component({
@@ -6,4 +8,9 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     styleUrls: ["./catalog-products.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CatalogProductsComponent {}
+export class CatalogProductsComponent extends AbstractModuleComponent {
+    public products$ = this.service.getProducts();
+    constructor(protected service: AbstractCatalogProductsService) {
+        super(service);
+    }
+}
