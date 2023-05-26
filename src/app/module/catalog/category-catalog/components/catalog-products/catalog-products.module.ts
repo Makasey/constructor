@@ -4,6 +4,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { PreloadDirectiveModule } from "@shared-directives/preload/preload.module";
 import { ProductCardModule } from "@components/shared";
+
 @NgModule({
     declarations: [CatalogProductsComponent],
     exports: [CatalogProductsComponent],

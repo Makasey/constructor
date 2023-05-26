@@ -1,11 +1,12 @@
 {
-  "name": "eslint-plugin-billing-rmi-rules",
-  "version": "1.0.0",
-  "main": "index.js",
-  "files": [
-    "./template",
-    "CODE_STYLE.md",
-    "package.json",
-    "index.js"
-  ]
+    "name": "eslint-plugin-billing-rmi-rules",
+    "version": "1.0.0",
+    "main": "index.js",
+    "files": [
+        "./code-rules",
+        "./template",
+        "CODE_STYLE.md",
+        "package.json",
+        "index.js"
+    ]
 }

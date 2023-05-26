@@ -2,7 +2,7 @@ import { Injectable, TemplateRef } from "@angular/core";
 
 import { ID, Order, QueryConfig, QueryEntity } from "@datorama/akita";
 
-import { combineLatest, map } from "rxjs";
+import { Observable, combineLatest, map } from "rxjs";
 
 import { LZToastrItem, LZToastrItemComponentType, LZToastrItemState } from "../types";
 import { LZToastrStore } from "./toastr.store";
@@ -24,7 +24,7 @@ export class LzToastrQuery extends QueryEntity<LZToastrItemState, LZToastrItem> 
         TemplateRef<unknown> | LZToastrItemComponentType
     >();
 
-    public selectToastrItems$ = combineLatest([this.selectAll(), this.selectAlwaysOnDisplay$]).pipe(
+    public selectToastrItems$: Observable<LZToastrItem[]> = combineLatest([this.selectAll(), this.selectAlwaysOnDisplay$]).pipe(
         map(([entities, alwaysOnDisplay]) => {
             return entities
             .filter(entity => alwaysOnDisplay || entity.visibility)
@@ -32,7 +32,7 @@ export class LzToastrQuery extends QueryEntity<LZToastrItemState, LZToastrItem> 
                 return {
                     ...entity,
                     template: this.templateRefMap.get(entity.id!),
-                } as LZToastrItem;
+                };
             });
         }),
     );

@@ -1,6 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Store, StoreConfig} from "@datorama/akita";
-import {TestState, TestStateName, createInitialState} from "./types";
+import { Injectable } from "@angular/core";
+import { Store, StoreConfig } from "@datorama/akita";
+import { TestState, TestStateName, createInitialState } from "./types";
 
 @Injectable({
     providedIn: "root",
