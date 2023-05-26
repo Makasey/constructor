@@ -38,4 +38,4 @@ export * from "./toastr";
 export * from "./modal";
 
 //Grid component
-export * from "./grid-list";
+export * from "./grid";

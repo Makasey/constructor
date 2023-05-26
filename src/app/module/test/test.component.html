@@ -1,12 +1,14 @@
-<p>test works!</p>
-<ng-container *ngIf="products$ | async as products">
-  <ng-container *ngFor="let product of products">
-    <ng-container *ngFor="let item of product | keyvalue">
-      {{item.key}} - {{item.value}}
-      <br />
-    </ng-container>
-  </ng-container>
-</ng-container>
-<button (click)="updateProductList()">
-  Click me
-</button>
+<!--<p>test works!</p>-->
+<!--<ng-container *ngIf="products$ | async as products">-->
+<!--  <ng-container *ngFor="let product of products">-->
+<!--    <ng-container *ngFor="let item of product | keyvalue">-->
+<!--      {{item.key}} - {{item.value}}-->
+<!--      <br />-->
+<!--    </ng-container>-->
+<!--  </ng-container>-->
+<!--</ng-container>-->
+<!--<button (click)="updateProductList()">-->
+<!--  Click me-->
+<!--</button>-->
+
+<lz-tree [tree]="tree"></lz-tree>

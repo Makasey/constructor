@@ -8,6 +8,7 @@ import { HomeModule } from "@modules/home/home.module";
 import { InfoModule } from "@modules/info/info.module";
 import { OrderModule } from "@modules/order/order.module";
 import { PersonModule } from "@modules/person/person.module";
+import { TestModule } from "@modules/test/test.module";
 import { TestimonialsModule } from "@modules/testimonials/testimonials.module";
 
 const routes: Routes = [
@@ -43,6 +44,10 @@ const routes: Routes = [
     {
         path: "person",
         loadChildren: (): Promise<typeof PersonModule> => import("@modules/person/person.module").then(module => module.PersonModule),
+    },
+    {
+        path: "lessons",
+        loadChildren: (): Promise<typeof TestModule> => import("@modules/test/test.module").then(module => module.TestModule),
     },
 ];
 
