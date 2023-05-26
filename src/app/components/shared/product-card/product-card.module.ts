@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { ProductCardComponent } from "./product-card.component";
+
+import { ProductCardComponent } from "@components/shared";
 
 @NgModule({
     declarations: [ProductCardComponent],

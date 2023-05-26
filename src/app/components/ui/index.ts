@@ -36,3 +36,6 @@ export * from "./toastr";
 
 //Modal component
 export * from "./modal";
+
+//Grid component
+export * from "./grid";

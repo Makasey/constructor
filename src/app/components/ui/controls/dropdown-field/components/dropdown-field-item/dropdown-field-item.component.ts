@@ -17,7 +17,7 @@ export class APDropdownFieldItemComponent {
     public item: APDropdownFieldItem;
 
     @Output()
-    public onItemClick: EventEmitter<APDropdownFieldItem> = new EventEmitter<APDropdownFieldItem>();
+    public readonly onItemClick: EventEmitter<APDropdownFieldItem> = new EventEmitter<APDropdownFieldItem>();
 
     @HostBinding("class.dropdown-field-item")
     public hostClass = true;

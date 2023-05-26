@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } from "@angular/core";
+import { LZSliderItem } from "@components/ui";
+
+export type SliderItemTemplateData = { item: LZSliderItem; };
 
 @Component({
     selector: "lz-slider-item",
@@ -7,7 +10,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } f
 })
 export class LZSliderItemComponent {
     @Input()
-    public itemTemplate: TemplateRef<unknown>;
+    public itemTemplate: TemplateRef<SliderItemTemplateData>;
 
     @Input()
     @HostBinding("class")
@@ -25,5 +28,5 @@ export class LZSliderItemComponent {
     @HostBinding("class.lz-slider-item")
     public hostClass = true;
 
-    public _itemClass: string = "";
+    public _itemClass = "";
 }

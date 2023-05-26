@@ -1,0 +1,10 @@
+<ng-container *ngFor="let item of items; trackBy: _trackBy">
+    <ng-template
+        [ngTemplateOutlet]="itemTemplate || defaultTemplate"
+        [ngTemplateOutletContext]="{ item: item }"
+    ></ng-template>
+</ng-container>
+
+<ng-template #defaultTemplate let-item="item">
+    <div>{{ item | json }}</div>
+</ng-template>

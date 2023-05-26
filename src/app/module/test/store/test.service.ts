@@ -1,16 +1,20 @@
 import { Injectable } from "@angular/core";
+
 import { Observable, tap } from "rxjs";
-import { Product } from "../../../types";
-import { ProductDataService } from "../../../core/data-service";
+
+import { arrayAdd } from "@datorama/akita";
+
+import { AbstractProductDataService } from "@core/data-service";
+import { Product } from "@shared-types/index";
+
 import { TestQuery } from "./test.query";
 import { TestStore } from "./test.store";
-import { arrayAdd } from "@datorama/akita";
 
 @Injectable({
     providedIn: "root",
 })
 export class TestService {
-    constructor(private store: TestStore, private query: TestQuery, private productDataService: ProductDataService) {}
+    constructor(private store: TestStore, private query: TestQuery, private productDataService: AbstractProductDataService) {}
 
     public fetchProducts(): Observable<Product[]> {
         return this.productDataService.getProducts().pipe(

@@ -8,12 +8,12 @@ import { LZTableMeta, LZTableValues, LZTemplatesMap } from "../../types";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableBodyComponent {
-  @Input()
+    @Input()
     public tableMeta!: LZTableMeta[];
 
-  @Input()
-  public tableValues!: LZTableValues[];
+    @Input()
+    public tableValues!: LZTableValues[];
 
-  @Input()
-  public templatesMap!: LZTemplatesMap;
+    @Input()
+    public templatesMap!: LZTemplatesMap;
 }

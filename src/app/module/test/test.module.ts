@@ -1,7 +1,8 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import {Route, RouterModule} from "@angular/router";
+import { Route, RouterModule } from "@angular/router";
 import { TestComponent } from "./test.component";
+import { TreeComponent } from "@components/ui/tree/tree.component";
 
 const ROUTES: Route[] = [
     {
@@ -11,13 +12,8 @@ const ROUTES: Route[] = [
 ];
 
 @NgModule({
-    declarations: [
-        TestComponent,
-    ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(ROUTES),
-    ],
+    declarations: [TestComponent],
+    imports: [CommonModule, RouterModule.forChild(ROUTES), TreeComponent],
     exports: [RouterModule],
 })
-export class TestModule { }
+export class TestModule {}

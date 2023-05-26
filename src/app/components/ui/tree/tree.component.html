@@ -1,0 +1,7 @@
+<span class="lz-tree-value">
+    {{ tree.value }}
+</span>
+
+<ng-container *ngIf="tree.children.length && !closed">
+    <lz-tree *ngFor="let childTree of tree.children" [tree]="childTree"></lz-tree>
+</ng-container>

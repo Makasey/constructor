@@ -10,8 +10,11 @@ import {
     TemplateRef,
     ViewChild,
 } from "@angular/core";
-import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
+
 import { Observable, interval, tap } from "rxjs";
+
+import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
+import { SliderItemTemplateData } from "@components/ui/slider/components/slider-item.component";
 
 @Component({
     selector: "lz-slider",
@@ -30,7 +33,7 @@ export class LZSliderComponent implements OnInit {
         ];
 
     @Input()
-    public itemTemplate: TemplateRef<unknown>;
+    public itemTemplate: TemplateRef<SliderItemTemplateData>;
 
     @Input()
     public sliderConfig: LZSliderConfig = lzDefaultSliderConfig;
@@ -87,7 +90,7 @@ export class LZSliderComponent implements OnInit {
     constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
     public ngOnInit(): void {
-        this._sliderWidth = this.elementRef.nativeElement.offsetWidth;
+        this._sliderWidth = (this.elementRef.nativeElement as HTMLElement).offsetWidth;
 
         this._sliderItemsCount = this.items.length;
 

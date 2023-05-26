@@ -1,14 +1,14 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+
 import { OrdersComponent } from "./orders.component";
 import { OrdersService } from "./orders.service";
-import { StatusModule } from "../../ui/status";
-import { TableModule } from "../../ui/table";
+import { StatusModule, TableModule } from "@components/ui";
 
 @NgModule({
     declarations: [OrdersComponent],
     exports: [OrdersComponent],
-    imports: [CommonModule, TableModule, StatusModule],
+    imports: [CommonModule, StatusModule, TableModule],
     providers: [OrdersService],
 })
 export class OrdersModule {}

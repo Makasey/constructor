@@ -8,8 +8,8 @@ import {
     preloadBackgroundComponentsMap,
     preloadBackgroundConfigFactory,
 } from "./types";
-import { LzPreloadFiltersComponent, LzPreloadTableComponent } from "../../components/ui/preload-background";
-import { NumberToArrayModule } from "../../pipes";
+import { LzPreloadFiltersComponent, LzPreloadProductComponent, LzPreloadTableComponent } from "../../components/ui/preload-background";
+import { NumberToArrayPipe } from "../../pipes";
 import { PreloadDirective } from "./preload.directive";
 
 @NgModule({
@@ -19,9 +19,9 @@ import { PreloadDirective } from "./preload.directive";
             provide: PRELOAD_BACKGROUND_CONFIG_TOKEN,
         },
     ],
-    declarations: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective],
-    imports: [CommonModule, NumberToArrayModule],
-    exports: [LzPreloadFiltersComponent, LzPreloadTableComponent, PreloadDirective],
+    declarations: [LzPreloadFiltersComponent, LzPreloadProductComponent, LzPreloadTableComponent, PreloadDirective],
+    imports: [CommonModule, NumberToArrayPipe],
+    exports: [LzPreloadFiltersComponent, LzPreloadProductComponent, LzPreloadTableComponent, PreloadDirective],
 })
 export class PreloadDirectiveModule {
     public static forRoot(moduleConfig: PreloadCustomModuleConfig = {}): ModuleWithProviders<PreloadDirectiveModule> {

@@ -4,11 +4,14 @@
         <div class="catalog-sort">catalog-sort add component</div>
         <div class="catalog-chips">catalog-chips add component</div>
     </div>
-    <div class="catalog-grid">
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-        <lz-product-cart></lz-product-cart>
-    </div>
+    <ng-template
+        [preloadBackground]="'product'"
+        [preloadBackgroundLoading]="_loading$ | async"
+        [preloadBackgroundConfig]="{ productCount: 9 }"
+    >
+        <div class="catalog-grid">
+            <lz-product-cart *ngFor="let product of products(); let index = index" [product]="product">
+            </lz-product-cart>
+        </div>
+    </ng-template>
 </div>

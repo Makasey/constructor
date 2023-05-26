@@ -25,13 +25,13 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     public controlModel: APFormControl;
 
     @Output()
-    public onValueChange: EventEmitter<APNumberFieldValueChangeEvent> = new EventEmitter<APNumberFieldValueChangeEvent>();
+    public readonly onValueChange: EventEmitter<APNumberFieldValueChangeEvent> = new EventEmitter<APNumberFieldValueChangeEvent>();
 
     @Output()
-    public onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
     @Output()
-    public onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
     public _value: number | string;
 
