@@ -20,7 +20,7 @@ export function initialRootModuleState(): RootModuleState {
     return {
         ...initialModuleDataState(),
         ...initialTableModuleState(),
-        product: {} as Product,
+        products: [] as Product[],
     };
 }
 

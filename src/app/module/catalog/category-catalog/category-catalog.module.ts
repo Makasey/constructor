@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
 import { APFormModule } from "app/components";
+import { AbstractProductService, DefaultProductService } from "../product/product.service";
 import { CatalogProductsModule } from "./components/catalog-products/catalog-products.module";
 import { CategoryCatalogComponent } from "./category-catalog.component";
 import { CategoryCatalogRoutingModule } from "./category-catalog-routing.module";
@@ -20,6 +21,12 @@ import { LZCatalogFiltersModule } from "./components/catalog-filters/catalog-fil
         CommonModule,
         LZCatalogFiltersModule,
         RangeControllerModule,
+    ],
+    providers: [
+        {
+            provide: AbstractProductService,
+            useClass: DefaultProductService,
+        },
     ],
 })
 export class CategoryCatalogModule {}
