@@ -1,7 +1,9 @@
-import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "./patterns";
 import { HttpResponse } from "@angular/common/http";
-import { PaginationListItems, SearchConditions, TOTAL_COUNT_HEADER } from "../types";
+
 import { isNil } from "@datorama/akita";
+
+import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "./patterns";
+import { PaginationListItems, SearchConditions, TOTAL_COUNT_HEADER } from "../types";
 
 export const conditionsMap: Record<SearchConditions, RegExp> = {
     [SearchConditions.EQUAL]: EQUALS_PATTERN,
@@ -16,7 +18,7 @@ export function convertBooleanToTableValues(value: boolean): string {
 export function mapPaginationResponseToListModel<T>(response: HttpResponse<T[]>): PaginationListItems<T> {
     const countHeader = response.headers.get(TOTAL_COUNT_HEADER);
     return {
-        items: response.body as T[],
+        items: response.body ?? [],
         count: Number(countHeader),
     };
 }
@@ -44,4 +46,20 @@ export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): P
         }
         return result;
     }, {});
+}
+
+export function normalizeToIntNumber(value: number, min: number, max: number): number {
+    if (value > max) {
+        return max;
+    }
+
+    if (value < min) {
+        return min;
+    }
+
+    return Math.round(value);
+}
+
+export function isNumberInRange(value: number, from: number, to: number): boolean {
+    return value >= from && value <= to;
 }

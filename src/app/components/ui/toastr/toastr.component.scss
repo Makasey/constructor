@@ -1,0 +1,14 @@
+@import "components/toastr-box/toastr-box.component";
+@import "components/toastr-item/toastr-item.component";
+@import "components/toastr-list/toastr-list.component";
+
+.lz-toastr {
+    max-width: 360px;
+    width: 100%;
+    max-height: calc(100% - 48px);
+    position: absolute;
+    top: 48px;
+    right: 0;
+    z-index: 110;
+    overflow: hidden;
+}

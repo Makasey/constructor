@@ -1,21 +1,33 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from "@angular/core";
 
 @Injectable()
 export abstract class AbstractNavigationService {
-    public abstract buildLink(key: string, id?: string): string;
+    public abstract buildLink(key: string, ids?: Record<string, string | number>): string;
 }
 
 @Injectable()
 export class NavigationService extends AbstractNavigationService {
-    private readonly projectLinksMap: Record<string, string[]> = {};
+    private readonly projectLinksMap: Record<string, string[]> = {
+        catalog: ["/", "catalog", "categoryId"],
+        product: ["/", "catalog", "categoryId", "productId"],
+    };
 
-    public buildLink(key: string, id?: string): string {
-        let path = this.projectLinksMap[key].join("");
-
-        if (id) {
-            path += id;
+    public buildLink(key: string, ids: Record<string, string | number> = {}): string {
+        if (!key) {
+            return "";
         }
 
-        return path ? path : "";
+        if (!this.projectLinksMap[key]) {
+            return "";
+        }
+
+        const path = this.projectLinksMap[key].reduce((acc, item, index, array) => {
+            const isLastItem = index === array.length - 1;
+            const pathPart = ids[item] ? `${ids[item]}` : item;
+
+            return acc + pathPart + (!isLastItem && pathPart !== "/" ? "/" : "");
+        }, "");
+
+        return path;
     }
 }

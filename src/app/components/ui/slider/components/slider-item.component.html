@@ -1,0 +1,8 @@
+<ng-template
+    [ngTemplateOutlet]="itemTemplate ?? defaultTemplate"
+    [ngTemplateOutletContext]="{ item: item }"
+></ng-template>
+
+<ng-template #defaultTemplate let-item="item">
+    {{ item | json }}
+</ng-template>

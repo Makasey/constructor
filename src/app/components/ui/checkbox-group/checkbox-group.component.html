@@ -1,0 +1,11 @@
+<div class="checkbox-group">
+    <h3 class="checkbox-group-label"> {{ label }} </h3>
+    <div class="checkbox-group-controls" [ngClass]="{ column: columnDirection }">
+        <div *ngFor="let item of list; trackBy: checkChanges">
+            <label class="checkbox-group-control">
+                <input type="checkbox" [checked]="isSelected(item.value)" (change)="toggleValue(item.value)" />
+                {{ item.label }}
+            </label>
+        </div>
+    </div>
+</div>

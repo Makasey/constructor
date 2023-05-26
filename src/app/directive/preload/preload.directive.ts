@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Directive, Inject, Injector, Input, OnChanges, TemplateRef, Type, ViewContainerRef } from "@angular/core";
+
 import { PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_COMPONENTS_CONFIG, PreloadBackgroundComponentKey } from "./types";
 
 @Directive({
@@ -9,7 +10,7 @@ export class PreloadDirective implements OnChanges {
     public preloadBackgroundType: string;
 
     @Input("preloadBackgroundLoading")
-    public loading: boolean = true;
+    public loading = true;
 
     @Input("preloadBackgroundConfig")
     public preloadConfig: Record<string, unknown>;

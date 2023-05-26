@@ -1,0 +1,39 @@
+<header class="lz-calendar-header">
+    <button class="lz-calendar-control" (click)="onPreviousMonthClick()">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M22.5 25.5L17.5 20L22.5 14.5"
+                stroke="#7D818E"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </button>
+    <h2 class="lz-calendar-month">
+        {{ _month.toUserDateFormat() }}
+    </h2>
+    <button class="lz-calendar-control" (click)="onNextMonthClick()">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M17.5 25.5L22.5 20L17.5 14.5"
+                stroke="#7D818E"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg>
+    </button>
+</header>
+<div class="lz-calendar-wrapper">
+    <div class="lz-calendar-item _weekday" *ngFor="let weekday of weekdays">
+        {{ weekday }}
+    </div>
+    <ng-container *ngFor="let week of _month | lzMonthSheet : true">
+        <ng-container *ngFor="let day of week; trackBy: _trackByDay">
+            <button class="lz-calendar-item" [class.active]="day.daySame(_value)" (click)="pickDate(day)">
+                {{ day.day }}
+            </button>
+        </ng-container>
+    </ng-container>
+</div>

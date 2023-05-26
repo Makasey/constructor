@@ -1,8 +1,7 @@
 import { AbstractCatalogFiltersService } from "./catalog-filters.service";
-import { AbstractModuleComponent } from "../../../../../core/abstract/abstract.service";
+import { AbstractModuleComponent } from "@core/abstract/abstract.service";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { LZToastrItemType } from "../../../../../components/toastr/types";
-import { LZToastrService } from "../../../../../components/toastr/store/toastr.service";
+import { LZToastrItemType, LZToastrService } from "@components/ui";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { guid } from "@datorama/akita";
 

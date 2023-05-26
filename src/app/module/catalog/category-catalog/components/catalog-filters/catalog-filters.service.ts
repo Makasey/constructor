@@ -1,14 +1,14 @@
-import { APFormDefaultTemplateKeys, APFormModel } from "../../../../../components/form";
-import { AbstractDefaultModuleService, AbstractModuleService } from "../../../../../core/abstract/abstract.service";
-import { AbstractProductDataService } from "../../../../../core/data-service";
+import { APFormDefaultTemplateKeys, APFormModel } from "app/components";
+import { AbstractDefaultModuleService, AbstractModuleService } from "app/core/abstract/abstract.service";
+import { AbstractProductDataService } from "app/core/data-service";
 import { Injectable } from "@angular/core";
-import { LzQuery } from "../../../../../core/store/lz.query";
-import { LzService } from "../../../../../core/store/lz.service";
-import { LzStateKey } from "../../../../../core/store/lz.state";
+import { LzQuery } from "app/core/store/lz.query";
+import { LzService } from "app/core/store/lz.service";
+import { LzStateKey } from "app/core/store/lz.state";
 import { Observable, tap } from "rxjs";
 import { Router } from "@angular/router";
-import { UIDataState } from "../../../../../core/store/states/ui-states";
-import { selectRouterParameters } from "../../../../../utils";
+import { UIDataState } from "app/core/store/states/ui-states";
+import { selectRouterParameters } from "app/utils";
 
 @Injectable()
 export abstract class AbstractCatalogFiltersService extends AbstractModuleService {
@@ -140,7 +140,7 @@ export class DefaultCatalogFiltersService
     }
 
     public applyFilters(): void {
-        void this.router.navigate([], { queryParams: { priceFrom: "eq(120)", priceTo: 20 } });
+        void this.router.navigate([], { queryParams: { priceFrom: "eq(120)", priceTo: "eq(20)" } });
     }
 
     public selectFilters(): Observable<APFormModel> {
