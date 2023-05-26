@@ -1,5 +1,5 @@
 <ng-container *ngFor="let item of items; trackBy: _trackBy">
-    <ng-template [ngTemplateOutlet]="itemTemplatesMap[viewMode] || defaultTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
+    <ng-template [ngTemplateOutlet]="itemTemplate || defaultTemplate" [ngTemplateOutletContext]="{ $implicit: item }"></ng-template>
 </ng-container>
 
 <ng-template #defaultTemplate let-item>

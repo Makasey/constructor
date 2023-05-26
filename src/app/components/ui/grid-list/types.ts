@@ -1,11 +1,9 @@
-import { TemplateRef } from "@angular/core";
-
 export enum ViewModeTypes {
     CARD = "card",
     LIST = "list",
 }
 
-export const columnsCountValiableName = "--columns-count";
+export const columnsCountVariableName = "--columns-count";
 
 export type LZGridItem = Readonly<{
     id: number | string;
@@ -13,4 +11,4 @@ export type LZGridItem = Readonly<{
     [key: string]: unknown;
 }>;
 
-export type LZGridTemplatesMap = Readonly<Record<ViewModeTypes, TemplateRef<unknown>>>;
+export type LZGridTemplateData = Readonly<{ item: LZGridItem; }>;
