@@ -2,45 +2,33 @@
 <!-- <router-outlet></router-outlet> -->
 
 <div class="container">
-  <div class="nav-menu">
-    <span class="greeting">Здраствуйте, Алексей!</span>
-    <div class="discount-info">
-      <div class="discount-title">Ваша скидка <span>5%</span></div>
+    <div class="nav-menu">
+        <span class="greeting">Здраствуйте, Алексей!</span>
+        <div class="discount-info">
+            <div class="discount-title">Ваша скидка <span>5%</span></div>
 
-      <span class="discount-description">Цены на сайте отображаются с учётом вашей скидки</span>
+            <span class="discount-description">Цены на сайте отображаются с учётом вашей скидки</span>
+        </div>
+        <nav class="nav-items">
+            <a
+                class="nav-item"
+                *ngFor="let menuItem of accountMenuItems"
+                [routerLink]="menuItem.link | lzNavigationLink"
+                routerLinkActive="active"
+            >
+                <span class="logo">
+                    <img [src]="menuItem.icon" [alt]="menuItem.title" />
+                </span>
+                <span class="text">{{ menuItem.title }}</span>
+            </a>
+
+            <button class="nav-item">
+                <span class="logo"><img src="assets/exit.svg" alt="exit logo" /></span>
+                <span class="text">Выйти</span>
+            </button>
+        </nav>
     </div>
-    <div class="nav-items">
-      <a class="nav-item" routerLink="account" routerLinkActive="active">
-        <div class="logo"><img src="../../../assets/Group 153.svg" alt="logo"></div>
-        <div class="text">Личный кабинет</div>
-      </a>
-      <a class="nav-item" routerLink="addresses" routerLinkActive="active">
-        <div class="logo"><img src="../../../assets/Group 27.svg" alt="geo logo"></div>
-        <div class="text">Адресы</div>
-      </a>
-      <a class="nav-item" routerLink="orders" routerLinkActive="active">
-        <div class="logo"><img src="../../../assets/Group 251.svg" alt="orders logo"></div>
-        <div class="text">Заказы</div>
-      </a>
-      <a class="nav-item" routerLink="settings" routerLinkActive="active">
-        <div class="logo"><img src="../../../assets/Settings logo.svg" alt="settings logo"></div>
-        <div class="text">Настройки</div>
-      </a>
-      <a class="nav-item" routerLink="notifiations" routerLinkActive="active">
-        <div class="logo"><img src="../../../assets/Group 168.svg" alt="calendar"></div>
-        <div class="text">Напоминания</div>
-      </a>
-      <a class="nav-item" routerLink="sales" routerLinkActive="active">
-        <div class="logo"><img src="../../../assets/Group 250.svg" alt="sales logo"></div>
-        <div class="text">О скидках</div>
-      </a>
-      <a class="nav-item">
-        <div class="logo"><img src="../../../assets/Group 249.svg" alt="exit logo"></div>
-        <div class="text">Выйти</div>
-      </a>
+    <div class="account-content">
+        <router-outlet></router-outlet>
     </div>
-  </div>
-  <div class="content">
-    <router-outlet></router-outlet>
-  </div>
 </div>

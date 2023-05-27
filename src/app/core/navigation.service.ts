@@ -20,6 +20,12 @@ export class NavigationService extends AbstractNavigationService {
         [RouteKey.ORDER]: [RoutePaths.HOME, RoutePaths.ORDER],
         [RouteKey.PRODUCT]: [RoutePaths.HOME, RoutePaths.CATALOG, RouteParams.CATEGORY_ID, RouteParams.PRODUCT_ID],
         [RouteKey.TESTIMONIALS]: [RoutePaths.HOME, RoutePaths.TESTIMONIALS],
+        [RouteKey.PERSON]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.PERSON],
+        [RouteKey.ADDRESSES]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.ADDRESSES],
+        [RouteKey.SALES]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.SALES],
+        [RouteKey.SETTINGS]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.SETTINGS],
+        [RouteKey.NOTIFICATIONS]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.NOTIFICATIONS],
+        [RouteKey.ORDERS]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.ORDERS],
     };
 
     public buildLink(key: string, ids: SimpleMap<string | number> = {}): string {

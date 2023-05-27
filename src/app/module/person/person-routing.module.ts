@@ -1,15 +1,13 @@
-
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { AccountModule } from "./module/account/account.module";
 import { AddressesModule } from "./module/addresses/addresses.module";
-import { NotifiationsModule } from "./module/notifiations/notifiations.module";
+import { NotificationsModule } from "@modules/person/module/notifications/notifications.module";
 import { OrdersModule } from "./module/orders/orders.module";
 import { PersonComponent } from "./person.component";
 import { SalesModule } from "./module/sales/sales.module";
 import { SettingsModule } from "./module/settings/settings.module";
-
 
 const routes: Routes = [
     {
@@ -19,15 +17,16 @@ const routes: Routes = [
             {
                 path: "",
                 pathMatch: "full",
-                redirectTo: "account",
+                redirectTo: "person",
             },
             {
-                path: "account",
+                path: "person",
                 loadChildren: (): Promise<typeof AccountModule> => import("./module/account/account.module").then(module => module.AccountModule),
             },
             {
                 path: "addresses",
-                loadChildren: (): Promise<typeof AddressesModule> => import("./module/addresses/addresses.module").then(module => module.AddressesModule),
+                loadChildren: (): Promise<typeof AddressesModule> =>
+                    import("./module/addresses/addresses.module").then(module => module.AddressesModule),
             },
             {
                 path: "orders",
@@ -38,8 +37,9 @@ const routes: Routes = [
                 loadChildren: (): Promise<typeof SettingsModule> => import("./module/settings/settings.module").then(module => module.SettingsModule),
             },
             {
-                path: "notifiations",
-                loadChildren: (): Promise<typeof NotifiationsModule> => import("./module/notifiations/notifiations.module").then(module => module.NotifiationsModule),
+                path: "notifications",
+                loadChildren: (): Promise<typeof NotificationsModule> =>
+                    import("@modules/person/module/notifications/notifications.module").then(module => module.NotificationsModule),
             },
             {
                 path: "sales",

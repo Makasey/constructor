@@ -1,12 +1,18 @@
 .container {
     display: flex;
     justify-content: space-between;
+    align-items: unset;
     width: 100%;
+    padding: 20px 0;
 }
 
 .nav-menu {
     display: flex;
-    flex: 0 0 310px;
+    max-width: 310px;
+    width: 100%;
+    height: fit-content;
+    position: sticky;
+    top: 16px;
     flex-direction: column;
 }
 
@@ -60,7 +66,6 @@
     width: 20px;
 }
 
-.content {
-  flex: 1 1 auto;
+.account-content {
+    flex: 1 1 auto;
 }
-
