@@ -1,0 +1,133 @@
+.main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .main-content_unit {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+        display: none;
+        max-width: 870px;
+        margin: 0 auto;
+
+        &.active {
+            display: flex;
+        }
+
+        .orders-table {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            border: 1px solid #f2f3f5;
+            box-shadow: 0 4px 15px rgba(34, 42, 70, 0.08);
+            border-radius: 10px;
+            font-family: "TT Norms Regular", sans-serif;
+
+            .lz-table-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px;
+                gap: 5px;
+                border-top: 1px solid #d0d2d7;
+
+                &.head {
+                    background-color: #f4f5f7;
+                    border-radius: 10px 10px 0 0;
+                    border-top: none;
+
+                    .purchase_id {
+                        font-weight: 400;
+                        font-size: 14px;
+                        color: black;
+                    }
+
+                    .purchase_status {
+                        font-weight: 400;
+                    }
+
+                    .purchase_amount {
+                        font-weight: 400;
+                        font-size: 14px;
+                    }
+
+                    .purchase_recipient {
+                        font-weight: 400;
+                    }
+                }
+
+                .purchase_id {
+                    max-width: 90px;
+                    width: 100%;
+                    font-weight: 400;
+                    font-size: 16px;
+                    text-decoration: none;
+                    color: #0093a2;
+                }
+
+                .purchase_name,
+                .purchase_delivery_date,
+                .purchase_recipient,
+                .purchase_review {
+                    width: 100%;
+                    font-weight: 400;
+                    font-size: 14px;
+                }
+
+                .purchase_name {
+                    max-width: 140px;
+                }
+
+                .purchase_delivery_date {
+                    max-width: 95px;
+                }
+
+                .purchase_recipient {
+                    max-width: 115px;
+                }
+
+                .purchase_status {
+                    width: 100%;
+                    font-weight: 700;
+                    font-size: 14px;
+                    max-width: 80px;
+                }
+
+                .purchase_amount {
+                    width: 100%;
+                    max-width: 60px;
+                    font-weight: 700;
+                    font-size: 16px;
+                }
+
+                .purchase_review {
+                    max-width: 75px;
+                    text-decoration: none;
+                    color: #0093a2;
+                    background-color: transparent;
+                    border: none;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    transition-duration: 0.4s;
+                }
+
+                .purchase_review:hover {
+                    background-color: #0093a2;
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .none_purchase_item {
+        padding: 15px 20px;
+    }
+
+    .title {
+        font-weight: 700;
+        font-size: 30px;
+        color: #222a46;
+    }
+}

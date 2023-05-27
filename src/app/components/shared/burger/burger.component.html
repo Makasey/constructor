@@ -1,0 +1,44 @@
+<div class="organization_burger_menu">
+    <div class="time_and_cancel">
+        <div class="timetable">
+            <img src="assets/clock-loading.svg" alt="clock-loading" />
+            <h4>Пн-Сб: 8:00–20:00 Вс: 9:00–20:00</h4>
+        </div>
+        <button class="cancel_btn" id="burger_menu_cancel_btn" (click)="closeModal()">
+            <img src="assets/Cross.svg" alt="Cross" />
+        </button>
+    </div>
+    <nav class="organization_info">
+        <a href="#" class="organization_info_link">Доставка</a>
+        <a href="#" class="organization_info_link">Оплата</a>
+        <a href="#" class="organization_info_link">Отзывы</a>
+        <a href="#" class="organization_info_link">Блог</a>
+        <a href="#" class="organization_info_link">Гарантии</a>
+        <a href="#" class="organization_info_link">Вопрос и ответ</a>
+        <a href="#" class="organization_info_link">Корпоративным клиентам</a>
+        <a href="#" class="organization_info_link">О компании</a>
+        <a href="#" class="organization_info_link">Контакты</a>
+    </nav>
+    <div class="contact_drop_list">
+        <ul class="drop_list_contacts">
+            <li class="drop_list_contact" *ngFor="let contactLink of contactLinks">
+                <img [src]="contactLink.icon" [alt]="contactLink.alt" />
+                <a [href]="contactLink.link">{{ contactLink.label }}</a>
+            </li>
+        </ul>
+        <div class="drop_list_socials">
+            <h3 class="socials_title">Напишите нам:</h3>
+            <nav class="socials_links">
+                <a
+                    *ngFor="let social of socialLinks"
+                    class="social_link"
+                    target="_blank"
+                    [ngClass]="social.iconClass"
+                    [href]="social.link"
+                >
+                    <img [width]="16" [height]="16" [ngSrc]="social.icon" [alt]="social.alt" />
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>

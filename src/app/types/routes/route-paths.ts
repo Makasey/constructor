@@ -8,6 +8,12 @@ export enum RouteKey {
     INFO = "info",
     ORDER = "order",
     TESTIMONIALS = "testimonials",
+    PERSON = "person",
+    NOTIFICATIONS = "notifications",
+    ADDRESSES = "addresses",
+    ORDERS = "orders",
+    SETTINGS = "settings",
+    SALES = "sales",
 }
 
 export enum RoutePaths {
@@ -19,6 +25,12 @@ export enum RoutePaths {
     INFO = "info",
     ORDER = "order",
     TESTIMONIALS = "testimonials",
+    PERSON = "person",
+    NOTIFICATIONS = "notifications",
+    ADDRESSES = "addresses",
+    ORDERS = "orders",
+    SETTINGS = "settings",
+    SALES = "sales",
 }
 
 export enum RouteParams {

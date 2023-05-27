@@ -10,8 +10,8 @@ import { AddressesRoutingModule } from "./addresses-routing.module";
         AddressesComponent,
     ],
     imports: [
-        CommonModule,
         AddressesRoutingModule,
+        CommonModule,
     ],
 })
 export class AddressesModule { }

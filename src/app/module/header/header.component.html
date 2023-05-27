@@ -2,69 +2,10 @@
     <div class="organization">
         <div class="container">
             <div class="organization_burger">
-                <button class="organization_burger_btn">
+                <button class="organization_burger_btn" (click)="openModal()">
                     <img src="assets/bars.svg" alt="bars" />
                 </button>
                 <h4 class="delivery_burger">Доставка цветов в Воронеже</h4>
-                <div class="organization_burger_menu hidden">
-                    <div class="time_and_cancel">
-                        <div class="timetable">
-                            <img src="assets/clock-loading.svg" alt="clock-loading" />
-                            <h4>Пн-Сб: 8:00–20:00 Вс: 9:00–20:00</h4>
-                        </div>
-                        <button class="cancel_btn" id="burger_menu_cancel_btn">
-                            <img src="assets/Cross.svg" alt="Cross" />
-                        </button>
-                    </div>
-                    <div class="organization_info">
-                        <a href="#" class="organization_info_link">Доставка</a>
-                        <a href="#" class="organization_info_link">Оплата</a>
-                        <a href="#" class="organization_info_link">Отзывы</a>
-                        <a href="#" class="organization_info_link">Блог</a>
-                        <a href="#" class="organization_info_link">Гарантии</a>
-                        <a href="#" class="organization_info_link">Вопрос и ответ</a>
-                        <a href="#" class="organization_info_link">Корпоративным клиентам</a>
-                        <a href="#" class="organization_info_link">О компании</a>
-                        <a href="#" class="organization_info_link">Контакты</a>
-                    </div>
-                    <div class="contact_drop_list">
-                        <div class="drop_list_contacts">
-                            <div class="drop_list_contact">
-                                <img src="assets/Call.svg" alt="Call" />
-                                <a href="#"> +7 (920) 211-49-03</a>
-                            </div>
-                            <div class="drop_list_contact">
-                                <img src="assets/marker.svg" alt="marker" />
-                                <a href="#"> ул. Революции 1905 года 80</a>
-                            </div>
-                            <div class="drop_list_contact">
-                                <img src="assets/marker.svg" alt="marker" />
-                                <a href=""> ул. Вл. Невского 17</a>
-                            </div>
-                            <div class="drop_list_contact">
-                                <img src="assets/envelope.svg" alt="envelope" />
-                                <a href="#">info@lavkaroz.ru</a>
-                            </div>
-                        </div>
-                        <div class="drop_list_socials">
-                            <h3 class="socials_title">Напишите нам:</h3>
-                            <div class="socials_links">
-                                <a href="#" class="social_link">
-                                    <img src="assets/WhatsApp.svg" alt="WhatsApp" />
-                                </a>
-                                <a href="#" class="social_link">
-                                    <img src="assets/telegram.svg" alt="telegram" />
-                                </a>
-                                <a href="#" class="social_link">
-                                    <img src="assets/vk.svg" alt="vk" />
-                                </a>
-                                <a href="#" class="social_link">
-                                    <img src="assets/instagram.svg" alt="instagram" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="timetable">
                 <img src="assets/clock-loading.svg" alt="clock-loading" />
@@ -91,16 +32,24 @@
             </div>
             <div class="organization_socials">
                 <a href="#" class="organization_socials_link">
-                  <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6329 0.681989C15.7442 0.291725 15.6329 0.00488281 15.1035 0.00488281H13.3531C12.908 0.00488281 12.703 0.252646 12.5917 0.525935C12.5917 0.525935 11.7015 2.80922 10.4404 4.29238C10.0325 4.72172 9.84705 4.85817 9.6245 4.85817C9.51322 4.85817 9.35218 4.72173 9.35218 4.33146V0.681989C9.35218 0.213568 9.22303 0.00488281 8.85207 0.00488281H6.10142C5.82336 0.00488281 5.65607 0.222252 5.65607 0.428304C5.65607 0.872383 6.28647 0.974751 6.35148 2.2237V4.93646C6.35148 5.5312 6.24946 5.63909 6.02691 5.63909C5.43352 5.63909 3.99018 3.34541 3.13398 0.721067C2.96619 0.210936 2.7979 0.00488281 2.35055 0.00488281H0.60014C0.100023 0.00488281 0 0.252646 0 0.525935C0 1.01383 0.593513 3.43383 2.76314 6.63436C4.20973 8.81988 6.24746 10.0049 8.10189 10.0049C9.21465 10.0049 9.35218 9.74172 9.35218 9.28843V7.63646C9.35218 7.11015 9.45758 7.00515 9.80979 7.00515C10.0696 7.00515 10.5146 7.14173 11.5532 8.19554C12.74 9.44436 12.9355 10.0049 13.6032 10.0049H15.3536C15.8537 10.0049 16.1038 9.74172 15.9595 9.22238C15.8017 8.70475 15.2351 7.95396 14.4831 7.0637C14.0752 6.5562 13.4631 6.00975 13.2779 5.73659C13.0182 5.38528 13.0923 5.22923 13.2779 4.91712C13.2779 4.91712 15.4103 1.75554 15.6329 0.68212V0.681989Z" fill="#505567"/>
-                  </svg>
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M15.6329 0.681989C15.7442 0.291725 15.6329 0.00488281 15.1035 0.00488281H13.3531C12.908 0.00488281 12.703 0.252646 12.5917 0.525935C12.5917 0.525935 11.7015 2.80922 10.4404 4.29238C10.0325 4.72172 9.84705 4.85817 9.6245 4.85817C9.51322 4.85817 9.35218 4.72173 9.35218 4.33146V0.681989C9.35218 0.213568 9.22303 0.00488281 8.85207 0.00488281H6.10142C5.82336 0.00488281 5.65607 0.222252 5.65607 0.428304C5.65607 0.872383 6.28647 0.974751 6.35148 2.2237V4.93646C6.35148 5.5312 6.24946 5.63909 6.02691 5.63909C5.43352 5.63909 3.99018 3.34541 3.13398 0.721067C2.96619 0.210936 2.7979 0.00488281 2.35055 0.00488281H0.60014C0.100023 0.00488281 0 0.252646 0 0.525935C0 1.01383 0.593513 3.43383 2.76314 6.63436C4.20973 8.81988 6.24746 10.0049 8.10189 10.0049C9.21465 10.0049 9.35218 9.74172 9.35218 9.28843V7.63646C9.35218 7.11015 9.45758 7.00515 9.80979 7.00515C10.0696 7.00515 10.5146 7.14173 11.5532 8.19554C12.74 9.44436 12.9355 10.0049 13.6032 10.0049H15.3536C15.8537 10.0049 16.1038 9.74172 15.9595 9.22238C15.8017 8.70475 15.2351 7.95396 14.4831 7.0637C14.0752 6.5562 13.4631 6.00975 13.2779 5.73659C13.0182 5.38528 13.0923 5.22923 13.2779 4.91712C13.2779 4.91712 15.4103 1.75554 15.6329 0.68212V0.681989Z"
+                            fill="#505567"
+                        />
+                    </svg>
                 </a>
                 <a href="#" class="organization_socials_link">
-                  <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.33397 8.00488C5.33397 6.53218 6.52756 5.338 8.00032 5.338C9.47308 5.338 10.6673 6.53218 10.6673 8.00488C10.6673 9.47759 9.47308 10.6718 8.00032 10.6718C6.52756 10.6718 5.33397 9.47759 5.33397 8.00488ZM3.89225 8.00488C3.89225 10.2737 5.73143 12.1128 8.00032 12.1128C10.2692 12.1128 12.1084 10.2737 12.1084 8.00488C12.1084 5.73608 10.2692 3.89698 8.00032 3.89698C5.73143 3.89698 3.89225 5.73608 3.89225 8.00488ZM11.311 3.7341C11.3109 3.92397 11.3671 4.1096 11.4726 4.26751C11.578 4.42542 11.7279 4.54853 11.9033 4.62126C12.0787 4.69399 12.2717 4.71308 12.4579 4.67611C12.6442 4.63914 12.8153 4.54778 12.9496 4.41358C13.0839 4.27937 13.1754 4.10835 13.2125 3.92215C13.2497 3.73594 13.2307 3.54291 13.1581 3.36746C13.0855 3.19202 12.9625 3.04203 12.8047 2.93649C12.6469 2.83094 12.4613 2.77456 12.2714 2.77448H12.271C12.0165 2.7746 11.7724 2.87573 11.5924 3.05566C11.4124 3.23558 11.3112 3.47959 11.311 3.7341ZM4.76819 14.5167C3.98819 14.4812 3.56424 14.3513 3.2825 14.2415C2.90898 14.0961 2.64247 13.9229 2.36227 13.6431C2.08207 13.3633 1.90862 13.097 1.76385 12.7235C1.65402 12.4419 1.52409 12.0179 1.48864 11.2379C1.44985 10.3946 1.44211 10.1413 1.44211 8.00495C1.44211 5.86856 1.45049 5.61595 1.48864 4.77199C1.52416 3.99202 1.65504 3.56879 1.76385 3.28635C1.90926 2.91285 2.08245 2.64635 2.36227 2.36616C2.64209 2.08597 2.90834 1.91253 3.2825 1.76776C3.56411 1.65794 3.98819 1.52802 4.76819 1.49256C5.61149 1.45378 5.86481 1.44603 8.00032 1.44603C10.1358 1.44603 10.3894 1.45442 11.2334 1.49256C12.0134 1.52808 12.4367 1.65896 12.7191 1.76776C13.0926 1.91253 13.3591 2.08635 13.6393 2.36616C13.9195 2.64597 14.0923 2.91285 14.2378 3.28635C14.3476 3.56795 14.4775 3.99202 14.513 4.77199C14.5518 5.61595 14.5595 5.86856 14.5595 8.00495C14.5595 10.1413 14.5518 10.3939 14.513 11.2379C14.4774 12.0179 14.3469 12.4418 14.2378 12.7235C14.0923 13.097 13.9192 13.3635 13.6393 13.6431C13.3595 13.9226 13.0926 14.0961 12.7191 14.2415C12.4375 14.3513 12.0134 14.4812 11.2334 14.5167C10.3901 14.5555 10.1368 14.5632 8.00032 14.5632C5.86385 14.5632 5.61123 14.5555 4.76819 14.5167ZM4.70195 0.0533308C3.85027 0.0921148 3.26829 0.227155 2.76005 0.424915C2.23369 0.629139 1.7881 0.903123 1.34284 1.34767C0.897572 1.79221 0.624281 2.23848 0.420049 2.76482C0.222281 3.27336 0.0872355 3.85499 0.0484499 4.70664C0.00902436 5.55963 0 5.83234 0 8.00488C0 10.1774 0.00902436 10.4501 0.0484499 11.3031C0.0872355 12.1548 0.222281 12.7364 0.420049 13.2449C0.624281 13.771 0.897636 14.2177 1.34284 14.6621C1.78804 15.1065 2.23369 15.3801 2.76005 15.5849C3.26925 15.7826 3.85027 15.9177 4.70195 15.9564C5.55542 15.9952 5.82769 16.0049 8.00032 16.0049C10.173 16.0049 10.4457 15.9959 11.2987 15.9564C12.1504 15.9177 12.732 15.7826 13.2406 15.5849C13.7666 15.3801 14.2125 15.1066 14.6578 14.6621C15.1031 14.2176 15.3758 13.771 15.5806 13.2449C15.7784 12.7364 15.914 12.1548 15.9522 11.3031C15.991 10.4495 16 10.1774 16 8.00488C16 5.83234 15.991 5.55963 15.9522 4.70664C15.9134 3.85493 15.7784 3.27304 15.5806 2.76482C15.3758 2.2388 15.1024 1.79291 14.6578 1.34767C14.2132 0.902419 13.7666 0.629139 13.2412 0.424915C12.732 0.227155 12.1504 0.0914748 11.2993 0.0533308C10.4463 0.0145468 10.1736 0.00488281 8.00096 0.00488281C5.82833 0.00488281 5.55542 0.0139068 4.70195 0.0533308Z" fill="#505567"/>
-                  </svg>
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M5.33397 8.00488C5.33397 6.53218 6.52756 5.338 8.00032 5.338C9.47308 5.338 10.6673 6.53218 10.6673 8.00488C10.6673 9.47759 9.47308 10.6718 8.00032 10.6718C6.52756 10.6718 5.33397 9.47759 5.33397 8.00488ZM3.89225 8.00488C3.89225 10.2737 5.73143 12.1128 8.00032 12.1128C10.2692 12.1128 12.1084 10.2737 12.1084 8.00488C12.1084 5.73608 10.2692 3.89698 8.00032 3.89698C5.73143 3.89698 3.89225 5.73608 3.89225 8.00488ZM11.311 3.7341C11.3109 3.92397 11.3671 4.1096 11.4726 4.26751C11.578 4.42542 11.7279 4.54853 11.9033 4.62126C12.0787 4.69399 12.2717 4.71308 12.4579 4.67611C12.6442 4.63914 12.8153 4.54778 12.9496 4.41358C13.0839 4.27937 13.1754 4.10835 13.2125 3.92215C13.2497 3.73594 13.2307 3.54291 13.1581 3.36746C13.0855 3.19202 12.9625 3.04203 12.8047 2.93649C12.6469 2.83094 12.4613 2.77456 12.2714 2.77448H12.271C12.0165 2.7746 11.7724 2.87573 11.5924 3.05566C11.4124 3.23558 11.3112 3.47959 11.311 3.7341ZM4.76819 14.5167C3.98819 14.4812 3.56424 14.3513 3.2825 14.2415C2.90898 14.0961 2.64247 13.9229 2.36227 13.6431C2.08207 13.3633 1.90862 13.097 1.76385 12.7235C1.65402 12.4419 1.52409 12.0179 1.48864 11.2379C1.44985 10.3946 1.44211 10.1413 1.44211 8.00495C1.44211 5.86856 1.45049 5.61595 1.48864 4.77199C1.52416 3.99202 1.65504 3.56879 1.76385 3.28635C1.90926 2.91285 2.08245 2.64635 2.36227 2.36616C2.64209 2.08597 2.90834 1.91253 3.2825 1.76776C3.56411 1.65794 3.98819 1.52802 4.76819 1.49256C5.61149 1.45378 5.86481 1.44603 8.00032 1.44603C10.1358 1.44603 10.3894 1.45442 11.2334 1.49256C12.0134 1.52808 12.4367 1.65896 12.7191 1.76776C13.0926 1.91253 13.3591 2.08635 13.6393 2.36616C13.9195 2.64597 14.0923 2.91285 14.2378 3.28635C14.3476 3.56795 14.4775 3.99202 14.513 4.77199C14.5518 5.61595 14.5595 5.86856 14.5595 8.00495C14.5595 10.1413 14.5518 10.3939 14.513 11.2379C14.4774 12.0179 14.3469 12.4418 14.2378 12.7235C14.0923 13.097 13.9192 13.3635 13.6393 13.6431C13.3595 13.9226 13.0926 14.0961 12.7191 14.2415C12.4375 14.3513 12.0134 14.4812 11.2334 14.5167C10.3901 14.5555 10.1368 14.5632 8.00032 14.5632C5.86385 14.5632 5.61123 14.5555 4.76819 14.5167ZM4.70195 0.0533308C3.85027 0.0921148 3.26829 0.227155 2.76005 0.424915C2.23369 0.629139 1.7881 0.903123 1.34284 1.34767C0.897572 1.79221 0.624281 2.23848 0.420049 2.76482C0.222281 3.27336 0.0872355 3.85499 0.0484499 4.70664C0.00902436 5.55963 0 5.83234 0 8.00488C0 10.1774 0.00902436 10.4501 0.0484499 11.3031C0.0872355 12.1548 0.222281 12.7364 0.420049 13.2449C0.624281 13.771 0.897636 14.2177 1.34284 14.6621C1.78804 15.1065 2.23369 15.3801 2.76005 15.5849C3.26925 15.7826 3.85027 15.9177 4.70195 15.9564C5.55542 15.9952 5.82769 16.0049 8.00032 16.0049C10.173 16.0049 10.4457 15.9959 11.2987 15.9564C12.1504 15.9177 12.732 15.7826 13.2406 15.5849C13.7666 15.3801 14.2125 15.1066 14.6578 14.6621C15.1031 14.2176 15.3758 13.771 15.5806 13.2449C15.7784 12.7364 15.914 12.1548 15.9522 11.3031C15.991 10.4495 16 10.1774 16 8.00488C16 5.83234 15.991 5.55963 15.9522 4.70664C15.9134 3.85493 15.7784 3.27304 15.5806 2.76482C15.3758 2.2388 15.1024 1.79291 14.6578 1.34767C14.2132 0.902419 13.7666 0.629139 13.2412 0.424915C12.732 0.227155 12.1504 0.0914748 11.2993 0.0533308C10.4463 0.0145468 10.1736 0.00488281 8.00096 0.00488281C5.82833 0.00488281 5.55542 0.0139068 4.70195 0.0533308Z"
+                            fill="#505567"
+                        />
+                    </svg>
                 </a>
-                <a href="#" class="organization_socials_link person_orders">
+                <a [routerLink]="accountLink | lzNavigationLink" class="organization_socials_link person_orders">
                     <img src="assets/person.svg" alt="person" />
                     Мои заказы
                 </a>
@@ -248,13 +197,13 @@
     <nav>
         <div class="container">
             <a href="#" class="sales">
-                <img src="assets/percent.svg" alt="percent">
+                <img src="assets/percent.svg" alt="percent" />
                 АКЦИИ
             </a>
             <div class="navigation_points">
                 <button class="navigation_point" id="navigation_point_1">
                     Цветы поштучно
-                    <img src="assets/Path.svg" alt="Path">
+                    <img src="assets/Path.svg" alt="Path" />
                     <div class="drop_list hidden" id="navigation_list_1">
                         <a href="#" class="drop_list_link">Голландские розы</a>
                         <a href="#" class="drop_list_link">Местная роза</a>
@@ -265,7 +214,7 @@
                 </button>
                 <button class="navigation_point" id="navigation_point_2">
                     Розы
-                  <img src="assets/Path.svg" alt="Path">
+                    <img src="assets/Path.svg" alt="Path" />
                     <div class="drop_list hidden" id="navigation_list_2">
                         <a href="#" class="drop_list_link">Голландские розы</a>
                         <a href="#" class="drop_list_link">Местная роза</a>
@@ -276,7 +225,7 @@
                 </button>
                 <button class="navigation_point" id="navigation_point_3">
                     Букеты
-                  <img src="assets/Path.svg" alt="Path">
+                    <img src="assets/Path.svg" alt="Path" />
                     <div class="drop_list hidden" id="navigation_list_3">
                         <a href="#" class="drop_list_link">Голландские розы</a>
                         <a href="#" class="drop_list_link">Местная роза</a>
@@ -287,7 +236,7 @@
                 </button>
                 <button class="navigation_point" id="navigation_point_4">
                     Композиции
-                  <img src="assets/Path.svg" alt="Path">
+                    <img src="assets/Path.svg" alt="Path" />
                     <div class="drop_list hidden" id="navigation_list_4">
                         <a href="#" class="drop_list_link">Голландские розы</a>
                         <a href="#" class="drop_list_link">Местная роза</a>
@@ -298,7 +247,7 @@
                 </button>
                 <button class="navigation_point" id="navigation_point_5">
                     Подарки
-                  <img src="assets/Path.svg" alt="Path">
+                    <img src="assets/Path.svg" alt="Path" />
                     <div class="drop_list hidden" id="navigation_list_5">
                         <a href="#" class="drop_list_link">Голландские розы</a>
                         <a href="#" class="drop_list_link">Местная роза</a>
@@ -309,7 +258,7 @@
                 </button>
                 <button class="navigation_point" id="navigation_point_6">
                     Шары
-                  <img src="assets/Path.svg" alt="Path">
+                    <img src="assets/Path.svg" alt="Path" />
                     <div class="drop_list hidden" id="navigation_list_6">
                         <a href="#" class="drop_list_link">Голландские розы</a>
                         <a href="#" class="drop_list_link">Местная роза</a>
@@ -328,26 +277,26 @@
                 <div class="delivery_and_cancel">
                     <h4 class="delivery"> Доставка цветов в Воронеже </h4>
                     <button class="cancel_btn" id="navigation_adaptive_menu_cancel_btn">
-                        <img src="assets/Cross.svg" alt="Cross">
+                        <img src="assets/Cross.svg" alt="Cross" />
                     </button>
                 </div>
                 <form class="search_form">
                     <input type="text" placeholder="Поиск по сайту" />
                     <button>
-                        <img src="assets/search.svg" alt="search">
+                        <img src="assets/search.svg" alt="search" />
                     </button>
                 </form>
                 <h3 class="menu_title">Каталог товаров</h3>
                 <a href="#" class="sales">
-                    <img src="assets/percent.svg" alt="percent">
+                    <img src="assets/percent.svg" alt="percent" />
                     АКЦИИ
                 </a>
                 <div class="navigation_points">
                     <div class="navigation_point" id="navigation_adaptive_menu_point_1">
                         <button class="navigation_point_title">
-                          <img src="assets/chevron_left.svg" alt="chevron_left">
+                            <img src="assets/chevron_left.svg" alt="chevron_left" />
                             Цветы поштучно
-                            <img src="assets/chevron_right.svg" alt="chevron_right">
+                            <img src="assets/chevron_right.svg" alt="chevron_right" />
                         </button>
                         <div class="navigation_point_list hidden" id="navigation_adaptive_menu_list_1">
                             <a href="#" class="drop_list_link">Голландские розы</a>
@@ -359,9 +308,9 @@
                     </div>
                     <div class="navigation_point" id="navigation_adaptive_menu_point_2">
                         <button class="navigation_point_title">
-                          <img src="assets/chevron_left.svg" alt="chevron_left">
+                            <img src="assets/chevron_left.svg" alt="chevron_left" />
                             Розы
-                          <img src="assets/chevron_right.svg" alt="chevron_right">
+                            <img src="assets/chevron_right.svg" alt="chevron_right" />
                         </button>
                         <div class="navigation_point_list hidden" id="navigation_adaptive_menu_list_2">
                             <a href="#" class="drop_list_link">Голландские розы</a>
@@ -373,9 +322,9 @@
                     </div>
                     <div class="navigation_point" id="navigation_adaptive_menu_point_3">
                         <button class="navigation_point_title">
-                          <img src="assets/chevron_left.svg" alt="chevron_left">
+                            <img src="assets/chevron_left.svg" alt="chevron_left" />
                             Букеты
-                          <img src="assets/chevron_right.svg" alt="chevron_right">
+                            <img src="assets/chevron_right.svg" alt="chevron_right" />
                         </button>
                         <div class="navigation_point_list hidden" id="navigation_adaptive_menu_list_3">
                             <a href="#" class="drop_list_link">Голландские розы</a>
@@ -387,9 +336,9 @@
                     </div>
                     <div class="navigation_point" id="navigation_adaptive_menu_point_4">
                         <button class="navigation_point_title">
-                          <img src="assets/chevron_left.svg" alt="chevron_left">
+                            <img src="assets/chevron_left.svg" alt="chevron_left" />
                             Композиции
-                          <img src="assets/chevron_right.svg" alt="chevron_right">
+                            <img src="assets/chevron_right.svg" alt="chevron_right" />
                         </button>
                         <div class="navigation_point_list hidden" id="navigation_adaptive_menu_list_4">
                             <a href="#" class="drop_list_link">Голландские розы</a>
@@ -401,9 +350,9 @@
                     </div>
                     <div class="navigation_point" id="navigation_adaptive_menu_point_5">
                         <button class="navigation_point_title">
-                          <img src="assets/chevron_left.svg" alt="chevron_left">
+                            <img src="assets/chevron_left.svg" alt="chevron_left" />
                             Подарки
-                          <img src="assets/chevron_right.svg" alt="chevron_right">
+                            <img src="assets/chevron_right.svg" alt="chevron_right" />
                         </button>
                         <div class="navigation_point_list hidden" id="navigation_adaptive_menu_list_5">
                             <a href="#" class="drop_list_link">Голландские розы</a>
@@ -415,9 +364,9 @@
                     </div>
                     <div class="navigation_point" id="navigation_adaptive_menu_point_6">
                         <button class="navigation_point_title">
-                          <img src="assets/chevron_left.svg" alt="chevron_left">
+                            <img src="assets/chevron_left.svg" alt="chevron_left" />
                             Шары
-                          <img src="assets/chevron_right.svg" alt="chevron_right">
+                            <img src="assets/chevron_right.svg" alt="chevron_right" />
                         </button>
                         <div class="navigation_point_list hidden" id="navigation_adaptive_menu_list_6">
                             <a href="#" class="drop_list_link">Голландские розы</a>

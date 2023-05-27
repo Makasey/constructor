@@ -129,25 +129,39 @@ a {
     min-height: 1px;
 }
 
-body {
+body,
+app-root {
     height: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh + 450px);
 }
-button{
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: transparent;
+
+app-root {
+    display: flex;
+    flex-direction: column;
 }
-.container{
-  max-width: 1170px;
-  width: 100%;
-  display: flex;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'TT Norms', sans-serif;
-  font-size: 14px;
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+.container {
+    max-width: 1170px;
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "TT Norms", sans-serif;
+    font-size: 14px;
 }
 
 .html-no-scroll {
@@ -224,5 +238,17 @@ button{
 
             padding: 13px 10px;
         }
+    }
+}
+
+.lz-burger-modal {
+    .modal-overlay {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .modal-content {
+        max-width: 320px;
+        min-height: 100vh;
     }
 }

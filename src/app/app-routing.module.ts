@@ -42,7 +42,7 @@ const routes: Routes = [
         loadChildren: (): Promise<typeof InfoModule> => import("@modules/info/info.module").then(module => module.InfoModule),
     },
     {
-        path: "person",
+        path: "account",
         loadChildren: (): Promise<typeof PersonModule> => import("@modules/person/person.module").then(module => module.PersonModule),
     },
     {

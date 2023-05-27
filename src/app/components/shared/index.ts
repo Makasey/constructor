@@ -1,6 +1,3 @@
-// Orders Component
-export * from "./orders";
-
 // Login Component
 export * from "./login";
 
