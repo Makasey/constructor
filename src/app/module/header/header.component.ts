@@ -12,7 +12,11 @@ type ModalData = ModalWithData<{ id: string; }>;
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-    public accountLink = RouteKey.ACCOUNT;
+    public readonly accountLink = RouteKey.ACCOUNT;
+
+    public readonly homeLink = RouteKey.HOME;
+
+    public readonly catalogLink = RouteKey.CATALOG;
 
     public modalId: string | null = null;
 
@@ -37,15 +41,5 @@ export class HeaderComponent {
                 id: this.modalId,
             },
         });
-    }
-
-    public closeModal(): void {
-        if (!this.modalId) {
-            return;
-        }
-
-        this.modalService.closeModal(this.modalId);
-
-        this.modalId = null;
     }
 }
