@@ -41,5 +41,26 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    margin-bottom: 20px;
 }
 
+.btn-load {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #0093a2;
+    font-family: "TT Norms Medium", sans-serif;
+    border: 1px solid #0093a2;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.lz-grid {
+    gap: 30px;
+    margin-bottom: 30px;
+}

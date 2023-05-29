@@ -5,6 +5,7 @@ import { LzQuery } from "@core/store/lz.query";
 import { LzService } from "@core/store/lz.service";
 import { LzStateKey } from "@core/store/lz.state";
 import { Observable, tap } from "rxjs";
+import { PaginationListItems } from "@shared-types/response/response-view.type";
 import { Product } from "@shared-types/product/product";
 import { UIDataState } from "@core/store/states/ui-states";
 
@@ -22,15 +23,14 @@ export class DefaultProductService
         super(LzStateKey.ROOT_STATE, query, service);
     }
 
-    public asyncInit(options?: { productId: number; }): Observable<unknown> {
-        console.log("TRIGGERED");
-        return this.productDataService.getProducts().pipe(
-            tap(products => {
+    public asyncInit(options?: { productId: number; }): Observable<PaginationListItems<Product>> {
+        return this.productDataService.getProducts({}).pipe(
+            tap(({ items, count }) => {
                 this.updateState(state => {
                     return {
                         ...state,
                         dataState: UIDataState.LOADED,
-                        products: products,
+                        products: items,
                     };
                 });
             }),
