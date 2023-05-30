@@ -16,6 +16,20 @@
                 <a href="#" class="organization_info_link">Оплата</a>
                 <a href="#" class="organization_info_link">Отзывы</a>
                 <a href="#" class="organization_info_link">Блог</a>
+
+                <lz-menu-group
+                    [itemTemplate]="itemTemplate"
+                    triggerLabel="Информация"
+                    [items]="[
+                        { link: '/', label: 'Гарантии' },
+                        { link: '/', label: 'Вопрос и ответ' },
+                        { link: '/', label: 'Корпоративным клиентам' },
+                        { link: '/', label: 'О компании' }
+                    ]"
+                ></lz-menu-group>
+                <ng-template #itemTemplate let-item="item">
+                    <a [routerLink]="item.link" class="drop_list_link">{{ item.label }}</a>
+                </ng-template>
                 <div class="information_drop_list">
                     <button class="organization_info_link list">
                         Информация
