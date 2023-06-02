@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { Observable, map, tap } from "rxjs";
+import { Observable, map } from "rxjs";
 
-import { Product } from "../../types";
+import { PaginationListItems, Product, SimpleMap } from "../../types";
+import { mapPaginationResponseToListModel } from "@shared-utils/utils";
 
 @Injectable()
 export abstract class AbstractProductDataService {
-    public abstract getProducts(): Observable<Product[]>;
+    public abstract getProducts(params: SimpleMap<number>): Observable<PaginationListItems<Product>>;
 }
 
 @Injectable()
@@ -16,12 +17,12 @@ export class ProductDataService extends AbstractProductDataService {
         super();
     }
 
-    public getProducts(): Observable<Product[]> {
-        return this.httpClient.get<Product[]>("http://178.172.139.42:7000/api/products").pipe(
-            tap(response => {
-                console.log(response);
-            }),
-            map(response => response),
-        );
+    public getProducts(params: SimpleMap<number>): Observable<PaginationListItems<Product>> {
+        return this.httpClient
+        .get<Product[]>("http://178.172.139.42:7000/api/products", {
+            params: params,
+            observe: "response",
+        })
+        .pipe(map(response => mapPaginationResponseToListModel(response)));
     }
 }

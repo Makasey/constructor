@@ -5,7 +5,7 @@ import { Observable, tap } from "rxjs";
 import { arrayAdd } from "@datorama/akita";
 
 import { AbstractProductDataService } from "@core/data-service";
-import { Product } from "@shared-types/index";
+import { PaginationListItems, Product } from "@shared-types/index";
 
 import { TestQuery } from "./test.query";
 import { TestStore } from "./test.store";
@@ -16,12 +16,12 @@ import { TestStore } from "./test.store";
 export class TestService {
     constructor(private store: TestStore, private query: TestQuery, private productDataService: AbstractProductDataService) {}
 
-    public fetchProducts(): Observable<Product[]> {
-        return this.productDataService.getProducts().pipe(
-            tap((products: Product[]) => {
+    public fetchProducts(): Observable<PaginationListItems<Product>> {
+        return this.productDataService.getProducts({}).pipe(
+            tap(({ items, count }) => {
                 this.store.update(state => {
                     return {
-                        products: state.products.concat(products),
+                        products: state.products.concat(items),
                     };
                 });
             }),

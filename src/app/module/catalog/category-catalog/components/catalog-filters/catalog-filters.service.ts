@@ -32,7 +32,7 @@ export class DefaultCatalogFiltersService
 
     public asyncInit(options?: { productId: number; }): Observable<unknown> {
         selectRouterParameters("priceFrom", "priceTo").subscribe(console.log);
-        return this.productDataService.getProducts().pipe(
+        return this.productDataService.getProducts({}).pipe(
             tap(products => {
                 this.updateState(state => {
                     return {

@@ -16,8 +16,11 @@ export class LZGridListComponent {
         return this.viewMode === ViewModeTypes.LIST;
     }
 
+    @HostBinding("class.lz-grid")
+    public hostClass = true;
+
     @Input({ required: true })
-    public items: LZGridItem[];
+    public items: unknown[];
 
     @Input({ required: true })
     public set columns(value: number) {
