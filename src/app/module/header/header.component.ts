@@ -1,6 +1,7 @@
 import { BurgerComponent } from "@components/shared/burger/burger.component";
 import { ChangeDetectionStrategy, Component, ViewContainerRef, inject } from "@angular/core";
 import { ModalService, ModalType, ModalWithData } from "@components/ui";
+import { ProductCartComponent } from "@components/shared/product-cart/product-cart.component";
 import { RouteKey } from "@shared-types/routes/route-paths";
 
 type ModalData = ModalWithData<{ id: string; }>;
@@ -19,6 +20,8 @@ export class HeaderComponent {
     public readonly catalogLink = RouteKey.CATALOG;
 
     public modalId: string | null = null;
+
+    public productCartId: string = crypto.randomUUID();
 
     private readonly modalService = inject(ModalService);
 
@@ -40,6 +43,18 @@ export class HeaderComponent {
             data: {
                 id: this.modalId,
             },
+        });
+    }
+
+    public openProductCartModal(): void {
+        this.modalService.openModal({
+            component: ProductCartComponent,
+            contentType: ModalType.COMPONENT,
+            id: this.productCartId,
+            viewContainerRef: this.viewContainerRef,
+            closable: true,
+            closeOnOutsideClick: true,
+            customClass: "product-cart-modal",
         });
     }
 }

@@ -20,6 +20,7 @@ import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, ModalConfig, ModalType, ModalWi
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 
+
 @Injectable({
     providedIn: "root",
 })
@@ -135,7 +136,7 @@ export class ModalService {
                 const contentRef = componentRef.instance.hostView.viewContainerRef.createComponent(model.component as Type<unknown>, {
                     injector: updatedInjector,
                 });
-
+                // TODO: Remove mutation of component instance
                 if (data) {
                     (contentRef.instance as ModalWithData<unknown>).data = data;
                 }

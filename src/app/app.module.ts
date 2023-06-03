@@ -1,7 +1,7 @@
+import { APP_INITIALIZER, Injector, NgModule } from "@angular/core";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
 import { HttpClientModule } from "@angular/common/http";
-import { Injector, NgModule } from "@angular/core";
 
 import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 
@@ -19,7 +19,9 @@ import { LzStore } from "@core/store/lz.store";
 
 import { LZCalendarModule, LZToastrModule } from "./components";
 
+import { AbstractProductCartService, ProductCartService } from "@components/shared/product-cart/product-cart.service";
 import { environment } from "environments/environment";
+import { initProductCartFactory } from "./factory/init-product-cart.factory";
 
 @NgModule({
     declarations: [AppComponent],
@@ -47,9 +49,18 @@ import { environment } from "environments/environment";
             provide: LZAbstractAuthDataService,
             useClass: LZDefaultAuthDataService,
         },
+        {
+            provide: AbstractProductCartService,
+            useClass: ProductCartService,
+        },
         LzQuery,
         LzService,
         LzStore,
+        {
+            provide: APP_INITIALIZER,
+            multi: true,
+            useFactory: initProductCartFactory,
+        },
     ],
     bootstrap: [AppComponent],
 })

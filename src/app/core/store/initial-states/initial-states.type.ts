@@ -1,7 +1,15 @@
 import { APFormModel } from "@components/ui";
 import { Product } from "@shared-types/index";
 
-import { CatalogFiltersState, CatalogProductsState, ModuleState, RootModuleState, TableModuleState, UIDataState } from "../states/ui-states";
+import {
+    CatalogFiltersState,
+    CatalogProductsState,
+    ModuleState,
+    ProductCartState,
+    RootModuleState,
+    TableModuleState,
+    UIDataState,
+} from "../states/ui-states";
 
 export function initialTableModuleState(): TableModuleState {
     return {
@@ -35,5 +43,12 @@ export function initialCatalogProductState(): CatalogProductsState {
     return {
         ...initialModuleDataState(),
         products: [],
+    };
+}
+
+export function initialProductCartState(): ProductCartState {
+    return {
+        cart: null,
+        dataState: UIDataState.INITIAL,
     };
 }
