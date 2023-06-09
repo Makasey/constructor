@@ -19,6 +19,7 @@ import { LzStore } from "@core/store/lz.store";
 
 import { LZCalendarModule, LZToastrModule } from "./components";
 
+import { AbstractCartProductDataService, CartProductDataService } from "@core/data-service/cart-product-data.service";
 import { AbstractProductCartService, ProductCartService } from "@components/shared/product-cart/product-cart.service";
 import { environment } from "environments/environment";
 import { initProductCartFactory } from "./factory/init-product-cart.factory";
@@ -48,6 +49,10 @@ import { initProductCartFactory } from "./factory/init-product-cart.factory";
         {
             provide: LZAbstractAuthDataService,
             useClass: LZDefaultAuthDataService,
+        },
+        {
+            provide: AbstractCartProductDataService,
+            useClass: CartProductDataService,
         },
         {
             provide: AbstractProductCartService,

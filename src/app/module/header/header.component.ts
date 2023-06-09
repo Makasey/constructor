@@ -51,6 +51,7 @@ export class HeaderComponent {
             component: ProductCartComponent,
             contentType: ModalType.COMPONENT,
             id: this.productCartId,
+            title: "",
             viewContainerRef: this.viewContainerRef,
             closable: true,
             closeOnOutsideClick: true,
