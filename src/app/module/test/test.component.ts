@@ -9,11 +9,6 @@ import { Tree } from "@components/ui/tree/tree.component";
 import { Product } from "../../types";
 import { TestService } from "./store";
 
-export type ItemsWithId<T> = {
-    items: T[];
-    id: number;
-};
-
 @UntilDestroy()
 @Component({
     selector: "app-test",

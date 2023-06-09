@@ -9,9 +9,12 @@
         [preloadBackgroundLoading]="_loading$ | async"
         [preloadBackgroundConfig]="{ productCount: 9 }"
     >
-        <div class="catalog-grid">
-            <lz-product-cart *ngFor="let product of products(); let index = index" [product]="product">
-            </lz-product-cart>
-        </div>
+        <lz-grid [items]="products()" [itemTemplate]="cart" [columns]="3"> </lz-grid>
+
+        <ng-template #cart let-item="item">
+            <lz-product-cart [product]="item"> </lz-product-cart>
+        </ng-template>
+
+        <button class="btn-load" *ngIf="canLoad()" (click)="loadMore()">Загрузить еще</button>
     </ng-template>
 </div>

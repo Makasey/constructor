@@ -43,6 +43,7 @@ export function initialCatalogProductState(): CatalogProductsState {
     return {
         ...initialModuleDataState(),
         products: [],
+        totalCount: 0,
     };
 }
 

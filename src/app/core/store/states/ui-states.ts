@@ -35,6 +35,7 @@ export type CatalogFiltersState = Readonly<{
 
 export type CatalogProductsState = Readonly<{
     products: Product[];
+    totalCount: number;
 }> &
     ModuleState;
 
