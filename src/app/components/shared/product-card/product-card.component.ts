@@ -5,13 +5,13 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 @UntilDestroy()
 @Component({
-    selector: "lz-product-cart",
+    selector: "lz-product-card",
     templateUrl: "./product-card.component.html",
     styleUrls: ["./product-card.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCardComponent {
-    @Input() public set product(value: Product) {
+    @Input({ required: true }) public set product(value: Product) {
         this._product.set(value);
     }
 

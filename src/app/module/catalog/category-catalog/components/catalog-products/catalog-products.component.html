@@ -12,7 +12,7 @@
         <lz-grid [items]="products()" [itemTemplate]="cart" [columns]="3"> </lz-grid>
 
         <ng-template #cart let-item="item">
-            <lz-product-cart [product]="item"> </lz-product-cart>
+            <lz-product-card [product]="item"> </lz-product-card>
         </ng-template>
 
         <button class="btn-load" *ngIf="canLoad()" (click)="loadMore()">Загрузить еще</button>
