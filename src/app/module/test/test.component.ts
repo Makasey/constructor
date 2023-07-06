@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, inject } from "@angular/core";
 
 import { Observable } from "rxjs";
 
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import { UntilDestroy } from "@ngneat/until-destroy";
 
 import { Tree } from "@components/ui/tree/tree.component";
+
+import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
+import { LzStateKey } from "@core/store/lz.state";
+import { UIDataState } from "@core/store/states/ui-states";
 
 import { Product } from "../../types";
 import { TestService } from "./store";
@@ -60,13 +66,17 @@ export class TestComponent implements OnInit {
         ],
     };
 
+    private readonly query: LzAbstractQuery<LzStateKey.TEST_STATE> = inject(LzQueryInjectionTokensMap[LzStateKey.TEST_STATE]!);
+
+    private readonly storeService: AbstractLzStoreService<LzStateKey.TEST_STATE> = inject(LzServiceInjectionTokensMap[LzStateKey.TEST_STATE]!);
+
     constructor(private service: TestService) {}
 
     public ngOnInit(): void {
-        this.service.fetchProducts().pipe(untilDestroyed(this)).subscribe();
-    }
-
-    public updateProductList(): void {
-        this.service.test();
+        this.storeService.updateState(() => {
+            return {
+                dataState: UIDataState.LOADED,
+            };
+        });
     }
 }

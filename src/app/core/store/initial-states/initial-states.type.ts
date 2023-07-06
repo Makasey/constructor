@@ -8,6 +8,7 @@ import {
     ProductCartState,
     RootModuleState,
     TableModuleState,
+    TestState,
     UIDataState,
 } from "../states/ui-states";
 
@@ -50,6 +51,12 @@ export function initialCatalogProductState(): CatalogProductsState {
 export function initialProductCartState(): ProductCartState {
     return {
         cart: null,
+        dataState: UIDataState.INITIAL,
+    };
+}
+
+export function initialTestState(): TestState {
+    return {
         dataState: UIDataState.INITIAL,
     };
 }

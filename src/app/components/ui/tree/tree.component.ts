@@ -5,7 +5,6 @@ import {
     HostListener,
     Inject,
     Input,
-    OnInit,
     Optional,
     SkipSelf,
     ViewEncapsulation,
@@ -26,7 +25,7 @@ export type Tree<V = number> = {
     standalone: true,
     templateUrl: "./tree.component.html",
 })
-export class TreeComponent implements OnInit {
+export class TreeComponent {
     @HostBinding("class.lz-tree")
     public hostClass = true;
 
@@ -45,8 +44,4 @@ export class TreeComponent implements OnInit {
     public closed = false;
 
     constructor(@SkipSelf() @Optional() @Inject(TreeComponent) public parent: TreeComponent) {}
-
-    public ngOnInit(): void {
-        console.log(this.tree, this.parent);
-    }
 }

@@ -43,3 +43,5 @@ export type ProductCartState = Readonly<{
     cart: Cart | null;
 }> &
     ModuleState;
+
+export type TestState = ModuleState;
