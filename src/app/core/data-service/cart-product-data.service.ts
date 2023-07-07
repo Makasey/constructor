@@ -7,6 +7,10 @@ import { Product } from "@shared-types/product/product";
 @Injectable()
 export abstract class AbstractCartProductDataService {
     public abstract addItemToCart(product: Product): Observable<Cart>;
+
+    public abstract removeItemFromCart(itemId: number, cartId: number): Observable<void>;
+
+    public abstract updateCartItemCount(cartId: number, id: number, totalCount: number): Observable<void>;
 }
 
 @Injectable()
@@ -22,6 +26,29 @@ export class CartProductDataService extends AbstractCartProductDataService {
             {
                 withCredentials: true,
             },
+        );
+    }
+
+    public removeItemFromCart(itemId: number, cartId: number): Observable<void> {
+        return this.httpClient.post<void>(
+            "http://localhost:7000/api/cart/delete",
+            {
+                cartId: cartId,
+                cartItemId: itemId,
+            },
+            { withCredentials: true },
+        );
+    }
+
+    public updateCartItemCount(cartId: number, id: number, totalCount: number): Observable<void> {
+        return this.httpClient.post<void>(
+            "http://localhost:7000/api/cart/count",
+            {
+                cartId: cartId,
+                cartItemId: id,
+                count: totalCount,
+            },
+            { withCredentials: true },
         );
     }
 }

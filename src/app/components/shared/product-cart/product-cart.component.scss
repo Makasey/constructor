@@ -29,6 +29,15 @@
         flex-direction: column;
         overflow: auto;
         max-height: calc(100vh - 220px);
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: gold;
+            border-radius: 20px;
+        }
     }
 
     &-title {

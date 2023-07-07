@@ -1,14 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    HostListener,
-    Inject,
-    Input,
-    Optional,
-    SkipSelf,
-    ViewEncapsulation,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input, Optional, SkipSelf, ViewEncapsulation } from "@angular/core";
 import { NgFor, NgIf } from "@angular/common";
 
 export type Tree<V = number> = {

@@ -16,14 +16,14 @@
                 <h3 class="cart-item-category">{{ cartItem.product.categories[0].value }}</h3>
                 <div class="cart-item-count">
                     <div class="cart-item-count-controller">
-                        <button class="cart-item-count-action">-</button>
+                        <button class="cart-item-count-action" (click)="decrementProductCartCount(cartItem)">-</button>
                         <input [ngModel]="cartItem.count" />
-                        <button class="cart-item-count-action">+</button>
+                        <button class="cart-item-count-action" (click)="incrementProductCartCount(cartItem)">+</button>
                     </div>
                     <h3 class="cart-item-price">{{ cartItem.subtotalPrice }}</h3>
                 </div>
             </div>
-            <button class="cart-item-delete">X</button>
+            <button class="cart-item-delete" (click)="deleteItemFromCart(cartItem)">X</button>
         </article>
     </ng-container>
 </section>
