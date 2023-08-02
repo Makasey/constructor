@@ -1,8 +1,9 @@
-import { CatalogFiltersState, CatalogProductsState, ProductCartState, RootModuleState, TestState } from "./states/ui-states";
+import { CatalogFiltersState, CatalogProductsState, EditorState, ProductCartState, RootModuleState, TestState } from "./states/ui-states";
 import { InitialStateFunctions } from "./types";
 import {
     initialCatalogFiltersState,
     initialCatalogProductState,
+    initialEditorState,
     initialProductCartState,
     initialRootModuleState,
     initialTestState,
@@ -14,6 +15,7 @@ export enum LzStateKey {
     CATALOG_PRODUCTS_STATE = "catalogProductsState",
     PRODUCT_CART_STATE = "productCartState",
     TEST_STATE = "testState",
+    EDITOR_STATE = "editorState",
 }
 
 export type LzState = Readonly<{
@@ -22,6 +24,7 @@ export type LzState = Readonly<{
     [LzStateKey.CATALOG_PRODUCTS_STATE]: CatalogProductsState;
     [LzStateKey.PRODUCT_CART_STATE]: ProductCartState;
     [LzStateKey.TEST_STATE]: TestState;
+    [LzStateKey.EDITOR_STATE]: EditorState;
 }>;
 
 export const lzInitialStateFunctions: InitialStateFunctions = {
@@ -30,6 +33,7 @@ export const lzInitialStateFunctions: InitialStateFunctions = {
     [LzStateKey.CATALOG_PRODUCTS_STATE]: initialCatalogProductState,
     [LzStateKey.PRODUCT_CART_STATE]: initialProductCartState,
     [LzStateKey.TEST_STATE]: initialTestState,
+    [LzStateKey.EDITOR_STATE]: initialEditorState,
 };
 
 export function createLZInitialState(): LzState {

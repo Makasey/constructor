@@ -1,6 +1,6 @@
 import { HomeModule } from "@modules/home/home.module";
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { Route, RouterModule, Routes } from "@angular/router";
 import { TestModule } from "@modules/test/test.module";
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     },
     {
         path: "constructor",
-        loadChildren: (): Promise<typeof TestModule> => import("@modules/test/test.module").then(module => module.TestModule),
+        loadChildren: (): Promise<Route[]> => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
     },
     {
         path: "lessons",

@@ -1,5 +1,6 @@
 import { APFormModel, LZTableMeta, LZTableValues } from "@components/ui";
 import { Cart, Product } from "@shared-types/index";
+import { PageSettings, SitePageElement } from "@modules/constructor/components/edit-area/types";
 
 export enum UIDataState {
     INITIAL = "initial",
@@ -45,3 +46,11 @@ export type ProductCartState = Readonly<{
     ModuleState;
 
 export type TestState = ModuleState;
+
+export type EditorState = Readonly<
+    {
+        settings: PageSettings;
+        items: Record<string, SitePageElement>;
+        selectedElement: number | null;
+    } & ModuleState
+>;

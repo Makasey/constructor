@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
-import { FooterModule } from "@modules/footer/footer.module";
-import { HeaderModule } from "@modules/header/header.module";
+import { FooterModule } from "@modules/home/module/footer/footer.module";
+import { HeaderModule } from "@modules/home/module/header/header.module";
 import { HomeComponent } from "./home.component";
 import { HomeInnerComponent } from "@modules/home/home-inner.component";
 import { HomeRoutingModule } from "./home-routing.module";
