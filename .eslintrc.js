@@ -73,7 +73,12 @@ module.exports = {
                 createDefaultProgram: true,
             },
             plugins: ["sort-imports-es6-autofix", "billing-rmi-rules"],
-            extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended-requiring-type-checking", "plugin:@angular-eslint/recommended"],
+            extends: [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:@angular-eslint/recommended",
+                "plugin:prettier/recommended",
+            ],
             rules: {
                 "arrow-body-style": 0,
                 "prefer-arrow-callback": 0,

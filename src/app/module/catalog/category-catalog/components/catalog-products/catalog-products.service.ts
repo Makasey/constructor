@@ -1,10 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 
 import { Observable, tap } from "rxjs";
 
 import { AbstractDefaultModuleService, AbstractModuleService } from "@core/abstract/abstract.service";
 import { AbstractProductDataService } from "@core/data-service";
 import { LzQuery } from "@core/store/lz.query";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzService } from "@core/store/lz.service";
 import { LzStateKey } from "@core/store/lz.state";
 import { PaginationListItems } from "@shared-types/response/response-view.type";
@@ -26,7 +27,11 @@ export class DefaultCatalogProductsService
     extends AbstractDefaultModuleService<LzStateKey.CATALOG_PRODUCTS_STATE>
     implements AbstractCatalogProductsService
 {
-    constructor(protected query: LzQuery, protected service: LzService, private productDataService: AbstractProductDataService) {
+    constructor(
+        @Inject(LzQueryInjectionTokensMap[LzStateKey.CATALOG_PRODUCTS_STATE]) protected query: LzQuery,
+        @Inject(LzServiceInjectionTokensMap[LzStateKey.CATALOG_PRODUCTS_STATE]) protected service: LzService,
+        private productDataService: AbstractProductDataService,
+    ) {
         super(LzStateKey.CATALOG_PRODUCTS_STATE, query, service);
     }
 
@@ -78,8 +83,6 @@ export class DefaultCatalogProductsService
     }
 
     public canLoadProducts(): Observable<boolean> {
-        return this.selectState(state => 
-            state.products.length < state.totalCount,
-        );
+        return this.selectState(state => state.products.length < state.totalCount);
     }
 }
