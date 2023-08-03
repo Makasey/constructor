@@ -5,7 +5,7 @@ import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/st
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
 import { SitePageElement, SitePageElementType, defaultPageElementSettingsMap } from "@modules/constructor/components/edit-area/types";
-import { arrayAdd, arrayRemove } from "@datorama/akita";
+import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
 export abstract class AbstractEditAreaService {
@@ -42,6 +42,7 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
     public addElement(parentId: number, type: SitePageElementType): void {
         this.service.updateState(state => {
             const newElementID = this.getStoreElement("currentStateIndex") + 1;
+            logAction(`Add element with id: ${newElementID}`);
             const items = state.items;
             const parentElement = items[parentId];
             const newElement: SitePageElement = {
@@ -65,6 +66,8 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
     }
 
     public deleteElement(parentId: number, elementId: number): void {
+        logAction(`Delete element with id: ${elementId}`, [], { id: elementId });
+
         this.service.updateState(state => {
             const items = { ...state.items };
             const parentElement = items[parentId];
@@ -92,7 +95,7 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
     public updateSelection(elementId: number): void {
         this.service.updateState(state => {
             const shouldDeselectItem = elementId === state.selectedElement;
-
+            logAction(`${shouldDeselectItem ? "deselect" : "select"}: ${elementId}`, [elementId]);
             return {
                 selectedElement: shouldDeselectItem ? null : elementId,
             };

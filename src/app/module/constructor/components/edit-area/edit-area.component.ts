@@ -1,6 +1,6 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
+import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
 
 @Component({
@@ -16,7 +16,5 @@ export class EditAreaComponent {
     @HostBinding("class.lz-edit-area")
     public hostClass = true;
 
-    public service = inject(AbstractEditAreaService);
-
-    public selectedElement$ = this.service.selectSelectedElement();
+    public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 }

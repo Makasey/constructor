@@ -1,8 +1,6 @@
-import { AbstractEditAreaService, DefaultEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
-import { LzStateKey } from "@core/store/lz.state";
+import { EDITOR_PROVIDERS } from "@modules/constructor/providers/providers";
 import { RouterOutlet } from "@angular/router";
-import { createStoreProviders } from "@core/store/abstract/create-store-providers";
 
 @Component({
     selector: "lz-constructor",
@@ -12,7 +10,7 @@ import { createStoreProviders } from "@core/store/abstract/create-store-provider
     templateUrl: "./constructor.component.html",
     styleUrls: ["./constructor.component.scss"],
     imports: [RouterOutlet],
-    providers: [...createStoreProviders(LzStateKey.EDITOR_STATE), { provide: AbstractEditAreaService, useClass: DefaultEditAreaService }],
+    providers: EDITOR_PROVIDERS,
 })
 export class LZConstructorComponent {
     @HostBinding("class.lz-constructor")

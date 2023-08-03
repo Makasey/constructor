@@ -11,7 +11,7 @@ export enum SitePageElementType {
     SECTION = "section",
 }
 
-export const ELEMENT_ID = new InjectionToken("ELEMENT_ID");
+export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID");
 
 export type SitePageElement = Readonly<{
     id: number;
