@@ -1,9 +1,7 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
-import { Observable } from "rxjs";
-import { SitePageElement } from "@modules/constructor/components/edit-area/types";
 
 @Component({
     selector: "lz-edit-area-item",
@@ -14,15 +12,23 @@ import { SitePageElement } from "@modules/constructor/components/edit-area/types
     templateUrl: "./edit-area-item.component.html",
     imports: [AsyncPipe, JsonPipe, NgForOf, NgIf, ElementResolverDirective],
 })
-export class LZEditAreaItemComponent implements OnInit {
+export class LZEditAreaItemComponent {
+    @HostListener("click", ["$event"])
+    public toggleSelection(event: MouseEvent): void {
+        event.stopPropagation();
+        this.service.updateSelection(this.elementID);
+    }
+
     @Input({ required: true })
     public elementID: number;
 
+    @Input({ required: true })
+    public parentID: number;
+
     private readonly service = inject(AbstractEditAreaService);
 
-    public element$: Observable<SitePageElement>;
-
-    public ngOnInit(): void {
-        this.element$ = this.service.selectElement(this.elementID);
+    public deleteElement(event: MouseEvent): void {
+        event.stopPropagation();
+        this.service.deleteElement(this.parentID, this.elementID);
     }
 }

@@ -1,5 +1,5 @@
 import { AbstractEditAreaService, DefaultEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
 import { LzStateKey } from "@core/store/lz.state";
 import { RouterOutlet } from "@angular/router";
 import { createStoreProviders } from "@core/store/abstract/create-store-providers";
@@ -14,4 +14,7 @@ import { createStoreProviders } from "@core/store/abstract/create-store-provider
     imports: [RouterOutlet],
     providers: [...createStoreProviders(LzStateKey.EDITOR_STATE), { provide: AbstractEditAreaService, useClass: DefaultEditAreaService }],
 })
-export class LZConstructorComponent {}
+export class LZConstructorComponent {
+    @HostBinding("class.lz-constructor")
+    public hostClass = true;
+}

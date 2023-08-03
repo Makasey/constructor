@@ -1,6 +1,7 @@
+import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/core";
-import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/edit-area-item.component";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
+import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
 
 @Component({
     selector: "lz-edit-area",
@@ -9,6 +10,13 @@ import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-ar
     styleUrls: ["./edit-area.component.scss"],
     standalone: true,
     templateUrl: "./edit-area.component.html",
-    imports: [JsonPipe, AsyncPipe, LZEditAreaItemComponent],
+    imports: [JsonPipe, AsyncPipe, RootComponent],
 })
-export class EditAreaComponent {}
+export class EditAreaComponent {
+    @HostBinding("class.lz-edit-area")
+    public hostClass = true;
+
+    public service = inject(AbstractEditAreaService);
+
+    public selectedElement$ = this.service.selectSelectedElement();
+}

@@ -132,7 +132,7 @@ a {
 body,
 app-root {
     height: 100%;
-    min-height: calc(100vh + 450px);
+    min-height: calc(100vh);
 }
 
 app-root {
@@ -250,4 +250,10 @@ button {
         max-width: 320px;
         min-height: 100vh;
     }
+}
+
+router-outlet + * {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }

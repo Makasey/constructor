@@ -1,6 +1,6 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { ComponentWithVCR, SitePageElement, sitePageElementMap } from "@modules/constructor/components/edit-area/types";
-import { Directive, Input, OnChanges, SimpleChanges, ViewContainerRef, inject } from "@angular/core";
+import { Directive, Injector, Input, OnChanges, SimpleChanges, ViewContainerRef, inject } from "@angular/core";
+import { ELEMENT_ID, sitePageElementMap } from "@modules/constructor/components/edit-area/types";
 
 @Directive({
     selector: "[lzElementResolver]",
@@ -11,24 +11,28 @@ export class ElementResolverDirective implements OnChanges {
 
     private readonly service = inject(AbstractEditAreaService);
 
+    private readonly injector = inject(Injector);
+
     @Input({ required: true })
-    public lzElementResolver: SitePageElement | null;
+    public lzElementResolver: number | undefined;
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.lzElementResolver && this.lzElementResolver) {
-            const { type, children, isExtendable } = this.lzElementResolver;
+            const { type, id } = this.service.getElement(this.lzElementResolver);
             const componentType = sitePageElementMap[type];
-            const componentRef = this.viewContainerRef.createComponent<ComponentWithVCR>(componentType);
-            componentRef.setInput("item", this.lzElementResolver);
+            const newInjector = Injector.create({
+                providers: [
+                    {
+                        provide: ELEMENT_ID,
+                        useValue: id,
+                    },
+                ],
+                parent: this.injector,
+            });
 
-            if (isExtendable) {
-                children.forEach(item => {
-                    const element = this.service.getElement(item);
-                    const componentType = sitePageElementMap[element.type];
-
-                    componentRef.instance.container.createComponent(componentType).setInput("item", item);
-                });
-            }
+            this.viewContainerRef.createComponent<unknown>(componentType, {
+                injector: newInjector,
+            });
         }
     }
 }

@@ -79,7 +79,7 @@ export function initialEditorState(): EditorState {
             },
             "2": {
                 id: 2,
-                type: SitePageElementType.TITLE,
+                type: SitePageElementType.SECTION,
                 isExtendable: false,
                 children: [5],
                 settings: {
@@ -89,9 +89,9 @@ export function initialEditorState(): EditorState {
             },
             "3": {
                 id: 3,
-                type: SitePageElementType.TITLE,
+                type: SitePageElementType.SECTION,
                 children: [],
-                isExtendable: true,
+                isExtendable: false,
                 settings: {
                     width: 200,
                     height: 20,
@@ -99,8 +99,8 @@ export function initialEditorState(): EditorState {
             },
             "4": {
                 id: 4,
-                type: SitePageElementType.TITLE,
-                isExtendable: true,
+                type: SitePageElementType.SECTION,
+                isExtendable: false,
                 children: [],
                 settings: {
                     width: 200,
@@ -111,7 +111,7 @@ export function initialEditorState(): EditorState {
                 id: 5,
                 type: SitePageElementType.TITLE,
                 children: [],
-                isExtendable: true,
+                isExtendable: false,
                 settings: {
                     width: 200,
                     height: 20,
@@ -119,6 +119,7 @@ export function initialEditorState(): EditorState {
             },
         },
         selectedElement: null,
+        currentStateIndex: 5,
         settings: {
             title: "My best site",
             id: 1,

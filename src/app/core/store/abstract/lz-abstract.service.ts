@@ -27,9 +27,9 @@ export class LzStoreService<T extends keyof LzState> extends AbstractLzStoreServ
         this.updateState(state => {
             return isUIDateStateful(state)
                 ? {
-                    ...state,
-                    dataState: dataState,
-                }
+                      ...state,
+                      dataState: dataState,
+                  }
                 : {};
         });
     }
@@ -37,6 +37,7 @@ export class LzStoreService<T extends keyof LzState> extends AbstractLzStoreServ
     public updateState(updateStateCallback: UpdateStateCallback<LzState[T], Partial<LzState[T]>>): void {
         this.store.update((state: LzState[T]) => {
             return {
+                ...state,
                 ...updateStateCallback(state),
             };
         });
