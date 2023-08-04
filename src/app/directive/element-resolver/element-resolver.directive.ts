@@ -30,9 +30,11 @@ export class ElementResolverDirective implements OnChanges {
                 parent: this.injector,
             });
 
-            this.viewContainerRef.createComponent<unknown>(componentType, {
+            const elementRef = this.viewContainerRef.createComponent<unknown>(componentType, {
                 injector: newInjector,
             });
+
+            elementRef.setInput("elementID", id);
         }
     }
 }

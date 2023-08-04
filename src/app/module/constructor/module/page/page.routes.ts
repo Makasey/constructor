@@ -10,10 +10,10 @@ export const PAGE_ROUTES: Route[] = [
             {
                 path: "",
                 pathMatch: "full",
-                redirectTo: "create",
+                redirectTo: "editor",
             },
             {
-                path: "create",
+                path: "editor",
                 component: PageInnerComponent,
             },
         ],

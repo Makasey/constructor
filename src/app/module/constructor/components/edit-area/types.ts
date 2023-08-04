@@ -2,6 +2,7 @@ import { InjectionToken, Type, ViewContainerRef } from "@angular/core";
 import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
 import { SectionComponent } from "@modules/constructor/components/edit-area/component/section/section.component";
 import { TitleComponent } from "@modules/constructor/components/edit-area/component/title/title.component";
+import { isObject } from "@datorama/akita";
 
 export const ROOT_ELEMENT_ID = 1;
 
@@ -10,6 +11,16 @@ export enum SitePageElementType {
     TITLE = "title",
     SECTION = "section",
 }
+
+export enum StyleUnit {
+    PERCENT = "percent",
+    PX = "px",
+}
+
+export const styleUnitMap: Record<StyleUnit, string> = {
+    [StyleUnit.PX]: StyleUnit.PX,
+    [StyleUnit.PERCENT]: "%",
+};
 
 export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID");
 
@@ -22,9 +33,14 @@ export type SitePageElement = Readonly<{
 }>;
 
 export type SitePageElementSettings = Readonly<{
-    width: number;
-    height: number;
+    width: ElementSettingsWithUnit;
+    height: ElementSettingsWithUnit;
     text?: string;
+}>;
+
+export type ElementSettingsWithUnit = Readonly<{
+    value: number;
+    unit: StyleUnit;
 }>;
 
 export type PageSettings = Readonly<{
@@ -45,8 +61,14 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
         children: [],
         isExtendable: false,
         settings: {
-            width: 200,
-            height: 20,
+            width: {
+                value: 100,
+                unit: StyleUnit.PERCENT,
+            },
+            height: {
+                value: 20,
+                unit: StyleUnit.PERCENT,
+            },
         },
     },
     [SitePageElementType.SECTION]: {
@@ -54,8 +76,14 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
         children: [],
         isExtendable: false,
         settings: {
-            width: 200,
-            height: 20,
+            width: {
+                value: 100,
+                unit: StyleUnit.PERCENT,
+            },
+            height: {
+                value: 20,
+                unit: StyleUnit.PX,
+            },
         },
     },
     [SitePageElementType.PAGE]: {
@@ -63,8 +91,14 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
         children: [],
         isExtendable: false,
         settings: {
-            width: 200,
-            height: 20,
+            width: {
+                value: 100,
+                unit: StyleUnit.PERCENT,
+            },
+            height: {
+                value: 100,
+                unit: StyleUnit.PERCENT,
+            },
         },
     },
 };
@@ -73,4 +107,39 @@ export interface ComponentWithVCR {
     readonly viewContainerRef: ViewContainerRef;
 
     readonly container: ViewContainerRef;
+}
+
+export function processSettingValueWithUnit(settingsValue: ElementSettingsWithUnit): string {
+    const { value, unit } = settingsValue;
+    const convertedUnit = styleUnitMap[unit];
+
+    return `${value}${convertedUnit}`;
+}
+
+export function isObjectEquals<T>(target: T, other: T): boolean {
+    if ((!isObject(target) && isObject(other)) || (isObject(target) && !isObject(other))) {
+        return false;
+    }
+
+    if (!isObject(target) && !isObject(other)) {
+        return target === other;
+    }
+
+    return Object.keys(target as {}).every(key => {
+        const targetItem = target[key];
+        const otherItem = other[key];
+
+        if (isObject(targetItem) && isObject(otherItem)) {
+            return isObjectEquals(targetItem, otherItem);
+        }
+
+        if (Array.isArray(targetItem) && Array.isArray(otherItem)) {
+            return (
+                targetItem.length === otherItem.length &&
+                targetItem.every(element => !!otherItem.find(otherElement => isObjectEquals(element, otherElement)))
+            );
+        }
+
+        return targetItem === otherItem;
+    });
 }

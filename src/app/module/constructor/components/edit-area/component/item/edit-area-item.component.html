@@ -1,5 +1,5 @@
 <ng-container *lzElementResolver="elementID"></ng-container>
 
-<button (click)="deleteElement($event)">
+<button class="add-element" (click.stop)="deleteElement()">
     <i class="bx bx-trash"></i>
 </button>

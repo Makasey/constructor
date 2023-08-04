@@ -10,6 +10,6 @@
 
 <ng-template #emptyTemplate> Сейчас тут нет элементов... </ng-template>
 
-<button class="add-element" (click)="addElement(sitePageElementType.TITLE, $event)">
+<button class="add-element" (click.stop)="addElement(sitePageElementType.TITLE)">
     <i class="bx bx-plus-circle"></i>
 </button>

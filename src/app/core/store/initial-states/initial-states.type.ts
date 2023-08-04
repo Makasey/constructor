@@ -12,7 +12,7 @@ import {
     TestState,
     UIDataState,
 } from "../states/ui-states";
-import { ROOT_ELEMENT_ID, SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/types";
 
 export function initialTableModuleState(): TableModuleState {
     return {
@@ -73,18 +73,30 @@ export function initialEditorState(): EditorState {
                 children: [2, 3, 4],
                 isExtendable: true,
                 settings: {
-                    width: 1920,
-                    height: 1080,
+                    width: {
+                        value: 1920,
+                        unit: StyleUnit.PERCENT,
+                    },
+                    height: {
+                        value: 1080,
+                        unit: StyleUnit.PERCENT,
+                    },
                 },
             },
             "2": {
                 id: 2,
                 type: SitePageElementType.SECTION,
-                isExtendable: false,
+                isExtendable: true,
                 children: [5],
                 settings: {
-                    width: 200,
-                    height: 20,
+                    width: {
+                        value: 100,
+                        unit: StyleUnit.PERCENT,
+                    },
+                    height: {
+                        value: 200,
+                        unit: StyleUnit.PX,
+                    },
                 },
             },
             "3": {
@@ -93,8 +105,14 @@ export function initialEditorState(): EditorState {
                 children: [],
                 isExtendable: false,
                 settings: {
-                    width: 200,
-                    height: 20,
+                    width: {
+                        value: 100,
+                        unit: StyleUnit.PERCENT,
+                    },
+                    height: {
+                        value: 200,
+                        unit: StyleUnit.PX,
+                    },
                 },
             },
             "4": {
@@ -103,8 +121,14 @@ export function initialEditorState(): EditorState {
                 isExtendable: false,
                 children: [],
                 settings: {
-                    width: 200,
-                    height: 20,
+                    width: {
+                        value: 100,
+                        unit: StyleUnit.PERCENT,
+                    },
+                    height: {
+                        value: 200,
+                        unit: StyleUnit.PX,
+                    },
                 },
             },
             "5": {
@@ -113,13 +137,19 @@ export function initialEditorState(): EditorState {
                 children: [],
                 isExtendable: false,
                 settings: {
-                    width: 200,
-                    height: 20,
+                    width: {
+                        value: 200,
+                        unit: StyleUnit.PX,
+                    },
+                    height: {
+                        value: 20,
+                        unit: StyleUnit.PX,
+                    },
                 },
             },
         },
         selectedElement: null,
-        currentStateIndex: 5,
+        currentStateIndex: 6,
         settings: {
             title: "My best site",
             id: 1,

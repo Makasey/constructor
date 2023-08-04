@@ -155,7 +155,7 @@ module.exports = {
                 "@typescript-eslint/no-parameter-properties": 0,
                 "@typescript-eslint/no-inferrable-types": [1, { ignoreParameters: true }],
                 "@typescript-eslint/member-delimiter-style": [
-                    2,
+                    0,
                     {
                         multiline: {
                             delimiter: "semi",

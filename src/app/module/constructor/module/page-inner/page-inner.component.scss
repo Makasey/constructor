@@ -1,4 +1,33 @@
 .lz-page-inner {
-    padding: 20px;
-}
+    --editor-sidebar-width: 400px;
 
+    padding: 20px 20px 20px var(--editor-sidebar-width);
+
+    .settings-title {
+        font-size: 24px;
+        line-height: 30px;
+        color: #fff;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .editor-sidebar {
+        padding: 20px;
+        position: fixed;
+        background: #1b1c21;
+        left: 0;
+        top: 0;
+        font-weight: 400;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        max-width: var(--editor-sidebar-width);
+        width: 100%;
+    }
+
+    .form-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+}

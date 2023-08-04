@@ -19,10 +19,8 @@ export class TreeComponent {
     @HostBinding("class.lz-tree")
     public hostClass = true;
 
-    @HostListener("click", ["$event"])
-    public toggleTree(event: PointerEvent): void {
-        event.stopPropagation();
-
+    @HostListener("click.stop", ["$event"])
+    public toggleTree(): void {
         this.closed = !this.closed;
     }
 

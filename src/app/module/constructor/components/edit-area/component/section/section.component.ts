@@ -1,9 +1,10 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { AsyncPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostListener, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ELEMENT_ID, SitePageElement, SitePageElementType, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
 import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
-import { Observable } from "rxjs";
-import { SitePageElement, SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { Observable, map } from "rxjs";
+import { filterNilValue } from "@datorama/akita";
 
 @Component({
     selector: "lz-section-element",
@@ -12,13 +13,23 @@ import { SitePageElement, SitePageElementType } from "@modules/constructor/compo
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
-    imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe],
+    imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe, JsonPipe],
 })
 export class SectionComponent implements OnInit {
-    @HostListener("click", ["$event"])
-    public toggleSelection(event: MouseEvent): void {
-        event.stopPropagation();
-        this.service.updateSelection(this.elementID);
+    @HostBinding("$.style.height")
+    @HostListener("$.style.height")
+    public sectionHeight$: Observable<string>;
+
+    @HostBinding("$.style.width")
+    @HostListener("$.style.width")
+    public sectionWidth$: Observable<string>;
+
+    @HostBinding("class.lz-section-element")
+    public hostClass = true;
+
+    @HostListener("click.stop", ["$event"])
+    public toggleSelection(): void {
+        this.service.updateSelection(this.ELEMENT_ID ?? this.elementID);
     }
 
     private readonly service = inject(AbstractEditAreaService);
@@ -26,17 +37,27 @@ export class SectionComponent implements OnInit {
     @Input({ required: true })
     public elementID: number;
 
-    public element$: Observable<SitePageElement>;
+    public element$: Observable<SitePageElement> = new Observable();
+
+    public readonly ELEMENT_ID = inject(ELEMENT_ID, { optional: true });
 
     public sitePageElementType = SitePageElementType;
 
     public ngOnInit(): void {
-        this.element$ = this.service.selectElement(this.elementID);
+        this.element$ = this.service.selectElement(this.ELEMENT_ID ?? this.elementID);
+        this.sectionHeight$ = this.element$.pipe(
+            filterNilValue(),
+            map(element => processSettingValueWithUnit(element.settings.height)),
+        );
+
+        this.sectionWidth$ = this.element$.pipe(
+            filterNilValue(),
+            map(element => processSettingValueWithUnit(element.settings.width)),
+        );
     }
 
-    public addElement(type: SitePageElementType, event: MouseEvent): void {
-        event.stopPropagation();
-        this.service.addElement(this.elementID, type);
+    public addElement(type: SitePageElementType): void {
+        this.service.addElement(this.ELEMENT_ID ?? this.elementID, type);
     }
 
     public _trackByChild(index: number, child: number): number {

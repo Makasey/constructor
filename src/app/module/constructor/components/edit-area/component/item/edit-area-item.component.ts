@@ -1,6 +1,6 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 
 @Component({
@@ -13,9 +13,11 @@ import { ElementResolverDirective } from "@shared-directives/element-resolver/el
     imports: [AsyncPipe, JsonPipe, NgForOf, NgIf, ElementResolverDirective],
 })
 export class LZEditAreaItemComponent {
-    @HostListener("click", ["$event"])
-    public toggleSelection(event: MouseEvent): void {
-        event.stopPropagation();
+    @HostBinding("class.lz-edit-area-item")
+    public hostClass = true;
+
+    @HostListener("click.stop", ["$event"])
+    public toggleSelection(): void {
         this.service.updateSelection(this.elementID);
     }
 
@@ -27,8 +29,7 @@ export class LZEditAreaItemComponent {
 
     private readonly service = inject(AbstractEditAreaService);
 
-    public deleteElement(event: MouseEvent): void {
-        event.stopPropagation();
+    public deleteElement(): void {
         this.service.deleteElement(this.parentID, this.elementID);
     }
 }

@@ -5,7 +5,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { CategoryControllerModule, CheckboxGroupModule, ColorPickerModule, RangeControllerModule } from "@components/ui";
 
 import { APDropdownFieldModule, APNumberFieldModule, APTextFieldModule } from "../controls";
-import {APFormComponent} from "./form.component";
+import { APFormComponent } from "./form.component";
+import { TextareaComponent } from "@components/ui/controls/textarea/textarea.component";
 
 const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModule];
 
@@ -19,6 +20,7 @@ const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModul
         CommonModule,
         RangeControllerModule,
         ReactiveFormsModule,
+        TextareaComponent,
     ],
     exports: [APFormComponent],
 })
