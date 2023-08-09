@@ -9,7 +9,19 @@
     max-width: 1280px;
 }
 
-.add-element {
+.add-element,
+.delete-element {
     width: 24px;
     height: 24px;
+    position: absolute;
+    transform: translateX(-50%);
+    bottom: 0;
+}
+
+.add-element {
+    left: 50%;
+}
+
+.delete-element {
+    left: calc(50% + 24px);
 }

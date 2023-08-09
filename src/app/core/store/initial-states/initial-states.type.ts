@@ -72,14 +72,15 @@ export function initialEditorState(): EditorState {
                 type: SitePageElementType.PAGE,
                 children: [2, 3, 4],
                 isExtendable: true,
+                parentId: null,
                 settings: {
                     width: {
                         value: 1920,
-                        unit: StyleUnit.PERCENT,
+                        unit: StyleUnit.PX,
                     },
                     height: {
                         value: 1080,
-                        unit: StyleUnit.PERCENT,
+                        unit: StyleUnit.PX,
                     },
                 },
             },
@@ -88,6 +89,7 @@ export function initialEditorState(): EditorState {
                 type: SitePageElementType.SECTION,
                 isExtendable: true,
                 children: [5],
+                parentId: 1,
                 settings: {
                     width: {
                         value: 100,
@@ -103,6 +105,7 @@ export function initialEditorState(): EditorState {
                 id: 3,
                 type: SitePageElementType.SECTION,
                 children: [],
+                parentId: 1,
                 isExtendable: false,
                 settings: {
                     width: {
@@ -120,6 +123,7 @@ export function initialEditorState(): EditorState {
                 type: SitePageElementType.SECTION,
                 isExtendable: false,
                 children: [],
+                parentId: 1,
                 settings: {
                     width: {
                         value: 100,
@@ -135,20 +139,22 @@ export function initialEditorState(): EditorState {
                 id: 5,
                 type: SitePageElementType.TITLE,
                 children: [],
+                parentId: 2,
                 isExtendable: false,
                 settings: {
                     width: {
-                        value: 200,
-                        unit: StyleUnit.PX,
+                        value: 100,
+                        unit: StyleUnit.PERCENT,
                     },
                     height: {
                         value: 20,
                         unit: StyleUnit.PX,
                     },
+                    text: "The BEST OF THE BEST",
                 },
             },
         },
-        selectedElement: null,
+        selectedElement: ROOT_ELEMENT_ID,
         currentStateIndex: 6,
         settings: {
             title: "My best site",

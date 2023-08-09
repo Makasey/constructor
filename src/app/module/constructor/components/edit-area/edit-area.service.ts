@@ -8,9 +8,12 @@ import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, tap } from "rxjs";
 import {
     PageSettings,
+    ROOT_ELEMENT_ID,
     SitePageElement,
+    SitePageElementSettings,
     SitePageElementType,
     defaultPageElementSettingsMap,
+    deleteElementFromTree,
     isObjectEquals,
 } from "@modules/constructor/components/edit-area/types";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
@@ -21,15 +24,17 @@ export abstract class AbstractEditAreaService {
 
     public abstract getElement(id: number): SitePageElement;
 
-    public abstract addElement(parentId: number, type: SitePageElementType): void;
+    public abstract addElement(type: SitePageElementType, parentId?: number): void;
 
-    public abstract deleteElement(parentId: number, elementId: number): void;
+    public abstract deleteElement(elementId: number): void;
 
     public abstract updateSelection(elementId: number): void;
 
-    public abstract selectSelectedElement(): Observable<number | null>;
+    public abstract selectSelectedElement(): Observable<number>;
 
     public abstract selectFormModel(): Observable<APFormModel>;
+
+    public abstract selectSettings<K>(id: number, project: (settings: SitePageElementSettings) => K): Observable<K>;
 
     public abstract selectFormModelChange(): Observable<PageSettings>;
 }
@@ -52,15 +57,25 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         return this.getStoreElement("items")[id];
     }
 
-    public addElement(parentId: number, type: SitePageElementType): void {
+    public addElement(type: SitePageElementType, parentId?: number): void {
         this.service.updateState(state => {
             const newElementID = this.getStoreElement("currentStateIndex") + 1;
+            parentId = parentId ?? state.selectedElement;
+
             logAction(`Add element with id: ${newElementID}`);
             const items = state.items;
             const parentElement = items[parentId];
             const newElement: SitePageElement = {
-                id: newElementID,
                 ...defaultPageElementSettingsMap[type],
+                id: newElementID,
+                parentId: parentId,
+                settings: {
+                    ...defaultPageElementSettingsMap[type].settings,
+                    height: {
+                        unit: parentElement.settings.height.unit,
+                        value: parentElement.settings.height.value - 20,
+                    },
+                },
             };
 
             return {
@@ -78,14 +93,20 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         });
     }
 
-    public deleteElement(parentId: number, elementId: number): void {
+    public deleteElement(elementId: number): void {
         logAction(`Delete element with id: ${elementId}`, [], { id: elementId });
 
         this.service.updateState(state => {
-            const items = { ...state.items };
+            let items = { ...state.items };
+            const { parentId } = items[elementId];
+
+            if (!parentId) {
+                return state;
+            }
+
             const parentElement = items[parentId];
 
-            delete items[elementId];
+            items = deleteElementFromTree(state.items, elementId);
 
             return {
                 currentStateIndex: state.currentStateIndex === elementId ? elementId - 1 : state.currentStateIndex,
@@ -96,7 +117,7 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
                         children: arrayRemove<number[], number>(parentElement.children, item => item === elementId),
                     },
                 },
-                selectedElement: state.selectedElement === elementId ? null : state.selectedElement,
+                selectedElement: state.selectedElement === elementId ? parentId : ROOT_ELEMENT_ID,
             };
         });
     }
@@ -110,12 +131,12 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
             const shouldDeselectItem = elementId === state.selectedElement;
             logAction(`${shouldDeselectItem ? "deselect" : "select"}: ${elementId}`, [elementId]);
             return {
-                selectedElement: shouldDeselectItem ? null : elementId,
+                selectedElement: shouldDeselectItem ? ROOT_ELEMENT_ID : elementId,
             };
         });
     }
 
-    public selectSelectedElement(): Observable<number | null> {
+    public selectSelectedElement(): Observable<number> {
         return this.query.select(state => state.selectedElement);
     }
 
@@ -197,5 +218,9 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
                 },
             };
         });
+    }
+
+    public selectSettings<K>(id: number, project: (settings: SitePageElementSettings) => K): Observable<K> {
+        return this.query.select(state => state.items[id].settings).pipe(map(settings => project(settings)));
     }
 }

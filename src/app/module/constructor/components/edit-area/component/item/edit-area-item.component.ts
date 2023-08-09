@@ -30,6 +30,6 @@ export class LZEditAreaItemComponent {
     private readonly service = inject(AbstractEditAreaService);
 
     public deleteElement(): void {
-        this.service.deleteElement(this.parentID, this.elementID);
+        this.service.deleteElement(this.elementID);
     }
 }

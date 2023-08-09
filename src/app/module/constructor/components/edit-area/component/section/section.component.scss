@@ -1,5 +1,7 @@
 .lz-section-element {
     display: flex;
+    position: relative;
     flex-direction: column;
+    border: 5px dashed yellow;
 }
 

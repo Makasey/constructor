@@ -51,7 +51,7 @@ export type EditorState = Readonly<
     {
         settings: PageSettings;
         items: Record<string, SitePageElement>;
-        selectedElement: number | null;
+        selectedElement: number;
         currentStateIndex: number;
     } & ModuleState
 >;

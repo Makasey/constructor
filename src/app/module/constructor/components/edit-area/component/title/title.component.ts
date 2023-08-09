@@ -1,22 +1,40 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, inject } from "@angular/core";
-import { ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
-import { JsonPipe } from "@angular/common";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { AsyncPipe, JsonPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ELEMENT_ID, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "lz-title-element",
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     encapsulation: ViewEncapsulation.None,
-    template: "TITLE: {{item() | json}}",
-    imports: [JsonPipe],
+    templateUrl: "./title.components.html",
+    styleUrls: ["./title.component.scss"],
+    imports: [JsonPipe, AsyncPipe],
 })
-export class TitleComponent {
+export class TitleComponent implements OnInit {
     private readonly service = inject(AbstractEditAreaService);
 
-    @Input()
+    @HostBinding("$.style.height")
+    @HostListener("$.style.height")
+    public titleHeight$: Observable<string>;
+
+    @HostBinding("$.style.width")
+    @HostListener("$.style.width")
+    public titleWidth$: Observable<string>;
+
     private elementID = inject(ELEMENT_ID);
 
-    public readonly item = toSignal(this.service.selectElement(this.elementID));
+    public titleText$: Observable<string>;
+
+    public readonly titleElement$ = this.service.selectElement(this.elementID);
+
+    public ngOnInit(): void {
+        this.titleHeight$ = this.service.selectSettings(this.elementID, settings => processSettingValueWithUnit(settings.height));
+
+        this.titleWidth$ = this.service.selectSettings(this.elementID, settings => processSettingValueWithUnit(settings.width));
+
+        this.titleText$ = this.service.selectSettings(this.elementID, settings => settings.text ?? "");
+    }
 }

@@ -24,8 +24,11 @@ export const styleUnitMap: Record<StyleUnit, string> = {
 
 export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID");
 
+export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
+
 export type SitePageElement = Readonly<{
     id: number;
+    parentId: number | null;
     type: SitePageElementType;
     isExtendable: boolean;
     children: number[];
@@ -55,7 +58,7 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.SECTION]: SectionComponent,
 };
 
-export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElement, "id">> = {
+export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElement, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: {
         type: SitePageElementType.TITLE,
         children: [],
@@ -81,7 +84,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
                 unit: StyleUnit.PERCENT,
             },
             height: {
-                value: 20,
+                value: 200,
                 unit: StyleUnit.PX,
             },
         },
@@ -142,4 +145,18 @@ export function isObjectEquals<T>(target: T, other: T): boolean {
 
         return targetItem === otherItem;
     });
+}
+
+export function deleteElementFromTree(items: Record<string, SitePageElement>, element: number): Record<string, SitePageElement> {
+    const { id, children } = items[element];
+
+    let itemsCopy = { ...items };
+
+    children.forEach(child => {
+        itemsCopy = deleteElementFromTree(itemsCopy, child);
+    });
+
+    delete itemsCopy[id];
+
+    return itemsCopy;
 }

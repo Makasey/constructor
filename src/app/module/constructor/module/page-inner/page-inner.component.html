@@ -1,4 +1,21 @@
 <aside class="editor-sidebar">
+    <ng-container *ngIf="elements$ | async as elements">
+        <section class="elements-settings" *ngIf="elements.length">
+            <h2 class="settings-title">Элементы сайта</h2>
+            <article class="elements-wrapper">
+                <button
+                    class="element"
+                    *ngFor="let element of elements"
+                    [class._disabled]="!(selectedElement$ | async)"
+                    (click)="createNewElement(element.type)"
+                >
+                    <i class="bx" [ngClass]="element.icon"></i>
+                    {{ element.title }}
+                </button>
+            </article>
+        </section>
+    </ng-container>
+
     <section class="global-settings">
         <h2 class="settings-title">Настройки сайта</h2>
         <ap-form [formModel]="formModel()"></ap-form>

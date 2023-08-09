@@ -1,10 +1,16 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { ELEMENT_ID, SitePageElement, SitePageElementType, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import {
+    ELEMENT_ID,
+    PARENT_ID,
+    ROOT_ELEMENT_ID,
+    SitePageElement,
+    SitePageElementType,
+    processSettingValueWithUnit,
+} from "@modules/constructor/components/edit-area/types";
 import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
-import { Observable, map } from "rxjs";
-import { filterNilValue } from "@datorama/akita";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "lz-section-element",
@@ -29,38 +35,36 @@ export class SectionComponent implements OnInit {
 
     @HostListener("click.stop", ["$event"])
     public toggleSelection(): void {
-        this.service.updateSelection(this.ELEMENT_ID ?? this.elementID);
+        this.service.updateSelection(this.ELEMENT_ID);
     }
 
     private readonly service = inject(AbstractEditAreaService);
 
-    @Input({ required: true })
-    public elementID: number;
-
     public element$: Observable<SitePageElement> = new Observable();
 
-    public readonly ELEMENT_ID = inject(ELEMENT_ID, { optional: true });
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
+    public readonly PARENT_ID = inject(PARENT_ID);
+
+    public readonly rootElementId = ROOT_ELEMENT_ID;
 
     public sitePageElementType = SitePageElementType;
 
     public ngOnInit(): void {
-        this.element$ = this.service.selectElement(this.ELEMENT_ID ?? this.elementID);
-        this.sectionHeight$ = this.element$.pipe(
-            filterNilValue(),
-            map(element => processSettingValueWithUnit(element.settings.height)),
-        );
+        this.element$ = this.service.selectElement(this.ELEMENT_ID);
+        this.sectionHeight$ = this.service.selectSettings(this.ELEMENT_ID, settings => processSettingValueWithUnit(settings.height));
 
-        this.sectionWidth$ = this.element$.pipe(
-            filterNilValue(),
-            map(element => processSettingValueWithUnit(element.settings.width)),
-        );
+        this.sectionWidth$ = this.service.selectSettings(this.ELEMENT_ID, settings => processSettingValueWithUnit(settings.width));
     }
 
     public addElement(type: SitePageElementType): void {
-        this.service.addElement(this.ELEMENT_ID ?? this.elementID, type);
+        this.service.addElement(type, this.ELEMENT_ID);
     }
 
     public _trackByChild(index: number, child: number): number {
         return child;
+    }
+
+    public deleteElement(): void {
+        this.service.deleteElement(this.ELEMENT_ID);
     }
 }
