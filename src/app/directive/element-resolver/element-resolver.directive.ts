@@ -1,5 +1,5 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { Directive, Injector, Input, OnChanges, SimpleChanges, ViewContainerRef, inject } from "@angular/core";
+import { Directive, Injector, Input, OnChanges, SimpleChanges, Type, ViewContainerRef, inject } from "@angular/core";
 import { ELEMENT_ID, PARENT_ID, sitePageElementMap } from "@modules/constructor/components/edit-area/types";
 
 @Directive({
@@ -22,7 +22,7 @@ export class ElementResolverDirective implements OnChanges {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.lzElementResolver && this.lzElementResolver && this.lzElementResolverParent) {
             const { type, id } = this.service.getElement(this.lzElementResolver);
-            const componentType = sitePageElementMap[type];
+            const componentType: Type<unknown> = sitePageElementMap[type];
             const newInjector = Injector.create({
                 providers: [
                     {

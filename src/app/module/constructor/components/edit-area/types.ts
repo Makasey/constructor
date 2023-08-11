@@ -49,6 +49,8 @@ export type ElementSettingsWithUnit = Readonly<{
 export type PageSettings = Readonly<{
     title: string;
     campaignName: string;
+    siteMetaTags: string;
+    siteDescription: string;
     id?: number;
 }>;
 

@@ -6,11 +6,12 @@ import {
     PARENT_ID,
     ROOT_ELEMENT_ID,
     SitePageElement,
+    SitePageElementSettings,
     SitePageElementType,
     processSettingValueWithUnit,
 } from "@modules/constructor/components/edit-area/types";
 import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 
 @Component({
     selector: "lz-section-element",
@@ -49,11 +50,16 @@ export class SectionComponent implements OnInit {
 
     public sitePageElementType = SitePageElementType;
 
+    private sectionSettings$: Observable<SitePageElementSettings>;
+
     public ngOnInit(): void {
         this.element$ = this.service.selectElement(this.ELEMENT_ID);
-        this.sectionHeight$ = this.service.selectSettings(this.ELEMENT_ID, settings => processSettingValueWithUnit(settings.height));
 
-        this.sectionWidth$ = this.service.selectSettings(this.ELEMENT_ID, settings => processSettingValueWithUnit(settings.width));
+        this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
+
+        this.sectionHeight$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+
+        this.sectionWidth$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
     }
 
     public addElement(type: SitePageElementType): void {

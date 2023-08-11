@@ -4,9 +4,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 import { CommonModule } from "@angular/common";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { EditAreaComponent } from "@modules/constructor/components/edit-area/edit-area.component";
-import { ElementButton, blockElements } from "@modules/constructor/module/page-inner/types";
-import { Observable, map } from "rxjs";
 import { SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { blockElements } from "@modules/constructor/module/page-inner/types";
+import { map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -23,49 +23,58 @@ export class PageInnerComponent {
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    public elements$: Observable<ElementButton[]> = this.selectedElement$.pipe(
-        map(selectedElement => {
-            const { type } = this.service.getElement(selectedElement);
+    public elements = toSignal(
+        this.selectedElement$.pipe(
+            map(selectedElement => {
+                const { type } = this.service.getElement(selectedElement);
 
-            if (type === SitePageElementType.PAGE) {
-                return [
-                    {
-                        title: "Секция",
-                        type: SitePageElementType.SECTION,
-                        icon: "bx-font",
-                    },
-                ];
-            }
+                if (type === SitePageElementType.PAGE) {
+                    return [
+                        {
+                            title: "Секция",
+                            type: SitePageElementType.SECTION,
+                            icon: "bx-font",
+                        },
+                    ];
+                }
 
-            if (blockElements.includes(type)) {
-                return [
-                    {
-                        title: "Заголовок",
-                        type: SitePageElementType.TITLE,
-                        icon: "bx-font",
-                    },
-                    {
-                        title: "Заголовок",
-                        type: SitePageElementType.TITLE,
-                        icon: "bx-font",
-                    },
-                    {
-                        title: "Секция",
-                        type: SitePageElementType.SECTION,
-                        icon: "bx-font",
-                    },
-                ];
-            }
+                if (blockElements.includes(type)) {
+                    return [
+                        {
+                            title: "Заголовок",
+                            type: SitePageElementType.TITLE,
+                            icon: "bx-font",
+                        },
+                        {
+                            title: "Заголовок",
+                            type: SitePageElementType.TITLE,
+                            icon: "bx-font",
+                        },
+                        {
+                            title: "Секция",
+                            type: SitePageElementType.SECTION,
+                            icon: "bx-font",
+                        },
+                    ];
+                }
 
-            return [];
-        }),
+                return [];
+            }),
+        ),
+        { initialValue: [] },
     );
 
     public readonly formModel = toSignal(this.service.selectFormModel(), {
         initialValue: {} as APFormModel,
     });
 
+    public readonly elementSettingsFormModel = toSignal(this.service.selectElementSettingsFormModel(), {
+        initialValue: {} as APFormModel,
+    });
+
     public readonly formModelChanges = toSignal(this.service.selectFormModelChange());
+
+    public readonly selectElementSettingsFormModelChange = toSignal(this.service.selectElementSettingsFormModelChange());
 
     @HostBinding("class.lz-page-inner")
     public hostClass = true;

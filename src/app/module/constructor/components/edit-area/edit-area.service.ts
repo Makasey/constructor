@@ -5,7 +5,7 @@ import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { Observable, distinctUntilChanged, map, tap } from "rxjs";
+import { Observable, distinctUntilChanged, filter, map, shareReplay, skip, tap } from "rxjs";
 import {
     PageSettings,
     ROOT_ELEMENT_ID,
@@ -16,7 +16,7 @@ import {
     deleteElementFromTree,
     isObjectEquals,
 } from "@modules/constructor/components/edit-area/types";
-import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { arrayAdd, arrayRemove, filterNilValue, logAction } from "@datorama/akita";
 
 @Injectable()
 export abstract class AbstractEditAreaService {
@@ -34,9 +34,13 @@ export abstract class AbstractEditAreaService {
 
     public abstract selectFormModel(): Observable<APFormModel>;
 
-    public abstract selectSettings<K>(id: number, project: (settings: SitePageElementSettings) => K): Observable<K>;
+    public abstract selectElementSettingsFormModel(): Observable<APFormModel>;
+
+    public abstract selectSettings<K>(id: number): Observable<K>;
 
     public abstract selectFormModelChange(): Observable<PageSettings>;
+
+    public abstract selectElementSettingsFormModelChange(): Observable<SitePageElementSettings>;
 }
 
 @Injectable()
@@ -71,10 +75,6 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
                 parentId: parentId,
                 settings: {
                     ...defaultPageElementSettingsMap[type].settings,
-                    height: {
-                        unit: parentElement.settings.height.unit,
-                        value: parentElement.settings.height.value - 20,
-                    },
                 },
             };
 
@@ -177,9 +177,9 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
 
                             {
                                 id: crypto.randomUUID(),
-                                name: "testArea",
+                                name: "siteDescription",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-                                value: "My best description",
+                                value: settings.siteDescription,
                                 options: {
                                     maxLength: 300,
                                     label: "Описание вашей компании",
@@ -188,9 +188,9 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
 
                             {
                                 id: crypto.randomUUID(),
-                                name: "testArea",
+                                name: "siteMetaTags",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-                                value: "My best keywords",
+                                value: settings.siteMetaTags,
                                 options: {
                                     maxLength: 300,
                                     label: "Ключевые слова для вашего сайта",
@@ -204,12 +204,15 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
 
     public selectFormModelChange(): Observable<PageSettings> {
         return this.formsManager.valueChanges("globalSettings").pipe(
+            skip(1),
             distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
             tap(value => this.updatePageSettings(value)),
         );
     }
 
     private updatePageSettings(value: PageSettings): void {
+        logAction("Update page settings", [], value);
+
         this.service.updateState(state => {
             return {
                 settings: {
@@ -220,7 +223,101 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         });
     }
 
-    public selectSettings<K>(id: number, project: (settings: SitePageElementSettings) => K): Observable<K> {
-        return this.query.select(state => state.items[id].settings).pipe(map(settings => project(settings)));
+    public selectSettings<K>(id: number): Observable<K> {
+        return this.query.select(state => state.items[id]?.settings as K).pipe(filterNilValue(), shareReplay(1));
+    }
+
+    public selectElementSettingsFormModel(): Observable<APFormModel> {
+        return this.selectSelectedElement().pipe(
+            filter(selectedElement => selectedElement !== ROOT_ELEMENT_ID),
+            map(selectedElement => {
+                const element = this.getElement(selectedElement);
+
+                return {
+                    id: "elementSettings",
+                    name: "elementSettings",
+                    upsertConfig: {
+                        debounceTime: 500,
+                    },
+                    controls: [
+                        {
+                            id: "width",
+                            name: "width",
+                            value: element.settings.width.value,
+                            valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+                            options: {
+                                max: 1920,
+                                label: "Ширина элемента",
+                            },
+                        },
+                        {
+                            id: "height",
+                            name: "height",
+                            value: element.settings.height.value,
+                            valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+                            options: {
+                                max: 1920,
+                                label: "Высота элемента",
+                            },
+                        },
+                        {
+                            id: "text",
+                            name: "text",
+                            value: element.settings.text,
+                            valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
+                            options: {
+                                maxLength: 300,
+                                label: "Текст элемента",
+                            },
+                        },
+                    ],
+                };
+            }),
+        );
+    }
+
+    public selectElementSettingsFormModelChange(): Observable<SitePageElementSettings> {
+        return this.formsManager.valueChanges("elementSettings").pipe(
+            skip(1),
+            distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
+            tap(value => this.updateElementSettings(value)),
+        );
+    }
+
+    private updateElementSettings(value: SitePageElementSettings): void {
+        const id = this.getStoreElement("selectedElement");
+
+        logAction(`Update element settings`, id, value);
+
+        this.service.updateState(state => {
+            const { items } = state;
+            const item = items[id];
+            const { settings } = item;
+
+            const width = {
+                ...settings.width,
+                value: value.width,
+            };
+
+            const height = {
+                ...settings.height,
+                value: value.height,
+            };
+
+            return {
+                items: {
+                    ...items,
+                    [id]: {
+                        ...item,
+                        settings: {
+                            ...item.settings,
+                            ...value,
+                            width: width,
+                            height: height,
+                        },
+                    },
+                },
+            };
+        });
     }
 }

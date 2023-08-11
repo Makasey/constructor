@@ -159,6 +159,8 @@ export function initialEditorState(): EditorState {
         settings: {
             title: "My best site",
             id: 1,
+            siteDescription: "My best site",
+            siteMetaTags: "",
             campaignName: "My best campaign",
         },
     };

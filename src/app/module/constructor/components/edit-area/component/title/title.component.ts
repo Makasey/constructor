@@ -1,8 +1,8 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { ELEMENT_ID, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
-import { Observable } from "rxjs";
+import { ELEMENT_ID, SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
+import { Observable, map } from "rxjs";
 
 @Component({
     selector: "lz-title-element",
@@ -28,13 +28,17 @@ export class TitleComponent implements OnInit {
 
     public titleText$: Observable<string>;
 
+    private titleSettings$: Observable<SitePageElementSettings>;
+
     public readonly titleElement$ = this.service.selectElement(this.elementID);
 
     public ngOnInit(): void {
-        this.titleHeight$ = this.service.selectSettings(this.elementID, settings => processSettingValueWithUnit(settings.height));
+        this.titleSettings$ = this.service.selectSettings(this.elementID);
 
-        this.titleWidth$ = this.service.selectSettings(this.elementID, settings => processSettingValueWithUnit(settings.width));
+        this.titleHeight$ = this.titleSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
-        this.titleText$ = this.service.selectSettings(this.elementID, settings => settings.text ?? "");
+        this.titleWidth$ = this.titleSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
+
+        this.titleText$ = this.titleSettings$.pipe(map(settings => settings.text ?? ""));
     }
 }
