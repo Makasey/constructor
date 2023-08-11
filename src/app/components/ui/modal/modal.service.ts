@@ -1,22 +1,11 @@
-import {
-    ApplicationRef,
-    ComponentRef,
-    EmbeddedViewRef,
-    Inject,
-    Injectable,
-    Injector,
-    Renderer2,
-    RendererFactory2,
-    TemplateRef,
-    Type,
-} from "@angular/core";
+import { ApplicationRef, ComponentRef, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type, inject } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 
-import { Subscription, tap } from "rxjs";
+import { tap } from "rxjs";
 
 import { ModalComponent } from "@components/ui";
 
-import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, ModalConfig, ModalType, ModalWithData } from "./types";
+import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, ModalConfig, ModalModel, ModalModelMap, ModalType, ModalWithData } from "./types";
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 
@@ -24,23 +13,17 @@ const NO_SCROLL_CLASS = "html-no-scroll";
     providedIn: "root",
 })
 export class ModalService {
-    private modalMap: Record<
-        string,
-        {
-            modalWrapperRef: ComponentRef<ModalComponent>;
-            contentRef: ComponentRef<unknown> | EmbeddedViewRef<unknown>;
-            controlsRef: ComponentRef<unknown> | EmbeddedViewRef<unknown>;
-            closeSubscription: Subscription;
-        }
-    > = {};
+    private readonly appRef = inject(ApplicationRef);
 
-    private renderer: Renderer2;
+    private readonly documentRef = inject(DOCUMENT);
 
-    constructor(private appRef: ApplicationRef, @Inject(DOCUMENT) public documentRef: Document, private rendererFactory: RendererFactory2) {
-        this.renderer = rendererFactory.createRenderer(appRef, null);
-    }
+    private readonly rendererFactory = inject(RendererFactory2);
 
-    public openModal<T>(model: ModalConfig<T>): string {
+    private modalMap: ModalModelMap = {};
+
+    private renderer: Renderer2 = this.rendererFactory.createRenderer(this.appRef, null);
+
+    public openModal<T>(model: ModalConfig<T>): ModalModel {
         const { viewContainerRef, id } = model;
 
         viewContainerRef.clear();
@@ -58,16 +41,25 @@ export class ModalService {
             ...this.modalMap,
             [modalId]: {
                 ...this.modalMap[modalId],
+                id: modalId,
                 modalWrapperRef: modalWrapperRef,
             },
         };
 
-        this.modalMap[modalId].closeSubscription = modalWrapperRef.instance.closeSubject$
-        .asObservable()
-        .pipe(tap(() => this.closeModal(modalId)))
-        .subscribe(console.log);
+        const closeSubscription = modalWrapperRef.instance.closeSubject$
+            .asObservable()
+            .pipe(tap(() => this.closeModal(modalId)))
+            .subscribe(console.log);
 
-        return modalId;
+        this.modalMap = {
+            ...this.modalMap,
+            [modalId]: {
+                ...this.modalMap[modalId],
+                closeSubscription: closeSubscription,
+            },
+        };
+
+        return this.modalMap[modalId];
     }
 
     public closeModal(id: string): void {
@@ -135,7 +127,7 @@ export class ModalService {
                 const contentRef = componentRef.instance.hostView.viewContainerRef.createComponent(model.component as Type<unknown>, {
                     injector: updatedInjector,
                 });
-
+                // TODO: Remove mutation of component instance
                 if (data) {
                     (contentRef.instance as ModalWithData<unknown>).data = data;
                 }

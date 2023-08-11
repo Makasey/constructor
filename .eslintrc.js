@@ -73,7 +73,12 @@ module.exports = {
                 createDefaultProgram: true,
             },
             plugins: ["sort-imports-es6-autofix", "billing-rmi-rules"],
-            extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended-requiring-type-checking", "plugin:@angular-eslint/recommended"],
+            extends: [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended-requiring-type-checking",
+                "plugin:@angular-eslint/recommended",
+                "plugin:prettier/recommended",
+            ],
             rules: {
                 "arrow-body-style": 0,
                 "prefer-arrow-callback": 0,
@@ -150,7 +155,7 @@ module.exports = {
                 "@typescript-eslint/no-parameter-properties": 0,
                 "@typescript-eslint/no-inferrable-types": [1, { ignoreParameters: true }],
                 "@typescript-eslint/member-delimiter-style": [
-                    2,
+                    0,
                     {
                         multiline: {
                             delimiter: "semi",
@@ -165,7 +170,6 @@ module.exports = {
                 ],
                 "@typescript-eslint/no-use-before-define": 1,
                 "@typescript-eslint/no-this-alias": [1, { allowedNames: ["self"] }],
-                "@typescript-eslint/no-duplicate-imports": 2,
                 "@typescript-eslint/no-require-imports": 2,
                 "@typescript-eslint/no-unsafe-return": 0,
                 "@typescript-eslint/explicit-module-boundary-types": ["error"],

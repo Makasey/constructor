@@ -78,7 +78,7 @@
                 >
                 <h3 class="product-price old-price">{{ _product()?.price }} {{ _product()?.currencies[0].symbol }}</h3>
             </div>
-            <button class="product-button">
+            <button class="product-button" (click)="addProductToCart(_product())">
                 <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M3.40719 15.6861C2.8428 13.411 2.60454 10.7076 2.52891 9.12915C2.50248 8.5775 2.94772 8.13013 3.5 8.13013H16.5C17.0523 8.13013 17.4975 8.5775 17.4711 9.12915C17.3954 10.7076 17.1572 13.411 16.5928 15.6861C16.4012 16.4583 15.8347 17.0546 15.0499 17.1855C14.0501 17.3523 12.4224 17.5051 10 17.5051C7.57762 17.5051 5.94985 17.3523 4.95013 17.1855C4.16533 17.0546 3.59876 16.4583 3.40719 15.6861Z"

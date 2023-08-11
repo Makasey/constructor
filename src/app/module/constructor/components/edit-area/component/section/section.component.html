@@ -1,0 +1,19 @@
+<ng-container *ngIf="element$ | async as element">
+    <ng-container *ngIf="element.children.length; else emptyTemplate">
+        <lz-edit-area-item
+            *ngFor="let child of element.children; trackBy: _trackByChild"
+            [elementID]="child"
+            [parentID]="element.id"
+        ></lz-edit-area-item>
+    </ng-container>
+</ng-container>
+
+<ng-template #emptyTemplate> Сейчас тут нет элементов... </ng-template>
+
+<button class="add-element" (click.stop)="addElement(sitePageElementType.TITLE)">
+    <i class="bx bx-plus-circle"></i>
+</button>
+
+<button class="delete-element" (click.stop)="deleteElement()" *ngIf="PARENT_ID === rootElementId">
+    <i class="bx bx-trash"></i>
+</button>

@@ -15,6 +15,6 @@ export class LZDefaultAuthDataService extends LZAbstractAuthDataService {
     }
 
     public login(loginData: { email: string; password: string; }): Observable<unknown> {
-        return this.httpClient.post("http://178.172.139.42:7000/api/auth/login", loginData);
+        return this.httpClient.post("http://localhost:7000/api/auth/login", loginData, {withCredentials: true});
     }
 }

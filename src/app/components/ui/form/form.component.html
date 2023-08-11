@@ -22,7 +22,7 @@
     </ng-container>
     <ng-container *ngIf="formModel?.innerGroups">
         <ng-container
-            *ngFor="let group of formModel.innerGroups; let i = index"
+            *ngFor="let group of formModel.innerGroups; let i = index; trackBy: trackByGroup"
             [ngTemplateOutlet]="groupTemplate"
             [ngTemplateOutletContext]="{
                 formModel: group,
@@ -38,7 +38,7 @@
         <form class="form" [formGroup]="formGroup" (submit)="_onFormSubmit()">
             <div class="form-controls">
                 <ng-container *ngIf="formModel.innerControls">
-                    <ng-container *ngFor="let control of formModel.innerControls">
+                    <ng-container *ngFor="let control of formModel.innerControls; trackBy: trackByControl">
                         <div [ngClass]="control.controlClass" *ngIf="control && !control.hidden">
                             <h2 [ngClass]="control.options?.titleClass" *ngIf="control.options?.title">{{
                                 control.options.title
@@ -81,6 +81,14 @@
         [nativeControl]="nativeControl"
         [formControl]="nativeControl"
     ></ap-number-field>
+</ng-template>
+
+<ng-template #textAreaFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <lz-textarea
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+    ></lz-textarea>
 </ng-template>
 
 <ng-template #dropdownFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">

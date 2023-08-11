@@ -1,13 +1,24 @@
+import { ComponentRef, EmbeddedViewRef, InjectionToken, TemplateRef, Type, ViewContainerRef } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { InjectionToken, TemplateRef, Type, ViewContainerRef } from "@angular/core";
 
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 
 import { APFormControl, APFormOptions } from "../form";
+import { ModalComponent } from "@components/ui";
 
 export interface ModalWithData<T> {
     data: T;
 }
+
+export type ModalModel = Readonly<{
+    modalWrapperRef: ComponentRef<ModalComponent>;
+    contentRef: ComponentRef<unknown> | EmbeddedViewRef<unknown>;
+    controlsRef: ComponentRef<unknown> | EmbeddedViewRef<unknown>;
+    closeSubscription: Subscription;
+    id: string;
+}>;
+
+export type ModalModelMap = Record<string, ModalModel>;
 
 export enum ModalType {
     DEFAULT = "default",

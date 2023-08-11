@@ -1,0 +1,35 @@
+.form-control {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &-label {
+        display: flex;
+        gap: 6px;
+        width: 100%;
+        font-size: 18px;
+        flex-direction: column;
+    }
+
+    &-input {
+        max-width: 100%;
+        width: 100%;
+        line-height: 24px;
+        font-size: 18px;
+        background: transparent;
+        border: 1px solid #fff;
+        color: white;
+        padding: 3px 10px;
+        border-radius: 4px;
+    }
+
+    textarea.form-control-input {
+        min-height: 80px;
+        max-height: 180px;
+        resize: vertical;
+    }
+
+    &-text {
+        color: white;
+    }
+}

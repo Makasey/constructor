@@ -1,0 +1,20 @@
+<div class="catalog-products">
+    <div class="catalog-header">
+        <h2 class="catalog-title">Букеты из роз</h2>
+        <div class="catalog-sort">catalog-sort add component</div>
+        <div class="catalog-chips">catalog-chips add component</div>
+    </div>
+    <ng-template
+        [preloadBackground]="'product'"
+        [preloadBackgroundLoading]="_loading$ | async"
+        [preloadBackgroundConfig]="{ productCount: 9 }"
+    >
+        <lz-grid [items]="products()" [itemTemplate]="cart" [columns]="3"> </lz-grid>
+
+        <ng-template #cart let-item="item">
+            <lz-product-card [product]="item"> </lz-product-card>
+        </ng-template>
+
+        <button class="btn-load" *ngIf="canLoad()" (click)="loadMore()">Загрузить еще</button>
+    </ng-template>
+</div>

@@ -44,6 +44,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private numberField: ControlTemplate;
 
+    @ViewChild("textAreaFieldTemplate", {
+        static: true,
+    })
+    private textAreaField: ControlTemplate;
+
     @ViewChild("dropdownFieldTemplate", {
         static: true,
     })
@@ -103,6 +108,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
             [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
             [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
+            [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
         };
 
         this._templatesMap = {
@@ -198,11 +204,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             gridAreas: gridAreasFromColumns(resultControls?.map(its => its.filter(it => !it.hidden))),
             innerGroups:
                 formModel.innerGroups
-                ?.filter(group => !!group)
-                .map((group, i) => {
-                    const pathItem: string = formModel.isFormArray ? `${i}` : group.name;
-                    return this.normalizeFields(group, [...currentPath, pathItem]) ?? ({} as ApFormInnerModel);
-                }) ?? [],
+                    ?.filter(group => !!group)
+                    .map((group, i) => {
+                        const pathItem: string = formModel.isFormArray ? `${i}` : group.name;
+                        return this.normalizeFields(group, [...currentPath, pathItem]) ?? ({} as ApFormInnerModel);
+                    }) ?? [],
             path: currentPath.length > 0 ? currentPath : undefined,
             firstColumnLength: resultControls?.[0]?.length ?? 0,
         };
@@ -222,8 +228,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
                 const oldControl: APFormControl =
                     oldFormInner?.controls &&
                     ([] as APFormControl[])
-                    .concat(...oldFormInner.controls)
-                    .find((oldControl: APFormControl) => oldControl.name === innerControl.name)!;
+                        .concat(...oldFormInner.controls)
+                        .find((oldControl: APFormControl) => oldControl.name === innerControl.name)!;
                 if (oldControl && innerControl.valueTemplateKey !== oldControl.valueTemplateKey) {
                     formGroup.removeControl(innerControl.name);
                     formGroup.addControl(innerControl.name, formControl);
@@ -346,5 +352,13 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.unsubscribeForm();
+    }
+
+    public trackByGroup(index: number, group: APFormModel): string {
+        return group.id;
+    }
+
+    public trackByControl(index: number, control: ApFormControlInner): string {
+        return control.name;
     }
 }

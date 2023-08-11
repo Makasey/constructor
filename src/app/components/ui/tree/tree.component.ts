@@ -1,15 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    HostListener,
-    Inject,
-    Input,
-    OnInit,
-    Optional,
-    SkipSelf,
-    ViewEncapsulation,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input, Optional, SkipSelf, ViewEncapsulation } from "@angular/core";
 import { NgFor, NgIf } from "@angular/common";
 
 export type Tree<V = number> = {
@@ -26,14 +15,12 @@ export type Tree<V = number> = {
     standalone: true,
     templateUrl: "./tree.component.html",
 })
-export class TreeComponent implements OnInit {
+export class TreeComponent {
     @HostBinding("class.lz-tree")
     public hostClass = true;
 
-    @HostListener("click", ["$event"])
-    public toggleTree(event: PointerEvent): void {
-        event.stopPropagation();
-
+    @HostListener("click.stop", ["$event"])
+    public toggleTree(): void {
         this.closed = !this.closed;
     }
 
@@ -45,8 +32,4 @@ export class TreeComponent implements OnInit {
     public closed = false;
 
     constructor(@SkipSelf() @Optional() @Inject(TreeComponent) public parent: TreeComponent) {}
-
-    public ngOnInit(): void {
-        console.log(this.tree, this.parent);
-    }
 }

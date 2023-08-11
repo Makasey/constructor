@@ -17,7 +17,7 @@ export enum RouteKey {
 }
 
 export enum RoutePaths {
-    HOME = "/",
+    HOME = "/home",
     CATALOG = "catalog",
     ACCOUNT = "account",
     ABOUT = "about",

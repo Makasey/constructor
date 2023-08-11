@@ -1,65 +1,9 @@
+<app-header></app-header>
 
-<div class="welcome">
-  <div class="container">
-    <div class="welcome_sliders">
-      <div class="welcome_main_slider">
-        <div class="slider_content">
-          <button class="switch left">
-            <img src="assets/Sort_left.svg" alt="Sort_left">
-          </button>
-          <div class="slider_text">
-            <h2 class="slider_title">
-              Бесплатная доставка
-              от 5000 руб
-            </h2>
-            <h4 class="promo_text">Промокод:</h4>
-            <form>
-              <input type="text" placeholder="ЛАВКАРОЗ">
-              <button class="copy_btn">
-                <img src="assets/copy-target.svg" alt="copy-target">
-              </button>
-            </form>
-          </div>
-          <button class="switch right">
-            <img src="assets/Sort_right.svg" alt="Sort_right">
-          </button>
-        </div>
-        <div class="slider_crumbs">
-          <button class="crumb_btn active"></button>
-          <button class="crumb_btn"></button>
-          <button class="crumb_btn"></button>
-        </div>
-      </div>
-      <div class="week_product">
-        <h3 class="week_product_title">Букет недели</h3>
-        <div class="product_input"></div>
-      </div>
-    </div>
-    <div class="welcome_advantages">
-      <div class="advantages_item">
-        <img src="assets/quality-1.svg" alt="track_icon">
-        <h3 class="advantages_text">Экспресс-доставка
-          от 90 минут</h3>
-      </div>
-      <div class="advantages_item">
-        <img src="assets/quality-2.svg" alt="sale_icon">
-        <h3 class="advantages_text">Низкие цены</h3>
-      </div>
-      <div class="advantages_item">
-        <img src="assets/quality-3.svg" alt="medal_icon">
-        <h3 class="advantages_text">Каждый день поступление
-          свежих цветов</h3>
-      </div>
-      <div class="advantages_item">
-        <img src="assets/quality-4.svg" alt="bouquet_icon">
-        <h3 class="advantages_text">Опытные флористы</h3>
-      </div>
-      <div class="advantages_item">
-        <img src="assets/quality-5.svg" alt="Calendar_Check_icon">
-        <h3 class="advantages_text">Работаем
-          без выходных</h3>
-      </div>
-    </div>
-  </div>
-</div>
+<main class="content">
+  <router-outlet />
+</main>
+<lz-toastr></lz-toastr>
+
+<app-footer></app-footer>
 

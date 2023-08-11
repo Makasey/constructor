@@ -13,6 +13,7 @@ export enum APFormDefaultTemplateKeys {
     RANGE_FIELD = "rangeFieldTemplate",
     COLOR_FIELD = "colorPickerTemplate",
     CHECKBOX_FIELD = "checkboxGroupTemplate",
+    TEXTAREA_FIELD = "textAreaFieldTemplate",
 }
 
 export type APFormModel = {
@@ -53,7 +54,7 @@ export type APFormControl<T = any> = {
     styleClass?: string;
 } & AbstractControlOptions;
 
-export function gridAreasFromColumns(columns: { gridClass: string; }[][]): string {
+export function gridAreasFromColumns(columns: { gridClass: string }[][]): string {
     const gridAreas = [];
     let j = 0;
     while (columns?.some(it => !!it[j])) {

@@ -43,14 +43,14 @@ describe(`${TEST_TAG} Test`, () => {
     it(`[${TEST_TAG}] Build link method should return roses catalog link`, () => {
         const pathIds = { categoryId: "roses" };
         const pathName = "catalog";
-        const expectedResult = "/catalog/roses";
+        const expectedResult = "/home/catalog/roses";
         expect(service.buildLink(pathName, pathIds)).toEqual(expectedResult);
     });
 
     it(`[${TEST_TAG}] Build link method should return rose product link`, () => {
         const pathIds = { categoryId: "roses", productId: "rose" };
         const pathName = "product";
-        const expectedResult = "/catalog/roses/rose";
+        const expectedResult = "/home/catalog/roses/rose";
 
         expect(service.buildLink(pathName, pathIds)).toEqual(expectedResult);
     });
