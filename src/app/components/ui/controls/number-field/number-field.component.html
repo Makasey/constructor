@@ -1,7 +1,9 @@
 <ng-container>
     <div class="form-control">
         <label class="form-control-label number-field" [for]="controlModel.id">
-            {{ controlModel.options?.label }}
+            <span class="form-control-text">
+                {{ controlModel.options?.label }}
+            </span>
             <input
                 type="text"
                 class="form-control-input"
