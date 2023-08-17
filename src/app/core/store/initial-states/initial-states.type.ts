@@ -70,7 +70,7 @@ export function initialEditorState(): EditorState {
             [ROOT_ELEMENT_ID]: {
                 id: 1,
                 type: SitePageElementType.PAGE,
-                children: [2, 3, 4],
+                children: [],
                 isExtendable: true,
                 parentId: null,
                 settings: {
@@ -84,78 +84,9 @@ export function initialEditorState(): EditorState {
                     },
                 },
             },
-            "2": {
-                id: 2,
-                type: SitePageElementType.SECTION,
-                isExtendable: true,
-                children: [5],
-                parentId: 1,
-                settings: {
-                    width: {
-                        value: 100,
-                        unit: StyleUnit.PERCENT,
-                    },
-                    height: {
-                        value: 200,
-                        unit: StyleUnit.PX,
-                    },
-                },
-            },
-            "3": {
-                id: 3,
-                type: SitePageElementType.SECTION,
-                children: [],
-                parentId: 1,
-                isExtendable: false,
-                settings: {
-                    width: {
-                        value: 100,
-                        unit: StyleUnit.PERCENT,
-                    },
-                    height: {
-                        value: 200,
-                        unit: StyleUnit.PX,
-                    },
-                },
-            },
-            "4": {
-                id: 4,
-                type: SitePageElementType.SECTION,
-                isExtendable: false,
-                children: [],
-                parentId: 1,
-                settings: {
-                    width: {
-                        value: 100,
-                        unit: StyleUnit.PERCENT,
-                    },
-                    height: {
-                        value: 200,
-                        unit: StyleUnit.PX,
-                    },
-                },
-            },
-            "5": {
-                id: 5,
-                type: SitePageElementType.TITLE,
-                children: [],
-                parentId: 2,
-                isExtendable: false,
-                settings: {
-                    width: {
-                        value: 100,
-                        unit: StyleUnit.PERCENT,
-                    },
-                    height: {
-                        value: 20,
-                        unit: StyleUnit.PX,
-                    },
-                    text: "The BEST OF THE BEST",
-                },
-            },
         },
         selectedElement: ROOT_ELEMENT_ID,
-        currentStateIndex: 6,
+        currentStateIndex: 1,
         settings: {
             title: "My best site",
             id: 1,

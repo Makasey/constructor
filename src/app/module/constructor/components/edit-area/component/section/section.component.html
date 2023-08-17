@@ -9,11 +9,12 @@
 </ng-container>
 
 <ng-template #emptyTemplate> Сейчас тут нет элементов... </ng-template>
+<ng-container *ngIf="(selectedElement$ | async) === ELEMENT_ID">
+    <button class="add-element" (click.stop)="addElement(sitePageElementType.TITLE)">
+        <i class="bx bx-plus-circle"></i>
+    </button>
 
-<button class="add-element" (click.stop)="addElement(sitePageElementType.TITLE)">
-    <i class="bx bx-plus-circle"></i>
-</button>
-
-<button class="delete-element" (click.stop)="deleteElement()" *ngIf="PARENT_ID === rootElementId">
-    <i class="bx bx-trash"></i>
-</button>
+    <button class="delete-element" (click.stop)="deleteElement()">
+        <i class="bx bx-trash"></i>
+    </button>
+</ng-container>

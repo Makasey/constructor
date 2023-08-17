@@ -1,5 +1,7 @@
 <ng-container *lzElementResolver="elementID; parent: parentID"></ng-container>
 
-<button class="delete-element" (click.stop)="deleteElement()">
-    <i class="bx bx-trash"></i>
-</button>
+<ng-container *ngIf="(selectedElement$ | async) === elementID && element?.type !== sitePageElementType.SECTION">
+    <button class="delete-element" (click.stop)="deleteElement()">
+        <i class="bx bx-trash"></i>
+    </button>
+</ng-container>

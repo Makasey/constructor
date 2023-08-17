@@ -41,6 +41,8 @@ export abstract class AbstractEditAreaService {
     public abstract selectFormModelChange(): Observable<PageSettings>;
 
     public abstract selectElementSettingsFormModelChange(): Observable<SitePageElementSettings>;
+
+    public abstract tabSelection(currentIndex?: number): void;
 }
 
 @Injectable()
@@ -263,7 +265,7 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
                         {
                             id: "text",
                             name: "text",
-                            value: element.settings.text,
+                            value: element.settings.text ?? null,
                             valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
                             options: {
                                 maxLength: 300,
@@ -319,5 +321,33 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
                 },
             };
         });
+    }
+
+    public tabSelection(currentIndex?: number): void {
+        const index = (currentIndex ?? this.getStoreElement("selectedElement")) + 1;
+        const items = this.getStoreElement("items");
+        const currentStateIndex = this.getStoreElement("currentStateIndex");
+
+        if (index > currentStateIndex) {
+            this.service.updateState(() => {
+                return {
+                    selectedElement: ROOT_ELEMENT_ID,
+                };
+            });
+
+            return;
+        }
+
+        if (items[index]) {
+            this.service.updateState(() => {
+                return {
+                    selectedElement: index,
+                };
+            });
+
+            return;
+        }
+
+        this.tabSelection(index);
     }
 }

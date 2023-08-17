@@ -1,7 +1,10 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
+import { Observable, map } from "rxjs";
+import { SitePageElement, SitePageElementType } from "@modules/constructor/components/edit-area/types";
 
 @Component({
     selector: "lz-edit-area-item",
@@ -12,7 +15,7 @@ import { ElementResolverDirective } from "@shared-directives/element-resolver/el
     templateUrl: "./edit-area-item.component.html",
     imports: [AsyncPipe, JsonPipe, NgForOf, NgIf, ElementResolverDirective],
 })
-export class LZEditAreaItemComponent {
+export class LZEditAreaItemComponent implements OnInit {
     @HostBinding("class.lz-edit-area-item")
     public hostClass = true;
 
@@ -27,9 +30,29 @@ export class LZEditAreaItemComponent {
     @Input({ required: true })
     public parentID: number;
 
+    public sitePageElementType = SitePageElementType;
+
+    public element: SitePageElement | undefined;
+
+    @HostBinding("$.class._selected")
+    @HostListener("$.class._selected")
+    public isSelected$: Observable<boolean>;
+
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
     private readonly service = inject(AbstractEditAreaService);
+
+    public ngOnInit(): void {
+        this.element = this.service.getElement(this.elementID);
+
+        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.elementID));
+    }
 
     public deleteElement(): void {
         this.service.deleteElement(this.elementID);
+    }
+
+    public addElement(type: SitePageElementType): void {
+        this.service.addElement(type, this.parentID);
     }
 }

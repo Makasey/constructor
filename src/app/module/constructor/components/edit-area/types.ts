@@ -121,7 +121,7 @@ export function processSettingValueWithUnit(settingsValue: ElementSettingsWithUn
     return `${value}${convertedUnit}`;
 }
 
-export function isObjectEquals<T>(target: T, other: T): boolean {
+export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T): boolean {
     if ((!isObject(target) && isObject(other)) || (isObject(target) && !isObject(other))) {
         return false;
     }
@@ -130,7 +130,7 @@ export function isObjectEquals<T>(target: T, other: T): boolean {
         return target === other;
     }
 
-    return Object.keys(target as {}).every(key => {
+    return Object.keys(target as Record<string, unknown>).every(key => {
         const targetItem = target[key];
         const otherItem = other[key];
 

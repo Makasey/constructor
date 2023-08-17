@@ -1,3 +1,4 @@
 <ng-container *ngFor="let child of root()?.children; trackBy: _trackById">
     <ng-container *lzElementResolver="child; parent: root()?.id"></ng-container>
 </ng-container>
+

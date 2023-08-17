@@ -4,6 +4,7 @@ import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { NgForOf } from "@angular/common";
 import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
+import { TabSelectionDirective } from "@shared-directives/editor";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -14,6 +15,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
     imports: [NgForOf, ElementResolverDirective],
+    hostDirectives: [TabSelectionDirective],
 })
 export class RootComponent {
     private readonly selectedElement = toSignal(inject(EDITOR_SELECTED_ELEMENT), { initialValue: ROOT_ELEMENT_ID });

@@ -1,10 +1,9 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import {
     ELEMENT_ID,
-    PARENT_ID,
-    ROOT_ELEMENT_ID,
     SitePageElement,
     SitePageElementSettings,
     SitePageElementType,
@@ -12,6 +11,7 @@ import {
 } from "@modules/constructor/components/edit-area/types";
 import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
 import { Observable, map } from "rxjs";
+import { TabSelectionDirective } from "@shared-directives/editor";
 
 @Component({
     selector: "lz-section-element",
@@ -20,6 +20,7 @@ import { Observable, map } from "rxjs";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
+    hostDirectives: [TabSelectionDirective],
     imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe, JsonPipe],
 })
 export class SectionComponent implements OnInit {
@@ -39,14 +40,17 @@ export class SectionComponent implements OnInit {
         this.service.updateSelection(this.ELEMENT_ID);
     }
 
+    @HostBinding("$.class._selected")
+    @HostListener("$.class._selected")
+    public isSelected$: Observable<boolean>;
+
     private readonly service = inject(AbstractEditAreaService);
 
     public element$: Observable<SitePageElement> = new Observable();
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
-    public readonly PARENT_ID = inject(PARENT_ID);
 
-    public readonly rootElementId = ROOT_ELEMENT_ID;
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
     public sitePageElementType = SitePageElementType;
 
@@ -56,6 +60,8 @@ export class SectionComponent implements OnInit {
         this.element$ = this.service.selectElement(this.ELEMENT_ID);
 
         this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
+
+        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.ELEMENT_ID));
 
         this.sectionHeight$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
