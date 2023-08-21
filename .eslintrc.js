@@ -173,6 +173,7 @@ module.exports = {
                 "@typescript-eslint/no-this-alias": [1, { allowedNames: ["self"] }],
                 "@typescript-eslint/no-require-imports": 2,
                 "@typescript-eslint/no-unsafe-return": 0,
+                "@typescript-eslint/no-explicit-any": 1,
                 "@typescript-eslint/explicit-module-boundary-types": ["error"],
                 "@typescript-eslint/restrict-template-expressions": 0,
                 "@typescript-eslint/restrict-plus-operands": 0,
