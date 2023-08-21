@@ -10,7 +10,10 @@ interface InitVarContext<T> {
 export class LZInitVarDirective<T> implements OnInit {
     private _context: InitVarContext<T> = { initVar: null };
 
-    constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<InitVarContext<T>>) {}
+    constructor(
+        private viewContainerRef: ViewContainerRef,
+        private templateRef: TemplateRef<InitVarContext<T>>,
+    ) {}
 
     @Input()
     public set initVar(value: T) {

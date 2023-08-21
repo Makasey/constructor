@@ -83,7 +83,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     @Output()
-    public readonly submitForm: EventEmitter<any> = new EventEmitter<any>();
+    public readonly submitForm: EventEmitter<unknown> = new EventEmitter<unknown>();
 
     public mainFormGroup: FormGroup | null = null;
 
@@ -91,7 +91,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public _templatesMap: Record<string, TemplateRef<unknown>>;
 
-    public _defaultTemplatesMap: Record<APFormDefaultTemplateKeys | string, TemplateRef<ControlTemplate | any>>;
+    public _defaultTemplatesMap: Record<APFormDefaultTemplateKeys | string, TemplateRef<ControlTemplate | unknown>>;
 
     private subscribedForms: string[] = [];
 
@@ -256,8 +256,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             if (innerGroup.isFormArray) {
                 this.updateFormArray(formGroup.controls[innerGroup.name] as FormArray, innerGroup);
             } else {
-                const oldGroup = oldFormInner?.innerGroups?.find(oldGroup => oldGroup.name === innerGroup.name)!;
-                this.updateFormGroup(formGroup.controls[innerGroup.name] as FormGroup, innerGroup, oldGroup);
+                const oldGroup = oldFormInner?.innerGroups?.find(oldGroup => oldGroup.name === innerGroup.name);
+                this.updateFormGroup(formGroup.controls[innerGroup.name] as FormGroup, innerGroup, oldGroup!);
             }
         });
     }
@@ -265,15 +265,18 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     private convertToGroupsMap(models: ApFormInnerModel[]): Record<string, FormGroup | FormArray> | null {
         return (
             models &&
-            models.reduce((result, next) => {
-                if (next?.isFormArray) {
-                    result[next.name] = this.convertToNativeFormArray(next)!;
-                } else {
-                    result[next.name] = this.convertToNativeGroup(next)!;
-                }
+            models.reduce(
+                (result, next) => {
+                    if (next?.isFormArray) {
+                        result[next.name] = this.convertToNativeFormArray(next)!;
+                    } else {
+                        result[next.name] = this.convertToNativeGroup(next)!;
+                    }
 
-                return result;
-            }, {} as Record<string, FormGroup | FormArray>)
+                    return result;
+                },
+                {} as Record<string, FormGroup | FormArray>,
+            )
         );
     }
 
@@ -354,11 +357,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
         this.unsubscribeForm();
     }
 
-    public trackByGroup(index: number, group: APFormModel): string {
+    public trackByGroup(_: number, group: APFormModel): string {
         return group.id;
     }
 
-    public trackByControl(index: number, control: ApFormControlInner): string {
+    public trackByControl(_: number, control: ApFormControlInner): string {
         return control.name;
     }
 }

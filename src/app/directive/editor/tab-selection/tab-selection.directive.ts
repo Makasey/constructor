@@ -1,4 +1,4 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditAreaService } from "@modules/constructor";
 import { Directive, HostBinding, HostListener, inject } from "@angular/core";
 
 @Directive({

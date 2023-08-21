@@ -2,7 +2,7 @@ import { DayOfWeek } from "../types";
 import { LZDay, LZMonth } from "../classes";
 
 const getMonthStartDaysOffset = (month: LZMonth, firstDayOfWeek: DayOfWeek): number => {
-    const startMonthOffsetFromSunday = new Date(month.year, month.month, 1).getDay();
+    const startMonthOffsetFromSunday: DayOfWeek = new Date(month.year, month.month, 1).getDay();
 
     return startMonthOffsetFromSunday >= firstDayOfWeek
         ? startMonthOffsetFromSunday - firstDayOfWeek

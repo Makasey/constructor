@@ -13,7 +13,10 @@ export class LZToastrBoxComponent {
     @HostBinding("class.lz-toastr-box")
     public hostClass = true;
 
-    constructor(private toastrService: LZToastrService, private toastrQuery: LzToastrQuery) {}
+    constructor(
+        private toastrService: LZToastrService,
+        private toastrQuery: LzToastrQuery,
+    ) {}
 
     public _changeEnableDNDMode(changeEvent: Event): void {
         const target = changeEvent.target as HTMLInputElement;

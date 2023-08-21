@@ -5,7 +5,11 @@ import { LZMonth, LZMonthLike } from "./month";
 import { LZYear } from "./year";
 
 export class LZDay extends LZMonth implements LZDayLike {
-    constructor(public readonly year: number, public readonly month: number, public readonly day: number) {
+    constructor(
+        public readonly year: number,
+        public readonly month: number,
+        public readonly day: number,
+    ) {
         super(year, month);
     }
 
@@ -55,7 +59,7 @@ export class LZDay extends LZMonth implements LZDayLike {
         return Math.round((to.toLocalNativeDate().getTime() - from.toLocalNativeDate().getTime()) / (1000 * 60 * 60 * 24));
     }
 
-    public static parseRawDateString(date: string, dateMode: LZDateMode = "DMY"): { day: number; month: number; year: number; } {
+    public static parseRawDateString(date: string, dateMode: LZDateMode = "DMY"): { day: number; month: number; year: number } {
         switch (dateMode) {
             case "MDY": {
                 return {
@@ -130,7 +134,7 @@ export class LZDay extends LZMonth implements LZDayLike {
         return dayOfWeek === DayOfWeek.SUNDAY || dayOfWeek === DayOfWeek.SATURDAY;
     }
 
-    public dayOfWeek(startFromMonday: boolean = true): number {
+    public dayOfWeek(startFromMonday: boolean = true): DayOfWeek {
         const dayOfWeek = startFromMonday ? this.toLocalNativeDate().getDay() - 1 : this.toLocalNativeDate().getDay();
 
         return dayOfWeek < 0 ? 6 : dayOfWeek;
@@ -171,7 +175,7 @@ export class LZDay extends LZMonth implements LZDayLike {
     public override append({ year = 0, month = 0, day = 0 }: LZDayLike): LZDay {
         const totalMonths = (this.year + year) * 12 + this.month + month;
         let years = Math.floor(totalMonths / 12);
-        let months = totalMonths % 12;
+        let months = (totalMonths % 12) as MonthNumber;
         let days = Math.min(this.day, LZMonth.getMonthDaysCount(months, LZYear.isLeapYear(years))) + day;
 
         while (days > LZMonth.getMonthDaysCount(months, LZYear.isLeapYear(years))) {

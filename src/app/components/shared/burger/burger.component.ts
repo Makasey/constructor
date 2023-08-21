@@ -11,10 +11,10 @@ import { NgClass, NgFor, NgIf, NgOptimizedImage } from "@angular/common";
     templateUrl: "./burger.component.html",
     imports: [NgFor, NgIf, NgClass, NgOptimizedImage],
 })
-export class BurgerComponent implements ModalWithData<{ id: string; }> {
-    public data: { id: string; };
+export class BurgerComponent implements ModalWithData<{ id: string }> {
+    public data: { id: string };
 
-    public readonly socialLinks: { link: string; iconClass: string; icon: string; alt: string; }[] = [
+    public readonly socialLinks: { link: string; iconClass: string; icon: string; alt: string }[] = [
         {
             link: "https://wa.me/375255345899",
             alt: "Whatsapp icon",
@@ -41,7 +41,7 @@ export class BurgerComponent implements ModalWithData<{ id: string; }> {
         },
     ];
 
-    public readonly contactLinks: { link: string; alt: string; icon: string; label: string; }[] = [
+    public readonly contactLinks: { link: string; alt: string; icon: string; label: string }[] = [
         {
             link: "tel:+79202114903",
             label: "+7 (920) 211-49-03",
@@ -64,7 +64,7 @@ export class BurgerComponent implements ModalWithData<{ id: string; }> {
 
     private readonly modalService = inject(ModalService);
 
-    private readonly config = inject(MODAL_DATA_TOKEN) as { id: string; };
+    private readonly config = inject(MODAL_DATA_TOKEN) as { id: string };
 
     public closeModal(): void {
         this.modalService.closeModal(this.config.id);

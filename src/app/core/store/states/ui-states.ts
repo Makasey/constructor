@@ -1,6 +1,6 @@
 import { APFormModel, LZTableMeta, LZTableValues } from "@components/ui";
 import { Cart, Product } from "@shared-types/index";
-import { PageSettings, SitePageElement } from "@modules/constructor/components/edit-area/types";
+import { PageSettings, SitePageElement } from "@modules/constructor";
 
 export enum UIDataState {
     INITIAL = "initial",

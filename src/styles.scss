@@ -49,6 +49,9 @@ a {
     --active-color: #e2195b;
     --max-slider-width: 1280px;
     --slider-item-width: 400px;
+
+    --selected-element-color: yellow;
+    --root-selected-color: lightblue;
 }
 
 .cdk-overlay-container,
@@ -261,6 +264,12 @@ router-outlet + * {
     flex-grow: 1;
 }
 
-._selected {
-    border-color: green;
+.editor-element {
+    --selected-element-color: yellow;
+    --root-selected-color: lightblue;
+}
+
+.editor-element._selected {
+    --selected-element-color: green;
+    --root-selected-color: green;
 }

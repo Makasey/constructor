@@ -1,5 +1,6 @@
 import { APFormModel } from "@components/ui";
 import { Product } from "@shared-types/index";
+import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor";
 
 import {
     CatalogFiltersState,
@@ -12,7 +13,6 @@ import {
     TestState,
     UIDataState,
 } from "../states/ui-states";
-import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/types";
 
 export function initialTableModuleState(): TableModuleState {
     return {

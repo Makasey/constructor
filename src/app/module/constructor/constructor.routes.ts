@@ -1,4 +1,4 @@
-import { LZConstructorComponent } from "@modules/constructor/constructor.component";
+import { LZConstructorComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
 
 export const CONSTRUCTOR_ROUTES: Route[] = [

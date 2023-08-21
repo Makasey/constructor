@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } from "@angular/core";
 import { LZSliderItem } from "@components/ui";
 
-export type SliderItemTemplateData = { item: LZSliderItem; };
+export type SliderItemTemplateData = { item: LZSliderItem };
 
 @Component({
     selector: "lz-slider-item",

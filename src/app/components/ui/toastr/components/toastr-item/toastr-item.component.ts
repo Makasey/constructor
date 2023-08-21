@@ -78,7 +78,10 @@ export class LZToastrItemComponent implements OnInit {
 
     private disappearingTimerId: number;
 
-    constructor(private cdr: ChangeDetectorRef, private ngZone: NgZone) {}
+    constructor(
+        private cdr: ChangeDetectorRef,
+        private ngZone: NgZone,
+    ) {}
 
     public ngOnInit(): void {
         if (!this._alwaysOnDisplay) {

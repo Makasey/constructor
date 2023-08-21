@@ -4,6 +4,7 @@ import { Observable, catchError, of, tap } from "rxjs";
 
 import { LZAbstractAuthDataService } from "@core/data-service";
 import { LZToastrItemType, LZToastrService, ModalService } from "@components/ui";
+import { ServerError } from "@shared-types/common/common";
 
 @Injectable()
 export abstract class LZAbstractLoginService {
@@ -12,7 +13,11 @@ export abstract class LZAbstractLoginService {
 
 @Injectable()
 export class LZDefaultLoginService extends LZAbstractLoginService {
-    constructor(private authDataService: LZAbstractAuthDataService, private toastrService: LZToastrService, private modalService: ModalService) {
+    constructor(
+        private authDataService: LZAbstractAuthDataService,
+        private toastrService: LZToastrService,
+        private modalService: ModalService,
+    ) {
         super();
     }
 
@@ -27,7 +32,7 @@ export class LZDefaultLoginService extends LZAbstractLoginService {
 
                 this.modalService.closeModal("my-login-modal");
             }),
-            catchError(err => {
+            catchError((err: ServerError) => {
                 this.toastrService.addToastrItem({
                     title: "Ошибка со статусом: " + err.error?.status,
                     type: LZToastrItemType.ERROR,

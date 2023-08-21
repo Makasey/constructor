@@ -19,10 +19,10 @@ export class ProductDataService extends AbstractProductDataService {
 
     public getProducts(params: SimpleMap<number>): Observable<PaginationListItems<Product>> {
         return this.httpClient
-        .get<Product[]>("http://178.172.139.42:7000/api/products", {
-            params: params,
-            observe: "response",
-        })
-        .pipe(map(response => mapPaginationResponseToListModel(response)));
+            .get<Product[]>("http://178.172.139.42:7000/api/products", {
+                params: params,
+                observe: "response",
+            })
+            .pipe(map(response => mapPaginationResponseToListModel(response)));
     }
 }

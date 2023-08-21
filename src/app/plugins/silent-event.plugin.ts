@@ -1,16 +1,10 @@
-import { EventManager } from "@angular/platform-browser";
+import { AbstractEventPlugin } from "./abstract-event.plugin";
 import { NgZone } from "@angular/core";
 
-export class SilentEventPlugin {
+export class SilentEventPlugin extends AbstractEventPlugin {
     public static ngZone?: NgZone;
 
-    private manager!: EventManager;
-
-    private modifier = ".silent";
-
-    public supports(event: string): boolean {
-        return event.includes(this.modifier);
-    }
+    protected modifier = ".silent";
 
     public addEventListener(
         element: HTMLElement,
@@ -22,12 +16,5 @@ export class SilentEventPlugin {
         SilentEventPlugin.ngZone = this.manager.getZone();
 
         return this.manager.getZone().runOutsideAngular(() => this.manager.addEventListener(element, this.unwrap(event), handler));
-    }
-
-    private unwrap(event: string): string {
-        return event
-            .split(".")
-            .filter(value => !this.modifier.includes(value))
-            .join(".");
     }
 }

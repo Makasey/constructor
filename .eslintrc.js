@@ -143,6 +143,7 @@ module.exports = {
                 "@typescript-eslint/no-empty-function": 1,
                 "@typescript-eslint/no-unsafe-assignment": 0,
                 "@typescript-eslint/no-unsafe-member-access": 1,
+                "@typescript-eslint/no-redundant-type-constituents": 0,
                 "@typescript-eslint/consistent-type-assertions": [
                     1,
                     {
@@ -175,6 +176,15 @@ module.exports = {
                 "@typescript-eslint/explicit-module-boundary-types": ["error"],
                 "@typescript-eslint/restrict-template-expressions": 0,
                 "@typescript-eslint/restrict-plus-operands": 0,
+                "@typescript-eslint/ban-types": [
+                    "error",
+                    {
+                        types: {
+                            Function: false,
+                        },
+                    },
+                ],
+
                 // angular-eslint
                 "@angular-eslint/component-selector": [
                     "error",
@@ -193,7 +203,7 @@ module.exports = {
                 "@angular-eslint/no-conflicting-lifecycle": 1,
                 "@angular-eslint/prefer-output-readonly": 1,
                 "@angular-eslint/use-component-selector": 2,
-                "@angular-eslint/use-component-view-encapsulation": 1,
+                "@angular-eslint/use-component-view-encapsulation": 0,
                 "@angular-eslint/component-class-suffix": 2,
                 "@angular-eslint/directive-class-suffix": 2,
                 "@angular-eslint/no-host-metadata-property": 2,

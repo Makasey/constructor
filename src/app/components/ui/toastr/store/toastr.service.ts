@@ -10,7 +10,10 @@ import { LzToastrQuery } from "./toastr.query";
 export class LZToastrService {
     private order: 0;
 
-    constructor(private toastrStore: LZToastrStore, private toastrQuery: LzToastrQuery) {}
+    constructor(
+        private toastrStore: LZToastrStore,
+        private toastrQuery: LzToastrQuery,
+    ) {}
 
     public addToastrItem(toastrItem: LZToastrItem): void {
         const id = guid();

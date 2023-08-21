@@ -24,13 +24,13 @@ import { SliderItemTemplateData } from "@components/ui/slider/components/slider-
 export class LZSliderComponent implements OnInit {
     @Input()
     public items: LZSliderItem[] = [
-            { title: "12345" },
-            { title: "12345" },
-            { title: "12345" },
-            { title: "12345" },
-            { title: "12345" },
-            { title: "12345" },
-        ];
+        { title: "12345" },
+        { title: "12345" },
+        { title: "12345" },
+        { title: "12345" },
+        { title: "12345" },
+        { title: "12345" },
+    ];
 
     @Input()
     public itemTemplate: TemplateRef<SliderItemTemplateData>;
@@ -87,7 +87,10 @@ export class LZSliderComponent implements OnInit {
 
     private _sliderTimeout = 1000;
 
-    constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
+    constructor(
+        private renderer: Renderer2,
+        private elementRef: ElementRef,
+    ) {}
 
     public ngOnInit(): void {
         this._sliderWidth = (this.elementRef.nativeElement as HTMLElement).offsetWidth;

@@ -8,7 +8,7 @@ import { RouteKey } from "@shared-types/routes/route-paths";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonComponent {
-    public accountMenuItems: { icon: string; title: string; link: RouteKey; }[] = [
+    public accountMenuItems: { icon: string; title: string; link: RouteKey }[] = [
         {
             title: "Личный кабинет",
             link: RouteKey.PERSON,

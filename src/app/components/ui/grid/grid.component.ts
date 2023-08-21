@@ -33,7 +33,10 @@ export class LZGridListComponent {
     @Input()
     public viewMode: ViewModeTypes = ViewModeTypes.CARD;
 
-    constructor(private renderer: Renderer2, private host: ElementRef<HTMLElement>) {}
+    constructor(
+        private renderer: Renderer2,
+        private host: ElementRef<HTMLElement>,
+    ) {}
 
     public _trackBy(index: number, item: LZGridItem): string | number {
         return item.id;

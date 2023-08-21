@@ -8,3 +8,12 @@ export type ItemsWithId<T> = Readonly<{
     items: T[];
     id: number;
 }>;
+
+export type ServerError = Readonly<{
+    error?: ServerInnerError;
+}>;
+
+export type ServerInnerError = Readonly<{
+    status: number;
+    message: string;
+}>;

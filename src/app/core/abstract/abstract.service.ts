@@ -35,7 +35,11 @@ export abstract class AbstractModuleService<T extends Rec = Rec> {
 export abstract class AbstractDefaultModuleService<K extends keyof LzState, T extends Rec = Rec> implements AbstractModuleService {
     protected options: T;
 
-    protected constructor(protected readonly stateKey: K, protected query: LzQuery, protected service: LzService) {}
+    protected constructor(
+        protected readonly stateKey: K,
+        protected query: LzQuery,
+        protected service: LzService,
+    ) {}
 
     public abstract asyncInit(options?: T): Observable<unknown>;
 

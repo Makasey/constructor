@@ -8,7 +8,7 @@ import { APP_REF } from "@core/app-ref";
 import { RouteParams, SearchConditions } from "../../types";
 import { conditionsMap } from "../utils";
 
-export function getRouterParameters(...paramNames: string[]): Record<string, unknown> | unknown {
+export function getRouterParameters(...paramNames: string[]): unknown | Record<string, unknown> {
     const injector = APP_REF.injector as Injector;
     const queryParametersMap = injector.get(ActivatedRoute).root.snapshot.queryParamMap;
     const queryMap: Record<string, unknown> = {};

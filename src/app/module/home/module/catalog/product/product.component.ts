@@ -14,7 +14,10 @@ export class ProductComponent extends AbstractModuleComponent implements OnInit 
 
     public product$ = this.service.selectProduct();
 
-    constructor(protected service: AbstractProductService, private activatedRoute: ActivatedRoute) {
+    constructor(
+        protected service: AbstractProductService,
+        private activatedRoute: ActivatedRoute,
+    ) {
         super(service);
     }
 

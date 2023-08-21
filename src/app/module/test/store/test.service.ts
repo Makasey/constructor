@@ -14,7 +14,11 @@ import { TestStore } from "./test.store";
     providedIn: "root",
 })
 export class TestService {
-    constructor(private store: TestStore, private query: TestQuery, private productDataService: AbstractProductDataService) {}
+    constructor(
+        private store: TestStore,
+        private query: TestQuery,
+        private productDataService: AbstractProductDataService,
+    ) {}
 
     public fetchProducts(): Observable<PaginationListItems<Product>> {
         return this.productDataService.getProducts({}).pipe(

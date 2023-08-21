@@ -4,7 +4,10 @@ import { LZYear, LzYearLike } from "./year";
 import { MonthNumber } from "../types";
 
 export class LZMonth extends LZYear implements LZMonthLike {
-    constructor(public readonly year: number, public readonly month: number) {
+    constructor(
+        public readonly year: number,
+        public readonly month: number,
+    ) {
         super(year);
     }
 
@@ -114,11 +117,11 @@ export class LZMonth extends LZYear implements LZMonthLike {
 
     public toUserDateFormat(): string {
         return this.toUtcNativeDate()
-        .toLocaleDateString("ru-RU", {
-            month: "long",
-            year: "numeric",
-        })
-        .slice(0, -2);
+            .toLocaleDateString("ru-RU", {
+                month: "long",
+                year: "numeric",
+            })
+            .slice(0, -2);
     }
 }
 

@@ -14,7 +14,11 @@ import { guid } from "@datorama/akita";
 export class CatalogFiltersComponent extends AbstractModuleComponent<{ productId: string }> implements OnInit {
     public _formModel$ = this.service.selectFilters();
 
-    constructor(protected service: AbstractCatalogFiltersService, private formsManager: NgFormsManager, private toastrService: LZToastrService) {
+    constructor(
+        protected service: AbstractCatalogFiltersService,
+        private formsManager: NgFormsManager,
+        private toastrService: LZToastrService,
+    ) {
         super(service);
     }
 

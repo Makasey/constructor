@@ -11,4 +11,4 @@ export type LZGridItem = Readonly<{
     [key: string]: unknown;
 }>;
 
-export type LZGridTemplateData = Readonly<{ item: LZGridItem; }>;
+export type LZGridTemplateData = Readonly<{ item: LZGridItem }>;

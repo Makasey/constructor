@@ -40,7 +40,7 @@ export interface ApFormControlInner extends APFormControl {
     readonly gridClass: string;
 }
 
-export type APFormControl<T = any> = {
+export type APFormControl<T = unknown> = {
     name: string;
     id?: string;
     value?: T | T[];

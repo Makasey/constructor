@@ -1,10 +1,8 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditAreaService, EDITOR_SELECTED_ELEMENT, SitePageElement, SitePageElementType } from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
-import { Observable, map } from "rxjs";
-import { SitePageElement, SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { ToggleSelectionDirective } from "@shared-directives/editor";
 
 @Component({
     selector: "lz-edit-area-item",
@@ -13,16 +11,15 @@ import { SitePageElement, SitePageElementType } from "@modules/constructor/compo
     standalone: true,
     styleUrls: ["./edit-area-item.component.scss"],
     templateUrl: "./edit-area-item.component.html",
+    hostDirectives: [ToggleSelectionDirective],
     imports: [AsyncPipe, JsonPipe, NgForOf, NgIf, ElementResolverDirective],
 })
 export class LZEditAreaItemComponent implements OnInit {
-    @HostBinding("class.lz-edit-area-item")
-    public hostClass = true;
-
-    @HostListener("click.stop", ["$event"])
-    public toggleSelection(): void {
-        this.service.updateSelection(this.elementID);
-    }
+    @HostBinding("class")
+    public hostClass = {
+        "lz-edit-area-item": true,
+        "editor-element": true,
+    };
 
     @Input({ required: true })
     public elementID: number;
@@ -34,25 +31,15 @@ export class LZEditAreaItemComponent implements OnInit {
 
     public element: SitePageElement | undefined;
 
-    @HostBinding("$.class._selected")
-    @HostListener("$.class._selected")
-    public isSelected$: Observable<boolean>;
-
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly service = inject(AbstractEditAreaService);
 
     public ngOnInit(): void {
         this.element = this.service.getElement(this.elementID);
-
-        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.elementID));
     }
 
     public deleteElement(): void {
         this.service.deleteElement(this.elementID);
-    }
-
-    public addElement(type: SitePageElementType): void {
-        this.service.addElement(type, this.parentID);
     }
 }

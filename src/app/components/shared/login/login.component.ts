@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { guid } from "@datorama/akita";
 
-import { LZToastrItemType, LZToastrService, MODAL_DATA_TOKEN, ModalWithData } from "@components/ui";
+import { LZToastrItemType, LZToastrService, ModalWithData } from "@components/ui";
 
 import { LZAbstractLoginService } from "./login.service";
 import { LoginFormControl } from "./types";
@@ -27,9 +27,10 @@ export class LZLoginComponent implements ModalWithData<Record<string, unknown>>,
     @HostBinding("class.lz-login")
     public hostClass = true;
 
-    private modalData = inject(MODAL_DATA_TOKEN);
-
-    constructor(private toastrService: LZToastrService, private service: LZAbstractLoginService) {}
+    constructor(
+        private toastrService: LZToastrService,
+        private service: LZAbstractLoginService,
+    ) {}
 
     public ngOnInit(): void {
         this.loginForm = new FormGroup({
@@ -50,11 +51,8 @@ export class LZLoginComponent implements ModalWithData<Record<string, unknown>>,
             return;
         }
 
-        const { value } = this.loginForm;
+        const { email, password } = this.loginForm.value as { email: string; password: string };
 
-        this.service
-        .login(value.email as string, value.password as string)
-        .pipe(untilDestroyed(this))
-        .subscribe();
+        this.service.login(email, password).pipe(untilDestroyed(this)).subscribe();
     }
 }

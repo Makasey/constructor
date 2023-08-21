@@ -1,17 +1,17 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import {
+    AbstractEditAreaService,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
+    LZEditAreaItemComponent,
     SitePageElement,
     SitePageElementSettings,
     SitePageElementType,
     processSettingValueWithUnit,
-} from "@modules/constructor/components/edit-area/types";
-import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
+} from "@modules/constructor";
+import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { TabSelectionDirective } from "@shared-directives/editor";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 
 @Component({
     selector: "lz-section-element",
@@ -20,7 +20,7 @@ import { TabSelectionDirective } from "@shared-directives/editor";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
-    hostDirectives: [TabSelectionDirective],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe, JsonPipe],
 })
 export class SectionComponent implements OnInit {
@@ -32,17 +32,11 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.width")
     public sectionWidth$: Observable<string>;
 
-    @HostBinding("class.lz-section-element")
-    public hostClass = true;
-
-    @HostListener("click.stop", ["$event"])
-    public toggleSelection(): void {
-        this.service.updateSelection(this.ELEMENT_ID);
-    }
-
-    @HostBinding("$.class._selected")
-    @HostListener("$.class._selected")
-    public isSelected$: Observable<boolean>;
+    @HostBinding("class")
+    public hostClass = {
+        "lz-section-element": true,
+        "editor-element": true,
+    };
 
     private readonly service = inject(AbstractEditAreaService);
 
@@ -61,8 +55,6 @@ export class SectionComponent implements OnInit {
 
         this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
 
-        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.ELEMENT_ID));
-
         this.sectionHeight$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
         this.sectionWidth$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
@@ -72,7 +64,7 @@ export class SectionComponent implements OnInit {
         this.service.addElement(type, this.ELEMENT_ID);
     }
 
-    public _trackByChild(index: number, child: number): number {
+    public _trackByChild(_: number, child: number): number {
         return child;
     }
 

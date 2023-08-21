@@ -26,7 +26,11 @@ export abstract class AbstractProductCartService {
 
 @Injectable()
 export class ProductCartService extends AbstractProductCartService {
-    constructor(private query: LzQuery, private service: LzService, private cartProductDataService: AbstractCartProductDataService) {
+    constructor(
+        private query: LzQuery,
+        private service: LzService,
+        private cartProductDataService: AbstractCartProductDataService,
+    ) {
         super();
     }
 
@@ -148,7 +152,7 @@ export class ProductCartService extends AbstractProductCartService {
         return this.query.getValue().productCartState;
     }
 
-    private calculateCartItemInfo(items: CartItem[]): { count: number; total: number; } {
+    private calculateCartItemInfo(items: CartItem[]): { count: number; total: number } {
         return items.reduce(
             (result, item) => {
                 return {

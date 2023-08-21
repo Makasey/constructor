@@ -21,7 +21,10 @@ export class LZToastrListComponent {
     @HostBinding("class.lz-toastr-list")
     public hostClass = true;
 
-    constructor(private toastrQuery: LzToastrQuery, private toastrService: LZToastrService) {}
+    constructor(
+        private toastrQuery: LzToastrQuery,
+        private toastrService: LZToastrService,
+    ) {}
 
     public _trackById(index: number, item: LZToastrItem): ID {
         return item.id!;

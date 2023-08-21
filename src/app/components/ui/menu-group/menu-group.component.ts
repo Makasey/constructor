@@ -31,7 +31,7 @@ export class MenuGroupComponent {
     public hovered = false;
 
     @Input({ required: true })
-    public itemTemplate: TemplateRef<{ item: unknown; }>;
+    public itemTemplate: TemplateRef<{ item: unknown }>;
 
     @Input({ required: true })
     public items: unknown[];

@@ -1,6 +1,5 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditAreaService, ELEMENT_ID, PARENT_ID, sitePageElementMap } from "@modules/constructor";
 import { Directive, Injector, Input, OnChanges, SimpleChanges, Type, ViewContainerRef, inject } from "@angular/core";
-import { ELEMENT_ID, PARENT_ID, sitePageElementMap } from "@modules/constructor/components/edit-area/types";
 
 @Directive({
     selector: "[lzElementResolver]",

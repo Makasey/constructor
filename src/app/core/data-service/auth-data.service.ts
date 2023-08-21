@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export abstract class LZAbstractAuthDataService {
-    public abstract login(loginData: { email: string; password: string; }): Observable<unknown>;
+    public abstract login(loginData: { email: string; password: string }): Observable<unknown>;
 }
 
 @Injectable()
@@ -14,7 +14,7 @@ export class LZDefaultAuthDataService extends LZAbstractAuthDataService {
         super();
     }
 
-    public login(loginData: { email: string; password: string; }): Observable<unknown> {
-        return this.httpClient.post("http://localhost:7000/api/auth/login", loginData, {withCredentials: true});
+    public login(loginData: { email: string; password: string }): Observable<unknown> {
+        return this.httpClient.post("http://localhost:7000/api/auth/login", loginData, { withCredentials: true });
     }
 }
