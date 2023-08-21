@@ -4,6 +4,7 @@ import { isNil } from "@datorama/akita";
 
 import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "./patterns";
 import { PaginationListItems, SearchConditions, TOTAL_COUNT_HEADER } from "../types";
+import { Valuable } from "@shared-types/common/common";
 
 export const conditionsMap: Record<SearchConditions, RegExp> = {
     [SearchConditions.EQUAL]: EQUALS_PATTERN,
@@ -28,8 +29,16 @@ export function filterToQueryParameter(condition: SearchConditions, value: numbe
     return `${condition}(${stringValue})`;
 }
 
-export function isItemsInDifferentArray(source: string[], dest: string[]): boolean {
-    return source.some(item => dest.includes(item));
+export function defaultCompareFunction<T = unknown, K = T>(sourceItem: T, destinationItem: K): boolean {
+    return Object.is(sourceItem, destinationItem);
+}
+
+export function isItemsInDifferentArray<T = string, K = T>(
+    source: T[],
+    dest: K[],
+    findFunction: (sourceItem: T, destinationItem: K) => boolean = defaultCompareFunction,
+): boolean {
+    return source.some(sourceItem => !!dest.find(destinationItem => findFunction(sourceItem, destinationItem)));
 }
 
 export function getPaginationRequestParams(): Record<string, string> {
@@ -39,13 +48,8 @@ export function getPaginationRequestParams(): Record<string, string> {
     };
 }
 
-export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): Partial<T> {
-    return Object.keys(obj).reduce<Partial<T>>((result, key: keyof T) => {
-        if (!isNil(obj[key])) {
-            result[key] = obj[key];
-        }
-        return result;
-    }, {});
+export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): Valuable<T> {
+    return Object.fromEntries(Object.entries(obj).filter(([, v]) => !isNil(v))) as Valuable<T>;
 }
 
 export function normalizeToIntNumber(value: number, min: number, max: number): number {
