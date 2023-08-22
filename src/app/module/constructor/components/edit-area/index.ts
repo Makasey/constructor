@@ -1,21 +1,20 @@
-export { EditAreaComponent } from "./edit-area.component";
-export { AbstractEditAreaService, DefaultEditAreaService } from "./edit-area.service";
 export {
-    defaultPageElementSettingsMap,
     ELEMENT_ID,
-    SitePageElementSettings,
-    SitePageElementType,
-    ROOT_ELEMENT_ID,
     SitePageElement,
-    ElementSettingsWithUnit,
+    SitePageElementType,
+    StyleUnit,
+    ROOT_ELEMENT_ID,
+    defaultPageElementSettingsMap,
+    deleteElementFromTree,
     PageSettings,
     sitePageElementMap,
-    StyleUnit,
+    SitePageElementSettings,
     styleUnitMap,
-    deleteElementFromTree,
+    ElementSettingsWithUnit,
     processSettingValueWithUnit,
     ComponentWithVCR,
     PARENT_ID,
     isObjectEquals,
 } from "./types";
-export { RootComponent, TitleComponent, SectionComponent, LZEditAreaItemComponent } from "./component";
+export { AbstractEditAreaService, DefaultEditAreaService } from "./edit-area.service";
+export { EditAreaComponent } from "./edit-area.component";
