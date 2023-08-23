@@ -18,3 +18,4 @@ export {
 } from "./types";
 export { AbstractEditAreaService, DefaultEditAreaService } from "./edit-area.service";
 export { EditAreaComponent } from "./edit-area.component";
+export { LZEditAreaItemComponent, TitleComponent, RootComponent, SectionComponent } from "./component";
