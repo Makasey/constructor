@@ -3,6 +3,7 @@ import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ELEMENT_ID, SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
 import { Observable, map } from "rxjs";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 
 @Component({
     selector: "lz-title-element",
@@ -12,9 +13,16 @@ import { Observable, map } from "rxjs";
     templateUrl: "./title.components.html",
     styleUrls: ["./title.component.scss"],
     imports: [JsonPipe, AsyncPipe],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {
     private readonly service = inject(AbstractEditAreaService);
+
+    @HostBinding("class")
+    public hostClasses = {
+        "lz-title-element": true,
+        "editor-element": true,
+    };
 
     @HostBinding("$.style.height")
     @HostListener("$.style.height")

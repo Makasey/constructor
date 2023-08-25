@@ -22,7 +22,11 @@ export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.PERCENT]: "%",
 };
 
-export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID");
+export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID", {
+    factory: () => {
+        return ROOT_ELEMENT_ID;
+    },
+});
 
 export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
 

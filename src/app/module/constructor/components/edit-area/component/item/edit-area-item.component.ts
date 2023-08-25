@@ -1,9 +1,8 @@
 import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
-import { Observable, map } from "rxjs";
 import { SitePageElement, SitePageElementType } from "@modules/constructor/components/edit-area/types";
 
 @Component({
@@ -19,11 +18,6 @@ export class LZEditAreaItemComponent implements OnInit {
     @HostBinding("class.lz-edit-area-item")
     public hostClass = true;
 
-    @HostListener("click.stop", ["$event"])
-    public toggleSelection(): void {
-        this.service.updateSelection(this.elementID);
-    }
-
     @Input({ required: true })
     public elementID: number;
 
@@ -34,18 +28,12 @@ export class LZEditAreaItemComponent implements OnInit {
 
     public element: SitePageElement | undefined;
 
-    @HostBinding("$.class._selected")
-    @HostListener("$.class._selected")
-    public isSelected$: Observable<boolean>;
-
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly service = inject(AbstractEditAreaService);
 
     public ngOnInit(): void {
         this.element = this.service.getElement(this.elementID);
-
-        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.elementID));
     }
 
     public deleteElement(): void {

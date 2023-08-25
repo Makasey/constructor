@@ -11,7 +11,7 @@ import {
 } from "@modules/constructor/components/edit-area/types";
 import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
 import { Observable, map } from "rxjs";
-import { TabSelectionDirective } from "@shared-directives/editor";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 
 @Component({
     selector: "lz-section-element",
@@ -20,7 +20,7 @@ import { TabSelectionDirective } from "@shared-directives/editor";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
-    hostDirectives: [TabSelectionDirective],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe, JsonPipe],
 })
 export class SectionComponent implements OnInit {
@@ -32,17 +32,11 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.width")
     public sectionWidth$: Observable<string>;
 
-    @HostBinding("class.lz-section-element")
-    public hostClass = true;
-
-    @HostListener("click.stop", ["$event"])
-    public toggleSelection(): void {
-        this.service.updateSelection(this.ELEMENT_ID);
-    }
-
-    @HostBinding("$.class._selected")
-    @HostListener("$.class._selected")
-    public isSelected$: Observable<boolean>;
+    @HostBinding("class")
+    public classes = {
+        "editor-element": true,
+        "lz-section-element": true,
+    };
 
     private readonly service = inject(AbstractEditAreaService);
 
@@ -60,8 +54,6 @@ export class SectionComponent implements OnInit {
         this.element$ = this.service.selectElement(this.ELEMENT_ID);
 
         this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
-
-        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.ELEMENT_ID));
 
         this.sectionHeight$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
