@@ -1,5 +1,7 @@
-import { AbstractEditAreaService, EDITOR_SELECTED_ELEMENT, ELEMENT_ID, ROOT_ELEMENT_ID } from "@modules/constructor";
+import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { Directive, HostBinding, HostListener, OnInit, inject } from "@angular/core";
+import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
+import { ELEMENT_ID, ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
 import { Observable, map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
