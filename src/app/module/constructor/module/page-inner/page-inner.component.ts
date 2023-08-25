@@ -1,14 +1,11 @@
 import { APFormModel, APFormModule } from "@components/ui";
-import {
-    AbstractEditAreaService,
-    EDITOR_SELECTED_ELEMENT,
-    EditAreaComponent,
-    ElementButton,
-    SitePageElementType,
-    blockElements,
-} from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
+import { EditAreaComponent } from "@modules/constructor/components/edit-area/edit-area.component";
+import { SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { blockElements } from "@modules/constructor/module/page-inner/types";
 import { map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -26,7 +23,7 @@ export class PageInnerComponent {
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    public elements: Signal<ElementButton[]> = toSignal(
+    public elements = toSignal(
         this.selectedElement$.pipe(
             map(selectedElement => {
                 const { type } = this.service.getElement(selectedElement);

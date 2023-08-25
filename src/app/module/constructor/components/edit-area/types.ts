@@ -1,5 +1,7 @@
 import { InjectionToken, Type, ViewContainerRef } from "@angular/core";
-import { RootComponent, SectionComponent, TitleComponent } from "@modules/constructor";
+import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
+import { SectionComponent } from "@modules/constructor/components/edit-area/component/section/section.component";
+import { TitleComponent } from "@modules/constructor/components/edit-area/component/title/title.component";
 import { isObject } from "@datorama/akita";
 
 export const ROOT_ELEMENT_ID = 1;
@@ -20,11 +22,7 @@ export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.PERCENT]: "%",
 };
 
-export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID", {
-    factory() {
-        return ROOT_ELEMENT_ID;
-    },
-});
+export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID");
 
 export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
 

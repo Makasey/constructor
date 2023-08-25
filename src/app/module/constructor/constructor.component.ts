@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
-import { EDITOR_PROVIDERS } from "@modules/constructor";
+import { EDITOR_PROVIDERS } from "@modules/constructor/providers/providers";
 import { RouterOutlet } from "@angular/router";
 
 @Component({

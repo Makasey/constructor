@@ -1,4 +1,5 @@
-import { PageComponent, PageInnerComponent } from "@modules/constructor";
+import { PageComponent } from "@modules/constructor/module/page/page.component";
+import { PageInnerComponent } from "@modules/constructor/module/page-inner/page-inner.component";
 import { Route } from "@angular/router";
 
 export const PAGE_ROUTES: Route[] = [

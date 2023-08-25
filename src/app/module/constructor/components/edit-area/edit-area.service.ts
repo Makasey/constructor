@@ -15,7 +15,7 @@ import {
     defaultPageElementSettingsMap,
     deleteElementFromTree,
     isObjectEquals,
-} from "@modules/constructor";
+} from "@modules/constructor/components/edit-area/types";
 import { arrayAdd, arrayRemove, filterNilValue, logAction } from "@datorama/akita";
 
 @Injectable()

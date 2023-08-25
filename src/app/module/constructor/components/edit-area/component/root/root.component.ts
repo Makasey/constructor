@@ -1,9 +1,10 @@
-import { AbstractEditAreaService, ROOT_ELEMENT_ID } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
-import { DeleteSelectedElementDirective, TabSelectionDirective } from "@shared-directives/editor";
+import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, ViewEncapsulation, inject } from "@angular/core";
+import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { NgForOf } from "@angular/common";
-import { ToggleSelectionDirective } from "@shared-directives/editor/toggle-selection/toggle-selection.directive";
+import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
+import { TabSelectionDirective } from "@shared-directives/editor";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -14,14 +15,23 @@ import { toSignal } from "@angular/core/rxjs-interop";
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
     imports: [NgForOf, ElementResolverDirective],
-    hostDirectives: [TabSelectionDirective, DeleteSelectedElementDirective, ToggleSelectionDirective],
+    hostDirectives: [TabSelectionDirective],
 })
 export class RootComponent {
-    @HostBinding("class")
-    public hostClass = {
-        "lz-root-element": true,
-        "editor-element": true,
-    };
+    private readonly selectedElement = toSignal(inject(EDITOR_SELECTED_ELEMENT), { initialValue: ROOT_ELEMENT_ID });
+
+    @HostListener("click")
+    public toggleSelection(): void {
+        this.service.updateSelection(ROOT_ELEMENT_ID);
+    }
+
+    @HostListener("document:keydown.delete")
+    public deleteElement(): void {
+        this.service.deleteElement(this.selectedElement());
+    }
+
+    @HostBinding("class.lz-root-element")
+    public hostClass = true;
 
     constructor(private service: AbstractEditAreaService) {}
 

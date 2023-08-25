@@ -1,6 +1,7 @@
-import { AbstractEditAreaService, ELEMENT_ID, SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor";
+import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ELEMENT_ID, SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
 import { Observable, map } from "rxjs";
 
 @Component({
