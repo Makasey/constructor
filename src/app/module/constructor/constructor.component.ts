@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
 import { EDITOR_PROVIDERS } from "@modules/constructor/providers/providers";
+import { LZToastrModule } from "@components/ui";
 import { RouterOutlet } from "@angular/router";
 
 @Component({
@@ -9,7 +10,7 @@ import { RouterOutlet } from "@angular/router";
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./constructor.component.html",
     styleUrls: ["./constructor.component.scss"],
-    imports: [RouterOutlet],
+    imports: [RouterOutlet, LZToastrModule],
     providers: EDITOR_PROVIDERS,
 })
 export class LZConstructorComponent {

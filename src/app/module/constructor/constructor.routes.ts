@@ -7,6 +7,10 @@ export const CONSTRUCTOR_ROUTES: Route[] = [
         component: LZConstructorComponent,
         children: [
             {
+                path: "list",
+                loadChildren: () => import("./module/list").then(routes => routes.CAMPAIGN_LIST_ROUTES),
+            },
+            {
                 path: ":id",
                 loadChildren: () => import("./module/page/page.routes").then(routes => routes.PAGE_ROUTES),
             },

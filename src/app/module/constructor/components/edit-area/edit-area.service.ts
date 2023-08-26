@@ -1,12 +1,11 @@
-import { APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
+import { APFormDefaultTemplateKeys, APFormModel, LZToastrItemType, LZToastrService } from "@components/ui";
+import { AbstractCampaignDataService } from "@core/data-service/campaign-data.service";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzState, LzStateKey } from "@core/store/lz.state";
-import { NgFormsManager } from "@ngneat/forms-manager";
-import { Observable, distinctUntilChanged, filter, map, shareReplay, skip, tap } from "rxjs";
+import { AbstractNavigationService } from "@core/navigation.service";
 import {
+    CampaignModel,
+    CampaignType,
+    CreateCampaignModel,
     PageSettings,
     ROOT_ELEMENT_ID,
     SitePageElement,
@@ -16,11 +15,22 @@ import {
     deleteElementFromTree,
     isObjectEquals,
 } from "@modules/constructor/components/edit-area/types";
+import { Inject, Injectable } from "@angular/core";
+import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
+import { LzState, LzStateKey } from "@core/store/lz.state";
+import { NgFormsManager } from "@ngneat/forms-manager";
+import { Observable, catchError, distinctUntilChanged, filter, map, shareReplay, skip, tap, throwError } from "rxjs";
+import { RouteKey } from "@shared-types/routes/route-paths";
+import { Router } from "@angular/router";
+import { UIDataState } from "@core/store/states/ui-states";
 import { arrayAdd, arrayRemove, filterNilValue, logAction } from "@datorama/akita";
 
 @Injectable()
 export abstract class AbstractEditAreaService {
     public abstract selectElement(id: number): Observable<SitePageElement>;
+
+    public abstract selectIsNewCampaign(): Observable<boolean>;
 
     public abstract getElement(id: number): SitePageElement;
 
@@ -42,7 +52,15 @@ export abstract class AbstractEditAreaService {
 
     public abstract selectElementSettingsFormModelChange(): Observable<SitePageElementSettings>;
 
+    public abstract createCampaign(): Observable<CampaignModel>;
+
+    public abstract updateCampaignById(): Observable<CampaignModel>;
+
     public abstract tabSelection(currentIndex?: number): void;
+
+    public abstract resetState(): void;
+
+    public abstract getCampaignById(id: number): Observable<CampaignModel>;
 }
 
 @Injectable()
@@ -51,6 +69,10 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) private readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) private readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
         private readonly formsManager: NgFormsManager,
+        private readonly navigationService: AbstractNavigationService,
+        private readonly campaignDataService: AbstractCampaignDataService,
+        private readonly toastrService: LZToastrService,
+        private readonly router: Router,
     ) {
         super();
     }
@@ -349,5 +371,105 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         }
 
         this.tabSelection(index);
+    }
+
+    public createCampaign(): Observable<CampaignModel> {
+        return this.campaignDataService.createCampaign(this.getCreateCampaignRequestData()).pipe(
+            tap(() => {
+                this.toastrService.addToastrItem({
+                    type: LZToastrItemType.SUCCESS,
+                    text: `Компания успешно создана`,
+                    title: "Успех",
+                });
+
+                const link = this.navigationService.buildLink(RouteKey.CAMPAIGN_LIST);
+
+                void this.router.navigate([link]);
+            }),
+        );
+    }
+
+    public updateCampaignById(): Observable<CampaignModel> {
+        const id = this.getStoreElement("settings").id!;
+
+        return this.campaignDataService.updateCampaignByID(id, this.getCreateCampaignRequestData()).pipe(
+            tap(() => {
+                this.toastrService.addToastrItem({
+                    type: LZToastrItemType.SUCCESS,
+                    text: `Компания с id: ${id} успешно обновлена`,
+                    title: "Успех",
+                });
+
+                const link = this.navigationService.buildLink(RouteKey.CAMPAIGN_LIST);
+
+                void this.router.navigate([link]);
+            }),
+        );
+    }
+
+    private getCreateCampaignRequestData(): CreateCampaignModel {
+        const { settings, items } = this.query.getValue();
+
+        return {
+            model: items,
+            campaignName: settings.campaignName,
+            settings: {
+                ...settings,
+                id: undefined,
+            },
+            type: CampaignType.SINGLE_PAGE,
+        };
+    }
+
+    public resetState(): void {
+        this.service.reInitiateState(LzStateKey.EDITOR_STATE);
+    }
+
+    public getCampaignById(id: number): Observable<CampaignModel> {
+        return this.campaignDataService.getCampaignByID(id).pipe(
+            tap(campaign => {
+                this.service.updateState(() => {
+                    const { id, settings, model } = campaign;
+                    const currentStateIndex = this.getMaxIndex(model);
+
+                    return {
+                        items: model,
+                        dataState: UIDataState.LOADED,
+                        currentStateIndex: currentStateIndex,
+                        settings: {
+                            ...settings,
+                            id: id,
+                        },
+                    };
+                });
+            }),
+            catchError(err => {
+                this.toastrService.addToastrItem({
+                    type: LZToastrItemType.ERROR,
+                    title: "Компания не найдена",
+                    text: `Компания с id: ${id} не найдена`,
+                });
+
+                const link = this.navigationService.buildLink(RouteKey.CAMPAIGN_LIST);
+
+                void this.router.navigate([link]);
+
+                return throwError(err);
+            }),
+        );
+    }
+
+    public getMaxIndex(items: Record<number, SitePageElement>): number {
+        return Math.max(...(Object.keys(items) as unknown as number[]));
+    }
+
+    public selectIsNewCampaign(): Observable<boolean> {
+        return this.query
+            .select(state => state.settings.id)
+            .pipe(
+                map(id => {
+                    return !id;
+                }),
+            );
     }
 }

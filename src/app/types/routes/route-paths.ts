@@ -14,9 +14,14 @@ export enum RouteKey {
     ORDERS = "orders",
     SETTINGS = "settings",
     SALES = "sales",
+    BUILDER = "builder",
+    CAMPAIGN_PREVIEW = "preview",
+    CAMPAIGN_EDITOR = "editor",
+    CAMPAIGN_LIST = "list",
 }
 
 export enum RoutePaths {
+    INITIAL = "/",
     HOME = "/home",
     CATALOG = "catalog",
     ACCOUNT = "account",
@@ -31,6 +36,10 @@ export enum RoutePaths {
     ORDERS = "orders",
     SETTINGS = "settings",
     SALES = "sales",
+    BUILDER = "builder",
+    PREVIEW = "preview",
+    EDITOR = "editor",
+    LIST = "list",
 }
 
 export enum RouteParams {
@@ -39,5 +48,6 @@ export enum RouteParams {
     LIMIT = "limit",
     ROLE = "role",
     CATEGORY_ID = "categoryId",
+    CAMPAIGN_ID = "campaignId",
     PRODUCT_ID = "productId",
 }

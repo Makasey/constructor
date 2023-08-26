@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform, inject } from "@angular/core";
 
 import { AbstractNavigationService } from "@core/navigation.service";
+import { RouteKey } from "@shared-types/routes/route-paths";
 
 @Pipe({
     name: "lzNavigationLink",
@@ -10,7 +11,7 @@ import { AbstractNavigationService } from "@core/navigation.service";
 export class NavigationLinkPipe implements PipeTransform {
     private readonly navigationService = inject(AbstractNavigationService);
 
-    public transform(key: string, ids: Record<string, string | number> = {}): string {
+    public transform(key: RouteKey, ids: Record<string, string | number> = {}): string {
         return this.navigationService.buildLink(key, ids);
     }
 }

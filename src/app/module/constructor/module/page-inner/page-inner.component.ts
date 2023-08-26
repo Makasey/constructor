@@ -5,10 +5,12 @@ import { CommonModule } from "@angular/common";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { EditAreaComponent } from "@modules/constructor/components/edit-area/edit-area.component";
 import { SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { blockElements } from "@modules/constructor/module/page-inner/types";
 import { map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
+@UntilDestroy()
 @Component({
     selector: "lz-page-inner",
     standalone: true,
@@ -19,6 +21,9 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageInnerComponent {
+    @HostBinding("class.lz-page-inner")
+    public hostClass = true;
+
     private readonly service = inject(AbstractEditAreaService);
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
@@ -68,6 +73,8 @@ export class PageInnerComponent {
         initialValue: {} as APFormModel,
     });
 
+    public readonly isNewCampaign = toSignal(this.service.selectIsNewCampaign());
+
     public readonly elementSettingsFormModel = toSignal(this.service.selectElementSettingsFormModel(), {
         initialValue: {} as APFormModel,
     });
@@ -76,10 +83,15 @@ export class PageInnerComponent {
 
     public readonly selectElementSettingsFormModelChange = toSignal(this.service.selectElementSettingsFormModelChange());
 
-    @HostBinding("class.lz-page-inner")
-    public hostClass = true;
-
     public createNewElement(type: SitePageElementType): void {
         this.service.addElement(type);
+    }
+
+    public createCampaign(): void {
+        this.service.createCampaign().pipe(untilDestroyed(this)).subscribe();
+    }
+
+    public updateCampaign(): void {
+        this.service.updateCampaignById().pipe(untilDestroyed(this)).subscribe();
     }
 }

@@ -1,0 +1,62 @@
+.lz-campaign-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+
+    .table-title {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .campaigns-list-table {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        border: 1px solid #f2f3f5;
+        box-shadow: 0 4px 15px rgba(34, 42, 70, 0.08);
+        border-radius: 10px;
+        font-family: "TT Norms Regular", sans-serif;
+
+        .lz-table-row {
+            padding: 15px 20px;
+            gap: 5px;
+            border-top: 1px solid #d0d2d7;
+
+            &.head {
+                background-color: #f4f5f7;
+                border-radius: 10px 10px 0 0;
+                border-top: none;
+            }
+
+            .actions-column {
+                display: flex;
+                justify-content: flex-end;
+                gap: 12px;
+
+                .create-campaign {
+                    max-width: 110px;
+                }
+            }
+        }
+    }
+
+    .create-campaign {
+        border: 1px solid #1b1c21;
+        border-radius: 4px;
+        max-width: 180px;
+        width: 100%;
+        color: #1b1c21;
+        padding: 7px 0;
+        cursor: pointer;
+        text-align: center;
+        align-self: flex-end;
+        transition: 0.6s;
+
+        &:hover {
+            background: #1b1c21;
+            color: #fff;
+        }
+    }
+}

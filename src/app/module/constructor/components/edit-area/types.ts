@@ -6,6 +6,10 @@ import { isObject } from "@datorama/akita";
 
 export const ROOT_ELEMENT_ID = 1;
 
+export enum CampaignType {
+    SINGLE_PAGE = "singlePage",
+}
+
 export enum SitePageElementType {
     PAGE = "page",
     TITLE = "title",
@@ -166,3 +170,13 @@ export function deleteElementFromTree(items: Record<string, SitePageElement>, el
 
     return itemsCopy;
 }
+
+export type CampaignModel = Readonly<{
+    id: number;
+    model: Record<string, SitePageElement>;
+    settings: PageSettings;
+    type: CampaignType;
+    campaignName: string;
+}>;
+
+export type CreateCampaignModel = Omit<CampaignModel, "id">;

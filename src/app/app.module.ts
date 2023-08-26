@@ -17,6 +17,7 @@ import { LzStore } from "@core/store/lz.store";
 
 import { LZCalendarModule, LZToastrModule } from "./components";
 
+import { AbstractCampaignDataService, CampaignDataService } from "@core/data-service/campaign-data.service";
 import { AbstractCartProductDataService, CartProductDataService } from "@core/data-service/cart-product-data.service";
 import { AbstractProductCartService, ProductCartService } from "@components/shared/product-cart/product-cart.service";
 import { HostBinderAsyncPlugin } from "./plugins/host-binder-async.plugin";
@@ -60,6 +61,10 @@ import { environment } from "environments/environment";
             provide: EVENT_MANAGER_PLUGINS,
             multi: true,
             useClass: HostBinderAsyncPlugin,
+        },
+        {
+            provide: AbstractCampaignDataService,
+            useClass: CampaignDataService,
         },
         {
             provide: EVENT_MANAGER_PLUGINS,

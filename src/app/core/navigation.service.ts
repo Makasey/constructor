@@ -5,7 +5,7 @@ import { SimpleMap } from "@shared-types/common/common";
 
 @Injectable()
 export abstract class AbstractNavigationService {
-    public abstract buildLink(key: string, ids?: SimpleMap<string | number>): string;
+    public abstract buildLink(key: RouteKey, ids?: SimpleMap<string | number>): string;
 }
 
 @Injectable()
@@ -25,10 +25,14 @@ export class NavigationService extends AbstractNavigationService {
         [RouteKey.SALES]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.SALES],
         [RouteKey.SETTINGS]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.SETTINGS],
         [RouteKey.NOTIFICATIONS]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.NOTIFICATIONS],
+        [RouteKey.BUILDER]: [RoutePaths.BUILDER],
+        [RouteKey.CAMPAIGN_PREVIEW]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RoutePaths.PREVIEW],
+        [RouteKey.CAMPAIGN_EDITOR]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RouteParams.CAMPAIGN_ID, RoutePaths.EDITOR],
+        [RouteKey.CAMPAIGN_LIST]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RoutePaths.LIST],
         [RouteKey.ORDERS]: [RoutePaths.HOME, RoutePaths.ACCOUNT, RoutePaths.ORDERS],
     };
 
-    public buildLink(key: string, ids: SimpleMap<string | number> = {}): string {
+    public buildLink(key: RouteKey, ids: SimpleMap<string | number> = {}): string {
         if (!key) {
             return "";
         }
@@ -37,7 +41,7 @@ export class NavigationService extends AbstractNavigationService {
             return "";
         }
 
-        const path = (this.projectLinksMap[key] as string[]).reduce<string>((acc: string, item: string, index: number, array: string[]) => {
+        const path = this.projectLinksMap[key].reduce<string>((acc: string, item: string, index: number, array: string[]) => {
             const isLastItem = index === array.length - 1;
             const pathPart = ids[item] ? `${ids[item]}` : item;
 

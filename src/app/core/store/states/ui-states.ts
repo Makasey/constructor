@@ -1,6 +1,6 @@
 import { APFormModel, LZTableMeta, LZTableValues } from "@components/ui";
+import { CampaignModel, PageSettings, SitePageElement } from "@modules/constructor/components/edit-area/types";
 import { Cart, Product } from "@shared-types/index";
-import { PageSettings, SitePageElement } from "@modules/constructor/components/edit-area/types";
 
 export enum UIDataState {
     INITIAL = "initial",
@@ -54,4 +54,11 @@ export type EditorState = Readonly<
         selectedElement: number;
         currentStateIndex: number;
     } & ModuleState
+>;
+
+export type CampaignListState = Readonly<
+    {
+        campaigns: CampaignModel[];
+    } & ModuleState &
+        TableModuleState
 >;

@@ -2,6 +2,7 @@ import { APFormModel } from "@components/ui";
 import { Product } from "@shared-types/index";
 
 import {
+    CampaignListState,
     CatalogFiltersState,
     CatalogProductsState,
     EditorState,
@@ -89,10 +90,18 @@ export function initialEditorState(): EditorState {
         currentStateIndex: 1,
         settings: {
             title: "My best site",
-            id: 1,
+            id: undefined,
             siteDescription: "My best site",
             siteMetaTags: "",
             campaignName: "My best campaign",
         },
+    };
+}
+
+export function initialCampaignListState(): CampaignListState {
+    return {
+        ...initialModuleDataState(),
+        ...initialTableModuleState(),
+        campaigns: [],
     };
 }

@@ -14,7 +14,7 @@ const routes: Routes = [
         loadChildren: (): Promise<typeof HomeModule> => import("@modules/home/home.module").then(module => module.HomeModule),
     },
     {
-        path: "constructor",
+        path: "builder",
         loadChildren: (): Promise<Route[]> => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
     },
     {
