@@ -1,33 +1,25 @@
 <aside class="editor-sidebar">
-    <section class="elements-settings" *ngIf="elements().length">
-        <h2 class="settings-title">Элементы сайта</h2>
-        <article class="elements-wrapper">
-            <button class="element" *ngFor="let element of elements()" (click)="createNewElement(element.type)">
-                <i class="bx" [ngClass]="element.icon"></i>
-                {{ element.title }}
-            </button>
-        </article>
-    </section>
-
-    <section class="element-settings">
-        <h2 class="settings-title">Настройки элемента</h2>
-        <ap-form [formModel]="elementSettingsFormModel()" />
-    </section>
-
-    <section class="global-settings">
-        <h2 class="settings-title">Настройки сайта</h2>
-        <ap-form [formModel]="formModel()"></ap-form>
-    </section>
+    <lz-tabs>
+        <lz-tabs-item>
+            <lz-site-elements></lz-site-elements>
+        </lz-tabs-item>
+        <lz-tabs-item>
+            <lz-element-settings></lz-element-settings>
+        </lz-tabs-item>
+        <lz-tabs-item>
+            <lz-site-settings></lz-site-settings>
+        </lz-tabs-item>
+    </lz-tabs>
 
     <ng-template [ngTemplateOutlet]="isNewCampaign() ? createCampaignTemplate : updateCampaignTemplate"></ng-template>
 </aside>
 
 <ng-template #createCampaignTemplate>
-  <button class="create-campaign" (click)="createCampaign()">Создать компанию</button>
+    <button class="create-campaign" (click)="createCampaign()">Создать компанию</button>
 </ng-template>
 
 <ng-template #updateCampaignTemplate>
-  <button class="create-campaign" (click)="updateCampaign()">Обновить компанию</button>
+    <button class="create-campaign" (click)="updateCampaign()">Обновить компанию</button>
 </ng-template>
 
 <lz-edit-area></lz-edit-area>
