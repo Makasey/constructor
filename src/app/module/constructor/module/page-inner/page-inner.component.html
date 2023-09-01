@@ -1,15 +1,30 @@
 <aside class="editor-sidebar">
     <lz-tabs>
-        <lz-tabs-item>
-            <lz-site-elements></lz-site-elements>
+        <lz-tabs-item
+          [title]="'Элементы сайта'"
+          [template]="siteElements">
         </lz-tabs-item>
-        <lz-tabs-item>
-            <lz-element-settings></lz-element-settings>
+        <lz-tabs-item
+          [title]="'Настройки элемента'"
+          [template]="elementSettings">
         </lz-tabs-item>
-        <lz-tabs-item>
-            <lz-site-settings></lz-site-settings>
+        <lz-tabs-item
+          [title]="'Настройки сайта'"
+          [template]="siteSettings">
         </lz-tabs-item>
     </lz-tabs>
+
+    <ng-template #siteElements>
+        <lz-site-elements></lz-site-elements>
+    </ng-template>
+
+    <ng-template #elementSettings>
+        <lz-element-settings></lz-element-settings>
+    </ng-template>
+
+    <ng-template #siteSettings>
+        <lz-site-settings></lz-site-settings>
+    </ng-template>
 
     <ng-template [ngTemplateOutlet]="isNewCampaign() ? createCampaignTemplate : updateCampaignTemplate"></ng-template>
 </aside>
@@ -17,7 +32,6 @@
 <ng-template #createCampaignTemplate>
     <button class="create-campaign" (click)="createCampaign()">Создать компанию</button>
 </ng-template>
-
 <ng-template #updateCampaignTemplate>
     <button class="create-campaign" (click)="updateCampaign()">Обновить компанию</button>
 </ng-template>

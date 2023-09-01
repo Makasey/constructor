@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulation } from "@angular/core";
 
 @Component({
     selector: "lz-tabs-item",
@@ -9,6 +9,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     encapsulation: ViewEncapsulation.None,
 })
 export class TabsItemComponent {
-    @HostBinding("class.lz-tabs-item")
-    public hostClass = true;
+    @Input({ required: true })
+    public title: string;
+
+    @Input({ required: true })
+    public template: TemplateRef<unknown>;
 }
