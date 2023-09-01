@@ -1,11 +1,11 @@
 <div class="nav">
-    <div
-        (click)="activateTab(tab)"
-        [ngClass]="{ active: tab == activeComponent }"
+    <button
         class="nav-item"
-        *ngFor="let tab of tabs"
+        *ngFor="let tab of tabs; trackBy: trackByTab"
+        [class.active]="tab === activeComponent"
+        (click)="activateTab(tab)"
     >
         <span>{{ tab.title }}</span>
-    </div>
+    </button>
 </div>
 <ng-template [ngTemplateOutlet]="activeComponent!.template"></ng-template>

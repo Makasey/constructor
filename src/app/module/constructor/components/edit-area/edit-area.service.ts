@@ -20,11 +20,12 @@ import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { Observable, catchError, distinctUntilChanged, filter, map, shareReplay, skip, tap, throwError } from "rxjs";
+import { Observable, catchError, distinctUntilChanged, map, shareReplay, skip, tap, throwError } from "rxjs";
 import { RouteKey } from "@shared-types/routes/route-paths";
 import { Router } from "@angular/router";
 import { UIDataState } from "@core/store/states/ui-states";
 import { arrayAdd, arrayRemove, filterNilValue, logAction } from "@datorama/akita";
+import { processElementSettings } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Injectable()
 export abstract class AbstractEditAreaService {
@@ -44,7 +45,7 @@ export abstract class AbstractEditAreaService {
 
     public abstract selectFormModel(): Observable<APFormModel>;
 
-    public abstract selectElementSettingsFormModel(): Observable<APFormModel>;
+    public abstract selectElementSettingsFormModel(): Observable<APFormModel | null>;
 
     public abstract selectSettings<K>(id: number): Observable<K>;
 
@@ -251,51 +252,16 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         return this.query.select(state => state.items[id]?.settings as K).pipe(filterNilValue(), shareReplay(1));
     }
 
-    public selectElementSettingsFormModel(): Observable<APFormModel> {
+    public selectElementSettingsFormModel(): Observable<APFormModel | null> {
         return this.selectSelectedElement().pipe(
-            filter(selectedElement => selectedElement !== ROOT_ELEMENT_ID),
             map(selectedElement => {
+                if (selectedElement === ROOT_ELEMENT_ID) {
+                    return null;
+                }
+
                 const element = this.getElement(selectedElement);
 
-                return {
-                    id: "elementSettings",
-                    name: "elementSettings",
-                    upsertConfig: {
-                        debounceTime: 500,
-                    },
-                    controls: [
-                        {
-                            id: "width",
-                            name: "width",
-                            value: element.settings.width.value,
-                            valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
-                            options: {
-                                max: 1920,
-                                label: "Ширина элемента",
-                            },
-                        },
-                        {
-                            id: "height",
-                            name: "height",
-                            value: element.settings.height.value,
-                            valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
-                            options: {
-                                max: 1920,
-                                label: "Высота элемента",
-                            },
-                        },
-                        {
-                            id: "text",
-                            name: "text",
-                            value: element.settings.text ?? null,
-                            valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-                            options: {
-                                maxLength: 300,
-                                label: "Текст элемента",
-                            },
-                        },
-                    ],
-                };
+                return processElementSettings(element.type, element);
             }),
         );
     }

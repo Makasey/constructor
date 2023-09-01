@@ -28,4 +28,8 @@ export class LzTabsComponent implements AfterContentInit {
     public activateTab(tab: TabsItemComponent): void {
         this.activeComponent = tab;
     }
+
+    public trackByTab(_: number, tab: TabsItemComponent): string {
+        return tab.title;
+    }
 }

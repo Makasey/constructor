@@ -34,20 +34,25 @@ export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID", {
 
 export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
 
-export type SitePageElement = Readonly<{
+export type SitePageElement<T = SitePageElementSettings> = Readonly<{
     id: number;
     parentId: number | null;
     type: SitePageElementType;
     isExtendable: boolean;
     children: number[];
-    settings: SitePageElementSettings;
+    settings: T;
 }>;
 
-export type SitePageElementSettings = Readonly<{
+export type SitePageElementSizeSettings = Readonly<{
     width: ElementSettingsWithUnit;
     height: ElementSettingsWithUnit;
-    text?: string;
 }>;
+
+export type SitePageElementSettings = Readonly<
+    {
+        text?: string;
+    } & SitePageElementSizeSettings
+>;
 
 export type ElementSettingsWithUnit = Readonly<{
     value: number;
