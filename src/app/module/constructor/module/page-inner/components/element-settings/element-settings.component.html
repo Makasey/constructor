@@ -1,4 +1,4 @@
-<section class="element-settings" *ngIf="elementSettingsFormModel()">
+<section class="element-settings" *ngIf="elementSettingsFormModel() as formModel">
     <h2 class="settings-title">Настройки элемента</h2>
-    <ap-form [formModel]="elementSettingsFormModel()" />
+    <ap-form [formModel]="formModel" />
 </section>
