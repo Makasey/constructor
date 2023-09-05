@@ -1,0 +1,13 @@
+input[type="color"] {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border-radius: 50%;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
