@@ -18,3 +18,7 @@ export const defaultAPTextFieldOptions: ApTextFormControlOptions = {
     maxLength: 16,
     minLength: 0,
 };
+
+export const defaultColorPikerOptions: ApTextFormControlOptions = {
+    label: "Color field",
+};

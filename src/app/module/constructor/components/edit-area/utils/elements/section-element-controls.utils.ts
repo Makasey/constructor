@@ -29,8 +29,25 @@ function getSectionLabelControl(element: SectionPageElement): APFormControl {
     };
 }
 
+function getSectionBackgroundControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "textColor",
+        name: "textColor",
+        value: "#ffffff",
+        valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
+        options: {
+            label: "Цвет текста",
+        },
+    };
+}
+
 export function getSectionElementControls(element: SectionPageElement): APFormControl[] {
-    return [...getDefaultSizeSettings(element), getSectionTextControl(element), getSectionLabelControl(element)];
+    return [
+        ...getDefaultSizeSettings(element),
+        getSectionTextControl(element),
+        getSectionLabelControl(element),
+        getSectionBackgroundControl(element),
+    ];
 }
 
 export function getSectionSettings(element: SectionPageElement): APFormModel {

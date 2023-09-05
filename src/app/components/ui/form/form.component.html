@@ -103,6 +103,14 @@
     </ap-dropdown-field>
 </ng-template>
 
+<ng-template #colorPickerTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <lz-color-picker
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+    ></lz-color-picker>
+</ng-template>
+
 <ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <span class="form-default-text">
         {{ "label: " + controlModel?.options.label }}
@@ -121,10 +129,6 @@
 
 <ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
     <lz-range-controller [formControl]="nativeControl" [value]="controlModel.value"></lz-range-controller>
-</ng-template>
-
-<ng-template #colorPickerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-color-picker [formControl]="nativeControl"></lz-color-picker>
 </ng-template>
 
 <ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
