@@ -1,5 +1,6 @@
 <ng-container *ngIf="element$ | async as element">
-    <ng-container *ngIf="element.children.length; else emptyTemplate">
+    {{ element.settings.text }}
+    <ng-container *ngIf="element.children.length || element.settings.text; else emptyTemplate">
         <lz-edit-area-item
             *ngFor="let child of element.children; trackBy: _trackByChild"
             [elementID]="child"

@@ -29,14 +29,26 @@ function getSectionLabelControl(element: SectionPageElement): APFormControl {
     };
 }
 
-function getSectionBackgroundControl(element: SectionPageElement): APFormControl {
+function getSectionColorControl(element: SectionPageElement): APFormControl {
     return {
-        id: "textColor",
-        name: "textColor",
-        value: "#ffffff",
+        id: "color",
+        name: "color",
+        value: element.settings.color ?? "#1b1c21",
         valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
         options: {
             label: "Цвет текста",
+        },
+    };
+}
+
+function getSectionBackgroundColorControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "backgroundColor",
+        name: "backgroundColor",
+        value: element.settings.backgroundColor ?? "#ffffff",
+        valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
+        options: {
+            label: "Цвет бэкграунда",
         },
     };
 }
@@ -46,7 +58,8 @@ export function getSectionElementControls(element: SectionPageElement): APFormCo
         ...getDefaultSizeSettings(element),
         getSectionTextControl(element),
         getSectionLabelControl(element),
-        getSectionBackgroundControl(element),
+        getSectionColorControl(element),
+        getSectionBackgroundColorControl(element),
     ];
 }
 

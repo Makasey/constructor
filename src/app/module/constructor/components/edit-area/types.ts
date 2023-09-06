@@ -1,6 +1,7 @@
 import { InjectionToken, Type, ViewContainerRef } from "@angular/core";
 import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
 import { SectionComponent } from "@modules/constructor/components/edit-area/component/section/section.component";
+import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { TitleComponent } from "@modules/constructor/components/edit-area/component/title/title.component";
 import { isObject } from "@datorama/akita";
 
@@ -34,6 +35,8 @@ export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID", {
 
 export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
 
+export type SitePageElementUnion = SectionPageElement | SitePageElement;
+
 export type SitePageElement<T = SitePageElementSettings> = Readonly<{
     id: number;
     parentId: number | null;
@@ -46,6 +49,14 @@ export type SitePageElement<T = SitePageElementSettings> = Readonly<{
 export type SitePageElementSizeSettings = Readonly<{
     width: ElementSettingsWithUnit;
     height: ElementSettingsWithUnit;
+}>;
+
+export type SitePageElementTextColor = Readonly<{
+    color: string;
+}>;
+
+export type SitePageElementBackground = Readonly<{
+    backgroundColor: string;
 }>;
 
 export type SitePageElementSettings = Readonly<

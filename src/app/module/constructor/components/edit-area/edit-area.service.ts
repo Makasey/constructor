@@ -29,11 +29,11 @@ import { processElementSettings } from "@modules/constructor/components/edit-are
 
 @Injectable()
 export abstract class AbstractEditAreaService {
-    public abstract selectElement(id: number): Observable<SitePageElement>;
+    public abstract selectElement<T>(id: number): Observable<SitePageElement<T>>;
 
     public abstract selectIsNewCampaign(): Observable<boolean>;
 
-    public abstract getElement(id: number): SitePageElement;
+    public abstract getElement<T>(id: number): SitePageElement<T>;
 
     public abstract addElement(type: SitePageElementType, parentId?: number): void;
 
@@ -78,12 +78,12 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         super();
     }
 
-    public selectElement(id: number): Observable<SitePageElement> {
-        return this.query.select(state => state.items[id]);
+    public selectElement<T = SitePageElementSettings>(id: number): Observable<SitePageElement<T>> {
+        return this.query.select<SitePageElement<T>>(state => state.items[id] as SitePageElement<T>);
     }
 
-    public getElement(id: number): SitePageElement {
-        return this.getStoreElement("items")[id];
+    public getElement<T = SitePageElementSettings>(id: number): SitePageElement<T> {
+        return this.getStoreElement("items")[id] as SitePageElement<T>;
     }
 
     public addElement(type: SitePageElementType, parentId?: number): void {
