@@ -114,8 +114,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
         };
 
         this._templatesMap = {
-            ...this.templatesMap,
             ...this._defaultTemplatesMap,
+            ...this._templatesMap,
         };
     }
 
