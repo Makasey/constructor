@@ -1,6 +1,6 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
 import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area/constants";
-import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
+import { SectionElementSettingsGroup, SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { getDefaultSizeSettings } from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
 
 function getSectionTextControl(element: SectionPageElement): APFormControl {
@@ -9,19 +9,6 @@ function getSectionTextControl(element: SectionPageElement): APFormControl {
         name: "text",
         value: element.settings.text ?? null,
         valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-        options: {
-            maxLength: 300,
-            label: "Текст элемента",
-        },
-    };
-}
-
-function getSectionLabelControl(element: SectionPageElement): APFormControl {
-    return {
-        id: "label",
-        name: "label",
-        value: element.settings.label ?? null,
-        valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
         options: {
             maxLength: 300,
             label: "Текст элемента",
@@ -53,23 +40,43 @@ function getSectionBackgroundColorControl(element: SectionPageElement): APFormCo
     };
 }
 
-export function getSectionElementControls(element: SectionPageElement): APFormControl[] {
-    return [
-        ...getDefaultSizeSettings(element),
-        getSectionTextControl(element),
-        getSectionLabelControl(element),
-        getSectionColorControl(element),
-        getSectionBackgroundColorControl(element),
-    ];
+export function getSectionElementSizeControls(element: SectionPageElement): APFormControl[] {
+    return [...getDefaultSizeSettings(element)];
+}
+
+export function getSectionElementTextControl(element: SectionPageElement): APFormControl[] {
+    return [getSectionTextControl(element), getSectionColorControl(element)];
+}
+
+export function getSectionElementStyleControl(element: SectionPageElement): APFormControl[] {
+    return [getSectionBackgroundColorControl(element)];
 }
 
 export function getSectionSettings(element: SectionPageElement): APFormModel {
-    const controls = getSectionElementControls(element);
-
     return {
         id: "elementSettings",
         name: "elementSettings",
         upsertConfig: DEFAULT_UPSERT_CONFIG,
-        controls: controls,
+        controls: [],
+        innerGroups: [
+            {
+                id: SectionElementSettingsGroup.SIZE_SETTINGS,
+                name: SectionElementSettingsGroup.SIZE_SETTINGS,
+                upsertConfig: DEFAULT_UPSERT_CONFIG,
+                controls: getSectionElementSizeControls(element),
+            },
+            {
+                id: SectionElementSettingsGroup.TEXT_SETTINGS,
+                name: SectionElementSettingsGroup.TEXT_SETTINGS,
+                upsertConfig: DEFAULT_UPSERT_CONFIG,
+                controls: getSectionElementTextControl(element),
+            },
+            {
+                id: SectionElementSettingsGroup.STYLE_SETTINGS,
+                name: SectionElementSettingsGroup.STYLE_SETTINGS,
+                upsertConfig: DEFAULT_UPSERT_CONFIG,
+                controls: getSectionElementStyleControl(element),
+            },
+        ],
     };
 }

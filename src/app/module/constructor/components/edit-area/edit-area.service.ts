@@ -270,6 +270,11 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         return this.formsManager.valueChanges("elementSettings").pipe(
             skip(1),
             distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
+            map((value: Record<string, SitePageElementSettings>) => {
+                const settings = Object.values(value);
+
+                return settings.reduce((result, value) => ({ ...result, ...value }), {} as SitePageElementSettings);
+            }),
             tap(value => this.updateElementSettings(value)),
         );
     }

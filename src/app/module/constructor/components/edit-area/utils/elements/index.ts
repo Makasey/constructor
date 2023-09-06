@@ -1,1 +1,1 @@
-export { getSectionSettings, getSectionElementControls } from "./section-element-controls.utils";
+export { getSectionSettings } from "./section-element-controls.utils";

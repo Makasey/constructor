@@ -12,6 +12,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
+    ViewEncapsulation,
 } from "@angular/core";
 
 import { NgFormsManager } from "@ngneat/forms-manager";
@@ -25,6 +26,7 @@ import { ControlTemplate } from "../modal";
     selector: "ap-form",
     templateUrl: "./form.component.html",
     styleUrls: ["./form.component.scss"],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class APFormComponent implements OnChanges, OnInit, OnDestroy {

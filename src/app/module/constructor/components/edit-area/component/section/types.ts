@@ -15,3 +15,9 @@ export type SectionPageElementSettings = Readonly<
         SitePageElementTextColor &
         SitePageElementBackground
 >;
+
+export enum SectionElementSettingsGroup {
+    SIZE_SETTINGS = "sizeSettings",
+    TEXT_SETTINGS = "textSettings",
+    STYLE_SETTINGS = "styleSettings",
+}

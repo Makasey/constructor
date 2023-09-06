@@ -8,4 +8,8 @@
         <span>{{ tab.title }}</span>
     </button>
 </div>
-<ng-template [ngTemplateOutlet]="activeComponent!.template"></ng-template>
+
+<section class="_scrollable tab-section" [ngClass]="activeComponent!.customClass">
+  <ng-template [ngTemplateOutlet]="activeComponent!.template"></ng-template>
+</section>
+

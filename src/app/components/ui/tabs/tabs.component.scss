@@ -28,3 +28,16 @@
         border-radius: 4px;
     }
 }
+
+._scrollable {
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: gold;
+        border-radius: 20px;
+    }
+}

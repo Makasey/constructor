@@ -12,6 +12,9 @@ export class TabsItemComponent {
     @Input({ required: true })
     public title: string;
 
+    @Input()
+    public customClass: string;
+
     @Input({ required: true })
     public template: TemplateRef<unknown>;
 }
