@@ -1,7 +1,7 @@
-import { ComponentRef, EmbeddedViewRef, InjectionToken, TemplateRef, Type, ViewContainerRef } from "@angular/core";
+import { ComponentRef, EmbeddedViewRef, InjectionToken, Injector, TemplateRef, Type, ViewContainerRef } from "@angular/core";
 import { FormControl } from "@angular/forms";
 
-import { Observable, Subscription } from "rxjs";
+import { Observable } from "rxjs";
 
 import { APFormControl, APFormOptions } from "../form";
 import { ModalComponent } from "@components/ui";
@@ -14,7 +14,7 @@ export type ModalModel = Readonly<{
     modalWrapperRef: ComponentRef<ModalComponent>;
     contentRef: ComponentRef<unknown> | EmbeddedViewRef<unknown>;
     controlsRef: ComponentRef<unknown> | EmbeddedViewRef<unknown>;
-    closeSubscription: Subscription;
+    onClose: Observable<unknown>;
     id: string;
 }>;
 
@@ -43,6 +43,7 @@ export type ModalConfig<T = unknown, U = unknown> = Readonly<{
     closeOnOutsideClick?: boolean;
     closeOnEsc?: boolean;
     title?: string;
+    injector?: Injector;
     innerText?: string;
     innerTemplate?: TemplateRef<unknown>;
     headerTemplate?: TemplateRef<unknown>;
@@ -80,3 +81,5 @@ export const MODAL_DATA_TOKEN = new InjectionToken<unknown>("Modal data injectio
         return {};
     },
 });
+
+export const MODAL_ID_TOKEN = new InjectionToken<string>("Modal id injection token");

@@ -1,9 +1,15 @@
-import { AbstractLzStoreService, LzStoreService } from "@core/store/abstract/lz-abstract.service";
 import { InjectionToken, Provider } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzState, lzInitialStateFunctions } from "@core/store/lz.state";
 import { Query, Store } from "@datorama/akita";
+
+import {
+    AbstractLzStoreService,
+    LzAbstractQuery,
+    LzQueryInjectionTokensMap,
+    LzServiceInjectionTokensMap,
+    LzState,
+    LzStoreService,
+    lzInitialStateFunctions,
+} from "@core/store";
 
 export function createStoreProviders<T extends keyof LzState>(stateKey: T): Provider[] {
     const store = new Store<LzState[T]>(lzInitialStateFunctions[stateKey](), {

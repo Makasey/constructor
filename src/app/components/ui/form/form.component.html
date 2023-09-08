@@ -111,6 +111,10 @@
     ></lz-color-picker>
 </ng-template>
 
+<ng-template #fileUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <lz-file-upload [formControl]="nativeControl" [nativeControl]="nativeControl" [controlModel]="controlModel" />
+</ng-template>
+
 <ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <span class="form-default-text">
         {{ "label: " + controlModel?.options.label }}

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { Store, StoreConfig } from "@datorama/akita";
 
-import { LzState, createLZInitialState } from "./lz.state";
+import { LzState, createLZInitialState } from "@core/store";
 
 @Injectable()
 @StoreConfig({

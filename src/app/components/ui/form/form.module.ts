@@ -6,6 +6,7 @@ import { CategoryControllerModule, CheckboxGroupModule, RangeControllerModule } 
 
 import { APDropdownFieldModule, APNumberFieldModule, APTextFieldModule } from "../controls";
 import { APFormComponent } from "./form.component";
+import { ESFileUploadComponent } from "@components/ui/controls/file-gallery/file-upload.component";
 import { LZColorPickerComponent } from "@components/ui/controls/color-picker";
 import { TextareaComponent } from "@components/ui/controls/textarea/textarea.component";
 
@@ -18,6 +19,7 @@ const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModul
         CategoryControllerModule,
         CheckboxGroupModule,
         CommonModule,
+        ESFileUploadComponent,
         LZColorPickerComponent,
         RangeControllerModule,
         ReactiveFormsModule,

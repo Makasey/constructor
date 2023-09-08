@@ -61,6 +61,11 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private categoryControllerField: ControlTemplate;
 
+    @ViewChild("fileUploadTemplate", {
+        static: true,
+    })
+    private fileUploadField: ControlTemplate;
+
     @ViewChild("rangeFieldTemplate", {
         static: true,
     })
@@ -109,6 +114,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.CATEGORY_CONTROLLER]: this.categoryControllerField,
             [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
             [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
+            [APFormDefaultTemplateKeys.FILE_UPLOAD]: this.fileUploadField,
             [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
             [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
         };

@@ -6,13 +6,14 @@ import {
     CatalogFiltersState,
     CatalogProductsState,
     EditorState,
+    FilesState,
     ModuleState,
     ProductCartState,
     RootModuleState,
     TableModuleState,
     TestState,
     UIDataState,
-} from "../states/ui-states";
+} from "@core/store";
 import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/types";
 
 export function initialTableModuleState(): TableModuleState {
@@ -91,6 +92,7 @@ export function initialEditorState(): EditorState {
         settings: {
             title: "My best site",
             id: undefined,
+            logotype: null,
             siteDescription: "My best site",
             siteMetaTags: "",
             campaignName: "My best campaign",
@@ -103,5 +105,12 @@ export function initialCampaignListState(): CampaignListState {
         ...initialModuleDataState(),
         ...initialTableModuleState(),
         campaigns: [],
+    };
+}
+
+export function initialFilesState(): FilesState {
+    return {
+        ...initialModuleDataState(),
+        files: [],
     };
 }

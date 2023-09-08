@@ -1,11 +1,11 @@
 import { ApplicationRef, ComponentRef, Injectable, Injector, Renderer2, RendererFactory2, TemplateRef, Type, inject } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 
-import { tap } from "rxjs";
+import { finalize } from "rxjs";
 
 import { ModalComponent } from "@components/ui";
 
-import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, ModalConfig, ModalModel, ModalModelMap, ModalType, ModalWithData } from "./types";
+import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, MODAL_ID_TOKEN, ModalConfig, ModalModel, ModalModelMap, ModalType, ModalWithData } from "./types";
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 
@@ -30,12 +30,12 @@ export class ModalService {
         const modalWrapperRef = viewContainerRef.createComponent(ModalComponent);
         const modalId = id ?? crypto.randomUUID();
 
-        this.generateContent(model, modalId, modalWrapperRef);
-        this.generateControls(model, modalId, modalWrapperRef);
-
         this.renderer.addClass(this.documentRef.documentElement, NO_SCROLL_CLASS);
 
         modalWrapperRef.instance.config = Object.assign({ ...DEFAULT_MODAL_CONFIG }, { ...model });
+
+        this.generateContent(model, modalId, modalWrapperRef);
+        this.generateControls(model, modalId, modalWrapperRef);
 
         this.modalMap = {
             ...this.modalMap,
@@ -46,23 +46,20 @@ export class ModalService {
             },
         };
 
-        const closeSubscription = modalWrapperRef.instance.closeSubject$
-            .asObservable()
-            .pipe(tap(() => this.closeModal(modalId)))
-            .subscribe(console.log);
+        const closeStream = modalWrapperRef.instance.closeSubject$.asObservable().pipe(finalize(() => this.closeModal(modalId)));
 
         this.modalMap = {
             ...this.modalMap,
             [modalId]: {
                 ...this.modalMap[modalId],
-                closeSubscription: closeSubscription,
+                onClose: closeStream,
             },
         };
 
         return this.modalMap[modalId];
     }
 
-    public closeModal(id: string): void {
+    public closeModal(id: string, value?: unknown): void {
         const item = this.modalMap[id];
 
         if (!item) return;
@@ -73,7 +70,8 @@ export class ModalService {
             this.renderer.removeClass(documentRef, NO_SCROLL_CLASS);
         }
 
-        item.closeSubscription.unsubscribe();
+        item.modalWrapperRef.instance.closeSubject$.next(value);
+        item.modalWrapperRef.instance.closeSubject$.complete();
 
         item.modalWrapperRef.destroy();
 
@@ -87,7 +85,8 @@ export class ModalService {
 
                 this.renderer.removeClass(documentRef, NO_SCROLL_CLASS);
             }
-            modal.closeSubscription.unsubscribe();
+
+            modal.modalWrapperRef.instance.closeSubject$.complete();
             modal.modalWrapperRef.destroy();
         });
 
@@ -120,6 +119,10 @@ export class ModalService {
                         {
                             provide: MODAL_DATA_TOKEN,
                             useValue: data,
+                        },
+                        {
+                            provide: MODAL_ID_TOKEN,
+                            useValue: id,
                         },
                     ],
                 });

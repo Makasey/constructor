@@ -4,3 +4,4 @@ export { TOTAL_COUNT_HEADER, PaginationListItems } from "./response/response-vie
 export { SearchConditions } from "./search/search-conditions.type";
 export { UIState, SimpleMap, ItemsWithId } from "./common/common";
 export { Cart, CartItem, CartStatus } from "./cart/cart";
+export { File } from "./file/file";

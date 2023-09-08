@@ -1,0 +1,9 @@
+<ng-template [ngTemplateOutlet]="value ? valueTemplate : emptyTemplate"></ng-template>
+
+<ng-template #valueTemplate>
+    <button class="file-upload-button" (click)="openModal()"><img [src]="value.path" [alt]="value.fileName" /></button>
+</ng-template>
+
+<ng-template #emptyTemplate>
+    <button class="file-upload-button" (click)="openModal()">Загрузить фото</button>
+</ng-template>

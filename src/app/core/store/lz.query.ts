@@ -2,10 +2,8 @@ import { Injectable } from "@angular/core";
 
 import { Query } from "@datorama/akita";
 
+import { LzState, LzStore } from "@core/store";
 import { Observable } from "rxjs";
-
-import { LzState } from "./lz.state";
-import { LzStore } from "./lz.store";
 
 @Injectable()
 export class LzQuery extends Query<LzState> {

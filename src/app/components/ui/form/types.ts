@@ -13,6 +13,7 @@ export enum APFormDefaultTemplateKeys {
     RANGE_FIELD = "rangeFieldTemplate",
     COLOR_FIELD = "colorPickerTemplate",
     CHECKBOX_FIELD = "checkboxGroupTemplate",
+    FILE_UPLOAD = "fileUploadTemplate",
     TEXTAREA_FIELD = "textAreaFieldTemplate",
 }
 

@@ -22,7 +22,7 @@ export abstract class AbstractEditorPageSettingsService {
             .select(state => state.settings)
             .pipe(
                 map(settings => {
-                    const { title, campaignName } = settings;
+                    const { title, campaignName, logotype } = settings;
 
                     return {
                         id: crypto.randomUUID(),
@@ -51,7 +51,12 @@ export abstract class AbstractEditorPageSettingsService {
                                     label: "Название вашей компании",
                                 },
                             },
-
+                            {
+                                id: crypto.randomUUID(),
+                                name: "logotype",
+                                valueTemplateKey: APFormDefaultTemplateKeys.FILE_UPLOAD,
+                                value: logotype,
+                            },
                             {
                                 id: crypto.randomUUID(),
                                 name: "siteDescription",

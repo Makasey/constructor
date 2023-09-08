@@ -1,3 +1,4 @@
+import { File } from "@shared-types/file/file";
 import { InjectionToken, Type, ViewContainerRef } from "@angular/core";
 import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
 import { SectionComponent } from "@modules/constructor/components/edit-area/component/section/section.component";
@@ -73,6 +74,7 @@ export type ElementSettingsWithUnit = Readonly<{
 export type PageSettings = Readonly<{
     title: string;
     campaignName: string;
+    logotype: File | null;
     siteMetaTags: string;
     siteDescription: string;
     id?: number;

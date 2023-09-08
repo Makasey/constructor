@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, TemplateRef, ViewChild, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, TemplateRef, ViewChild, ViewEncapsulation, inject } from "@angular/core";
 
 import { Subject } from "rxjs";
 
 import { HostModalContentDirective } from "./host-modal-content.directive";
 import { ModalConfig } from "./types";
+import { ModalService } from "@components/ui";
 
 @Component({
     selector: "ap-modal",
@@ -15,7 +16,9 @@ import { ModalConfig } from "./types";
 export class ModalComponent {
     public config: ModalConfig;
 
-    public closeSubject$: Subject<void> = new Subject<void>();
+    public closeSubject$: Subject<unknown> = new Subject<unknown>();
+
+    private readonly modalService = inject(ModalService);
 
     @ViewChild(HostModalContentDirective, {
         static: true,
@@ -39,8 +42,10 @@ export class ModalComponent {
             return;
         }
 
-        this.closeSubject$.next();
+        this.closeSubject$.next(undefined);
         this.closeSubject$.complete();
+
+        this.modalService.closeModal(this.config.id, undefined);
     }
 
     public stopEventPropagation(event: Event): void {

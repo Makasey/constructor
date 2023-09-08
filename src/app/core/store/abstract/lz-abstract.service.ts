@@ -1,8 +1,6 @@
-import { LzAbstractStore } from "@core/store/abstract/lz-abstract.store";
-import { LzState, lzInitialStateFunctions } from "@core/store/lz.state";
-import { UIDataState } from "@core/store/states/ui-states";
 import { UpdateStateCallback } from "@datorama/akita";
-import { isUIDateStateful } from "@core/store/types";
+
+import { LzAbstractStore, LzState, UIDataState, isUIDateStateful, lzInitialStateFunctions } from "@core/store";
 
 export abstract class AbstractLzStoreService<T extends keyof LzState> {
     public abstract updateState(updateStateCallback: UpdateStateCallback<LzState[T], Partial<LzState[T]>>): void;

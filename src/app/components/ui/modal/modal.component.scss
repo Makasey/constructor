@@ -13,8 +13,20 @@
 
     &-content {
         max-width: 600px;
+        gap: 16px;
         width: 100%;
         background-color: #fff;
         min-height: 680px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        height: 100%;
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        height: 100%;
     }
 }

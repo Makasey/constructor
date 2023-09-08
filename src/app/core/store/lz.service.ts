@@ -2,10 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { UpdateStateCallback, isFunction } from "@datorama/akita";
 
-import { LzState, lzInitialStateFunctions } from "./lz.state";
-import { LzStore } from "./lz.store";
-import { StateCallbackOrPart } from "./types";
-import { UIDataState } from "./states/ui-states";
+import { LzState, LzStore, StateCallbackOrPart, UIDataState, lzInitialStateFunctions } from "@core/store";
 
 @Injectable()
 export class LzService {
