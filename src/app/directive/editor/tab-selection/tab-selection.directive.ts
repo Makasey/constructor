@@ -1,4 +1,4 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorSelectionService } from "@modules/constructor/core/abstract/editor-selection.service";
 import { Directive, HostBinding, HostListener, inject } from "@angular/core";
 
 @Directive({
@@ -9,7 +9,7 @@ export class TabSelectionDirective {
     @HostBinding("attr.tabIndex")
     public attr = 1;
 
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractEditorSelectionService);
 
     @HostListener("keydown.tab.stop")
     public select(): void {

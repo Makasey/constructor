@@ -4,9 +4,9 @@ import { NgClass, NgForOf, NgIf } from "@angular/common";
 import { map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
-import { SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { SitePageElementType, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { blockElements } from "@modules/constructor/module/page-inner/types";
 
 @Component({
@@ -19,7 +19,8 @@ import { blockElements } from "@modules/constructor/module/page-inner/types";
     imports: [NgClass, NgForOf, NgIf],
 })
 export class SiteElementsComponent {
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
+
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
     public elements = toSignal(

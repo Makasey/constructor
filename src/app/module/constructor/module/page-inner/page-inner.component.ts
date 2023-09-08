@@ -6,7 +6,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { APFormModule } from "@components/ui";
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractCampaignService } from "@modules/constructor/core/abstract/campaign.service";
 import { EditAreaComponent } from "@modules/constructor/components/edit-area/edit-area.component";
 import { ElementSettingsComponent } from "@modules/constructor/module/page-inner/components/element-settings/element-settings.component";
 import { LzTabsComponent } from "@components/ui/tabs";
@@ -37,7 +37,7 @@ export class PageInnerComponent {
     @HostBinding("class.lz-page-inner")
     public hostClass = true;
 
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractCampaignService);
 
     public readonly isNewCampaign = toSignal(this.service.selectIsNewCampaign());
 

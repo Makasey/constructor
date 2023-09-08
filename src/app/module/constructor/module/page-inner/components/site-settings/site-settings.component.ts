@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import { APFormModel, APFormModule } from "@components/ui";
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorPageSettingsService } from "@modules/constructor/core/abstract/editor-page-settings.service";
 
 @Component({
     selector: "lz-site-settings",
@@ -15,7 +15,7 @@ import { AbstractEditAreaService } from "@modules/constructor/components/edit-ar
     imports: [APFormModule],
 })
 export class SiteSettingsComponent {
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractEditorPageSettingsService);
 
     public readonly formModel = toSignal(this.service.selectFormModel(), {
         initialValue: {} as APFormModel,

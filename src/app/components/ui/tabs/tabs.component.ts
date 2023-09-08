@@ -1,7 +1,7 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, QueryList, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { TabsItemComponent } from "@components/ui/tabs/components/tabs-item/tabs-item.component";
+import { TabsItemComponent } from "./components/tabs-item/tabs-item.component";
 
 @Component({
     selector: "lz-tabs",

@@ -1,4 +1,4 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorSelectionService } from "@modules/constructor/core/abstract/editor-selection.service";
 import { Directive, HostBinding, HostListener, OnInit, inject } from "@angular/core";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { ELEMENT_ID, ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
@@ -16,7 +16,7 @@ export class ToggleSelectionDirective implements OnInit {
 
     private readonly selectedElement = toSignal(this.selectedElement$);
 
-    private readonly service: AbstractEditAreaService = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractEditorSelectionService);
 
     @HostBinding("$.class._selected")
     @HostListener("$.class._selected")

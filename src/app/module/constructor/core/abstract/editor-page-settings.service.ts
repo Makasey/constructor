@@ -1,7 +1,8 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
@@ -13,7 +14,7 @@ export abstract class AbstractEditorPageSettingsService {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
-        private readonly formsManager: NgFormsManager,
+        protected readonly formsManager: NgFormsManager,
     ) {}
 
     public selectFormModel(): Observable<APFormModel> {
@@ -97,5 +98,16 @@ export abstract class AbstractEditorPageSettingsService {
                 },
             };
         });
+    }
+}
+
+@Injectable()
+export class SinglePageEditorPageSettingsService extends AbstractEditorPageSettingsService {
+    constructor(
+        @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
+        @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
+        protected readonly formsManager: NgFormsManager,
+    ) {
+        super(query, service, formsManager);
     }
 }

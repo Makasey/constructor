@@ -1,9 +1,10 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
 import { DeleteSelectedElementDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { NgForOf } from "@angular/common";
 import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
+import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -23,7 +24,7 @@ export class RootComponent {
         "editor-element": true,
     };
 
-    constructor(private service: AbstractEditAreaService) {}
+    constructor(private service: AbstractEditorElementActionsService<SectionPageElement>) {}
 
     public root = toSignal(this.service.selectElement(ROOT_ELEMENT_ID));
 

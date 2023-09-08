@@ -1,19 +1,21 @@
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
 import {
     ROOT_ELEMENT_ID,
     SitePageElement,
     SitePageElementType,
+    SitePageElementUnion,
     defaultPageElementSettingsMap,
     deleteElementFromTree,
 } from "@modules/constructor/components/edit-area/types";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
-export abstract class AbstractEditorElementService<T extends SitePageElement> {
+export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
@@ -90,5 +92,15 @@ export abstract class AbstractEditorElementService<T extends SitePageElement> {
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {
         return this.query.getValue()[key];
+    }
+}
+
+@Injectable()
+export class DefaultEditorElementActionsService<T extends SitePageElementUnion> extends AbstractEditorElementActionsService<T> {
+    constructor(
+        @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
+        @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
+    ) {
+        super(query, service);
     }
 }

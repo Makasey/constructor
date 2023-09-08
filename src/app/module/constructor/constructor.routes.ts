@@ -7,6 +7,11 @@ export const CONSTRUCTOR_ROUTES: Route[] = [
         component: LZConstructorComponent,
         children: [
             {
+                path: "",
+                redirectTo: "list",
+                pathMatch: "full",
+            },
+            {
                 path: "list",
                 loadChildren: () => import("./module/list").then(routes => routes.CAMPAIGN_LIST_ROUTES),
             },

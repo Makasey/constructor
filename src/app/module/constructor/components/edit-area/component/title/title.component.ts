@@ -1,4 +1,4 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ELEMENT_ID, SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
@@ -16,7 +16,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractEditorElementSettingsService);
 
     @HostBinding("class")
     public hostClasses = {
@@ -37,8 +37,6 @@ export class TitleComponent implements OnInit {
     public titleText$: Observable<string>;
 
     private titleSettings$: Observable<SitePageElementSettings>;
-
-    public readonly titleElement$ = this.service.selectElement(this.elementID);
 
     public ngOnInit(): void {
         this.titleSettings$ = this.service.selectSettings(this.elementID);

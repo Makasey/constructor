@@ -1,6 +1,7 @@
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
 import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
@@ -57,5 +58,15 @@ export abstract class AbstractEditorSelectionService {
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {
         return this.query.getValue()[key];
+    }
+}
+
+@Injectable()
+export class SinglePageEditorSelectionService extends AbstractEditorSelectionService {
+    constructor(
+        @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
+        @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
+    ) {
+        super(query, service);
     }
 }

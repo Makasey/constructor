@@ -1,4 +1,5 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
+import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
 import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
@@ -41,7 +42,9 @@ export class SectionComponent implements OnInit {
         "lz-section-element": true,
     };
 
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractEditorElementSettingsService);
+
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>);
 
     public element$: Observable<SectionPageElement> = new Observable();
 
@@ -54,7 +57,7 @@ export class SectionComponent implements OnInit {
     private sectionSettings$: Observable<SectionPageElementSettings>;
 
     public ngOnInit(): void {
-        this.element$ = this.service.selectElement<SectionPageElementSettings>(this.ELEMENT_ID);
+        this.element$ = this.editorActionsService.selectElement(this.ELEMENT_ID);
 
         this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
 
@@ -68,7 +71,7 @@ export class SectionComponent implements OnInit {
     }
 
     public addElement(type: SitePageElementType): void {
-        this.service.addElement(type, this.ELEMENT_ID);
+        this.editorActionsService.addElement(type, this.ELEMENT_ID);
     }
 
     public _trackByChild(index: number, child: number): number {
@@ -76,6 +79,6 @@ export class SectionComponent implements OnInit {
     }
 
     public deleteElement(): void {
-        this.service.deleteElement(this.ELEMENT_ID);
+        this.editorActionsService.deleteElement(this.ELEMENT_ID);
     }
 }

@@ -1,27 +1,33 @@
 import { AbstractCampaignDataService } from "@core/data-service/campaign-data.service";
+import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
+import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
 import { AbstractNavigationService } from "@core/navigation.service";
 import { CampaignModel, CampaignType, CreateCampaignModel } from "@modules/constructor/components/edit-area/types";
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components/ui";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzState, LzStateKey } from "@core/store/lz.state";
-import { Observable, catchError, tap, throwError } from "rxjs";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
+import { LzStateKey } from "@core/store/lz.state";
+import { Observable, catchError, map, tap, throwError } from "rxjs";
 import { PaginationListItems } from "@shared-types/response/response-view.type";
 import { RouteKey } from "@shared-types/routes/route-paths";
 import { Router } from "@angular/router";
 
 @Injectable()
-export abstract class AbstractCampaignService<T = CampaignModel> {
+export abstract class AbstractCampaignService<T = CampaignModel> extends AbstractEditorOperationService {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
+        protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
         protected toastrService: LZToastrService,
         protected readonly router: Router,
         protected readonly navigationService: AbstractNavigationService,
-    ) {}
+    ) {
+        super(query, service);
+    }
 
     public abstract createCampaign(): Observable<T>;
 
-    public abstract updateCampaignById(id: number): Observable<T>;
+    public abstract updateCampaignById(): Observable<T>;
 
     public abstract getCampaignById(id: number): Observable<T>;
 
@@ -29,23 +35,22 @@ export abstract class AbstractCampaignService<T = CampaignModel> {
 
     public abstract deleteCampaignById(id: number): Observable<void>;
 
-    protected abstract getCreateCampaignRequestData(): CreateCampaignModel;
+    public abstract selectIsNewCampaign(): Observable<boolean>;
 
-    protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {
-        return this.query.getValue()[key];
-    }
+    protected abstract getCreateCampaignRequestData(): CreateCampaignModel;
 }
 
 @Injectable()
 export class SinglePageCampaignService extends AbstractCampaignService {
     constructor(
+        @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
+        @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
         protected toasterService: LZToastrService,
         protected readonly router: Router,
-        protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected readonly navigationService: AbstractNavigationService,
         private readonly campaignDataService: AbstractCampaignDataService,
     ) {
-        super(query, toasterService, router, navigationService);
+        super(query, service, toasterService, router, navigationService);
     }
 
     public createCampaign(): Observable<CampaignModel> {
@@ -148,5 +153,15 @@ export class SinglePageCampaignService extends AbstractCampaignService {
             },
             type: CampaignType.SINGLE_PAGE,
         };
+    }
+
+    public selectIsNewCampaign(): Observable<boolean> {
+        return this.query
+            .select(state => state.settings.id)
+            .pipe(
+                map(id => {
+                    return !id;
+                }),
+            );
     }
 }

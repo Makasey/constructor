@@ -1,4 +1,4 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
+import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
@@ -30,7 +30,7 @@ export class LZEditAreaItemComponent implements OnInit {
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service = inject(AbstractEditorElementActionsService);
 
     public ngOnInit(): void {
         this.element = this.service.getElement(this.elementID);

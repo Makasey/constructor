@@ -1,6 +1,6 @@
-import { AbstractEditAreaService } from "@modules/constructor/components/edit-area/edit-area.service";
-import { Directive, Injector, Input, OnChanges, SimpleChanges, Type, ViewContainerRef, inject } from "@angular/core";
-import { ELEMENT_ID, PARENT_ID, sitePageElementMap } from "@modules/constructor/components/edit-area/types";
+import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
+import { Directive, Injector, Input, OnChanges, Type, ViewContainerRef, inject } from "@angular/core";
+import { ELEMENT_ID, PARENT_ID, SitePageElementUnion, sitePageElementMap } from "@modules/constructor/components/edit-area/types";
 
 @Directive({
     selector: "[lzElementResolver]",
@@ -9,7 +9,7 @@ import { ELEMENT_ID, PARENT_ID, sitePageElementMap } from "@modules/constructor/
 export class ElementResolverDirective implements OnChanges {
     private readonly viewContainerRef = inject(ViewContainerRef);
 
-    private readonly service = inject(AbstractEditAreaService);
+    private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
 
     private readonly injector = inject(Injector);
 
@@ -19,8 +19,8 @@ export class ElementResolverDirective implements OnChanges {
     @Input()
     public lzElementResolverParent: number | undefined;
 
-    public ngOnChanges(changes: SimpleChanges): void {
-        if (changes.lzElementResolver && this.lzElementResolver && this.lzElementResolverParent) {
+    public ngOnChanges(): void {
+        if (this.lzElementResolver && this.lzElementResolverParent) {
             const { type, id } = this.service.getElement(this.lzElementResolver);
             const componentType: Type<unknown> = sitePageElementMap[type];
             const newInjector = Injector.create({

@@ -14,7 +14,7 @@ import {
 } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
-import { Observable, debounceTime, distinctUntilChanged, tap } from "rxjs";
+import { Observable, distinctUntilChanged, tap } from "rxjs";
 import { filterNilValue } from "@datorama/akita";
 
 import { defaultColorPikerOptions } from "@components/ui/controls/text-field/types";
@@ -63,7 +63,6 @@ export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnC
         this.colorControlValueChange$ = this.colorControl.valueChanges.pipe(
             filterNilValue(),
             distinctUntilChanged(),
-            debounceTime(500),
             tap(value => {
                 this.onValueChange.emit(value);
                 this.onChange(value);
