@@ -114,10 +114,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     @Input()
     public set tableMeta(tableMeta: TableMeta[] | null) {
         this._tableMeta = tableMeta ?? [];
-
-        this.service.patchState({
-            tableMeta: this._tableMeta,
-        });
     }
 
     @Input()
@@ -135,39 +131,23 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     @Input({ required: true })
     public set tableRows(tableRows: TableRow[] | null) {
         this._tableRows = tableRows ?? [];
-
-        this.service.patchState({
-            tableRows: this._tableRows,
-        });
     }
 
     @Input()
     public set selectedRows(selectedRows: unknown[]) {
         this._selectedRows = Array.isArray(selectedRows) ? [...selectedRows] : [];
-
-        this.service.patchState({
-            selectedRows: this._selectedRows,
-        });
     }
 
     @Input({ required: true })
     public set tableExtra(tableExtra: Partial<TableExtra> | null) {
         const processedTableExtra = tableExtra ?? {};
 
-        this._tableExtra = { ...defaultTableExtra, ...processedTableExtra };
-
-        this.service.patchState({
-            tableExtra: this._tableExtra,
-        });
+        this._tableExtra = { ...this._tableExtra, ...processedTableExtra };
     }
 
     @Input()
     public set valuesExtra(valuesExtra: TableValueExtraInternal | null) {
         this._valuesExtra = valuesExtra ?? {};
-
-        this.service.patchState({
-            valuesExtra: this._valuesExtra,
-        });
     }
 
     @shouldCall(checkScrollPosition)

@@ -4,13 +4,6 @@
 
 <h2 class="table-title">Список компаний</h2>
 
-<!--<lz-table-->
-<!--    class="campaigns-list-table"-->
-<!--    [tableMeta]="tableMeta$ | async"-->
-<!--    [tableValues]="tableValues$ | async"-->
-<!--    [templatesMap]="{ actionsTemplate: actionsTemplate }"-->
-<!--&gt;</lz-table>-->
-
 <ng-template #actionsTemplate let-value="value">
     <button class="create-campaign" (click)="deleteCampaignByID(value)">Удалить</button>
     <a [routerLink]="createNewCampaignLink | lzNavigationLink: { campaignId: value }" class="create-campaign"
