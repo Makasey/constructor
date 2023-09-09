@@ -481,7 +481,7 @@ lz-table {
             }
 
             &-cell {
-                max-width: var(--table-column-width, unset);
+                //max-width: var(--table-column-width, unset);
                 min-width: var(--table-column-width, unset);
                 display: flex;
                 flex-basis: 100%;
@@ -679,7 +679,7 @@ lz-table {
             }
 
             &-cell {
-                max-width: var(--table-column-width, unset);
+                //max-width: var(--table-column-width, unset);
                 min-width: var(--table-column-width, unset);
 
                 display: flex;

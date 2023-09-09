@@ -26,7 +26,7 @@
                 class="table-row-cell"
                 *ngFor="let metaItem of tableMeta; trackBy: trackByFieldKey; let index = index"
                 [ngStyle]="{
-                    '--table-column-width': metaItem.width + 'px'
+                    '--table-column-width.px': metaItem.width
                 }"
                 [ngClass]="metaItem.customClass"
                 [style.padding-left.px]="

@@ -48,20 +48,24 @@ export class DefaultCampaignListService extends AbstractDefaultModuleService<LzS
             {
                 label: "ID",
                 fieldKey: "id",
+                width: 400,
             },
             {
                 label: "Имя компании",
                 fieldKey: "campaignName",
+                width: 400,
             },
             {
                 label: "Тип компании",
                 fieldKey: "type",
+                width: 400,
             },
             {
                 label: "Действия",
                 templateKey: "actionsTemplate",
                 customClass: "actions-column",
                 fieldKey: "id",
+                width: 400,
             },
         ];
     }
