@@ -5,6 +5,9 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 import { APFormModule } from "@components/ui";
 import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
+import { AccordionComponent } from "@components/ui/accordion";
+import { AccordionContentDirective } from "@components/ui/accordion/directives/accordion-content.directive";
+import { AccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
 
 @Component({
     selector: "lz-element-settings",
@@ -13,7 +16,7 @@ import { AbstractEditorElementSettingsService } from "@modules/constructor/core/
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormModule, NgIf],
+    imports: [APFormModule, NgIf, AccordionComponent, AccordionItemDirective, AccordionContentDirective],
 })
 export class ElementSettingsComponent {
     private readonly service = inject(AbstractEditorElementSettingsService);

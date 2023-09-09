@@ -2,3 +2,15 @@
     <h2 class="settings-title">Настройки элемента</h2>
     <ap-form [formModel]="formModel" />
 </section>
+
+<lz-accordion>
+    <accordion-item title="Настройки размера">
+        <ng-template accordionContent> first </ng-template>
+    </accordion-item>
+    <accordion-item title="Настройки текста">
+        <ng-template accordionContent> Lorem ipsum dolor sit amet!</ng-template>
+    </accordion-item>
+    <accordion-item title="Настройки стилей">
+        <ng-template accordionContent> third </ng-template>
+    </accordion-item>
+</lz-accordion>
