@@ -20,8 +20,9 @@
 
 <lz-table
     [tableMeta]="tableMeta$ | async"
-    [selectedRows]="[]"
+    [selectedRows]="selectedRows"
     [tableRows]="tableValues$ | async"
     [tableExtra]="{ hasCheckboxes: true, hasSelectAllCheckbox: true, idKey: 'id' }"
     [templatesMap]="{ actionsTemplate: actionsTemplate }"
+    (onSelect)="selectRows($event)"
 ></lz-table>

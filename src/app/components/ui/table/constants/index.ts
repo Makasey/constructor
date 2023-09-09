@@ -1,5 +1,5 @@
+import { TableExtra, TableValueExtraInternalParams } from "../interfaces";
 import { TableState, UIDataState } from "@core/store/states/ui-states";
-import { TableValueExtraInternalParams } from "../interfaces";
 
 export const DEFAULT_LOAD_MORE_LABEL = "Load more data";
 
@@ -27,22 +27,24 @@ export const DEFAULT_VALUE_EXTRA_ITEM: TableValueExtraInternalParams = {
     rowCustomClass: undefined,
 };
 
+export const defaultTableExtra: TableExtra = {
+    hasCheckboxes: false,
+    clickableRows: false,
+    draggableHeader: false,
+    selectAll: false,
+    hoverableRows: false,
+    hasSelectAllCheckbox: false,
+    isHierarchical: false,
+    noRecordsLabel: "",
+    idKey: "id",
+    nameKey: "label",
+    highlightedId: null,
+    pageLoading: false,
+};
+
 export const initialTableStore: TableState = {
     dataState: UIDataState.INITIAL,
-    tableExtra: {
-        hasCheckboxes: false,
-        clickableRows: false,
-        draggableHeader: false,
-        selectAll: false,
-        hoverableRows: false,
-        hasSelectAllCheckbox: false,
-        isHierarchical: false,
-        noRecordsLabel: "",
-        idKey: "id",
-        nameKey: "label",
-        highlightedId: null,
-        pageLoading: false,
-    },
+    tableExtra: defaultTableExtra,
     tableMeta: [],
     tableRows: [],
     valuesExtra: {},

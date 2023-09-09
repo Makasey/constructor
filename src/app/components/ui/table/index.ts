@@ -1,5 +1,6 @@
 export { TableRowComponent, TableHeadComponent, TableFootComponent, TableBodyComponent } from "./components";
 export { TableQuery, TableService, TableStore } from "./store/table-store.providers";
+export { AbstractAwesomeTableService, DefaultAwesomeTableService } from "./store/table-component.store";
 export { RowPaddingPipe } from "./pipes/row-padding.pipe";
 export { TableComponent } from "./table.component";
 export { LzTableModule } from "./table.module";
@@ -36,4 +37,3 @@ export {
     deselectParentRowById,
 } from "./utils";
 export { initialTableStore, DEFAULT_VALUE_EXTRA_ITEM, DEFAULT_LOAD_MORE_LABEL } from "./constants";
-export { AbstractAwesomeTableService, DefaultAwesomeTableService } from "./store/table-component.store";

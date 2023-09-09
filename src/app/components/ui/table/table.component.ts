@@ -26,9 +26,11 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    SimpleChanges,
     TemplateRef,
     ViewEncapsulation,
 } from "@angular/core";
+import { defaultTableExtra } from "@components/ui/table/constants";
 import { shouldCall } from "../../../decorators/should-call";
 
 @Component({
@@ -71,7 +73,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     @Output()
     public columnDropped: EventEmitter<ColumnDropEvent> = new EventEmitter<ColumnDropEvent>();
 
-    public _tableExtra: Partial<TableExtra> = {};
+    public _tableExtra: TableExtra = { ...defaultTableExtra };
 
     public _selectedRows: unknown[] = [];
 
@@ -93,7 +95,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
     public valuesExtra$: Observable<TableValueExtraInternal> = this.service.selectValuesExtra();
 
-    public selectedRows$: Observable<unknown[]> = this.service.selectTableRows().pipe(
+    public selectedRows$: Observable<unknown[]> = this.service.selectSelectedRows().pipe(
         skip(1),
         tap(rows => this.onSelect.emit(rows)),
     );
@@ -112,6 +114,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     @Input()
     public set tableMeta(tableMeta: TableMeta[] | null) {
         this._tableMeta = tableMeta ?? [];
+
+        this.service.patchState({
+            tableMeta: this._tableMeta,
+        });
     }
 
     @Input()
@@ -129,6 +135,10 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     @Input({ required: true })
     public set tableRows(tableRows: TableRow[] | null) {
         this._tableRows = tableRows ?? [];
+
+        this.service.patchState({
+            tableRows: this._tableRows,
+        });
     }
 
     @Input()
@@ -142,12 +152,22 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input({ required: true })
     public set tableExtra(tableExtra: Partial<TableExtra> | null) {
-        this._tableExtra = tableExtra ?? {};
+        const processedTableExtra = tableExtra ?? {};
+
+        this._tableExtra = { ...defaultTableExtra, ...processedTableExtra };
+
+        this.service.patchState({
+            tableExtra: this._tableExtra,
+        });
     }
 
     @Input()
     public set valuesExtra(valuesExtra: TableValueExtraInternal | null) {
         this._valuesExtra = valuesExtra ?? {};
+
+        this.service.patchState({
+            valuesExtra: this._valuesExtra,
+        });
     }
 
     @shouldCall(checkScrollPosition)
@@ -156,18 +176,7 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.trackByRow = (index: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey!];
-
-        this.updateComponentStore(
-            {
-                tableRows: this._tableRows,
-                valuesExtra: this._valuesExtra,
-                tableMeta: this._tableMeta,
-                tableExtra: this._tableExtra as TableExtra,
-                selectedRows: this._selectedRows,
-            },
-            this.relations,
-        );
+        this.trackByRow = (index: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey];
     }
 
     public ngOnDestroy(): void {
@@ -210,14 +219,14 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
         });
     }
 
-    public ngOnChanges(): void {
-        if (this._tableExtra && this._tableRows && this._tableMeta) {
+    public ngOnChanges(changes: SimpleChanges): void {
+        if ((changes.tableMeta && !changes.tableMeta.firstChange) || (changes.tableRows && !changes.tableRows.firstChange)) {
             this.updateComponentStore(
                 {
                     tableRows: this._tableRows,
                     valuesExtra: this._valuesExtra,
                     tableMeta: this._tableMeta,
-                    tableExtra: this._tableExtra as TableExtra,
+                    tableExtra: this._tableExtra,
                     selectedRows: this._selectedRows,
                 },
                 this.relations,

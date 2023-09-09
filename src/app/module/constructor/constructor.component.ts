@@ -11,7 +11,7 @@ import { RouterOutlet } from "@angular/router";
     templateUrl: "./constructor.component.html",
     styleUrls: ["./constructor.component.scss"],
     imports: [RouterOutlet, LZToastrModule],
-    providers: EDITOR_PROVIDERS,
+    providers: [...EDITOR_PROVIDERS],
 })
 export class LZConstructorComponent {
     @HostBinding("class.lz-constructor")

@@ -31,6 +31,8 @@ export class CampaignListComponent extends AbstractModuleComponent {
 
     public tableMeta$ = this.service.selectTableMeta();
 
+    public selectedRows: string[] = [];
+
     public tableValues$ = this.service.selectTableValues();
 
     constructor(protected service: AbstractCampaignListService) {
@@ -39,5 +41,9 @@ export class CampaignListComponent extends AbstractModuleComponent {
 
     public deleteCampaignByID(id: number): void {
         this.service.deleteCampaignByID(id).pipe(untilDestroyed(this)).subscribe();
+    }
+
+    public selectRows(rows: unknown[]): void {
+        this.selectedRows = rows as string[];
     }
 }

@@ -225,9 +225,7 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
 
     public patchState(data: Partial<TableState>): void {
         this.service.updateState(() => {
-            return {
-                ...data,
-            };
+            return structuredClone(data);
         });
     }
 
