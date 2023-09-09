@@ -17,12 +17,15 @@ import {
     initialRootModuleState,
     initialTestState,
 } from "@core/store";
+import { TableState } from "@core/store/states/ui-states";
+import { initialTableState } from "@core/store/initial-states/initial-states.type";
 
 export enum LzStateKey {
     ROOT_STATE = "rootState",
     CATALOG_FILTERS_STATE = "catalogFiltersState",
     CATALOG_PRODUCTS_STATE = "catalogProductsState",
     PRODUCT_CART_STATE = "productCartState",
+    TABLE_STATE = "tableState",
     TEST_STATE = "testState",
     FILES_STATE = "filesState",
     EDITOR_STATE = "editorState",
@@ -37,6 +40,7 @@ export type LzState = Readonly<{
     [LzStateKey.TEST_STATE]: TestState;
     [LzStateKey.FILES_STATE]: FilesState;
     [LzStateKey.EDITOR_STATE]: EditorState;
+    [LzStateKey.TABLE_STATE]: TableState;
     [LzStateKey.CAMPAIGN_LIST]: CampaignListState;
 }>;
 
@@ -48,6 +52,7 @@ export const lzInitialStateFunctions: InitialStateFunctions = {
     [LzStateKey.TEST_STATE]: initialTestState,
     [LzStateKey.FILES_STATE]: initialFilesState,
     [LzStateKey.EDITOR_STATE]: initialEditorState,
+    [LzStateKey.TABLE_STATE]: initialTableState,
     [LzStateKey.CAMPAIGN_LIST]: initialCampaignListState,
 };
 

@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { OrdersComponent } from "./orders.component";
 import { OrdersService } from "./orders.service";
 import { Route, RouterModule } from "@angular/router";
-import { StatusModule, TableModule } from "@components/ui";
+import { StatusModule } from "@components/ui";
 
 const ROUTES: Route[] = [
     {
@@ -16,7 +16,7 @@ const ROUTES: Route[] = [
 @NgModule({
     declarations: [OrdersComponent],
     exports: [OrdersComponent, RouterModule],
-    imports: [CommonModule, StatusModule, TableModule, RouterModule.forChild(ROUTES)],
+    imports: [CommonModule, StatusModule, RouterModule.forChild(ROUTES)],
     providers: [OrdersService],
 })
 export class OrdersModule {}

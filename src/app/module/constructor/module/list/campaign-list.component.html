@@ -4,12 +4,12 @@
 
 <h2 class="table-title">Список компаний</h2>
 
-<lz-table
-    class="campaigns-list-table"
-    [tableMeta]="tableMeta$ | async"
-    [tableValues]="tableValues$ | async"
-    [templatesMap]="{ actionsTemplate: actionsTemplate }"
-></lz-table>
+<!--<lz-table-->
+<!--    class="campaigns-list-table"-->
+<!--    [tableMeta]="tableMeta$ | async"-->
+<!--    [tableValues]="tableValues$ | async"-->
+<!--    [templatesMap]="{ actionsTemplate: actionsTemplate }"-->
+<!--&gt;</lz-table>-->
 
 <ng-template #actionsTemplate let-value="value">
     <button class="create-campaign" (click)="deleteCampaignByID(value)">Удалить</button>
@@ -17,3 +17,11 @@
         >Редактировать</a
     >
 </ng-template>
+
+<lz-table
+    [tableMeta]="tableMeta$ | async"
+    [selectedRows]="[]"
+    [tableRows]="tableValues$ | async"
+    [tableExtra]="{ hasCheckboxes: true, hasSelectAllCheckbox: true, idKey: 'id' }"
+    [templatesMap]="{ actionsTemplate: actionsTemplate }"
+></lz-table>

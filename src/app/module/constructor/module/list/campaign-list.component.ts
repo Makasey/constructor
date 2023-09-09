@@ -1,11 +1,11 @@
 import { AbstractCampaignListService, DefaultCampaignListService } from "@modules/constructor/module/list/campaign-list.service";
-import { AbstractModuleComponent } from "@core/abstract/abstract.service";
+import { AbstractModuleComponent } from "@core/abstract";
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
+import { LzTableModule } from "@components/ui";
 import { NavigationLinkPipe } from "@shared-pipes/navigation-link/navigation-link.pipe";
 import { RouteKey } from "@shared-types/routes/route-paths";
 import { RouterLink } from "@angular/router";
-import { TableModule } from "@components/ui";
 import { untilDestroyed } from "@ngneat/until-destroy";
 
 @Component({
@@ -15,7 +15,7 @@ import { untilDestroyed } from "@ngneat/until-destroy";
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./campaign-list.component.scss"],
-    imports: [TableModule, AsyncPipe, RouterLink, NavigationLinkPipe],
+    imports: [AsyncPipe, RouterLink, NavigationLinkPipe, LzTableModule],
     providers: [
         {
             provide: AbstractCampaignListService,

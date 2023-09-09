@@ -67,3 +67,12 @@ export function normalizeToIntNumber(value: number, min: number, max: number): n
 export function isNumberInRange(value: number, from: number, to: number): boolean {
     return value >= from && value <= to;
 }
+
+export function getRandomString(count: number): string {
+    let result = "";
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 0; i < count; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+}

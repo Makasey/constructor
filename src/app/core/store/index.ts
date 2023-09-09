@@ -22,6 +22,7 @@ export {
     initialCatalogFiltersState,
     initialTableModuleState,
     initialCampaignListState,
+    initialTableState,
 } from "./initial-states/initial-states.type";
 export { LzState, LzStateKey, lzInitialStateFunctions, createLZInitialState } from "./lz.state";
 export {
@@ -36,5 +37,6 @@ export {
     CatalogProductsState,
     EditorState,
     UIDataStateful,
+    TableState,
     CatalogFiltersState,
 } from "./states/ui-states";

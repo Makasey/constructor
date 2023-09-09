@@ -15,6 +15,7 @@ import {
     UIDataState,
 } from "@core/store";
 import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/types";
+import { TableState } from "@core/store/states/ui-states";
 
 export function initialTableModuleState(): TableModuleState {
     return {
@@ -112,5 +113,30 @@ export function initialFilesState(): FilesState {
     return {
         ...initialModuleDataState(),
         files: [],
+    };
+}
+
+export function initialTableState(): TableState {
+    return {
+        ...initialModuleDataState(),
+        tableExtra: {
+            hasCheckboxes: false,
+            clickableRows: false,
+            draggableHeader: false,
+            selectAll: false,
+            hoverableRows: false,
+            hasSelectAllCheckbox: false,
+            isHierarchical: false,
+            noRecordsLabel: "",
+            idKey: "id",
+            nameKey: "label",
+            highlightedId: null,
+            pageLoading: false,
+        },
+        tableMeta: [],
+        tableRows: [],
+        valuesExtra: {},
+        selectedRows: [],
+        isDragging: false,
     };
 }

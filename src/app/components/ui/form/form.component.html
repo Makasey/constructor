@@ -22,6 +22,7 @@
     </ng-container>
     <ng-container *ngIf="formModel?.innerGroups">
         <ng-container
+
             *ngFor="let group of formModel.innerGroups; let i = index; trackBy: trackByGroup"
             [ngTemplateOutlet]="groupTemplate"
             [ngTemplateOutletContext]="{
