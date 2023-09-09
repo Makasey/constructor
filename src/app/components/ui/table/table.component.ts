@@ -151,12 +151,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     @shouldCall(checkScrollPosition)
-    public onScroll(event: Event): void {
+    public onScroll(_: Event): void {
         this.scrollBottomSubject$.next(true);
     }
 
     public ngOnInit(): void {
-        this.trackByRow = (index: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey];
+        this.trackByRow = (_: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey];
     }
 
     public ngOnDestroy(): void {
