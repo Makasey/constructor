@@ -3,14 +3,14 @@
     <ap-form [formModel]="formModel" />
 </section>
 
-<lz-accordion>
+<lz-accordion [collapsing]="false">
     <accordion-item title="Настройки размера">
         <ng-template accordionContent> first </ng-template>
     </accordion-item>
     <accordion-item title="Настройки текста">
         <ng-template accordionContent> Lorem ipsum dolor sit amet!</ng-template>
     </accordion-item>
-    <accordion-item title="Настройки стилей">
+    <accordion-item title="Настройки стилей" [disabled]="true">
         <ng-template accordionContent> third </ng-template>
     </accordion-item>
 </lz-accordion>
