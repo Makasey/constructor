@@ -40,6 +40,11 @@
         border: 1px solid #fff;
     }
 
+    .accordion__content.active {
+        padding: 16px;
+        color: #ffffff;
+    }
+
     .accordion__toggle-btn:disabled {
         cursor: not-allowed;
     }

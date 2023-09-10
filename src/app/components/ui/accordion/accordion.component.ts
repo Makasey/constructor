@@ -1,17 +1,8 @@
-import {
-    AfterViewInit,
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    ContentChildren,
-    HostBinding,
-    Input,
-    QueryList,
-    ViewEncapsulation,
-} from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
+
+import { Observable, map, merge, of, tap } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { map, merge, of } from "rxjs";
 
 import { AccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
 import { TogglePipe } from "@components/ui/accordion/pipe/toggle.pipe";
@@ -42,28 +33,27 @@ export class AccordionComponent implements AfterViewInit {
 
     public expanded = new Set<number>();
 
-    constructor(private readonly cdr: ChangeDetectorRef) {}
+    public expandedItems$: Observable<AccordionItemDirective[]>;
 
     public ngAfterViewInit(): void {
-        merge(this.items.changes, of(this.items))
-            .pipe(map(() => this.items.toArray()))
-            .subscribe(items => {
+        this.expandedItems$ = merge(this.items.changes, of(this.items)).pipe(
+            map(() => this.items.toArray()),
+            tap(items => {
                 items.forEach((item, index) => {
                     if (item.expanded) {
                         this.expanded.add(index);
                     }
                 });
-                this.cdr.detectChanges();
-            });
+            }),
+        );
     }
 
     public toggleState = (index: number): void => {
         if (this.expanded.has(index)) {
             this.expanded.delete(index);
         } else {
-            if (this.collapsing) {
-                this.expanded.clear();
-            }
+            this.collapsing && this.expanded.clear();
+
             this.expanded.add(index);
         }
     };

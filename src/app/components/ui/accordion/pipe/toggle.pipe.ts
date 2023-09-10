@@ -1,8 +1,7 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-    // eslint-disable-next-line @angular-eslint/pipe-prefix
-    name: "getToggleFunction",
+    name: "lzGetToggleFunction",
     standalone: true,
 })
 export class TogglePipe implements PipeTransform {
