@@ -64,18 +64,21 @@ export function getSectionSettings(element: SectionPageElement): APFormModel {
                 name: SectionElementSettingsGroup.SIZE_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSectionElementSizeControls(element),
+                headerText: "Настройки размера",
             },
             {
                 id: SectionElementSettingsGroup.TEXT_SETTINGS,
                 name: SectionElementSettingsGroup.TEXT_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSectionElementTextControl(element),
+                headerText: "Настройки текста",
             },
             {
                 id: SectionElementSettingsGroup.STYLE_SETTINGS,
                 name: SectionElementSettingsGroup.STYLE_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSectionElementStyleControl(element),
+                headerText: "Настройки стилей",
             },
         ],
     };

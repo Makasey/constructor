@@ -93,8 +93,10 @@ export class FileGalleryService extends AbstractDefaultModuleService<LzStateKey.
                 });
 
                 this.service.updateStatePart(this.stateKey, state => {
+                    const { files } = state;
+
                     return {
-                        files: state.files.filter(file => file.id !== id),
+                        files: files.filter(file => file.id !== id),
                         dataState: UIDataState.LOADED,
                     };
                 });

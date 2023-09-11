@@ -20,6 +20,8 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
 import { ControlTemplate } from "../modal";
+import { Observable, distinctUntilChanged, skip, tap } from "rxjs";
+import { isObjectEquals } from "@modules/constructor/components/edit-area/types";
 
 @UntilDestroy()
 @Component({
@@ -97,6 +99,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     public _convertedFormModel: ApFormInnerModel;
 
     public _templatesMap: Record<string, TemplateRef<unknown>>;
+
+    public valueChanges$: Observable<unknown>;
 
     public _defaultTemplatesMap: Record<APFormDefaultTemplateKeys | string, TemplateRef<ControlTemplate | unknown>>;
 
@@ -323,8 +327,15 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
         if (!formModel) {
             return;
         }
+
         this.formsManager.upsert(formModel.name, this.mainFormGroup!, formModel.upsertConfig);
         this.subscribedForms.push(formModel.name);
+
+        this.valueChanges$ = this.formsManager.valueChanges(formModel.name).pipe(
+            skip(1),
+            distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
+            tap(value => this.submitForm.emit(value)),
+        );
     }
 
     private toNativeControl(control: APFormControl): FormControl {
