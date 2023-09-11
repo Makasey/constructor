@@ -1,4 +1,83 @@
-<div class="lz-table">
-  <lz-table-head [tableMeta]="tableMeta"></lz-table-head>
-  <lz-table-body [tableMeta]="tableMeta" [tableValues]="tableValues" [templatesMap]="templatesMap"></lz-table-body>
-</div>
+<ng-container *ngIf="scrollBottomSubject$ | async"></ng-container>
+<ng-container *ngIf="_tableExtra.hasCheckboxes">
+    <ng-container *ngIf="selectedRows$ | async"></ng-container>
+</ng-container>
+
+<ng-template #draggableWrapper>
+    <div
+        class="table-scroll-wrapper"
+        cdkDropList
+        cdkDropListAutoScrollDisabled
+        cdkDropListLockAxis="x"
+        cdkDropListOrientation="horizontal"
+        (scroll.silent)="onScroll($event)"
+        (cdkDropListDropped)="dropColumn($event)"
+    >
+        <lz-table-head
+            [templateMap]="templatesMap"
+            [tableMeta]="tableMeta$ | async"
+            [tableExtra]="tableExtra$ | async"
+        ></lz-table-head>
+        <ng-container *ngIf="!!_tableRows.length; else noRecordsTemplate">
+            <lz-table-body
+                [tableRows]="tableRows$ | async"
+                [tableExtra]="tableExtra$ | async"
+                [valuesExtra]="valuesExtra$ | async"
+                [tableMeta]="tableMeta$ | async"
+                [trackByRow]="_trackByRow"
+                [templateMap]="templatesMap"
+            >
+            </lz-table-body>
+        </ng-container>
+        <lz-table-foot>
+            <ng-template [ngTemplateOutlet]="footerTemplate ?? defaultFooterTemplate"> </ng-template>
+            <ng-template [ngTemplateOutlet]="content"></ng-template>
+        </lz-table-foot>
+    </div>
+</ng-template>
+
+<ng-template #defaultWrapper>
+    <div class="table-scroll-wrapper" (scroll.silent)="onScroll($event)">
+        <lz-table-head
+            [templateMap]="templatesMap"
+            [tableMeta]="tableMeta$ | async"
+            [tableExtra]="tableExtra$ | async"
+        ></lz-table-head>
+        <ng-container *ngIf="!!_tableRows.length; else noRecordsTemplate">
+            <lz-table-body
+                [tableRows]="tableRows$ | async"
+                [tableExtra]="tableExtra$ | async"
+                [valuesExtra]="valuesExtra$ | async"
+                [tableMeta]="tableMeta$ | async"
+                [trackByRow]="_trackByRow"
+                [templateMap]="templatesMap"
+            >
+            </lz-table-body>
+        </ng-container>
+        <lz-table-foot>
+            <ng-template [ngTemplateOutlet]="footerTemplate ?? defaultFooterTemplate"> </ng-template>
+            <ng-template [ngTemplateOutlet]="content"></ng-template>
+        </lz-table-foot>
+    </div>
+</ng-template>
+
+<ng-template [ngTemplateOutlet]="_tableExtra.draggableHeader ? draggableWrapper : defaultWrapper"></ng-template>
+
+<!--<megadash-load-more-spinner *ngIf="_loading" class="table-loader" [label]="loadMoreLabel"> </megadash-load-more-spinner>-->
+
+<ng-template #defaultFooterTemplate></ng-template>
+
+<ng-template #noRecordsTemplate>
+    <ng-template [ngTemplateOutlet]="templatesMap.noRecordsTemplate ?? defaultNoRecordsTemplate"></ng-template>
+</ng-template>
+
+<ng-template #defaultNoRecordsTemplate>
+    <div class="table-empty">
+        <!--        <img src="assets/img/statistics/tip-ico-copy.svg" alt="Bulb icon" />-->
+        Nothing to show yet
+    </div>
+</ng-template>
+
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>

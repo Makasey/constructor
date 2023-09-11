@@ -1,4 +1,14 @@
-<div class="lz-table-body">
-    <lz-table-row rowTemplate="body" [tableMeta]="tableMeta" [tableValues]="tableValues" [templatesMap]="templatesMap">
-    </lz-table-row>
+<div class="table-body-row-wrapper" *ngIf="tableExtra">
+    <lz-table-row
+        class="table-body-row"
+        *ngFor="let row of tableRows; trackBy: trackByRow; let rowIndex = index"
+        [tableRow]="row"
+        [tableMeta]="tableMeta"
+        [templatesMap]="templateMap"
+        [tableExtra]="tableExtra"
+        [valuesExtra]="valuesExtra"
+        [rowIndex]="rowIndex"
+        [trackByRow]="trackByRow"
+        (onBottomScrolled)="onBottomScrolled($event)"
+    ></lz-table-row>
 </div>

@@ -4,3 +4,9 @@ export type PaginationListItems<T> = Readonly<{
 }>;
 
 export const TOTAL_COUNT_HEADER = "X-TOTAL-COUNT";
+
+export type ResponseError = Readonly<{
+    error: {
+        messages?: string[];
+    };
+}>;

@@ -1,3 +1,124 @@
-<div class="lz-table-head">
-    <lz-table-row rowTemplate="head" [tableMeta]="tableMeta"> </lz-table-row>
-</div>
+<ng-container *ngIf="tableExtra">
+    <ng-template [ngTemplateOutlet]="tableExtra.draggableHeader ? draggableRow : defaultRow"></ng-template>
+</ng-container>
+
+<ng-template #draggableRow>
+    <div class="table-head-row">
+        <div class="table-head-checkbox" *ngIf="tableExtra.hasCheckboxes">
+            <input
+                type="checkbox"
+                *ngIf="tableExtra.hasSelectAllCheckbox"
+                (click)="selectAllRowsHandler($event)"
+                [ngModel]="tableExtra.selectAll"
+            />
+        </div>
+        <ng-container *ngFor="let cell of tableMeta; trackBy: trackByFieldKey">
+            <ng-template
+                [ngTemplateOutlet]="!cell.dragDisabled ? draggableRowCell : defaultRowCell"
+                [ngTemplateOutletContext]="{ cell: cell }"
+            ></ng-template>
+        </ng-container>
+    </div>
+</ng-template>
+
+<ng-template #draggableRowCell let-cell="cell">
+    <div
+        class="table-head-cell"
+        cdkDrag
+        [cdkDragDisabled]="cell.dragDisabled"
+        [ngStyle]="{
+            '--table-column-width.px': cell.width
+        }"
+        [ngClass]="cell.customClass"
+        [class._hierarchical]="tableExtra.isHierarchical"
+        [class._checkbox]="tableExtra.hasCheckboxes"
+        (cdkDragStarted)="startColumnDrag()"
+        (cdkDragEnded)="endColumnDrag()"
+    >
+        <div
+            *cdkDragPlaceholder
+            class="column-drag-placeholder"
+            [ngStyle]="{
+                'width.px': cell.width
+            }"
+        ></div>
+
+        <div class="column-top-placeholder" *ngIf="!(isDragging$ | async)">
+            <div class="column-dragging-button" cdkDragHandle></div>
+        </div>
+
+        <ng-template
+            [ngTemplateOutlet]="templateMap[cell.headerTemplateKey] ?? defaultItemTemplate"
+            [ngTemplateOutletContext]="{
+                cell: cell,
+                isDragging: isDragging$ | async
+            }"
+        >
+        </ng-template>
+
+        <div
+            *cdkDragPreview
+            class="header-cell-preview"
+            [ngStyle]="{
+                'width.px': cell.width
+            }"
+        >
+            {{ cell.label }}
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #defaultRowCell let-cell="cell">
+    <div
+        class="table-head-cell"
+        [ngStyle]="{
+            '--table-column-width.px': cell.width
+        }"
+        [ngClass]="cell.customClass"
+        [class._hierarchical]="tableExtra.isHierarchical"
+        [class._checkbox]="tableExtra.hasCheckboxes"
+    >
+        <ng-template
+            [ngTemplateOutlet]="templateMap[cell.headerTemplateKey] ?? defaultItemTemplate"
+            [ngTemplateOutletContext]="{ cell: cell }"
+        >
+        </ng-template>
+    </div>
+</ng-template>
+
+<ng-template #defaultRow>
+    <div class="table-head-row">
+        <div class="table-head-checkbox" *ngIf="tableExtra.hasCheckboxes">
+            <input
+                type="checkbox"
+                *ngIf="tableExtra.hasSelectAllCheckbox"
+                (click)="selectAllRowsHandler($event)"
+                [ngModel]="tableExtra.selectAll"
+            />
+        </div>
+        <div
+            class="table-head-cell"
+            *ngFor="let cell of tableMeta; trackBy: trackByFieldKey"
+            [ngStyle]="{
+                '--table-column-width.px': cell.width
+            }"
+            [ngClass]="cell.customClass"
+            [class._hierarchical]="tableExtra.isHierarchical"
+            [class._checkbox]="tableExtra.hasCheckboxes"
+        >
+            <ng-template
+                [ngTemplateOutlet]="templateMap[cell.headerTemplateKey] ?? defaultItemTemplate"
+                [ngTemplateOutletContext]="{ cell: cell }"
+            >
+            </ng-template>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #defaultItemTemplate let-cell="cell">
+    <div class="table-head-template">
+        <div class="table-head-template-value">
+            {{ cell.label }}
+        </div>
+    </div>
+</ng-template>

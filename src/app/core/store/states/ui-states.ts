@@ -1,4 +1,4 @@
-import { APFormModel, LZTableMeta, LZTableValues } from "@components/ui";
+import { APFormModel, TableExtra, TableMeta, TableRow, TableValueExtraInternal } from "@components/ui";
 import { CampaignModel, PageSettings, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { Cart, File, Product } from "@shared-types/index";
 
@@ -19,8 +19,8 @@ export type UIDataStateful = Readonly<{
 export type ModuleState = UIDataStateful;
 
 export type TableModuleState = Readonly<{
-    tableMeta: LZTableMeta[];
-    tableValues: LZTableValues[];
+    tableMeta: TableMeta[];
+    tableValues: TableRow[];
 }>;
 
 export type RootModuleState = Readonly<{
@@ -66,5 +66,16 @@ export type CampaignListState = Readonly<
 export type FilesState = Readonly<
     {
         files: File[];
+    } & ModuleState
+>;
+
+export type TableState = Readonly<
+    {
+        tableMeta: TableMeta[];
+        tableRows: TableRow[];
+        tableExtra: TableExtra;
+        valuesExtra: TableValueExtraInternal;
+        selectedRows: unknown[];
+        isDragging: boolean;
     } & ModuleState
 >;

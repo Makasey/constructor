@@ -1,21 +1,18 @@
-import { AbstractCampaignDataService } from "@core/data-service/campaign-data.service";
-import { AbstractDefaultModuleService, AbstractModuleService } from "@core/abstract/abstract.service";
+import { AbstractCampaignDataService } from "@core/data-service";
+import { AbstractDefaultModuleService, AbstractModuleService } from "@core/abstract";
 import { CampaignModel } from "@modules/constructor/components/edit-area/types";
 import { Injectable } from "@angular/core";
-import { LZTableMeta, LZTableValues, LZToastrItemType, LZToastrService } from "@components/ui";
-import { LzQuery } from "@core/store/lz.query";
-import { LzService } from "@core/store/lz.service";
-import { LzStateKey } from "@core/store/lz.state";
+import { LZToastrItemType, LZToastrService, TableMeta } from "@components/ui";
+import { LzQuery, LzService, LzStateKey, UIDataState } from "@core/store";
 import { Observable, tap } from "rxjs";
 import { PaginationListItems } from "@shared-types/response/response-view.type";
-import { UIDataState } from "@core/store/states/ui-states";
 import { arrayRemove } from "@datorama/akita";
 
 @Injectable()
 export abstract class AbstractCampaignListService extends AbstractModuleService {
-    public abstract selectTableMeta(): Observable<LZTableMeta[]>;
+    public abstract selectTableMeta(): Observable<TableMeta[]>;
 
-    public abstract selectTableValues(): Observable<LZTableValues[]>;
+    public abstract selectTableValues(): Observable<CampaignModel[]>;
 
     public abstract deleteCampaignByID(id: number): Observable<void>;
 }
@@ -39,53 +36,46 @@ export class DefaultCampaignListService extends AbstractDefaultModuleService<LzS
                         tableMeta: this.getTableMeta(),
                         campaigns: items,
                         dataState: UIDataState.LOADED,
-                        tableValues: items.map(item => this.convertCampaignModelToTableValue(item)),
+                        tableValues: items,
                     };
                 });
             }),
         );
     }
 
-    private getTableMeta(): LZTableMeta[] {
+    private getTableMeta(): TableMeta[] {
         return [
             {
                 label: "ID",
                 fieldKey: "id",
+                width: 400,
             },
             {
                 label: "Имя компании",
                 fieldKey: "campaignName",
+                width: 400,
             },
             {
                 label: "Тип компании",
                 fieldKey: "type",
+                width: 400,
             },
             {
                 label: "Действия",
                 templateKey: "actionsTemplate",
                 customClass: "actions-column",
-                fieldKey: "actions",
+                fieldKey: "id",
+                width: 400,
             },
         ];
     }
 
-    private convertCampaignModelToTableValue(campaign: CampaignModel): LZTableValues {
-        const { campaignName, id, type } = campaign;
-
-        return {
-            id: id,
-            campaignName: campaignName,
-            type: type,
-            actions: id,
-        };
-    }
-
-    public selectTableMeta(): Observable<LZTableMeta[]> {
+    public selectTableMeta(): Observable<TableMeta[]> {
         return this.selectState(state => state.tableMeta);
     }
 
-    public selectTableValues(): Observable<LZTableValues[]> {
-        return this.selectState(state => state.tableValues);
+    public selectTableValues(): Observable<CampaignModel[]> {
+        return this.selectState(state => state.campaigns);
     }
 
     public deleteCampaignByID(id: number): Observable<void> {

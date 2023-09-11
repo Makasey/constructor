@@ -1,44 +1,125 @@
-<ng-container>
-    <ng-template [ngTemplateOutlet]="rowTemplate === 'head' ? headTemplate : bodyTemplate"> </ng-template>
+<ng-container *initVar="valuesExtra[rowId] as valueExtra">
+    <ng-container *ngIf="valueExtra?.scrollable && scrollBottomSubject$ | async"></ng-container>
+
+    <div class="table-scrollable-row" (scroll.silent)="onRowScroll($event)">
+        <div
+            class="table-row-inner"
+            #rowElement
+            [class._disabled]="valueExtra?.disabled"
+            [class._hoverable]="tableExtra.hoverableRows"
+            [class._highlighted]="$any(tableExtra.clickableRows && highlighterId === tableRow[tableExtra.idKey])"
+            [ngClass]="valueExtra?.rowCustomClass"
+            (click)="tableExtra.clickableRows && onRowClick(tableRow)"
+        >
+            <div class="table-row-checkbox" *ngIf="tableExtra.hasCheckboxes">
+                <ng-template
+                    [ngTemplateOutlet]="$any(templatesMap.checkboxTemplate ?? defaultCheckboxTemplate)"
+                    [ngTemplateOutletContext]="{
+                        valueExtra: valueExtra,
+                        rowId: rowId,
+                        row: tableRow
+                    }"
+                ></ng-template>
+            </div>
+
+            <div
+                class="table-row-cell"
+                *ngFor="let metaItem of tableMeta; trackBy: trackByFieldKey; let index = index"
+                [ngStyle]="{
+                    '--table-column-width.px': metaItem.width
+                }"
+                [ngClass]="metaItem.customClass"
+                [style.padding-left.px]="
+                    tableExtra.isHierarchical &&
+                    index === 0 &&
+                    (valueExtra | lzRowPadding: _paddingType.CELL : tableExtra.hasCheckboxes)
+                "
+            >
+                <ng-container *ngIf="valueExtra">
+                    <div
+                        class="table-row-cell-arrow"
+                        *ngIf="index === 0 && valueExtra?.hasChild"
+                        [class._opened]="valueExtra?.opened"
+                        (click)="onArrowClick($event, tableRow)"
+                    >
+                        <svg class="table-row-cell-arrow-icon" *ngIf="!valueExtra?.opened; else invertedArrow">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M6.62492 12.1299C6.93881 12.4002 7.41237 12.3648 7.68263 12.0509L10.7531 8.48472C10.9955 8.20321 10.9952 7.78669 10.7526 7.50543L7.68213 3.9466C7.41155 3.63298 6.93796 3.59809 6.62434 3.86868C6.31072 4.13926 6.27583 4.61285 6.54641 4.92647L9.19459 7.99587L6.54591 11.0722C6.27565 11.3861 6.31102 11.8596 6.62492 12.1299Z"
+                                fill="currentColor"
+                            />
+                        </svg>
+                        <ng-template #invertedArrow>
+                            <svg class="table-row-cell-arrow-icon">
+                                <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M12.1294 6.62492C12.3997 6.93881 12.3643 7.41237 12.0504 7.68263L8.48423 10.7531C8.20272 10.9955 7.7862 10.9952 7.50494 10.7526L3.94612 7.68213C3.63249 7.41155 3.5976 6.93796 3.86819 6.62434C4.13877 6.31072 4.61236 6.27583 4.92598 6.54641L7.99538 9.19459L11.0717 6.54591C11.3856 6.27565 11.8591 6.31102 12.1294 6.62492Z"
+                                    fill="currentColor"
+                                />
+                            </svg>
+                        </ng-template>
+                    </div>
+
+                    <ng-template
+                        [ngTemplateOutlet]="$any(templatesMap[metaItem.templateKey] ?? defaultItemTemplate)"
+                        [ngTemplateOutletContext]="{
+                            row: tableRow,
+                            key: metaItem.fieldKey,
+                            value: tableRow[metaItem.fieldKey],
+                            metaItem: metaItem,
+                            tableMeta: tableMeta,
+                            valueExtra: valueExtra,
+                            rowIndex: rowIndex
+                        }"
+                    ></ng-template>
+
+                    <ng-template #defaultItemTemplate let-cellValue="value">
+                        <div class="table-row-cell-text" [title]="cellValue">
+                            {{ cellValue ? cellValue : " - " }}
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </div>
+
+            <ng-template
+                [ngTemplateOutlet]="$any(templatesMap[valueExtra?.rowSubTemplateKey])"
+                [ngTemplateOutletContext]="{
+                    row: tableRow,
+                    tableMeta: tableMeta,
+                    rowElement: rowElement
+                }"
+            >
+            </ng-template>
+        </div>
+        <div
+            class="table-row-extra"
+            *ngIf="valueExtra?.expandTemplateKey && valueExtra?.isExpanded"
+            [class._expanded]="valueExtra.isExpanded"
+        >
+            <ng-template
+                [ngTemplateOutlet]="$any(templatesMap[valueExtra.expandTemplateKey])"
+                [ngTemplateOutletContext]="{
+                    row: tableRow
+                }"
+            ></ng-template>
+        </div>
+        <ng-container *ngIf="valueExtra?.hasChild && valueExtra?.opened">
+            <lz-table-row
+                *ngFor="let child of valueExtra?.children; trackBy: trackByRow"
+                [tableRow]="child"
+                [tableMeta]="tableMeta"
+                [valuesExtra]="valuesExtra"
+                [tableExtra]="tableExtra"
+                [highlighterId]="highlighterId"
+                [templatesMap]="templatesMap"
+                [trackByRow]="trackByRow"
+            ></lz-table-row>
+        </ng-container>
+    </div>
 </ng-container>
 
-<ng-template #headTemplate>
-    <div
-        class="lz-table-row head"
-        [ngStyle]="{
-            '--columns-count': tableMeta.length
-        }"
-    >
-        <ng-container *ngFor="let item of tableMeta; let i = index">
-            <div class="lz-table-head-item" [ngClass]="tableMeta[i].customClass">
-                {{ item.label }}
-            </div>
-        </ng-container>
-    </div>
-</ng-template>
-
-<ng-template #bodyTemplate>
-    <div
-        class="lz-table-row"
-        *ngFor="let row of tableValues"
-        [ngStyle]="{
-            '--columns-count': tableMeta.length
-        }"
-    >
-        <ng-container *ngFor="let item of row | keyvalue; let i = index">
-            <div class="lz-table-row-item" [ngClass]="tableMeta[i].customClass" *ngIf="!!row[tableMeta[i].fieldKey]">
-                <ng-template
-                    [ngTemplateOutlet]="
-                        tableMeta[i].templateKey ? templatesMap[tableMeta[i].templateKey!] : defaultTemplate
-                    "
-                    [ngTemplateOutletContext]="{ value: row[tableMeta[i].fieldKey], row: row }"
-                >
-                </ng-template>
-            </div>
-        </ng-container>
-    </div>
-</ng-template>
-
-<ng-template #defaultTemplate let-value="value">
-    <span class="lz-table-row-item-value">{{ value }}</span>
+<ng-template #defaultCheckboxTemplate let-valueExtra="valueExtra">
+    <input type="checkbox" [ngModel]="!!valueExtra?.selected" (click)="onSelectRow($event, rowId)" />
 </ng-template>

@@ -142,7 +142,7 @@ module.exports = {
                 "@typescript-eslint/no-var-requires": 1,
                 "@typescript-eslint/no-empty-function": 1,
                 "@typescript-eslint/no-unsafe-assignment": 0,
-                "@typescript-eslint/no-unsafe-member-access": 1,
+                "@typescript-eslint/no-unsafe-member-access": 0,
                 "@typescript-eslint/no-redundant-type-constituents": 0,
                 "@typescript-eslint/consistent-type-assertions": [
                     1,

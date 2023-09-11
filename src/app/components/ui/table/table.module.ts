@@ -1,14 +1,18 @@
 import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
 
-import { TableBodyComponent } from "./components/table-body/table-body.component";
-import { TableComponent } from "./table.component";
-import { TableHeadComponent } from "./components/table-head/table-head.component";
-import { TableRowComponent } from "./components/table-row/table-row.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { OverlayModule } from "@angular/cdk/overlay";
+
+// import { PageLoaderModule } from "@ui/page-loader/page-loader.module";
+// import { CheckboxModule } from "@ui/checkbox/checkbox.module";
+import { LZInitVarDirective } from "@shared-directives/init-var/init-var.directive";
+import { RowPaddingPipe, TableBodyComponent, TableComponent, TableFootComponent, TableHeadComponent, TableRowComponent } from "@components/ui";
 
 @NgModule({
-    declarations: [TableBodyComponent, TableComponent, TableHeadComponent, TableRowComponent],
+    imports: [CommonModule, DragDropModule, FormsModule, LZInitVarDirective, OverlayModule, RowPaddingPipe],
+    declarations: [TableBodyComponent, TableComponent, TableFootComponent, TableHeadComponent, TableRowComponent],
     exports: [TableComponent],
-    imports: [CommonModule],
 })
-export class TableModule {}
+export class LzTableModule {}
