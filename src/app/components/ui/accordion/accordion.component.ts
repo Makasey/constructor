@@ -4,13 +4,12 @@ import { CommonModule } from "@angular/common";
 import { Observable, map, merge, of, tap } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
-import { AccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
-import { TogglePipe } from "@components/ui/accordion/pipe/toggle.pipe";
+import { LZAccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
 
 @Component({
     selector: "lz-accordion",
     standalone: true,
-    imports: [CommonModule, TogglePipe],
+    imports: [CommonModule],
     templateUrl: "./accordion.component.html",
     styleUrls: ["./accordion.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,11 +28,11 @@ export class AccordionComponent implements AfterViewInit {
 
     @Input() public collapsing = true;
 
-    @ContentChildren(AccordionItemDirective) public items: QueryList<AccordionItemDirective>;
+    @ContentChildren(LZAccordionItemDirective) public items: QueryList<LZAccordionItemDirective>;
 
     public expanded = new Set<number>();
 
-    public expandedItems$: Observable<AccordionItemDirective[]>;
+    public expandedItems$: Observable<LZAccordionItemDirective[]>;
 
     public ngAfterViewInit(): void {
         this.expandedItems$ = merge(this.items.changes, of(this.items)).pipe(
@@ -48,7 +47,11 @@ export class AccordionComponent implements AfterViewInit {
         );
     }
 
-    public toggleState = (index: number): void => {
+    public toggleState(index: number, item: LZAccordionItemDirective): void {
+        if (item.disabled) {
+            return;
+        }
+
         if (this.expanded.has(index)) {
             this.expanded.delete(index);
         } else {
@@ -56,5 +59,5 @@ export class AccordionComponent implements AfterViewInit {
 
             this.expanded.add(index);
         }
-    };
+    }
 }

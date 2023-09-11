@@ -7,7 +7,7 @@
     >
         <ng-container
             [ngTemplateOutlet]="defaultHeader"
-            [ngTemplateOutletContext]="{ $implicit: item, index: i, toggle: i | lzGetToggleFunction: toggleState }"
+            [ngTemplateOutletContext]="{ $implicit: item, index: i, toggle: toggleState.bind(this, i, item) }"
         ></ng-container>
         <div
             *ngIf="expandedItems$ | async"
@@ -22,7 +22,7 @@
 </section>
 
 <ng-template #defaultHeader let-item let-index="index">
-    <header class="accordion__header" (click)="item.disabled ? {} : toggleState(index)">
+    <header class="accordion__header" (click)="toggleState(index, item)">
         <ng-container *ngTemplateOutlet="defaultTitle"></ng-container>
         <button class="accordion__toggle-btn" [disabled]="item.disabled">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

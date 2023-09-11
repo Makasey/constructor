@@ -1,14 +1,14 @@
 import { ContentChild, Directive, Input } from "@angular/core";
 
-import { AccordionContentDirective } from "@components/ui/accordion/directives/accordion-content.directive";
+import { LZAccordionContentDirective } from "@components/ui/accordion/directives/accordion-content.directive";
 
 @Directive({
-    selector: "accordion-item",
+    selector: "lz-accordion-item",
     standalone: true,
 })
-export class AccordionItemDirective {
-    @Input() public title: string;
+export class LZAccordionItemDirective {
+    @Input({ required: true }) public title: string;
     @Input() public disabled = false;
     @Input() public expanded = false;
-    @ContentChild(AccordionContentDirective) public content: AccordionContentDirective;
+    @ContentChild(LZAccordionContentDirective) public content: LZAccordionContentDirective;
 }

@@ -1,9 +1,9 @@
 import { Directive, TemplateRef } from "@angular/core";
 
 @Directive({
-    selector: "[accordionContent]",
+    selector: "[lzAccordionContent]",
     standalone: true,
 })
-export class AccordionContentDirective {
+export class LZAccordionContentDirective {
     constructor(public readonly templateRef: TemplateRef<unknown>) {}
 }

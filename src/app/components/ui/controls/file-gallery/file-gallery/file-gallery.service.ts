@@ -1,11 +1,11 @@
 import { AbstractDefaultModuleService, AbstractModuleService } from "@core/abstract/abstract.service";
 import { AbstractFilesDataService } from "@core/data-service/files-data.service";
 import { File } from "@shared-types/file/file";
-import { HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components/ui";
 import { LzQuery, LzService, LzStateKey, UIDataState } from "@core/store";
 import { Observable, catchError, tap, throwError } from "rxjs";
+import { ResponseError } from "@shared-types/response/response-view.type";
 
 @Injectable()
 export abstract class AbstractFileGalleryService extends AbstractModuleService {
@@ -59,7 +59,7 @@ export class FileGalleryService extends AbstractDefaultModuleService<LzStateKey.
                     };
                 });
             }),
-            catchError((err: HttpErrorResponse) => {
+            catchError((err: ResponseError) => {
                 this.toastrService.addToastrItem({
                     type: LZToastrItemType.ERROR,
                     text: (err.error.messages ?? []).join(", "),
@@ -93,13 +93,15 @@ export class FileGalleryService extends AbstractDefaultModuleService<LzStateKey.
                 });
 
                 this.service.updateStatePart(this.stateKey, state => {
+                    const { files } = state;
+
                     return {
-                        files: state.files.filter(file => file.id !== id),
+                        files: files.filter(file => file.id !== id),
                         dataState: UIDataState.LOADED,
                     };
                 });
             }),
-            catchError((err: HttpErrorResponse) => {
+            catchError((err: ResponseError) => {
                 this.toastrService.addToastrItem({
                     type: LZToastrItemType.ERROR,
                     text: (err.error.messages ?? []).join(", "),
