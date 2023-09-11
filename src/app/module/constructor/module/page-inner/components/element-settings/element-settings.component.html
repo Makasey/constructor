@@ -1,16 +1,10 @@
 <section class="element-settings" *ngIf="elementSettingsFormModel() as formModel">
     <h2 class="settings-title">Настройки элемента</h2>
-    <ap-form [formModel]="formModel" />
+    <lz-accordion [collapsing]="false">
+        <lz-accordion-item [expanded]="true" *ngFor="let group of formModel.innerGroups" [title]="group.headerText!">
+            <ng-template lzAccordionContent>
+                <ap-form [formModel]="group" (submitForm)="test($event)" />
+            </ng-template>
+        </lz-accordion-item>
+    </lz-accordion>
 </section>
-
-<lz-accordion [collapsing]="false">
-    <lz-accordion-item title="Настройки размера">
-        <ng-template lzAccordionContent> first </ng-template>
-    </lz-accordion-item>
-    <lz-accordion-item title="Настройки текста">
-        <ng-template lzAccordionContent> Lorem ipsum dolor sit amet!</ng-template>
-    </lz-accordion-item>
-    <lz-accordion-item title="Настройки стилей">
-        <ng-template lzAccordionContent> third </ng-template>
-    </lz-accordion-item>
-</lz-accordion>

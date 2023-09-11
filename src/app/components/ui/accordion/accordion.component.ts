@@ -1,7 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
-import { Observable, map, merge, of, tap } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { LZAccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
@@ -22,7 +20,7 @@ import { LZAccordionItemDirective } from "@components/ui/accordion/directives/ac
         ]),
     ],
 })
-export class AccordionComponent implements AfterViewInit {
+export class AccordionComponent {
     @HostBinding("class.lz-accordion")
     public hostClass = true;
 
@@ -30,34 +28,21 @@ export class AccordionComponent implements AfterViewInit {
 
     @ContentChildren(LZAccordionItemDirective) public items: QueryList<LZAccordionItemDirective>;
 
-    public expanded = new Set<number>();
-
-    public expandedItems$: Observable<LZAccordionItemDirective[]>;
-
-    public ngAfterViewInit(): void {
-        this.expandedItems$ = merge(this.items.changes, of(this.items)).pipe(
-            map(() => this.items.toArray()),
-            tap(items => {
-                items.forEach((item, index) => {
-                    if (item.expanded) {
-                        this.expanded.add(index);
-                    }
-                });
-            }),
-        );
-    }
-
-    public toggleState(index: number, item: LZAccordionItemDirective): void {
+    public toggleState(item: LZAccordionItemDirective): void {
         if (item.disabled) {
             return;
         }
 
-        if (this.expanded.has(index)) {
-            this.expanded.delete(index);
-        } else {
-            this.collapsing && this.expanded.clear();
-
-            this.expanded.add(index);
+        if (!item.expanded && this.collapsing) {
+            this.items.toArray().forEach(item => {
+                item.expanded = false;
+            });
         }
+
+        item.expanded = !item.expanded;
+    }
+
+    public trackByItem(_: number, item: LZAccordionItemDirective): string {
+        return item.title;
     }
 }

@@ -5,6 +5,10 @@
     --accordion-border-radius: 4px;
     width: 100%;
 
+    .ap-form {
+        margin: unset;
+    }
+
     .accordion {
         border: 1px solid hsl(0, 0%, 80%);
         border-radius: var(--accordion-border-radius);

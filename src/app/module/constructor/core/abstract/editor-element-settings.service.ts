@@ -6,13 +6,9 @@ import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { Observable, distinctUntilChanged, map, shareReplay, skip, tap } from "rxjs";
-import {
-    ROOT_ELEMENT_ID,
-    SitePageElementSettings,
-    SitePageElementSizeSettings,
-    isObjectEquals,
-} from "@modules/constructor/components/edit-area/types";
+import { Observable, map, shareReplay } from "rxjs";
+import { ROOT_ELEMENT_ID, SitePageElementSettings, SitePageElementSizeSettings } from "@modules/constructor/components/edit-area/types";
+import { SectionElementSettingsGroup } from "@modules/constructor/components/edit-area/component/section/types";
 import { filterNilValue, logAction } from "@datorama/akita";
 import { processElementSettings } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
@@ -31,6 +27,8 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
     public abstract selectSettings(id: number): Observable<K>;
 
     public abstract selectElementSettingsFormModelChange(): Observable<K>;
+
+    public abstract updateElementSettings(settings: K): void;
 }
 
 @Injectable()
@@ -60,19 +58,23 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
     }
 
     public selectElementSettingsFormModelChange(): Observable<K> {
-        return this.formsManager.valueChanges("elementSettings").pipe(
-            skip(1),
-            distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
-            map((value: Record<string, K>) => {
-                const settings = Object.values(value);
-
-                return settings.reduce((result, value) => ({ ...result, ...value }), {} as K);
-            }),
-            tap(value => this.updateElementSettings(value)),
-        );
+        return this.formsManager
+            .valueChanges(SectionElementSettingsGroup.SIZE_SETTINGS)
+            .pipe
+            // skip(1),
+            // distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
+            // // map((value: Record<string, K>) => {
+            // //     // const settings = Object.values(value);
+            // //
+            // //   console.log(value);
+            // //
+            // //     return settings.reduce((result, value) => ({ ...result, ...value }), {} as K);
+            // // }),
+            // tap(value => this.updateElementSettings(value)),
+            ();
     }
 
-    protected updateElementSettings(value: K): void {
+    public updateElementSettings(value: K): void {
         const id = this.getStoreElement("selectedElement");
 
         logAction(`Update element settings`, id, value);
@@ -84,12 +86,12 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
 
             const width = {
                 ...settings.width,
-                value: value.width,
+                value: value.width ?? settings.width.value,
             };
 
             const height = {
                 ...settings.height,
-                value: value.height,
+                value: value.height ?? settings.height.value,
             };
 
             return {

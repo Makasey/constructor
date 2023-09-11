@@ -1,3 +1,5 @@
+<ng-container *ngIf="valueChanges$ | async"></ng-container>
+
 <div class="form-inner">
     <ng-container
         [ngTemplateOutlet]="groupTemplate"
@@ -22,7 +24,6 @@
     </ng-container>
     <ng-container *ngIf="formModel?.innerGroups">
         <ng-container
-
             *ngFor="let group of formModel.innerGroups; let i = index; trackBy: trackByGroup"
             [ngTemplateOutlet]="groupTemplate"
             [ngTemplateOutletContext]="{

@@ -1,28 +1,27 @@
 <section class="accordion">
     <div
-        *ngFor="let item of items; index as i"
+        *ngFor="let item of items; index as i; trackBy: trackByItem"
         class="accordion__item"
         [class.disabled]="item.disabled"
-        [class.active]="expanded.has(i)"
+        [class.active]="item.expanded"
     >
         <ng-container
             [ngTemplateOutlet]="defaultHeader"
-            [ngTemplateOutletContext]="{ $implicit: item, index: i, toggle: toggleState.bind(this, i, item) }"
+            [ngTemplateOutletContext]="{ $implicit: item, index: i, toggle: toggleState.bind(this, item) }"
         ></ng-container>
         <div
-            *ngIf="expandedItems$ | async"
             class="accordion__content"
-            [class.expanded]="expanded.has(i)"
-            [class.active]="expanded.has(i)"
-            [@contentExpansion]="expanded.has(i) ? 'expanded' : 'collapsed'"
+            [class.expanded]="item.expanded"
+            [class.active]="item.expanded"
+            [@contentExpansion]="item.expanded ? 'expanded' : 'collapsed'"
         >
             <ng-container *ngTemplateOutlet="item?.content?.templateRef!"></ng-container>
         </div>
     </div>
 </section>
 
-<ng-template #defaultHeader let-item let-index="index">
-    <header class="accordion__header" (click)="toggleState(index, item)">
+<ng-template #defaultHeader let-item>
+    <header class="accordion__header" (click)="toggleState(item)">
         <ng-container *ngTemplateOutlet="defaultTitle"></ng-container>
         <button class="accordion__toggle-btn" [disabled]="item.disabled">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

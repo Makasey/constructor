@@ -9,6 +9,6 @@ import { LZAccordionContentDirective } from "@components/ui/accordion/directives
 export class LZAccordionItemDirective {
     @Input({ required: true }) public title: string;
     @Input() public disabled = false;
-    @Input() public expanded = false;
+    @Input() public expanded = true;
     @ContentChild(LZAccordionContentDirective) public content: LZAccordionContentDirective;
 }
