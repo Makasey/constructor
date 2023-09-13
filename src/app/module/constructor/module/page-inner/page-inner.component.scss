@@ -81,5 +81,6 @@
     .tab-section.element-settings {
         padding: 0 20px;
         max-height: calc(100vh - 180px);
+        min-height: calc(100vh - 180px);
     }
 }

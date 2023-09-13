@@ -1,25 +1,26 @@
 <div class="dropdown" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (focus)="_onDropdownFieldFocus()">
+    <span class="form-control-text" *ngIf="label">
+        {{ label }}
+    </span>
     <button class="dropdown-button" type="button" (click)="_onToggleDropdownListVisibility($event)">
-        <span class="form-control-text" [class.focused]="_isDropdownItemsVisible || touched || _value.length">
-            OPEN DROPDOWN
-        </span>
         <span class="dropdown-value">
-            {{ _value | lzDropdownLabel : _selectLabelKey }}
+            {{ _value | lzDropdownLabel: _selectLabelKey }}
         </span>
     </button>
 </div>
 
 <ng-template
     cdkConnectedOverlay
+    [cdkConnectedOverlayPanelClass]="customClass"
     [cdkConnectedOverlayOpen]="_isDropdownItemsVisible"
     [cdkConnectedOverlayOrigin]="trigger"
-    (overlayOutsideClick)="_onCloseDropdownList()"
+    (overlayOutsideClick)="_onCloseDropdownList($event)"
 >
     <div class="dropdown-list">
         <ng-container *ngFor="let item of items">
             <ap-dropdown-field-item
                 [item]="item"
-                [active]="item.id | lzDropdownActive : _value : _selectValueKey"
+                [active]="item[this._selectValueKey] | lzDropdownActive: _value : _selectValueKey"
                 (onItemClick)="_onDropdownItemChoose(item)"
             >
             </ap-dropdown-field-item>

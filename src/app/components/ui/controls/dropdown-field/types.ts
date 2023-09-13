@@ -10,6 +10,7 @@ export type ApDropdownFormControlOptions<T> = Readonly<{
     placeholder?: string;
     disabled?: boolean;
     multi?: boolean;
+    customClass?: string;
 }>;
 
 export type APDropdownFieldValueChangeEvent = Readonly<{

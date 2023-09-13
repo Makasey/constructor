@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { LZAccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "lz-accordion",
@@ -20,13 +21,19 @@ import { LZAccordionItemDirective } from "@components/ui/accordion/directives/ac
         ]),
     ],
 })
-export class AccordionComponent {
+export class AccordionComponent implements AfterViewInit {
     @HostBinding("class.lz-accordion")
     public hostClass = true;
+
+    public itemsChanges$: Observable<QueryList<LZAccordionItemDirective>>;
 
     @Input() public collapsing = true;
 
     @ContentChildren(LZAccordionItemDirective) public items: QueryList<LZAccordionItemDirective>;
+
+    public ngAfterViewInit(): void {
+        this.itemsChanges$ = this.items.changes;
+    }
 
     public toggleState(item: LZAccordionItemDirective): void {
         if (item.disabled) {

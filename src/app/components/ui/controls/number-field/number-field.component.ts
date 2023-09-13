@@ -24,6 +24,9 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     @Input()
     public controlModel: APFormControl;
 
+    @Input()
+    public label = "";
+
     @Output()
     public readonly onValueChange: EventEmitter<APNumberFieldValueChangeEvent> = new EventEmitter<APNumberFieldValueChangeEvent>();
 

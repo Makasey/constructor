@@ -1,3 +1,5 @@
+<ng-container *ngIf="itemsChanges$ | async"></ng-container>
+
 <section class="accordion">
     <div
         *ngFor="let item of items; index as i; trackBy: trackByItem"

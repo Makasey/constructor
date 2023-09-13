@@ -83,6 +83,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private checkboxField: ControlTemplate;
 
+    @ViewChild("numberWithDropdownField", { static: true })
+    private numberWithDropdownField: ControlTemplate;
+
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
         this._templatesMap = {
@@ -121,6 +124,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.FILE_UPLOAD]: this.fileUploadField,
             [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
             [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
+            [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField,
         };
 
         this._templatesMap = {

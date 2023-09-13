@@ -1,14 +1,13 @@
 import { APFormModel } from "@components/ui";
 import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { EMPTY, Observable, map, shareReplay } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { Observable, map, shareReplay } from "rxjs";
 import { ROOT_ELEMENT_ID, SitePageElementSettings, SitePageElementSizeSettings } from "@modules/constructor/components/edit-area/types";
-import { SectionElementSettingsGroup } from "@modules/constructor/components/edit-area/component/section/types";
 import { filterNilValue, logAction } from "@datorama/akita";
 import { processElementSettings } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
@@ -52,26 +51,13 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
 
                     const element = this.getElement(selectedElement);
 
-                    return processElementSettings(element.type, element);
+                    return structuredClone(processElementSettings(element.type, element));
                 }),
             );
     }
 
     public selectElementSettingsFormModelChange(): Observable<K> {
-        return this.formsManager
-            .valueChanges(SectionElementSettingsGroup.SIZE_SETTINGS)
-            .pipe
-            // skip(1),
-            // distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
-            // // map((value: Record<string, K>) => {
-            // //     // const settings = Object.values(value);
-            // //
-            // //   console.log(value);
-            // //
-            // //     return settings.reduce((result, value) => ({ ...result, ...value }), {} as K);
-            // // }),
-            // tap(value => this.updateElementSettings(value)),
-            ();
+        return EMPTY;
     }
 
     public updateElementSettings(value: K): void {
@@ -82,17 +68,6 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
         this.service.updateState(state => {
             const { items } = state;
             const item = items[id];
-            const { settings } = item;
-
-            const width = {
-                ...settings.width,
-                value: value.width ?? settings.width.value,
-            };
-
-            const height = {
-                ...settings.height,
-                value: value.height ?? settings.height.value,
-            };
 
             return {
                 items: {
@@ -102,8 +77,6 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
                         settings: {
                             ...item.settings,
                             ...value,
-                            width: width,
-                            height: height,
                         },
                     },
                 },

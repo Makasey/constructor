@@ -1,0 +1,28 @@
+.lz-number-with-dropdown-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .controls-wrapper {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+
+        ap-number-field {
+            flex-grow: 1;
+        }
+
+        ap-dropdown-field {
+            max-width: 48px;
+            width: 100%;
+
+            .dropdown-value {
+                text-align: center;
+            }
+        }
+    }
+}
+
+.unit-dropdown {
+    width: 48px;
+}

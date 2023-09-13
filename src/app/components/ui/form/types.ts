@@ -15,6 +15,7 @@ export enum APFormDefaultTemplateKeys {
     CHECKBOX_FIELD = "checkboxGroupTemplate",
     FILE_UPLOAD = "fileUploadTemplate",
     TEXTAREA_FIELD = "textAreaFieldTemplate",
+    NUMBER_WITH_DROPDOWN_FIELD = "numberWithDropdownField",
 }
 
 export type APFormModel = {

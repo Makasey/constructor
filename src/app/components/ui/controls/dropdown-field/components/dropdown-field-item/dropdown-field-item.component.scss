@@ -1,9 +1,14 @@
 .dropdown-list-item {
-  background-color: white;
-  padding: 20px;
-  border: 2px solid black;
+  width: 100%;
+  background-color: #1b1c21;
+  padding: 10px;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  color: #ffffff;
 
   &.active {
-    background-color: lightgray;
+    background-color: #ffffff;
+    color: #1b1c21;
+    border-color: gold;
   }
 }

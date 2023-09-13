@@ -1,5 +1,5 @@
+import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@angular/core";
-import { NgForOf, NgIf } from "@angular/common";
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -16,14 +16,14 @@ import { LZAccordionItemDirective } from "@components/ui/accordion/directives/ac
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormModule, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective, NgForOf],
+    imports: [APFormModule, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective, NgForOf, AsyncPipe],
 })
 export class ElementSettingsComponent {
     private readonly service = inject(AbstractEditorElementSettingsService);
 
     public readonly elementSettingsFormModel = toSignal(this.service.selectElementSettingsFormModel());
 
-    public test(settings: unknown): void {
+    public updateElementSettings(settings: unknown): void {
         this.service.updateElementSettings(settings);
     }
 }
