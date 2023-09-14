@@ -1,8 +1,9 @@
 import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { ELEMENT_ID, SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
+import { ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { Observable, map } from "rxjs";
+import { SitePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 
 @Component({

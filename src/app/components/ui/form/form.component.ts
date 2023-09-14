@@ -21,7 +21,7 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
 import { ControlTemplate } from "../modal";
 import { Observable, distinctUntilChanged, skip, tap } from "rxjs";
-import { isObjectEquals } from "@modules/constructor/components/edit-area/types";
+import { isObjectEquals } from "@shared-utils/object.utils";
 
 @UntilDestroy()
 @Component({

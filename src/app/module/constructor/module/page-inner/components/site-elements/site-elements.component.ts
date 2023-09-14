@@ -6,7 +6,8 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
-import { SitePageElementType, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
+import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
+import { SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { blockElements } from "@modules/constructor/module/page-inner/types";
 
 @Component({

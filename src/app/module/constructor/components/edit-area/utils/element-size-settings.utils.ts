@@ -1,5 +1,11 @@
 import { APFormControl, APFormDefaultTemplateKeys } from "@components/ui";
-import { SitePageElement, StyleUnit } from "@modules/constructor/components/edit-area/types";
+import { SitePageElement } from "../../edit-area/types";
+import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
+
+export const defaultSizeControlUnit = [
+    { label: "%", value: StyleUnit.PERCENT },
+    { label: StyleUnit.PX, value: StyleUnit.PX },
+];
 
 function getDefaultHeightControl(element: SitePageElement): APFormControl {
     return {
@@ -11,10 +17,7 @@ function getDefaultHeightControl(element: SitePageElement): APFormControl {
             max: 1920,
             selectLabelKey: "label",
             selectValueKey: "value",
-            items: [
-                { label: "%", value: StyleUnit.PERCENT },
-                { label: StyleUnit.PX, value: StyleUnit.PX },
-            ],
+            items: defaultSizeControlUnit,
             label: "Высота элемента",
         },
     };
@@ -30,10 +33,7 @@ function getDefaultWidthControl(element: SitePageElement): APFormControl {
             max: 1920,
             selectLabelKey: "label",
             selectValueKey: "value",
-            items: [
-                { label: "%", value: StyleUnit.PERCENT },
-                { label: StyleUnit.PX, value: StyleUnit.PX },
-            ],
+            items: defaultSizeControlUnit,
             label: "Ширина элемента",
         },
     };

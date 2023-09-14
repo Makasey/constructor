@@ -11,6 +11,7 @@ export type SectionPageElementSettings = Readonly<
     {
         text?: string;
         label?: string;
+        tag?: string;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

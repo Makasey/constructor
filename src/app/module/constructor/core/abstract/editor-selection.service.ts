@@ -4,7 +4,7 @@ import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
+import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { logAction } from "@datorama/akita";
 
 @Injectable()

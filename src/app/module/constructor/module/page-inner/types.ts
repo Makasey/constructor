@@ -1,4 +1,4 @@
-import { SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 
 export type ElementButton = Readonly<{
     title: string;

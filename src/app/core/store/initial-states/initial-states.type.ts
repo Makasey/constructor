@@ -14,7 +14,8 @@ import {
     TestState,
     UIDataState,
 } from "@core/store";
-import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/types";
+import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
+import { SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
 import { TableState } from "@core/store/states/ui-states";
 
 export function initialTableModuleState(): TableModuleState {

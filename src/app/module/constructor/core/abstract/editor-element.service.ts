@@ -4,15 +4,11 @@ import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
-import {
-    ROOT_ELEMENT_ID,
-    SitePageElement,
-    SitePageElementType,
-    SitePageElementUnion,
-    defaultPageElementSettingsMap,
-    deleteElementFromTree,
-} from "@modules/constructor/components/edit-area/types";
+import { ROOT_ELEMENT_ID, defaultPageElementSettingsMap } from "@modules/constructor/components/edit-area/constants";
+import { SitePageElement, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
+import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { deleteElementFromTree } from "@modules/constructor/components/edit-area/utils/element.utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {

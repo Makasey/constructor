@@ -7,7 +7,8 @@ import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { ROOT_ELEMENT_ID, SitePageElementSettings, SitePageElementSizeSettings } from "@modules/constructor/components/edit-area/types";
+import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
+import { SitePageElementSettings, SitePageElementSizeSettings } from "@modules/constructor/components/edit-area/types";
 import { filterNilValue, logAction } from "@datorama/akita";
 import { processElementSettings } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 

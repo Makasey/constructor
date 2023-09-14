@@ -2,7 +2,8 @@ import { AbstractCampaignDataService } from "@core/data-service/campaign-data.se
 import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
 import { AbstractNavigationService } from "@core/navigation.service";
-import { CampaignModel, CampaignType, CreateCampaignModel } from "@modules/constructor/components/edit-area/types";
+import { CampaignModel, CreateCampaignModel } from "@modules/constructor/components/edit-area/types";
+import { CampaignType } from "@modules/constructor/components/edit-area/enums";
 import { Inject, Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components/ui";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";

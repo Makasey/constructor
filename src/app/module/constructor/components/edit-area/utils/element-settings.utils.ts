@@ -1,6 +1,7 @@
 import { APFormModel } from "@components/ui";
 import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
-import { SitePageElementType, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
+import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
+import { SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { getSectionSettings } from "./elements";
 
 export function processElementSettings<T extends SitePageElementUnion>(type: SitePageElementType, element: T): APFormModel {

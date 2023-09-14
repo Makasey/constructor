@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 import { DeleteSelectedElementDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { NgForOf } from "@angular/common";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/types";
+import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { toSignal } from "@angular/core/rxjs-interop";
 

@@ -6,7 +6,8 @@ import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/st
 import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
-import { PageSettings, isObjectEquals } from "@modules/constructor/components/edit-area/types";
+import { PageSettings } from "@modules/constructor/components/edit-area/types";
+import { isObjectEquals } from "@shared-utils/object.utils";
 import { logAction } from "@datorama/akita";
 
 @Injectable()

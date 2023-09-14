@@ -1,6 +1,7 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
 import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area/constants";
 import { SectionElementSettingsGroup, SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
+import { defaultSectionTagControls } from "@modules/constructor/components/edit-area/component/section/constants";
 import { getDefaultSizeSettings } from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
 
 function getSectionTextControl(element: SectionPageElement): APFormControl {
@@ -12,6 +13,21 @@ function getSectionTextControl(element: SectionPageElement): APFormControl {
         options: {
             maxLength: 300,
             label: "Текст элемента",
+        },
+    };
+}
+
+function getSectionHTMLTagControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "tag",
+        name: "tag",
+        value: element.settings.tag,
+        valueTemplateKey: APFormDefaultTemplateKeys.DROPDOWN_FIELD,
+        options: {
+            selectLabelKey: "label",
+            selectValueKey: "value",
+            items: defaultSectionTagControls,
+            label: "Тип тега",
         },
     };
 }
@@ -45,7 +61,7 @@ export function getSectionElementSizeControls(element: SectionPageElement): APFo
 }
 
 export function getSectionElementTextControl(element: SectionPageElement): APFormControl[] {
-    return [getSectionTextControl(element), getSectionColorControl(element)];
+    return [getSectionTextControl(element), getSectionHTMLTagControl(element), getSectionColorControl(element)];
 }
 
 export function getSectionElementStyleControl(element: SectionPageElement): APFormControl[] {

@@ -3,7 +3,8 @@ import { AsyncPipe, JsonPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
-import { SitePageElement, SitePageElementType } from "@modules/constructor/components/edit-area/types";
+import { SitePageElement } from "@modules/constructor/components/edit-area/types";
+import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 
 @Component({
     selector: "lz-edit-area-item",
