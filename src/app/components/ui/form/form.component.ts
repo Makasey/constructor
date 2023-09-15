@@ -83,6 +83,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private checkboxField: ControlTemplate;
 
+    @ViewChild("directionFieldTemplate", { static: true })
+    private directionField: ControlTemplate;
+
     @ViewChild("numberWithDropdownField", { static: true })
     private numberWithDropdownField: ControlTemplate;
 
@@ -125,6 +128,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
             [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
             [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField,
+            [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField,
         };
 
         this._templatesMap = {

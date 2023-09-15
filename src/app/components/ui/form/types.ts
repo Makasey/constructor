@@ -16,6 +16,7 @@ export enum APFormDefaultTemplateKeys {
     FILE_UPLOAD = "fileUploadTemplate",
     TEXTAREA_FIELD = "textAreaFieldTemplate",
     NUMBER_WITH_DROPDOWN_FIELD = "numberWithDropdownField",
+    DIRECTION_FIELD = "directionFieldTemplate",
 }
 
 export type APFormModel = {

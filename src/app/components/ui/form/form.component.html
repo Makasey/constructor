@@ -120,6 +120,10 @@
     </lz-number-with-dropdown-field>
 </ng-template>
 
+<ng-template #directionFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <lz-direction-field [controlModel]="controlModel" [nativeControl]="nativeControl"> </lz-direction-field>
+</ng-template>
+
 <ng-template #colorPickerTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-color-picker
         [formControl]="nativeControl"
