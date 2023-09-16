@@ -1,9 +1,8 @@
 import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
-import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
+import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
-import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 import { TitlePageElement, TitlePageElementSettings } from "@modules/constructor/components/edit-area/component/title/types";
@@ -16,7 +15,7 @@ import { processSettingValueWithUnit } from "@modules/constructor/components/edi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./title.components.html",
     styleUrls: ["./title.component.scss"],
-    imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe, JsonPipe],
+    imports: [JsonPipe, AsyncPipe],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {
@@ -48,7 +47,7 @@ export class TitleComponent implements OnInit {
 
     public titleText$: Observable<string>;
 
-    public element$: Observable<TitlePageElement> = new Observable();
+    public element$: Observable<TitlePageElement>;
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
