@@ -1,15 +1,15 @@
-import { APFormControl } from "@components/ui";
+import { APDropdownFieldModule, APFormControl } from "@components/ui";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { DEFAULT_DIRECTION_CONTROLLER_VALUE } from "@modules/constructor/components/edit-area/component/section/constants";
 import { DirectionController } from "@components/ui/controls/direction-field/types";
-import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { Directions, StyleUnit } from "@modules/constructor/components/edit-area/enums";
 
 @Component({
     selector: "lz-direction-field",
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, APDropdownFieldModule, FormsModule],
     templateUrl: "./direction-field.component.html",
     styleUrls: ["./direction-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,7 +22,7 @@ import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
         },
     ],
 })
-export class DirectionFieldComponent implements ControlValueAccessor {
+export class DirectionFieldComponent<T> implements ControlValueAccessor {
     @HostBinding("class.direction-field")
     public hostClass = true;
 
@@ -31,6 +31,18 @@ export class DirectionFieldComponent implements ControlValueAccessor {
 
     @Input()
     public controlModel: APFormControl;
+
+    @Input()
+    public label: string;
+
+    @Input()
+    public items: { label: string; value: T }[] = [];
+
+    @Input()
+    public selectLabelKey = "label";
+
+    @Input()
+    public selectValueKey = "value";
 
     @Input() public set value(value: DirectionController | null) {
         this._value = value ?? DEFAULT_DIRECTION_CONTROLLER_VALUE;
@@ -44,6 +56,8 @@ export class DirectionFieldComponent implements ControlValueAccessor {
     public isConnected = true;
 
     public isDisabled = false;
+
+    public Directions = Directions;
 
     private onChange: (value: DirectionController) => void;
 
@@ -71,6 +85,19 @@ export class DirectionFieldComponent implements ControlValueAccessor {
         this.emitControlValue();
     }
 
+    public updateUnitValue(unit: StyleUnit): void {
+        this._value = {
+            ...this._value,
+            unit: unit,
+        };
+
+        this.emitControlValue();
+    }
+
+    public updateIsConnected(event: boolean): void {
+        this.isConnected = event;
+    }
+
     private updateNoConnectedValue(value: number, type: string): void {
         this._value = {
             ...this._value,
@@ -86,15 +113,6 @@ export class DirectionFieldComponent implements ControlValueAccessor {
             left: value,
             right: value,
         };
-    }
-
-    private updateUnit(unit: StyleUnit): void {
-        this._value = {
-            ...this._value,
-            unit: unit,
-        };
-
-        this.emitControlValue();
     }
 
     private emitControlValue(): void {

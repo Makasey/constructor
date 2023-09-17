@@ -121,7 +121,14 @@
 </ng-template>
 
 <ng-template #directionFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
-    <lz-direction-field [controlModel]="controlModel" [nativeControl]="nativeControl"> </lz-direction-field>
+    <lz-direction-field
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [items]="controlModel.options?.items"
+    >
+    </lz-direction-field>
 </ng-template>
 
 <ng-template #colorPickerTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">

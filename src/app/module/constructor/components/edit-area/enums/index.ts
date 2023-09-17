@@ -29,3 +29,10 @@ export enum ElementHTMLTag {
     FOOTER = "footer",
     HEADER = "header",
 }
+
+export enum Directions {
+    TOP = "top",
+    RIGHT = "right",
+    BOTTOM = "bottom",
+    LEFT = "left",
+}

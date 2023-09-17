@@ -1,1 +1,43 @@
-<article class="control">{{ controlModel.options?.label }}</article>
+<article class="controls">
+    <div class="unit">
+        <span class="label">{{ label }}</span>
+        <ap-dropdown-field
+            customClass="unit-dropdown"
+            [ngModel]="_value.unit"
+            [items]="items"
+            [selectLabelKey]="selectLabelKey"
+            [selectValueKey]="selectLabelKey"
+            [disabled]="isDisabled"
+            (ngModelChange)="updateUnitValue($event)"
+        >
+        </ap-dropdown-field>
+    </div>
+    <div class="directions">
+        <input
+            type="number"
+            class="item"
+            [ngModel]="_value.top"
+            (ngModelChange)="updateDirectionValue($event, Directions.TOP)"
+        />
+
+        <input
+            type="number"
+            class="item"
+            [ngModel]="_value.right"
+            (ngModelChange)="updateDirectionValue($event, Directions.RIGHT)"
+        />
+        <input
+            type="number"
+            class="item"
+            [ngModel]="_value.bottom"
+            (ngModelChange)="updateDirectionValue($event, Directions.BOTTOM)"
+        />
+        <input
+            type="number"
+            class="item"
+            [ngModel]="_value.left"
+            (ngModelChange)="updateDirectionValue($event, Directions.LEFT)"
+        />
+        <input type="checkbox" class="connected" [ngModel]="isConnected" (ngModelChange)="updateIsConnected($event)" />
+    </div>
+</article>

@@ -1,4 +1,41 @@
-.control {
+.controls {
     padding: 16px;
     border: 1px solid #ffffff;
+    border-radius: 4px;
+
+    .unit {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .label {
+        display: flex;
+        align-items: center;
+    }
+
+    .directions {
+        display: flex;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+    }
+
+    .item {
+        width: 63px;
+        height: 30px;
+        padding: 0 10px;
+        background-color: #1b1c21;
+        border-radius: 4px;
+        border-right: 1px solid #ffffff;
+        color: #ffffff;
+    }
+
+    .connected {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.unit-dropdown {
+    width: 48px;
 }
