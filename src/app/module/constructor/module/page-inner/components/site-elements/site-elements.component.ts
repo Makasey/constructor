@@ -6,6 +6,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
+import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 import { SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { blockElements } from "@modules/constructor/module/page-inner/types";
@@ -23,6 +24,8 @@ export class SiteElementsComponent {
     private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
+    public readonly selectedElement = toSignal(this.selectedElement$);
 
     public elements = toSignal(
         this.selectedElement$.pipe(
@@ -66,6 +69,12 @@ export class SiteElementsComponent {
     );
 
     public createNewElement(type: SitePageElementType): void {
+        if (this.selectedElement() === ROOT_ELEMENT_ID) {
+            this.service.addPageElement(type);
+
+            return;
+        }
+
         this.service.addElement(type);
     }
 }

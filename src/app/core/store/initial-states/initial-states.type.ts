@@ -91,14 +91,22 @@ export function initialEditorState(): EditorState {
         },
         selectedElement: ROOT_ELEMENT_ID,
         currentStateIndex: 1,
-        settings: {
-            title: "My best site",
-            id: undefined,
-            logotype: null,
-            siteDescription: "My best site",
-            siteMetaTags: "",
-            campaignName: "My best campaign",
-        },
+        selectedPage: 1,
+        pages: [
+            {
+                id: 1,
+                settings: {
+                    title: "My best site",
+                    id: undefined,
+                    logotype: null,
+                    siteDescription: "My best site",
+                    siteMetaTags: "",
+                    campaignName: "My best campaign",
+                },
+                children: [],
+            },
+        ],
+        id: undefined,
     };
 }
 

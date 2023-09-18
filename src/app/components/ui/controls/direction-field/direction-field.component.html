@@ -8,36 +8,55 @@
             [selectLabelKey]="selectLabelKey"
             [selectValueKey]="selectLabelKey"
             [disabled]="isDisabled"
-            (ngModelChange)="updateUnitValue($event)"
+            (ngModelChange)="updateUnitValue($event[0].value)"
         >
         </ap-dropdown-field>
     </div>
     <div class="directions">
-        <input
-            type="number"
-            class="item"
-            [ngModel]="_value.top"
-            (ngModelChange)="updateDirectionValue($event, Directions.TOP)"
-        />
+        <label [for]="label + '-top'">
+            <input
+                type="number"
+                class="item"
+                [id]="label + '-top'"
+                [ngModel]="_value.top"
+                (ngModelChange)="updateDirectionValue($event, Directions.TOP)"
+            />
+            <span class="item-label">Top</span>
+        </label>
 
-        <input
-            type="number"
-            class="item"
-            [ngModel]="_value.right"
-            (ngModelChange)="updateDirectionValue($event, Directions.RIGHT)"
-        />
-        <input
-            type="number"
-            class="item"
-            [ngModel]="_value.bottom"
-            (ngModelChange)="updateDirectionValue($event, Directions.BOTTOM)"
-        />
-        <input
-            type="number"
-            class="item"
-            [ngModel]="_value.left"
-            (ngModelChange)="updateDirectionValue($event, Directions.LEFT)"
-        />
+        <label [for]="label + '-right'">
+            <input
+                type="number"
+                class="item"
+                [id]="label + '-right'"
+                [ngModel]="_value.right"
+                (ngModelChange)="updateDirectionValue($event, Directions.RIGHT)"
+            />
+            <span class="item-label">Right</span>
+        </label>
+
+        <label [for]="label + '-bottom'">
+            <input
+                type="number"
+                class="item"
+                [id]="label + '-bottom'"
+                [ngModel]="_value.bottom"
+                (ngModelChange)="updateDirectionValue($event, Directions.BOTTOM)"
+            />
+            <span class="item-label">Bottom</span>
+        </label>
+
+        <label [for]="label + '-left'">
+            <input
+                type="number"
+                class="item"
+                [id]="label + '-left'"
+                [ngModel]="_value.left"
+                (ngModelChange)="updateDirectionValue($event, Directions.LEFT)"
+            />
+            <span class="item-label">Left</span>
+        </label>
+
         <input type="checkbox" class="connected" [ngModel]="isConnected" (ngModelChange)="updateIsConnected($event)" />
     </div>
 </article>

@@ -1,4 +1,5 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
+import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
 import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
@@ -11,16 +12,18 @@ import { isObjectEquals } from "@shared-utils/object.utils";
 import { logAction } from "@datorama/akita";
 
 @Injectable()
-export abstract class AbstractEditorPageSettingsService {
+export abstract class AbstractEditorPageSettingsService extends AbstractEditorOperationService {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
         protected readonly formsManager: NgFormsManager,
-    ) {}
+    ) {
+        super(query, service);
+    }
 
     public selectFormModel(): Observable<APFormModel> {
         return this.query
-            .select(state => state.settings)
+            .select(state => state[state.selectedPage].settings)
             .pipe(
                 map(settings => {
                     const { title, campaignName, logotype } = settings;
@@ -96,12 +99,26 @@ export abstract class AbstractEditorPageSettingsService {
     protected updatePageSettings(value: PageSettings): void {
         logAction("Update page settings", [], value);
 
-        this.service.updateState(state => {
+        this.service.updateState(() => {
+            const selectedPage = this.getStoreElement("selectedPage");
+            const pages = this.getStoreElement("pages");
+
+            const updatedPages = pages.map(page => {
+                if (page.id === selectedPage) {
+                    return {
+                        ...page,
+                        settings: {
+                            ...page.settings,
+                            ...value,
+                        },
+                    };
+                }
+
+                return page;
+            });
+
             return {
-                settings: {
-                    ...state.settings,
-                    ...value,
-                },
+                pages: updatedPages,
             };
         });
     }

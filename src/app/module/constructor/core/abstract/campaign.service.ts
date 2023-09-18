@@ -3,7 +3,6 @@ import { AbstractEditorOperationService } from "@modules/constructor/core/abstra
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
 import { AbstractNavigationService } from "@core/navigation.service";
 import { CampaignModel, CreateCampaignModel } from "@modules/constructor/components/edit-area/types";
-import { CampaignType } from "@modules/constructor/components/edit-area/enums";
 import { Inject, Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components/ui";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
@@ -71,7 +70,7 @@ export class SinglePageCampaignService extends AbstractCampaignService {
     }
 
     public updateCampaignById(): Observable<CampaignModel> {
-        const id = this.getStoreElement("settings").id!;
+        const id = this.getStoreElement("id")!;
 
         return this.campaignDataService.updateCampaignByID(id, this.getCreateCampaignRequestData()).pipe(
             tap(() => {
@@ -143,22 +142,20 @@ export class SinglePageCampaignService extends AbstractCampaignService {
     }
 
     protected getCreateCampaignRequestData(): CreateCampaignModel {
-        const { settings, items } = this.query.getValue();
+        const { pages, items } = this.query.getValue();
 
         return {
-            model: items,
-            campaignName: settings.campaignName,
-            settings: {
-                ...settings,
-                id: undefined,
+            body: {
+                pages: pages,
+                elements: items,
             },
-            type: CampaignType.SINGLE_PAGE,
+            type: "page",
         };
     }
 
     public selectIsNewCampaign(): Observable<boolean> {
         return this.query
-            .select(state => state.settings.id)
+            .select(state => state.id)
             .pipe(
                 map(id => {
                     return !id;

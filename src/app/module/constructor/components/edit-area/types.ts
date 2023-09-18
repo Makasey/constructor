@@ -1,5 +1,6 @@
 import { CampaignType, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
 import { File } from "@shared-types/file/file";
+import { Page } from "@core/store/states/ui-states";
 import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { ViewContainerRef } from "@angular/core";
 import { styleUnitMap } from "@modules/constructor/components/edit-area/constants";
@@ -69,4 +70,10 @@ export type CampaignModel = Readonly<{
     campaignName: string;
 }>;
 
-export type CreateCampaignModel = Omit<CampaignModel, "id">;
+export type CreateCampaignModel = Readonly<{
+    type: "page";
+    body: {
+        pages: Page[];
+        elements: Record<string, SitePageElement>;
+    };
+}>;

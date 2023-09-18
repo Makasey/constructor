@@ -47,12 +47,20 @@ export type ProductCartState = Readonly<{
 
 export type TestState = ModuleState;
 
+export type Page = Readonly<{
+    settings: PageSettings;
+    children: number[];
+    id: number;
+}>;
+
 export type EditorState = Readonly<
     {
-        settings: PageSettings;
         items: Record<string, SitePageElementUnion>;
+        pages: Page[];
+        selectedPage: number;
         selectedElement: number;
         currentStateIndex: number;
+        id: number | undefined;
     } & ModuleState
 >;
 

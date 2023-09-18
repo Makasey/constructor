@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
 import { DeleteSelectedElementDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { NgForOf } from "@angular/common";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -26,9 +25,9 @@ export class RootComponent {
 
     constructor(private service: AbstractEditorElementActionsService<SectionPageElement>) {}
 
-    public root = toSignal(this.service.selectElement(ROOT_ELEMENT_ID));
+    public rootElements = toSignal(this.service.selectPageElements());
 
-    public _trackById(index: number, item: number): number {
+    public _trackById(_: number, item: number): number {
         return item;
     }
 }

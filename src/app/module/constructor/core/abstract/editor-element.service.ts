@@ -3,7 +3,8 @@ import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzState, LzStateKey } from "@core/store/lz.state";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
+import { Page } from "@core/store/states/ui-states";
 import { ROOT_ELEMENT_ID, defaultPageElementSettingsMap } from "@modules/constructor/components/edit-area/constants";
 import { SitePageElement, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
@@ -21,8 +22,63 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         return this.query.select(state => state.items[id] as T);
     }
 
+    public selectPageElements(): Observable<number[]> {
+        return this.query
+            .select(state => {
+                return {
+                    selectedPage: state.selectedPage,
+                    pages: state.pages,
+                };
+            })
+            .pipe(
+                map(({ selectedPage, pages }) => {
+                    const page = pages.find(page => page.id === selectedPage);
+
+                    return page?.children ?? [];
+                }),
+            );
+    }
+
     public getElement(id: number): T {
         return this.getStoreElement("items")[id] as T;
+    }
+
+    public addPageElement(type: SitePageElementType): void {
+        this.service.updateState(state => {
+            const newElementID = this.getStoreElement("currentStateIndex") + 1;
+            const items = state.items;
+            logAction(`Add element to page with id: ${newElementID}`);
+
+            const newElement: SitePageElement = {
+                ...defaultPageElementSettingsMap[type],
+                id: newElementID,
+                parentId: ROOT_ELEMENT_ID,
+                settings: {
+                    ...defaultPageElementSettingsMap[type].settings,
+                },
+            };
+
+            const updatedPages = state.pages.map(page => {
+                if (page.id === state.selectedPage) {
+                    return {
+                        ...page,
+                        children: arrayAdd(page.children, newElementID),
+                    };
+                }
+
+                return page;
+            });
+
+            return {
+                currentStateIndex: state.currentStateIndex > newElementID ? state.currentStateIndex : newElementID,
+                selectedElement: newElementID,
+                pages: updatedPages,
+                items: {
+                    ...items,
+                    [newElementID]: newElement,
+                },
+            };
+        });
     }
 
     public addElement(type: SitePageElementType, parentId?: number): void {
@@ -62,10 +118,16 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
         this.service.updateState(state => {
             let items = { ...state.items };
+            let updatedPages = state.pages;
+
             const { parentId } = items[elementId];
 
             if (!parentId) {
                 return state;
+            }
+
+            if (parentId === ROOT_ELEMENT_ID) {
+                updatedPages = this.deleteItemFromPage(elementId);
             }
 
             const parentElement = items[parentId];
@@ -81,8 +143,25 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                         children: arrayRemove<number[], number>(parentElement.children, item => item === elementId),
                     },
                 },
+                pages: updatedPages,
                 selectedElement: state.selectedElement === elementId ? parentId : ROOT_ELEMENT_ID,
             };
+        });
+    }
+
+    protected deleteItemFromPage(elementId: number): Page[] {
+        const state = this.query.getValue();
+        const { pages, selectedPage } = state;
+
+        return pages.map(page => {
+            if (page.id === selectedPage) {
+                return {
+                    ...page,
+                    children: arrayRemove(page.children, elementId),
+                };
+            }
+
+            return page;
         });
     }
 
