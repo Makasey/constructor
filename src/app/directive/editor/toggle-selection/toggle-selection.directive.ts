@@ -22,7 +22,7 @@ export class ToggleSelectionDirective implements OnInit {
     @HostListener("$.class._selected")
     public isSelected$: Observable<boolean>;
 
-    @HostListener("click.stop.silent")
+    @HostListener("click.stop")
     public toggleSelection(): void {
         const selectionCondition = this.elementId === ROOT_ELEMENT_ID && this.selectedElement() === ROOT_ELEMENT_ID;
 
