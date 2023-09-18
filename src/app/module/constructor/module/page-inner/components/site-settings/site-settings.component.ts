@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -15,6 +15,9 @@ import { AbstractEditorPageSettingsService } from "@modules/constructor/core/abs
     imports: [APFormModule],
 })
 export class SiteSettingsComponent {
+    @HostBinding("class.lz-site-settings")
+    public hostClass = true;
+
     private readonly service = inject(AbstractEditorPageSettingsService);
 
     public readonly formModel = toSignal(this.service.selectFormModel(), {

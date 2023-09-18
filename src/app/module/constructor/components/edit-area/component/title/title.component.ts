@@ -6,7 +6,7 @@ import { ELEMENT_ID } from "@modules/constructor/components/edit-area/constants"
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 import { TitlePageElement, TitlePageElementSettings } from "@modules/constructor/components/edit-area/component/title/types";
-import { processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
+import { processSettingValueWithUnit } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Component({
     selector: "lz-title-element",

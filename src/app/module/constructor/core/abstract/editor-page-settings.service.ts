@@ -23,7 +23,13 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
 
     public selectFormModel(): Observable<APFormModel> {
         return this.query
-            .select(state => state[state.selectedPage].settings)
+            .select(state => {
+                const { selectedPage, pages } = state;
+
+                const page = pages.find(page => page.id === selectedPage)!;
+
+                return page.settings;
+            })
             .pipe(
                 map(settings => {
                     const { title, campaignName, logotype } = settings;

@@ -47,7 +47,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     public touched = false;
 
     public writeValue(value: number): void {
-        this._value = value || "";
+        this._value = value || 0;
     }
 
     public registerOnChange(fn: (value: number) => unknown): void {

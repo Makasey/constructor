@@ -41,6 +41,8 @@ function getSectionPaddingControl(element: SectionPageElement): APFormControl {
         options: {
             selectLabelKey: "label",
             selectValueKey: "value",
+            max: 1000,
+            min: 0,
             items: defaultSizeControlUnit,
             label: "Padding",
         },
@@ -56,6 +58,8 @@ function getSectionMarginControl(element: SectionPageElement): APFormControl {
         options: {
             selectLabelKey: "label",
             selectValueKey: "value",
+            max: 1000,
+            min: -1000,
             items: defaultSizeControlUnit,
             label: "Margin",
         },

@@ -16,23 +16,44 @@
 
     .directions {
         display: flex;
-        border: 1px solid #ffffff;
         border-radius: 4px;
+        justify-content: space-between;
+    }
+
+    .direction-label {
+        max-width: 60px;
+        width: 100%;
+        position: relative;
+        padding-bottom: 16px;
     }
 
     .item {
-        width: 63px;
-        height: 30px;
-        padding: 0 10px;
-        background-color: #1b1c21;
-        border-radius: 4px;
-        border-right: 1px solid #ffffff;
-        color: #ffffff;
+        &-label {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+        }
     }
 
-    .connected {
-        width: 30px;
+    .form-control-input {
+        line-height: 22px;
+        font-size: 14px;
+    }
+
+    .connected-btn {
+        min-width: 30px;
         height: 30px;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+        color: #ffffff;
+        font-size: 20px;
+
+        &.active {
+            background-color: #ffffff;
+            color: #1b1c21;
+        }
     }
 }
 

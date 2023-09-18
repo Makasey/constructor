@@ -88,10 +88,10 @@ export class NumberWithDropdownFieldComponent<T> implements ControlValueAccessor
         this.onTouchedHandler();
     }
 
-    public updateDropdownValue(value: { label: string; value: T }[]): void {
+    public updateDropdownValue(value: T): void {
         this.value = {
             ...this.value,
-            unit: value[0].value,
+            unit: value,
         };
 
         this.emitControlValue();

@@ -14,6 +14,6 @@ export type ApDropdownFormControlOptions<T> = Readonly<{
 }>;
 
 export type APDropdownFieldValueChangeEvent = Readonly<{
-    newValue: APDropdownFieldItem[];
-    oldValue: APDropdownFieldItem[] | null;
+    newValue: number[] | number;
+    oldValue: number[] | number | null;
 }>;

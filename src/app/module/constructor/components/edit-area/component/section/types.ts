@@ -1,4 +1,4 @@
-import { DirectionController } from "@components/ui/controls/direction-field/types";
+import { Direction } from "@components/ui/controls/direction-field/types";
 import {
     SitePageElement,
     SitePageElementBackground,
@@ -13,8 +13,8 @@ export type SectionPageElementSettings = Readonly<
         text?: string;
         label?: string;
         tag?: string;
-        padding?: DirectionController;
-        margin?: DirectionController;
+        padding?: Direction;
+        margin?: Direction;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

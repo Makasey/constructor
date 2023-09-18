@@ -1,10 +1,11 @@
 import { InjectionToken, Type } from "@angular/core";
 import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
 import { SectionComponent } from "@modules/constructor/components/edit-area/component/section/section.component";
-import { SitePageElement } from "@modules/constructor/components/edit-area/types";
 import { SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
 import { TitleComponent } from "@modules/constructor/components/edit-area/component/title/title.component";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
+import { defaultSectionElementSettings } from "@modules/constructor/components/edit-area/component/section/constants";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 500,
@@ -31,7 +32,7 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.SECTION]: SectionComponent,
 };
 
-export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElement, "id" | "parentId">> = {
+export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: {
         type: SitePageElementType.TITLE,
         children: [],
@@ -47,21 +48,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
             },
         },
     },
-    [SitePageElementType.SECTION]: {
-        type: SitePageElementType.SECTION,
-        children: [],
-        isExtendable: false,
-        settings: {
-            width: {
-                value: 100,
-                unit: StyleUnit.PERCENT,
-            },
-            height: {
-                value: 200,
-                unit: StyleUnit.PX,
-            },
-        },
-    },
+    [SitePageElementType.SECTION]: defaultSectionElementSettings,
     [SitePageElementType.PAGE]: {
         type: SitePageElementType.PAGE,
         children: [],
