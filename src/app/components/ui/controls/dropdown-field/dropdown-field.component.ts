@@ -72,7 +72,7 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
 
     public _value: APDropdownFieldItem[];
 
-    private onChange: (value: APDropdownFieldItem[]) => void = () => undefined;
+    private onChange: (value: number | number[]) => void = () => undefined;
 
     private onTouched: () => void;
 
@@ -87,11 +87,23 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
             this._onToggleDropdownListVisibility();
         }
 
-        this.onChange(this._value);
-        this.onValueChange.emit({
-            newValue: this._value,
-            oldValue: oldValue,
-        });
+        const processedValue = this._value.map(item => item[this._selectValueKey]);
+        const processedOldValue = oldValue.map(item => item[this._selectValueKey]);
+
+        if (this.multi) {
+            this.onChange(processedValue);
+            this.onValueChange.emit({
+                newValue: processedValue,
+                oldValue: processedOldValue,
+            });
+        } else {
+            this.onChange(processedValue[0] as number);
+
+            this.onValueChange.emit({
+                newValue: processedValue[0] as number,
+                oldValue: processedOldValue[0] as number,
+            });
+        }
     }
 
     public _onDropdownFieldFocus(): void {
@@ -99,7 +111,7 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
         this.onTouched();
     }
 
-    public registerOnChange(fn: (value: APDropdownFieldItem[]) => unknown): void {
+    public registerOnChange(fn: (value: number[] | number) => unknown): void {
         this.onChange = fn;
     }
 

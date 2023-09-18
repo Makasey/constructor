@@ -1,5 +1,6 @@
-import { DirectionController } from "@components/ui/controls/direction-field/types";
-import { ElementHTMLTag, StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { ElementHTMLTag, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
+import { defaultDirectionValue } from "@components/ui/controls/direction-field/types";
 
 export const defaultSectionTagControls = [
     { label: ElementHTMLTag.SECTION, value: ElementHTMLTag.SECTION },
@@ -7,10 +8,28 @@ export const defaultSectionTagControls = [
     { label: ElementHTMLTag.ARTICLE, value: ElementHTMLTag.ARTICLE },
 ];
 
-export const DEFAULT_DIRECTION_CONTROLLER_VALUE: DirectionController = {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    unit: StyleUnit.PX,
+export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "parentId"> = {
+    type: SitePageElementType.SECTION,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 200,
+            unit: StyleUnit.PX,
+        },
+        text: "Hello World!",
+        tag: ElementHTMLTag.SECTION,
+        color: "#1b1c2d",
+        backgroundColor: "#ffffff",
+        margin: {
+            ...defaultDirectionValue,
+        },
+        padding: {
+            ...defaultDirectionValue,
+        },
+    },
 };

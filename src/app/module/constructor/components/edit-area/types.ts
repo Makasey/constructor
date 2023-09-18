@@ -3,7 +3,6 @@ import { File } from "@shared-types/file/file";
 import { Page } from "@core/store/states/ui-states";
 import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { ViewContainerRef } from "@angular/core";
-import { styleUnitMap } from "@modules/constructor/components/edit-area/constants";
 
 export type SitePageElementUnion = SectionPageElement | SitePageElement;
 
@@ -53,13 +52,6 @@ export interface ComponentWithVCR {
     readonly viewContainerRef: ViewContainerRef;
 
     readonly container: ViewContainerRef;
-}
-
-export function processSettingValueWithUnit(settingsValue: ElementSettingsWithUnit): string {
-    const { value, unit } = settingsValue;
-    const convertedUnit = styleUnitMap[unit];
-
-    return `${value}${convertedUnit}`;
 }
 
 export type CampaignModel = Readonly<{

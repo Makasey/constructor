@@ -6,17 +6,18 @@
             [ngModel]="_value.unit"
             [items]="items"
             [selectLabelKey]="selectLabelKey"
-            [selectValueKey]="selectLabelKey"
+            [selectValueKey]="selectValueKey"
             [disabled]="isDisabled"
-            (ngModelChange)="updateUnitValue($event[0].value)"
+            (ngModelChange)="updateUnitValue($event)"
         >
         </ap-dropdown-field>
     </div>
     <div class="directions">
-        <label [for]="label + '-top'">
-            <input
-                type="number"
+        <label class="direction-label" [for]="label + '-top'">
+            <ap-number-field
                 class="item"
+                [controlModel]="controlModel"
+                [nativeControl]="nativeControl"
                 [id]="label + '-top'"
                 [ngModel]="_value.top"
                 (ngModelChange)="updateDirectionValue($event, Directions.TOP)"
@@ -24,10 +25,11 @@
             <span class="item-label">Top</span>
         </label>
 
-        <label [for]="label + '-right'">
-            <input
-                type="number"
+        <label class="direction-label" [for]="label + '-right'">
+            <ap-number-field
                 class="item"
+                [nativeControl]="nativeControl"
+                [controlModel]="controlModel"
                 [id]="label + '-right'"
                 [ngModel]="_value.right"
                 (ngModelChange)="updateDirectionValue($event, Directions.RIGHT)"
@@ -35,10 +37,11 @@
             <span class="item-label">Right</span>
         </label>
 
-        <label [for]="label + '-bottom'">
-            <input
-                type="number"
+        <label class="direction-label" [for]="label + '-bottom'">
+            <ap-number-field
                 class="item"
+                [controlModel]="controlModel"
+                [nativeControl]="nativeControl"
                 [id]="label + '-bottom'"
                 [ngModel]="_value.bottom"
                 (ngModelChange)="updateDirectionValue($event, Directions.BOTTOM)"
@@ -46,17 +49,19 @@
             <span class="item-label">Bottom</span>
         </label>
 
-        <label [for]="label + '-left'">
-            <input
-                type="number"
+        <label class="direction-label" [for]="label + '-left'">
+            <ap-number-field
                 class="item"
+                [controlModel]="controlModel"
+                [nativeControl]="nativeControl"
                 [id]="label + '-left'"
                 [ngModel]="_value.left"
                 (ngModelChange)="updateDirectionValue($event, Directions.LEFT)"
             />
             <span class="item-label">Left</span>
         </label>
-
-        <input type="checkbox" class="connected" [ngModel]="isConnected" (ngModelChange)="updateIsConnected($event)" />
+        <button class="connected-btn" [class.active]="isConnected" (click)="updateIsConnected()">
+            <i class="bx bx-link"></i>
+        </button>
     </div>
 </article>

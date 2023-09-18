@@ -9,7 +9,7 @@ import { Observable, map } from "rxjs";
 import { SectionPageElement, SectionPageElementSettings } from "@modules/constructor/components/edit-area/component/section/types";
 import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
-import { processSettingValueWithUnit } from "@modules/constructor/components/edit-area/types";
+import { processDirectionValue, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Component({
     selector: "lz-section-element",
@@ -37,6 +37,14 @@ export class SectionComponent implements OnInit {
     @HostBinding("$.style.background-color")
     @HostListener("$.style.background-color")
     public sectionBackgroundColor$: Observable<string>;
+
+    @HostBinding("$.style.padding")
+    @HostListener("$.style.padding")
+    public sectionPadding$: Observable<string>;
+
+    @HostBinding("$.style.margin")
+    @HostListener("$.style.margin")
+    public sectionMargin$: Observable<string>;
 
     @HostBinding("class")
     public classes = {
@@ -70,6 +78,10 @@ export class SectionComponent implements OnInit {
         this.sectionColor$ = this.sectionSettings$.pipe(map(settings => settings.color));
 
         this.sectionBackgroundColor$ = this.sectionSettings$.pipe(map(settings => settings.backgroundColor));
+
+        this.sectionPadding$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
+
+        this.sectionMargin$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.margin)));
     }
 
     public addElement(type: SitePageElementType): void {

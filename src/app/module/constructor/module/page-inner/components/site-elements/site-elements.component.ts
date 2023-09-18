@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 
 import { map } from "rxjs";
@@ -21,6 +21,9 @@ import { blockElements } from "@modules/constructor/module/page-inner/types";
     imports: [NgClass, NgForOf, NgIf],
 })
 export class SiteElementsComponent {
+    @HostBinding("class.lz-site-elements")
+    public hostClass = true;
+
     private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);

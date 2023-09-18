@@ -1,15 +1,14 @@
-import { APDropdownFieldModule, APFormControl } from "@components/ui";
+import { APDropdownFieldModule, APFormControl, APNumberFieldModule } from "@components/ui";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { DEFAULT_DIRECTION_CONTROLLER_VALUE } from "@modules/constructor/components/edit-area/component/section/constants";
-import { DirectionController } from "@components/ui/controls/direction-field/types";
+import { Direction, defaultDirectionValue } from "@components/ui/controls/direction-field/types";
 import { Directions, StyleUnit } from "@modules/constructor/components/edit-area/enums";
 
 @Component({
     selector: "lz-direction-field",
     standalone: true,
-    imports: [CommonModule, APDropdownFieldModule, FormsModule],
+    imports: [CommonModule, APDropdownFieldModule, FormsModule, APNumberFieldModule],
     templateUrl: "./direction-field.component.html",
     styleUrls: ["./direction-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -36,6 +35,12 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
     public label: string;
 
     @Input()
+    public min: number = Number.MIN_VALUE;
+
+    @Input()
+    public max: number = Number.MAX_VALUE;
+
+    @Input()
     public items: { label: string; value: T }[] = [];
 
     @Input()
@@ -44,14 +49,14 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
     @Input()
     public selectValueKey = "value";
 
-    @Input() public set value(value: DirectionController | null) {
-        this._value = value ?? DEFAULT_DIRECTION_CONTROLLER_VALUE;
+    @Input() public set value(value: Direction | null) {
+        this._value = value ?? { ...defaultDirectionValue };
     }
 
     @Output()
-    public readonly onValueChange: EventEmitter<DirectionController> = new EventEmitter<DirectionController>();
+    public readonly onValueChange: EventEmitter<Direction> = new EventEmitter<Direction>();
 
-    public _value: DirectionController = DEFAULT_DIRECTION_CONTROLLER_VALUE;
+    public _value: Direction = { ...defaultDirectionValue };
 
     public isConnected = true;
 
@@ -59,11 +64,11 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
 
     public Directions = Directions;
 
-    private onChange: (value: DirectionController) => void;
+    private onChange: (value: Direction) => void;
 
     private onTouched: () => void;
 
-    public registerOnChange(fn: (value: DirectionController) => void): void {
+    public registerOnChange(fn: (value: Direction) => void): void {
         this.onChange = fn;
     }
 
@@ -75,7 +80,7 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
         this.isDisabled = isDisabled;
     }
 
-    public writeValue(obj: DirectionController): void {
+    public writeValue(obj: Direction): void {
         this.value = obj;
     }
 
@@ -94,8 +99,8 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
         this.emitControlValue();
     }
 
-    public updateIsConnected(event: boolean): void {
-        this.isConnected = event;
+    public updateIsConnected(): void {
+        this.isConnected = !this.isConnected;
     }
 
     private updateNoConnectedValue(value: number, type: string): void {
