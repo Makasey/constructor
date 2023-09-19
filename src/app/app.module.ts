@@ -23,8 +23,11 @@ import { AbstractFilesDataService, DefaultFilesDataService } from "@core/data-se
 import { AbstractProductCartService, ProductCartService } from "@components/shared/product-cart/product-cart.service";
 import { HostBinderAsyncPlugin } from "./plugins/host-binder-async.plugin";
 import { SilentEventPlugin } from "./plugins/silent-event.plugin";
+import { SocketIoConfig, SocketIoModule } from "ngx-socket-io";
 import { StopEventPlugin } from "./plugins/stop-event.plugin";
 import { environment } from "environments/environment";
+
+const config: SocketIoConfig = { url: "http://localhost:7000", options: { transports: ["websocket"] } };
 
 @NgModule({
     declarations: [AppComponent],
@@ -32,6 +35,7 @@ import { environment } from "environments/environment";
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
+        SocketIoModule.forRoot(config),
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
         HttpClientModule,

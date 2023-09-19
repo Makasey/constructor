@@ -33,6 +33,8 @@ export class CampaignListComponent extends AbstractModuleComponent {
 
     public selectedRows: string[] = [];
 
+    public messages = this.service.getMessage().subscribe();
+
     public tableValues$ = this.service.selectTableValues();
 
     constructor(protected service: AbstractCampaignListService) {
@@ -45,5 +47,9 @@ export class CampaignListComponent extends AbstractModuleComponent {
 
     public selectRows(rows: unknown[]): void {
         this.selectedRows = rows as string[];
+    }
+
+    public test(): void {
+        this.service.sendMessage("TEST_MESSAGE");
     }
 }

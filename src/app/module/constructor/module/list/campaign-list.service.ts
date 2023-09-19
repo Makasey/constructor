@@ -6,6 +6,7 @@ import { LZToastrItemType, LZToastrService, TableMeta } from "@components/ui";
 import { LzQuery, LzService, LzStateKey, UIDataState } from "@core/store";
 import { Observable, tap } from "rxjs";
 import { PaginationListItems } from "@shared-types/response/response-view.type";
+import { Socket } from "ngx-socket-io";
 import { arrayRemove } from "@datorama/akita";
 
 @Injectable()
@@ -15,6 +16,10 @@ export abstract class AbstractCampaignListService extends AbstractModuleService 
     public abstract selectTableValues(): Observable<CampaignModel[]>;
 
     public abstract deleteCampaignByID(id: number): Observable<void>;
+
+    public abstract sendMessage(msg: string): void;
+
+    public abstract getMessage(): Observable<any>;
 }
 
 @Injectable()
@@ -23,9 +28,18 @@ export class DefaultCampaignListService extends AbstractDefaultModuleService<LzS
         protected readonly query: LzQuery,
         protected readonly service: LzService,
         private readonly campaignDataService: AbstractCampaignDataService,
+        private readonly socket: Socket,
         private readonly toastrService: LZToastrService,
     ) {
         super(LzStateKey.CAMPAIGN_LIST, query, service);
+    }
+
+    public sendMessage(msg: string): void {
+        this.socket.emit("send_message", msg);
+    }
+
+    public getMessage(): Observable<any> {
+        return this.socket.fromEvent("send_message").pipe(tap(data => console.log(data)));
     }
 
     public asyncInit(): Observable<PaginationListItems<CampaignModel>> {
