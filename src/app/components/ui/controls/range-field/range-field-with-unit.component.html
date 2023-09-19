@@ -1,0 +1,27 @@
+<article class="control">
+    <div class="unit">
+        <span class="label">{{ label }}</span>
+        <ap-dropdown-field
+            customClass="unit-dropdown"
+            [ngModel]="_value.unit"
+            [items]="items"
+            [selectLabelKey]="selectLabelKey"
+            [selectValueKey]="selectValueKey"
+            [disabled]="isDisabled"
+            (ngModelChange)="updateUnitValue($event)"
+        >
+        </ap-dropdown-field>
+    </div>
+
+    <div class="controls">
+        <input type="range" [min]="min" [max]="max" [ngModel]="_value.value" (ngModelChange)="updateRange($event)" />
+
+        <ap-number-field
+            class="number-field"
+            [controlModel]="controlModel"
+            [nativeControl]="nativeControl"
+            [ngModel]="_value.value"
+            (ngModelChange)="updateRange($event)"
+        />
+    </div>
+</article>

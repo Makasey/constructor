@@ -23,8 +23,8 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
     }
 }
 
-export function processSettingValueWithUnit(settingsValue: ElementSettingsWithUnit): string {
-    const { value, unit } = settingsValue;
+export function processSettingValueWithUnit(settingsValue?: ElementSettingsWithUnit): string {
+    const { value = 0, unit = StyleUnit.PX } = settingsValue ?? {};
     const convertedUnit = styleUnitMap[unit];
 
     return `${value}${convertedUnit}`;

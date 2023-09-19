@@ -2,7 +2,11 @@ import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@componen
 import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area/constants";
 import { SectionElementSettingsGroup, SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { defaultSectionTagControls } from "@modules/constructor/components/edit-area/component/section/constants";
-import { defaultSizeControlUnit, getDefaultSizeSettings } from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
+import {
+    defaultSizeControlUnit,
+    defaultTextControlElement,
+    getDefaultSizeSettings,
+} from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
 
 function getSectionTextControl(element: SectionPageElement): APFormControl {
     return {
@@ -28,6 +32,21 @@ function getSectionHTMLTagControl(element: SectionPageElement): APFormControl {
             selectValueKey: "value",
             items: defaultSectionTagControls,
             label: "Тип тега",
+        },
+    };
+}
+
+function getLetterSpacingControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "letterSpacing",
+        name: "letterSpacing",
+        value: element.settings.letterSpacing,
+        valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD,
+        options: {
+            selectLabelKey: "label",
+            selectValueKey: "value",
+            items: defaultTextControlElement,
+            label: "Letter spacing",
         },
     };
 }
@@ -95,7 +114,7 @@ export function getSectionElementSizeControls(element: SectionPageElement): APFo
 }
 
 export function getSectionElementTextControl(element: SectionPageElement): APFormControl[] {
-    return [getSectionTextControl(element), getSectionHTMLTagControl(element), getSectionColorControl(element)];
+    return [getSectionTextControl(element), getSectionHTMLTagControl(element), getLetterSpacingControl(element), getSectionColorControl(element)];
 }
 
 export function getSectionElementStyleControl(element: SectionPageElement): APFormControl[] {

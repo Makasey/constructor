@@ -162,7 +162,15 @@
 </ng-template>
 
 <ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-range-controller [formControl]="nativeControl" [value]="controlModel.value"></lz-range-controller>
+    <lz-range-field-with-unit
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [items]="controlModel.options?.items"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+    ></lz-range-field-with-unit>
 </ng-template>
 
 <ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
