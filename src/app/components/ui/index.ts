@@ -7,7 +7,7 @@ export * from "./category-controller";
 //Product card component
 export * from "../shared/product-card";
 
-//Range controller component
+//RangeWithUnit controller component
 export * from "./range-controller";
 
 //Status component

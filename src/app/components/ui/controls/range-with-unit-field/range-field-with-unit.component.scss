@@ -1,5 +1,9 @@
-.lz-range-field {
-    padding: 16px;
+.lz-range-with-unit-field {
+    .control {
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+        padding: 16px;
+    }
 
     .unit {
         display: flex;

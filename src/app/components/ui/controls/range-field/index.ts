@@ -1,1 +1,1 @@
-export { RangeFieldWithUnitComponent } from "./range-field-with-unit.component";
+export { RangeFieldComponent } from "./range-field.component";

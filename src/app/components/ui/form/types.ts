@@ -10,13 +10,14 @@ export enum APFormDefaultTemplateKeys {
     NUMBER_FIELD = "numberFieldTemplate",
     DROPDOWN_FIELD = "dropdownFieldTemplate",
     CATEGORY_CONTROLLER = "categoryControllerTemplate",
-    RANGE_FIELD = "rangeFieldTemplate",
+    RANGE_FIELD_WITH_UNIT_FIELD = "rangeFieldWithUnitTemplate",
     COLOR_FIELD = "colorPickerTemplate",
     CHECKBOX_FIELD = "checkboxGroupTemplate",
     FILE_UPLOAD = "fileUploadTemplate",
     TEXTAREA_FIELD = "textAreaFieldTemplate",
     NUMBER_WITH_DROPDOWN_FIELD = "numberWithDropdownField",
     DIRECTION_FIELD = "directionFieldTemplate",
+    RANGE_FIELD = "RangeFieldComponent",
 }
 
 export type APFormModel = {

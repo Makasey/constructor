@@ -1,5 +1,5 @@
 import { Direction } from "@components/ui/controls/direction-field/types";
-import { Range } from "@components/ui/controls/range-field/types";
+import { RangeWithUnit } from "@components/ui/controls/range-with-unit-field/types";
 import {
     SitePageElement,
     SitePageElementBackground,
@@ -16,7 +16,8 @@ export type SectionPageElementSettings = Readonly<
         tag?: string;
         padding?: Direction;
         margin?: Direction;
-        letterSpacing?: Range;
+        letterSpacing?: RangeWithUnit;
+        opacity?: number;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

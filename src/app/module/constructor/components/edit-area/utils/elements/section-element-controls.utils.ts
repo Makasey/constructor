@@ -36,17 +36,29 @@ function getSectionHTMLTagControl(element: SectionPageElement): APFormControl {
     };
 }
 
-function getLetterSpacingControl(element: SectionPageElement): APFormControl {
+function getSectionLetterSpacingControl(element: SectionPageElement): APFormControl {
     return {
         id: "letterSpacing",
         name: "letterSpacing",
         value: element.settings.letterSpacing,
-        valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD,
+        valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD_WITH_UNIT_FIELD,
         options: {
             selectLabelKey: "label",
             selectValueKey: "value",
             items: defaultTextControlElement,
             label: "Letter spacing",
+        },
+    };
+}
+
+function getSectionOpacityControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "opacity",
+        name: "opacity",
+        value: element.settings.opacity,
+        valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD,
+        options: {
+            label: "Opacity",
         },
     };
 }
@@ -114,7 +126,13 @@ export function getSectionElementSizeControls(element: SectionPageElement): APFo
 }
 
 export function getSectionElementTextControl(element: SectionPageElement): APFormControl[] {
-    return [getSectionTextControl(element), getSectionHTMLTagControl(element), getLetterSpacingControl(element), getSectionColorControl(element)];
+    return [
+        getSectionTextControl(element),
+        getSectionHTMLTagControl(element),
+        getSectionLetterSpacingControl(element),
+        getSectionOpacityControl(element),
+        getSectionColorControl(element),
+    ];
 }
 
 export function getSectionElementStyleControl(element: SectionPageElement): APFormControl[] {

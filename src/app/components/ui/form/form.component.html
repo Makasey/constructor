@@ -161,8 +161,8 @@
     <lz-category-controller [formControl]="nativeControl"> </lz-category-controller>
 </ng-template>
 
-<ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-range-field-with-unit
+<ng-template #rangeFieldWithUnitTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-range-with-unit-field
         [formControl]="nativeControl"
         [controlModel]="controlModel"
         [nativeControl]="nativeControl"
@@ -170,7 +170,20 @@
         [items]="controlModel.options?.items"
         [max]="controlModel.options?.max"
         [min]="controlModel.options?.min"
-    ></lz-range-field-with-unit>
+    >
+    </lz-range-with-unit-field>
+</ng-template>
+
+<ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-range-field
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+    >
+    </lz-range-field>
 </ng-template>
 
 <ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
