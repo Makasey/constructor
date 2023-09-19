@@ -2,7 +2,8 @@ import { APDropdownFieldModule, APFormControl, APNumberFieldModule } from "@comp
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { defaultRangeValue } from "@components/ui/controls/range-field/types";
+
+import { defaultRangeStep, defaultRangeValue } from "@components/ui/controls/range-field/types";
 
 @Component({
     selector: "lz-range-field",
@@ -32,6 +33,9 @@ export class RangeFieldComponent implements ControlValueAccessor {
 
     @Input()
     public label: string;
+
+    @Input()
+    public step = defaultRangeStep;
 
     @Input()
     public min: number = Number.MIN_VALUE;

@@ -33,3 +33,5 @@ export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "par
         },
     },
 };
+
+export const defaultSectionOpacityStep = 0.1;

@@ -1,7 +1,7 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
 import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area/constants";
 import { SectionElementSettingsGroup, SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
-import { defaultSectionTagControls } from "@modules/constructor/components/edit-area/component/section/constants";
+import { defaultSectionOpacityStep, defaultSectionTagControls } from "@modules/constructor/components/edit-area/component/section/constants";
 import {
     defaultSizeControlUnit,
     defaultTextControlElement,
@@ -58,6 +58,7 @@ function getSectionOpacityControl(element: SectionPageElement): APFormControl {
         value: element.settings.opacity,
         valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD,
         options: {
+            step: defaultSectionOpacityStep,
             label: "Opacity",
         },
     };
