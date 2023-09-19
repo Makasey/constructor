@@ -1,12 +1,12 @@
 import { APFormModel } from "@components/ui";
 import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { EMPTY, Observable, map, shareReplay } from "rxjs";
 import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
 import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
 import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
+import { Observable, map, shareReplay } from "rxjs";
 import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { SitePageElementSettings, SitePageElementSizeSettings } from "@modules/constructor/components/edit-area/types";
 import { filterNilValue, logAction } from "@datorama/akita";
@@ -25,8 +25,6 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
     public abstract selectElementSettingsFormModel(): Observable<APFormModel | null>;
 
     public abstract selectSettings(id: number): Observable<K>;
-
-    public abstract selectElementSettingsFormModelChange(): Observable<K>;
 
     public abstract updateElementSettings(settings: K): void;
 }
@@ -52,13 +50,9 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
 
                     const element = this.getElement(selectedElement);
 
-                    return structuredClone(processElementSettings(element.type, element));
+                    return processElementSettings(element.type, element);
                 }),
             );
-    }
-
-    public selectElementSettingsFormModelChange(): Observable<K> {
-        return EMPTY;
     }
 
     public updateElementSettings(value: K): void {

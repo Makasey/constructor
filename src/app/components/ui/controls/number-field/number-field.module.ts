@@ -1,12 +1,12 @@
 import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
-import { ReactiveFormsModule } from "@angular/forms";
 
-import { APNumberFieldComponent } from "./number-field.component";
+import { APNumberFieldComponent } from "@components/ui";
 
 @NgModule({
     declarations: [APNumberFieldComponent],
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule],
     exports: [APNumberFieldComponent],
 })
 export class APNumberFieldModule {}

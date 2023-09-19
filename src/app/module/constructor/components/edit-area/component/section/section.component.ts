@@ -1,10 +1,10 @@
 import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
-import { AsyncPipe, JsonPipe, NgComponentOutlet, NgForOf, NgIf } from "@angular/common";
+import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
 import { ELEMENT_ID } from "../../constants";
-import { LZEditAreaItemComponent } from "@modules/constructor/components/edit-area/component/item/edit-area-item.component";
+import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { Observable, map } from "rxjs";
 import { SectionPageElement, SectionPageElementSettings } from "@modules/constructor/components/edit-area/component/section/types";
 import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
@@ -19,7 +19,7 @@ import { processDirectionValue, processSettingValueWithUnit } from "@modules/con
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [NgComponentOutlet, NgForOf, LZEditAreaItemComponent, NgIf, AsyncPipe, JsonPipe],
+    imports: [NgForOf, NgIf, AsyncPipe, ElementResolverDirective],
 })
 export class SectionComponent implements OnInit {
     @HostBinding("$.style.height")

@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output, ViewChild } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { APFormControl } from "../../form";
 import { APNumberFieldValueChangeEvent } from "./types";
+import { normalizeToIntNumber } from "@shared-utils/utils";
 
 @Component({
     selector: "ap-number-field",
@@ -27,6 +28,15 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     @Input()
     public label = "";
 
+    @Input()
+    public step = 1;
+
+    @Input()
+    public max = Number.MAX_VALUE;
+
+    @Input()
+    public min = Number.MIN_VALUE;
+
     @Output()
     public readonly onValueChange: EventEmitter<APNumberFieldValueChangeEvent> = new EventEmitter<APNumberFieldValueChangeEvent>();
 
@@ -35,6 +45,25 @@ export class APNumberFieldComponent implements ControlValueAccessor {
 
     @Output()
     public readonly onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
+    @HostListener("keydown.arrowUp")
+    public onCountIncrease(): void {
+        const processedValue = Number(this._value) + this.step;
+        const clampedValue = Math.min(this.max, processedValue);
+
+        this.updateValue(`${clampedValue}`, this._value);
+    }
+
+    @HostListener("keydown.arrowDown")
+    public onCountDecrease(): void {
+        const processedValue = Number(this._value) - this.step;
+        const clampedValue = Math.max(this.min, processedValue);
+
+        this.updateValue(`${clampedValue}`, this._value);
+    }
+
+    @ViewChild("numberField", { static: true })
+    public numberField: HTMLInputElement;
 
     public _value: number | string;
 
@@ -47,7 +76,10 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     public touched = false;
 
     public writeValue(value: number): void {
-        this._value = value || 0;
+        const processedValue = this.getNumbersFromString(`${value}`);
+        const clampedValue = this.processBoundariesValue(+processedValue);
+
+        this.updateInputValue(`${clampedValue}`);
     }
 
     public registerOnChange(fn: (value: number) => unknown): void {
@@ -71,7 +103,10 @@ export class APNumberFieldComponent implements ControlValueAccessor {
 
         const parsedValue = this.getNumbersFromString(input.value);
         this.updateValue(parsedValue, this._value);
-        parsedValue ? (input.value = parsedValue) : (input.value = "");
+
+        this._value = +parsedValue;
+
+        input.value = parsedValue;
     }
 
     public _onFocus(event: Event | FocusEvent): void {
@@ -93,8 +128,8 @@ export class APNumberFieldComponent implements ControlValueAccessor {
 
     public updateValue(newValue: string, oldValue: number | string): void {
         const value = newValue && !isNaN(+newValue) ? +newValue : null;
-        this.writeValue(value!);
         this.onChange(value!);
+        this.updateInputValue(`${value!}`);
         this.onValueChange.emit({
             newValue: value!,
             oldValue: +oldValue,
@@ -108,7 +143,17 @@ export class APNumberFieldComponent implements ControlValueAccessor {
         return parsedValue.indexOf(".") === lastDotIndex ? parsedValue : parsedValue.slice(0, lastDotIndex);
     }
 
-    public _onPasteValue(event: ClipboardEvent): void {
-        //console.log(event);
+    public processBoundariesValue(value: number): number {
+        return normalizeToIntNumber(value, this.min, this.max);
+    }
+
+    private updateInputValue(value: string): void {
+        this._value = value;
+
+        this.updateInputNodeValue();
+    }
+
+    private updateInputNodeValue(): void {
+        this.numberField.value = this._value as string;
     }
 }

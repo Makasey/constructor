@@ -5,23 +5,21 @@
                 {{ label }}
             </span>
             <input
+                #numberField
                 type="text"
                 class="form-control-input"
-                inputmode="numeric"
-                pattern="-?[0-9.]*"
-                min="-9007199254740991"
-                max="9007199254740991"
+                autocomplete="off"
                 [attr.id]="controlModel.id"
                 [attr.required]="controlModel.required"
                 [attr.name]="controlModel.name"
                 [class.disabled]="disabled"
                 [disabled]="disabled"
                 [value]="_value"
-                (paste)="_onPasteValue($event)"
                 (blur)="_onBlur($event)"
                 (focus)="_onFocus($event)"
                 (input)="_onInput($event)"
             />
+            {{ _value }}
         </label>
         <div class="form-control-errors" *ngIf="nativeControl.dirty && (nativeControl.errors | keyvalue)?.length">
             <ng-container *ngFor="let error of nativeControl.errors | keyvalue">
