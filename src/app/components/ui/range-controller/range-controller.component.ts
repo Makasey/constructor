@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { Range } from "./types";
+import { RangeWithUnit } from "./types";
 
 @Component({
     selector: "lz-range-controller",
@@ -17,12 +17,12 @@ import { Range } from "./types";
     ],
 })
 export class RangeControllerComponent implements ControlValueAccessor {
-    @Input() public set value(value: Range) {
+    @Input() public set value(value: RangeWithUnit) {
         this.min = value?.min;
         this.max = value?.max;
     }
 
-    @Output() public readonly changeValue: EventEmitter<Range> = new EventEmitter<Range>();
+    @Output() public readonly changeValue: EventEmitter<RangeWithUnit> = new EventEmitter<RangeWithUnit>();
 
     public min = 1500;
 
@@ -38,16 +38,16 @@ export class RangeControllerComponent implements ControlValueAccessor {
 
     public maxRate = 45500;
 
-    private range: Range;
+    private range: RangeWithUnit;
 
-    private onChange: (value: Range) => void = () => undefined;
+    private onChange: (value: RangeWithUnit) => void = () => undefined;
     private onTouched: () => unknown = () => ({});
 
-    public writeValue(value: Range): void {
+    public writeValue(value: RangeWithUnit): void {
         this.range = value;
     }
 
-    public registerOnChange(fn: (value: Range) => void): void {
+    public registerOnChange(fn: (value: RangeWithUnit) => void): void {
         this.onChange = fn;
     }
 

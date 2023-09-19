@@ -7,6 +7,11 @@ export const defaultSizeControlUnit = [
     { label: StyleUnit.PX, value: StyleUnit.PX },
 ];
 
+export const defaultTextControlElement = [
+    { label: StyleUnit.PX, value: StyleUnit.PX },
+    { label: StyleUnit.EM, value: StyleUnit.EM },
+];
+
 function getDefaultHeightControl(element: SitePageElement): APFormControl {
     return {
         id: "height",

@@ -24,6 +24,10 @@ export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
 export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.PX]: StyleUnit.PX,
     [StyleUnit.PERCENT]: "%",
+    [StyleUnit.EM]: StyleUnit.EM,
+    [StyleUnit.VH]: StyleUnit.VH,
+    [StyleUnit.VW]: StyleUnit.VW,
+    [StyleUnit.REM]: StyleUnit.REM,
 };
 
 export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {

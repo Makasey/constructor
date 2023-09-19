@@ -68,9 +68,12 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private fileUploadField: ControlTemplate;
 
-    @ViewChild("rangeFieldTemplate", {
+    @ViewChild("rangeFieldWithUnitTemplate", {
         static: true,
     })
+    private rangeWithUnitField: ControlTemplate;
+
+    @ViewChild("rangeFieldTemplate", { static: true })
     private rangeField: ControlTemplate;
 
     @ViewChild("colorPickerTemplate", {
@@ -122,13 +125,14 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.NUMBER_FIELD]: this.numberField,
             [APFormDefaultTemplateKeys.DROPDOWN_FIELD]: this.dropdownField,
             [APFormDefaultTemplateKeys.CATEGORY_CONTROLLER]: this.categoryControllerField,
-            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
+            [APFormDefaultTemplateKeys.RANGE_FIELD_WITH_UNIT_FIELD]: this.rangeWithUnitField,
             [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
             [APFormDefaultTemplateKeys.FILE_UPLOAD]: this.fileUploadField,
             [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
             [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
             [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField,
             [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField,
+            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
         };
 
         this._templatesMap = {

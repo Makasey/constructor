@@ -46,6 +46,14 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.margin")
     public sectionMargin$: Observable<string>;
 
+    @HostBinding("$.style.letter-spacing")
+    @HostListener("$.style.letter-spacing")
+    public sectionLetterSpacing$: Observable<string>;
+
+    @HostBinding("$.style.opacity")
+    @HostListener("$.style.opacity")
+    public sectionOpacity$: Observable<number>;
+
     @HostBinding("class")
     public classes = {
         "editor-element": true,
@@ -82,6 +90,10 @@ export class SectionComponent implements OnInit {
         this.sectionPadding$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
 
         this.sectionMargin$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.margin)));
+
+        this.sectionLetterSpacing$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.letterSpacing)));
+
+        this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity!));
     }
 
     public addElement(type: SitePageElementType): void {

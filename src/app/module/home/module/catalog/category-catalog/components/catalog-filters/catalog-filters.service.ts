@@ -60,7 +60,7 @@ export class DefaultCatalogFiltersService
                                         {
                                             id: crypto.randomUUID(),
                                             name: "price-flowers",
-                                            valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD,
+                                            valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD_WITH_UNIT_FIELD,
                                             value: {
                                                 min: 1500,
                                                 max: 23000,

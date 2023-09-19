@@ -5,6 +5,10 @@ export enum CampaignType {
 export enum StyleUnit {
     PERCENT = "percent",
     PX = "px",
+    EM = "em",
+    REM = "rem",
+    VW = "vw",
+    VH = "vh",
 }
 
 export enum SitePageElementType {
