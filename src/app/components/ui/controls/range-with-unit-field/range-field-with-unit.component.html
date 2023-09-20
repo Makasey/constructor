@@ -14,12 +14,22 @@
     </div>
 
     <div class="controls">
-        <input type="range" [min]="min" [max]="max" [ngModel]="_value.value" (ngModelChange)="updateRange($event)" />
+        <input
+            type="range"
+            [step]="step"
+            [min]="min"
+            [max]="max"
+            [ngModel]="_value.value"
+            (ngModelChange)="updateRange($event)"
+        />
 
         <ap-number-field
             class="number-field"
             [controlModel]="controlModel"
             [nativeControl]="nativeControl"
+            [min]="min"
+            [max]="max"
+            [step]="step"
             [ngModel]="_value.value"
             (ngModelChange)="updateRange($event)"
         />

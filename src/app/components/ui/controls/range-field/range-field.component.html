@@ -15,6 +15,9 @@
             class="number-field"
             [controlModel]="controlModel"
             [nativeControl]="nativeControl"
+            [max]="max"
+            [min]="min"
+            [step]="step"
             [ngModel]="_value"
             (ngModelChange)="updateRange($event)"
         />

@@ -52,7 +52,7 @@ export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): V
     return Object.fromEntries(Object.entries(obj).filter(([, v]) => !isNil(v))) as Valuable<T>;
 }
 
-export function normalizeToIntNumber(value: number, min: number, max: number): number {
+export function normalizeNumberValue(value: number, min: number, max: number): number {
     if (value > max) {
         return max;
     }
@@ -61,7 +61,31 @@ export function normalizeToIntNumber(value: number, min: number, max: number): n
         return min;
     }
 
-    return Math.round(value);
+    return value;
+}
+
+export function normalizeToIntNumber(value: number, min: number, max: number): number {
+    return Math.round(normalizeNumberValue(value, min, max));
+}
+
+export function roundNumberWithFraction(value: number, fraction = 1): number {
+    return Number(value.toFixed(fraction));
+}
+
+export function calculateFractionNumber(value: number): number {
+    if (value >= 1) {
+        return 1;
+    }
+
+    let fraction = 0;
+
+    while (value < 1) {
+        value = value * 10;
+
+        fraction++;
+    }
+
+    return fraction;
 }
 
 export function isNumberInRange(value: number, from: number, to: number): boolean {

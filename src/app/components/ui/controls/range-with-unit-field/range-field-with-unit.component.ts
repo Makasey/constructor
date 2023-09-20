@@ -2,8 +2,8 @@ import { APDropdownFieldModule, APFormControl, APNumberFieldModule } from "@comp
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { Directions, StyleUnit } from "@modules/constructor/components/edit-area/enums";
 import { RangeWithUnit, defaultRangeWithUnitValue } from "@components/ui/controls/range-with-unit-field/types";
+import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
 
 @Component({
     selector: "lz-range-with-unit-field",
@@ -35,10 +35,13 @@ export class RangeFieldWithUnitComponent<T> implements ControlValueAccessor {
     public label: string;
 
     @Input()
-    public min: number = Number.MIN_VALUE;
+    public min = 0;
 
     @Input()
-    public max: number = Number.MAX_VALUE;
+    public max: number = Number.MAX_SAFE_INTEGER;
+
+    @Input()
+    public step: 1;
 
     @Input()
     public items: { label: string; value: T }[] = [];
@@ -103,6 +106,4 @@ export class RangeFieldWithUnitComponent<T> implements ControlValueAccessor {
         this.onChange(this._value);
         this.onValueChange.emit(this._value);
     }
-
-    protected readonly Directions = Directions;
 }

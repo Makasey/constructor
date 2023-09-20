@@ -45,6 +45,9 @@ function getSectionLetterSpacingControl(element: SectionPageElement): APFormCont
         options: {
             selectLabelKey: "label",
             selectValueKey: "value",
+            step: 1,
+            min: -5,
+            max: 10,
             items: defaultTextControlElement,
             label: "Letter spacing",
         },
@@ -59,6 +62,8 @@ function getSectionOpacityControl(element: SectionPageElement): APFormControl {
         valueTemplateKey: APFormDefaultTemplateKeys.RANGE_FIELD,
         options: {
             step: defaultSectionOpacityStep,
+            min: 0,
+            max: 1,
             label: "Opacity",
         },
     };
