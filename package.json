@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --port 4220",
-    "build": "ng build --aot --configuration development --build-optimizer --common-chunk --optimization",
+    "build": "ng build --aot --configuration production --build-optimizer --common-chunk --optimization",
     "watch": "ng build --watch --configuration development",
     "test": "jest --verbose",
     "test:watch": "jest --watch",
