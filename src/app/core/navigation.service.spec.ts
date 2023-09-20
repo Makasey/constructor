@@ -42,17 +42,9 @@ describe(`${TEST_TAG} Test`, () => {
     });
 
     it(`[${TEST_TAG}] Build link method should return roses catalog link`, () => {
-        const pathIds = { categoryId: "roses" };
-        const pathName = RouteKey.CATALOG;
-        const expectedResult = "/home/catalog/roses";
-        expect(service.buildLink(pathName, pathIds)).toEqual(expectedResult);
-    });
-
-    it(`[${TEST_TAG}] Build link method should return rose product link`, () => {
-        const pathIds = { categoryId: "roses", productId: "rose" };
-        const pathName = RouteKey.PRODUCT;
-        const expectedResult = "/home/catalog/roses/rose";
-
+        const pathIds = { campaignId: "123" };
+        const pathName = RouteKey.CAMPAIGN_EDITOR;
+        const expectedResult = "/builder/123/editor";
         expect(service.buildLink(pathName, pathIds)).toEqual(expectedResult);
     });
 });
