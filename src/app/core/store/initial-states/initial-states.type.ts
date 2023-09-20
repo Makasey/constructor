@@ -1,22 +1,6 @@
-import { APFormModel } from "@components/ui";
-import { Product } from "@shared-types/index";
-
-import {
-    CampaignListState,
-    CatalogFiltersState,
-    CatalogProductsState,
-    EditorState,
-    FilesState,
-    ModuleState,
-    ProductCartState,
-    RootModuleState,
-    TableModuleState,
-    TestState,
-    UIDataState,
-} from "@core/store";
+import { CampaignListState, EditorState, FilesState, ModuleState, TableModuleState, TableState, UIDataState } from "@core/store";
 import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
-import { TableState } from "@core/store/states/ui-states";
 
 export function initialTableModuleState(): TableModuleState {
     return {
@@ -26,42 +10,6 @@ export function initialTableModuleState(): TableModuleState {
 }
 
 export function initialModuleDataState(): ModuleState {
-    return {
-        dataState: UIDataState.INITIAL,
-    };
-}
-
-export function initialRootModuleState(): RootModuleState {
-    return {
-        ...initialModuleDataState(),
-        ...initialTableModuleState(),
-        products: [] as Product[],
-    };
-}
-
-export function initialCatalogFiltersState(): CatalogFiltersState {
-    return {
-        ...initialModuleDataState(),
-        filters: {} as APFormModel,
-    };
-}
-
-export function initialCatalogProductState(): CatalogProductsState {
-    return {
-        ...initialModuleDataState(),
-        products: [],
-        totalCount: 0,
-    };
-}
-
-export function initialProductCartState(): ProductCartState {
-    return {
-        cart: null,
-        dataState: UIDataState.INITIAL,
-    };
-}
-
-export function initialTestState(): TestState {
     return {
         dataState: UIDataState.INITIAL,
     };

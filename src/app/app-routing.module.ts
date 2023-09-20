@@ -1,25 +1,15 @@
-import { HomeModule } from "@modules/home/home.module";
 import { NgModule } from "@angular/core";
 import { Route, RouterModule, Routes } from "@angular/router";
-import { TestModule } from "@modules/test/test.module";
 
 const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
-        redirectTo: "home",
-    },
-    {
-        path: "home",
-        loadChildren: (): Promise<typeof HomeModule> => import("@modules/home/home.module").then(module => module.HomeModule),
+        redirectTo: "builder",
     },
     {
         path: "builder",
         loadChildren: (): Promise<Route[]> => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
-    },
-    {
-        path: "lessons",
-        loadChildren: (): Promise<typeof TestModule> => import("@modules/test/test.module").then(module => module.TestModule),
     },
 ];
 

@@ -9,18 +9,15 @@ import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { APP_REF } from "@core/app-ref";
+import { AbstractCampaignDataService, CampaignDataService, LZAbstractAuthDataService, LZDefaultAuthDataService } from "@core/data-service";
 import { AbstractNavigationService, NavigationService } from "@core/navigation.service";
-import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "@core/data-service";
 import { LzQuery } from "@core/store/lz.query";
 import { LzService } from "@core/store/lz.service";
 import { LzStore } from "@core/store/lz.store";
 
 import { LZCalendarModule, LZToastrModule } from "./components";
 
-import { AbstractCampaignDataService, CampaignDataService } from "@core/data-service/campaign-data.service";
-import { AbstractCartProductDataService, CartProductDataService } from "@core/data-service/cart-product-data.service";
 import { AbstractFilesDataService, DefaultFilesDataService } from "@core/data-service/files-data.service";
-import { AbstractProductCartService, ProductCartService } from "@components/shared/product-cart/product-cart.service";
 import { HostBinderAsyncPlugin } from "./plugins/host-binder-async.plugin";
 import { SilentEventPlugin } from "./plugins/silent-event.plugin";
 import { StopEventPlugin } from "./plugins/stop-event.plugin";
@@ -43,20 +40,8 @@ import { environment } from "environments/environment";
             useClass: NavigationService,
         },
         {
-            provide: AbstractProductDataService,
-            useClass: ProductDataService,
-        },
-        {
             provide: LZAbstractAuthDataService,
             useClass: LZDefaultAuthDataService,
-        },
-        {
-            provide: AbstractCartProductDataService,
-            useClass: CartProductDataService,
-        },
-        {
-            provide: AbstractProductCartService,
-            useClass: ProductCartService,
         },
         {
             provide: EVENT_MANAGER_PLUGINS,
@@ -84,11 +69,6 @@ import { environment } from "environments/environment";
         LzQuery,
         LzService,
         LzStore,
-        // {
-        //     provide: APP_INITIALIZER,
-        //     multi: true,
-        //     useFactory: initProductCartFactory,
-        // },
     ],
     bootstrap: [AppComponent],
 })
