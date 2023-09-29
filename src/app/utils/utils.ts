@@ -100,3 +100,11 @@ export function getRandomString(count: number): string {
     }
     return result;
 }
+
+export function getRandomId(): string {
+    if ("randomUUID" in crypto) {
+        return crypto.randomUUID();
+    }
+
+    return getRandomString(36);
+}

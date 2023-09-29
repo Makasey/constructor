@@ -1,6 +1,6 @@
 import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
-import { AsyncPipe, JsonPipe } from "@angular/common";
+import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { Observable, map } from "rxjs";
@@ -15,7 +15,7 @@ import { processSettingValueWithUnit } from "@modules/constructor/components/edi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./title.components.html",
     styleUrls: ["./title.component.scss"],
-    imports: [JsonPipe, AsyncPipe],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {

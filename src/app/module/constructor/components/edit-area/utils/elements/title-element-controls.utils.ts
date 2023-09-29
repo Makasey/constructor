@@ -3,6 +3,7 @@ import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area
 import { TitleElementSettingsGroup, TitlePageElement } from "@modules/constructor/components/edit-area/component/title/types";
 import { defaultTitleTagControls } from "@modules/constructor/components/edit-area/component/title/constants";
 import { getDefaultSizeSettings } from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
+import { linkValidator } from "@modules/constructor/components/edit-area/utils/validators/link.validator";
 
 function getTitleTextControl(element: TitlePageElement): APFormControl {
     return {
@@ -56,12 +57,26 @@ function getTitleBackgroundColorControl(element: TitlePageElement): APFormContro
     };
 }
 
+export function getLinkElementControl(element: TitlePageElement): APFormControl {
+    return {
+        id: "link",
+        name: "link",
+        value: element.settings.link ?? "",
+        valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
+        validators: [linkValidator],
+        options: {
+            label: "Ссылка для текста",
+            maxLength: 50,
+        },
+    };
+}
+
 export function getTitleElementSizeControls(element: TitlePageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
 
 export function getTitleElementTextControl(element: TitlePageElement): APFormControl[] {
-    return [getTitleTextControl(element), getTitleHTMLTagControl(element), getTitleColorControl(element)];
+    return [getTitleTextControl(element), getTitleHTMLTagControl(element), getTitleColorControl(element), getLinkElementControl(element)];
 }
 
 export function getTitleElementStyleControl(element: TitlePageElement): APFormControl[] {

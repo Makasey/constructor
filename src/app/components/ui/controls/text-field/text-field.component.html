@@ -20,10 +20,7 @@
                 (input)="_onInput($event)"
             />
         </label>
-        <div
-            class="form-control-errors"
-            *ngIf="nativeControl.dirty && !touched && (nativeControl.errors | keyvalue)?.length"
-        >
+        <div class="form-control-errors" *ngIf="nativeControl.dirty">
             <ng-container *ngFor="let error of nativeControl.errors | keyvalue">
                 <span class="form-control-error">
                     {{ error.key }}

@@ -21,6 +21,7 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
 import { ControlTemplate } from "../modal";
 import { Observable, distinctUntilChanged, skip, tap } from "rxjs";
+import { getRandomId } from "@shared-utils/utils";
 import { isObjectEquals } from "@shared-utils/object.utils";
 
 @UntilDestroy()
@@ -207,7 +208,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
                         ? control.validators.includes(Validators.required)
                         : control.validators === Validators.required
                     : control.required,
-                id: control.id ?? crypto.randomUUID(),
+                id: control.id ?? getRandomId(),
                 gridClass: String.fromCharCode(i++),
             };
         };
