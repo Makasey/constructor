@@ -1,7 +1,6 @@
-import { CampaignType, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { CampaignType, SectionPageElement, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area";
 import { File } from "@shared-types/file/file";
 import { Page } from "@core/store/states/ui-states";
-import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
 import { ViewContainerRef } from "@angular/core";
 
 export type SitePageElementUnion = SectionPageElement | SitePageElement;

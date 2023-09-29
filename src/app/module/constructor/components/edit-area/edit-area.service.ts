@@ -1,12 +1,10 @@
 import { AbstractCampaignService } from "@modules/constructor/core/abstract/campaign.service";
 import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { CampaignModel, SitePageElement } from "@modules/constructor/components/edit-area/types";
+import { CampaignModel, SitePageElement } from "@modules/constructor/components/edit-area";
 import { Inject, Injectable } from "@angular/core";
 import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzStateKey } from "@core/store/lz.state";
+import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, UIDataState } from "@core/store";
 import { Observable, tap } from "rxjs";
-import { UIDataState } from "@core/store/states/ui-states";
 
 @Injectable()
 export abstract class AbstractEditAreaService {
