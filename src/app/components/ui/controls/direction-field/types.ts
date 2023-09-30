@@ -1,11 +1,11 @@
-import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { StyleUnit } from "@modules/constructor";
 
-export type Direction<T = StyleUnit> = {
+export type Direction = {
     top: number;
     bottom: number;
     left: number;
     right: number;
-    unit: T;
+    unit: StyleUnit;
 };
 
 export const defaultDirectionValue: Direction = {

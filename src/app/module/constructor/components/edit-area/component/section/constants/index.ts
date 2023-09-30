@@ -1,6 +1,5 @@
-import { ElementHTMLTag, SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
-import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
-import { defaultDirectionValue } from "@components/ui/controls/direction-field/types";
+import { ElementHTMLTag, SectionPageElement, SitePageElementType, StyleUnit } from "@modules/constructor";
+import { defaultDirectionValue } from "@components";
 
 export const defaultSectionTagControls = [
     { label: ElementHTMLTag.SECTION, value: ElementHTMLTag.SECTION },

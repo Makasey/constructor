@@ -21,3 +21,5 @@ export const lzDefaultSliderConfig: LZSliderConfig = {
 export const lzDefaultItemClass = "slider-item";
 
 export const sliderItemWidthVariableName = "--slider-item-width";
+
+export type SliderItemTemplateData = { item: LZSliderItem };

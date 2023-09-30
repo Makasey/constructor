@@ -1,6 +1,5 @@
-import { CampaignListState, EditorState, FilesState, ModuleState, TableModuleState, TableState, UIDataState } from "@core/store";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
-import { SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { CampaignListState, EditorState, FilesState, ModuleState, TableModuleState, TableState, UIDataState } from "@core";
+import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor";
 
 export function initialTableModuleState(): TableModuleState {
     return {

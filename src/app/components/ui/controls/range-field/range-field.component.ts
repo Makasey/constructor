@@ -1,9 +1,7 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule } from "@components/ui";
+import { APDropdownFieldModule, APFormControl, APNumberFieldModule, defaultRangeStep, defaultRangeValue } from "@components";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-
-import { defaultRangeStep, defaultRangeValue } from "@components/ui/controls/range-field/types";
 
 @Component({
     selector: "lz-range-field",

@@ -1,4 +1,4 @@
-import { LZConstructorComponent } from "@modules/constructor/constructor.component";
+import { LZConstructorComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
 
 export const CONSTRUCTOR_ROUTES: Route[] = [
@@ -13,11 +13,11 @@ export const CONSTRUCTOR_ROUTES: Route[] = [
             },
             {
                 path: "list",
-                loadChildren: () => import("./module/list").then(routes => routes.CAMPAIGN_LIST_ROUTES),
+                loadChildren: () => import("@modules/constructor").then(routes => routes.CAMPAIGN_LIST_ROUTES),
             },
             {
                 path: ":id",
-                loadChildren: () => import("./module/page/page.routes").then(routes => routes.PAGE_ROUTES),
+                loadChildren: () => import("@modules/constructor").then(routes => routes.PAGE_ROUTES),
             },
         ],
     },

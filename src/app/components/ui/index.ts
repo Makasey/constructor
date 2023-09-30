@@ -4,9 +4,6 @@ export * from "./checkbox-group";
 //Category controller component
 export * from "./category-controller";
 
-//RangeWithUnit controller component
-export * from "./range-controller";
-
 //Status component
 export * from "./status";
 
@@ -36,3 +33,7 @@ export * from "./grid";
 
 //Table component
 export * from "./table";
+
+export * from "./accordion";
+
+export * from "./tabs";

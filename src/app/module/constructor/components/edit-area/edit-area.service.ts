@@ -1,9 +1,6 @@
-import { AbstractCampaignService } from "@modules/constructor/core/abstract/campaign.service";
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { CampaignModel, SitePageElement } from "@modules/constructor/components/edit-area";
+import { AbstractCampaignService, CampaignModel, SitePageElement } from "@modules/constructor";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, UIDataState } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, UIDataState } from "@core/store";
 import { Observable, tap } from "rxjs";
 
 @Injectable()

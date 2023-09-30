@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable, catchError, of, tap } from "rxjs";
 
 import { LZAbstractAuthDataService } from "@core/data-service";
-import { LZToastrItemType, LZToastrService, ModalService } from "@components/ui";
+import { LZToastrItemType, LZToastrService, ModalService } from "@components";
 import { ServerError } from "@shared-types/common/common";
 
 @Injectable()

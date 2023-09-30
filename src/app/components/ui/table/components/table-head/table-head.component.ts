@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input } from "@angular/core";
 
-import { AbstractAwesomeTableService, TableExtra, TableMeta, TemplateMap } from "@components/ui";
+import { AbstractAwesomeTableService, TableExtra, TableMeta, TemplateMap } from "@components";
 import { Observable } from "rxjs";
 
 @Component({

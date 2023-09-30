@@ -1,13 +1,9 @@
-import { APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
-import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { APFormDefaultTemplateKeys, APFormModel } from "@components";
+import { AbstractEditorOperationService, PageSettings } from "@modules/constructor";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
-import { PageSettings } from "@modules/constructor/components/edit-area/types";
 import { getRandomId } from "@shared-utils/utils";
 import { isObjectEquals } from "@shared-utils/object.utils";
 import { logAction } from "@datorama/akita";

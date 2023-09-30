@@ -1,9 +1,8 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule } from "@components/ui";
+import { APDropdownFieldModule, APFormControl, APNumberFieldModule, RangeWithUnit, defaultRangeWithUnitValue } from "@components";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { RangeWithUnit, defaultRangeWithUnitValue } from "@components/ui/controls/range-with-unit-field/types";
-import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { StyleUnit } from "@modules/constructor";
 
 @Component({
     selector: "lz-range-with-unit-field",

@@ -1,3 +1,32 @@
+export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag } from "./enums";
+export {
+    SectionPageElement,
+    TitlePageElementSettings,
+    TitleElementSettingsGroup,
+    SectionElementSettingsGroup,
+    TitleComponent,
+    SectionPageElementSettings,
+    RootComponent,
+    defaultSectionElementSettings,
+    defaultSectionOpacityStep,
+    TitlePageElement,
+    SectionComponent,
+    defaultTitleTagControls,
+    defaultSectionTagControls,
+} from "./component";
+
+export {
+    sitePageElementMap,
+    ELEMENT_ID,
+    defaultPageElementSettingsMap,
+    DEFAULT_UPSERT_CONFIG,
+    ROOT_ELEMENT_ID,
+    styleUnitMap,
+    PARENT_ID,
+    defaultTextControlElement,
+    defaultSizeControlUnit,
+} from "./constants";
+
 export {
     SitePageElement,
     SitePageElementBackground,
@@ -16,8 +45,6 @@ export { AbstractEditAreaService, DefaultEditAreaService } from "./edit-area.ser
 
 export {
     getDefaultSizeSettings,
-    defaultTextControlElement,
-    defaultSizeControlUnit,
     getSectionSettings,
     linkPattern,
     linkValidator,
@@ -27,33 +54,5 @@ export {
     processElementSettings,
     getTitleSettings,
 } from "./utils";
-
-export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag } from "./enums";
-
-export {
-    sitePageElementMap,
-    ELEMENT_ID,
-    defaultPageElementSettingsMap,
-    DEFAULT_UPSERT_CONFIG,
-    ROOT_ELEMENT_ID,
-    styleUnitMap,
-    PARENT_ID,
-} from "./constants";
-
-export {
-    SectionPageElement,
-    TitlePageElementSettings,
-    TitleElementSettingsGroup,
-    SectionElementSettingsGroup,
-    TitleComponent,
-    SectionPageElementSettings,
-    RootComponent,
-    defaultSectionElementSettings,
-    defaultSectionOpacityStep,
-    TitlePageElement,
-    SectionComponent,
-    defaultTitleTagControls,
-    defaultSectionTagControls,
-} from "./component";
 
 export { EditAreaComponent } from "./edit-area.component";

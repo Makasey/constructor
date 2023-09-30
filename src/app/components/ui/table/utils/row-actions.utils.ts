@@ -1,4 +1,4 @@
-import { TableExtra, TableRow, TableValueExtraInternal, TableValueExtraInternalParams } from "@components/ui";
+import { TableExtra, TableRow, TableValueExtraInternal, TableValueExtraInternalParams } from "@components";
 
 export function openRowById(id: string, valuesExtra: TableValueExtraInternal): TableValueExtraInternal {
     return {

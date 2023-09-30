@@ -1,9 +1,12 @@
-import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
-import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area/constants";
-import { TitleElementSettingsGroup, TitlePageElement } from "@modules/constructor/components/edit-area/component/title/types";
-import { defaultTitleTagControls } from "@modules/constructor/components/edit-area/component/title/constants";
-import { getDefaultSizeSettings } from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
-import { linkValidator } from "@modules/constructor/components/edit-area/utils/validators/link.validator";
+import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
+import {
+    DEFAULT_UPSERT_CONFIG,
+    TitleElementSettingsGroup,
+    TitlePageElement,
+    defaultTitleTagControls,
+    getDefaultSizeSettings,
+    linkValidator,
+} from "@modules/constructor";
 
 function getTitleTextControl(element: TitlePageElement): APFormControl {
     return {

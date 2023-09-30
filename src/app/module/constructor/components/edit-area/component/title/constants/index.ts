@@ -1,4 +1,4 @@
-import { ElementHTMLTag } from "@modules/constructor/components/edit-area/enums";
+import { ElementHTMLTag } from "@modules/constructor";
 
 export const defaultTitleTagControls = [
     { label: ElementHTMLTag.H1, value: ElementHTMLTag.H1 },

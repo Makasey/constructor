@@ -1,10 +1,10 @@
-import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
+import { NgForOf } from "@angular/common";
+import { toSignal } from "@angular/core/rxjs-interop";
+
+import { AbstractEditorElementActionsService, SectionPageElement } from "@modules/constructor";
 import { DeleteSelectedElementDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
-import { NgForOf } from "@angular/common";
-import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
-import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-root-element",

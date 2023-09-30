@@ -1,8 +1,13 @@
-import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
-import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
+import {
+    AbstractEditorElementActionsService,
+    AbstractEditorElementSettingsService,
+    ELEMENT_ID,
+    TitlePageElement,
+    TitlePageElementSettings,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { ELEMENT_ID, TitlePageElement, TitlePageElementSettings, processSettingValueWithUnit } from "@modules/constructor/components/edit-area";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 

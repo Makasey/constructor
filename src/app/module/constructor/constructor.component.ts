@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
-import { EDITOR_PROVIDERS } from "@modules/constructor/providers/providers";
-import { LZToastrModule } from "@components/ui";
+import { LZToastrModule } from "@components";
 import { RouterOutlet } from "@angular/router";
+
+import { EDITOR_PROVIDERS } from "@modules/constructor";
 
 @Component({
     selector: "lz-constructor",

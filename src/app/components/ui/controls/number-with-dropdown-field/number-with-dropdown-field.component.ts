@@ -1,4 +1,4 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule, NumberWithDropdownEvent } from "@components/ui";
+import { APDropdownFieldModule, APFormControl, APNumberFieldModule, NumberWithDropdownEvent } from "@components";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";

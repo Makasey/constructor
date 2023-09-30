@@ -1,11 +1,15 @@
-import { APFormModel } from "@components/ui";
-import { Direction } from "@components/ui/controls/direction-field/types";
-import { ElementSettingsWithUnit, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
-import { SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
-import { SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
-import { TitlePageElement } from "@modules/constructor/components/edit-area/component/title/types";
-import { getSectionSettings, getTitleSettings } from "./elements";
-import { styleUnitMap } from "@modules/constructor/components/edit-area/constants";
+import { APFormModel, Direction } from "@components";
+import {
+    ElementSettingsWithUnit,
+    SectionPageElement,
+    SitePageElementType,
+    SitePageElementUnion,
+    StyleUnit,
+    TitlePageElement,
+    getSectionSettings,
+    getTitleSettings,
+    styleUnitMap,
+} from "@modules/constructor";
 
 export function processElementSettings<T extends SitePageElementUnion>(type: SitePageElementType, element: T): APFormModel {
     switch (type) {

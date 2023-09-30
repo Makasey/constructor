@@ -1,15 +1,19 @@
-import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
-import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
+import {
+    AbstractEditorElementActionsService,
+    AbstractEditorElementSettingsService,
+    EDITOR_SELECTED_ELEMENT,
+    ELEMENT_ID,
+    SectionPageElement,
+    SectionPageElementSettings,
+    SitePageElementType,
+    processDirectionValue,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
 import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
-import { ELEMENT_ID } from "../../constants";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
 import { Observable, map } from "rxjs";
-import { SectionPageElement, SectionPageElementSettings } from "@modules/constructor/components/edit-area/component/section/types";
-import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
-import { processDirectionValue, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Component({
     selector: "lz-section-element",

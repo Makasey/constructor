@@ -1,11 +1,5 @@
-import { Direction } from "@components/ui/controls/direction-field/types";
-import { RangeWithUnit } from "@components/ui/controls/range-with-unit-field/types";
-import {
-    SitePageElement,
-    SitePageElementBackground,
-    SitePageElementSizeSettings,
-    SitePageElementTextColor,
-} from "@modules/constructor/components/edit-area/types";
+import { Direction, RangeWithUnit } from "@components";
+import { SitePageElement, SitePageElementBackground, SitePageElementSizeSettings, SitePageElementTextColor } from "@modules/constructor";
 
 export type SectionPageElement = SitePageElement<SectionPageElementSettings>;
 

@@ -4,7 +4,7 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 import { LZInitVarDirective } from "@shared-directives/init-var/init-var.directive";
 
 import { LZToastrBoxComponent, LZToastrItemComponent, LZToastrListComponent } from "./components";
-import { LZToastrComponent } from "@components/ui";
+import { LZToastrComponent } from "@components";
 import { LZToastrService, LZToastrStore, LzToastrQuery } from "./store";
 
 @NgModule({

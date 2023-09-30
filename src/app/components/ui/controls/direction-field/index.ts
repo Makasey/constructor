@@ -1,2 +1,2 @@
 export { DirectionFieldComponent } from "./direction-field.component";
-export { Direction } from "./types";
+export { Direction, defaultDirectionValue } from "./types";

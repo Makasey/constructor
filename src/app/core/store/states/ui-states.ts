@@ -1,16 +1,10 @@
-import { CampaignModel, PageSettings, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
-import { File } from "@shared-types/index";
-import { TableExtra, TableMeta, TableRow, TableValueExtraInternal } from "@components/ui";
+import { File } from "@shared-types";
 
-export enum UIDataState {
-    INITIAL = "initial",
-    SAVING = "saving",
-    LOADING = "loading",
-    INVOKE_RELOAD = "invokeReload",
-    EXTRA_LOADING = "extraLoading",
-    LOADED = "loaded",
-    ERROR = "error",
-}
+import { TableExtra, TableMeta, TableRow, TableValueExtraInternal } from "@components";
+
+import { UIDataState } from "@core";
+
+import { CampaignModel, PageSettings, SitePageElementUnion } from "@modules/constructor";
 
 export type UIDataStateful = Readonly<{
     dataState: UIDataState;

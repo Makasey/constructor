@@ -1,4 +1,4 @@
-import { APFormControl, APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "@components/ui";
+import { APFormControl, APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "@components";
 import {
     ChangeDetectionStrategy,
     Component,

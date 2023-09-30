@@ -3,12 +3,12 @@ import {
     EditorState,
     FilesState,
     InitialStateFunctions,
+    TableState,
     initialCampaignListState,
     initialEditorState,
     initialFilesState,
-} from "@core/store";
-import { TableState } from "@core/store/states/ui-states";
-import { initialTableState } from "@core/store/initial-states/initial-states.type";
+    initialTableState,
+} from "@core";
 
 export enum LzStateKey {
     TABLE_STATE = "tableState",

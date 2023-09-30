@@ -1,16 +1,5 @@
-import { APFormControl, APFormDefaultTemplateKeys } from "@components/ui";
-import { SitePageElement } from "../../edit-area/types";
-import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
-
-export const defaultSizeControlUnit = [
-    { label: "%", value: StyleUnit.PERCENT },
-    { label: StyleUnit.PX, value: StyleUnit.PX },
-];
-
-export const defaultTextControlElement = [
-    { label: StyleUnit.PX, value: StyleUnit.PX },
-    { label: StyleUnit.EM, value: StyleUnit.EM },
-];
+import { APFormControl, APFormDefaultTemplateKeys } from "@components";
+import { SitePageElement, defaultSizeControlUnit } from "@modules/constructor";
 
 function getDefaultHeightControl(element: SitePageElement): APFormControl {
     return {

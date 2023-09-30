@@ -1,4 +1,4 @@
-import { AbstractEditorSelectionService } from "@modules/constructor/core/abstract/editor-selection.service";
+import { AbstractEditorSelectionService } from "@modules/constructor";
 import { Directive, HostBinding, HostListener, inject } from "@angular/core";
 
 @Directive({

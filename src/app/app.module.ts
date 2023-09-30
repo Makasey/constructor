@@ -8,17 +8,23 @@ import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
-import { APP_REF } from "@core/app-ref";
-import { AbstractCampaignDataService, CampaignDataService, LZAbstractAuthDataService, LZDefaultAuthDataService } from "@core/data-service";
-import { AbstractNavigationService, NavigationService } from "@core/navigation.service";
-import { LzQuery } from "@core/store/lz.query";
-import { LzService } from "@core/store/lz.service";
-import { LzStore } from "@core/store/lz.store";
+import {
+    APP_REF,
+    AbstractCampaignDataService,
+    AbstractFilesDataService,
+    AbstractNavigationService,
+    CampaignDataService,
+    DefaultFilesDataService,
+    LZAbstractAuthDataService,
+    LZDefaultAuthDataService,
+    LzQuery,
+    LzService,
+    LzStore,
+    NavigationService,
+} from "@core";
 
-import { LZCalendarModule, LZToastrModule } from "./components";
-
-import { AbstractFilesDataService, DefaultFilesDataService } from "@core/data-service/files-data.service";
 import { HostBinderAsyncPlugin } from "./plugins/host-binder-async.plugin";
+import { LZCalendarModule, LZToastrModule } from "@components";
 import { SilentEventPlugin } from "./plugins/silent-event.plugin";
 import { StopEventPlugin } from "./plugins/stop-event.plugin";
 import { environment } from "environments/environment";

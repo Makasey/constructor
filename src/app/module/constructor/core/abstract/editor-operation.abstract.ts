@@ -1,7 +1,5 @@
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzState, LzStateKey } from "@core/store/lz.state";
-import { SitePageElement, SitePageElementSettings } from "@modules/constructor/components/edit-area/types";
+import { AbstractLzStoreService, LzAbstractQuery, LzState, LzStateKey } from "@core";
+import { SitePageElement, SitePageElementSettings } from "@modules/constructor";
 
 export abstract class AbstractEditorOperationService {
     protected constructor(

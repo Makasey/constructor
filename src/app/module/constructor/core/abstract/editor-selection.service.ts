@@ -1,10 +1,7 @@
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
+import { ROOT_ELEMENT_ID } from "@modules/constructor";
 import { logAction } from "@datorama/akita";
 
 @Injectable()

@@ -1,9 +1,0 @@
-<section class="elements-settings" *ngIf="elements().length">
-    <h2 class="settings-title">Элементы сайта</h2>
-    <article class="elements-wrapper">
-        <button class="element" *ngFor="let element of elements()" (click)="createNewElement(element.type)">
-            <i class="bx" [ngClass]="element.icon"></i>
-            {{ element.title }}
-        </button>
-    </article>
-</section>

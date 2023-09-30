@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { Query } from "@datorama/akita";
 
-import { LzState, LzStore } from "@core/store";
+import { LzState, LzStore } from "@core";
 import { Observable } from "rxjs";
 
 @Injectable()

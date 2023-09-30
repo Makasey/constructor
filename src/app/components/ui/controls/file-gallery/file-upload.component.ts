@@ -1,4 +1,4 @@
-import { APFormControl, ModalService, ModalType } from "@components/ui";
+import { APFormControl, ModalService, ModalType } from "@components";
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -15,7 +15,7 @@ import {
 } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { File } from "@shared-types/file/file";
-import { FileGalleryComponent } from "./file-gallery/file-gallery.component";
+import { FileGalleryComponent } from "@components/ui";
 import { NgTemplateOutlet } from "@angular/common";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { filter, tap } from "rxjs";

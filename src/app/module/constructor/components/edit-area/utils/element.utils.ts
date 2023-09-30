@@ -1,4 +1,4 @@
-import { SitePageElement } from "@modules/constructor/components/edit-area/types";
+import { SitePageElement } from "@modules/constructor";
 
 export function deleteElementFromTree(items: Record<string, SitePageElement>, element: number): Record<string, SitePageElement> {
     const { id, children } = items[element];

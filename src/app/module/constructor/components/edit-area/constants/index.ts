@@ -1,11 +1,14 @@
 import { InjectionToken, Type } from "@angular/core";
-import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
-import { SectionComponent } from "@modules/constructor/components/edit-area/component/section/section.component";
-import { SitePageElementType, StyleUnit } from "@modules/constructor/components/edit-area/enums";
-import { SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
-import { TitleComponent } from "@modules/constructor/components/edit-area/component/title/title.component";
+import {
+    RootComponent,
+    SectionComponent,
+    SitePageElementType,
+    SitePageElementUnion,
+    StyleUnit,
+    TitleComponent,
+    defaultSectionElementSettings,
+} from "@modules/constructor";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
-import { defaultSectionElementSettings } from "@modules/constructor/components/edit-area/component/section/constants";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 500,
@@ -69,3 +72,13 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
         },
     },
 };
+
+export const defaultSizeControlUnit = [
+    { label: "%", value: StyleUnit.PERCENT },
+    { label: StyleUnit.PX, value: StyleUnit.PX },
+];
+
+export const defaultTextControlElement = [
+    { label: StyleUnit.PX, value: StyleUnit.PX },
+    { label: StyleUnit.EM, value: StyleUnit.EM },
+];

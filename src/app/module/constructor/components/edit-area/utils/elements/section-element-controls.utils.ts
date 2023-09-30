@@ -1,12 +1,14 @@
-import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
-import { DEFAULT_UPSERT_CONFIG } from "@modules/constructor/components/edit-area/constants";
-import { SectionElementSettingsGroup, SectionPageElement } from "@modules/constructor/components/edit-area/component/section/types";
-import { defaultSectionOpacityStep, defaultSectionTagControls } from "@modules/constructor/components/edit-area/component/section/constants";
+import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
 import {
+    DEFAULT_UPSERT_CONFIG,
+    SectionElementSettingsGroup,
+    SectionPageElement,
+    defaultSectionOpacityStep,
+    defaultSectionTagControls,
     defaultSizeControlUnit,
     defaultTextControlElement,
     getDefaultSizeSettings,
-} from "@modules/constructor/components/edit-area/utils/element-size-settings.utils";
+} from "@modules/constructor";
 
 function getSectionTextControl(element: SectionPageElement): APFormControl {
     return {

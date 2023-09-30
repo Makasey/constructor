@@ -12,7 +12,7 @@ import {
     TableValueExtraInternal,
     TemplateMap,
     checkScrollPosition,
-} from "@components/ui";
+} from "@components";
 import { shouldCall } from "app/decorators/should-call";
 
 @Component({
