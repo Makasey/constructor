@@ -6,7 +6,7 @@
     "start": "ng serve --open --port 4220",
     "build": "ng build --aot --configuration production --build-optimizer --common-chunk --optimization",
     "watch": "ng build --watch --configuration development",
-    "test": "jest --verbose",
+    "test": "jest --verbose --maxConcurrency=1024",
     "test:watch": "jest --watch",
     "eslint:fix": "eslint . --ext .ts,.js --fix --quiet",
     "eslint-all": "eslint . --ext .ts,.js --quiet",
