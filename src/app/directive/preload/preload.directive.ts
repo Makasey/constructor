@@ -4,6 +4,7 @@ import { PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_COMPONENTS_CONFIG, PreloadBack
 
 @Directive({
     selector: "[preloadBackground]",
+    standalone: true,
 })
 export class PreloadDirective implements OnChanges {
     @Input("preloadBackground")
@@ -27,6 +28,7 @@ export class PreloadDirective implements OnChanges {
         this.viewContainerRef.clear();
         if (this.loading) {
             const component = this.preloadBackgroundComponentsMap[this.preloadBackgroundType as PreloadBackgroundComponentKey];
+
             if (component) {
                 const newInjector = Injector.create({
                     providers: [

@@ -14,8 +14,8 @@ import {
     inject,
 } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { File } from "@shared-types/file/file";
-import { FileGalleryComponent } from "@components/ui";
+import { File } from "@shared-types";
+import { FileGalleryComponent } from "@components";
 import { NgTemplateOutlet } from "@angular/common";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { filter, tap } from "rxjs";

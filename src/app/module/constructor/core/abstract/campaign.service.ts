@@ -11,8 +11,7 @@ import { AbstractEditorOperationService, CampaignModel, CreateCampaignModel } fr
 import { Inject, Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
-import { PaginationListItems } from "@shared-types/response/response-view.type";
-import { RouteKey } from "@shared-types/routes/route-paths";
+import { PaginationListItems, RouteKey } from "@shared-types";
 import { Router } from "@angular/router";
 
 @Injectable()

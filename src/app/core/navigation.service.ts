@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import { RouteKey, RouteParams, RoutePaths } from "@shared-types/routes/route-paths";
-import { SimpleMap } from "@shared-types/common/common";
+import { RouteKey, RouteParams, RoutePaths, SimpleMap } from "@shared-types";
 
 @Injectable()
 export abstract class AbstractNavigationService {

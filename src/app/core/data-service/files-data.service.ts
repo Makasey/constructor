@@ -1,8 +1,8 @@
-import { File, PaginationListItems } from "@shared-types/index";
+import { File, PaginationListItems } from "@shared-types";
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, delay, map } from "rxjs";
-import { mapPaginationResponseToListModel } from "@shared-utils/utils";
+import { mapPaginationResponseToListModel } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractFilesDataService {

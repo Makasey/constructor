@@ -23,10 +23,8 @@ import {
     NavigationService,
 } from "@core";
 
-import { HostBinderAsyncPlugin } from "./plugins/host-binder-async.plugin";
+import { HostBinderAsyncPlugin, SilentEventPlugin, StopEventPlugin } from "./plugins";
 import { LZCalendarModule, LZToastrModule } from "@components";
-import { SilentEventPlugin } from "./plugins/silent-event.plugin";
-import { StopEventPlugin } from "./plugins/stop-event.plugin";
 import { environment } from "environments/environment";
 
 @NgModule({

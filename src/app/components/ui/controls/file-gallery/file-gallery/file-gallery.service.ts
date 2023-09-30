@@ -1,9 +1,8 @@
 import { AbstractDefaultModuleService, AbstractFilesDataService, AbstractModuleService, LzQuery, LzService, LzStateKey, UIDataState } from "@core";
-import { File } from "@shared-types/file/file";
+import { File, ResponseError } from "@shared-types";
 import { Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components";
 import { Observable, catchError, tap, throwError } from "rxjs";
-import { ResponseError } from "@shared-types/response/response-view.type";
 
 @Injectable()
 export abstract class AbstractFileGalleryService extends AbstractModuleService {

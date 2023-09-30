@@ -1,5 +1,5 @@
 import { CampaignType, SectionPageElement, SitePageElementType, StyleUnit } from "@modules/constructor";
-import { File } from "@shared-types/file/file";
+import { File } from "@shared-types";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
 

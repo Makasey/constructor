@@ -3,12 +3,19 @@ const { pathsToModuleNameMapper } = require("ts-jest");
 
 const aliases = {
     "@shared-types/*": ["<rootDir>/src/app/types/*"],
+    "@shared-types": ["<rootDir>/src/app/types/index.ts"],
     "@core/*": ["<rootDir>/src/app/core/*"],
+    "@core": ["<rootDir>/src/app/core/index.ts"],
     "@components/*": ["<rootDir>/src/app/components/*"],
+    "@components": ["<rootDir>/src/app/components/index.ts"],
     "@modules/*": ["<rootDir>/src/app/module/*"],
+    "@modules": ["<rootDir>/src/app/module/index.ts"],
     "@shared-pipes/*": ["<rootDir>/src/app/pipes/*"],
+    "@shared-pipes": ["<rootDir>/src/app/pipes/index.ts"],
     "@shared-utils/*": ["<rootDir>/src/app/utils/*"],
+    "@shared-utils": ["<rootDir>/src/app/utils/index.ts"],
     "@shared-directives/*": ["<rootDir>/src/app/directive/*"],
+    "@shared-directives": ["<rootDir>/src/app/directive/index.ts"],
 };
 
 module.exports = {

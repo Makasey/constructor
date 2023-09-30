@@ -1,6 +1,5 @@
 import { InjectionToken, Type } from "@angular/core";
-
-import { LzPreloadFiltersComponent, LzPreloadProductComponent, LzPreloadTableComponent } from "@components/ui/preload-background";
+import { LzPreloadFiltersComponent, LzPreloadProductComponent, LzPreloadTableComponent } from "@shared-directives";
 
 export enum PreloadBackgroundComponentKey {
     TABLE = "table",
@@ -24,7 +23,13 @@ export type PreloadCustomModuleConfig = {
     config?: PreloadBackgroundComponents;
 };
 
-export const PRELOAD_BACKGROUND_CONFIG_TOKEN = new InjectionToken<string>("preloadBackgroundConfigToken");
+export const PRELOAD_BACKGROUND_CONFIG_TOKEN = new InjectionToken<Record<string, Type<unknown>>>("preloadBackgroundConfigToken", {
+    factory() {
+        return {
+            ...preloadBackgroundComponentsMap,
+        };
+    },
+});
 
 export const CUSTOM_PRELOAD_BACKGROUND_CONFIG_TOKEN = new InjectionToken<string>("customPreloadBackgroundConfigToken");
 

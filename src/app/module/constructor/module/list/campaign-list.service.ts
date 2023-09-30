@@ -3,7 +3,7 @@ import { CampaignModel } from "@modules/constructor";
 import { Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService, TableMeta } from "@components";
 import { Observable, tap } from "rxjs";
-import { PaginationListItems } from "@shared-types/response/response-view.type";
+import { PaginationListItems } from "@shared-types";
 import { arrayRemove } from "@datorama/akita";
 
 @Injectable()

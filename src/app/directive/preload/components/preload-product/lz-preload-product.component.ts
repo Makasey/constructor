@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, ViewEncapsulation } from "@angular/core";
-import { PRELOAD_COMPONENTS_CONFIG } from "@shared-directives/preload";
+
+import { NgForOf } from "@angular/common";
+import { NumberToArrayPipe } from "@shared-pipes";
+import { PRELOAD_COMPONENTS_CONFIG } from "@shared-directives";
 
 @Component({
     selector: "lz-preload-product",
@@ -7,6 +10,8 @@ import { PRELOAD_COMPONENTS_CONFIG } from "@shared-directives/preload";
     styleUrls: ["./lz-preload-product.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [NgForOf, NumberToArrayPipe],
 })
 export class LzPreloadProductComponent {
     constructor(@Inject(PRELOAD_COMPONENTS_CONFIG) public config: Record<string, number>) {}
