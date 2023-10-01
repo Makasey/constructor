@@ -1,15 +1,3 @@
-//Checkbox group component
-export * from "./checkbox-group";
-
-//Category controller component
-export * from "./category-controller";
-
-//Status component
-export * from "./status";
-
-//Color picker component
-export * from "./color-picker";
-
 //Controls components
 export * from "./controls";
 

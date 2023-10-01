@@ -7,8 +7,6 @@ import {
     APFormComponent,
     APNumberFieldModule,
     APTextFieldModule,
-    CategoryControllerModule,
-    CheckboxGroupModule,
     DirectionFieldComponent,
     ESFileUploadComponent,
     LZColorPickerComponent,
@@ -24,8 +22,6 @@ const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModul
     declarations: [APFormComponent],
     imports: [
         ...AP_MODULES,
-        CategoryControllerModule,
-        CheckboxGroupModule,
         CommonModule,
         DirectionFieldComponent,
         ESFileUploadComponent,

@@ -160,11 +160,6 @@
         {{ formModel.headerText }}
     </div>
 </ng-template>
-
-<ng-template #categoryControllerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-category-controller [formControl]="nativeControl"> </lz-category-controller>
-</ng-template>
-
 <ng-template #rangeFieldWithUnitTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
     <lz-range-with-unit-field
         [formControl]="nativeControl"
@@ -190,13 +185,4 @@
         [step]="controlModel.options?.step"
     >
     </lz-range-field>
-</ng-template>
-
-<ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-checkbox-group
-        [label]="controlModel.options.label"
-        [columnDirection]="controlModel.options.columnDirection"
-        [formControl]="nativeControl"
-    >
-    </lz-checkbox-group>
 </ng-template>
