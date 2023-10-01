@@ -4,11 +4,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { Observable, catchError, debounceTime, filter, map, of, switchMap, tap, throwError } from "rxjs";
 
-import { LzQuery } from "../store/lz.query";
-import { LzService } from "../store/lz.service";
-import { LzState } from "../store/lz.state";
-import { ModuleState, UIDataState } from "../store/states/ui-states";
-import { StateCallbackOrPart } from "../store/types";
+import { LzQuery, LzService, LzState, ModuleState, StateCallbackOrPart, UIDataState } from "@core";
 
 type Rec = Record<string, unknown>;
 

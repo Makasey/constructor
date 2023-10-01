@@ -1,7 +1,6 @@
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
-import { RootComponent } from "@modules/constructor/components/edit-area/component/root/root.component";
+import { EDITOR_SELECTED_ELEMENT, RootComponent } from "@modules/constructor";
 
 @Component({
     selector: "lz-edit-area",

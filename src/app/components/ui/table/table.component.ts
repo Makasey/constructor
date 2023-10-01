@@ -14,7 +14,8 @@ import {
     TemplateMap,
     checkScrollPosition,
     convertPlainRowsToValueExtraParams,
-} from "@components/ui";
+    defaultTableExtra,
+} from "@components";
 import { BehaviorSubject, Observable, debounceTime, filter, skip, tap } from "rxjs";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import {
@@ -30,8 +31,7 @@ import {
     TemplateRef,
     ViewEncapsulation,
 } from "@angular/core";
-import { defaultTableExtra } from "@components/ui/table/constants";
-import { shouldCall } from "../../../decorators/should-call";
+import { shouldCall } from "app/decorators/should-call";
 
 @Component({
     selector: "lz-table",

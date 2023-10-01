@@ -29,12 +29,19 @@
         "useDefineForClassFields": false,
         "paths": {
             "@core/*": ["app/core/*"],
+            "@core": ["app/core/index.ts"],
             "@components/*": ["app/components/*"],
+            "@components": ["app/components/index.ts"],
             "@modules/*": ["app/module/*"],
+            "@modules": ["app/module/index.ts"],
             "@shared-pipes/*": ["app/pipes/*"],
+            "@shared-pipes": ["app/pipes/index.ts"],
             "@shared-types/*": ["app/types/*"],
+            "@shared-types": ["app/types/index.ts"],
             "@shared-utils/*": ["app/utils/*"],
-            "@shared-directives/*": ["app/directive/*"]
+            "@shared-utils": ["app/utils/index.ts"],
+            "@shared-directives/*": ["app/directive/*"],
+            "@shared-directives": ["app/directive/index.ts"]
         }
     },
     "angularCompilerOptions": {

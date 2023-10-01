@@ -9,7 +9,7 @@ import {
     LzState,
     LzStoreService,
     lzInitialStateFunctions,
-} from "@core/store";
+} from "@core";
 
 export function createStoreProviders<T extends keyof LzState>(stateKey: T): Provider[] {
     const store = new Store<LzState[T]>(lzInitialStateFunctions[stateKey](), {

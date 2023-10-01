@@ -5,7 +5,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { guid } from "@datorama/akita";
 
-import { LZToastrItemType, LZToastrService, ModalWithData } from "@components/ui";
+import { LZToastrItemType, LZToastrService, ModalWithData } from "@components";
 
 import { LZAbstractLoginService } from "./login.service";
 import { LoginFormControl } from "./types";

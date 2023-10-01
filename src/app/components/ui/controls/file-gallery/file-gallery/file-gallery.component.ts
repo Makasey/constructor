@@ -1,10 +1,8 @@
-import { AbstractFileGalleryService } from "./file-gallery.service";
-import { AbstractModuleComponent } from "@core/abstract/abstract.service";
+import { AbstractFileGalleryService, FILE_UPLOAD_PROVIDERS, MODAL_DATA_TOKEN, MODAL_ID_TOKEN, ModalService, ModalWithData } from "@components";
+import { AbstractModuleComponent } from "@core";
 import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, ViewChild, ViewEncapsulation, inject } from "@angular/core";
-import { FILE_UPLOAD_PROVIDERS } from "@components/ui/controls/file-gallery/types";
-import { File } from "@shared-types/index";
-import { MODAL_DATA_TOKEN, MODAL_ID_TOKEN, ModalService, ModalWithData } from "@components/ui";
+import { File } from "@shared-types";
 import { tap } from "rxjs";
 import { untilDestroyed } from "@ngneat/until-destroy";
 

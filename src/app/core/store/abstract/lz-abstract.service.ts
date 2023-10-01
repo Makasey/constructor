@@ -1,6 +1,6 @@
 import { UpdateStateCallback } from "@datorama/akita";
 
-import { LzAbstractStore, LzState, UIDataState, isUIDateStateful, lzInitialStateFunctions } from "@core/store";
+import { LzAbstractStore, LzState, UIDataState, isUIDateStateful, lzInitialStateFunctions } from "@core";
 
 export abstract class AbstractLzStoreService<T extends keyof LzState> {
     public abstract updateState(updateStateCallback: UpdateStateCallback<LzState[T], Partial<LzState[T]>>): void;

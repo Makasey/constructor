@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, Hos
 import { CommonModule } from "@angular/common";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
-import { LZAccordionItemDirective } from "@components/ui/accordion/directives/accordion-item.directive";
+import { LZAccordionItemDirective } from "@components";
 import { Observable } from "rxjs";
 
 @Component({

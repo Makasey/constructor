@@ -1,21 +1,24 @@
-import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
-import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
-import { AsyncPipe, JsonPipe } from "@angular/common";
+import {
+    AbstractEditorElementActionsService,
+    AbstractEditorElementSettingsService,
+    ELEMENT_ID,
+    TitlePageElement,
+    TitlePageElementSettings,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
+import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
-import { TitlePageElement, TitlePageElementSettings } from "@modules/constructor/components/edit-area/component/title/types";
-import { processSettingValueWithUnit } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Component({
     selector: "lz-title-element",
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     encapsulation: ViewEncapsulation.None,
-    templateUrl: "./title.components.html",
+    templateUrl: "./title.component.html",
     styleUrls: ["./title.component.scss"],
-    imports: [JsonPipe, AsyncPipe],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {

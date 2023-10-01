@@ -293,101 +293,12 @@ router-outlet + * {
 
 .editor-element {
     --selected-element-color: yellow;
-    --root-selected-color: lightblue;
+    --root-selected-color: yellowgreen;
 }
 
 .editor-element._selected {
-    --selected-element-color: green;
+    --selected-element-color: lightblue;
     --root-selected-color: green;
-}
-
-lz-table {
-    overflow-x: auto;
-
-    &.extended {
-        .lz-table-item {
-            padding: 20px 10px;
-        }
-    }
-}
-
-.lz-table {
-    overflow-x: auto;
-    --table-max-width: 100%;
-    --table-hover-bg: #1d1b31;
-    --table-bg-color: #fff;
-    --table-color: #1d1b31;
-
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 25px;
-    max-width: var(--table-max-width);
-
-    &-head,
-    &-body {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-
-    &-head-item {
-        font-weight: 600;
-    }
-
-    &-row {
-        display: grid;
-        grid-template-columns: repeat(var(--columns-count, 1), 1fr);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        width: 100%;
-        color: var(--table-color);
-        background-color: var(--table-bg-color);
-    }
-
-    &-item {
-        padding: 10px;
-        font-family: "Ubuntu", sans-serif;
-        text-align: center;
-        word-break: break-all;
-
-        border: 1px solid var(--table-color);
-        border-bottom: none;
-
-        &:first-child {
-            text-align: left;
-            border: 1px solid var(--table-color);
-            border-bottom: none;
-            border-right: none;
-        }
-
-        &:last-child {
-            border: 1px solid var(--table-color);
-            border-bottom: none;
-            border-left: none;
-            text-align: end;
-        }
-    }
-
-    &-body {
-        lz-table-row:last-child {
-            .lz-table-row:last-child {
-                .lz-table-item {
-                    border-bottom: 1px solid black;
-                }
-            }
-        }
-    }
-
-    .status {
-        &.uncompleted {
-            padding: 5px 8px;
-            background: crimson;
-            color: white;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-    }
 }
 
 lz-table {

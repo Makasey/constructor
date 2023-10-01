@@ -2,9 +2,8 @@ import { HttpResponse } from "@angular/common/http";
 
 import { isNil } from "@datorama/akita";
 
-import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "./patterns";
-import { PaginationListItems, SearchConditions, TOTAL_COUNT_HEADER } from "../types";
-import { Valuable } from "@shared-types/common/common";
+import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "@shared-utils/patterns";
+import { PaginationListItems, SearchConditions, TOTAL_COUNT_HEADER, Valuable } from "@shared-types";
 
 export const conditionsMap: Record<SearchConditions, RegExp> = {
     [SearchConditions.EQUAL]: EQUALS_PATTERN,
@@ -52,7 +51,7 @@ export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): V
     return Object.fromEntries(Object.entries(obj).filter(([, v]) => !isNil(v))) as Valuable<T>;
 }
 
-export function normalizeToIntNumber(value: number, min: number, max: number): number {
+export function normalizeNumberValue(value: number, min: number, max: number): number {
     if (value > max) {
         return max;
     }
@@ -61,7 +60,31 @@ export function normalizeToIntNumber(value: number, min: number, max: number): n
         return min;
     }
 
-    return Math.round(value);
+    return value;
+}
+
+export function normalizeToIntNumber(value: number, min: number, max: number): number {
+    return Math.round(normalizeNumberValue(value, min, max));
+}
+
+export function roundNumberWithFraction(value: number, fraction = 1): number {
+    return Number(value.toFixed(fraction));
+}
+
+export function calculateFractionNumber(value: number): number {
+    if (value >= 1) {
+        return 1;
+    }
+
+    let fraction = 0;
+
+    while (value < 1) {
+        value = value * 10;
+
+        fraction++;
+    }
+
+    return fraction;
 }
 
 export function isNumberInRange(value: number, from: number, to: number): boolean {
@@ -75,4 +98,12 @@ export function getRandomString(count: number): string {
         result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
+}
+
+export function getRandomId(): string {
+    if ("randomUUID" in crypto) {
+        return crypto.randomUUID();
+    }
+
+    return getRandomString(36);
 }

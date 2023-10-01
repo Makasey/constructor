@@ -19,7 +19,6 @@
                 (focus)="_onFocus($event)"
                 (input)="_onInput($event)"
             />
-            {{ _value }}
         </label>
         <div class="form-control-errors" *ngIf="nativeControl.dirty && (nativeControl.errors | keyvalue)?.length">
             <ng-container *ngFor="let error of nativeControl.errors | keyvalue">

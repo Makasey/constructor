@@ -1,6 +1,6 @@
 import { ContentChild, Directive, Input } from "@angular/core";
 
-import { LZAccordionContentDirective } from "@components/ui/accordion/directives/accordion-content.directive";
+import { LZAccordionContentDirective } from "@components";
 
 @Directive({
     selector: "lz-accordion-item",

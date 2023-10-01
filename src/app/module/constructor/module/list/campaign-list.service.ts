@@ -1,11 +1,9 @@
-import { AbstractCampaignDataService } from "@core/data-service";
-import { AbstractDefaultModuleService, AbstractModuleService } from "@core/abstract";
-import { CampaignModel } from "@modules/constructor/components/edit-area/types";
+import { AbstractCampaignDataService, AbstractDefaultModuleService, AbstractModuleService, LzQuery, LzService, LzStateKey, UIDataState } from "@core";
+import { CampaignModel } from "@modules/constructor";
 import { Injectable } from "@angular/core";
-import { LZToastrItemType, LZToastrService, TableMeta } from "@components/ui";
-import { LzQuery, LzService, LzStateKey, UIDataState } from "@core/store";
+import { LZToastrItemType, LZToastrService, TableMeta } from "@components";
 import { Observable, tap } from "rxjs";
-import { PaginationListItems } from "@shared-types/response/response-view.type";
+import { PaginationListItems } from "@shared-types";
 import { Socket } from "ngx-socket-io";
 import { arrayRemove } from "@datorama/akita";
 

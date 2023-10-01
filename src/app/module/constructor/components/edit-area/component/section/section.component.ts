@@ -1,15 +1,26 @@
-import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
-import { AbstractEditorElementSettingsService } from "@modules/constructor/core/abstract/editor-element-settings.service";
-import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
+import {
+    AbstractEditorElementActionsService,
+    AbstractEditorElementSettingsService,
+    AbstractEditorSelectionService,
+    AbstractSectionEditorActionsService,
+    ColumnStructure,
+    EDITOR_SELECTED_ELEMENT,
+    ELEMENT_ID,
+    SECTION_PROVIDERS,
+    SectionPageElement,
+    SectionPageElementSettings,
+    SectionSelectionService,
+    SitePageElementType,
+    columnStructureElements,
+    processDirectionValue,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
+import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
-import { ELEMENT_ID } from "../../constants";
 import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
+import { ImageLinkPipe } from "@shared-pipes";
 import { Observable, map } from "rxjs";
-import { SectionPageElement, SectionPageElementSettings } from "@modules/constructor/components/edit-area/component/section/types";
-import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
-import { processDirectionValue, processSettingValueWithUnit } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Component({
     selector: "lz-section-element",
@@ -19,7 +30,8 @@ import { processDirectionValue, processSettingValueWithUnit } from "@modules/con
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [NgForOf, NgIf, AsyncPipe, ElementResolverDirective],
+    providers: [...SECTION_PROVIDERS],
+    imports: [NgForOf, NgIf, AsyncPipe, ElementResolverDirective, NgTemplateOutlet, ImageLinkPipe],
 })
 export class SectionComponent implements OnInit {
     @HostBinding("$.style.height")
@@ -46,6 +58,14 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.margin")
     public sectionMargin$: Observable<string>;
 
+    @HostBinding("$.style.letter-spacing")
+    @HostListener("$.style.letter-spacing")
+    public sectionLetterSpacing$: Observable<string>;
+
+    @HostBinding("$.style.opacity")
+    @HostListener("$.style.opacity")
+    public sectionOpacity$: Observable<number>;
+
     @HostBinding("class")
     public classes = {
         "editor-element": true,
@@ -54,7 +74,9 @@ export class SectionComponent implements OnInit {
 
     private readonly service = inject(AbstractEditorElementSettingsService);
 
-    private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>);
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>) as AbstractSectionEditorActionsService;
+
+    private readonly selectionService = inject(AbstractEditorSelectionService) as SectionSelectionService;
 
     public element$: Observable<SectionPageElement> = new Observable();
 
@@ -62,7 +84,11 @@ export class SectionComponent implements OnInit {
 
     public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    public sitePageElementType = SitePageElementType;
+    public readonly columnStructureElement = ColumnStructure;
+
+    public readonly columnStructureElements = columnStructureElements;
+
+    public readonly sitePageElementType = SitePageElementType;
 
     private sectionSettings$: Observable<SectionPageElementSettings>;
 
@@ -82,6 +108,10 @@ export class SectionComponent implements OnInit {
         this.sectionPadding$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
 
         this.sectionMargin$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.margin)));
+
+        this.sectionLetterSpacing$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.letterSpacing)));
+
+        this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity!));
     }
 
     public addElement(type: SitePageElementType): void {
@@ -94,5 +124,14 @@ export class SectionComponent implements OnInit {
 
     public deleteElement(): void {
         this.editorActionsService.deleteElement(this.ELEMENT_ID);
+    }
+
+    public chooseStructure(type: ColumnStructure): void {
+        this.selectionService.updateSectionSelection(this.ELEMENT_ID);
+        this.editorActionsService.chooseColumnStructureType(this.ELEMENT_ID, type);
+    }
+
+    public selectElement(): void {
+        this.selectionService.updateSectionSelection(this.ELEMENT_ID);
     }
 }

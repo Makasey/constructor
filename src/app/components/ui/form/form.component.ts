@@ -21,6 +21,7 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
 import { ControlTemplate } from "../modal";
 import { Observable, distinctUntilChanged, skip, tap } from "rxjs";
+import { getRandomId } from "@shared-utils/utils";
 import { isObjectEquals } from "@shared-utils/object.utils";
 
 @UntilDestroy()
@@ -58,30 +59,23 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     })
     private dropdownField: ControlTemplate;
 
-    @ViewChild("categoryControllerTemplate", {
-        static: true,
-    })
-    private categoryControllerField: ControlTemplate;
-
     @ViewChild("fileUploadTemplate", {
         static: true,
     })
     private fileUploadField: ControlTemplate;
 
-    @ViewChild("rangeFieldTemplate", {
+    @ViewChild("rangeFieldWithUnitTemplate", {
         static: true,
     })
+    private rangeWithUnitField: ControlTemplate;
+
+    @ViewChild("rangeFieldTemplate", { static: true })
     private rangeField: ControlTemplate;
 
     @ViewChild("colorPickerTemplate", {
         static: true,
     })
     private colorField: ControlTemplate;
-
-    @ViewChild("checkboxGroupTemplate", {
-        static: true,
-    })
-    private checkboxField: ControlTemplate;
 
     @ViewChild("directionFieldTemplate", { static: true })
     private directionField: ControlTemplate;
@@ -121,14 +115,13 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.TEXT_FIELD]: this.textField,
             [APFormDefaultTemplateKeys.NUMBER_FIELD]: this.numberField,
             [APFormDefaultTemplateKeys.DROPDOWN_FIELD]: this.dropdownField,
-            [APFormDefaultTemplateKeys.CATEGORY_CONTROLLER]: this.categoryControllerField,
-            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
+            [APFormDefaultTemplateKeys.RANGE_FIELD_WITH_UNIT_FIELD]: this.rangeWithUnitField,
             [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
             [APFormDefaultTemplateKeys.FILE_UPLOAD]: this.fileUploadField,
-            [APFormDefaultTemplateKeys.CHECKBOX_FIELD]: this.checkboxField,
             [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
             [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField,
             [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField,
+            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
         };
 
         this._templatesMap = {
@@ -203,7 +196,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
                         ? control.validators.includes(Validators.required)
                         : control.validators === Validators.required
                     : control.required,
-                id: control.id ?? crypto.randomUUID(),
+                id: control.id ?? getRandomId(),
                 gridClass: String.fromCharCode(i++),
             };
         };

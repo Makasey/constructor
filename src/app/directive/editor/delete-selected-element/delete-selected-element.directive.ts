@@ -1,7 +1,5 @@
-import { AbstractEditorElementActionsService } from "@modules/constructor/core/abstract/editor-element.service";
+import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, ROOT_ELEMENT_ID } from "@modules/constructor";
 import { Directive, HostListener, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor/providers/selected-element.provider";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Directive({

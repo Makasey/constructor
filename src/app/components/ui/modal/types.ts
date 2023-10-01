@@ -4,7 +4,7 @@ import { FormControl } from "@angular/forms";
 import { Observable } from "rxjs";
 
 import { APFormControl, APFormOptions } from "../form";
-import { ModalComponent } from "@components/ui";
+import { ModalComponent } from "@components";
 
 export interface ModalWithData<T> {
     data: T;

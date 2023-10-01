@@ -3,7 +3,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/f
 
 import { APFormControl } from "../../form";
 import { APNumberFieldValueChangeEvent } from "./types";
-import { normalizeToIntNumber } from "@shared-utils/utils";
+import { calculateFractionNumber, normalizeNumberValue, roundNumberWithFraction } from "@shared-utils/utils";
 
 @Component({
     selector: "ap-number-field",
@@ -32,10 +32,10 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     public step = 1;
 
     @Input()
-    public max = Number.MAX_VALUE;
+    public max = Number.MAX_SAFE_INTEGER;
 
     @Input()
-    public min = Number.MIN_VALUE;
+    public min = 0;
 
     @Output()
     public readonly onValueChange: EventEmitter<APNumberFieldValueChangeEvent> = new EventEmitter<APNumberFieldValueChangeEvent>();
@@ -48,7 +48,9 @@ export class APNumberFieldComponent implements ControlValueAccessor {
 
     @HostListener("keydown.arrowUp")
     public onCountIncrease(): void {
-        const processedValue = Number(this._value) + this.step;
+        const fractionNumber = calculateFractionNumber(this.step);
+
+        const processedValue = roundNumberWithFraction(Number(this._value) + this.step, fractionNumber);
         const clampedValue = Math.min(this.max, processedValue);
 
         this.updateValue(`${clampedValue}`, this._value);
@@ -56,7 +58,8 @@ export class APNumberFieldComponent implements ControlValueAccessor {
 
     @HostListener("keydown.arrowDown")
     public onCountDecrease(): void {
-        const processedValue = Number(this._value) - this.step;
+        const fractionNumber = calculateFractionNumber(this.step);
+        const processedValue = roundNumberWithFraction(Number(this._value) - this.step, fractionNumber);
         const clampedValue = Math.max(this.min, processedValue);
 
         this.updateValue(`${clampedValue}`, this._value);
@@ -144,7 +147,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     }
 
     public processBoundariesValue(value: number): number {
-        return normalizeToIntNumber(value, this.min, this.max);
+        return normalizeNumberValue(value, this.min, this.max);
     }
 
     private updateInputValue(value: string): void {

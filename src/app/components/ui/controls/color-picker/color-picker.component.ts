@@ -1,4 +1,4 @@
-import { APFormControl, ApTextFormControlOptions } from "@components/ui";
+import { APFormControl, ApTextFormControlOptions } from "@components";
 import { AsyncPipe, NgIf } from "@angular/common";
 import {
     ChangeDetectionStrategy,
@@ -17,7 +17,7 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModu
 import { Observable, distinctUntilChanged, tap } from "rxjs";
 import { filterNilValue } from "@datorama/akita";
 
-import { defaultColorPikerOptions } from "@components/ui/controls/text-field/types";
+import { defaultColorPickerOptions } from "@components";
 
 @Component({
     selector: "lz-color-picker",
@@ -73,7 +73,7 @@ export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnC
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.controlModel) {
             this._options = {
-                ...defaultColorPikerOptions,
+                ...defaultColorPickerOptions,
                 ...this.controlModel.options,
             };
         }

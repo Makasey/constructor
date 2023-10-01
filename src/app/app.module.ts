@@ -8,23 +8,24 @@ import { AkitaNgDevtools } from "@datorama/akita-ngdevtools";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 
-import { APP_REF } from "@core/app-ref";
-import { AbstractNavigationService, NavigationService } from "@core/navigation.service";
-import { AbstractProductDataService, LZAbstractAuthDataService, LZDefaultAuthDataService, ProductDataService } from "@core/data-service";
-import { LzQuery } from "@core/store/lz.query";
-import { LzService } from "@core/store/lz.service";
-import { LzStore } from "@core/store/lz.store";
+import {
+    APP_REF,
+    AbstractCampaignDataService,
+    AbstractFilesDataService,
+    AbstractNavigationService,
+    CampaignDataService,
+    DefaultFilesDataService,
+    LZAbstractAuthDataService,
+    LZDefaultAuthDataService,
+    LzQuery,
+    LzService,
+    LzStore,
+    NavigationService,
+} from "@core";
 
-import { LZCalendarModule, LZToastrModule } from "./components";
-
-import { AbstractCampaignDataService, CampaignDataService } from "@core/data-service/campaign-data.service";
-import { AbstractCartProductDataService, CartProductDataService } from "@core/data-service/cart-product-data.service";
-import { AbstractFilesDataService, DefaultFilesDataService } from "@core/data-service/files-data.service";
-import { AbstractProductCartService, ProductCartService } from "@components/shared/product-cart/product-cart.service";
-import { HostBinderAsyncPlugin } from "./plugins/host-binder-async.plugin";
-import { SilentEventPlugin } from "./plugins/silent-event.plugin";
+import { HostBinderAsyncPlugin, SilentEventPlugin, StopEventPlugin } from "./plugins";
+import { LZCalendarModule, LZToastrModule } from "@components";
 import { SocketIoConfig, SocketIoModule } from "ngx-socket-io";
-import { StopEventPlugin } from "./plugins/stop-event.plugin";
 import { environment } from "environments/environment";
 
 const config: SocketIoConfig = { url: "http://localhost:7000", options: { transports: ["websocket"] } };
@@ -47,20 +48,8 @@ const config: SocketIoConfig = { url: "http://localhost:7000", options: { transp
             useClass: NavigationService,
         },
         {
-            provide: AbstractProductDataService,
-            useClass: ProductDataService,
-        },
-        {
             provide: LZAbstractAuthDataService,
             useClass: LZDefaultAuthDataService,
-        },
-        {
-            provide: AbstractCartProductDataService,
-            useClass: CartProductDataService,
-        },
-        {
-            provide: AbstractProductCartService,
-            useClass: ProductCartService,
         },
         {
             provide: EVENT_MANAGER_PLUGINS,
@@ -88,11 +77,6 @@ const config: SocketIoConfig = { url: "http://localhost:7000", options: { transp
         LzQuery,
         LzService,
         LzStore,
-        // {
-        //     provide: APP_INITIALIZER,
-        //     multi: true,
-        //     useFactory: initProductCartFactory,
-        // },
     ],
     bootstrap: [AppComponent],
 })

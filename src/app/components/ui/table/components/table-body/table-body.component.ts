@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from "@angular/core";
 
-import { TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components/ui";
+import { TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 
 @Component({
     selector: "lz-table-body",

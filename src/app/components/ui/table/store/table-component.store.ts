@@ -21,8 +21,8 @@ import {
     selectAllRows,
     selectParentRowById,
     selectRowById,
-} from "@components/ui";
-import { TableState } from "@core/store";
+} from "@components";
+import { TableState } from "@core";
 
 @Injectable()
 export abstract class AbstractAwesomeTableService {

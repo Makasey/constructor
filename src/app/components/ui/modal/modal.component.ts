@@ -4,7 +4,7 @@ import { Subject } from "rxjs";
 
 import { HostModalContentDirective } from "./host-modal-content.directive";
 import { ModalConfig } from "./types";
-import { ModalService } from "@components/ui";
+import { ModalService } from "@components";
 
 @Component({
     selector: "ap-modal",

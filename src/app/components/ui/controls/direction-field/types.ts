@@ -1,4 +1,4 @@
-import { StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { StyleUnit } from "@modules/constructor";
 
 export type Direction = {
     top: number;

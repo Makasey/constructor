@@ -1,16 +1,16 @@
-import { APFormModel } from "@components/ui";
-import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { APFormModel } from "@components";
+import {
+    AbstractEditorOperationService,
+    ROOT_ELEMENT_ID,
+    SitePageElementSettings,
+    SitePageElementSizeSettings,
+    processElementSettings,
+} from "@modules/constructor";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, map, shareReplay } from "rxjs";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
-import { SitePageElementSettings, SitePageElementSizeSettings } from "@modules/constructor/components/edit-area/types";
 import { filterNilValue, logAction } from "@datorama/akita";
-import { processElementSettings } from "@modules/constructor/components/edit-area/utils/element-settings.utils";
 
 @Injectable()
 export abstract class AbstractEditorElementSettingsService<K = SitePageElementSettings> extends AbstractEditorOperationService {
@@ -26,7 +26,7 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
 
     public abstract selectSettings(id: number): Observable<K>;
 
-    public abstract updateElementSettings(settings: K): void;
+    public abstract updateElementSettings(settings: K | Partial<K>, elementId?: number): void;
 }
 
 @Injectable()
@@ -55,8 +55,8 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
             );
     }
 
-    public updateElementSettings(value: K): void {
-        const id = this.getStoreElement("selectedElement");
+    public updateElementSettings(value: K | Partial<K>, elementId?: number): void {
+        const id = elementId ?? this.getStoreElement("selectedElement");
 
         logAction(`Update element settings`, id, value);
 

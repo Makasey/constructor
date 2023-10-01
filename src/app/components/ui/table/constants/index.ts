@@ -1,5 +1,5 @@
 import { TableExtra, TableValueExtraInternalParams } from "../interfaces";
-import { TableState, UIDataState } from "@core/store/states/ui-states";
+import { TableState, UIDataState } from "@core";
 
 export const DEFAULT_LOAD_MORE_LABEL = "Load more data";
 

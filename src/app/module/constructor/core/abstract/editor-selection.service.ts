@@ -1,10 +1,7 @@
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable } from "rxjs";
-import { ROOT_ELEMENT_ID } from "@modules/constructor/components/edit-area/constants";
+import { ROOT_ELEMENT_ID } from "@modules/constructor";
 import { logAction } from "@datorama/akita";
 
 @Injectable()
@@ -15,11 +12,29 @@ export abstract class AbstractEditorSelectionService {
     ) {}
 
     public updateSelection(elementId: number): void {
-        this.service.updateState(state => {
-            const shouldDeselectItem = elementId === state.selectedElement;
-            logAction(`${shouldDeselectItem ? "deselect" : "select"}: ${elementId}`, [elementId]);
+        const selectedElement = this.getStoreElement("selectedElement");
+
+        const shouldDeselectItem = elementId === selectedElement;
+
+        shouldDeselectItem ? this.deselectElement(elementId) : this.selectElement(elementId);
+    }
+
+    protected selectElement(elementId: number): void {
+        logAction(`Select element with id: ${elementId}`, [elementId]);
+
+        this.service.updateState(() => {
             return {
-                selectedElement: shouldDeselectItem ? ROOT_ELEMENT_ID : elementId,
+                selectedElement: elementId,
+            };
+        });
+    }
+
+    protected deselectElement(elementId: number): void {
+        logAction(`Deselect element with id: ${elementId}`, [elementId]);
+
+        this.service.updateState(() => {
+            return {
+                selectedElement: ROOT_ELEMENT_ID,
             };
         });
     }

@@ -1,4 +1,4 @@
-import { LzState, UIDataStateful } from "@core/store";
+import { LzState, UIDataStateful } from "@core";
 import { UpdateStateCallback } from "@datorama/akita";
 
 export type CallbackOrPart<T> = UpdateStateCallback<T> | Partial<T>;
@@ -11,4 +11,14 @@ export type InitialStateFunctions = Readonly<{
 
 export function isUIDateStateful(object: Record<string, unknown>): object is UIDataStateful {
     return Object.prototype.hasOwnProperty.call(object, "dataState");
+}
+
+export enum UIDataState {
+    INITIAL = "initial",
+    SAVING = "saving",
+    LOADING = "loading",
+    INVOKE_RELOAD = "invokeReload",
+    EXTRA_LOADING = "extraLoading",
+    LOADED = "loaded",
+    ERROR = "error",
 }

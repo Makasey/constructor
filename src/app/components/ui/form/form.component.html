@@ -82,6 +82,10 @@
         [controlModel]="controlModel"
         [nativeControl]="nativeControl"
         [formControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+        [step]="controlModel.options?.step"
     ></ap-number-field>
 </ng-template>
 
@@ -156,20 +160,29 @@
         {{ formModel.headerText }}
     </div>
 </ng-template>
-
-<ng-template #categoryControllerTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-category-controller [formControl]="nativeControl"> </lz-category-controller>
+<ng-template #rangeFieldWithUnitTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-range-with-unit-field
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [items]="controlModel.options?.items"
+        [max]="controlModel.options?.max"
+        [step]="controlModel.options?.step"
+        [min]="controlModel.options?.min"
+    >
+    </lz-range-with-unit-field>
 </ng-template>
 
 <ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-range-controller [formControl]="nativeControl" [value]="controlModel.value"></lz-range-controller>
-</ng-template>
-
-<ng-template #checkboxGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
-    <lz-checkbox-group
-        [label]="controlModel.options.label"
-        [columnDirection]="controlModel.options.columnDirection"
+    <lz-range-field
         [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+        [step]="controlModel.options?.step"
     >
-    </lz-checkbox-group>
+    </lz-range-field>
 </ng-template>

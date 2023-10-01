@@ -20,7 +20,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser-esbuild",
                     "options": {
-                        "outputPath": "dist",
+                        "outputPath": "public",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "polyfills.ts",
@@ -50,7 +50,14 @@
                                     "with": "src/environments/environment.prod.ts"
                                 }
                             ],
-                            "outputHashing": "all"
+                            "buildOptimizer": true,
+                            "optimization": true,
+                            "vendorChunk": true,
+                            "extractLicenses": false,
+                            "sourceMap": false,
+                            "namedChunks": true,
+                            "outputHashing": "none",
+                            "aot": true
                         },
                         "development": {
                             "buildOptimizer": false,

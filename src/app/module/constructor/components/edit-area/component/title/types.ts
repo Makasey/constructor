@@ -1,9 +1,4 @@
-import {
-    SitePageElement,
-    SitePageElementBackground,
-    SitePageElementSizeSettings,
-    SitePageElementTextColor,
-} from "@modules/constructor/components/edit-area/types";
+import { SitePageElement, SitePageElementBackground, SitePageElementSizeSettings, SitePageElementTextColor } from "@modules/constructor";
 
 export type TitlePageElement = SitePageElement<TitlePageElementSettings>;
 
@@ -12,6 +7,7 @@ export type TitlePageElementSettings = Readonly<
         text?: string;
         label?: string;
         tag?: string;
+        link?: string;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

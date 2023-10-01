@@ -1,6 +1,6 @@
-import { LzStateKey, createStoreProviders } from "@core/store";
+import { LzStateKey, createStoreProviders } from "@core";
 
-import { AbstractFileGalleryService, FileGalleryService } from "./file-gallery/file-gallery.service";
+import { AbstractFileGalleryService, FileGalleryService } from "@components";
 
 export const FILE_UPLOAD_PROVIDERS = [
     ...createStoreProviders(LzStateKey.FILES_STATE),

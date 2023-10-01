@@ -3,9 +3,10 @@ import { DOCUMENT } from "@angular/common";
 
 import { finalize } from "rxjs";
 
-import { ModalComponent } from "@components/ui";
+import { ModalComponent } from "@components";
 
 import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, MODAL_ID_TOKEN, ModalConfig, ModalModel, ModalModelMap, ModalType, ModalWithData } from "./types";
+import { getRandomId } from "@shared-utils/utils";
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 
@@ -28,7 +29,7 @@ export class ModalService {
 
         viewContainerRef.clear();
         const modalWrapperRef = viewContainerRef.createComponent(ModalComponent);
-        const modalId = id ?? crypto.randomUUID();
+        const modalId = id ?? getRandomId();
 
         this.renderer.addClass(this.documentRef.documentElement, NO_SCROLL_CLASS);
 

@@ -1,15 +1,15 @@
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzState, LzStateKey } from "@core/store/lz.state";
 import { Observable, map } from "rxjs";
-import { Page } from "@core/store/states/ui-states";
-import { ROOT_ELEMENT_ID, defaultPageElementSettingsMap } from "@modules/constructor/components/edit-area/constants";
-import { SitePageElement, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
-import { SitePageElementType } from "@modules/constructor/components/edit-area/enums";
+import {
+    ROOT_ELEMENT_ID,
+    SitePageElement,
+    SitePageElementType,
+    SitePageElementUnion,
+    defaultPageElementSettingsMap,
+    deleteElementFromTree,
+} from "@modules/constructor";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
-import { deleteElementFromTree } from "@modules/constructor/components/edit-area/utils/element.utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
@@ -130,7 +130,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                 updatedPages = this.deleteItemFromPage(elementId);
             }
 
-            const parentElement = items[parentId];
+            const parentElement: SitePageElementUnion = items[parentId];
 
             items = deleteElementFromTree(state.items, elementId);
 

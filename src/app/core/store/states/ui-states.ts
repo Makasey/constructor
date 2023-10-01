@@ -1,16 +1,10 @@
-import { APFormModel, TableExtra, TableMeta, TableRow, TableValueExtraInternal } from "@components/ui";
-import { CampaignModel, PageSettings, SitePageElementUnion } from "@modules/constructor/components/edit-area/types";
-import { Cart, File, Product } from "@shared-types/index";
+import { File } from "@shared-types";
 
-export enum UIDataState {
-    INITIAL = "initial",
-    SAVING = "saving",
-    LOADING = "loading",
-    INVOKE_RELOAD = "invokeReload",
-    EXTRA_LOADING = "extraLoading",
-    LOADED = "loaded",
-    ERROR = "error",
-}
+import { TableExtra, TableMeta, TableRow, TableValueExtraInternal } from "@components";
+
+import { UIDataState } from "@core";
+
+import { CampaignModel, PageSettings, SitePageElementUnion } from "@modules/constructor";
 
 export type UIDataStateful = Readonly<{
     dataState: UIDataState;
@@ -22,30 +16,6 @@ export type TableModuleState = Readonly<{
     tableMeta: TableMeta[];
     tableValues: TableRow[];
 }>;
-
-export type RootModuleState = Readonly<{
-    products: Product[];
-}> &
-    TableModuleState &
-    ModuleState;
-
-export type CatalogFiltersState = Readonly<{
-    filters: APFormModel;
-}> &
-    ModuleState;
-
-export type CatalogProductsState = Readonly<{
-    products: Product[];
-    totalCount: number;
-}> &
-    ModuleState;
-
-export type ProductCartState = Readonly<{
-    cart: Cart | null;
-}> &
-    ModuleState;
-
-export type TestState = ModuleState;
 
 export type Page = Readonly<{
     settings: PageSettings;

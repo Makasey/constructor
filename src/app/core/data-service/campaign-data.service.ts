@@ -1,9 +1,9 @@
-import { CampaignModel, CreateCampaignModel } from "@modules/constructor/components/edit-area/types";
+import { CampaignModel, CreateCampaignModel } from "@modules/constructor";
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { PaginationListItems } from "@shared-types/response/response-view.type";
-import { mapPaginationResponseToListModel } from "@shared-utils/utils";
+import { PaginationListItems } from "@shared-types";
+import { mapPaginationResponseToListModel } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractCampaignDataService {

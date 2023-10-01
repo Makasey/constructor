@@ -1,16 +1,17 @@
-import { AbstractCampaignDataService } from "@core/data-service/campaign-data.service";
-import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
-import { AbstractNavigationService } from "@core/navigation.service";
-import { CampaignModel, CreateCampaignModel } from "@modules/constructor/components/edit-area/types";
+import {
+    AbstractCampaignDataService,
+    AbstractLzStoreService,
+    AbstractNavigationService,
+    LzAbstractQuery,
+    LzQueryInjectionTokensMap,
+    LzServiceInjectionTokensMap,
+    LzStateKey,
+} from "@core";
+import { AbstractEditorOperationService, CampaignModel, CreateCampaignModel } from "@modules/constructor";
 import { Inject, Injectable } from "@angular/core";
-import { LZToastrItemType, LZToastrService } from "@components/ui";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzStateKey } from "@core/store/lz.state";
+import { LZToastrItemType, LZToastrService } from "@components";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
-import { PaginationListItems } from "@shared-types/response/response-view.type";
-import { RouteKey } from "@shared-types/routes/route-paths";
+import { PaginationListItems, RouteKey } from "@shared-types";
 import { Router } from "@angular/router";
 
 @Injectable()

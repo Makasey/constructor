@@ -1,3 +1,5 @@
+export { LzPreloadFiltersComponent, LzPreloadProductComponent, LzPreloadTableComponent } from "./components";
+export { PreloadDirective } from "./preload.directive";
 export {
     preloadBackgroundComponentsMap,
     PreloadBackgroundComponentKey,

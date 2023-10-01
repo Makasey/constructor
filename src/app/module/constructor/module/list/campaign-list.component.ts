@@ -1,10 +1,10 @@
-import { AbstractCampaignListService, DefaultCampaignListService } from "@modules/constructor/module/list/campaign-list.service";
-import { AbstractModuleComponent } from "@core/abstract";
+import { AbstractCampaignListService, DefaultCampaignListService } from "@modules/constructor";
+import { AbstractModuleComponent } from "@core";
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
-import { LzTableModule } from "@components/ui";
-import { NavigationLinkPipe } from "@shared-pipes/navigation-link/navigation-link.pipe";
-import { RouteKey } from "@shared-types/routes/route-paths";
+import { LzTableModule } from "@components";
+import { NavigationLinkPipe } from "@shared-pipes";
+import { RouteKey } from "@shared-types";
 import { RouterLink } from "@angular/router";
 import { untilDestroyed } from "@ngneat/until-destroy";
 

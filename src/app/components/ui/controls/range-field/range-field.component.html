@@ -1,0 +1,25 @@
+<article class="control">
+    <span class="label">{{ label }}</span>
+
+    <div class="controls">
+        <input
+            type="range"
+            [min]="min"
+            [max]="max"
+            [step]="step"
+            [ngModel]="_value"
+            (ngModelChange)="updateRange($event)"
+        />
+
+        <ap-number-field
+            class="number-field"
+            [controlModel]="controlModel"
+            [nativeControl]="nativeControl"
+            [max]="max"
+            [min]="min"
+            [step]="step"
+            [ngModel]="_value"
+            (ngModelChange)="updateRange($event)"
+        />
+    </div>
+</article>

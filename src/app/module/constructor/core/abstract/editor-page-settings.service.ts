@@ -1,13 +1,10 @@
-import { APFormDefaultTemplateKeys, APFormModel } from "@components/ui";
-import { AbstractEditorOperationService } from "@modules/constructor/core/abstract/editor-operation.abstract";
-import { AbstractLzStoreService } from "@core/store/abstract/lz-abstract.service";
+import { APFormDefaultTemplateKeys, APFormModel } from "@components";
+import { AbstractEditorOperationService, PageSettings } from "@modules/constructor";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { LzAbstractQuery } from "@core/store/abstract/lz-abstract.query";
-import { LzQueryInjectionTokensMap, LzServiceInjectionTokensMap } from "@core/store/abstract/types";
-import { LzStateKey } from "@core/store/lz.state";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
-import { PageSettings } from "@modules/constructor/components/edit-area/types";
+import { getRandomId } from "@shared-utils/utils";
 import { isObjectEquals } from "@shared-utils/object.utils";
 import { logAction } from "@datorama/akita";
 
@@ -35,14 +32,14 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                     const { title, campaignName, logotype } = settings;
 
                     return {
-                        id: crypto.randomUUID(),
+                        id: getRandomId(),
                         name: "globalSettings",
                         upsertConfig: {
                             debounceTime: 500,
                         },
                         controls: [
                             {
-                                id: crypto.randomUUID(),
+                                id: getRandomId(),
                                 name: "title",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
                                 value: title,
@@ -52,7 +49,7 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                                 },
                             },
                             {
-                                id: crypto.randomUUID(),
+                                id: getRandomId(),
                                 name: "campaignName",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
                                 value: campaignName,
@@ -62,13 +59,13 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                                 },
                             },
                             {
-                                id: crypto.randomUUID(),
+                                id: getRandomId(),
                                 name: "logotype",
                                 valueTemplateKey: APFormDefaultTemplateKeys.FILE_UPLOAD,
                                 value: logotype,
                             },
                             {
-                                id: crypto.randomUUID(),
+                                id: getRandomId(),
                                 name: "siteDescription",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
                                 value: settings.siteDescription,
@@ -79,7 +76,7 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                             },
 
                             {
-                                id: crypto.randomUUID(),
+                                id: getRandomId(),
                                 name: "siteMetaTags",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
                                 value: settings.siteMetaTags,

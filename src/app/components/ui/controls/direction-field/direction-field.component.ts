@@ -1,9 +1,8 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule } from "@components/ui";
+import { APDropdownFieldModule, APFormControl, APNumberFieldModule, Direction, defaultDirectionValue } from "@components";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { Direction, defaultDirectionValue } from "@components/ui/controls/direction-field/types";
-import { Directions, StyleUnit } from "@modules/constructor/components/edit-area/enums";
+import { Directions, StyleUnit } from "@modules/constructor";
 
 @Component({
     selector: "lz-direction-field",

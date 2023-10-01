@@ -36,4 +36,4 @@ export {
     selectParentRowById,
     deselectParentRowById,
 } from "./utils";
-export { initialTableStore, DEFAULT_VALUE_EXTRA_ITEM, DEFAULT_LOAD_MORE_LABEL } from "./constants";
+export { initialTableStore, DEFAULT_VALUE_EXTRA_ITEM, DEFAULT_LOAD_MORE_LABEL, defaultTableExtra, TABLE_CELL_HEIGHT } from "./constants";
