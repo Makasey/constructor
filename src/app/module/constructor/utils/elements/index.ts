@@ -12,3 +12,4 @@ export {
     getTitleElementStyleControl,
     getTitleElementTextControl,
 } from "./title-element-controls.utils";
+export { getInnerSettings } from "./inner";

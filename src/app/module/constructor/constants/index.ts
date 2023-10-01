@@ -85,6 +85,21 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
             },
         },
     },
+    [SitePageElementType.INNER]: {
+        type: SitePageElementType.INNER,
+        children: [],
+        isExtendable: false,
+        settings: {
+            width: {
+                value: 100,
+                unit: StyleUnit.PERCENT,
+            },
+            height: {
+                value: 100,
+                unit: StyleUnit.PERCENT,
+            },
+        },
+    },
 };
 
 export const defaultSizeControlUnit = [

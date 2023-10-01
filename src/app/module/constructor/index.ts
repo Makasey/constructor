@@ -41,6 +41,7 @@ export {
     getSectionElementTextControl,
     getSectionElementSizeControls,
     processStructureType,
+    getInnerSettings,
 } from "./utils";
 
 export {
@@ -85,6 +86,8 @@ export {
     TitleComponent,
     RootComponent,
     sitePageElementMap,
+    InnerComponent,
+    InnerPageElement,
 } from "./components";
 
 export {

@@ -20,4 +20,6 @@ export {
     sitePageElementMap,
     DefaultEditAreaService,
     AbstractEditAreaService,
+    InnerComponent,
+    InnerPageElement,
 } from "./edit-area";
