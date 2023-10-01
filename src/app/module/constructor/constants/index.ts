@@ -1,14 +1,7 @@
-import { InjectionToken, Type } from "@angular/core";
-import {
-    RootComponent,
-    SectionComponent,
-    SitePageElementType,
-    SitePageElementUnion,
-    StyleUnit,
-    TitleComponent,
-    defaultSectionElementSettings,
-} from "@modules/constructor";
+import { ElementHTMLTag, SectionPageElement, SitePageElementType, SitePageElementUnion, StyleUnit } from "@modules/constructor";
+import { InjectionToken } from "@angular/core";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
+import { defaultDirectionValue } from "@components";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 500,
@@ -33,10 +26,31 @@ export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.REM]: StyleUnit.REM,
 };
 
-export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
-    [SitePageElementType.TITLE]: TitleComponent,
-    [SitePageElementType.PAGE]: RootComponent,
-    [SitePageElementType.SECTION]: SectionComponent,
+export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "parentId"> = {
+    type: SitePageElementType.SECTION,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 200,
+            unit: StyleUnit.PX,
+        },
+        text: "Hello World!",
+        tag: ElementHTMLTag.SECTION,
+        color: "#1b1c2d",
+        backgroundColor: "#ffffff",
+        margin: {
+            ...defaultDirectionValue,
+        },
+        padding: {
+            ...defaultDirectionValue,
+        },
+        isInit: false,
+    },
 };
 
 export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {

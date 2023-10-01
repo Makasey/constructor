@@ -1,5 +1,11 @@
+import {
+    ColumnStructure,
+    SitePageElement,
+    SitePageElementBackground,
+    SitePageElementSizeSettings,
+    SitePageElementTextColor,
+} from "@modules/constructor";
 import { Direction, RangeWithUnit } from "@components";
-import { SitePageElement, SitePageElementBackground, SitePageElementSizeSettings, SitePageElementTextColor } from "@modules/constructor";
 
 export type SectionPageElement = SitePageElement<SectionPageElementSettings>;
 
@@ -12,13 +18,15 @@ export type SectionPageElementSettings = Readonly<
         margin?: Direction;
         letterSpacing?: RangeWithUnit;
         opacity?: number;
+        isInit?: boolean;
+        structure?: ColumnStructure;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground
 >;
 
-export enum SectionElementSettingsGroup {
-    SIZE_SETTINGS = "sizeSettings",
-    TEXT_SETTINGS = "textSettings",
-    STYLE_SETTINGS = "styleSettings",
-}
+export type ColumnStructureElement = Readonly<{
+    type: ColumnStructure;
+    icon: string;
+    text: string;
+}>;

@@ -4,8 +4,12 @@ export {
     SectionElementSettingsGroup,
     SectionComponent,
     SectionPageElementSettings,
-    defaultSectionElementSettings,
     defaultSectionOpacityStep,
     defaultSectionTagControls,
+    ColumnStructure,
+    columnStructureElements,
+    columnStructureMap,
+    ColumnStructureElement,
+    columnStructureIconMap,
 } from "./section";
 export { RootComponent } from "./root";

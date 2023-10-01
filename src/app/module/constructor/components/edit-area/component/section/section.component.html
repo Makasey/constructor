@@ -5,7 +5,34 @@
             <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
         </ng-container>
     </ng-container>
+
+    <ng-template
+        [ngTemplateOutlet]="!element.settings?.isInit ? selectStructureTemplate : emptyStructureTemplate"
+    ></ng-template>
 </ng-container>
+
+<ng-template #selectStructureTemplate>
+    <section class="structure-content" (click.stop)="selectElement()">
+        <h2 class="title">Выберите структуру секции</h2>
+
+        <article class="structure-wrapper">
+            <button
+                *ngFor="let structureElement of columnStructureElements"
+                class="structure-item"
+                [title]="structureElement.text"
+                (click.stop)="chooseStructure(structureElement.type)"
+            >
+                <img [src]="structureElement.icon | lzImageLink: 'structure'" [alt]="structureElement.text" />
+            </button>
+        </article>
+
+        <button class="structure-content-close" (click.stop)="chooseStructure(columnStructureElement.ONE_COLUMN)">
+            <i class="bx bx-x"></i>
+        </button>
+    </section>
+</ng-template>
+
+<ng-template #emptyStructureTemplate></ng-template>
 
 <ng-template #emptyTemplate> Сейчас тут нет элементов... </ng-template>
 

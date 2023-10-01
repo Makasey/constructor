@@ -26,7 +26,7 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
 
     public abstract selectSettings(id: number): Observable<K>;
 
-    public abstract updateElementSettings(settings: K): void;
+    public abstract updateElementSettings(settings: K | Partial<K>, elementId?: number): void;
 }
 
 @Injectable()
@@ -55,8 +55,8 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
             );
     }
 
-    public updateElementSettings(value: K): void {
-        const id = this.getStoreElement("selectedElement");
+    public updateElementSettings(value: K | Partial<K>, elementId?: number): void {
+        const id = elementId ?? this.getStoreElement("selectedElement");
 
         logAction(`Update element settings`, id, value);
 

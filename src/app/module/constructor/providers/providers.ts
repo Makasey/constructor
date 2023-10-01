@@ -1,5 +1,3 @@
-import { LzStateKey, createStoreProviders } from "@core";
-
 import {
     AbstractCampaignService,
     AbstractEditAreaService,
@@ -16,6 +14,7 @@ import {
     SinglePageEditorSelectionService,
     editorSelectedElementFactory,
 } from "@modules/constructor";
+import { LzStateKey, createStoreProviders } from "@core";
 import { Provider } from "@angular/core";
 
 export const EDITOR_PROVIDERS: Provider[] = [

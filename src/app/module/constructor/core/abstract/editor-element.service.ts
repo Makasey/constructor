@@ -130,7 +130,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                 updatedPages = this.deleteItemFromPage(elementId);
             }
 
-            const parentElement = items[parentId];
+            const parentElement: SitePageElementUnion = items[parentId];
 
             items = deleteElementFromTree(state.items, elementId);
 

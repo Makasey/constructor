@@ -1,8 +1,48 @@
+@import "assets/styles/_mixins.scss";
+
 .lz-section-element {
     display: flex;
     position: relative;
     flex-direction: column;
-    border: 5px dashed var(--selected-element-color);
+    border: 1px solid var(--selected-element-color);
+
+    .structure {
+        &-content {
+            padding: 16px;
+            position: absolute;
+            inset: 0;
+            background: lightgrey;
+            @include flexbox(column, center, unset, unset, 24px);
+
+            .title {
+                font-size: 20px;
+                line-height: 24px;
+                font-weight: 600;
+            }
+
+            &-close {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                font-size: 28px;
+                @include flexbox(row, center, center);
+            }
+        }
+
+        &-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 120px;
+            width: 100%;
+        }
+
+        &-wrapper {
+            @include flexbox(row, unset, center, wrap, 16px);
+
+            width: 100%;
+        }
+    }
 }
 
 .dropdown-large {
