@@ -25,10 +25,7 @@ import {
 
 import { HostBinderAsyncPlugin, SilentEventPlugin, StopEventPlugin } from "./plugins";
 import { LZCalendarModule, LZToastrModule } from "@components";
-import { SocketIoConfig, SocketIoModule } from "ngx-socket-io";
 import { environment } from "environments/environment";
-
-const config: SocketIoConfig = { url: "http://localhost:7000", options: { transports: ["websocket"] } };
 
 @NgModule({
     declarations: [AppComponent],
@@ -36,7 +33,6 @@ const config: SocketIoConfig = { url: "http://localhost:7000", options: { transp
         AppRoutingModule,
         BrowserAnimationsModule,
         BrowserModule,
-        SocketIoModule.forRoot(config),
         AkitaNgDevtools.forRoot(),
         LZToastrModule.forRoot(),
         HttpClientModule,

@@ -1,10 +1,18 @@
-import { AbstractCampaignDataService, AbstractDefaultModuleService, AbstractModuleService, LzQuery, LzService, LzStateKey, UIDataState } from "@core";
+import {
+    AbstractCampaignDataService,
+    AbstractDefaultModuleService,
+    AbstractModuleService,
+    LzQuery,
+    LzService,
+    LzStateKey,
+    UIDataState,
+    // WebsocketService,
+} from "@core";
 import { CampaignModel } from "@modules/constructor";
+import { EMPTY, Observable, tap } from "rxjs";
 import { Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService, TableMeta } from "@components";
-import { Observable, tap } from "rxjs";
 import { PaginationListItems } from "@shared-types";
-import { Socket } from "ngx-socket-io";
 import { arrayRemove } from "@datorama/akita";
 
 @Injectable()
@@ -15,9 +23,9 @@ export abstract class AbstractCampaignListService extends AbstractModuleService 
 
     public abstract deleteCampaignByID(id: number): Observable<void>;
 
-    public abstract sendMessage(msg: string): void;
+    public abstract sendMessage(eventName: string, msg: string): void;
 
-    public abstract getMessage(): Observable<any>;
+    public abstract selectMessages(eventName: string): Observable<unknown>;
 }
 
 @Injectable()
@@ -25,19 +33,21 @@ export class DefaultCampaignListService extends AbstractDefaultModuleService<LzS
     constructor(
         protected readonly query: LzQuery,
         protected readonly service: LzService,
+        // private readonly socket: WebsocketService,
         private readonly campaignDataService: AbstractCampaignDataService,
-        private readonly socket: Socket,
         private readonly toastrService: LZToastrService,
     ) {
         super(LzStateKey.CAMPAIGN_LIST, query, service);
     }
 
-    public sendMessage(msg: string): void {
-        this.socket.emit("send_message", msg);
+    public sendMessage(eventName: string, msg: string): void {
+        // return this.socket.sendMessage(eventName, msg);
     }
 
-    public getMessage(): Observable<any> {
-        return this.socket.fromEvent("send_message").pipe(tap(data => console.log(data)));
+    public selectMessages(eventName: string): Observable<unknown> {
+        // return this.socket.subscribeToEvent(eventName);
+
+        return EMPTY;
     }
 
     public asyncInit(): Observable<PaginationListItems<CampaignModel>> {

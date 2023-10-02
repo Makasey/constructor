@@ -292,13 +292,15 @@ router-outlet + * {
 }
 
 .editor-element {
-    --selected-element-color: yellow;
+    --selected-element-color: transparent;
     --root-selected-color: yellowgreen;
 
-    border: 1px solid var(--selected-element-color);
+    border: none;
 }
 
 .editor-element._selected {
+    border: 1px solid var(--selected-element-color);
+
     --selected-element-color: lightblue;
     --root-selected-color: green;
 }

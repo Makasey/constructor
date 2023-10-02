@@ -3,7 +3,7 @@ import { Injector } from "@angular/core";
 
 import { Observable, map } from "rxjs";
 
-import { APP_REF } from "@core/app-ref";
+import { APP_REF } from "@core";
 
 import { RouteParams, SearchConditions } from "../../types";
 import { conditionsMap } from "../utils";
