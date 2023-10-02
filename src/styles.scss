@@ -294,6 +294,8 @@ router-outlet + * {
 .editor-element {
     --selected-element-color: yellow;
     --root-selected-color: yellowgreen;
+
+    border: 1px solid var(--selected-element-color);
 }
 
 .editor-element._selected {

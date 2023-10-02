@@ -32,20 +32,13 @@ export class SectionEditorActionsService extends AbstractSectionEditorActionsSer
         super(query, service);
     }
 
-    public addElement(type: SitePageElementType, parentId?: number): void {
-        console.log(type, parentId);
-        // super.addElement(type, parentId);
-    }
-
     public chooseColumnStructureType(elementId: number, type: ColumnStructure): void {
-        console.log(elementId, type);
-
         const elements = processStructureType(type);
 
         this.elementSettingsService.updateElementSettings({ isInit: true }, elementId);
 
-        elements.forEach(element => {
-            // this.addElement("section-item", elementId);
+        elements.forEach(() => {
+            this.addElement(SitePageElementType.INNER, elementId);
         });
     }
 }

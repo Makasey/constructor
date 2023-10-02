@@ -66,6 +66,10 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.opacity")
     public sectionOpacity$: Observable<number>;
 
+    @HostBinding("$.style.gap")
+    @HostListener("$.style.gap")
+    public gap$: Observable<string>;
+
     @HostBinding("class")
     public classes = {
         "editor-element": true,
@@ -112,6 +116,8 @@ export class SectionComponent implements OnInit {
         this.sectionLetterSpacing$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.letterSpacing)));
 
         this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity!));
+
+        this.gap$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.gap)));
     }
 
     public addElement(type: SitePageElementType): void {

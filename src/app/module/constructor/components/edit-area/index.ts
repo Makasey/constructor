@@ -18,6 +18,10 @@ export {
     ColumnStructureElement,
     columnStructureElements,
     columnStructureIconMap,
+    InnerComponent,
+    InnerPageElement,
+    columnStructureCountMap,
+    InnerItemElementSettingsGroup,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

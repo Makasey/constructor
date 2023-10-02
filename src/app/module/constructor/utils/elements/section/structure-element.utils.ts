@@ -1,5 +1,7 @@
-import { ColumnStructure } from "@modules/constructor";
+import { ColumnStructure, columnStructureCountMap } from "@modules/constructor";
 
 export function processStructureType(type: ColumnStructure): string[] {
-    return [];
+    const count = columnStructureCountMap[type];
+
+    return Array.from({ length: count }).map((_, index) => `${index}`);
 }

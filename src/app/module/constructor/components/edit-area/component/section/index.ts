@@ -6,5 +6,6 @@ export {
     columnStructureElements,
     columnStructureMap,
     columnStructureIconMap,
+    columnStructureCountMap,
 } from "./constants";
 export { SectionComponent } from "./section.component";
