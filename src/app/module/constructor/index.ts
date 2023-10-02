@@ -41,6 +41,8 @@ export {
     getSectionElementTextControl,
     getSectionElementSizeControls,
     processStructureType,
+    getInnerSettings,
+    processPossibleElements,
 } from "./utils";
 
 export {
@@ -78,6 +80,7 @@ export {
     columnStructureMap,
     columnStructureElements,
     columnStructureIconMap,
+    columnStructureCountMap,
     DefaultEditAreaService,
     AbstractEditAreaService,
     EditAreaComponent,
@@ -85,6 +88,9 @@ export {
     TitleComponent,
     RootComponent,
     sitePageElementMap,
+    InnerComponent,
+    InnerPageElement,
+    InnerItemElementSettingsGroup,
 } from "./components";
 
 export {
@@ -95,7 +101,6 @@ export {
     ElementButton,
     PAGE_ROUTES,
     CAMPAIGN_LIST_ROUTES,
-    blockElements,
     ElementSettingsComponent,
     SiteSettingsComponent,
     SiteElementsComponent,

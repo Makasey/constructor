@@ -1,5 +1,4 @@
 <ng-container *ngIf="element$ | async as element">
-    {{ element.settings.text }}
     <ng-container *ngIf="element.children.length || element.settings.text; else emptyTemplate">
         <ng-container *ngFor="let child of element.children; trackBy: _trackByChild">
             <ng-container *lzElementResolver="child; parent: element.id"></ng-container>

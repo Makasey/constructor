@@ -129,8 +129,23 @@ function getSectionBackgroundColorControl(element: SectionPageElement): APFormCo
     };
 }
 
+function getSectionGapControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "gap",
+        name: "gap",
+        value: element.settings.gap,
+        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD,
+        options: {
+            selectLabelKey: "label",
+            selectValueKey: "value",
+            items: defaultTextControlElement,
+            label: "gap секции",
+        },
+    };
+}
+
 export function getSectionElementSizeControls(element: SectionPageElement): APFormControl[] {
-    return [...getDefaultSizeSettings(element)];
+    return [...getDefaultSizeSettings(element), getSectionGapControl(element)];
 }
 
 export function getSectionElementTextControl(element: SectionPageElement): APFormControl[] {

@@ -5,5 +5,3 @@ export type ElementButton = Readonly<{
     type: SitePageElementType;
     icon: string;
 }>;
-
-export const blockElements = [SitePageElementType.SECTION];

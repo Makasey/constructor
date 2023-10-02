@@ -1,3 +1,3 @@
 export { SiteSettingsComponent, SiteElementsComponent, ElementSettingsComponent } from "./components";
-export { ElementButton, blockElements } from "./types";
+export { ElementButton } from "./types";
 export { PageInnerComponent } from "./page-inner.component";

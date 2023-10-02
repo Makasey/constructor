@@ -20,6 +20,12 @@ export const columnStructureIconMap: Record<ColumnStructure, string> = {
     [ColumnStructure.THREE_COLUMNS]: "three-columns-icon.svg",
 };
 
+export const columnStructureCountMap: Record<ColumnStructure, number> = {
+    [ColumnStructure.ONE_COLUMN]: 1,
+    [ColumnStructure.TWO_COLUMNS]: 2,
+    [ColumnStructure.THREE_COLUMNS]: 3,
+};
+
 export const columnStructureElements: ColumnStructureElement[] = [
     {
         type: ColumnStructure.ONE_COLUMN,

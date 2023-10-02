@@ -10,7 +10,7 @@ import {
     ROOT_ELEMENT_ID,
     SitePageElementType,
     SitePageElementUnion,
-    blockElements,
+    processPossibleElements,
 } from "@modules/constructor";
 
 @Component({
@@ -37,37 +37,7 @@ export class SiteElementsComponent {
             map(selectedElement => {
                 const { type } = this.service.getElement(selectedElement);
 
-                if (type === SitePageElementType.PAGE) {
-                    return [
-                        {
-                            title: "Секция",
-                            type: SitePageElementType.SECTION,
-                            icon: "bx-font",
-                        },
-                    ];
-                }
-
-                if (blockElements.includes(type)) {
-                    return [
-                        {
-                            title: "Заголовок",
-                            type: SitePageElementType.TITLE,
-                            icon: "bx-font",
-                        },
-                        {
-                            title: "Заголовок",
-                            type: SitePageElementType.TITLE,
-                            icon: "bx-font",
-                        },
-                        {
-                            title: "Секция",
-                            type: SitePageElementType.SECTION,
-                            icon: "bx-font",
-                        },
-                    ];
-                }
-
-                return [];
+                return processPossibleElements(type);
             }),
         ),
         { initialValue: [] },

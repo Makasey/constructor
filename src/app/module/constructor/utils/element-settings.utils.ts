@@ -1,11 +1,13 @@
 import { APFormModel, Direction } from "@components";
 import {
     ElementSettingsWithUnit,
+    InnerPageElement,
     SectionPageElement,
     SitePageElementType,
     SitePageElementUnion,
     StyleUnit,
     TitlePageElement,
+    getInnerSettings,
     getSectionSettings,
     getTitleSettings,
     styleUnitMap,
@@ -23,6 +25,10 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
 
         case SitePageElementType.TITLE: {
             return getTitleSettings(element as TitlePageElement);
+        }
+
+        case SitePageElementType.INNER: {
+            return getInnerSettings(element as InnerPageElement);
         }
     }
 }
