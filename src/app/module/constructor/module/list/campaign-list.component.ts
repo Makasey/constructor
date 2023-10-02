@@ -1,12 +1,14 @@
 import { AbstractCampaignListService, DefaultCampaignListService } from "@modules/constructor";
 import { AbstractModuleComponent } from "@core";
 import { AsyncPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
 import { LzTableModule } from "@components";
 import { NavigationLinkPipe } from "@shared-pipes";
 import { RouteKey } from "@shared-types";
 import { RouterLink } from "@angular/router";
 import { untilDestroyed } from "@ngneat/until-destroy";
+// import { provideWebsocket } from "@core";
+// import { defaultWebsocketConfig } from "@core";
 
 @Component({
     selector: "lz-campaign-list",
@@ -21,9 +23,10 @@ import { untilDestroyed } from "@ngneat/until-destroy";
             provide: AbstractCampaignListService,
             useClass: DefaultCampaignListService,
         },
+        // ...provideWebsocket(defaultWebsocketConfig),
     ],
 })
-export class CampaignListComponent extends AbstractModuleComponent {
+export class CampaignListComponent extends AbstractModuleComponent implements OnInit {
     @HostBinding("class.lz-campaign-list")
     public readonly hostClass = true;
 
@@ -43,7 +46,17 @@ export class CampaignListComponent extends AbstractModuleComponent {
         this.service.deleteCampaignByID(id).pipe(untilDestroyed(this)).subscribe();
     }
 
+    public ngOnInit(options?: Record<string, unknown>): void {
+        super.ngOnInit(options);
+
+        // this.service.selectMessages("receive_message").subscribe(console.log);
+    }
+
     public selectRows(rows: unknown[]): void {
         this.selectedRows = rows as string[];
     }
+
+    // public test(): void {
+    //     this.service.sendMessage("send_message", "TEST_MESSAGE");
+    // }
 }

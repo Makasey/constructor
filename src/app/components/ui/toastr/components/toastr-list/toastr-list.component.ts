@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 
 import { ID } from "@datorama/akita";
 
-import { enterAnimation } from "@core/animations/animations";
+import { enterAnimation } from "@core";
 
 import { LZToastrItem } from "../../types";
 import { LZToastrService, LzToastrQuery } from "../../store";
