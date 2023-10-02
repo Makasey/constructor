@@ -17,9 +17,11 @@ export {
     columnStructureElements,
     columnStructureMap,
     columnStructureIconMap,
+    columnStructureCountMap,
     sitePageElementMap,
     DefaultEditAreaService,
     AbstractEditAreaService,
     InnerComponent,
     InnerPageElement,
+    InnerItemElementSettingsGroup,
 } from "./edit-area";

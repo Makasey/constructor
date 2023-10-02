@@ -1,3 +1,3 @@
-import { SitePageElement } from "@modules/constructor";
+import { SectionPageElementSettings, SitePageElement } from "@modules/constructor";
 
-export type InnerPageElement = SitePageElement;
+export type InnerPageElement = SitePageElement<SectionPageElementSettings>;

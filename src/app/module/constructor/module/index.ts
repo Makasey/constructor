@@ -6,6 +6,5 @@ export {
     SiteSettingsComponent,
     ElementSettingsComponent,
     SiteElementsComponent,
-    blockElements,
     ElementButton,
 } from "./page";

@@ -50,6 +50,10 @@ export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "par
             ...defaultDirectionValue,
         },
         isInit: false,
+        gap: {
+            value: 10,
+            unit: StyleUnit.PX,
+        },
     },
 };
 
@@ -96,8 +100,9 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
             },
             height: {
                 value: 100,
-                unit: StyleUnit.PERCENT,
+                unit: StyleUnit.PX,
             },
+            backgroundColor: "#c25656",
         },
     },
 };
@@ -110,4 +115,5 @@ export const defaultSizeControlUnit = [
 export const defaultTextControlElement = [
     { label: StyleUnit.PX, value: StyleUnit.PX },
     { label: StyleUnit.EM, value: StyleUnit.EM },
+    { label: StyleUnit.REM, value: StyleUnit.REM },
 ];

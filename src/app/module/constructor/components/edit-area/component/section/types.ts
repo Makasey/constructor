@@ -1,5 +1,6 @@
 import {
     ColumnStructure,
+    ElementSettingsWithUnit,
     SitePageElement,
     SitePageElementBackground,
     SitePageElementSizeSettings,
@@ -20,6 +21,7 @@ export type SectionPageElementSettings = Readonly<
         opacity?: number;
         isInit?: boolean;
         structure?: ColumnStructure;
+        gap?: ElementSettingsWithUnit;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground
