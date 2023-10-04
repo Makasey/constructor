@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open --port 4220",
-    "build": "ng build --aot --configuration production --build-optimizer --common-chunk --optimization",
+    "build": "ng build --aot --configuration production --build-optimizer --common-chunk --optimization && firebase deploy",
     "watch": "ng build --watch --configuration development",
     "test": "jest --verbose --maxConcurrency=1024",
     "test:watch": "jest --watch",
