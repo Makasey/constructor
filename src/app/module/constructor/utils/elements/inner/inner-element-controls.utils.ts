@@ -4,6 +4,7 @@ import {
     InnerItemElementSettingsGroup,
     InnerPageElement,
     SectionPageElement,
+    defaultJustifyContentItems,
     getDefaultSizeSettings,
 } from "@modules/constructor";
 
@@ -19,12 +20,25 @@ function getInnerItemBackgroundColorControl(element: SectionPageElement): APForm
     };
 }
 
+function getInnerJustifyContentControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "justifyContent",
+        name: "justifyContent",
+        value: element.settings.justifyContent,
+        valueTemplateKey: APFormDefaultTemplateKeys.RADIO_GROUP_FIELD,
+        options: {
+            label: "justify-content",
+            items: defaultJustifyContentItems,
+        },
+    };
+}
+
 export function getInnerItemElementSettings(element: SectionPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
 
 export function getInnerItemElementStyleControl(element: SectionPageElement): APFormControl[] {
-    return [getInnerItemBackgroundColorControl(element)];
+    return [getInnerItemBackgroundColorControl(element), getInnerJustifyContentControl(element)];
 }
 
 export function getInnerSettings(element: InnerPageElement): APFormModel {

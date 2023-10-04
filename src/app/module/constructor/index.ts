@@ -1,4 +1,4 @@
-export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag } from "./enums";
+export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag, JustifyContent } from "./enums";
 export {
     ElementSettingsWithUnit,
     SitePageElementSettings,
@@ -14,6 +14,7 @@ export {
 } from "./types";
 export {
     defaultTextControlElement,
+    defaultJustifyContentItems,
     ELEMENT_ID,
     defaultPageElementSettingsMap,
     DEFAULT_UPSERT_CONFIG,

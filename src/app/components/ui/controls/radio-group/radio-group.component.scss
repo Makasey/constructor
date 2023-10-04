@@ -1,0 +1,39 @@
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .label {
+        font-size: 20px;
+    }
+
+    .list {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+        height: 30px;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        border-right: 1px solid #ffffff;
+        cursor: pointer;
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    .active {
+        background-color: #7d818e;
+    }
+}

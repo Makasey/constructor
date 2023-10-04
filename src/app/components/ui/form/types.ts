@@ -15,7 +15,8 @@ export enum APFormDefaultTemplateKeys {
     TEXTAREA_FIELD = "textAreaFieldTemplate",
     NUMBER_WITH_DROPDOWN_FIELD = "numberWithDropdownField",
     DIRECTION_FIELD = "directionFieldTemplate",
-    RANGE_FIELD = "RangeFieldComponent",
+    RANGE_FIELD = "rangeFieldTemplate",
+    RADIO_GROUP_FIELD = "radioGroupField",
 }
 
 export type APFormModel = {

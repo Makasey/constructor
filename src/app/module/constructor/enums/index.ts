@@ -11,6 +11,15 @@ export enum StyleUnit {
     VH = "vh",
 }
 
+export enum JustifyContent {
+    START = "start",
+    CENTER = "center",
+    END = "end",
+    SPACE_BETWEEN = "space-between",
+    SPACE_AROUND = "space-around",
+    SPACE_EVENLY = "space-evenly",
+}
+
 export enum SitePageElementType {
     PAGE = "page",
     TITLE = "title",

@@ -1,4 +1,4 @@
-import { ElementHTMLTag, SectionPageElement, SitePageElementType, SitePageElementUnion, StyleUnit } from "@modules/constructor";
+import { ElementHTMLTag, JustifyContent, SectionPageElement, SitePageElementType, SitePageElementUnion, StyleUnit } from "@modules/constructor";
 import { InjectionToken } from "@angular/core";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 import { defaultDirectionValue } from "@components";
@@ -103,6 +103,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
                 unit: StyleUnit.PX,
             },
             backgroundColor: "#c25656",
+            justifyContent: JustifyContent.START,
         },
     },
 };
@@ -116,4 +117,13 @@ export const defaultTextControlElement = [
     { label: StyleUnit.PX, value: StyleUnit.PX },
     { label: StyleUnit.EM, value: StyleUnit.EM },
     { label: StyleUnit.REM, value: StyleUnit.REM },
+];
+
+export const defaultJustifyContentItems = [
+    { label: JustifyContent.START, value: JustifyContent.START, image: "eicon-justify-start-h" },
+    { label: JustifyContent.CENTER, value: JustifyContent.CENTER, image: "eicon-justify-center-h" },
+    { label: JustifyContent.END, value: JustifyContent.END, image: "eicon-justify-end-h" },
+    { label: JustifyContent.SPACE_BETWEEN, value: JustifyContent.SPACE_BETWEEN, image: "eicon-justify-space-between-h" },
+    { label: JustifyContent.SPACE_AROUND, value: JustifyContent.SPACE_AROUND, image: "eicon-justify-space-around-h" },
+    { label: JustifyContent.SPACE_EVENLY, value: JustifyContent.SPACE_EVENLY, image: "eicon-justify-space-evenly-h" },
 ];

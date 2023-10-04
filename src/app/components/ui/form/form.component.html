@@ -186,3 +186,14 @@
     >
     </lz-range-field>
 </ng-template>
+
+<ng-template #radioGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-radio-group
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [items]="controlModel.options?.items"
+        [label]="controlModel.options?.label"
+    >
+    </lz-radio-group>
+</ng-template>

@@ -8,3 +8,4 @@ export * from "./direction-field";
 export * from "./range-field";
 export * from "./textarea";
 export * from "./color-picker";
+export * from "./radio-group";

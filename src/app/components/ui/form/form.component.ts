@@ -83,6 +83,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     @ViewChild("numberWithDropdownField", { static: true })
     private numberWithDropdownField: ControlTemplate;
 
+    @ViewChild("radioGroupTemplate", { static: true })
+    private radioGroupField: ControlTemplate;
+
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
         this._templatesMap = {
@@ -122,6 +125,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField,
             [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField,
             [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
+            [APFormDefaultTemplateKeys.RADIO_GROUP_FIELD]: this.radioGroupField,
         };
 
         this._templatesMap = {
