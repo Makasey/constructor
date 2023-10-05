@@ -1,5 +1,6 @@
 import {
     ElementHTMLTag,
+    ImagePageElement,
     InnerPageElement,
     JustifyContent,
     SectionPageElement,
@@ -59,7 +60,11 @@ export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "par
             value: 10,
             unit: StyleUnit.PX,
         },
-        text: "Hello World!",
+        letterSpacing: {
+            value: 0,
+            unit: StyleUnit.PX,
+        },
+        opacity: 1,
         tag: ElementHTMLTag.SECTION,
         color: "#1b1c2d",
         backgroundColor: "#ffffff",
@@ -140,11 +145,36 @@ export const defaultInnerElementSettings: Omit<InnerPageElement, "id" | "parentI
     },
 };
 
+export const defaultImageElementSettings: Omit<ImagePageElement, "id" | "parentId"> = {
+    type: SitePageElementType.IMAGE,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        image: {
+            alt: "",
+
+            title: "",
+            src: "https://us1.wpdemo.org/wpd_1696513527_9424/tmp-site-q3qtfbcsqglvl.us1.wpdemo.org/wp-content/plugins/elementor/assets/images/placeholder.png",
+        },
+        alt: "",
+        title: "",
+    },
+};
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings,
     [SitePageElementType.SECTION]: defaultSectionElementSettings,
     [SitePageElementType.PAGE]: defaultPageElementSettings,
     [SitePageElementType.INNER]: defaultInnerElementSettings,
+    [SitePageElementType.IMAGE]: defaultImageElementSettings,
 };
 
 export const defaultSizeControlUnit = [

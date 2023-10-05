@@ -14,4 +14,5 @@ export {
     columnStructureCountMap,
 } from "./section";
 export { InnerComponent, InnerPageElement, InnerItemElementSettingsGroup } from "./inner";
+export { ImagePageElement, ImageComponent, ImagePageElementSettings, ImageElementSettingsGroup } from "./image";
 export { RootComponent } from "./root";

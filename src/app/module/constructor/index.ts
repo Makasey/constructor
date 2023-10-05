@@ -44,6 +44,7 @@ export {
     processStructureType,
     getInnerSettings,
     processPossibleElements,
+    getImageSettings,
 } from "./utils";
 
 export {
@@ -92,6 +93,10 @@ export {
     InnerComponent,
     InnerPageElement,
     InnerItemElementSettingsGroup,
+    ImagePageElement,
+    ImageComponent,
+    ImagePageElementSettings,
+    ImageElementSettingsGroup,
 } from "./components";
 
 export {

@@ -25,6 +25,7 @@ export enum SitePageElementType {
     TITLE = "title",
     SECTION = "section",
     INNER = "inner",
+    IMAGE = "image",
 }
 
 export enum ElementHTMLTag {

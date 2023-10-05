@@ -11,19 +11,6 @@ import {
     getDefaultSizeSettings,
 } from "@modules/constructor";
 
-function getSectionTextControl(element: SectionPageElement): APFormControl {
-    return {
-        id: "text",
-        name: "text",
-        value: element.settings.text ?? null,
-        valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-        options: {
-            maxLength: 300,
-            label: "Текст элемента",
-        },
-    };
-}
-
 function getSectionHTMLTagControl(element: SectionPageElement): APFormControl {
     return {
         id: "tag",
@@ -164,7 +151,6 @@ export function getSectionElementSizeControls(element: SectionPageElement): APFo
 
 export function getSectionElementTextControl(element: SectionPageElement): APFormControl[] {
     return [
-        getSectionTextControl(element),
         getSectionHTMLTagControl(element),
         getSectionLetterSpacingControl(element),
         getSectionOpacityControl(element),

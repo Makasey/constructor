@@ -1,6 +1,6 @@
 export type File = Readonly<{
-    id: number;
-    fileName: string;
-    path: string;
-    size: number;
+    id?: number;
+    src: string;
+    alt: string;
+    title: string;
 }>;

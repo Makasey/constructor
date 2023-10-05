@@ -7,7 +7,7 @@
 
 <section class="files">
     <article class="file" *ngFor="let item of files$ | async" [class.active]="item.id === selectedElement?.id">
-        <img [src]="item.path" [alt]="item.fileName" />
+        <img [src]="item.src" [alt]="item.alt" />
         <button class="file-button" (click)="selectElement(item)"></button>
         <button class="file-remove" (click)="removeFile(item.id)">
             <i class="bx bx-trash"></i>

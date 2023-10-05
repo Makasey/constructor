@@ -9,8 +9,9 @@ import {
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
-import { Observable, map, shareReplay } from "rxjs";
+import { Observable, distinctUntilChanged, map, shareReplay } from "rxjs";
 import { filterNilValue, logAction } from "@datorama/akita";
+import { isObjectEquals } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractEditorElementSettingsService<K = SitePageElementSettings> extends AbstractEditorOperationService {
@@ -41,9 +42,15 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
 
     public selectElementSettingsFormModel(): Observable<APFormModel | null> {
         return this.query
-            .select(state => state.selectedElement)
+            .select(({ selectedElement, items }) => {
+                return {
+                    selectedElement: selectedElement,
+                    settings: items[selectedElement].settings,
+                };
+            })
             .pipe(
-                map(selectedElement => {
+                distinctUntilChanged(isObjectEquals),
+                map(({ selectedElement, settings }) => {
                     if (selectedElement === ROOT_ELEMENT_ID) {
                         return null;
                     }

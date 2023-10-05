@@ -1,7 +1,7 @@
 <ng-template [ngTemplateOutlet]="value ? valueTemplate : emptyTemplate"></ng-template>
 
 <ng-template #valueTemplate>
-    <button class="file-upload-button" (click)="openModal()"><img [src]="value.path" [alt]="value.fileName" /></button>
+    <button class="file-upload-button" (click)="openModal()"><img [src]="value.src" [alt]="value.alt" /></button>
 </ng-template>
 
 <ng-template #emptyTemplate>

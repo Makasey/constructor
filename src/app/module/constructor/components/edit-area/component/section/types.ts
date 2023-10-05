@@ -13,17 +13,15 @@ export type SectionPageElement = SitePageElement<SectionPageElementSettings>;
 
 export type SectionPageElementSettings = Readonly<
     {
-        text?: string;
-        label?: string;
-        tag?: string;
-        padding?: Direction;
-        margin?: Direction;
-        letterSpacing?: RangeWithUnit;
-        opacity?: number;
-        isInit?: boolean;
+        tag: string;
+        padding: Direction;
+        margin: Direction;
+        letterSpacing: RangeWithUnit;
+        opacity: number;
+        isInit: boolean;
         structure?: ColumnStructure;
-        gap?: ElementSettingsWithUnit;
-        justifyContent?: JustifyContent;
+        gap: ElementSettingsWithUnit;
+        justifyContent: JustifyContent;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

@@ -25,6 +25,7 @@ export type APFormModel = {
     styleClass?: string;
     upsertConfig?: UpsertConfig;
     headerText?: string;
+    mapperFn?: (data: unknown) => unknown;
     isFormArray?: boolean;
     innerGroups?: APFormModel[];
     controls: (APFormControl | APFormControl[])[];

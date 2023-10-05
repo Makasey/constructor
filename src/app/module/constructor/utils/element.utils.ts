@@ -44,8 +44,8 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     icon: "bx-font",
                 },
                 {
-                    title: "Заголовок",
-                    type: SitePageElementType.TITLE,
+                    title: "Изображение",
+                    type: SitePageElementType.IMAGE,
                     icon: "bx-font",
                 },
                 {
@@ -57,7 +57,13 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
         }
 
         case SitePageElementType.TITLE: {
-            return [];
+            return [
+                {
+                    title: "Изображение",
+                    type: SitePageElementType.IMAGE,
+                    icon: "bx-font",
+                },
+            ];
         }
 
         default: {

@@ -3,7 +3,7 @@
     <lz-accordion [collapsing]="false">
         <lz-accordion-item [expanded]="true" *ngFor="let group of formModel.innerGroups" [title]="group.headerText!">
             <ng-template lzAccordionContent>
-                <ap-form [formModel]="group" (submitForm)="updateElementSettings($event)" />
+                <ap-form [formModel]="group" (submitForm)="updateElementSettings($event, formModel.mapperFn)" />
             </ng-template>
         </lz-accordion-item>
     </lz-accordion>

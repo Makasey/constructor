@@ -22,6 +22,10 @@ export {
     InnerPageElement,
     columnStructureCountMap,
     InnerItemElementSettingsGroup,
+    ImagePageElement,
+    ImageComponent,
+    ImagePageElementSettings,
+    ImageElementSettingsGroup,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

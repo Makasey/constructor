@@ -24,4 +24,8 @@ export {
     InnerComponent,
     InnerPageElement,
     InnerItemElementSettingsGroup,
+    ImagePageElementSettings,
+    ImagePageElement,
+    ImageComponent,
+    ImageElementSettingsGroup,
 } from "./edit-area";

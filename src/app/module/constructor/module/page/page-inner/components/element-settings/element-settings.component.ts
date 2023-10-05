@@ -20,7 +20,13 @@ export class ElementSettingsComponent {
 
     public readonly elementSettingsFormModel = toSignal(this.service.selectElementSettingsFormModel());
 
-    public updateElementSettings(settings: unknown): void {
-        this.service.updateElementSettings(settings);
+    public updateElementSettings(settings: unknown, mapperFn: <T, V>(data: T) => V): void {
+        const processedSettings = mapperFn ? mapperFn(settings) : this.defaultMapper(settings);
+
+        this.service.updateElementSettings(processedSettings);
+    }
+
+    private defaultMapper(data: unknown): unknown {
+        return data;
     }
 }
