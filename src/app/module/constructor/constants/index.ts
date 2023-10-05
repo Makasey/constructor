@@ -1,4 +1,14 @@
-import { ElementHTMLTag, JustifyContent, SectionPageElement, SitePageElementType, SitePageElementUnion, StyleUnit } from "@modules/constructor";
+import {
+    ElementHTMLTag,
+    InnerPageElement,
+    JustifyContent,
+    SectionPageElement,
+    SitePageElement,
+    SitePageElementType,
+    SitePageElementUnion,
+    StyleUnit,
+    TitlePageElement,
+} from "@modules/constructor";
 import { InjectionToken } from "@angular/core";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 import { defaultDirectionValue } from "@components";
@@ -39,73 +49,102 @@ export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "par
             value: 200,
             unit: StyleUnit.PX,
         },
-        text: "Hello World!",
-        tag: ElementHTMLTag.SECTION,
-        color: "#1b1c2d",
-        backgroundColor: "#ffffff",
         margin: {
             ...defaultDirectionValue,
         },
         padding: {
             ...defaultDirectionValue,
         },
-        isInit: false,
         gap: {
             value: 10,
             unit: StyleUnit.PX,
         },
+        text: "Hello World!",
+        tag: ElementHTMLTag.SECTION,
+        color: "#1b1c2d",
+        backgroundColor: "#ffffff",
+        isInit: false,
+        justifyContent: JustifyContent.START,
+    },
+};
+
+export const defaultTitleElementSettings: Omit<TitlePageElement, "id" | "parentId"> = {
+    type: SitePageElementType.TITLE,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 20,
+            unit: StyleUnit.PERCENT,
+        },
+        tag: ElementHTMLTag.H1,
+        color: "#000000",
+        backgroundColor: "transparent",
+        text: "Hello World",
+        link: "",
+    },
+};
+
+export const defaultPageElementSettings: Omit<SitePageElement, "id" | "parentId"> = {
+    type: SitePageElementType.PAGE,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+    },
+};
+
+export const defaultInnerElementSettings: Omit<InnerPageElement, "id" | "parentId"> = {
+    type: SitePageElementType.INNER,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 100,
+            unit: StyleUnit.PX,
+        },
+        gap: {
+            value: 0,
+            unit: StyleUnit.PX,
+        },
+        letterSpacing: {
+            value: 0,
+            unit: StyleUnit.PX,
+        },
+        margin: {
+            ...defaultDirectionValue,
+        },
+        padding: {
+            ...defaultDirectionValue,
+        },
+        opacity: 1,
+        color: "#000000",
+        backgroundColor: "#c25656",
+        justifyContent: JustifyContent.START,
+        tag: ElementHTMLTag.ARTICLE,
     },
 };
 
 export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {
-    [SitePageElementType.TITLE]: {
-        type: SitePageElementType.TITLE,
-        children: [],
-        isExtendable: false,
-        settings: {
-            width: {
-                value: 100,
-                unit: StyleUnit.PERCENT,
-            },
-            height: {
-                value: 20,
-                unit: StyleUnit.PERCENT,
-            },
-        },
-    },
+    [SitePageElementType.TITLE]: defaultTitleElementSettings,
     [SitePageElementType.SECTION]: defaultSectionElementSettings,
-    [SitePageElementType.PAGE]: {
-        type: SitePageElementType.PAGE,
-        children: [],
-        isExtendable: false,
-        settings: {
-            width: {
-                value: 100,
-                unit: StyleUnit.PERCENT,
-            },
-            height: {
-                value: 100,
-                unit: StyleUnit.PERCENT,
-            },
-        },
-    },
-    [SitePageElementType.INNER]: {
-        type: SitePageElementType.INNER,
-        children: [],
-        isExtendable: false,
-        settings: {
-            width: {
-                value: 100,
-                unit: StyleUnit.PERCENT,
-            },
-            height: {
-                value: 100,
-                unit: StyleUnit.PX,
-            },
-            backgroundColor: "#c25656",
-            justifyContent: JustifyContent.START,
-        },
-    },
+    [SitePageElementType.PAGE]: defaultPageElementSettings,
+    [SitePageElementType.INNER]: defaultInnerElementSettings,
 };
 
 export const defaultSizeControlUnit = [

@@ -3,12 +3,11 @@ import {
     DEFAULT_UPSERT_CONFIG,
     InnerItemElementSettingsGroup,
     InnerPageElement,
-    SectionPageElement,
     defaultJustifyContentItems,
     getDefaultSizeSettings,
 } from "@modules/constructor";
 
-function getInnerItemBackgroundColorControl(element: SectionPageElement): APFormControl {
+function getInnerItemBackgroundColorControl(element: InnerPageElement): APFormControl {
     return {
         id: "backgroundColor",
         name: "backgroundColor",
@@ -20,7 +19,7 @@ function getInnerItemBackgroundColorControl(element: SectionPageElement): APForm
     };
 }
 
-function getInnerJustifyContentControl(element: SectionPageElement): APFormControl {
+function getInnerJustifyContentControl(element: InnerPageElement): APFormControl {
     return {
         id: "justifyContent",
         name: "justifyContent",
@@ -33,11 +32,11 @@ function getInnerJustifyContentControl(element: SectionPageElement): APFormContr
     };
 }
 
-export function getInnerItemElementSettings(element: SectionPageElement): APFormControl[] {
+export function getInnerItemElementSettings(element: InnerPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
 
-export function getInnerItemElementStyleControl(element: SectionPageElement): APFormControl[] {
+export function getInnerItemElementStyleControl(element: InnerPageElement): APFormControl[] {
     return [getInnerItemBackgroundColorControl(element), getInnerJustifyContentControl(element)];
 }
 

@@ -1,9 +1,9 @@
-import { CampaignType, SectionPageElement, SitePageElementType, StyleUnit } from "@modules/constructor";
+import { CampaignType, InnerPageElement, SectionPageElement, SitePageElementType, StyleUnit, TitlePageElement } from "@modules/constructor";
 import { File } from "@shared-types";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
 
-export type SitePageElementUnion = SectionPageElement | SitePageElement;
+export type SitePageElementUnion = SectionPageElement | SitePageElement | TitlePageElement | InnerPageElement;
 
 export type SitePageElement<T = SitePageElementSettings> = Readonly<{
     id: number;
