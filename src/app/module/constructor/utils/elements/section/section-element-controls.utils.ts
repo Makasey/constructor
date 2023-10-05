@@ -3,6 +3,7 @@ import {
     DEFAULT_UPSERT_CONFIG,
     SectionElementSettingsGroup,
     SectionPageElement,
+    defaultJustifyContentItems,
     defaultSectionOpacityStep,
     defaultSectionTagControls,
     defaultSizeControlUnit,
@@ -144,6 +145,19 @@ function getSectionGapControl(element: SectionPageElement): APFormControl {
     };
 }
 
+function getSectionJustifyContentControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "justifyContent",
+        name: "justifyContent",
+        value: element.settings.justifyContent,
+        valueTemplateKey: APFormDefaultTemplateKeys.RADIO_GROUP_FIELD,
+        options: {
+            label: "justify-content",
+            items: defaultJustifyContentItems,
+        },
+    };
+}
+
 export function getSectionElementSizeControls(element: SectionPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element), getSectionGapControl(element)];
 }
@@ -159,7 +173,12 @@ export function getSectionElementTextControl(element: SectionPageElement): APFor
 }
 
 export function getSectionElementStyleControl(element: SectionPageElement): APFormControl[] {
-    return [getSectionPaddingControl(element), getSectionMarginControl(element), getSectionBackgroundColorControl(element)];
+    return [
+        getSectionPaddingControl(element),
+        getSectionMarginControl(element),
+        getSectionBackgroundColorControl(element),
+        getSectionJustifyContentControl(element),
+    ];
 }
 
 export function getSectionSettings(element: SectionPageElement): APFormModel {

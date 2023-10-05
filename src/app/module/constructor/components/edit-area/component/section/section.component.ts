@@ -70,6 +70,10 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.gap")
     public gap$: Observable<string>;
 
+    @HostBinding("$.style.justify-content")
+    @HostListener("$.style.justify-content")
+    public justifyContent$: Observable<string>;
+
     @HostBinding("class")
     public classes = {
         "editor-element": true,
@@ -118,6 +122,8 @@ export class SectionComponent implements OnInit {
         this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity!));
 
         this.gap$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.gap)));
+
+        this.justifyContent$ = this.sectionSettings$.pipe(map(settings => settings.justifyContent!));
     }
 
     public addElement(type: SitePageElementType): void {

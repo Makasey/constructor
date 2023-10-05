@@ -1,7 +1,7 @@
 <span class="label">{{ label }}</span>
 
 <article class="list">
-    <label *ngFor="let item of items" class="item" [class.active]="item.value === _value">
+    <label *ngFor="let item of items" class="item" [title]="item.label" [class.active]="item.value === _value">
         <i class="eicon-flex" [ngClass]="item.image"></i>
 
         <input

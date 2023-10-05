@@ -41,6 +41,10 @@ export class InnerComponent implements OnInit {
     @HostListener("$.style.background-color")
     public backgroundColor$: Observable<string>;
 
+    @HostBinding("$.style.justify-content")
+    @HostListener("$.style.justify-content")
+    public justifyContent$: Observable<string>;
+
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private readonly abstractEditorElementActionsService = inject(AbstractEditorElementActionsService);
@@ -57,6 +61,8 @@ export class InnerComponent implements OnInit {
         this.height$ = this.innerSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
         this.backgroundColor$ = this.innerSettings$.pipe(map(settings => settings.backgroundColor));
+
+        this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent!));
     }
 
     public _trackBy(_: number, item: number): number {
