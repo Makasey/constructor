@@ -42,15 +42,10 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
 
     public selectElementSettingsFormModel(): Observable<APFormModel | null> {
         return this.query
-            .select(({ selectedElement, items }) => {
-                return {
-                    selectedElement: selectedElement,
-                    settings: items[selectedElement].settings,
-                };
-            })
+            .select(state => state.selectedElement)
             .pipe(
                 distinctUntilChanged(isObjectEquals),
-                map(({ selectedElement, settings }) => {
+                map(selectedElement => {
                     if (selectedElement === ROOT_ELEMENT_ID) {
                         return null;
                     }

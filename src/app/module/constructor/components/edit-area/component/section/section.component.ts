@@ -119,11 +119,11 @@ export class SectionComponent implements OnInit {
 
         this.sectionLetterSpacing$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.letterSpacing)));
 
-        this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity!));
+        this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity));
 
         this.gap$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.gap)));
 
-        this.justifyContent$ = this.sectionSettings$.pipe(map(settings => settings.justifyContent!));
+        this.justifyContent$ = this.sectionSettings$.pipe(map(settings => settings.justifyContent));
     }
 
     public addElement(type: SitePageElementType): void {

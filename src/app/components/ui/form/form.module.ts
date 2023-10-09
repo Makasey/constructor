@@ -8,14 +8,15 @@ import {
     APNumberFieldModule,
     APTextFieldModule,
     DirectionFieldComponent,
-    ESFileUploadComponent,
     LZColorPickerComponent,
+    LZFileUploadComponent,
     NumberWithDropdownFieldComponent,
     RadioGroupComponent,
     RangeFieldComponent,
     RangeFieldWithUnitComponent,
     TextareaComponent,
 } from "@components";
+import { LZImageFieldComponent } from "@components/ui/controls/image-field/image-field.component";
 
 const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModule];
 
@@ -25,8 +26,9 @@ const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModul
         ...AP_MODULES,
         CommonModule,
         DirectionFieldComponent,
-        ESFileUploadComponent,
         LZColorPickerComponent,
+        LZFileUploadComponent,
+        LZImageFieldComponent,
         NumberWithDropdownFieldComponent,
         RadioGroupComponent,
         RangeFieldComponent,

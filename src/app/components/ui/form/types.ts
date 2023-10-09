@@ -17,6 +17,7 @@ export enum APFormDefaultTemplateKeys {
     DIRECTION_FIELD = "directionFieldTemplate",
     RANGE_FIELD = "rangeFieldTemplate",
     RADIO_GROUP_FIELD = "radioGroupField",
+    IMAGE_UPLOAD_FIELD = "imageUploadField",
 }
 
 export type APFormModel = {

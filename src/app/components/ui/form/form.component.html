@@ -149,6 +149,17 @@
     <lz-file-upload [formControl]="nativeControl" [nativeControl]="nativeControl" [controlModel]="controlModel" />
 </ng-template>
 
+<ng-template #imageUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <lz-image-field
+        [formControl]="nativeControl"
+        [nativeControl]="nativeControl"
+        [controlModel]="controlModel"
+        [label]="controlModel.options?.label"
+        [maxLength]="controlModel.options?.maxLength"
+        [minLength]="controlModel.options?.minLength"
+    ></lz-image-field>
+</ng-template>
+
 <ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <span class="form-default-text">
         {{ "label: " + controlModel?.options.label }}

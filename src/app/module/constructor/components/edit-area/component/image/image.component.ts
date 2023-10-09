@@ -22,6 +22,9 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class ImageComponent implements OnInit {
+    @HostBinding("class.lz-image")
+    public hostClass = true;
+
     @HostBinding("$.style.height")
     @HostListener("$.style.height")
     public height$: Observable<string>;
@@ -49,9 +52,9 @@ export class ImageComponent implements OnInit {
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
-        this.title$ = this.settings$.pipe(map(settings => settings.title));
+        this.title$ = this.settings$.pipe(map(settings => settings.image.title));
 
-        this.alt$ = this.settings$.pipe(map(settings => settings.alt));
+        this.alt$ = this.settings$.pipe(map(settings => settings.image.alt));
 
         this.src$ = this.settings$.pipe(map(settings => settings.image.src));
     }

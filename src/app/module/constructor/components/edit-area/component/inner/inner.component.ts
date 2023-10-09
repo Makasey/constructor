@@ -62,7 +62,7 @@ export class InnerComponent implements OnInit {
 
         this.backgroundColor$ = this.innerSettings$.pipe(map(settings => settings.backgroundColor));
 
-        this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent!));
+        this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent));
     }
 
     public _trackBy(_: number, item: number): number {

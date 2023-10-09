@@ -32,19 +32,19 @@ import { filter, tap } from "rxjs";
         {
             provide: NG_VALUE_ACCESSOR,
             multi: true,
-            useExisting: forwardRef(() => ESFileUploadComponent),
+            useExisting: forwardRef(() => LZFileUploadComponent),
         },
     ],
     imports: [NgTemplateOutlet],
 })
-export class ESFileUploadComponent implements ControlValueAccessor {
+export class LZFileUploadComponent implements ControlValueAccessor {
     @HostBinding("class.lz-file-upload")
     public hostClass = true;
 
-    @Input({ required: true })
+    @Input()
     public nativeControl: FormControl;
 
-    @Input({ required: true })
+    @Input()
     public controlModel: APFormControl;
 
     @Output()

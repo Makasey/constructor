@@ -86,6 +86,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     @ViewChild("radioGroupTemplate", { static: true })
     private radioGroupField: ControlTemplate;
 
+    @ViewChild("imageUploadTemplate", { static: true })
+    private imageUploadField: ControlTemplate;
+
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
         this._templatesMap = {
@@ -126,6 +129,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField,
             [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
             [APFormDefaultTemplateKeys.RADIO_GROUP_FIELD]: this.radioGroupField,
+            [APFormDefaultTemplateKeys.IMAGE_UPLOAD_FIELD]: this.imageUploadField,
         };
 
         this._templatesMap = {

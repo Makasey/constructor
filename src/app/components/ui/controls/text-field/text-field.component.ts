@@ -24,6 +24,15 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
     @Input()
     public controlModel: APFormControl;
 
+    @Input()
+    public label = "";
+
+    @Input()
+    public maxLength: number;
+
+    @Input()
+    public minLength: number;
+
     @Output()
     public readonly onValueChange: EventEmitter<APTextFieldValueChangeEvent> = new EventEmitter<APTextFieldValueChangeEvent>();
 
@@ -39,7 +48,7 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
 
     public disabled = false;
 
-    public _options: ApTextFormControlOptions;
+    public _options: ApTextFormControlOptions = { ...defaultAPTextFieldOptions };
 
     public onChange: (value: string) => void;
 
@@ -49,7 +58,7 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
         if (changes.controlModel) {
             this._options = {
                 ...defaultAPTextFieldOptions,
-                ...this.controlModel.options,
+                ...(this.controlModel.options ?? {}),
             };
         }
     }

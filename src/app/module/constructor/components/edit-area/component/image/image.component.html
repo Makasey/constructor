@@ -1,4 +1,4 @@
 <figure>
     <img [src]="src$ | async" [alt]="alt$ | async" />
-    <figcaption *ngIf="title$ | async as title">{{ title }}</figcaption>
+    <figcaption *ngIf="title$ | async as title" class="title">{{ title }}</figcaption>
 </figure>

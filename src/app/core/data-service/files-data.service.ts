@@ -1,7 +1,7 @@
 import { File, PaginationListItems } from "@shared-types";
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { Observable, delay, map } from "rxjs";
+import { Observable, map } from "rxjs";
 import { mapPaginationResponseToListModel } from "@shared-utils";
 
 @Injectable()
@@ -30,7 +30,7 @@ export class DefaultFilesDataService extends AbstractFilesDataService {
     }
 
     public uploadFiles(fileList: FormData): Observable<File[]> {
-        return this.httpClient.post<File[]>(`http://localhost:7000/api/editor-files`, fileList).pipe(delay(5000));
+        return this.httpClient.post<File[]>(`http://localhost:7000/api/editor-files`, fileList);
     }
 
     public removeFile(id: number): Observable<void> {
