@@ -74,6 +74,14 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.justify-content")
     public justifyContent$: Observable<string>;
 
+    @HostBinding("$.style.flex-wrap")
+    @HostListener("$.style.flex-wrap")
+    public flexWrap$: Observable<string>;
+
+    @HostBinding("$.style.align-items")
+    @HostListener("$.style.align-items")
+    public alignItems$: Observable<string>;
+
     @HostBinding("class")
     public classes = {
         "editor-element": true,
@@ -124,10 +132,14 @@ export class SectionComponent implements OnInit {
         this.gap$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.gap)));
 
         this.justifyContent$ = this.sectionSettings$.pipe(map(settings => settings.justifyContent));
+
+        this.flexWrap$ = this.sectionSettings$.pipe(map(settings => settings.flexWrap));
+
+        this.alignItems$ = this.sectionSettings$.pipe(map(settings => settings.alignItems));
     }
 
     public addElement(type: SitePageElementType): void {
-        this.editorActionsService.addElement(type, this.ELEMENT_ID);
+        this.editorActionsService.addElementByType(type, this.ELEMENT_ID);
     }
 
     public _trackByChild(index: number, child: number): number {

@@ -1690,6 +1690,14 @@
     content: "\e99d";
 }
 
+.eicon-wrap-reverse:before {
+    content: "\e99d";
+}
+
+.eicon-wrap-reverse {
+  transform: rotate(180deg);
+}
+
 .eicon-align-center-h:before {
     content: "\e99e";
 }

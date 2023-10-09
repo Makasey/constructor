@@ -1,5 +1,7 @@
 import {
+    AlignItems,
     ElementHTMLTag,
+    FlexWrap,
     ImagePageElement,
     InnerPageElement,
     JustifyContent,
@@ -70,6 +72,8 @@ export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "par
         backgroundColor: "#ffffff",
         isInit: false,
         justifyContent: JustifyContent.START,
+        flexWrap: FlexWrap.NO_WRAP,
+        alignItems: AlignItems.START,
     },
 };
 
@@ -195,4 +199,16 @@ export const defaultJustifyContentItems = [
     { label: JustifyContent.SPACE_BETWEEN, value: JustifyContent.SPACE_BETWEEN, image: "eicon-justify-space-between-h" },
     { label: JustifyContent.SPACE_AROUND, value: JustifyContent.SPACE_AROUND, image: "eicon-justify-space-around-h" },
     { label: JustifyContent.SPACE_EVENLY, value: JustifyContent.SPACE_EVENLY, image: "eicon-justify-space-evenly-h" },
+];
+
+export const defaultFlexWrapItems = [
+    { label: FlexWrap.WRAP, value: FlexWrap.WRAP, image: "eicon-wrap" },
+    { label: FlexWrap.NO_WRAP, value: FlexWrap.NO_WRAP, image: "eicon-nowrap" },
+    { label: FlexWrap.WRAP_REVERSE, value: FlexWrap.WRAP_REVERSE, image: "eicon-wrap-reverse" },
+];
+
+export const defaultAlignItemsItems = [
+    { label: AlignItems.START, value: AlignItems.START, image: "eicon-align-start-h" },
+    { label: AlignItems.CENTER, value: AlignItems.CENTER, image: "eicon-align-center-h" },
+    { label: AlignItems.END, value: AlignItems.END, image: "eicon-align-end-h" },
 ];

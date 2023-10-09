@@ -3,6 +3,8 @@ import {
     DEFAULT_UPSERT_CONFIG,
     SectionElementSettingsGroup,
     SectionPageElement,
+    defaultAlignItemsItems,
+    defaultFlexWrapItems,
     defaultJustifyContentItems,
     defaultSectionOpacityStep,
     defaultSectionTagControls,
@@ -145,6 +147,32 @@ function getSectionJustifyContentControl(element: SectionPageElement): APFormCon
     };
 }
 
+function getSectionFlexWrapControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "flexWrap",
+        name: "flexWrap",
+        value: element.settings.flexWrap,
+        valueTemplateKey: APFormDefaultTemplateKeys.RADIO_GROUP_FIELD,
+        options: {
+            label: "flex-wrap",
+            items: defaultFlexWrapItems,
+        },
+    };
+}
+
+function getSectionAlignItemsControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "alignItems",
+        name: "alignItems",
+        value: element.settings.alignItems,
+        valueTemplateKey: APFormDefaultTemplateKeys.RADIO_GROUP_FIELD,
+        options: {
+            label: "align-items",
+            items: defaultAlignItemsItems,
+        },
+    };
+}
+
 export function getSectionElementSizeControls(element: SectionPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element), getSectionGapControl(element)];
 }
@@ -164,6 +192,8 @@ export function getSectionElementStyleControl(element: SectionPageElement): APFo
         getSectionMarginControl(element),
         getSectionBackgroundColorControl(element),
         getSectionJustifyContentControl(element),
+        getSectionFlexWrapControl(element),
+        getSectionAlignItemsControl(element),
     ];
 }
 

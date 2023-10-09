@@ -81,12 +81,12 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         });
     }
 
-    public addElement(type: SitePageElementType, parentId?: number): void {
+    public addElementByType(type: SitePageElementType, parentId?: number): void {
         this.service.updateState(state => {
             const newElementID = this.getStoreElement("currentStateIndex") + 1;
             parentId = parentId ?? state.selectedElement;
 
-            logAction(`Add element with id: ${newElementID}`);
+            logAction(`Add element with id: ${newElementID}, type: ${type}`);
             const items = state.items;
             const parentElement = items[parentId];
             const newElement: SitePageElement = {
@@ -108,6 +108,31 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                         children: arrayAdd(parentElement.children, newElementID),
                     },
                     [newElementID]: newElement,
+                },
+            };
+        });
+    }
+
+    public addElement(element: SitePageElementUnion, parentId?: number): void {
+        this.service.updateState(state => {
+            const newElementID = this.getStoreElement("currentStateIndex") + 1;
+            parentId = parentId ?? state.selectedElement;
+            const { type } = element;
+
+            logAction(`Add element with id: ${newElementID} type: ${type}`);
+            const items = state.items;
+            const parentElement = items[parentId];
+
+            return {
+                currentStateIndex: state.currentStateIndex > newElementID ? state.currentStateIndex : newElementID,
+                selectedElement: newElementID,
+                items: {
+                    ...items,
+                    [parentId]: {
+                        ...parentElement,
+                        children: arrayAdd(parentElement.children, newElementID),
+                    },
+                    [newElementID]: element,
                 },
             };
         });

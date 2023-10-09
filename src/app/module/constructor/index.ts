@@ -1,4 +1,4 @@
-export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag, JustifyContent } from "./enums";
+export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag, JustifyContent, FlexWrap, AlignItems } from "./enums";
 export {
     ElementSettingsWithUnit,
     SitePageElementSettings,
@@ -15,6 +15,8 @@ export {
 export {
     defaultTextControlElement,
     defaultJustifyContentItems,
+    defaultFlexWrapItems,
+    defaultAlignItemsItems,
     ELEMENT_ID,
     defaultPageElementSettingsMap,
     DEFAULT_UPSERT_CONFIG,

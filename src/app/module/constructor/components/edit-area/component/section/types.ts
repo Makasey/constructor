@@ -1,6 +1,8 @@
 import {
+    AlignItems,
     ColumnStructure,
     ElementSettingsWithUnit,
+    FlexWrap,
     JustifyContent,
     SitePageElement,
     SitePageElementBackground,
@@ -22,6 +24,8 @@ export type SectionPageElementSettings = Readonly<
         structure?: ColumnStructure;
         gap: ElementSettingsWithUnit;
         justifyContent: JustifyContent;
+        flexWrap: FlexWrap;
+        alignItems: AlignItems;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

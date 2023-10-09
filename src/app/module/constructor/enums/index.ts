@@ -20,6 +20,18 @@ export enum JustifyContent {
     SPACE_EVENLY = "space-evenly",
 }
 
+export enum FlexWrap {
+    WRAP = "wrap",
+    NO_WRAP = "nowrap",
+    WRAP_REVERSE = "wrap-reverse",
+}
+
+export enum AlignItems {
+    START = "start",
+    END = "end",
+    CENTER = "center",
+}
+
 export enum SitePageElementType {
     PAGE = "page",
     TITLE = "title",

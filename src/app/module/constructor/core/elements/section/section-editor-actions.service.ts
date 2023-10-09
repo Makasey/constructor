@@ -4,7 +4,6 @@ import {
     ColumnStructure,
     SectionPageElement,
     SectionPageElementSettings,
-    SitePageElementType,
     processStructureType,
 } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
@@ -33,12 +32,14 @@ export class SectionEditorActionsService extends AbstractSectionEditorActionsSer
     }
 
     public chooseColumnStructureType(elementId: number, type: ColumnStructure): void {
-        const elements = processStructureType(type);
+        const lastElementId = this.getStoreElement("currentStateIndex");
+
+        const elements = processStructureType(type, elementId, lastElementId);
 
         this.elementSettingsService.updateElementSettings({ isInit: true }, elementId);
 
-        elements.forEach(() => {
-            this.addElement(SitePageElementType.INNER, elementId);
+        elements.forEach(element => {
+            this.addElement(element, elementId);
         });
     }
 }

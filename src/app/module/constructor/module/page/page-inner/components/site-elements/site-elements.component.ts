@@ -50,6 +50,6 @@ export class SiteElementsComponent {
             return;
         }
 
-        this.service.addElement(type);
+        this.service.addElementByType(type);
     }
 }
