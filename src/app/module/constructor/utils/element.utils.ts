@@ -53,6 +53,11 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     type: SitePageElementType.SECTION,
                     icon: "bx-font",
                 },
+                {
+                    title: "Табы",
+                    type: SitePageElementType.TABS,
+                    icon: "bx-font",
+                },
             ];
         }
 

@@ -10,6 +10,7 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     StyleUnit,
+    TabsPageElement,
     TitlePageElement,
 } from "@modules/constructor";
 import { InjectionToken } from "@angular/core";
@@ -173,12 +174,30 @@ export const defaultImageElementSettings: Omit<ImagePageElement, "id" | "parentI
     },
 };
 
+export const defaultTabsElementSettings: Omit<TabsPageElement, "id" | "parentId"> = {
+    type: SitePageElementType.TABS,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        count: 2,
+    },
+};
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings,
     [SitePageElementType.SECTION]: defaultSectionElementSettings,
     [SitePageElementType.PAGE]: defaultPageElementSettings,
     [SitePageElementType.INNER]: defaultInnerElementSettings,
     [SitePageElementType.IMAGE]: defaultImageElementSettings,
+    [SitePageElementType.TABS]: defaultTabsElementSettings,
 };
 
 export const defaultSizeControlUnit = [

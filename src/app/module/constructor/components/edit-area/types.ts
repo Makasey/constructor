@@ -1,4 +1,12 @@
-import { ImageComponent, InnerComponent, RootComponent, SectionComponent, SitePageElementType, TitleComponent } from "@modules/constructor";
+import {
+    ImageComponent,
+    InnerComponent,
+    RootComponent,
+    SectionComponent,
+    SitePageElementType,
+    TabsComponent,
+    TitleComponent,
+} from "@modules/constructor";
 import { Type } from "@angular/core";
 
 export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
@@ -7,4 +15,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.SECTION]: SectionComponent,
     [SitePageElementType.INNER]: InnerComponent,
     [SitePageElementType.IMAGE]: ImageComponent,
+    [SitePageElementType.TABS]: TabsComponent,
 };

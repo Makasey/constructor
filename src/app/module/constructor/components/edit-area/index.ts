@@ -26,6 +26,10 @@ export {
     ImageComponent,
     ImagePageElementSettings,
     ImageElementSettingsGroup,
+    TabsComponent,
+    TabsPageElementSettings,
+    TabsPageElement,
+    TabsElementSettingsGroup,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

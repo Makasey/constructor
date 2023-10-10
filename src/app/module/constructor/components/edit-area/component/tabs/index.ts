@@ -1,0 +1,3 @@
+export { TabsComponent } from "./tabs.component";
+export { TabsPageElement, TabsPageElementSettings } from "./types";
+export { TabsElementSettingsGroup } from "./enums";

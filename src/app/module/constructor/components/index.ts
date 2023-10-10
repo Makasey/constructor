@@ -28,4 +28,8 @@ export {
     ImagePageElement,
     ImageComponent,
     ImageElementSettingsGroup,
+    TabsComponent,
+    TabsPageElementSettings,
+    TabsPageElement,
+    TabsElementSettingsGroup,
 } from "./edit-area";

@@ -99,6 +99,10 @@ export {
     ImageComponent,
     ImagePageElementSettings,
     ImageElementSettingsGroup,
+    TabsComponent,
+    TabsPageElement,
+    TabsPageElementSettings,
+    TabsElementSettingsGroup,
 } from "./components";
 
 export {
