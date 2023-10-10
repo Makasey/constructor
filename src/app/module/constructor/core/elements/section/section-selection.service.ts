@@ -11,7 +11,7 @@ export class SectionSelectionService extends AbstractEditorSelectionService {
         super(query, service);
     }
 
-    public updateSectionSelection(elementId: number): void {
+    public updateSectionSelection(elementId: string): void {
         const selectedElement = this.getStoreElement("selectedElement");
 
         if (selectedElement === elementId) {

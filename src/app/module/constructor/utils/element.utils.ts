@@ -1,6 +1,6 @@
 import { ElementButton, SitePageElement, SitePageElementType } from "@modules/constructor";
 
-export function deleteElementFromTree(items: Record<string, SitePageElement>, element: number): Record<string, SitePageElement> {
+export function deleteElementFromTree(items: Record<string, SitePageElement>, element: string): Record<string, SitePageElement> {
     const { id, children } = items[element];
 
     let itemsCopy = { ...items };

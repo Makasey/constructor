@@ -1,5 +1,6 @@
 import { CampaignListState, EditorState, FilesState, ModuleState, TableModuleState, TableState, UIDataState } from "@core";
 import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor";
+import { getRandomId } from "@shared-utils";
 
 export function initialTableModuleState(): TableModuleState {
     return {
@@ -15,11 +16,13 @@ export function initialModuleDataState(): ModuleState {
 }
 
 export function initialEditorState(): EditorState {
+    const pageID = getRandomId();
+
     return {
         dataState: UIDataState.LOADED,
         items: {
             [ROOT_ELEMENT_ID]: {
-                id: 1,
+                id: ROOT_ELEMENT_ID,
                 type: SitePageElementType.PAGE,
                 children: [],
                 isExtendable: true,
@@ -37,11 +40,10 @@ export function initialEditorState(): EditorState {
             },
         },
         selectedElement: ROOT_ELEMENT_ID,
-        currentStateIndex: 1,
-        selectedPage: 1,
+        selectedPage: pageID,
         pages: [
             {
-                id: 1,
+                id: pageID,
                 settings: {
                     title: "My best site",
                     id: undefined,

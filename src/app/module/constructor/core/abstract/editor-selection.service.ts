@@ -11,7 +11,7 @@ export abstract class AbstractEditorSelectionService {
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
     ) {}
 
-    public updateSelection(elementId: number): void {
+    public updateSelection(elementId: string): void {
         const selectedElement = this.getStoreElement("selectedElement");
 
         const shouldDeselectItem = elementId === selectedElement;
@@ -19,7 +19,7 @@ export abstract class AbstractEditorSelectionService {
         shouldDeselectItem ? this.deselectElement(elementId) : this.selectElement(elementId);
     }
 
-    protected selectElement(elementId: number): void {
+    protected selectElement(elementId: string): void {
         logAction(`Select element with id: ${elementId}`, [elementId]);
 
         this.service.updateState(() => {
@@ -29,7 +29,7 @@ export abstract class AbstractEditorSelectionService {
         });
     }
 
-    protected deselectElement(elementId: number): void {
+    protected deselectElement(elementId: string): void {
         logAction(`Deselect element with id: ${elementId}`, [elementId]);
 
         this.service.updateState(() => {
@@ -39,16 +39,16 @@ export abstract class AbstractEditorSelectionService {
         });
     }
 
-    public selectSelectedElement(): Observable<number> {
+    public selectSelectedElement(): Observable<string> {
         return this.query.select(state => state.selectedElement);
     }
 
-    public tabSelection(currentIndex?: number): void {
-        const index = (currentIndex ?? this.getStoreElement("selectedElement")) + 1;
+    public tabSelection(currentId?: string, previousId?: string): void {
+        const id = this.getStoreElement("selectedElement");
         const items = this.getStoreElement("items");
-        const currentStateIndex = this.getStoreElement("currentStateIndex");
+        const { children, parentId } = items[id];
 
-        if (index > currentStateIndex) {
+        if (currentId === null) {
             this.service.updateState(() => {
                 return {
                     selectedElement: ROOT_ELEMENT_ID,
@@ -58,17 +58,87 @@ export abstract class AbstractEditorSelectionService {
             return;
         }
 
-        if (items[index]) {
+        if (currentId && previousId) {
+            const item = items[currentId];
+            const itemIndex = item.children.findIndex(child => child === previousId);
+
+            if (itemIndex === item.children.length - 1) {
+                this.tabSelection(item.parentId!, item.id);
+
+                return;
+            }
+
+            if (itemIndex < item.children.length - 1) {
+                this.service.updateState(() => {
+                    return {
+                        selectedElement: item.children[itemIndex + 1],
+                    };
+                });
+
+                return;
+            }
+
+            return;
+        }
+
+        if (children.length) {
             this.service.updateState(() => {
                 return {
-                    selectedElement: index,
+                    selectedElement: children[0],
                 };
             });
 
             return;
         }
 
-        this.tabSelection(index);
+        if (id === ROOT_ELEMENT_ID) {
+            this.service.updateState(() => {
+                return {
+                    selectedElement: ROOT_ELEMENT_ID,
+                };
+            });
+
+            return;
+        }
+
+        const parent = items[parentId!];
+        const itemIndex = parent.children.findIndex(child => child === id);
+
+        if (itemIndex === parent.children.length - 1) {
+            this.tabSelection(parent.parentId!, parent.id);
+
+            return;
+        }
+
+        this.service.updateState(() => {
+            return {
+                selectedElement: parent.children[itemIndex + 1],
+            };
+        });
+
+        // this.tabSelection(parent.children[itemIndex + 1]);
+        //
+        // if (index > currentStateIndex) {
+        //     this.service.updateState(() => {
+        //         return {
+        //             selectedElement: ROOT_ELEMENT_ID,
+        //         };
+        //     });
+        //
+        //     return;
+        // }
+        //
+        // if (items[index]) {
+        //     this.service.updateState(() => {
+        //         return {
+        //             selectedElement: index,
+        //         };
+        //     });
+        //
+        //     return;
+        // }
+        //
+        // this.tabSelection(index);
     }
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {

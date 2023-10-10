@@ -11,7 +11,7 @@ export abstract class AbstractEditorOperationService {
         return this.query.getValue()[key];
     }
 
-    public getElement<T = SitePageElementSettings>(id: number): SitePageElement<T> {
+    public getElement<T = SitePageElementSettings>(id: string): SitePageElement<T> {
         return this.getStoreElement("items")[id] as SitePageElement<T>;
     }
 }

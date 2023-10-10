@@ -25,9 +25,9 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
 
     public abstract selectElementSettingsFormModel(): Observable<APFormModel | null>;
 
-    public abstract selectSettings(id: number): Observable<K>;
+    public abstract selectSettings(id: string): Observable<K>;
 
-    public abstract updateElementSettings(settings: K | Partial<K>, elementId?: number): void;
+    public abstract updateElementSettings(settings: K | Partial<K>, elementId?: string): void;
 }
 
 @Injectable()
@@ -57,7 +57,7 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
             );
     }
 
-    public updateElementSettings(value: K | Partial<K>, elementId?: number): void {
+    public updateElementSettings(value: K | Partial<K>, elementId?: string): void {
         const id = elementId ?? this.getStoreElement("selectedElement");
 
         logAction(`Update element settings`, id, value);
@@ -81,7 +81,7 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
         });
     }
 
-    public selectSettings(id: number): Observable<K> {
+    public selectSettings(id: string): Observable<K> {
         return this.query.select(state => state.items[id]?.settings as K).pipe(filterNilValue(), shareReplay(1));
     }
 }

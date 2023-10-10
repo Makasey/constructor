@@ -19,17 +19,16 @@ export type TableModuleState = Readonly<{
 
 export type Page = Readonly<{
     settings: PageSettings;
-    children: number[];
-    id: number;
+    children: string[];
+    id: string;
 }>;
 
 export type EditorState = Readonly<
     {
         items: Record<string, SitePageElementUnion>;
         pages: Page[];
-        selectedPage: number;
-        selectedElement: number;
-        currentStateIndex: number;
+        selectedPage: string;
+        selectedElement: string;
         id: number | undefined;
     } & ModuleState
 >;

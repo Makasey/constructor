@@ -13,10 +13,10 @@ export class ElementResolverDirective implements OnChanges {
     private readonly injector = inject(Injector);
 
     @Input({ required: true })
-    public lzElementResolver: number | undefined;
+    public lzElementResolver: string | undefined;
 
     @Input()
-    public lzElementResolverParent: number | undefined;
+    public lzElementResolverParent: string | undefined;
 
     public ngOnChanges(): void {
         if (this.lzElementResolver && this.lzElementResolverParent) {

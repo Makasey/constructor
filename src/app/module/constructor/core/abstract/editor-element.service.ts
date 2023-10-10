@@ -10,6 +10,7 @@ import {
     deleteElementFromTree,
 } from "@modules/constructor";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { getRandomId } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
@@ -18,11 +19,11 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
     ) {}
 
-    public selectElement(id: number): Observable<T> {
+    public selectElement(id: string): Observable<T> {
         return this.query.select(state => state.items[id] as T);
     }
 
-    public selectPageElements(): Observable<number[]> {
+    public selectPageElements(): Observable<string[]> {
         return this.query
             .select(state => {
                 return {
@@ -39,13 +40,13 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
             );
     }
 
-    public getElement(id: number): T {
+    public getElement(id: string): T {
         return this.getStoreElement("items")[id] as T;
     }
 
     public addPageElement(type: SitePageElementType): void {
         this.service.updateState(state => {
-            const newElementID = this.getStoreElement("currentStateIndex") + 1;
+            const newElementID = getRandomId();
             const items = state.items;
             logAction(`Add element to page with id: ${newElementID}`);
 
@@ -70,20 +71,23 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
             });
 
             return {
-                currentStateIndex: state.currentStateIndex > newElementID ? state.currentStateIndex : newElementID,
                 selectedElement: newElementID,
                 pages: updatedPages,
                 items: {
                     ...items,
+                    [state.selectedElement]: {
+                        ...state.items[state.selectedElement],
+                        children: arrayAdd(state.items[state.selectedElement].children, newElementID),
+                    },
                     [newElementID]: newElement,
                 },
             };
         });
     }
 
-    public addElementByType(type: SitePageElementType, parentId?: number): void {
+    public addElementByType(type: SitePageElementType, parentId?: string): void {
         this.service.updateState(state => {
-            const newElementID = this.getStoreElement("currentStateIndex") + 1;
+            const newElementID = getRandomId();
             parentId = parentId ?? state.selectedElement;
 
             logAction(`Add element with id: ${newElementID}, type: ${type}`);
@@ -99,7 +103,6 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
             };
 
             return {
-                currentStateIndex: state.currentStateIndex > newElementID ? state.currentStateIndex : newElementID,
                 selectedElement: newElementID,
                 items: {
                     ...items,
@@ -113,32 +116,30 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         });
     }
 
-    public addElement(element: SitePageElementUnion, parentId?: number): void {
+    public addElement(element: SitePageElementUnion, parentId?: string): void {
         this.service.updateState(state => {
-            const newElementID = this.getStoreElement("currentStateIndex") + 1;
             parentId = parentId ?? state.selectedElement;
-            const { type } = element;
+            const { type, id: elementID } = element;
 
-            logAction(`Add element with id: ${newElementID} type: ${type}`);
+            logAction(`Add element with id: ${elementID} type: ${type}`);
             const items = state.items;
             const parentElement = items[parentId];
 
             return {
-                currentStateIndex: state.currentStateIndex > newElementID ? state.currentStateIndex : newElementID,
-                selectedElement: newElementID,
+                selectedElement: elementID,
                 items: {
                     ...items,
                     [parentId]: {
                         ...parentElement,
-                        children: arrayAdd(parentElement.children, newElementID),
+                        children: arrayAdd(parentElement.children, elementID),
                     },
-                    [newElementID]: element,
+                    [elementID]: element,
                 },
             };
         });
     }
 
-    public deleteElement(elementId: number): void {
+    public deleteElement(elementId: string): void {
         logAction(`Delete element with id: ${elementId}`, [], { id: elementId });
 
         this.service.updateState(state => {
@@ -160,12 +161,11 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
             items = deleteElementFromTree(state.items, elementId);
 
             return {
-                currentStateIndex: state.currentStateIndex === elementId ? elementId - 1 : state.currentStateIndex,
                 items: {
                     ...items,
                     [parentId]: {
                         ...parentElement,
-                        children: arrayRemove<number[], number>(parentElement.children, item => item === elementId),
+                        children: arrayRemove(parentElement.children, item => item === elementId),
                     },
                 },
                 pages: updatedPages,
@@ -174,7 +174,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         });
     }
 
-    protected deleteItemFromPage(elementId: number): Page[] {
+    protected deleteItemFromPage(elementId: string): Page[] {
         const state = this.query.getValue();
         const { pages, selectedPage } = state;
 

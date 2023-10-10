@@ -14,11 +14,11 @@ import { ViewContainerRef } from "@angular/core";
 export type SitePageElementUnion = SectionPageElement | SitePageElement | TitlePageElement | InnerPageElement | ImagePageElement;
 
 export type SitePageElement<T = SitePageElementSettings> = Readonly<{
-    id: number;
-    parentId: number | null;
+    id: string;
+    parentId: string | null;
     type: SitePageElementType;
     isExtendable: boolean;
-    children: number[];
+    children: string[];
     settings: T;
 }>;
 

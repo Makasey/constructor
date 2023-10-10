@@ -7,7 +7,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     standalone: true,
 })
 export class DeleteSelectedElementDirective {
-    private readonly selectedElement = toSignal(inject(EDITOR_SELECTED_ELEMENT), { initialValue: 0 });
+    private readonly selectedElement = toSignal(inject(EDITOR_SELECTED_ELEMENT), { initialValue: "" });
 
     private readonly service = inject(AbstractEditorElementActionsService);
 

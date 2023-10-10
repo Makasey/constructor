@@ -21,15 +21,15 @@ export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 500,
 };
 
-export const ROOT_ELEMENT_ID = 1;
+export const ROOT_ELEMENT_ID = "rootID";
 
-export const ELEMENT_ID = new InjectionToken<number>("ELEMENT_ID", {
+export const ELEMENT_ID = new InjectionToken<string>("ELEMENT_ID", {
     factory: () => {
         return ROOT_ELEMENT_ID;
     },
 });
 
-export const PARENT_ID = new InjectionToken<number>("PARENT_ID");
+export const PARENT_ID = new InjectionToken<string>("PARENT_ID");
 
 export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.PX]: StyleUnit.PX,

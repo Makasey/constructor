@@ -18,7 +18,7 @@ export abstract class AbstractSectionEditorActionsService extends AbstractEditor
         super(query, service);
     }
 
-    public abstract chooseColumnStructureType(elementId: number, type: ColumnStructure): void;
+    public abstract chooseColumnStructureType(elementId: string, type: ColumnStructure): void;
 }
 
 @Injectable()
@@ -31,10 +31,8 @@ export class SectionEditorActionsService extends AbstractSectionEditorActionsSer
         super(query, service);
     }
 
-    public chooseColumnStructureType(elementId: number, type: ColumnStructure): void {
-        const lastElementId = this.getStoreElement("currentStateIndex");
-
-        const elements = processStructureType(type, elementId, lastElementId);
+    public chooseColumnStructureType(elementId: string, type: ColumnStructure): void {
+        const elements = processStructureType(type, elementId);
 
         this.elementSettingsService.updateElementSettings({ isInit: true }, elementId);
 

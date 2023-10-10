@@ -2,9 +2,9 @@ import { AbstractEditorSelectionService } from "@modules/constructor";
 import { InjectionToken, inject } from "@angular/core";
 import { Observable, shareReplay } from "rxjs";
 
-export const EDITOR_SELECTED_ELEMENT = new InjectionToken<Observable<number>>("EDITOR_SELECTED_ELEMENT");
+export const EDITOR_SELECTED_ELEMENT = new InjectionToken<Observable<string>>("EDITOR_SELECTED_ELEMENT");
 
-export function editorSelectedElementFactory(): () => Observable<number> {
+export function editorSelectedElementFactory(): () => Observable<string> {
     return () => {
         const editorService = inject(AbstractEditorSelectionService);
 
