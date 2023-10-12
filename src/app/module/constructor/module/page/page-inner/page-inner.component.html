@@ -1,11 +1,17 @@
 <aside class="editor-sidebar">
     <lz-tabs>
         <lz-tabs-item [title]="'Элементы сайта'" [template]="siteElements"> </lz-tabs-item>
-        <lz-tabs-item customClass="element-settings" [title]="'Настройки элемента'" [template]="elementSettings"> </lz-tabs-item>
+        <lz-tabs-item customClass="element-settings" [title]="'Настройки элемента'" [template]="elementSettings">
+        </lz-tabs-item>
         <lz-tabs-item [title]="'Настройки сайта'" [template]="siteSettings"> </lz-tabs-item>
     </lz-tabs>
 
-    <ng-template [ngTemplateOutlet]="isNewCampaign() ? createCampaignTemplate : updateCampaignTemplate"></ng-template>
+    <footer class="editor-sidebar-footer">
+        <a class="create-campaign" [routerLink]="previewPath | lzNavigationLink: { campaignId: campaignId }">Превью</a>
+        <ng-template
+            [ngTemplateOutlet]="isNewCampaign() ? createCampaignTemplate : updateCampaignTemplate"
+        ></ng-template>
+    </footer>
 </aside>
 
 <ng-template #siteElements>

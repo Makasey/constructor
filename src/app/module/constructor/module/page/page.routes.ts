@@ -15,6 +15,10 @@ export const PAGE_ROUTES: Route[] = [
                 path: "editor",
                 component: PageInnerComponent,
             },
+            {
+                path: "preview",
+                loadChildren: () => import("@modules/constructor").then(module => module.PREVIEW_ROUTES),
+            },
         ],
     },
 ];

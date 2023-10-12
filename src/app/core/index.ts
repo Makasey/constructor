@@ -6,6 +6,8 @@ export {
     CampaignDataService,
     DefaultFilesDataService,
     AbstractCampaignDataService,
+    AbstractPreviewDataService,
+    providePreviewDataService,
 } from "./data-service";
 export { enterAnimation, fadeInAnimation, fadeOutAnimation } from "./animations";
 export { APP_REF, AppRefConfig } from "./app-ref";

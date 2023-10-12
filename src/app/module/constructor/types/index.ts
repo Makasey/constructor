@@ -85,3 +85,8 @@ export type CreateCampaignModel = Readonly<{
         elements: Record<string, SitePageElement>;
     };
 }>;
+
+export type CampaignPreviewModel = Readonly<{
+    id: string;
+    text: string;
+}>;

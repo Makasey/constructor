@@ -20,7 +20,8 @@
         <ng-container *ngFor="let item of items">
             <ap-dropdown-field-item
                 [item]="item"
-                [active]="item[this._selectValueKey] | lzDropdownActive: _value : _selectValueKey"
+                [selectLabelKey]="_selectLabelKey"
+                [active]="item[_selectValueKey] | lzDropdownActive: _value : _selectValueKey"
                 (onItemClick)="_onDropdownItemChoose(item)"
             >
             </ap-dropdown-field-item>

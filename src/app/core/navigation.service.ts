@@ -11,7 +11,7 @@ export abstract class AbstractNavigationService {
 export class NavigationService extends AbstractNavigationService {
     private readonly projectLinksMap: Record<RouteKey, string[]> = {
         [RouteKey.BUILDER]: [RoutePaths.BUILDER],
-        [RouteKey.CAMPAIGN_PREVIEW]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RoutePaths.PREVIEW],
+        [RouteKey.CAMPAIGN_PREVIEW]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RouteParams.CAMPAIGN_ID, RoutePaths.PREVIEW],
         [RouteKey.CAMPAIGN_EDITOR]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RouteParams.CAMPAIGN_ID, RoutePaths.EDITOR],
         [RouteKey.CAMPAIGN_LIST]: [RoutePaths.INITIAL, RoutePaths.BUILDER, RoutePaths.LIST],
     };

@@ -12,9 +12,11 @@ import {
     SinglePageCampaignService,
     SinglePageEditorPageSettingsService,
     SinglePageEditorSelectionService,
+    SitePreviewDataService,
     editorSelectedElementFactory,
+    providePreviewService,
 } from "@modules/constructor";
-import { LzStateKey, createStoreProviders } from "@core";
+import { LzStateKey, createStoreProviders, providePreviewDataService } from "@core";
 import { Provider } from "@angular/core";
 
 export const EDITOR_PROVIDERS: Provider[] = [
@@ -26,4 +28,6 @@ export const EDITOR_PROVIDERS: Provider[] = [
     { provide: AbstractEditorElementActionsService, useClass: DefaultEditorElementActionsService },
     { provide: AbstractCampaignService, useClass: SinglePageCampaignService },
     { provide: EDITOR_SELECTED_ELEMENT, useFactory: editorSelectedElementFactory() },
+    providePreviewDataService(SitePreviewDataService),
+    providePreviewService(),
 ];

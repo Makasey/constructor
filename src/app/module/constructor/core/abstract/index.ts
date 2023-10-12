@@ -4,3 +4,4 @@ export { AbstractEditorElementActionsService, DefaultEditorElementActionsService
 export { AbstractCampaignService, SinglePageCampaignService } from "./campaign.service";
 export { AbstractEditorPageSettingsService, SinglePageEditorPageSettingsService } from "./editor-page-settings.service";
 export { AbstractEditorSelectionService, SinglePageEditorSelectionService } from "./editor-selection.service";
+export { AbstractPreviewService, DefaultPreviewService, providePreviewService } from "./preview.service";

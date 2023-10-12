@@ -16,6 +16,9 @@ export class APDropdownFieldItemComponent {
     @Input()
     public item: APDropdownFieldItem;
 
+    @Input()
+    public selectLabelKey = "label";
+
     @Output()
     public readonly onItemClick: EventEmitter<APDropdownFieldItem> = new EventEmitter<APDropdownFieldItem>();
 
