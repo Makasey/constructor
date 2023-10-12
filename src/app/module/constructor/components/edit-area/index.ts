@@ -30,6 +30,10 @@ export {
     TabsPageElementSettings,
     TabsPageElement,
     TabsElementSettingsGroup,
+    TabsItemPageElementSettings,
+    TabsItemPageElement,
+    TabElementItemComponent,
+    TabsItemElementSettingsGroup,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

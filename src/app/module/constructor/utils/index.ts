@@ -12,6 +12,8 @@ export {
     getInnerSettings,
     getImageSettings,
     getTabsSettings,
+    processedCreatedTabsCount,
+    getTabsItemSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export { processSettingValueWithUnit, processDirectionValue, processElementSettings } from "./element-settings.utils";

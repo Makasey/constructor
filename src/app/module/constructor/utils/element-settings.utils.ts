@@ -7,15 +7,17 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     StyleUnit,
+    TabsItemPageElement,
     TabsPageElement,
     TitlePageElement,
     getImageSettings,
     getInnerSettings,
     getSectionSettings,
+    getTabsItemSettings,
     getTitleSettings,
     styleUnitMap,
 } from "@modules/constructor";
-import { getTabsSettings } from "@modules/constructor/utils/elements";
+import { getTabsSettings } from "@modules/constructor";
 
 export function processElementSettings<T extends SitePageElementUnion>(type: SitePageElementType, element: T): APFormModel {
     switch (type) {
@@ -41,6 +43,10 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
 
         case SitePageElementType.TABS: {
             return getTabsSettings(element as TabsPageElement);
+        }
+
+        case SitePageElementType.TABS_ITEM: {
+            return getTabsItemSettings(element as TabsItemPageElement);
         }
 
         default: {

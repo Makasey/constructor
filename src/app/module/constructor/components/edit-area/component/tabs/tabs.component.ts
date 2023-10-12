@@ -3,7 +3,13 @@ import { CommonModule } from "@angular/common";
 
 import { Observable, map } from "rxjs";
 
-import { AbstractEditorElementSettingsService, ELEMENT_ID, ImagePageElementSettings, processSettingValueWithUnit } from "@modules/constructor";
+import {
+    AbstractEditorElementSettingsService,
+    ELEMENT_ID,
+    TabsPageElementSettings,
+    processSettingValueWithUnit,
+    processedCreatedTabsCount,
+} from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
@@ -28,15 +34,19 @@ export class TabsComponent implements OnInit {
     @HostListener("$.style.width")
     public width$: Observable<string>;
 
+    public count$: Observable<number[]>;
+
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
-    private settings$: Observable<ImagePageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+    private settings$: Observable<TabsPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+
+        this.count$ = this.settings$.pipe(map(settings => processedCreatedTabsCount(settings.count)));
     }
 }

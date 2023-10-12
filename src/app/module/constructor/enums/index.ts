@@ -39,6 +39,7 @@ export enum SitePageElementType {
     INNER = "inner",
     IMAGE = "image",
     TABS = "tabs",
+    TABS_ITEM = "tabs-item",
 }
 
 export enum ElementHTMLTag {

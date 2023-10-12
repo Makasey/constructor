@@ -71,6 +71,26 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
             ];
         }
 
+        case SitePageElementType.TABS_ITEM: {
+            return [
+                {
+                    title: "Заголовок",
+                    type: SitePageElementType.TITLE,
+                    icon: "bx-font",
+                },
+                {
+                    title: "Изображение",
+                    type: SitePageElementType.IMAGE,
+                    icon: "bx-font",
+                },
+                {
+                    title: "Секция",
+                    type: SitePageElementType.SECTION,
+                    icon: "bx-font",
+                },
+            ];
+        }
+
         default: {
             return [];
         }

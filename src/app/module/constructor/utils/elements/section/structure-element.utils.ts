@@ -1,5 +1,5 @@
 import { ColumnStructure, InnerPageElement, StyleUnit, columnStructureCountMap } from "@modules/constructor";
-import { defaultInnerElementSettings } from "@modules/constructor/constants";
+import { defaultInnerElementSettings } from "@modules/constructor";
 import { getRandomId } from "@shared-utils";
 
 function getInnerItemByType(type: ColumnStructure, parentId: string): InnerPageElement {

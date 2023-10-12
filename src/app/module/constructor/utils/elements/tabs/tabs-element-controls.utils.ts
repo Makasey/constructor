@@ -1,8 +1,20 @@
-import { APFormControl, APFormModel } from "@components";
+import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
 import { DEFAULT_UPSERT_CONFIG, TabsElementSettingsGroup, TabsPageElement, getDefaultSizeSettings } from "@modules/constructor";
 
+export function getTabsElementCountControls(element: TabsPageElement): APFormControl {
+    return {
+        id: "count",
+        name: "count",
+        value: element.settings.count,
+        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+        options: {
+            label: "Количество табов",
+        },
+    };
+}
+
 export function getTabsElementControls(element: TabsPageElement): APFormControl[] {
-    return [...getDefaultSizeSettings(element)];
+    return [...getDefaultSizeSettings(element), getTabsElementCountControls(element)];
 }
 
 export function getTabsSettings(element: TabsPageElement): APFormModel {

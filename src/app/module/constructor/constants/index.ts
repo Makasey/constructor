@@ -10,6 +10,7 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     StyleUnit,
+    TabsItemPageElement,
     TabsPageElement,
     TitlePageElement,
 } from "@modules/constructor";
@@ -191,6 +192,28 @@ export const defaultTabsElementSettings: Omit<TabsPageElement, "id" | "parentId"
     },
 };
 
+export const defaultTabsItemElementSettings: Omit<TabsItemPageElement, "id" | "parentId"> = {
+    type: SitePageElementType.TABS_ITEM,
+    children: [],
+    isExtendable: false,
+    settings: {
+        margin: {
+            ...defaultDirectionValue,
+        },
+        padding: {
+            ...defaultDirectionValue,
+        },
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+    },
+};
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings,
     [SitePageElementType.SECTION]: defaultSectionElementSettings,
@@ -198,6 +221,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<Sit
     [SitePageElementType.INNER]: defaultInnerElementSettings,
     [SitePageElementType.IMAGE]: defaultImageElementSettings,
     [SitePageElementType.TABS]: defaultTabsElementSettings,
+    [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings,
 };
 
 export const defaultSizeControlUnit = [

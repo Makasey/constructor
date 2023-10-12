@@ -5,13 +5,22 @@ import {
     SectionPageElement,
     SitePageElementType,
     StyleUnit,
+    TabsItemPageElement,
+    TabsPageElement,
     TitlePageElement,
 } from "@modules/constructor";
 import { File } from "@shared-types";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
 
-export type SitePageElementUnion = SectionPageElement | SitePageElement | TitlePageElement | InnerPageElement | ImagePageElement;
+export type SitePageElementUnion =
+    | TabsItemPageElement
+    | SectionPageElement
+    | SitePageElement
+    | TitlePageElement
+    | InnerPageElement
+    | ImagePageElement
+    | TabsPageElement;
 
 export type SitePageElement<T = SitePageElementSettings> = Readonly<{
     id: string;

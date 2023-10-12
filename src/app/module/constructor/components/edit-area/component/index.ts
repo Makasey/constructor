@@ -16,4 +16,13 @@ export {
 export { InnerComponent, InnerPageElement, InnerItemElementSettingsGroup } from "./inner";
 export { ImagePageElement, ImageComponent, ImagePageElementSettings, ImageElementSettingsGroup } from "./image";
 export { RootComponent } from "./root";
-export { TabsComponent, TabsPageElement, TabsPageElementSettings, TabsElementSettingsGroup } from "./tabs";
+export {
+    TabsComponent,
+    TabsPageElement,
+    TabsPageElementSettings,
+    TabsElementSettingsGroup,
+    TabsItemPageElementSettings,
+    TabElementItemComponent,
+    TabsItemPageElement,
+    TabsItemElementSettingsGroup,
+} from "./tabs";

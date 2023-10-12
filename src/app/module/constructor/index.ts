@@ -25,6 +25,12 @@ export {
     PARENT_ID,
     defaultSizeControlUnit,
     defaultSectionElementSettings,
+    defaultImageElementSettings,
+    defaultInnerElementSettings,
+    defaultPageElementSettings,
+    defaultTabsElementSettings,
+    defaultTabsItemElementSettings,
+    defaultTitleElementSettings,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -47,6 +53,9 @@ export {
     getInnerSettings,
     processPossibleElements,
     getImageSettings,
+    processedCreatedTabsCount,
+    getTabsItemSettings,
+    getTabsSettings,
 } from "./utils";
 
 export {
@@ -103,6 +112,10 @@ export {
     TabsPageElement,
     TabsPageElementSettings,
     TabsElementSettingsGroup,
+    TabsItemPageElementSettings,
+    TabsItemPageElement,
+    TabElementItemComponent,
+    TabsItemElementSettingsGroup,
 } from "./components";
 
 export {
