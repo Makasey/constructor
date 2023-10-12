@@ -115,30 +115,6 @@ export abstract class AbstractEditorSelectionService {
                 selectedElement: parent.children[itemIndex + 1],
             };
         });
-
-        // this.tabSelection(parent.children[itemIndex + 1]);
-        //
-        // if (index > currentStateIndex) {
-        //     this.service.updateState(() => {
-        //         return {
-        //             selectedElement: ROOT_ELEMENT_ID,
-        //         };
-        //     });
-        //
-        //     return;
-        // }
-        //
-        // if (items[index]) {
-        //     this.service.updateState(() => {
-        //         return {
-        //             selectedElement: index,
-        //         };
-        //     });
-        //
-        //     return;
-        // }
-        //
-        // this.tabSelection(index);
     }
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {
