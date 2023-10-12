@@ -2,17 +2,11 @@ import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, 
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Observable, map } from "rxjs";
 
-import {
-    AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
-    ELEMENT_ID,
-    ImagePageElementSettings,
-    processSettingValueWithUnit,
-} from "@modules/constructor";
+import { AbstractEditorElementSettingsService, ELEMENT_ID, ImagePageElementSettings, processSettingValueWithUnit } from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
-    selector: "lz-image",
+    selector: "lz-image-element",
     standalone: true,
     imports: [CommonModule, NgOptimizedImage],
     templateUrl: "./image.component.html",
@@ -40,8 +34,6 @@ export class ImageComponent implements OnInit {
     public src$: Observable<string>;
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    private readonly elementActionsService = inject(AbstractEditorElementActionsService);
 
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
