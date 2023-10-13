@@ -31,7 +31,7 @@ import {
     TemplateRef,
     ViewEncapsulation,
 } from "@angular/core";
-import { shouldCall } from "app/decorators/should-call";
+import { shouldCall } from "@shared-decorators";
 
 @Component({
     selector: "lz-table",

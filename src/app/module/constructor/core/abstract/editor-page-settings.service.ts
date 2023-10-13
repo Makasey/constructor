@@ -4,8 +4,7 @@ import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzS
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
-import { getRandomId } from "@shared-utils/utils";
-import { isObjectEquals } from "@shared-utils/object.utils";
+import { getRandomId, isObjectEquals } from "@shared-utils";
 import { logAction } from "@datorama/akita";
 
 @Injectable()

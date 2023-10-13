@@ -13,7 +13,7 @@ import {
     TemplateMap,
     checkScrollPosition,
 } from "@components";
-import { shouldCall } from "app/decorators/should-call";
+import { shouldCall } from "@shared-decorators";
 
 @Component({
     selector: "lz-table-row",

@@ -18,7 +18,7 @@ import {
 
 import { fadeInAnimation, fadeOutAnimation } from "@core";
 
-import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem, TOASTR_ITEM_OPTIONS_TOKEN } from "../../types";
+import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem, TOASTR_ITEM_OPTIONS_TOKEN } from "@components";
 
 @Component({
     selector: "lz-toastr-item",

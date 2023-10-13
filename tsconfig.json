@@ -39,6 +39,10 @@
             "@shared-types/*": ["app/types/*"],
             "@shared-types": ["app/types/index.ts"],
             "@shared-utils/*": ["app/utils/*"],
+            "@shared-plugins": ["app/plugins"],
+            "@shared-plugins/*": ["app/plugins/index.ts"],
+            "@shared-decorators": ["app/decorators"],
+            "@shared-decorators/*": ["app/decorators/index.ts"],
             "@shared-utils": ["app/utils/index.ts"],
             "@shared-directives/*": ["app/directive/*"],
             "@shared-directives": ["app/directive/index.ts"]

@@ -1,4 +1,4 @@
-import { AbstractFileGalleryService, FileGalleryService } from "@components/ui";
+import { AbstractFileGalleryService, FileGalleryService } from "@components";
 import { LzStateKey, createStoreProviders } from "@core";
 
 export const FILE_UPLOAD_PROVIDERS = [

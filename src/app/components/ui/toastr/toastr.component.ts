@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 
-import { enterAnimation } from "app/core/animations/animations";
-
-import { LzToastrQuery } from "./store";
+import { LzToastrQuery } from "@components";
+import { enterAnimation } from "@core";
 
 @Component({
     selector: "lz-toastr",

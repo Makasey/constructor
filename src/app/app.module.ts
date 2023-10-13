@@ -23,7 +23,7 @@ import {
     NavigationService,
 } from "@core";
 
-import { HostBinderAsyncPlugin, SilentEventPlugin, StopEventPlugin } from "./plugins";
+import { HostBinderAsyncPlugin, SilentEventPlugin, StopEventPlugin } from "@shared-plugins";
 import { LZCalendarModule, LZToastrModule } from "@components";
 import { environment } from "environments/environment";
 

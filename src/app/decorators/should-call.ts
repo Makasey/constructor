@@ -1,6 +1,6 @@
 import { Predicate } from "@angular/core";
 
-import { SilentEventPlugin } from "../plugins/silent-event.plugin";
+import { SilentEventPlugin } from "@shared-plugins";
 import { isFunction } from "@datorama/akita";
 
 export function shouldCall<T>(predicate: Predicate<T>): MethodDecorator {
@@ -8,7 +8,9 @@ export function shouldCall<T>(predicate: Predicate<T>): MethodDecorator {
         const { value } = desc;
 
         desc.value = function (this: T, ...args: [value: T]): void {
-            if (!predicate.apply(this, args)) {
+            const shouldCall: boolean = predicate.apply(this, args);
+
+            if (!shouldCall) {
                 return;
             }
 

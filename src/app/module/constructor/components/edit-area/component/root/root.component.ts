@@ -3,8 +3,7 @@ import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import { AbstractEditorElementActionsService, SectionPageElement } from "@modules/constructor";
-import { DeleteSelectedElementDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
-import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
+import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-root-element",

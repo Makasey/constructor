@@ -1,6 +1,5 @@
-export { ModalModule } from "./modal.module";
-export { ModalComponent } from "./modal.component";
 export { ModalService } from "./modal.service";
+export { HostModalContentDirective } from "./host-modal-content.directive";
 export {
     ModalType,
     MODAL_ID_TOKEN,
@@ -10,4 +9,8 @@ export {
     ModalWithData,
     MODAL_DATA_TOKEN,
     ControlTemplate,
+    ModalModel,
+    ModalModelMap,
 } from "./types";
+export { ModalComponent } from "./modal.component";
+export { ModalModule } from "./modal.module";

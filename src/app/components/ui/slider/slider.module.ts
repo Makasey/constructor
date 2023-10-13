@@ -1,8 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 
-import { LZSliderComponent } from "./slider.component";
-import { LZSliderItemComponent } from "./components/slider-item.component";
+import { LZSliderComponent, LZSliderItemComponent } from "@components";
 
 @NgModule({
     imports: [CommonModule],

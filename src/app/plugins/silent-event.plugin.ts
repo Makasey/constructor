@@ -1,4 +1,4 @@
-import { AbstractEventPlugin } from "./abstract-event.plugin";
+import { AbstractEventPlugin } from "@shared-plugins";
 import { NgZone } from "@angular/core";
 
 export class SilentEventPlugin extends AbstractEventPlugin {

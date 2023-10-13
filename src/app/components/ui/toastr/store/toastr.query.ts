@@ -4,8 +4,7 @@ import { ID, Order, QueryConfig, QueryEntity } from "@datorama/akita";
 
 import { Observable, combineLatest, map } from "rxjs";
 
-import { LZToastrItem, LZToastrItemComponentType, LZToastrItemState } from "../types";
-import { LZToastrStore } from "./toastr.store";
+import { LZToastrItem, LZToastrItemComponentType, LZToastrItemState, LZToastrStore } from "@components";
 
 @Injectable()
 @QueryConfig({

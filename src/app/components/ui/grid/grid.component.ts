@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, Renderer2, RendererStyleFlags2, TemplateRef } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName } from "./types";
+import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName } from "@components";
 
 @Component({
     selector: "lz-grid",

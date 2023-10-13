@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output, ViewChild } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { APFormControl } from "../../form";
-import { APNumberFieldValueChangeEvent } from "./types";
-import { calculateFractionNumber, normalizeNumberValue, roundNumberWithFraction } from "@shared-utils/utils";
+import { APFormControl, APNumberFieldValueChangeEvent } from "@components";
+import { calculateFractionNumber, normalizeNumberValue, roundNumberWithFraction } from "@shared-utils";
 
 @Component({
     selector: "ap-number-field",

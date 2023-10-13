@@ -14,7 +14,7 @@ import {
     inject,
     signal,
 } from "@angular/core";
-import { CreatePreviewDirective } from "@shared-directives/preview/create-preview.directive";
+import { CreatePreviewDirective } from "@shared-directives";
 import { FormsModule } from "@angular/forms";
 import { NavigationLinkPipe } from "@shared-pipes";
 import { Observable, delay, tap } from "rxjs";

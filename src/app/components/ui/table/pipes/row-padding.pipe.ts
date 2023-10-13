@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from "@angular/core";
 
-import { RowPaddingType, TableValueExtraInternalParams } from "../interfaces";
+import { RowPaddingType, TableValueExtraInternalParams } from "@components";
 
 @Pipe({
     name: "lzRowPadding",

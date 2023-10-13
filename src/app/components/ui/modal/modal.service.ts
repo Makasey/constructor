@@ -3,10 +3,18 @@ import { DOCUMENT } from "@angular/common";
 
 import { finalize } from "rxjs";
 
-import { ModalComponent } from "@components";
-
-import { DEFAULT_MODAL_CONFIG, MODAL_DATA_TOKEN, MODAL_ID_TOKEN, ModalConfig, ModalModel, ModalModelMap, ModalType, ModalWithData } from "./types";
-import { getRandomId } from "@shared-utils/utils";
+import {
+    DEFAULT_MODAL_CONFIG,
+    MODAL_DATA_TOKEN,
+    MODAL_ID_TOKEN,
+    ModalComponent,
+    ModalConfig,
+    ModalModel,
+    ModalModelMap,
+    ModalType,
+    ModalWithData,
+} from "@components";
+import { getRandomId } from "@shared-utils";
 
 const NO_SCROLL_CLASS = "html-no-scroll";
 

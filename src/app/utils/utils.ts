@@ -2,7 +2,7 @@ import { HttpResponse } from "@angular/common/http";
 
 import { isNil } from "@datorama/akita";
 
-import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "@shared-utils/patterns";
+import { EQUALS_PATTERN, GREATER_OR_EQUAL_PATTERN, LESS_OR_EQUAL_PATTERN } from "@shared-utils";
 import { PaginationListItems, SearchConditions, TOTAL_COUNT_HEADER, Valuable } from "@shared-types";
 
 export const conditionsMap: Record<SearchConditions, RegExp> = {

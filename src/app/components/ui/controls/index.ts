@@ -9,3 +9,4 @@ export * from "./range-field";
 export * from "./textarea";
 export * from "./color-picker";
 export * from "./radio-group";
+export * from "./image-field";

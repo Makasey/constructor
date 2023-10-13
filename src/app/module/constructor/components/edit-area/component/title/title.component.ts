@@ -9,7 +9,7 @@ import {
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-title-element",

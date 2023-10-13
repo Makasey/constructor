@@ -1,4 +1,4 @@
-import { TableExtra, TableValueExtraInternal } from "../interfaces";
+import { TableExtra, TableValueExtraInternal } from "@components";
 
 export function selectRowById(id: string, tableExtra: Partial<TableExtra>, valuesExtra: TableValueExtraInternal): TableValueExtraInternal {
     const item = valuesExtra[id];

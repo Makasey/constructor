@@ -1,8 +1,6 @@
-import { isNumberInRange, normalizeToIntNumber } from "app/utils";
+import { isNumberInRange, normalizeToIntNumber } from "@shared-utils";
 
-import { DayOfWeek, LZDateMode, MonthNumber } from "../types";
-import { LZMonth, LZMonthLike } from "./month";
-import { LZYear } from "./year";
+import { DayOfWeek, LZDateMode, LZMonth, LZMonthLike, LZYear, MonthNumber } from "@components";
 
 export class LZDay extends LZMonth implements LZDayLike {
     constructor(

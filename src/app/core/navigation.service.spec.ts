@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 
-import { AbstractNavigationService, NavigationService } from "./navigation.service";
+import { AbstractNavigationService, NavigationService } from "@core";
 import { RouteKey } from "@shared-types";
 
 const TEST_TAG = "Navigation Service";

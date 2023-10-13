@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, Inject, Injector, Input, OnChanges, TemplateRef, Type, ViewContainerRef } from "@angular/core";
 
-import { PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_COMPONENTS_CONFIG, PreloadBackgroundComponentKey } from "./types";
+import { PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_COMPONENTS_CONFIG, PreloadBackgroundComponentKey } from "@shared-directives";
 
 @Directive({
     selector: "[preloadBackground]",

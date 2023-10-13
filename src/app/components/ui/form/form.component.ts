@@ -18,11 +18,17 @@ import {
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { UntilDestroy } from "@ngneat/until-destroy";
 
-import { APFormControl, APFormDefaultTemplateKeys, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "./types";
-import { ControlTemplate } from "../modal";
+import {
+    APFormControl,
+    APFormDefaultTemplateKeys,
+    APFormModel,
+    ApFormControlInner,
+    ApFormInnerModel,
+    ControlTemplate,
+    gridAreasFromColumns,
+} from "@components";
 import { Observable, distinctUntilChanged, skip, tap } from "rxjs";
-import { getRandomId } from "@shared-utils/utils";
-import { isObjectEquals } from "@shared-utils/object.utils";
+import { getRandomId, isObjectEquals } from "@shared-utils";
 
 @UntilDestroy()
 @Component({

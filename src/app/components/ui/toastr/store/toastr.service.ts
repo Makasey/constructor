@@ -2,9 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { ID, guid, transaction } from "@datorama/akita";
 
-import { LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE, LZToastrItem, LZToastrItemUIState } from "../types";
-import { LZToastrStore } from "./toastr.store";
-import { LzToastrQuery } from "./toastr.query";
+import { LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE, LZToastrItem, LZToastrItemUIState, LZToastrStore, LzToastrQuery } from "@components";
 
 @Injectable()
 export class LZToastrService {

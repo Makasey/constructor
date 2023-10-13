@@ -1,4 +1,4 @@
-import { AbstractEventPlugin } from "./abstract-event.plugin";
+import { AbstractEventPlugin } from "@shared-plugins";
 
 export class StopEventPlugin extends AbstractEventPlugin {
     protected readonly modifier = ".stop";

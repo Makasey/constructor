@@ -2,7 +2,7 @@ import { InjectionToken, TemplateRef, Type } from "@angular/core";
 
 import { ActiveState, EntityState, ID } from "@datorama/akita";
 
-import { UIState } from "app/types/common/common";
+import { UIState } from "@shared-types";
 
 export const LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE = "enableDNDMode";
 

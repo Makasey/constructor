@@ -15,3 +15,4 @@ export {
     LzPreloadTableComponent,
     LzPreloadFiltersComponent,
 } from "./preload";
+export { CreatePreviewDirective } from "./preview";

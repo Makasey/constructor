@@ -1,5 +1,4 @@
-import { DEFAULT_VALUE_EXTRA_ITEM } from "../constants";
-import { TableExtra, TableRow, TableValueExtraInternal } from "../interfaces";
+import { DEFAULT_VALUE_EXTRA_ITEM, TableExtra, TableRow, TableValueExtraInternal } from "@components";
 
 export function convertPlainRowsToValueExtraParams(
     plainRows: TableRow[],

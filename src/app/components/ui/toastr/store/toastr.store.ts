@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { EntityStore, StoreConfig, toBoolean } from "@datorama/akita";
 
-import { LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE, LZToastrItem, LZToastrItemState, getInitialToastrItemState } from "../types";
+import { LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE, LZToastrItem, LZToastrItemState, getInitialToastrItemState } from "@components";
 
 @Injectable()
 @StoreConfig({

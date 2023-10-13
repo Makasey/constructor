@@ -1,4 +1,4 @@
-import { TABLE_CELL_HEIGHT } from "../constants";
+import { TABLE_CELL_HEIGHT } from "@components";
 
 type ComponentWithScroll = {
     previousScrollPosition: number | undefined;

@@ -1,9 +1,7 @@
-import { APFormControl } from "@components/ui";
+import { APFormControl, RadioGroupItem } from "@components";
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
 import { CommonModule, NgForOf } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-
-import { RadioGroupItem } from "@components/ui/controls/radio-group/types";
 
 @Component({
     selector: "lz-radio-group",

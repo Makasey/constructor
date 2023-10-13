@@ -1,5 +1,4 @@
-import { DayOfWeek } from "../types";
-import { LZDay, LZMonth } from "../classes";
+import { DayOfWeek, LZDay, LZMonth } from "@components";
 
 const getMonthStartDaysOffset = (month: LZMonth, firstDayOfWeek: DayOfWeek): number => {
     const startMonthOffsetFromSunday: DayOfWeek = new Date(month.year, month.month, 1).getDay();

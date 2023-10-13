@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { Query, Store, UpdateStateCallback, guid } from "@datorama/akita";
 import { TableState } from "@core";
-import { initialTableStore } from "../constants";
+import { initialTableStore } from "@components";
 
 @Injectable()
 export class TableStore extends Store<TableState> {

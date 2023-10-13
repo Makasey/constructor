@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 
-import { APDropdownFieldItem } from "../../types";
+import { APDropdownFieldItem } from "@components";
 
 @Component({
     selector: "ap-dropdown-field-item",

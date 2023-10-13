@@ -13,8 +13,14 @@ import {
 
 import { Observable, interval, tap } from "rxjs";
 
-import { LZSliderConfig, LZSliderItem, lzDefaultItemClass, lzDefaultSliderConfig, sliderItemWidthVariableName } from "./types";
-import { SliderItemTemplateData } from "@components";
+import {
+    LZSliderConfig,
+    LZSliderItem,
+    SliderItemTemplateData,
+    lzDefaultItemClass,
+    lzDefaultSliderConfig,
+    sliderItemWidthVariableName,
+} from "@components";
 
 @Component({
     selector: "lz-slider",

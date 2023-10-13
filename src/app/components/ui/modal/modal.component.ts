@@ -2,9 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, TemplateRef, ViewChild
 
 import { Subject } from "rxjs";
 
-import { HostModalContentDirective } from "./host-modal-content.directive";
-import { ModalConfig } from "./types";
-import { ModalService } from "@components";
+import { HostModalContentDirective, ModalConfig, ModalService } from "@components";
 
 @Component({
     selector: "ap-modal",

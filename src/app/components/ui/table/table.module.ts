@@ -5,9 +5,7 @@ import { NgModule } from "@angular/core";
 import { DragDropModule } from "@angular/cdk/drag-drop";
 import { OverlayModule } from "@angular/cdk/overlay";
 
-// import { PageLoaderModule } from "@ui/page-loader/page-loader.module";
-// import { CheckboxModule } from "@ui/checkbox/checkbox.module";
-import { LZInitVarDirective } from "@shared-directives/init-var/init-var.directive";
+import { LZInitVarDirective } from "@shared-directives";
 import {
     LZLoaderComponent,
     RowPaddingPipe,

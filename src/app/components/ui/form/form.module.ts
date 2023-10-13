@@ -10,13 +10,13 @@ import {
     DirectionFieldComponent,
     LZColorPickerComponent,
     LZFileUploadComponent,
+    LZImageFieldComponent,
     NumberWithDropdownFieldComponent,
     RadioGroupComponent,
     RangeFieldComponent,
     RangeFieldWithUnitComponent,
     TextareaComponent,
 } from "@components";
-import { LZImageFieldComponent } from "@components/ui/controls/image-field/image-field.component";
 
 const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModule];
 

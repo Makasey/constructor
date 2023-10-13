@@ -5,8 +5,8 @@ import { Observable, map } from "rxjs";
 
 import { APP_REF } from "@core";
 
-import { RouteParams, SearchConditions } from "../../types";
-import { conditionsMap } from "../utils";
+import { RouteParams, SearchConditions } from "@shared-types";
+import { conditionsMap } from "@shared-utils";
 
 export function getRouterParameters(...paramNames: string[]): unknown | Record<string, unknown> {
     const injector = APP_REF.injector as Injector;

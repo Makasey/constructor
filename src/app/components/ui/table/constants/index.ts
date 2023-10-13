@@ -1,4 +1,4 @@
-import { TableExtra, TableValueExtraInternalParams } from "../interfaces";
+import { TableExtra, TableValueExtraInternalParams } from "@components";
 import { TableState, UIDataState } from "@core";
 
 export const DEFAULT_LOAD_MORE_LABEL = "Load more data";

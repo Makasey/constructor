@@ -17,10 +17,9 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe, NgForOf, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { ElementResolverDirective } from "@shared-directives/element-resolver/element-resolver.directive";
+import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
 import { Observable, map } from "rxjs";
-import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives/editor";
 
 @Component({
     selector: "lz-section-element",

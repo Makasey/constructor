@@ -1,11 +1,16 @@
 import { CommonModule } from "@angular/common";
 import { ModuleWithProviders, NgModule } from "@angular/core";
 
-import { LZInitVarDirective } from "@shared-directives/init-var/init-var.directive";
-
-import { LZToastrBoxComponent, LZToastrItemComponent, LZToastrListComponent } from "./components";
-import { LZToastrComponent } from "@components";
-import { LZToastrService, LZToastrStore, LzToastrQuery } from "./store";
+import { LZInitVarDirective } from "@shared-directives";
+import {
+    LZToastrBoxComponent,
+    LZToastrComponent,
+    LZToastrItemComponent,
+    LZToastrListComponent,
+    LZToastrService,
+    LZToastrStore,
+    LzToastrQuery,
+} from "@components";
 
 @NgModule({
     imports: [CommonModule, LZInitVarDirective],
