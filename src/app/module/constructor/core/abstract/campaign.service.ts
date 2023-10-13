@@ -7,7 +7,7 @@ import {
     LzServiceInjectionTokensMap,
     LzStateKey,
 } from "@core";
-import { AbstractEditorOperationService, CampaignModel, CreateCampaignModel } from "@modules/constructor";
+import { AbstractEditorOperationService, CampaignModel, CreateCampaignModel, getCampaignData } from "@modules/constructor";
 import { Inject, Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
@@ -143,15 +143,7 @@ export class SinglePageCampaignService extends AbstractCampaignService {
     }
 
     protected getCreateCampaignRequestData(): CreateCampaignModel {
-        const { pages, items } = this.query.getValue();
-
-        return {
-            body: {
-                pages: pages,
-                elements: items,
-            },
-            type: "page",
-        };
+        return getCampaignData(this.query.getValue());
     }
 
     public selectIsNewCampaign(): Observable<boolean> {

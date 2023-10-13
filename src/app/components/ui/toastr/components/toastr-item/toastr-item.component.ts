@@ -146,7 +146,7 @@ export class LZToastrItemComponent implements OnInit {
     private startDisappearing(): void {
         this.itemState = "hidden";
 
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
 
         clearTimeout(this.disappearingTimerId);
 

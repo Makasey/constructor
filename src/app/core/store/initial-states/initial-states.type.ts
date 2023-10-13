@@ -39,6 +39,7 @@ export function initialEditorState(): EditorState {
                 },
             },
         },
+        campaignName: "My best campaign",
         selectedElement: ROOT_ELEMENT_ID,
         selectedPage: pageID,
         pages: [
@@ -46,11 +47,9 @@ export function initialEditorState(): EditorState {
                 id: pageID,
                 settings: {
                     title: "My best site",
-                    id: undefined,
                     logotype: null,
                     siteDescription: "My best site",
                     siteMetaTags: "",
-                    campaignName: "My best campaign",
                 },
                 children: [],
             },

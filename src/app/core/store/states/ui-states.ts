@@ -30,6 +30,7 @@ export type EditorState = Readonly<
         selectedPage: string;
         selectedElement: string;
         id: number | undefined;
+        campaignName: string;
     } & ModuleState
 >;
 

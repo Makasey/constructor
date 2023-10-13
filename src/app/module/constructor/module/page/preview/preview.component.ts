@@ -1,4 +1,4 @@
-import { APDropdownFieldModule } from "@components";
+import { APDropdownFieldModule, LZLoaderComponent } from "@components";
 import { AbstractCampaignService, AbstractPreviewService, CampaignPreviewModel } from "@modules/constructor";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { AsyncPipe, NgIf } from "@angular/common";
@@ -30,7 +30,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     standalone: true,
     styleUrls: ["./preview.component.scss"],
     templateUrl: "./preview.component.html",
-    imports: [AsyncPipe, APDropdownFieldModule, FormsModule, RouterLink, NavigationLinkPipe, CreatePreviewDirective, NgIf],
+    imports: [AsyncPipe, APDropdownFieldModule, FormsModule, RouterLink, NavigationLinkPipe, CreatePreviewDirective, NgIf, LZLoaderComponent],
 })
 export class LZSitePreviewComponent implements OnInit {
     @HostBinding("class.lz-site-preview")

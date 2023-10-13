@@ -12,6 +12,7 @@ export {
     CreateCampaignModel,
     CampaignModel,
     CampaignPreviewModel,
+    CreatePreviewModel,
 } from "./types";
 export {
     defaultTextControlElement,
@@ -58,6 +59,7 @@ export {
     getTabsItemSettings,
     getTabsSettings,
     getPreviewData,
+    getCampaignData,
 } from "./utils";
 
 export {

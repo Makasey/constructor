@@ -1,4 +1,12 @@
 <section class="global-settings">
-  <h2 class="settings-title">Настройки сайта</h2>
-  <ap-form [formModel]="formModel()"></ap-form>
+    <h2 class="settings-title">Настройки сайта</h2>
+    <ap-text-field
+        label="Название компании"
+        [ngModel]="campaignName()"
+        [minLength]="3"
+        [maxLength]="50"
+        [required]="true"
+        (ngModelChange)="updateCampaignName($event)"
+    />
+    <ap-form [formModel]="formModel()"></ap-form>
 </section>

@@ -8,7 +8,7 @@ export const LOCAL_STORAGE_ENABLED_TOASTR_DND_MODE = "enableDNDMode";
 
 export const EXISTING_TIME_TOKEN = new InjectionToken<number>("toastr-item EXISTING_TIME", {
     factory(): number {
-        return 8000;
+        return 5000;
     },
 });
 
@@ -20,7 +20,7 @@ export const TOASTR_ITEM_OPTIONS_TOKEN = new InjectionToken<Record<string, unkno
 
 export const DISAPPEARING_TIME_TOKEN = new InjectionToken<number>("toastr-item DISAPPEARING_TIME", {
     factory(): number {
-        return 5000;
+        return 2000;
     },
 });
 

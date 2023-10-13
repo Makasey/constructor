@@ -63,7 +63,7 @@
 
 <ng-template [ngTemplateOutlet]="_tableExtra.draggableHeader ? draggableWrapper : defaultWrapper"></ng-template>
 
-<!--<megadash-load-more-spinner *ngIf="_loading" class="table-loader" [label]="loadMoreLabel"> </megadash-load-more-spinner>-->
+<lz-loader *ngIf="_loading" class="table-loader">{{ loadMoreLabel }} </lz-loader>
 
 <ng-template #defaultFooterTemplate></ng-template>
 
@@ -72,9 +72,7 @@
 </ng-template>
 
 <ng-template #defaultNoRecordsTemplate>
-    <div class="table-empty">
-        Nothing to show yet
-    </div>
+    <div class="table-empty"> Nothing to show yet </div>
 </ng-template>
 
 <ng-template #content>

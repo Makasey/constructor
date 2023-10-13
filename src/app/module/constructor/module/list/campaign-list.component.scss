@@ -29,16 +29,17 @@
                 border-radius: 10px 10px 0 0;
                 border-top: none;
             }
+        }
+    }
 
-            .actions-column {
-                display: flex;
-                justify-content: flex-end;
-                gap: 12px;
+    .actions-column {
+        display: flex;
+        justify-content: flex-end;
+        padding: 8px 12px;
+        gap: 12px;
 
-                .create-campaign {
-                    max-width: 110px;
-                }
-            }
+        .create-campaign {
+            max-width: 110px;
         }
     }
 

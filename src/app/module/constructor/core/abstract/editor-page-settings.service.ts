@@ -29,7 +29,7 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
             })
             .pipe(
                 map(settings => {
-                    const { title, campaignName, logotype } = settings;
+                    const { title, logotype, siteMetaTags, siteDescription } = settings;
 
                     return {
                         id: getRandomId(),
@@ -50,16 +50,6 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                             },
                             {
                                 id: getRandomId(),
-                                name: "campaignName",
-                                valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
-                                value: campaignName,
-                                options: {
-                                    maxLength: 30,
-                                    label: "Название вашей компании",
-                                },
-                            },
-                            {
-                                id: getRandomId(),
                                 name: "logotype",
                                 valueTemplateKey: APFormDefaultTemplateKeys.FILE_UPLOAD,
                                 value: logotype,
@@ -68,7 +58,7 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                                 id: getRandomId(),
                                 name: "siteDescription",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-                                value: settings.siteDescription,
+                                value: siteDescription,
                                 options: {
                                     maxLength: 300,
                                     label: "Описание вашей компании",
@@ -79,7 +69,7 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                                 id: getRandomId(),
                                 name: "siteMetaTags",
                                 valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
-                                value: settings.siteMetaTags,
+                                value: siteMetaTags,
                                 options: {
                                     maxLength: 300,
                                     label: "Ключевые слова для вашего сайта",
@@ -122,6 +112,18 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
 
             return {
                 pages: updatedPages,
+            };
+        });
+    }
+
+    public selectCampaignName(): Observable<string> {
+        return this.query.select(state => state.campaignName);
+    }
+
+    public updateCampaignName(campaignName: string): void {
+        this.service.updateState(() => {
+            return {
+                campaignName: campaignName,
             };
         });
     }

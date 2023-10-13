@@ -1,4 +1,4 @@
-import { AbstractCampaignService, CampaignModel, SitePageElement } from "@modules/constructor";
+import { AbstractCampaignService, CampaignModel, ROOT_ELEMENT_ID } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, UIDataState } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { Observable, tap } from "rxjs";
@@ -28,24 +28,19 @@ export class DefaultEditAreaService extends AbstractEditAreaService {
         return this.campaignService.getCampaignById(id).pipe(
             tap(campaign => {
                 this.service.updateState(() => {
-                    const { id, settings, model } = campaign;
-                    const currentStateIndex = this.getMaxIndex(model);
+                    const { id, elements, pages, campaignName } = campaign;
 
                     return {
-                        items: model,
+                        items: elements,
                         dataState: UIDataState.LOADED,
-                        currentStateIndex: currentStateIndex,
-                        settings: {
-                            ...settings,
-                            id: id,
-                        },
+                        pages: pages,
+                        selectedPage: pages[0].id,
+                        selectedElement: ROOT_ELEMENT_ID,
+                        id: id,
+                        campaignName: campaignName,
                     };
                 });
             }),
         );
-    }
-
-    public getMaxIndex(items: Record<number, SitePageElement>): number {
-        return Math.max(...(Object.keys(items) as unknown as number[]));
     }
 }

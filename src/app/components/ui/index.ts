@@ -22,6 +22,11 @@ export * from "./grid";
 //Table component
 export * from "./table";
 
+//Accordion component
 export * from "./accordion";
 
+//Tabs component
 export * from "./tabs";
+
+// Loader component
+export * from "./loader";

@@ -69,35 +69,4 @@
     }
 }
 
-.loader {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    &::before {
-        content: "";
-        width: 120px;
-        height: 120px;
-        border: 8px solid #1b1c21;
-        border-radius: 50%;
-        border-left: 8px solid #fff;
-        border-right: 8px solid #fff;
-        animation: spin 2s steps(36) both infinite;
-    }
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-
-    50% {
-        transform: rotate(180deg) scale(1.5);
-    }
-
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
-}

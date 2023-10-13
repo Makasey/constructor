@@ -1,5 +1,5 @@
+import { File } from "@shared-types";
 import {
-    CampaignType,
     ImagePageElement,
     InnerPageElement,
     SectionPageElement,
@@ -9,7 +9,6 @@ import {
     TabsPageElement,
     TitlePageElement,
 } from "@modules/constructor";
-import { File } from "@shared-types";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
 
@@ -57,11 +56,9 @@ export type ElementSettingsWithUnit = Readonly<{
 
 export type PageSettings = Readonly<{
     title: string;
-    campaignName: string;
     logotype: File | null;
     siteMetaTags: string;
     siteDescription: string;
-    id?: number;
 }>;
 
 export interface ComponentWithVCR {
@@ -72,13 +69,18 @@ export interface ComponentWithVCR {
 
 export type CampaignModel = Readonly<{
     id: number;
-    model: Record<string, SitePageElement>;
-    settings: PageSettings;
-    type: CampaignType;
+    elements: Record<string, SitePageElement>;
     campaignName: string;
+    pages: Page[];
 }>;
 
 export type CreateCampaignModel = Readonly<{
+    pages: Page[];
+    elements: Record<string, SitePageElement>;
+    campaignName: string;
+}>;
+
+export type CreatePreviewModel = Readonly<{
     type: "page";
     body: {
         pages: Page[];
@@ -89,4 +91,5 @@ export type CreateCampaignModel = Readonly<{
 export type CampaignPreviewModel = Readonly<{
     id: string;
     text: string;
+    name: string;
 }>;

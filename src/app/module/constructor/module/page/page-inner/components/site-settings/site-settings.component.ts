@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormModel, APFormModule } from "@components";
+import { APFormModel, APFormModule, APTextFieldModule } from "@components";
 import { AbstractEditorPageSettingsService } from "@modules/constructor";
+import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: "lz-site-settings",
@@ -12,7 +13,7 @@ import { AbstractEditorPageSettingsService } from "@modules/constructor";
     styleUrls: ["./site-settings.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormModule],
+    imports: [APFormModule, APTextFieldModule, FormsModule],
 })
 export class SiteSettingsComponent {
     @HostBinding("class.lz-site-settings")
@@ -24,5 +25,11 @@ export class SiteSettingsComponent {
         initialValue: {} as APFormModel,
     });
 
+    public readonly campaignName = toSignal(this.service.selectCampaignName());
+
     public readonly formModelChanges = toSignal(this.service.selectFormModelChange());
+
+    public updateCampaignName(campaignName: string): void {
+        this.service.updateCampaignName(campaignName);
+    }
 }

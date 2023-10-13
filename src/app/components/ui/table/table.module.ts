@@ -8,10 +8,18 @@ import { OverlayModule } from "@angular/cdk/overlay";
 // import { PageLoaderModule } from "@ui/page-loader/page-loader.module";
 // import { CheckboxModule } from "@ui/checkbox/checkbox.module";
 import { LZInitVarDirective } from "@shared-directives/init-var/init-var.directive";
-import { RowPaddingPipe, TableBodyComponent, TableComponent, TableFootComponent, TableHeadComponent, TableRowComponent } from "@components";
+import {
+    LZLoaderComponent,
+    RowPaddingPipe,
+    TableBodyComponent,
+    TableComponent,
+    TableFootComponent,
+    TableHeadComponent,
+    TableRowComponent,
+} from "@components";
 
 @NgModule({
-    imports: [CommonModule, DragDropModule, FormsModule, LZInitVarDirective, OverlayModule, RowPaddingPipe],
+    imports: [CommonModule, DragDropModule, FormsModule, LZInitVarDirective, LZLoaderComponent, OverlayModule, RowPaddingPipe],
     declarations: [TableBodyComponent, TableComponent, TableFootComponent, TableHeadComponent, TableRowComponent],
     exports: [TableComponent],
 })

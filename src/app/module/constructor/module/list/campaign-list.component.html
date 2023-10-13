@@ -13,6 +13,7 @@
 
 <lz-table
     [tableMeta]="tableMeta$ | async"
+    [loading]="_loading$ | async"
     [selectedRows]="selectedRows"
     [tableRows]="tableValues$ | async"
     [tableExtra]="{ hasCheckboxes: true, hasSelectAllCheckbox: true, idKey: 'id' }"

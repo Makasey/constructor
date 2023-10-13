@@ -11,5 +11,5 @@ export const fadeInAnimation: AnimationTriggerMetadata = trigger("fadeIn", [
 export const fadeOutAnimation: AnimationTriggerMetadata = trigger("fadeOut", [
     state("open", style({ opacity: 1 })),
     state("hidden", style({ opacity: 0 })),
-    transition("open => hidden", [animate("5s")]),
+    transition("open => hidden", [animate("2s")]),
 ]);
