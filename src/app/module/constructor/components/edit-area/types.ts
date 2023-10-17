@@ -4,10 +4,10 @@ import {
     RootComponent,
     SectionComponent,
     SitePageElementType,
+    TabElementItemComponent,
     TabsComponent,
     TitleComponent,
 } from "@modules/constructor";
-import { TabsItemComponent } from "@components";
 import { Type } from "@angular/core";
 
 export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
@@ -17,5 +17,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.INNER]: InnerComponent,
     [SitePageElementType.IMAGE]: ImageComponent,
     [SitePageElementType.TABS]: TabsComponent,
-    [SitePageElementType.TABS_ITEM]: TabsItemComponent,
+    [SitePageElementType.TABS_ITEM]: TabElementItemComponent,
 };
