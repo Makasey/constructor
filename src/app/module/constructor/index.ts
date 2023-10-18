@@ -33,6 +33,7 @@ export {
     defaultTabsElementSettings,
     defaultTabsItemElementSettings,
     defaultTitleElementSettings,
+    defaultTextElementSettings,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -43,6 +44,7 @@ export {
     processSettingValueWithUnit,
     processDirectionValue,
     getTitleSettings,
+    getTextSettings,
     deleteElementFromTree,
     getSectionElementStyleControl,
     getLinkElementControl,
@@ -107,6 +109,10 @@ export {
     EditAreaComponent,
     SectionComponent,
     TitleComponent,
+    TextComponent,
+    TextPageElement,
+    TextElementSettingsGroup,
+    TextPageElementSettings,
     RootComponent,
     sitePageElementMap,
     InnerComponent,

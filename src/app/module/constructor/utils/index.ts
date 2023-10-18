@@ -1,6 +1,7 @@
 export {
     getSectionSettings,
     getTitleSettings,
+    getTextSettings,
     processStructureType,
     getTitleElementStyleControl,
     getLinkElementControl,
