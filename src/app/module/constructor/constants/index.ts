@@ -17,6 +17,7 @@ import {
 import { InjectionToken } from "@angular/core";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 import { defaultDirectionValue } from "@components";
+import { getRandomString } from "@shared-utils";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 500,
@@ -184,6 +185,7 @@ export const defaultTabsElementSettings: Omit<TabsPageElement, "id" | "parentId"
             value: 100,
             unit: StyleUnit.PERCENT,
         },
+        selectedElement: "",
         height: {
             value: 100,
             unit: StyleUnit.PERCENT,
@@ -207,6 +209,7 @@ export const defaultTabsItemElementSettings: Omit<TabsItemPageElement, "id" | "p
             value: 100,
             unit: StyleUnit.PERCENT,
         },
+        title: getRandomString(10),
         height: {
             value: 100,
             unit: StyleUnit.PERCENT,
@@ -214,14 +217,14 @@ export const defaultTabsItemElementSettings: Omit<TabsItemPageElement, "id" | "p
     },
 };
 
-export const defaultPageElementSettingsMap: Record<SitePageElementType, Omit<SitePageElementUnion, "id" | "parentId">> = {
-    [SitePageElementType.TITLE]: defaultTitleElementSettings,
-    [SitePageElementType.SECTION]: defaultSectionElementSettings,
-    [SitePageElementType.PAGE]: defaultPageElementSettings,
-    [SitePageElementType.INNER]: defaultInnerElementSettings,
-    [SitePageElementType.IMAGE]: defaultImageElementSettings,
-    [SitePageElementType.TABS]: defaultTabsElementSettings,
-    [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings,
+export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
+    [SitePageElementType.TITLE]: () => defaultTitleElementSettings,
+    [SitePageElementType.SECTION]: () => defaultSectionElementSettings,
+    [SitePageElementType.PAGE]: () => defaultPageElementSettings,
+    [SitePageElementType.INNER]: () => defaultInnerElementSettings,
+    [SitePageElementType.IMAGE]: () => defaultImageElementSettings,
+    [SitePageElementType.TABS]: () => defaultTabsElementSettings,
+    [SitePageElementType.TABS_ITEM]: () => defaultTabsItemElementSettings,
 };
 
 export const defaultSizeControlUnit = [

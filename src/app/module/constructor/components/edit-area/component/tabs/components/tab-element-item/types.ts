@@ -6,5 +6,6 @@ export type TabsItemPageElement = SitePageElement<TabsItemPageElementSettings>;
 export type TabsItemPageElementSettings = Readonly<{
     margin: Direction;
     padding: Direction;
+    title?: string;
 }> &
     SitePageElementSizeSettings;

@@ -20,3 +20,4 @@ export { processSettingValueWithUnit, processDirectionValue, processElementSetti
 export { deleteElementFromTree, processPossibleElements } from "./element.utils";
 export { getDefaultSizeSettings } from "./element-size-settings.utils";
 export { getPreviewData, getCampaignData } from "./response.utils";
+export { processElementCreation } from "./element-creation";

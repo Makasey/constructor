@@ -60,6 +60,7 @@ export {
     getTabsSettings,
     getPreviewData,
     getCampaignData,
+    processElementCreation,
 } from "./utils";
 
 export {
