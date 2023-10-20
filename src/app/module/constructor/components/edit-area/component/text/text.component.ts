@@ -26,7 +26,7 @@ export class TextComponent implements OnInit {
 
     @HostBinding("class")
     public hostClasses = {
-        "lz-title-element": true,
+        "lz-text-element": true,
         "editor-element": true,
     };
 
