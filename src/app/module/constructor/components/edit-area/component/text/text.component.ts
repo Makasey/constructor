@@ -2,13 +2,14 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     ELEMENT_ID,
+    TextPageElement,
+    TextPageElementSettings,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { TextPageElement, TextPageElementSettings } from "@modules/constructor/components/edit-area/component/text/types";
 
 @Component({
     selector: "lz-text-element",

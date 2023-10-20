@@ -6,8 +6,6 @@ export type TextPageElementSettings = Readonly<
     {
         text?: string;
         label?: string;
-        tag?: string;
-        link?: string;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
         SitePageElementBackground

@@ -117,7 +117,6 @@ export const defaultTextElementSettings: Omit<TextPageElement, "id" | "parentId"
         color: "#000000",
         backgroundColor: "transparent",
         text: "Hello World",
-        link: "",
     },
 };
 

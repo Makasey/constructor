@@ -1,10 +1,4 @@
-import {
-    DEFAULT_UPSERT_CONFIG,
-    TextElementSettingsGroup,
-    TextPageElement,
-    getDefaultSizeSettings,
-    getLinkElementControl,
-} from "@modules/constructor";
+import { DEFAULT_UPSERT_CONFIG, TextElementSettingsGroup, TextPageElement, getDefaultSizeSettings } from "@modules/constructor";
 
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
 
@@ -45,15 +39,15 @@ function getTextColorControl(element: TextPageElement): APFormControl {
     };
 }
 
-export function getTextElementSizeControls(element: TextPageElement): APFormControl[] {
+function getTextElementSizeControls(element: TextPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
 
-export function getTextElementTextControl(element: TextPageElement): APFormControl[] {
-    return [getTextTextControl(element), getTextColorControl(element), getLinkElementControl(element)];
+function getTextElementTextControl(element: TextPageElement): APFormControl[] {
+    return [getTextTextControl(element), getTextColorControl(element)];
 }
 
-export function getTextElementStyleControl(element: TextPageElement): APFormControl[] {
+function getTextElementStyleControl(element: TextPageElement): APFormControl[] {
     return [getTextBackgroundColorControl(element)];
 }
 
