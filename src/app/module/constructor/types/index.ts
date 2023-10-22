@@ -7,6 +7,7 @@ import {
     StyleUnit,
     TabsItemPageElement,
     TabsPageElement,
+    TextPageElement,
     TitlePageElement,
 } from "@modules/constructor";
 import { Page } from "@core";
@@ -17,6 +18,7 @@ export type SitePageElementUnion =
     | SectionPageElement
     | SitePageElement
     | TitlePageElement
+    | TextPageElement
     | InnerPageElement
     | ImagePageElement
     | TabsPageElement;

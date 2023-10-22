@@ -12,6 +12,7 @@ import {
     StyleUnit,
     TabsItemPageElement,
     TabsPageElement,
+    TextPageElement,
     TitlePageElement,
 } from "@modules/constructor";
 import { InjectionToken } from "@angular/core";
@@ -98,6 +99,25 @@ export const defaultTitleElementSettings: Omit<TitlePageElement, "id" | "parentI
         backgroundColor: "transparent",
         text: "Hello World",
         link: "",
+    },
+};
+
+export const defaultTextElementSettings: Omit<TextPageElement, "id" | "parentId"> = {
+    type: SitePageElementType.TEXT,
+    children: [],
+    isExtendable: false,
+    settings: {
+        width: {
+            value: 100,
+            unit: StyleUnit.PERCENT,
+        },
+        height: {
+            value: 20,
+            unit: StyleUnit.PERCENT,
+        },
+        color: "#000000",
+        backgroundColor: "transparent",
+        text: "Hello World",
     },
 };
 
@@ -225,6 +245,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.IMAGE]: () => defaultImageElementSettings,
     [SitePageElementType.TABS]: () => defaultTabsElementSettings,
     [SitePageElementType.TABS_ITEM]: () => defaultTabsItemElementSettings,
+    [SitePageElementType.TEXT]: () => defaultTextElementSettings,
 };
 
 export const defaultSizeControlUnit = [

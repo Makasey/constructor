@@ -6,6 +6,7 @@ import {
     SitePageElementType,
     TabElementItemComponent,
     TabsComponent,
+    TextComponent,
     TitleComponent,
 } from "@modules/constructor";
 import { Type } from "@angular/core";
@@ -18,4 +19,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.IMAGE]: ImageComponent,
     [SitePageElementType.TABS]: TabsComponent,
     [SitePageElementType.TABS_ITEM]: TabElementItemComponent,
+    [SitePageElementType.TEXT]: TextComponent,
 };

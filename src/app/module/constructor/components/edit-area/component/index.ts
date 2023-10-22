@@ -26,3 +26,5 @@ export {
     TabsItemPageElement,
     TabsItemElementSettingsGroup,
 } from "./tabs";
+
+export { TextComponent, TextElementSettingsGroup, TextPageElementSettings, TextPageElement } from "./text";
