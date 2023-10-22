@@ -26,5 +26,6 @@ module.exports = {
     preset: "jest-preset-angular",
     verbose: true,
     setupFilesAfterEnv: ["./setup-jest.ts"],
+    transformIgnorePatterns: ["node_modules/(?!.*.mjs$|@datorama/akita)"],
     moduleNameMapper: pathsToModuleNameMapper(aliases),
 };
