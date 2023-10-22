@@ -49,6 +49,11 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     icon: "bx-font",
                 },
                 {
+                    title: "Текст",
+                    type: SitePageElementType.TEXT,
+                    icon: "bx-font",
+                },
+                {
                     title: "Секция",
                     type: SitePageElementType.SECTION,
                     icon: "bx-font",
