@@ -1,15 +1,20 @@
 <ng-container *ngIf="element() as element">
-    <button
-        *ngFor="let item of items$ | async; trackBy: trackByTab"
-        [class._active]="element.settings.selectedElement === item.id"
-        (click.stop)="console.log(item)"
-    >
-        {{ item.settings.title }}
-    </button>
+    <div class="nav">
+        <button
+            class="nav-item"
+            *ngFor="let item of items$ | async; trackBy: trackByTab"
+            [class._active]="element.settings.selectedElement === item.id"
+            (click.stop)="selectTabsItem(item)"
+        >
+            {{ item.settings.title }}
+        </button>
+    </div>
 
     <ng-container *ngIf="element.children.length">
         <ng-container *ngFor="let child of element.children; trackBy: _trackBy">
-            <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
+            <ng-container *ngIf="element.settings.selectedElement === child">
+                <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
+            </ng-container>
         </ng-container>
     </ng-container>
 </ng-container>

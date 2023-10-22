@@ -52,7 +52,7 @@ export function getTabsItemSettings(element: TabsItemPageElement): APFormModel {
                 name: TabsItemElementSettingsGroup.STYLE_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getTabsItemElementControls(element),
-                headerText: "Настройки табов",
+                headerText: "Настройки табы",
             },
         ],
     };

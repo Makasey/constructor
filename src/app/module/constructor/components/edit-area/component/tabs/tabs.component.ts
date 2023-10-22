@@ -8,6 +8,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
+    AbstractEditorSelectionService,
     ELEMENT_ID,
     TabsItemPageElement,
     TabsPageElement,
@@ -47,6 +48,8 @@ export class TabsComponent implements OnInit {
 
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
+    private readonly elementSelectionService = inject(AbstractEditorSelectionService);
+
     private settings$: Observable<TabsPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public element: Signal<TabsPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
@@ -73,5 +76,11 @@ export class TabsComponent implements OnInit {
         return child;
     }
 
-    public console = console;
+    public selectTabsItem(item: TabsItemPageElement): void {
+        const id = item.id;
+
+        this.elementSelectionService.updateSelection(id);
+
+        this.elementSettingsService.updateElementSettings({ selectedElement: id }, this.ELEMENT_ID);
+    }
 }

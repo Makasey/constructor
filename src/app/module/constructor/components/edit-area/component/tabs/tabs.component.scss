@@ -1,6 +1,25 @@
 .lz-tabs-element {
     display: flex;
-    border: 2px solid yellow;
+    flex-direction: column;
+    border: 2px solid #7e7979;
     padding: 10px;
     color: #ffffff;
+
+    .nav {
+        display: flex;
+        justify-content: flex-start;
+
+        &-item {
+            border: 1px solid #7e7979;
+            border-bottom: none;
+            border-radius: 4px;
+            padding: 10px;
+            color: #ffffff;
+        }
+
+        ._active {
+            background-color: #7e7979;
+            color: #ffffff;
+        }
+    }
 }
