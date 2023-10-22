@@ -1,1 +1,15 @@
-<div *ngFor="let item of count$ | async"> tab </div>
+<ng-container *ngIf="element() as element">
+    <button
+        *ngFor="let item of items$ | async; trackBy: trackByTab"
+        [class._active]="element.settings.selectedElement === item.id"
+        (click.stop)="console.log(item)"
+    >
+        {{ item.settings.title }}
+    </button>
+
+    <ng-container *ngIf="element.children.length">
+        <ng-container *ngFor="let child of element.children; trackBy: _trackBy">
+            <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
+        </ng-container>
+    </ng-container>
+</ng-container>

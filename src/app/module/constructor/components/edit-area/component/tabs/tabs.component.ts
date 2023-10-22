@@ -1,21 +1,26 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { Observable, map } from "rxjs";
+import { Observable, combineLatest, map } from "rxjs";
+import { switchMap } from "rxjs/operators";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
+    AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     ELEMENT_ID,
+    TabsItemPageElement,
+    TabsPageElement,
     TabsPageElementSettings,
     processSettingValueWithUnit,
     processedCreatedTabsCount,
 } from "@modules/constructor";
-import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-tabs-element",
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, ElementResolverDirective],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,9 +43,19 @@ export class TabsComponent implements OnInit {
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
+    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
+
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
     private settings$: Observable<TabsPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+
+    public element: Signal<TabsPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+
+    public items$ = this.editorElementActionsService.selectElement(this.ELEMENT_ID).pipe(
+        switchMap((item: TabsPageElement) => {
+            return combineLatest(item.children.map(id => this.editorElementActionsService.selectElement(id) as Observable<TabsItemPageElement>));
+        }),
+    );
 
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
@@ -49,4 +64,14 @@ export class TabsComponent implements OnInit {
 
         this.count$ = this.settings$.pipe(map(settings => processedCreatedTabsCount(settings.count)));
     }
+
+    public trackByTab(_: number, tab: TabsItemPageElement): string {
+        return tab.id;
+    }
+
+    public _trackBy(_: number, child: string): string {
+        return child;
+    }
+
+    public console = console;
 }

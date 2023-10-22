@@ -66,9 +66,14 @@ export class LZSitePreviewComponent implements OnInit {
     }
 
     public updateSelectedPage(id: string): void {
-        const selectedPage = this.previewData()!.find(page => page.id === id) ?? null;
+        const previewData = this.previewData();
 
-        this.selectedPage.set(selectedPage);
+        if (!previewData) {
+            return;
+        }
+
+        const selectedPage = previewData.find(page => page.id === id);
+        this.selectedPage.set(selectedPage ?? null);
     }
 
     public createCampaign(): void {

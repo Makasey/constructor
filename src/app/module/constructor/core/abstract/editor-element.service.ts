@@ -1,16 +1,8 @@
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { Observable, map } from "rxjs";
-import {
-    ROOT_ELEMENT_ID,
-    SitePageElement,
-    SitePageElementType,
-    SitePageElementUnion,
-    defaultPageElementSettingsMap,
-    deleteElementFromTree,
-} from "@modules/constructor";
+import { ROOT_ELEMENT_ID, SitePageElementType, SitePageElementUnion, deleteElementFromTree, processElementCreation } from "@modules/constructor";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
-import { getRandomId } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
@@ -46,24 +38,13 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
     public addPageElement(type: SitePageElementType): void {
         this.service.updateState(state => {
-            const newElementID = getRandomId();
-            const items = state.items;
-            logAction(`Add element to page with id: ${newElementID}`);
-
-            const newElement: SitePageElement = {
-                ...defaultPageElementSettingsMap[type],
-                id: newElementID,
-                parentId: ROOT_ELEMENT_ID,
-                settings: {
-                    ...defaultPageElementSettingsMap[type].settings,
-                },
-            };
+            const stateData = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
 
             const updatedPages = state.pages.map(page => {
                 if (page.id === state.selectedPage) {
                     return {
                         ...page,
-                        children: arrayAdd(page.children, newElementID),
+                        children: arrayAdd(page.children, stateData.selectedElement),
                     };
                 }
 
@@ -71,48 +52,17 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
             });
 
             return {
-                selectedElement: newElementID,
+                ...stateData,
                 pages: updatedPages,
-                items: {
-                    ...items,
-                    [state.selectedElement]: {
-                        ...state.items[state.selectedElement],
-                        children: arrayAdd(state.items[state.selectedElement].children, newElementID),
-                    },
-                    [newElementID]: newElement,
-                },
             };
         });
     }
 
     public addElementByType(type: SitePageElementType, parentId?: string): void {
         this.service.updateState(state => {
-            const newElementID = getRandomId();
             parentId = parentId ?? state.selectedElement;
 
-            logAction(`Add element with id: ${newElementID}, type: ${type}`);
-            const items = state.items;
-            const parentElement = items[parentId];
-            const newElement: SitePageElement = {
-                ...defaultPageElementSettingsMap[type],
-                id: newElementID,
-                parentId: parentId,
-                settings: {
-                    ...defaultPageElementSettingsMap[type].settings,
-                },
-            };
-
-            return {
-                selectedElement: newElementID,
-                items: {
-                    ...items,
-                    [parentId]: {
-                        ...parentElement,
-                        children: arrayAdd(parentElement.children, newElementID),
-                    },
-                    [newElementID]: newElement,
-                },
-            };
+            return processElementCreation(type, state.items, parentId);
         });
     }
 

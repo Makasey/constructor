@@ -1,19 +1,27 @@
 import {
     AbstractLzStoreService,
+    AbstractNavigationService,
     AbstractPreviewDataService,
     LzAbstractQuery,
     LzQueryInjectionTokensMap,
     LzServiceInjectionTokensMap,
     LzStateKey,
 } from "@core";
-import { Inject, Injectable, Provider, Type } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Inject, Injectable, Provider, Type, inject } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components";
-import { Observable, catchError, of } from "rxjs";
-import { ResponseError } from "@shared-types";
+import { Observable, catchError, throwError } from "rxjs";
+import { ResponseError, RouteKey, RouteParams } from "@shared-types";
 import { getPreviewData } from "@modules/constructor";
 
 @Injectable()
 export abstract class AbstractPreviewService<T> {
+    protected readonly router = inject(Router);
+
+    protected readonly navigationService = inject(AbstractNavigationService);
+
+    protected readonly activatedRoute = inject(ActivatedRoute);
+
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
@@ -51,7 +59,13 @@ export class DefaultPreviewService<T> extends AbstractPreviewService<T> {
                     text: error.error?.messages?.join(", ") ?? "Не удалось загрузить превью",
                 });
 
-                return of([] as T);
+                const builderRoute = this.navigationService.buildLink(RouteKey.CAMPAIGN_EDITOR, {
+                    campaignId: this.activatedRoute.snapshot.paramMap.get(RouteParams.CAMPAIGN_ID) ?? "new",
+                });
+
+                void this.router.navigate([builderRoute]);
+
+                return throwError(() => error);
             }),
         );
     }
