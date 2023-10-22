@@ -54,7 +54,7 @@ export class TabsComponent implements OnInit {
 
     public element: Signal<TabsPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
-    public items$ = this.editorElementActionsService.selectElement(this.ELEMENT_ID).pipe(
+    public items$: Observable<TabsItemPageElement[]> = this.editorElementActionsService.selectElement(this.ELEMENT_ID).pipe(
         switchMap((item: TabsPageElement) => {
             return combineLatest(item.children.map(id => this.editorElementActionsService.selectElement(id) as Observable<TabsItemPageElement>));
         }),
@@ -76,9 +76,7 @@ export class TabsComponent implements OnInit {
         return child;
     }
 
-    public selectTabsItem(item: TabsItemPageElement): void {
-        const id = item.id;
-
+    public selectTabItem(id: string): void {
         this.elementSelectionService.updateSelection(id);
 
         this.elementSettingsService.updateElementSettings({ selectedElement: id }, this.ELEMENT_ID);
