@@ -77,6 +77,9 @@ export class TabsComponent implements OnInit {
     }
 
     public selectTabItem(id: string): void {
+        if (this.element().settings.selectedElement === id) {
+            return;
+        }
         this.elementSelectionService.updateSelection(id);
 
         this.elementSettingsService.updateElementSettings({ selectedElement: id }, this.ELEMENT_ID);

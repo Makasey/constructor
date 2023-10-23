@@ -1,4 +1,7 @@
 .lz-tab-element-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
     border: 1px solid #7e7979;
     background-color: #7e7979;
 }

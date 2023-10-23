@@ -20,6 +20,7 @@ export class ElementResolverDirective implements OnChanges {
 
     public ngOnChanges(): void {
         if (this.lzElementResolver && this.lzElementResolverParent) {
+            this.viewContainerRef.clear();
             const { type, id } = this.service.getElement(this.lzElementResolver);
             const componentType: Type<unknown> = sitePageElementMap[type];
             const newInjector = Injector.create({
