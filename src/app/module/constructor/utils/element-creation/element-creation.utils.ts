@@ -62,7 +62,7 @@ export function processElementCreation(
             };
 
             return {
-                selectedElement: newElement.id,
+                selectedElement: tabItems[0].id,
                 items: {
                     ...updatedItems,
                     [parentId]: {

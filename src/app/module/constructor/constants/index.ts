@@ -189,7 +189,7 @@ export const defaultImageElementSettings: Omit<ImagePageElement, "id" | "parentI
             alt: "",
 
             title: "",
-            src: "https://us1.wpdemo.org/wpd_1696513527_9424/tmp-site-q3qtfbcsqglvl.us1.wpdemo.org/wp-content/plugins/elementor/assets/images/placeholder.png",
+            src: "/assets/icons/placeholder/image.png",
         },
         alt: "",
         title: "",
