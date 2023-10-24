@@ -4,6 +4,7 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     TabsItemPageElement,
+    TabsItemPageElementSettings,
     TabsPageElement,
     TabsPageElementSettings,
     defaultPageElementSettingsMap,
@@ -105,17 +106,23 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
             const children = item.children;
             const updatedSettings = value as TabsPageElementSettings;
 
-            const processedChildren = children.map(children => {
-                const item = items[children] as TabsItemPageElement;
-                const updatedElement = updatedSettings.items.find(updatedItem => updatedItem.id === children)!;
+            const processedChildren: TabsItemPageElement[] = children.map(children => {
+                const childItem = items[children] as TabsItemPageElement;
 
-                return {
-                    ...item,
-                    settings: {
-                        ...item.settings,
+                if (updatedSettings.items) {
+                    const updatedElement = updatedSettings.items.find(updatedItem => updatedItem.id === children)!;
+                    const updatedChildSettings: TabsItemPageElementSettings = {
+                        ...childItem.settings,
                         ...updatedElement,
-                    },
-                };
+                    };
+
+                    return {
+                        ...childItem,
+                        settings: updatedChildSettings,
+                    };
+                }
+
+                return { ...childItem };
             });
 
             return {
