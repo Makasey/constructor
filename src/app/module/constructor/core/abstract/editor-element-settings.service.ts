@@ -2,8 +2,7 @@ import { APFormModel } from "@components";
 import {
     AbstractEditorOperationService,
     ROOT_ELEMENT_ID,
-    SitePageElementSettings,
-    SitePageElementSizeSettings,
+    SitePageElementSettingsUnion,
     processElementSettings,
     processUpdateElementSettings,
 } from "@modules/constructor";
@@ -15,7 +14,7 @@ import { filterNilValue, logAction } from "@datorama/akita";
 import { isObjectEquals } from "@shared-utils";
 
 @Injectable()
-export abstract class AbstractEditorElementSettingsService<K = SitePageElementSettings> extends AbstractEditorOperationService {
+export abstract class AbstractEditorElementSettingsService<K = SitePageElementSettingsUnion> extends AbstractEditorOperationService {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
@@ -32,7 +31,7 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
 }
 
 @Injectable()
-export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSettings> extends AbstractEditorElementSettingsService<K> {
+export class DefaultEditorElementSettingsService<K extends SitePageElementSettingsUnion> extends AbstractEditorElementSettingsService<K> {
     constructor(
         @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,

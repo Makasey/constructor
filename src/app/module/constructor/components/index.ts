@@ -40,4 +40,5 @@ export {
     TabElementItemComponent,
     TabsItemPageElement,
     TabsItemElementSettingsGroup,
+    InnerPageElementSettings,
 } from "./edit-area";

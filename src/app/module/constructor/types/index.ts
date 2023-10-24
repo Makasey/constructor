@@ -1,14 +1,21 @@
 import { File } from "@shared-types";
 import {
     ImagePageElement,
+    ImagePageElementSettings,
     InnerPageElement,
+    InnerPageElementSettings,
     SectionPageElement,
+    SectionPageElementSettings,
     SitePageElementType,
     StyleUnit,
     TabsItemPageElement,
+    TabsItemPageElementSettings,
     TabsPageElement,
+    TabsPageElementSettings,
     TextPageElement,
+    TextPageElementSettings,
     TitlePageElement,
+    TitlePageElementSettings,
 } from "@modules/constructor";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
@@ -23,7 +30,17 @@ export type SitePageElementUnion =
     | ImagePageElement
     | TabsPageElement;
 
-export type SitePageElement<T = SitePageElementSettings> = Readonly<{
+export type SitePageElementSettingsUnion =
+    | TabsPageElementSettings
+    | SectionPageElementSettings
+    | SitePageElementSettings
+    | TitlePageElementSettings
+    | TextPageElementSettings
+    | InnerPageElementSettings
+    | ImagePageElementSettings
+    | TabsItemPageElementSettings;
+
+export type SitePageElement<T = SitePageElementSettingsUnion> = Readonly<{
     id: string;
     parentId: string | null;
     type: SitePageElementType;

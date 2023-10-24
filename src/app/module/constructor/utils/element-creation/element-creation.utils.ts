@@ -1,6 +1,6 @@
 import { EditorState } from "@core";
 import {
-    SitePageElementSizeSettings,
+    SitePageElementSettingsUnion,
     SitePageElementType,
     SitePageElementUnion,
     TabsItemPageElement,
@@ -92,7 +92,7 @@ export function processElementCreation(
     }
 }
 
-export function processUpdateElementSettings<K extends SitePageElementSizeSettings>(
+export function processUpdateElementSettings<K extends SitePageElementSettingsUnion>(
     value: K | Partial<K>,
     state: EditorState,
     id: string,
@@ -107,13 +107,13 @@ export function processUpdateElementSettings<K extends SitePageElementSizeSettin
 
             const processedChildren = children.map(children => {
                 const item = items[children] as TabsItemPageElement;
-                const updateElement = updatedSettings.items.find(updateItem => updateItem.id === children);
+                const updatedElement = updatedSettings.items.find(updatedItem => updatedItem.id === children)!;
 
                 return {
                     ...item,
                     settings: {
                         ...item.settings,
-                        ...updateElement,
+                        ...updatedElement,
                     },
                 };
             });
@@ -129,7 +129,7 @@ export function processUpdateElementSettings<K extends SitePageElementSizeSettin
                             items: processedChildren.map(child => child.settings),
                         },
                     },
-                } as Record<string, SitePageElementUnion>,
+                },
             };
         }
 

@@ -38,6 +38,7 @@ export {
     TabsItemPageElement,
     TabElementItemComponent,
     TabsItemElementSettingsGroup,
+    InnerPageElementSettings,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

@@ -13,6 +13,7 @@ export {
     CampaignModel,
     CampaignPreviewModel,
     CreatePreviewModel,
+    SitePageElementSettingsUnion,
 } from "./types";
 export {
     defaultTextControlElement,
@@ -132,6 +133,7 @@ export {
     TabsItemPageElement,
     TabElementItemComponent,
     TabsItemElementSettingsGroup,
+    InnerPageElementSettings,
 } from "./components";
 
 export {
