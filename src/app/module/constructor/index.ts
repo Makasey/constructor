@@ -63,6 +63,7 @@ export {
     getPreviewData,
     getCampaignData,
     processElementCreation,
+    processUpdateElementSettings,
 } from "./utils";
 
 export {

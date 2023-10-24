@@ -1,5 +1,13 @@
 import { EditorState } from "@core";
-import { SitePageElementType, SitePageElementUnion, TabsPageElement, defaultPageElementSettingsMap } from "@modules/constructor";
+import {
+    SitePageElementSizeSettings,
+    SitePageElementType,
+    SitePageElementUnion,
+    TabsItemPageElement,
+    TabsPageElement,
+    TabsPageElementSettings,
+    defaultPageElementSettingsMap,
+} from "@modules/constructor";
 import { arrayAdd, logAction } from "@datorama/akita";
 import { getRandomId } from "@shared-utils";
 
@@ -27,7 +35,9 @@ export function processElementCreation(
             const newElement = getNewElement<TabsPageElement>(type, parentId);
             const parentElement = items[newElement.parentId!];
 
-            const tabItems = Array.from({ length: newElement.settings.count }).map(() => getNewElement(SitePageElementType.TABS_ITEM, newElement.id));
+            const tabItems: TabsItemPageElement[] = Array.from({ length: newElement.settings.count }).map(() =>
+                getNewElement(SitePageElementType.TABS_ITEM, newElement.id),
+            );
             const childrenIds = tabItems.map(item => item.id);
             const updatedItems = tabItems.reduce((result, item) => {
                 result[item.id] = item;
@@ -39,6 +49,12 @@ export function processElementCreation(
                 ...newElement,
                 settings: {
                     ...newElement.settings,
+                    items: tabItems.map(tabItem => {
+                        return {
+                            ...tabItem.settings,
+                            id: tabItem.id,
+                        };
+                    }),
                     selectedElement: tabItems[0].id,
                 },
                 children: arrayAdd(newElement.children, childrenIds),
@@ -70,6 +86,63 @@ export function processElementCreation(
                         children: arrayAdd(parentElement.children, newElement.id),
                     },
                     [newElement.id]: newElement,
+                },
+            };
+        }
+    }
+}
+
+export function processUpdateElementSettings<K extends SitePageElementSizeSettings>(
+    value: K | Partial<K>,
+    state: EditorState,
+    id: string,
+): Partial<EditorState> {
+    const { items } = state;
+    const item = items[id];
+
+    switch (item.type) {
+        case SitePageElementType.TABS: {
+            const children = item.children;
+            const updatedSettings = value as TabsPageElementSettings;
+
+            const processedChildren = children.map(children => {
+                const item = items[children] as TabsItemPageElement;
+
+                return {
+                    ...item,
+                    settings: {
+                        ...item.settings,
+                        ...value,
+                    },
+                };
+            });
+
+            return {
+                items: {
+                    ...items,
+                    [id]: {
+                        ...item,
+                        settings: {
+                            ...item.settings,
+                            ...updatedSettings,
+                            items: processedChildren.map(child => child.settings),
+                        },
+                    },
+                } as Record<string, SitePageElementUnion>,
+            };
+        }
+
+        default: {
+            return {
+                items: {
+                    ...items,
+                    [id]: {
+                        ...item,
+                        settings: {
+                            ...item.settings,
+                            ...value,
+                        },
+                    },
                 },
             };
         }

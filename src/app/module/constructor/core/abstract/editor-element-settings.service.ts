@@ -5,6 +5,7 @@ import {
     SitePageElementSettings,
     SitePageElementSizeSettings,
     processElementSettings,
+    processUpdateElementSettings,
 } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
@@ -63,21 +64,7 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSizeSe
         logAction(`Update element settings`, id, value);
 
         this.service.updateState(state => {
-            const { items } = state;
-            const item = items[id];
-
-            return {
-                items: {
-                    ...items,
-                    [id]: {
-                        ...item,
-                        settings: {
-                            ...item.settings,
-                            ...value,
-                        },
-                    },
-                },
-            };
+            return processUpdateElementSettings<K>(value, state, id);
         });
     }
 

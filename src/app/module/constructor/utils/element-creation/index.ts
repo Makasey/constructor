@@ -1,1 +1,1 @@
-export { processElementCreation } from "./element-creation.utils";
+export { processElementCreation, processUpdateElementSettings } from "./element-creation.utils";

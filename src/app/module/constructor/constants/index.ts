@@ -206,6 +206,7 @@ export const defaultTabsElementSettings: Omit<TabsPageElement, "id" | "parentId"
             unit: StyleUnit.PERCENT,
         },
         selectedElement: "",
+        items: [],
         height: {
             value: 100,
             unit: StyleUnit.PERCENT,
