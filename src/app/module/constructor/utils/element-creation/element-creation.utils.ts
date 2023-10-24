@@ -107,12 +107,13 @@ export function processUpdateElementSettings<K extends SitePageElementSizeSettin
 
             const processedChildren = children.map(children => {
                 const item = items[children] as TabsItemPageElement;
+                const updateElement = updatedSettings.items.find(updateItem => updateItem.id === children);
 
                 return {
                     ...item,
                     settings: {
                         ...item.settings,
-                        ...value,
+                        ...updateElement,
                     },
                 };
             });
