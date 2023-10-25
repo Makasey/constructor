@@ -1,5 +1,12 @@
-import { ColumnStructure, InnerPageElement, StyleUnit, columnStructureCountMap } from "@modules/constructor";
-import { defaultInnerElementSettings } from "@modules/constructor";
+import {
+    ColumnStructure,
+    InnerPageElement,
+    InnerPageElementSettings,
+    SitePageElementType,
+    StyleUnit,
+    columnStructureCountMap,
+    defaultPageElementSettingsMap,
+} from "@modules/constructor";
 import { getRandomId } from "@shared-utils";
 
 function getInnerItemByType(type: ColumnStructure, parentId: string): InnerPageElement {
@@ -7,17 +14,18 @@ function getInnerItemByType(type: ColumnStructure, parentId: string): InnerPageE
     const elementId = getRandomId();
 
     const elementWidth = Math.floor(100 / count);
+    const element = defaultPageElementSettingsMap[SitePageElementType.INNER]();
 
     return {
-        ...defaultInnerElementSettings,
+        ...element,
         id: elementId,
         parentId: parentId,
         children: [],
         isExtendable: false,
         settings: {
-            ...defaultInnerElementSettings.settings,
+            ...element.settings,
             width: { value: elementWidth - 1, unit: StyleUnit.PERCENT },
-        },
+        } as InnerPageElementSettings,
     };
 }
 

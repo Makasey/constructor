@@ -3,22 +3,29 @@ import {
     ElementHTMLTag,
     FlexWrap,
     ImagePageElement,
+    ImagePageElementSettings,
     InnerPageElement,
+    InnerPageElementSettings,
     JustifyContent,
     SectionPageElement,
+    SectionPageElementSettings,
     SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
     StyleUnit,
     TabsItemPageElement,
+    TabsItemPageElementSettings,
     TabsPageElement,
+    TabsPageElementSettings,
     TextPageElement,
+    TextPageElementSettings,
     TitlePageElement,
+    TitlePageElementSettings,
+    TypeKeys,
 } from "@modules/constructor";
 import { InjectionToken } from "@angular/core";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 import { defaultDirectionValue } from "@components";
-import { getRandomString } from "@shared-utils";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 500,
@@ -43,210 +50,246 @@ export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.REM]: StyleUnit.REM,
 };
 
-export const defaultSectionElementSettings: Omit<SectionPageElement, "id" | "parentId"> = {
-    type: SitePageElementType.SECTION,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        height: {
-            value: 200,
-            unit: StyleUnit.PX,
-        },
-        margin: {
-            ...defaultDirectionValue,
-        },
-        padding: {
-            ...defaultDirectionValue,
-        },
-        gap: {
-            value: 10,
-            unit: StyleUnit.PX,
-        },
-        letterSpacing: {
-            value: 0,
-            unit: StyleUnit.PX,
-        },
-        opacity: 1,
-        tag: ElementHTMLTag.SECTION,
-        color: "#1b1c2d",
-        backgroundColor: "#ffffff",
-        isInit: false,
-        justifyContent: JustifyContent.START,
-        flexWrap: FlexWrap.NO_WRAP,
-        alignItems: AlignItems.START,
-    },
-};
+export function defaultSectionElementSettings(): () => Omit<SectionPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.SECTION,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 200,
+                    unit: StyleUnit.PX,
+                },
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                gap: {
+                    value: 10,
+                    unit: StyleUnit.PX,
+                },
+                letterSpacing: {
+                    value: 0,
+                    unit: StyleUnit.PX,
+                },
+                opacity: 1,
+                tag: ElementHTMLTag.SECTION,
+                color: "#1b1c2d",
+                backgroundColor: "#ffffff",
+                isInit: false,
+                justifyContent: JustifyContent.START,
+                flexWrap: FlexWrap.NO_WRAP,
+                alignItems: AlignItems.START,
+            },
+        };
+    };
+}
 
-export const defaultTitleElementSettings: Omit<TitlePageElement, "id" | "parentId"> = {
-    type: SitePageElementType.TITLE,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        height: {
-            value: 20,
-            unit: StyleUnit.PERCENT,
-        },
-        tag: ElementHTMLTag.H1,
-        color: "#000000",
-        backgroundColor: "transparent",
-        text: "Hello World",
-        link: "",
-    },
-};
+export function defaultTitleElementSettings(): () => Omit<TitlePageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.TITLE,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 20,
+                    unit: StyleUnit.PERCENT,
+                },
+                tag: ElementHTMLTag.H1,
+                color: "#000000",
+                backgroundColor: "transparent",
+                text: "Hello World",
+                link: "",
+            },
+        };
+    };
+}
 
-export const defaultTextElementSettings: Omit<TextPageElement, "id" | "parentId"> = {
-    type: SitePageElementType.TEXT,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        height: {
-            value: 20,
-            unit: StyleUnit.PERCENT,
-        },
-        color: "#000000",
-        backgroundColor: "transparent",
-        text: "Hello World",
-    },
-};
+export function defaultTextElementSettings(): () => Omit<TextPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.TEXT,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 20,
+                    unit: StyleUnit.PERCENT,
+                },
+                color: "#000000",
+                backgroundColor: "transparent",
+                text: "Hello World",
+            },
+        };
+    };
+}
 
-export const defaultPageElementSettings: Omit<SitePageElement, "id" | "parentId"> = {
-    type: SitePageElementType.PAGE,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        height: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-    },
-};
+export function defaultPageElementSettings(): () => Omit<SitePageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.PAGE,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+            },
+        };
+    };
+}
 
-export const defaultInnerElementSettings: Omit<InnerPageElement, "id" | "parentId"> = {
-    type: SitePageElementType.INNER,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        height: {
-            value: 100,
-            unit: StyleUnit.PX,
-        },
-        gap: {
-            value: 0,
-            unit: StyleUnit.PX,
-        },
-        letterSpacing: {
-            value: 0,
-            unit: StyleUnit.PX,
-        },
-        margin: {
-            ...defaultDirectionValue,
-        },
-        padding: {
-            ...defaultDirectionValue,
-        },
-        opacity: 1,
-        color: "#000000",
-        backgroundColor: "#c25656",
-        justifyContent: JustifyContent.START,
-        tag: ElementHTMLTag.ARTICLE,
-    },
-};
+export function defaultInnerElementSettings(): () => Omit<InnerPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.INNER,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PX,
+                },
+                gap: {
+                    value: 0,
+                    unit: StyleUnit.PX,
+                },
+                letterSpacing: {
+                    value: 0,
+                    unit: StyleUnit.PX,
+                },
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                opacity: 1,
+                color: "#000000",
+                backgroundColor: "#c25656",
+                justifyContent: JustifyContent.START,
+                tag: ElementHTMLTag.ARTICLE,
+            },
+        };
+    };
+}
 
-export const defaultImageElementSettings: Omit<ImagePageElement, "id" | "parentId"> = {
-    type: SitePageElementType.IMAGE,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        height: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        image: {
-            alt: "",
+export function defaultImageElementSettings(): () => Omit<ImagePageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.IMAGE,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                image: {
+                    alt: "",
 
-            title: "",
-            src: "/assets/icons/placeholder/image.png",
-        },
-        alt: "",
-        title: "",
-    },
-};
+                    title: "",
+                    src: "/assets/icons/placeholder/image.png",
+                },
+                alt: "",
+                title: "",
+            },
+        };
+    };
+}
 
-export const defaultTabsElementSettings: Omit<TabsPageElement, "id" | "parentId"> = {
-    type: SitePageElementType.TABS,
-    children: [],
-    isExtendable: false,
-    settings: {
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        selectedElement: "",
-        items: [],
-        height: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        count: 2,
-    },
-};
+export function defaultTabsElementSettings(): () => Omit<TabsPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.TABS,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                selectedElement: "",
+                items: [],
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                count: 2,
+            },
+        };
+    };
+}
 
-export const defaultTabsItemElementSettings: Omit<TabsItemPageElement, "id" | "parentId"> = {
-    type: SitePageElementType.TABS_ITEM,
-    children: [],
-    isExtendable: false,
-    settings: {
-        margin: {
-            ...defaultDirectionValue,
-        },
-        padding: {
-            ...defaultDirectionValue,
-        },
-        width: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-        title: getRandomString(10),
-        height: {
-            value: 100,
-            unit: StyleUnit.PERCENT,
-        },
-    },
-};
+export function defaultTabsItemElementSettings(): () => Omit<TabsItemPageElement, "id" | "parentId"> {
+    let uniqueCounter = 0;
+
+    return () => {
+        uniqueCounter++;
+
+        return {
+            type: SitePageElementType.TABS_ITEM,
+            children: [],
+            isExtendable: false,
+            settings: {
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                title: `Таб-${uniqueCounter}`,
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+            },
+        };
+    };
+}
 
 export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
-    [SitePageElementType.TITLE]: () => defaultTitleElementSettings,
-    [SitePageElementType.SECTION]: () => defaultSectionElementSettings,
-    [SitePageElementType.PAGE]: () => defaultPageElementSettings,
-    [SitePageElementType.INNER]: () => defaultInnerElementSettings,
-    [SitePageElementType.IMAGE]: () => defaultImageElementSettings,
-    [SitePageElementType.TABS]: () => defaultTabsElementSettings,
-    [SitePageElementType.TABS_ITEM]: () => defaultTabsItemElementSettings,
-    [SitePageElementType.TEXT]: () => defaultTextElementSettings,
+    [SitePageElementType.TITLE]: defaultTitleElementSettings(),
+    [SitePageElementType.SECTION]: defaultSectionElementSettings(),
+    [SitePageElementType.PAGE]: defaultPageElementSettings(),
+    [SitePageElementType.INNER]: defaultInnerElementSettings(),
+    [SitePageElementType.IMAGE]: defaultImageElementSettings(),
+    [SitePageElementType.TABS]: defaultTabsElementSettings(),
+    [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings(),
+    [SitePageElementType.TEXT]: defaultTextElementSettings(),
 };
 
 export const defaultSizeControlUnit = [
@@ -280,3 +323,42 @@ export const defaultAlignItemsItems = [
     { label: AlignItems.CENTER, value: AlignItems.CENTER, image: "eicon-align-center-h" },
     { label: AlignItems.END, value: AlignItems.END, image: "eicon-align-end-h" },
 ];
+
+export const sectionPageElementSettingsStylesKeys: TypeKeys<SectionPageElementSettings> = [
+    "width",
+    "height",
+    "color",
+    "backgroundColor",
+    "alignItems",
+    "flexWrap",
+    "gap",
+    "justifyContent",
+    "letterSpacing",
+    "margin",
+    "padding",
+    "opacity",
+];
+
+export const innerPageElementSettingsStyleKeys: TypeKeys<InnerPageElementSettings> = [
+    "width",
+    "height",
+    "color",
+    "backgroundColor",
+    "backgroundColor",
+    "opacity",
+    "letterSpacing",
+    "justifyContent",
+    "gap",
+    "padding",
+    "margin",
+];
+
+export const titlePageElementSettingsStylesKeys: TypeKeys<TitlePageElementSettings> = ["width", "height", "text", "color", "backgroundColor"];
+
+export const textPageElementSettingsStylesKeys: TypeKeys<TextPageElementSettings> = ["width", "height", "color", "backgroundColor"];
+
+export const imagePageElementSettingsStylesKeys: TypeKeys<ImagePageElementSettings> = ["width", "height", "image"];
+
+export const tabsPageElementSettingsStyleKeys: TypeKeys<TabsPageElementSettings> = ["width", "height"];
+
+export const tabsItemPageElementSettingsStyleKeys: TypeKeys<TabsItemPageElementSettings> = ["width", "height", "padding", "margin"];

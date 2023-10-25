@@ -49,6 +49,20 @@ export type SitePageElement<T = SitePageElementSettingsUnion> = Readonly<{
     settings: T;
 }>;
 
+export type SitePageRequestElement<StylesType = unknown, AttributesType = unknown> = Readonly<{
+    id: string;
+    parentId: string | null;
+    type: SitePageElementType;
+    isExtendable: boolean;
+    children: string[];
+    settings: {
+        styles: StylesType;
+        attributes: AttributesType;
+    };
+}>;
+
+export type TypeKeys<K> = (keyof K)[];
+
 export type SitePageElementSizeSettings = Readonly<{
     width: ElementSettingsWithUnit;
     height: ElementSettingsWithUnit;
@@ -95,7 +109,7 @@ export type CampaignModel = Readonly<{
 
 export type CreateCampaignModel = Readonly<{
     pages: Page[];
-    elements: Record<string, SitePageElement>;
+    elements: Record<string, SitePageRequestElement>;
     campaignName: string;
 }>;
 
