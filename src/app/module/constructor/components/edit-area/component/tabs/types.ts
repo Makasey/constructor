@@ -5,6 +5,6 @@ export type TabsPageElement = SitePageElement<TabsPageElementSettings>;
 export type TabsPageElementSettings = Readonly<{
     count: number;
     selectedElement: string;
-    items: (TabsItemPageElementSettings & { id?: string })[];
+    items: (TabsItemPageElementSettings & { id?: string; duplicatedId?: string })[];
 }> &
     SitePageElementSizeSettings;

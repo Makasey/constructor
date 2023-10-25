@@ -208,3 +208,13 @@
     >
     </lz-radio-group>
 </ng-template>
+
+<ng-template #itemsControlTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+    <lz-items-control-field
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options.label"
+        [defaultItemFn]="controlModel.options.defaultItemFn"
+    ></lz-items-control-field>
+</ng-template>

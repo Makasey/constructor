@@ -1,0 +1,11 @@
+<span>{{ label }}</span>
+<lz-items-control-item
+    *ngFor="let item of _value; trackBy: trackById"
+    [item]="item"
+    (onUpdate)="update($event)"
+    (onDelete)="delete($event)"
+    (onDuplicate)="duplicate($event)"
+>
+</lz-items-control-item>
+
+<button (click)="addItem()">ADD TAB</button>
