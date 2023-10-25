@@ -133,7 +133,48 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
                         settings: {
                             ...item.settings,
                             ...updatedSettings,
-                            items: processedChildren.map(child => child.settings),
+                            items: processedChildren.map(child => {
+                                return {
+                                    ...child.settings,
+                                    id: child.id,
+                                };
+                            }),
+                        },
+                    },
+                },
+            };
+        }
+
+        case SitePageElementType.TABS_ITEM: {
+            const parentId = item.parentId!;
+            const parentElement = items[parentId] as TabsPageElement;
+
+            const processParentElement = parentElement.settings.items.map(element => {
+                if (element.id !== id) {
+                    return element;
+                }
+
+                return {
+                    ...element,
+                    ...value,
+                };
+            });
+
+            return {
+                items: {
+                    ...items,
+                    [id]: {
+                        ...item,
+                        settings: {
+                            ...item.settings,
+                            ...value,
+                        },
+                    },
+                    [parentId]: {
+                        ...parentElement,
+                        settings: {
+                            ...parentElement.settings,
+                            items: processParentElement,
                         },
                     },
                 },
