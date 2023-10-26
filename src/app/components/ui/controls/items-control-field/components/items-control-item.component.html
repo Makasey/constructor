@@ -1,4 +1,6 @@
 <ap-text-field [ngModel]="item.title" (ngModelChange)="change($event)"> </ap-text-field>
 
-<button (click)="delete(item.id)">REMOVE</button>
-<button (click)="duplicate(item.id)">DUPLICATE</button>
+<div class="action">
+    <button class="action-btn eicon-close" (click)="delete(item.id)"></button>
+    <button class="action-btn eicon-copy" (click)="duplicate(item.id)"></button>
+</div>

@@ -1,5 +1,5 @@
 import { APTextFieldModule, ControlItem } from "@components/ui";
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
@@ -13,6 +13,9 @@ import { FormsModule } from "@angular/forms";
     encapsulation: ViewEncapsulation.None,
 })
 export class ItemsControlItemComponent {
+    @HostBinding("class.lz-items-control-item")
+    public hostClass = true;
+
     @Input({ required: true })
     public item: ControlItem;
 

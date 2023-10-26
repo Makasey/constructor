@@ -1,0 +1,29 @@
+.lz-items-control-item {
+    display: flex;
+    gap: 5px;
+
+    ap-text-field {
+        flex-grow: 1;
+    }
+
+    .action {
+        gap: 5px;
+        display: flex;
+        align-items: center;
+
+        &-btn {
+            border: 1px solid #ffffff;
+            border-radius: 4px;
+            height: 30px;
+            padding: 0 6px;
+            color: #ffffff;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #ffffff;
+                color: #000000;
+                transition: 0.5s;
+            }
+        }
+    }
+}

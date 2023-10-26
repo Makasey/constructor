@@ -1,0 +1,24 @@
+.lz-items-control-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .actions {
+        display: flex;
+        justify-content: center;
+
+        &-btn {
+            border: 1px solid #ffffff;
+            border-radius: 4px;
+            padding: 6px;
+            cursor: pointer;
+            color: #ffffff;
+
+            &:hover {
+                background-color: #ffffff;
+                color: #000000;
+                transition: 0.5s;
+            }
+        }
+    }
+}
