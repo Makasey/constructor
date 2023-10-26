@@ -37,7 +37,7 @@
 
 <ng-template #defaultGroupTemplate let-formModel="formModel" let-formGroup="formGroup" let-index="index">
     <div class="form__wrapper" *ngIf="formModel?.innerControls?.length">
-        <form class="form" [formGroup]="formGroup" (submit)="_onFormSubmit()">
+        <form class="form" [formGroup]="formGroup">
             <div class="form-controls">
                 <ng-container *ngIf="formModel.innerControls">
                     <ng-container *ngFor="let control of formModel.innerControls; trackBy: trackByControl">

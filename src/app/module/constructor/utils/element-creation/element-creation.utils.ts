@@ -8,8 +8,10 @@ import {
     TabsPageElement,
     TabsPageElementSettings,
     defaultPageElementSettingsMap,
+    deleteElementFromTree,
+    duplicateTreeElement,
 } from "@modules/constructor";
-import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { arrayAdd, logAction } from "@datorama/akita";
 import { getRandomId } from "@shared-utils";
 
 export function getNewElement<T extends SitePageElementUnion>(type: SitePageElementType, parentId: string): T {
@@ -124,30 +126,31 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
                         };
                     });
 
-                    const updatedItems = updatedChildren.reduce((result, item) => {
+                    let updatedItems = updatedChildren.reduce((result, item) => {
                         return {
                             ...result,
                             [item.id]: item,
                         };
                     }, items);
 
-                    delete updatedItems[deletedItemId];
+                    updatedItems = deleteElementFromTree(updatedItems, deletedItemId);
+                    const processedChildrenSettings = updatedChildren.map(child => {
+                        return {
+                            ...child.settings,
+                            id: child.id,
+                        };
+                    });
 
                     return {
                         items: {
                             ...updatedItems,
                             [id]: {
                                 ...item,
-                                children: arrayRemove(item.children, (item: string) => item === deletedItemId),
+                                children: newIds as string[],
                                 settings: {
                                     ...item.settings,
                                     ...updatedSettings,
-                                    items: updatedChildren.map(child => {
-                                        return {
-                                            ...child.settings,
-                                            id: child.id,
-                                        };
-                                    }),
+                                    items: processedChildrenSettings,
                                 },
                             },
                         },
@@ -155,7 +158,7 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
                 }
 
                 if (lengthDifference === 0) {
-                    const updatedChildren: TabsItemPageElement[] = updatedSettings.items.map(({ id, ...settings }) => {
+                    const updatedChildren: TabsItemPageElement[] = updatedSettings.items.map(({ id, duplicatedId, ...settings }) => {
                         const childItem = items[id!] as TabsItemPageElement;
 
                         return {
@@ -195,21 +198,46 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
                 }
 
                 if (lengthDifference === 1) {
-                    const newItem = updatedSettings.items.find(child => !children.includes(child.id!))!;
-                    let processedItem: TabsItemPageElement | null = null;
+                    const { id: newItemID, duplicatedId, ...settings } = updatedSettings.items.find(child => !children.includes(child.id!))!;
 
-                    if (newItem.duplicatedId) {
-                        processedItem = {
-                            ...items[newItem.duplicatedId],
-                            id: newItem.id!,
-                        } as TabsItemPageElement;
-                    } else {
-                        processedItem = {
-                            ...defaultPageElementSettingsMap[SitePageElementType.TABS_ITEM](),
-                            id: newItem.id!,
-                            parentId: item.id,
-                        } as TabsItemPageElement;
+                    if (duplicatedId) {
+                        const duplicatedItem = {
+                            ...items[duplicatedId],
+                            settings: {
+                                ...items[duplicatedId],
+                                ...settings,
+                            },
+                        };
+
+                        const updatedTree = duplicateTreeElement(items, duplicatedItem, item.id, newItemID);
+
+                        return {
+                            items: {
+                                ...updatedTree,
+                                [id]: {
+                                    ...updatedTree[id],
+                                    settings: {
+                                        ...updatedTree[id].settings,
+                                        ...updatedSettings,
+                                        items: updatedTree[id].children.map(child => {
+                                            const elementSettings = updatedTree[child].settings as TabsItemPageElementSettings;
+
+                                            return {
+                                                ...elementSettings,
+                                                id: child,
+                                            };
+                                        }),
+                                    },
+                                },
+                            },
+                        };
                     }
+
+                    const processedItem: TabsItemPageElement = {
+                        ...(defaultPageElementSettingsMap[SitePageElementType.TABS_ITEM]() as TabsItemPageElement),
+                        id: newItemID!,
+                        parentId: item.id,
+                    };
 
                     const updatedChildren: TabsItemPageElement[] = updatedSettings.items.map(({ id, ...settings }) => {
                         const childItem = (items[id!] ?? processedItem) as TabsItemPageElement;

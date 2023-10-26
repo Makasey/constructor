@@ -1,7 +1,7 @@
 <section class="element-settings" *ngIf="elementSettingsFormModel() as formModel">
     <h2 class="settings-title">Настройки элемента</h2>
     <lz-accordion [collapsing]="false">
-        <lz-accordion-item [expanded]="true" *ngFor="let group of formModel.innerGroups" [title]="group.headerText!">
+        <lz-accordion-item [expanded]="true" *ngFor="let group of formModel.innerGroups; trackBy: trackByGroup" [title]="group.headerText!">
             <ng-template lzAccordionContent>
                 <ap-form [formModel]="group" (submitForm)="updateElementSettings($event, formModel.mapperFn)" />
             </ng-template>

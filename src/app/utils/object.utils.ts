@@ -13,15 +13,15 @@ export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T)
         const targetItem = target[key];
         const otherItem = other[key];
 
-        if (isObject(targetItem) && isObject(otherItem)) {
-            return isObjectEquals(targetItem, otherItem);
-        }
-
         if (Array.isArray(targetItem) && Array.isArray(otherItem)) {
             return (
                 targetItem.length === otherItem.length &&
                 targetItem.every(element => !!otherItem.find(otherElement => isObjectEquals(element, otherElement)))
             );
+        }
+
+        if (isObject(targetItem) && isObject(otherItem)) {
+            return isObjectEquals(targetItem, otherItem);
         }
 
         return targetItem === otherItem;

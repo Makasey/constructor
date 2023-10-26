@@ -77,6 +77,7 @@ export {
     processRequestElementSettings,
     processRequestElementData,
     processElementDataCreation,
+    duplicateTreeElement,
 } from "./utils";
 
 export {

@@ -50,6 +50,7 @@ export class ItemsControlFieldComponent implements ControlValueAccessor {
     private onChange: (value: ControlItem[]) => void;
 
     private onTouched: () => void;
+
     public registerOnChange(fn: (value: ControlItem[]) => void): void {
         this.onChange = fn;
     }
@@ -95,7 +96,7 @@ export class ItemsControlFieldComponent implements ControlValueAccessor {
             return;
         }
 
-        const newElement = { ...element, id: getRandomId(), duplicatedId: id };
+        const newElement = { ...element, title: element.title + "-копия", id: getRandomId(), duplicatedId: id };
 
         this.value = [...this._value, newElement];
 
@@ -112,6 +113,7 @@ export class ItemsControlFieldComponent implements ControlValueAccessor {
 
     public emitEvent(): void {
         this.onChange(this._value);
+        this.onTouched();
         this.onValueChange.emit(this._value);
     }
 }

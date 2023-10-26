@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormModule, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
+import { APFormModel, APFormModule, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
 import { AbstractEditorElementSettingsService } from "@modules/constructor";
 
 @Component({
@@ -28,5 +28,9 @@ export class ElementSettingsComponent {
 
     private defaultMapper(data: unknown): unknown {
         return data;
+    }
+
+    public trackByGroup(_: number, group: APFormModel): string {
+        return group.id;
     }
 }
