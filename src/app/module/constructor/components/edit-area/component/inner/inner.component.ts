@@ -24,7 +24,7 @@ import { Observable, map } from "rxjs";
 })
 export class InnerComponent implements OnInit {
     @HostBinding("class")
-    public classes = {
+    public readonly classes = {
         "editor-element": true,
         "lz-inner-element": true,
     };
@@ -51,9 +51,11 @@ export class InnerComponent implements OnInit {
 
     private readonly abstractEditorElementSettingsService = inject(AbstractEditorElementSettingsService);
 
-    public element$: Observable<InnerPageElement> = this.abstractEditorElementActionsService.selectElement(this.ELEMENT_ID);
+    public readonly element$: Observable<InnerPageElement> = this.abstractEditorElementActionsService.selectElement(this.ELEMENT_ID);
 
-    private innerSettings$: Observable<SectionPageElementSettings> = this.abstractEditorElementSettingsService.selectSettings(this.ELEMENT_ID);
+    private readonly innerSettings$: Observable<SectionPageElementSettings> = this.abstractEditorElementSettingsService.selectSettings(
+        this.ELEMENT_ID,
+    );
 
     public ngOnInit(): void {
         this.width$ = this.innerSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
@@ -65,7 +67,7 @@ export class InnerComponent implements OnInit {
         this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent));
     }
 
-    public _trackBy(_: number, item: number): number {
+    public _trackBy(_: number, item: string): string {
         return item;
     }
 }

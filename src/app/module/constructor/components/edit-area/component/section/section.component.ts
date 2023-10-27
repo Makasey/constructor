@@ -82,7 +82,7 @@ export class SectionComponent implements OnInit {
     public alignItems$: Observable<string>;
 
     @HostBinding("class")
-    public classes = {
+    public readonly classes = {
         "editor-element": true,
         "lz-section-element": true,
     };
@@ -141,7 +141,7 @@ export class SectionComponent implements OnInit {
         this.editorActionsService.addElementByType(type, this.ELEMENT_ID);
     }
 
-    public _trackByChild(index: number, child: number): number {
+    public _trackByChild(_: number, child: string): string {
         return child;
     }
 

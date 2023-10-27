@@ -25,7 +25,7 @@ export class TitleComponent implements OnInit {
     private readonly service = inject(AbstractEditorElementSettingsService);
 
     @HostBinding("class")
-    public hostClasses = {
+    public readonly hostClasses = {
         "lz-title-element": true,
         "editor-element": true,
     };

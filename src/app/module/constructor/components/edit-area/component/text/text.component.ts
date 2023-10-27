@@ -25,7 +25,7 @@ export class TextComponent implements OnInit {
     private readonly service = inject(AbstractEditorElementSettingsService);
 
     @HostBinding("class")
-    public hostClasses = {
+    public readonly hostClasses = {
         "lz-text-element": true,
         "editor-element": true,
     };

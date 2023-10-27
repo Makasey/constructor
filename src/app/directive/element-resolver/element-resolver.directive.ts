@@ -15,7 +15,7 @@ export class ElementResolverDirective implements OnChanges {
     @Input({ required: true })
     public lzElementResolver: string | undefined;
 
-    @Input()
+    @Input({ required: true })
     public lzElementResolverParent: string | undefined;
 
     public ngOnChanges(): void {

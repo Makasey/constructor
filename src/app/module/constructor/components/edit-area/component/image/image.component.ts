@@ -16,8 +16,11 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class ImageComponent implements OnInit {
-    @HostBinding("class.lz-image")
-    public hostClass = true;
+    @HostBinding("class")
+    public readonly classes = {
+        "editor-element": true,
+        "lz-image": true,
+    };
 
     @HostBinding("$.style.height")
     @HostListener("$.style.height")
@@ -37,7 +40,7 @@ export class ImageComponent implements OnInit {
 
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
-    private settings$: Observable<ImagePageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+    private readonly settings$: Observable<ImagePageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));

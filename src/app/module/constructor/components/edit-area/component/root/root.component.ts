@@ -17,16 +17,16 @@ import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionD
 })
 export class RootComponent {
     @HostBinding("class")
-    public hostClass = {
+    public readonly hostClass = {
         "lz-root-element": true,
         "editor-element": true,
     };
 
     constructor(private service: AbstractEditorElementActionsService<SectionPageElement>) {}
 
-    public rootElements = toSignal(this.service.selectPageElements());
+    public rootElements = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
 
-    public _trackById(_: number, item: number): number {
+    public _trackById(_: number, item: string): string {
         return item;
     }
 }
