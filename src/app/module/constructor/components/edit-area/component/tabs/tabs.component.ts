@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { Observable, combineLatest, map } from "rxjs";
+import { Observable, combineLatest, filter, map } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -55,6 +55,7 @@ export class TabsComponent implements OnInit {
     public element: Signal<TabsPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
     public items$: Observable<TabsItemPageElement[]> = this.editorElementActionsService.selectElement(this.ELEMENT_ID).pipe(
+        filter(item => !!item),
         switchMap((item: TabsPageElement) => {
             return combineLatest(item.children.map(id => this.editorElementActionsService.selectElement(id) as Observable<TabsItemPageElement>));
         }),
