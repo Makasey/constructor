@@ -33,8 +33,8 @@ import { Observable, map } from "rxjs";
     imports: [NgForOf, NgIf, AsyncPipe, ElementResolverDirective, NgTemplateOutlet, ImageLinkPipe],
 })
 export class SectionComponent implements OnInit {
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
+    @HostBinding("$.style.min-height")
+    @HostListener("$.style.min-height")
     public sectionHeight$: Observable<string>;
 
     @HostBinding("$.style.width")

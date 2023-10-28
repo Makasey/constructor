@@ -2,7 +2,14 @@ import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, 
 import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Observable, map } from "rxjs";
 
-import { AbstractEditorElementSettingsService, ELEMENT_ID, ImagePageElementSettings, processSettingValueWithUnit } from "@modules/constructor";
+import {
+    AbstractEditorElementSettingsService,
+    ELEMENT_ID,
+    ImagePageElementSettings,
+    processObjectFitPositionValue,
+    processObjectFitValue,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
@@ -30,6 +37,14 @@ export class ImageComponent implements OnInit {
     @HostListener("$.style.width")
     public width$: Observable<string>;
 
+    @HostBinding("$.style.max-width")
+    @HostListener("$.style.max-width")
+    public maxWidth$: Observable<string>;
+
+    public objectFit$: Observable<string>;
+
+    public objectPosition$: Observable<string>;
+
     public title$: Observable<string>;
 
     public alt$: Observable<string>;
@@ -52,5 +67,11 @@ export class ImageComponent implements OnInit {
         this.alt$ = this.settings$.pipe(map(settings => settings.image.alt));
 
         this.src$ = this.settings$.pipe(map(settings => settings.image.src));
+
+        this.maxWidth$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.maxWidth)));
+
+        this.objectPosition$ = this.settings$.pipe(map(settings => processObjectFitPositionValue(settings.objectPosition)));
+
+        this.objectFit$ = this.settings$.pipe(map(settings => processObjectFitValue(settings.objectFit)));
     }
 }

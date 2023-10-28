@@ -15,6 +15,8 @@ export {
     filterToQueryParameter,
     isItemsInDifferentArray,
     objectWithoutNulls,
+    normalizeMaxValue,
+    normalizeMinValue,
 } from "./utils";
 export {
     FiltersMap,

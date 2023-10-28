@@ -8,6 +8,8 @@
         [controlModel]="controlModel"
         [nativeControl]="nativeControl"
         [disabled]="isDisabled"
+        [min]="min"
+        [max]="max"
         (onBlur)="onBlur()"
         (onFocus)="onFocus()"
         (ngModelChange)="updateNumberValue($event)"

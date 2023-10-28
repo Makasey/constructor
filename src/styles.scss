@@ -296,6 +296,7 @@ router-outlet + * {
     --selected-element-color: transparent;
     --root-selected-color: yellowgreen;
 
+    height: fit-content;
     border: none;
 }
 

@@ -3,6 +3,8 @@ import {
     ElementSettingsWithUnit,
     ImagePageElement,
     InnerPageElement,
+    ObjectFit,
+    ObjectFitPosition,
     SectionPageElement,
     SitePageElementType,
     SitePageElementUnion,
@@ -18,6 +20,8 @@ import {
     getTabsSettings,
     getTextSettings,
     getTitleSettings,
+    objectFitMap,
+    objectFitPositionMap,
     styleUnitMap,
 } from "@modules/constructor";
 
@@ -66,6 +70,14 @@ export function processSettingValueWithUnit(settingsValue?: ElementSettingsWithU
     const convertedUnit = styleUnitMap[unit];
 
     return `${value}${convertedUnit}`;
+}
+
+export function processObjectFitValue(objectFit: ObjectFit): string {
+    return objectFitMap[objectFit];
+}
+
+export function processObjectFitPositionValue(objectFitPosition: ObjectFitPosition): string {
+    return objectFitPositionMap[objectFitPosition];
 }
 
 export function processDirectionValue(settingsValue?: Direction): string {

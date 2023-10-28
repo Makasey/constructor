@@ -30,8 +30,8 @@ export class TextComponent implements OnInit {
         "editor-element": true,
     };
 
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
+    @HostBinding("$.style.min-height")
+    @HostListener("$.style.min-height")
     public textHeight$: Observable<string>;
 
     @HostBinding("$.style.width")

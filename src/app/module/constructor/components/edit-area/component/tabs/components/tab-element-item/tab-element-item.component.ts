@@ -27,8 +27,8 @@ export class TabElementItemComponent implements OnInit {
     @HostBinding("class.lz-tab-element-item")
     public hostClass = true;
 
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
+    @HostBinding("$.style.min-height")
+    @HostListener("$.style.min-height")
     public height$: Observable<string>;
 
     @HostBinding("$.style.width")

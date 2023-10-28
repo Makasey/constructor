@@ -11,6 +11,28 @@ export enum StyleUnit {
     VH = "vh",
 }
 
+export enum ObjectFit {
+    DEFAULT = "default",
+    FILL = "fill",
+    COVER = "cover",
+    CONTAIN = "contain",
+    SCALE_DOWN = "scaleDown",
+    REVERT = "revert",
+    REVERT_LAYER = "revertLayer",
+}
+
+export enum ObjectFitPosition {
+    CENTER_CENTER = "centerCenter",
+    CENTER_LEFT = "centerLeft",
+    CENTER_RIGHT = "centerRight",
+    TOP_CENTER = "topCenter",
+    TOP_LEFT = "topLeft",
+    TOP_RIGHT = "topRight",
+    BOTTOM_CENTER = "bottomCenter",
+    BOTTOM_LEFT = "bottomLeft",
+    BOTTOM_RIGHT = "bottomRight",
+}
+
 export enum JustifyContent {
     START = "start",
     CENTER = "center",

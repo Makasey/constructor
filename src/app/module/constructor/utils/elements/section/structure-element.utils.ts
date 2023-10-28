@@ -24,7 +24,7 @@ function getInnerItemByType(type: ColumnStructure, parentId: string): InnerPageE
         isExtendable: false,
         settings: {
             ...element.settings,
-            width: { value: elementWidth - 1, unit: StyleUnit.PERCENT },
+            width: { value: elementWidth, unit: StyleUnit.PERCENT },
         } as InnerPageElementSettings,
     };
 }

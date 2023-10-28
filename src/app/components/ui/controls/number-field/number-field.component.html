@@ -5,7 +5,6 @@
                 {{ label }}
             </span>
             <input
-                #numberField
                 type="text"
                 class="form-control-input"
                 autocomplete="off"
@@ -14,10 +13,10 @@
                 [attr.name]="controlModel.name"
                 [class.disabled]="disabled"
                 [disabled]="disabled"
-                [value]="_value"
+                [ngModel]="_value"
                 (blur)="_onBlur($event)"
                 (focus)="_onFocus($event)"
-                (input)="_onInput($event)"
+                (ngModelChange)="_onInput($event)"
             />
         </label>
         <div class="form-control-errors" *ngIf="nativeControl.dirty && (nativeControl.errors | keyvalue)?.length">

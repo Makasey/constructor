@@ -1,4 +1,15 @@
-export { StyleUnit, SitePageElementType, CampaignType, Directions, ElementHTMLTag, JustifyContent, FlexWrap, AlignItems } from "./enums";
+export {
+    StyleUnit,
+    SitePageElementType,
+    CampaignType,
+    Directions,
+    ElementHTMLTag,
+    JustifyContent,
+    FlexWrap,
+    AlignItems,
+    ObjectFit,
+    ObjectFitPosition,
+} from "./enums";
 export {
     ElementSettingsWithUnit,
     SitePageElementSettings,
@@ -44,6 +55,10 @@ export {
     imagePageElementSettingsStylesKeys,
     tabsItemPageElementSettingsStyleKeys,
     tabsPageElementSettingsStyleKeys,
+    objectFitMap,
+    objectFitPositionMap,
+    defaultObjectFitItems,
+    defaultObjectFitPositionItems,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -78,6 +93,8 @@ export {
     processRequestElementData,
     processElementDataCreation,
     duplicateTreeElement,
+    processObjectFitPositionValue,
+    processObjectFitValue,
 } from "./utils";
 
 export {

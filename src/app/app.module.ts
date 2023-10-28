@@ -23,7 +23,7 @@ import {
     NavigationService,
 } from "@core";
 
-import { HostBinderAsyncPlugin, SilentEventPlugin, StopEventPlugin } from "@shared-plugins";
+import { HostBinderAsyncPlugin, PreventEventPlugin, SilentEventPlugin, StopEventPlugin } from "@shared-plugins";
 import { LZCalendarModule, LZToastrModule } from "@components";
 import { environment } from "environments/environment";
 
@@ -69,6 +69,11 @@ import { environment } from "environments/environment";
             provide: EVENT_MANAGER_PLUGINS,
             multi: true,
             useClass: StopEventPlugin,
+        },
+        {
+            provide: EVENT_MANAGER_PLUGINS,
+            multi: true,
+            useClass: PreventEventPlugin,
         },
         LzQuery,
         LzService,

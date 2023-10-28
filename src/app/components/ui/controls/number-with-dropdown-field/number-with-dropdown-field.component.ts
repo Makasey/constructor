@@ -2,6 +2,7 @@ import { APDropdownFieldModule, APFormControl, APNumberFieldModule, NumberWithDr
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { SelectItem } from "@shared-types";
 
 @Component({
     selector: "lz-number-with-dropdown-field",
@@ -30,7 +31,7 @@ export class NumberWithDropdownFieldComponent<T> implements ControlValueAccessor
     public controlModel: APFormControl;
 
     @Input()
-    public items: { label: string; value: T }[] = [];
+    public items: SelectItem<T>[] = [];
 
     @Input()
     public nativeId = "newID";
@@ -43,6 +44,12 @@ export class NumberWithDropdownFieldComponent<T> implements ControlValueAccessor
 
     @Input()
     public label = "";
+
+    @Input()
+    public max: number;
+
+    @Input()
+    public min: number;
 
     @Output()
     public readonly onValueChange: EventEmitter<NumberWithDropdownEvent<T>> = new EventEmitter<NumberWithDropdownEvent<T>>();

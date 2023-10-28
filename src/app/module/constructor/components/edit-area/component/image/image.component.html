@@ -1,4 +1,11 @@
 <figure>
-    <img [src]="src$ | async" [alt]="alt$ | async" />
+    <img
+        [ngStyle]="{
+            'object-fit': objectFit$ | async,
+            'object-position': objectPosition$ | async
+        }"
+        [src]="src$ | async"
+        [alt]="alt$ | async"
+    />
     <figcaption *ngIf="title$ | async as title" class="title">{{ title }}</figcaption>
 </figure>

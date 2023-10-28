@@ -7,6 +7,8 @@ import {
     InnerPageElement,
     InnerPageElementSettings,
     JustifyContent,
+    ObjectFit,
+    ObjectFitPosition,
     SectionPageElement,
     SectionPageElementSettings,
     SitePageElement,
@@ -24,11 +26,12 @@ import {
     TypeKeys,
 } from "@modules/constructor";
 import { InjectionToken } from "@angular/core";
+import { SelectItem } from "@shared-types";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 import { defaultDirectionValue } from "@components";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
-    debounceTime: 500,
+    debounceTime: 200,
 };
 
 export const ROOT_ELEMENT_ID = "rootID";
@@ -85,7 +88,7 @@ export function defaultSectionElementSettings(): () => Omit<SectionPageElement, 
                 backgroundColor: "#ffffff",
                 isInit: false,
                 justifyContent: JustifyContent.START,
-                flexWrap: FlexWrap.NO_WRAP,
+                flexWrap: FlexWrap.WRAP,
                 alignItems: AlignItems.START,
             },
         };
@@ -105,7 +108,7 @@ export function defaultTitleElementSettings(): () => Omit<TitlePageElement, "id"
                 },
                 height: {
                     value: 20,
-                    unit: StyleUnit.PERCENT,
+                    unit: StyleUnit.PX,
                 },
                 tag: ElementHTMLTag.H1,
                 color: "#000000",
@@ -129,8 +132,8 @@ export function defaultTextElementSettings(): () => Omit<TextPageElement, "id" |
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 20,
-                    unit: StyleUnit.PERCENT,
+                    value: 16,
+                    unit: StyleUnit.PX,
                 },
                 color: "#000000",
                 backgroundColor: "transparent",
@@ -220,8 +223,12 @@ export function defaultImageElementSettings(): () => Omit<ImagePageElement, "id"
                     title: "",
                     src: "/assets/icons/placeholder/image.png",
                 },
-                alt: "",
-                title: "",
+                maxWidth: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                objectFit: ObjectFit.DEFAULT,
+                objectPosition: ObjectFitPosition.CENTER_CENTER,
             },
         };
     };
@@ -292,18 +299,18 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.TEXT]: defaultTextElementSettings(),
 };
 
-export const defaultSizeControlUnit = [
+export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [
     { label: "%", value: StyleUnit.PERCENT },
     { label: StyleUnit.PX, value: StyleUnit.PX },
 ];
 
-export const defaultTextControlElement = [
+export const defaultTextControlElement: SelectItem<StyleUnit>[] = [
     { label: StyleUnit.PX, value: StyleUnit.PX },
     { label: StyleUnit.EM, value: StyleUnit.EM },
     { label: StyleUnit.REM, value: StyleUnit.REM },
 ];
 
-export const defaultJustifyContentItems = [
+export const defaultJustifyContentItems: SelectItem<JustifyContent, JustifyContent>[] = [
     { label: JustifyContent.START, value: JustifyContent.START, image: "eicon-justify-start-h" },
     { label: JustifyContent.CENTER, value: JustifyContent.CENTER, image: "eicon-justify-center-h" },
     { label: JustifyContent.END, value: JustifyContent.END, image: "eicon-justify-end-h" },
@@ -312,13 +319,13 @@ export const defaultJustifyContentItems = [
     { label: JustifyContent.SPACE_EVENLY, value: JustifyContent.SPACE_EVENLY, image: "eicon-justify-space-evenly-h" },
 ];
 
-export const defaultFlexWrapItems = [
+export const defaultFlexWrapItems: SelectItem<FlexWrap, FlexWrap>[] = [
     { label: FlexWrap.WRAP, value: FlexWrap.WRAP, image: "eicon-wrap" },
     { label: FlexWrap.NO_WRAP, value: FlexWrap.NO_WRAP, image: "eicon-nowrap" },
     { label: FlexWrap.WRAP_REVERSE, value: FlexWrap.WRAP_REVERSE, image: "eicon-wrap-reverse" },
 ];
 
-export const defaultAlignItemsItems = [
+export const defaultAlignItemsItems: SelectItem<AlignItems, AlignItems>[] = [
     { label: AlignItems.START, value: AlignItems.START, image: "eicon-align-start-h" },
     { label: AlignItems.CENTER, value: AlignItems.CENTER, image: "eicon-align-center-h" },
     { label: AlignItems.END, value: AlignItems.END, image: "eicon-align-end-h" },
@@ -362,3 +369,95 @@ export const imagePageElementSettingsStylesKeys: TypeKeys<ImagePageElementSettin
 export const tabsPageElementSettingsStyleKeys: TypeKeys<TabsPageElementSettings> = ["width", "height"];
 
 export const tabsItemPageElementSettingsStyleKeys: TypeKeys<TabsItemPageElementSettings> = ["width", "height", "padding", "margin"];
+
+export const objectFitMap: Record<ObjectFit, string> = {
+    [ObjectFit.DEFAULT]: "none",
+    [ObjectFit.CONTAIN]: "contain",
+    [ObjectFit.COVER]: "cover",
+    [ObjectFit.FILL]: "fill",
+    [ObjectFit.SCALE_DOWN]: "scale-down",
+    [ObjectFit.REVERT]: "revert",
+    [ObjectFit.REVERT_LAYER]: "revert-layer",
+};
+
+export const objectFitPositionMap: Record<ObjectFitPosition, string> = {
+    [ObjectFitPosition.CENTER_CENTER]: "center center",
+    [ObjectFitPosition.CENTER_LEFT]: "center left",
+    [ObjectFitPosition.CENTER_RIGHT]: "center right",
+    [ObjectFitPosition.TOP_CENTER]: "top center",
+    [ObjectFitPosition.TOP_LEFT]: "top left",
+    [ObjectFitPosition.TOP_RIGHT]: "top right",
+    [ObjectFitPosition.BOTTOM_CENTER]: "bottom center",
+    [ObjectFitPosition.BOTTOM_LEFT]: "bottom left",
+    [ObjectFitPosition.BOTTOM_RIGHT]: "bottom right",
+};
+
+export const defaultObjectFitItems: SelectItem<ObjectFit>[] = [
+    {
+        value: ObjectFit.DEFAULT,
+        label: "Default",
+    },
+    {
+        value: ObjectFit.FILL,
+        label: "Fill",
+    },
+    {
+        value: ObjectFit.COVER,
+        label: "Cover",
+    },
+    {
+        value: ObjectFit.CONTAIN,
+        label: "Contain",
+    },
+    {
+        value: ObjectFit.SCALE_DOWN,
+        label: "Scale down",
+    },
+    {
+        value: ObjectFit.REVERT,
+        label: "Revert",
+    },
+    {
+        value: ObjectFit.REVERT_LAYER,
+        label: "Revert layer",
+    },
+];
+
+export const defaultObjectFitPositionItems: SelectItem<ObjectFitPosition>[] = [
+    {
+        value: ObjectFitPosition.CENTER_CENTER,
+        label: "Center Center",
+    },
+    {
+        value: ObjectFitPosition.CENTER_LEFT,
+        label: "Center Left",
+    },
+    {
+        value: ObjectFitPosition.CENTER_RIGHT,
+        label: "Center Right",
+    },
+    {
+        value: ObjectFitPosition.TOP_CENTER,
+        label: "Top Center",
+    },
+    {
+        value: ObjectFitPosition.TOP_LEFT,
+        label: "Top Left",
+    },
+    {
+        value: ObjectFitPosition.TOP_RIGHT,
+        label: "Top Right",
+    },
+    {
+        value: ObjectFitPosition.BOTTOM_CENTER,
+        label: "Bottom Center",
+    },
+    {
+        value: ObjectFitPosition.BOTTOM_LEFT,
+        label: "Bottom Left",
+    },
+    {
+        value: ObjectFitPosition.BOTTOM_RIGHT,
+        label: "Bottom Right",
+    },
+];

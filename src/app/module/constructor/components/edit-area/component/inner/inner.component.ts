@@ -29,8 +29,8 @@ export class InnerComponent implements OnInit {
         "lz-inner-element": true,
     };
 
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
+    @HostBinding("$.style.min-height")
+    @HostListener("$.style.min-height")
     public height$: Observable<string>;
 
     @HostBinding("$.style.width")
