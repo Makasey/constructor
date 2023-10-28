@@ -1,6 +1,6 @@
 import { LZConstructorComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
-import { RouteParams } from "@shared-types";
+import { RouteKey, RouteParams } from "@shared-types";
 
 export const CONSTRUCTOR_ROUTES: Route[] = [
     {
@@ -9,11 +9,11 @@ export const CONSTRUCTOR_ROUTES: Route[] = [
         children: [
             {
                 path: "",
-                redirectTo: "list",
+                redirectTo: RouteKey.CAMPAIGN_LIST,
                 pathMatch: "full",
             },
             {
-                path: "list",
+                path: RouteKey.CAMPAIGN_LIST,
                 loadChildren: () => import("@modules/constructor").then(routes => routes.CAMPAIGN_LIST_ROUTES),
             },
             {

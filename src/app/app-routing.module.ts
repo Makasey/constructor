@@ -1,14 +1,15 @@
 import { NgModule } from "@angular/core";
 import { Route, RouterModule, Routes } from "@angular/router";
+import { RouteKey } from "@shared-types";
 
 const routes: Routes = [
     {
         path: "",
         pathMatch: "full",
-        redirectTo: "builder",
+        redirectTo: RouteKey.BUILDER,
     },
     {
-        path: "builder",
+        path: RouteKey.BUILDER,
         loadChildren: (): Promise<Route[]> => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
     },
 ];

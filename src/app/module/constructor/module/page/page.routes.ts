@@ -1,5 +1,6 @@
 import { PageComponent, PageInnerComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
+import { RouteKey } from "@shared-types";
 
 export const PAGE_ROUTES: Route[] = [
     {
@@ -9,14 +10,14 @@ export const PAGE_ROUTES: Route[] = [
             {
                 path: "",
                 pathMatch: "full",
-                redirectTo: "editor",
+                redirectTo: RouteKey.CAMPAIGN_EDITOR,
             },
             {
-                path: "editor",
+                path: RouteKey.CAMPAIGN_EDITOR,
                 component: PageInnerComponent,
             },
             {
-                path: "preview",
+                path: RouteKey.CAMPAIGN_PREVIEW,
                 loadChildren: () => import("@modules/constructor").then(module => module.PREVIEW_ROUTES),
             },
         ],
