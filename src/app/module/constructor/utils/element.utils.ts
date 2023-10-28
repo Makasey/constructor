@@ -114,13 +114,7 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
         }
 
         case SitePageElementType.TITLE: {
-            return [
-                {
-                    title: "Изображение",
-                    type: SitePageElementType.IMAGE,
-                    icon: "bx-font",
-                },
-            ];
+            return [];
         }
 
         case SitePageElementType.TEXT: {
