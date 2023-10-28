@@ -52,7 +52,7 @@ export function duplicateTreeElement(
         };
 
         duplicatedElement.children.forEach(child => {
-            stack.unshift(items[child]);
+            stack.push(items[child]);
         });
 
         itemId = null;
