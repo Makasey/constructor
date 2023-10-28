@@ -68,7 +68,7 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                 {
                     title: "Секция",
                     type: SitePageElementType.SECTION,
-                    icon: "bx-font",
+                    icon: "bxs-layout",
                 },
             ];
         }
@@ -78,7 +78,7 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                 {
                     title: "Элемент секции",
                     type: SitePageElementType.INNER,
-                    icon: "bx-font",
+                    icon: "bx-rectangle",
                 },
             ];
         }
@@ -93,22 +93,22 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                 {
                     title: "Изображение",
                     type: SitePageElementType.IMAGE,
-                    icon: "bx-font",
+                    icon: "bxs-image-alt",
                 },
                 {
                     title: "Текст",
                     type: SitePageElementType.TEXT,
-                    icon: "bx-font",
+                    icon: "bx-highlight",
                 },
                 {
                     title: "Секция",
                     type: SitePageElementType.SECTION,
-                    icon: "bx-font",
+                    icon: "bxs-layout",
                 },
                 {
                     title: "Табы",
                     type: SitePageElementType.TABS,
-                    icon: "bx-font",
+                    icon: "bx-dock-top",
                 },
             ];
         }
@@ -131,22 +131,22 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                 {
                     title: "Текст",
                     type: SitePageElementType.TEXT,
-                    icon: "bx-font",
+                    icon: "bx-highlight",
                 },
                 {
                     title: "Изображение",
                     type: SitePageElementType.IMAGE,
-                    icon: "bx-font",
+                    icon: "bxs-image-alt",
                 },
                 {
                     title: "Секция",
                     type: SitePageElementType.SECTION,
-                    icon: "bx-font",
+                    icon: "bxs-layout",
                 },
                 {
                     title: "Табы",
                     type: SitePageElementType.TABS,
-                    icon: "bx-font",
+                    icon: "bx-dock-top",
                 },
             ];
         }
