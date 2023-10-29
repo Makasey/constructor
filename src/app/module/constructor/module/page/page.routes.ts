@@ -1,11 +1,10 @@
-import { PageComponent, PageInnerComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
 import { RouteKey } from "@shared-types";
 
 export const PAGE_ROUTES: Route[] = [
     {
         path: "",
-        component: PageComponent,
+        loadComponent: () => import("@modules/constructor").then(module => module.PageComponent),
         children: [
             {
                 path: "",
@@ -14,7 +13,7 @@ export const PAGE_ROUTES: Route[] = [
             },
             {
                 path: RouteKey.CAMPAIGN_EDITOR,
-                component: PageInnerComponent,
+                loadComponent: () => import("@modules/constructor").then(module => module.PageInnerComponent),
             },
             {
                 path: RouteKey.CAMPAIGN_PREVIEW,

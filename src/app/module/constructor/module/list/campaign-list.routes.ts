@@ -1,9 +1,8 @@
-import { CampaignListComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
 
 export const CAMPAIGN_LIST_ROUTES: Route[] = [
     {
         path: "",
-        component: CampaignListComponent,
+        loadComponent: () => import("@modules/constructor").then(module => module.CampaignListComponent),
     },
 ];

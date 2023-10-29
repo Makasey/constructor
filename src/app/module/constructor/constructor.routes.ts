@@ -1,11 +1,10 @@
-import { LZConstructorComponent } from "@modules/constructor";
 import { Route } from "@angular/router";
 import { RouteKey, RouteParams } from "@shared-types";
 
 export const CONSTRUCTOR_ROUTES: Route[] = [
     {
         path: "",
-        component: LZConstructorComponent,
+        loadComponent: () => import("@modules/constructor").then(module => module.LZConstructorComponent),
         children: [
             {
                 path: "",
