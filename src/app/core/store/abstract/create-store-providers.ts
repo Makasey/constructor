@@ -21,7 +21,7 @@ export function createStoreProviders<T extends keyof LzState>(stateKey: T): Prov
     }
 
     if (!LzServiceInjectionTokensMap[stateKey]) {
-        LzServiceInjectionTokensMap[stateKey] = new InjectionToken<AbstractLzStoreService<T>>(`LZ_QUERY_${stateKey}`);
+        LzServiceInjectionTokensMap[stateKey] = new InjectionToken<AbstractLzStoreService<T>>(`LZ_SERVICE_${stateKey}`);
     }
 
     return [

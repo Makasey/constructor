@@ -1,4 +1,5 @@
 import { APFormModel, Direction } from "@components";
+import { BackgroundFieldModel } from "@components/ui/controls/background-field/types";
 import {
     ElementSettingsWithUnit,
     ImagePageElement,
@@ -86,4 +87,11 @@ export function processDirectionValue(settingsValue?: Direction): string {
     return `${processSettingValueWithUnit({ value: top, unit })} ${processSettingValueWithUnit({ value: right, unit })} ${processSettingValueWithUnit(
         { value: bottom, unit },
     )} ${processSettingValueWithUnit({ value: left, unit })}`;
+}
+
+export function processBackgroundValue(settings: BackgroundFieldModel): string {
+    const { image = {}, color = "transparent" } = settings;
+    const { size = "unset", src = "", repeat = "no-repeat", position = ObjectFitPosition.CENTER_CENTER } = image;
+    const processedPosition = processObjectFitPositionValue(position);
+    return `${color} ${repeat} ${processedPosition} / ${size} url(${src})`;
 }

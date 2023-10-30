@@ -98,6 +98,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     @ViewChild("itemsControlTemplate", { static: true })
     private itemsControlField: ControlTemplate;
 
+    @ViewChild("backgroundColor", { static: true })
+    private backgroundColor: ControlTemplate;
+
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
         this._templatesMap = {
@@ -140,6 +143,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.RADIO_GROUP_FIELD]: this.radioGroupField,
             [APFormDefaultTemplateKeys.IMAGE_UPLOAD_FIELD]: this.imageUploadField,
             [APFormDefaultTemplateKeys.ITEMS_CONTROL_FIELD]: this.itemsControlField,
+            [APFormDefaultTemplateKeys.BACKGROUND_FIELD]: this.backgroundColor,
         };
 
         this._templatesMap = {

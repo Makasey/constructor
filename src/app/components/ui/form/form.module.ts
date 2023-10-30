@@ -18,6 +18,7 @@ import {
     RangeFieldWithUnitComponent,
     TextareaComponent,
 } from "@components";
+import { BackgroundFieldComponent } from "@components/ui/controls/background-field/background-field.component";
 
 const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModule];
 
@@ -25,6 +26,7 @@ const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModul
     declarations: [APFormComponent],
     imports: [
         ...AP_MODULES,
+        BackgroundFieldComponent,
         CommonModule,
         DirectionFieldComponent,
         ItemsControlFieldComponent,

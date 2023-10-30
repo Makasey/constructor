@@ -162,6 +162,14 @@
     ></lz-image-field>
 </ng-template>
 
+<ng-template #backgroundColor let-controlModel="controlModel" let-nativeControl="nativeControl">
+    <lz-background-field
+        [formControl]="nativeControl"
+        [nativeControl]="nativeControl"
+        [controlModel]="controlModel"
+    ></lz-background-field>
+</ng-template>
+
 <ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <span class="form-default-text">
         {{ "label: " + controlModel?.options.label }}

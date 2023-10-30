@@ -52,8 +52,20 @@ function getTitleBackgroundColorControl(element: TitlePageElement): APFormContro
     return {
         id: "backgroundColor",
         name: "backgroundColor",
-        value: element.settings.backgroundColor ?? "#ffffff",
+        value: element.settings.background ?? "#ffffff",
         valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
+        options: {
+            label: "Цвет бэкграунда",
+        },
+    };
+}
+
+function getBackgroundColorControl(element: TitlePageElement): APFormControl {
+    return {
+        id: "backgroundColor",
+        name: "background",
+        value: element.settings.background ?? "#ffffff",
+        valueTemplateKey: APFormDefaultTemplateKeys.BACKGROUND_FIELD,
         options: {
             label: "Цвет бэкграунда",
         },
@@ -83,7 +95,7 @@ export function getTitleElementTextControl(element: TitlePageElement): APFormCon
 }
 
 export function getTitleElementStyleControl(element: TitlePageElement): APFormControl[] {
-    return [getTitleBackgroundColorControl(element)];
+    return [getBackgroundColorControl(element)];
 }
 
 export function getTitleSettings(element: TitlePageElement): APFormModel {

@@ -36,10 +36,10 @@ import { defaultColorPickerOptions } from "@components";
     ],
 })
 export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnChanges {
-    @Input({ required: true })
+    @Input()
     public nativeControl: FormControl;
 
-    @Input({ required: true })
+    @Input()
     public controlModel: APFormControl;
 
     @Output()

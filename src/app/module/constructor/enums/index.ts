@@ -42,6 +42,13 @@ export enum JustifyContent {
     SPACE_EVENLY = "space-evenly",
 }
 
+export enum BackgroundType {
+    IMAGE = "image",
+    CLASSIC = "classic",
+    GRADIENT = "gradient",
+    VIDEO = "video",
+}
+
 export enum FlexWrap {
     WRAP = "wrap",
     NO_WRAP = "nowrap",

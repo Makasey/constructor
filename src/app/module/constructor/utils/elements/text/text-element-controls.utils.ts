@@ -6,7 +6,7 @@ function getTextBackgroundColorControl(element: TextPageElement): APFormControl 
     return {
         id: "backgroundColor",
         name: "backgroundColor",
-        value: element.settings.backgroundColor ?? "#ffffff",
+        value: element.settings.background ?? "#ffffff",
         valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
         options: {
             label: "Цвет бэкграунда",
