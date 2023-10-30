@@ -13,7 +13,7 @@ import {
 
 export function createStoreProviders<T extends keyof LzState>(stateKey: T): Provider[] {
     const store = new Store<LzState[T]>(lzInitialStateFunctions[stateKey](), {
-        name: `[LZ-STATE]_${stateKey} Alexey I will definitely save it :)`,
+        name: `[LZ-STATE]_${stateKey} Alexey I will definitely save it :) `,
     });
 
     if (!LzQueryInjectionTokensMap[stateKey]) {
