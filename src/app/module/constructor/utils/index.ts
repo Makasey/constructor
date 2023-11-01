@@ -32,5 +32,7 @@ export {
     processRequestElementData,
     processElementDataCreation,
     processRequestElementSettings,
+    processCampaignResponse,
+    processCampaignResponseItemSettings,
 } from "./response.utils";
 export { processElementCreation, processUpdateElementSettings } from "./element-creation";

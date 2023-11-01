@@ -3,7 +3,9 @@ import {
     CreatePreviewModel,
     ImagePageElement,
     InnerPageElement,
+    ROOT_ELEMENT_ID,
     SectionPageElement,
+    SitePageElement,
     SitePageElementSettingsUnion,
     SitePageElementType,
     SitePageElementUnion,
@@ -21,7 +23,7 @@ import {
     textPageElementSettingsStylesKeys,
     titlePageElementSettingsStylesKeys,
 } from "@modules/constructor";
-import { EditorState } from "@core";
+import { EditorState, UIDataState } from "@core";
 
 export function getPreviewData(state: EditorState): CreatePreviewModel {
     const { pages, items } = state;
@@ -127,5 +129,45 @@ export function getCampaignData(state: EditorState): CreateCampaignModel {
         campaignName: campaignName,
         pages: pages,
         elements: processedItems,
+    };
+}
+
+export function processCampaignResponseItemSettings(
+    settings: SitePageRequestElement<SitePageElementSettingsUnion, SitePageElementSettingsUnion>["settings"],
+): SitePageElement["settings"] {
+    return Object.values(settings).reduce((result, settingsItem) => {
+        return {
+            ...result,
+            ...settingsItem,
+        } as SitePageElementSettingsUnion;
+    }, {} as SitePageElementSettingsUnion);
+}
+
+export function processCampaignResponse(campaign: CreateCampaignModel & { id: number }): EditorState {
+    const { elements, id, campaignName, pages } = campaign;
+    const processedItems = Object.keys(elements).reduce(
+        (result, key) => {
+            const item = elements[key] as SitePageRequestElement<SitePageElementSettingsUnion, SitePageElementSettingsUnion>;
+
+            result[key] = {
+                ...item,
+                settings: {
+                    ...processCampaignResponseItemSettings(item.settings),
+                },
+            };
+
+            return result;
+        },
+        {} as Record<string, SitePageElementUnion>,
+    );
+
+    return {
+        items: processedItems,
+        dataState: UIDataState.LOADED,
+        pages: pages,
+        selectedPage: pages[0].id,
+        selectedElement: ROOT_ELEMENT_ID,
+        id: id,
+        campaignName: campaignName,
     };
 }
