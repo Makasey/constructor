@@ -1,6 +1,7 @@
 import { AbstractEditAreaService } from "@modules/constructor";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
 import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { RouteParams } from "@shared-types";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { filter, map } from "rxjs";
 import { switchMap } from "rxjs/operators";
@@ -26,7 +27,7 @@ export class PageComponent implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.activatedRoute.params
             .pipe(
-                map(params => params.id),
+                map(params => params[RouteParams.CAMPAIGN_ID]),
                 filter(id => id && id !== "new"),
                 switchMap((id: string) => {
                     return this.service.getCampaignById(+id);
