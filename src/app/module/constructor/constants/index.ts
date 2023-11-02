@@ -1,5 +1,6 @@
 import {
     AlignItems,
+    BackgroundType,
     ElementHTMLTag,
     FlexWrap,
     ImagePageElement,
@@ -25,7 +26,6 @@ import {
     TitlePageElementSettings,
     TypeKeys,
 } from "@modules/constructor";
-import { BackgroundType } from "@modules/constructor/enums";
 import { InjectionToken } from "@angular/core";
 import { SelectItem } from "@shared-types";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
