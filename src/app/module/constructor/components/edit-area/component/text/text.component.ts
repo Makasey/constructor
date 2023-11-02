@@ -67,7 +67,7 @@ export class TextComponent implements OnInit {
 
         this.textColor$ = this.textSettings$.pipe(map(settings => settings.color));
 
-        this.textBackgroundColor$ = this.textSettings$.pipe(map(settings => settings.backgroundColor));
+        this.textBackgroundColor$ = this.textSettings$.pipe(map(settings => settings.background?.color || ""));
 
         this.textText$ = this.textSettings$.pipe(map(settings => settings.text ?? ""));
     }

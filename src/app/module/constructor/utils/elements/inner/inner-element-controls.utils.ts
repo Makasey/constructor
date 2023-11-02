@@ -11,7 +11,7 @@ function getInnerItemBackgroundColorControl(element: InnerPageElement): APFormCo
     return {
         id: "backgroundColor",
         name: "backgroundColor",
-        value: element.settings.backgroundColor ?? "#c25656",
+        value: element.settings.background,
         valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
         options: {
             label: "Цвет бэкграунда",

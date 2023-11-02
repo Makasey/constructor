@@ -62,7 +62,7 @@ export class InnerComponent implements OnInit {
 
         this.height$ = this.innerSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
-        this.backgroundColor$ = this.innerSettings$.pipe(map(settings => settings.backgroundColor));
+        this.backgroundColor$ = this.innerSettings$.pipe(map(settings => settings.background.color || ""));
 
         this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent));
     }

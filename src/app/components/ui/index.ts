@@ -1,3 +1,6 @@
+//Tabs component
+export * from "./tabs";
+
 //Controls components
 export * from "./controls";
 
@@ -24,9 +27,6 @@ export * from "./table";
 
 //Accordion component
 export * from "./accordion";
-
-//Tabs component
-export * from "./tabs";
 
 // Loader component
 export * from "./loader";

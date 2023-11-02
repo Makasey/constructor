@@ -1,0 +1,58 @@
+<div class="container">
+    <article class="background-type"
+        ><p class="background-type-select">Background type</p>
+        <div class="background-type-items">
+            <lz-radio-group
+                [ngModel]="_value.backgroundType"
+                (ngModelChange)="handleBackgroundType($event)"
+                [items]="defaultBackgroundTypes"
+                [label]="'Select background type'"
+            >
+            </lz-radio-group> </div
+    ></article>
+
+    <article class="background-type"
+        ><p class="background-type-select">Color</p>
+        <div class="background-type-items">
+            <lz-color-picker [ngModel]="_value.color" (ngModelChange)="handleColor($event)"></lz-color-picker> </div
+    ></article>
+    <article class="background-type"
+        ><p class="background-type-select">Image</p>
+        <div class="background-type-items"
+            ><lz-file-upload [ngModel]="_value?.image" (onValueChange)="updateImageValue($event)"></lz-file-upload></div
+    ></article>
+
+    <ng-container *ngIf="_value.backgroundType === BackgroundType.IMAGE">
+        <article class="select-repeat-option"
+            ><p>Repeat</p
+            ><ap-dropdown-field
+                [ngModel]="_value?.image?.repeat"
+                [items]="defaultBackgroundRepeatItems"
+                selectValueKey="value"
+                selectLabelKey="label"
+                (onValueChange)="handleRepeat($event.newValue)"
+            ></ap-dropdown-field
+        ></article>
+
+        <article class="select-repeat-option"
+            ><p>Size</p
+            ><ap-dropdown-field
+                [ngModel]="_value?.image?.size"
+                [items]="defaultBackgroundSizeItems"
+                selectValueKey="value"
+                selectLabelKey="label"
+                (onValueChange)="handleSize($event.newValue)"
+            ></ap-dropdown-field
+        ></article>
+        <article class="select-repeat-option"
+            ><p>Position</p
+            ><ap-dropdown-field
+                [ngModel]="_value?.image?.position"
+                [items]="defaultObjectFitPositionItems"
+                selectValueKey="value"
+                selectLabelKey="label"
+                (onValueChange)="handlePosition($event.newValue)"
+            ></ap-dropdown-field
+        ></article>
+    </ng-container>
+</div>

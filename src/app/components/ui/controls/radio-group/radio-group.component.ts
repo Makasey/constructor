@@ -32,7 +32,7 @@ export class RadioGroupComponent implements ControlValueAccessor {
     @Input({ required: true })
     public items: RadioGroupItem[];
 
-    @Input({ required: true })
+    @Input()
     public label: string;
 
     @Output()

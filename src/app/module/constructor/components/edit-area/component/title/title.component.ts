@@ -10,6 +10,7 @@ import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { processBackgroundValue } from "@modules/constructor";
 
 @Component({
     selector: "lz-title-element",
@@ -31,7 +32,7 @@ export class TitleComponent implements OnInit {
     };
 
     @HostBinding("$.style.min-height")
-    @HostListener("$.style.min-height`")
+    @HostListener("$.style.min-height")
     public titleHeight$: Observable<string>;
 
     @HostBinding("$.style.width")
@@ -42,9 +43,9 @@ export class TitleComponent implements OnInit {
     @HostListener("$.style.color")
     public titleColor$: Observable<string>;
 
-    @HostBinding("$.style.background-color")
-    @HostListener("$.style.background-color")
-    public titleBackgroundColor$: Observable<string>;
+    @HostBinding("$.style.background")
+    @HostListener("$.style.background")
+    public titleBackground$: Observable<string>;
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
 
@@ -67,7 +68,11 @@ export class TitleComponent implements OnInit {
 
         this.titleColor$ = this.titleSettings$.pipe(map(settings => settings.color));
 
-        this.titleBackgroundColor$ = this.titleSettings$.pipe(map(settings => settings.backgroundColor));
+        this.titleBackground$ = this.titleSettings$.pipe(
+            map(settings => {
+                return processBackgroundValue(settings.background);
+            }),
+        );
 
         this.titleText$ = this.titleSettings$.pipe(map(settings => settings.text ?? ""));
     }

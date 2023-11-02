@@ -1,3 +1,4 @@
+import { BackgroundFieldModel } from "@components/ui";
 import { File } from "@shared-types";
 import {
     ImagePageElement,
@@ -73,7 +74,7 @@ export type SitePageElementTextColor = Readonly<{
 }>;
 
 export type SitePageElementBackground = Readonly<{
-    backgroundColor: string;
+    background: BackgroundFieldModel;
 }>;
 
 export type SitePageElementSettings = Readonly<

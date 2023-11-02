@@ -18,6 +18,7 @@ export enum APFormDefaultTemplateKeys {
     RADIO_GROUP_FIELD = "radioGroupField",
     IMAGE_UPLOAD_FIELD = "imageUploadField",
     ITEMS_CONTROL_FIELD = "itemsControlField",
+    BACKGROUND_FIELD = "backgroundColor",
 }
 
 export type APFormModel = {

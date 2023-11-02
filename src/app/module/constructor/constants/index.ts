@@ -1,5 +1,6 @@
 import {
     AlignItems,
+    BackgroundType,
     ElementHTMLTag,
     FlexWrap,
     ImagePageElement,
@@ -85,7 +86,7 @@ export function defaultSectionElementSettings(): () => Omit<SectionPageElement, 
                 opacity: 1,
                 tag: ElementHTMLTag.SECTION,
                 color: "#1b1c2d",
-                backgroundColor: "#ffffff",
+                background: { backgroundType: BackgroundType.CLASSIC },
                 isInit: false,
                 justifyContent: JustifyContent.START,
                 flexWrap: FlexWrap.WRAP,
@@ -112,7 +113,7 @@ export function defaultTitleElementSettings(): () => Omit<TitlePageElement, "id"
                 },
                 tag: ElementHTMLTag.H1,
                 color: "#000000",
-                backgroundColor: "transparent",
+                background: { backgroundType: BackgroundType.CLASSIC },
                 text: "Hello World",
                 link: "",
             },
@@ -136,7 +137,7 @@ export function defaultTextElementSettings(): () => Omit<TextPageElement, "id" |
                     unit: StyleUnit.PX,
                 },
                 color: "#000000",
-                backgroundColor: "transparent",
+                background: { backgroundType: BackgroundType.CLASSIC },
                 text: "Hello World",
             },
         };
@@ -194,7 +195,7 @@ export function defaultInnerElementSettings(): () => Omit<InnerPageElement, "id"
                 },
                 opacity: 1,
                 color: "#000000",
-                backgroundColor: "#c25656",
+                background: { backgroundType: BackgroundType.CLASSIC },
                 justifyContent: JustifyContent.START,
                 tag: ElementHTMLTag.ARTICLE,
             },
@@ -319,6 +320,11 @@ export const defaultJustifyContentItems: SelectItem<JustifyContent, JustifyConte
     { label: JustifyContent.SPACE_EVENLY, value: JustifyContent.SPACE_EVENLY, image: "eicon-justify-space-evenly-h" },
 ];
 
+export const defaultBackgroundColorItems = [
+    { label: BackgroundType.CLASSIC, value: BackgroundType.CLASSIC, image: "eicon-justify-start-h" },
+    { label: BackgroundType.GRADIENT, value: BackgroundType.GRADIENT, image: "eicon-justify-center-h" },
+];
+
 export const defaultFlexWrapItems: SelectItem<FlexWrap, FlexWrap>[] = [
     { label: FlexWrap.WRAP, value: FlexWrap.WRAP, image: "eicon-wrap" },
     { label: FlexWrap.NO_WRAP, value: FlexWrap.NO_WRAP, image: "eicon-nowrap" },
@@ -331,11 +337,24 @@ export const defaultAlignItemsItems: SelectItem<AlignItems, AlignItems>[] = [
     { label: AlignItems.END, value: AlignItems.END, image: "eicon-align-end-h" },
 ];
 
+export const defaultBackgroundRepeatItems = [
+    { label: "Повторение по оси X", value: "repeat-x" },
+    { label: "Повторение по оси Y", value: "repeat-y" },
+    { label: "Повторение по осям X и Y", value: "repeat" },
+    { label: "Без повторения", value: "no-repeat" },
+];
+
+export const defaultBackgroundSizeItems = [
+    { label: "Вместить", value: "contain" },
+    { label: "Расширить", value: "cover" },
+    { label: "Автоматически", value: "auto" },
+];
+
 export const sectionPageElementSettingsStylesKeys: TypeKeys<SectionPageElementSettings> = [
     "width",
     "height",
     "color",
-    "backgroundColor",
+    "background",
     "alignItems",
     "flexWrap",
     "gap",
@@ -350,8 +369,7 @@ export const innerPageElementSettingsStyleKeys: TypeKeys<InnerPageElementSetting
     "width",
     "height",
     "color",
-    "backgroundColor",
-    "backgroundColor",
+    "background",
     "opacity",
     "letterSpacing",
     "justifyContent",
@@ -360,9 +378,9 @@ export const innerPageElementSettingsStyleKeys: TypeKeys<InnerPageElementSetting
     "margin",
 ];
 
-export const titlePageElementSettingsStylesKeys: TypeKeys<TitlePageElementSettings> = ["width", "height", "text", "color", "backgroundColor"];
+export const titlePageElementSettingsStylesKeys: TypeKeys<TitlePageElementSettings> = ["width", "height", "text", "color", "background"];
 
-export const textPageElementSettingsStylesKeys: TypeKeys<TextPageElementSettings> = ["width", "height", "color", "backgroundColor"];
+export const textPageElementSettingsStylesKeys: TypeKeys<TextPageElementSettings> = ["width", "height", "color", "background"];
 
 export const imagePageElementSettingsStylesKeys: TypeKeys<ImagePageElementSettings> = ["width", "height", "image"];
 

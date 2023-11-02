@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .background-type {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-select {
+            width: 60%;
+        }
+
+        &-items {
+            width: 100px;
+        }
+    }
+    .select-repeat-option {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}

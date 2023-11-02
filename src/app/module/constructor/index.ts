@@ -9,6 +9,7 @@ export {
     AlignItems,
     ObjectFit,
     ObjectFitPosition,
+    BackgroundType,
 } from "./enums";
 export {
     ElementSettingsWithUnit,
@@ -59,6 +60,9 @@ export {
     objectFitPositionMap,
     defaultObjectFitItems,
     defaultObjectFitPositionItems,
+    defaultBackgroundSizeItems,
+    defaultBackgroundRepeatItems,
+    defaultBackgroundColorItems,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -95,6 +99,7 @@ export {
     duplicateTreeElement,
     processObjectFitPositionValue,
     processObjectFitValue,
+    processBackgroundValue,
 } from "./utils";
 
 export {

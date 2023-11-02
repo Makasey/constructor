@@ -10,4 +10,5 @@ export * from "./textarea";
 export * from "./color-picker";
 export * from "./radio-group";
 export * from "./image-field";
+export * from "./background-field";
 export * from "./items-control-field";

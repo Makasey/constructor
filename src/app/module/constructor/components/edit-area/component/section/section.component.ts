@@ -118,7 +118,7 @@ export class SectionComponent implements OnInit {
 
         this.sectionColor$ = this.sectionSettings$.pipe(map(settings => settings.color));
 
-        this.sectionBackgroundColor$ = this.sectionSettings$.pipe(map(settings => settings.backgroundColor));
+        this.sectionBackgroundColor$ = this.sectionSettings$.pipe(map(settings => settings.background.color || ""));
 
         this.sectionPadding$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
 
