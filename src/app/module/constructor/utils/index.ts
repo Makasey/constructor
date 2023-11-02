@@ -23,6 +23,7 @@ export {
     processElementSettings,
     processObjectFitValue,
     processObjectFitPositionValue,
+    processBackgroundValue,
 } from "./element-settings.utils";
 export { deleteElementFromTree, processPossibleElements, duplicateTreeElement } from "./element.utils";
 export { getDefaultSizeSettings } from "./element-size-settings.utils";

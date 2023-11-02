@@ -1,5 +1,4 @@
-import { APFormModel, Direction } from "@components";
-import { BackgroundFieldModel } from "@components/ui/controls/background-field/types";
+import { APFormModel, BackgroundFieldModel, Direction } from "@components";
 import {
     ElementSettingsWithUnit,
     ImagePageElement,

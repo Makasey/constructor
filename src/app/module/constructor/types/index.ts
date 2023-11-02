@@ -1,4 +1,4 @@
-import { BackgroundFieldModel } from "@components/ui/controls/background-field/types";
+import { BackgroundFieldModel } from "@components/ui";
 import { File } from "@shared-types";
 import {
     ImagePageElement,

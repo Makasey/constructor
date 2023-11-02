@@ -1,4 +1,4 @@
-import { BackgroundType, ObjectFitPosition } from "@modules/constructor/enums";
+import { BackgroundType, ObjectFitPosition } from "@modules/constructor";
 
 export type BackgroundFieldModel = Readonly<{
     backgroundType: BackgroundType;

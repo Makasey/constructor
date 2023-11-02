@@ -8,14 +8,14 @@ import {
     RadioGroupComponent,
     TabsItemComponent,
 } from "@components/ui";
-import { BackgroundFieldModel } from "@components/ui/controls/background-field/types";
-import { BackgroundType, ObjectFitPosition } from "@modules/constructor/enums";
+import { BackgroundFieldModel } from "@components";
+import { BackgroundType, ObjectFitPosition } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
 import { ElementSettingsComponent, defaultObjectFitPositionItems } from "@modules/constructor";
 import { File } from "@shared-types";
 import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgIf } from "@angular/common";
-import { defaultBackgroundColorItems, defaultBackgroundRepeatItems, defaultBackgroundSizeItems } from "@modules/constructor/constants";
+import { defaultBackgroundColorItems, defaultBackgroundRepeatItems, defaultBackgroundSizeItems } from "@modules/constructor";
 
 @Component({
     selector: "lz-background-field",

@@ -10,7 +10,7 @@ import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { processBackgroundValue } from "@modules/constructor/utils/element-settings.utils";
+import { processBackgroundValue } from "@modules/constructor";
 
 @Component({
     selector: "lz-title-element",
@@ -45,11 +45,7 @@ export class TitleComponent implements OnInit {
 
     @HostBinding("$.style.background")
     @HostListener("$.style.background")
-    public titleBackgroundImage$: Observable<string>;
-
-    @HostBinding("$.style.background-color")
-    @HostListener("$.style.background-color")
-    public titleBackgroundColor$: Observable<string>;
+    public titleBackground$: Observable<string>;
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
 
@@ -72,9 +68,7 @@ export class TitleComponent implements OnInit {
 
         this.titleColor$ = this.titleSettings$.pipe(map(settings => settings.color));
 
-        this.titleBackgroundColor$ = this.titleSettings$.pipe(map(settings => settings.background?.color || "transparent"));
-
-        this.titleBackgroundImage$ = this.titleSettings$.pipe(
+        this.titleBackground$ = this.titleSettings$.pipe(
             map(settings => {
                 return processBackgroundValue(settings.background);
             }),
