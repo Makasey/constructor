@@ -479,3 +479,5 @@ export const defaultObjectFitPositionItems: SelectItem<ObjectFitPosition>[] = [
         label: "Bottom Right",
     },
 ];
+
+export const defaultRequestElementSettingsKey = "default";

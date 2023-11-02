@@ -4,6 +4,7 @@ import {
     ImagePageElement,
     InnerPageElement,
     ROOT_ELEMENT_ID,
+    RequestElementSettings,
     SectionPageElement,
     SitePageElement,
     SitePageElementSettingsUnion,
@@ -15,6 +16,7 @@ import {
     TextPageElement,
     TitlePageElement,
     TypeKeys,
+    defaultRequestElementSettingsKey,
     imagePageElementSettingsStylesKeys,
     innerPageElementSettingsStyleKeys,
     sectionPageElementSettingsStylesKeys,
@@ -39,39 +41,36 @@ export function getPreviewData(state: EditorState): CreatePreviewModel {
 
 export function processRequestElementSettings<T extends SitePageElementSettingsUnion>(
     settings: T,
-    styleKeys: TypeKeys<T>,
-): {
-    styles: Partial<T>;
-    attributes: Partial<T>;
-} {
+    styleKeys: Record<string, TypeKeys<T>>,
+): RequestElementSettings<T> {
     return (Object.keys(settings) as TypeKeys<T>).reduce(
         (result, key) => {
-            if (styleKeys.includes(key)) {
-                return {
-                    ...result,
-                    styles: {
-                        ...result.styles,
-                        [key]: settings[key],
-                    },
-                };
-            }
+            const settingsKey = Object.keys(styleKeys).reduce((resultKey, currentKey) => {
+                const item = styleKeys[currentKey];
+
+                if (item.includes(key)) {
+                    return currentKey;
+                }
+
+                return resultKey;
+            }, defaultRequestElementSettingsKey);
 
             return {
                 ...result,
-                attributes: {
-                    ...result.attributes,
+                [settingsKey]: {
+                    ...(result[settingsKey] ?? {}),
                     [key]: settings[key],
                 },
             };
         },
-        { attributes: {}, styles: {} },
+        { default: {} },
     );
 }
 
 export function processRequestElementData<T extends SitePageElementUnion>(
     item: T,
-    stylesKeys: TypeKeys<T["settings"]>,
-): SitePageRequestElement<Partial<T["settings"]>, Partial<T["settings"]>> {
+    stylesKeys: Record<string, TypeKeys<T["settings"]>>,
+): SitePageRequestElement<Partial<T["settings"]>> {
     const processedSettings = processRequestElementSettings(item.settings, stylesKeys);
 
     return {
@@ -83,35 +82,35 @@ export function processRequestElementData<T extends SitePageElementUnion>(
 export function processElementDataCreation(item: SitePageElementUnion): SitePageRequestElement {
     switch (item.type) {
         case SitePageElementType.TITLE: {
-            return processRequestElementData(item as TitlePageElement, titlePageElementSettingsStylesKeys);
+            return processRequestElementData(item as TitlePageElement, { styles: titlePageElementSettingsStylesKeys, default: [] });
         }
 
         case SitePageElementType.TEXT: {
-            return processRequestElementData(item as TextPageElement, textPageElementSettingsStylesKeys);
+            return processRequestElementData(item as TextPageElement, { styles: textPageElementSettingsStylesKeys, default: [] });
         }
 
         case SitePageElementType.SECTION: {
-            return processRequestElementData(item as SectionPageElement, sectionPageElementSettingsStylesKeys);
+            return processRequestElementData(item as SectionPageElement, { styles: sectionPageElementSettingsStylesKeys, default: [] });
         }
 
         case SitePageElementType.IMAGE: {
-            return processRequestElementData(item as ImagePageElement, imagePageElementSettingsStylesKeys);
+            return processRequestElementData(item as ImagePageElement, { styles: imagePageElementSettingsStylesKeys, default: [] });
         }
 
         case SitePageElementType.INNER: {
-            return processRequestElementData(item as InnerPageElement, innerPageElementSettingsStyleKeys);
+            return processRequestElementData(item as InnerPageElement, { styles: innerPageElementSettingsStyleKeys });
         }
 
         case SitePageElementType.TABS: {
-            return processRequestElementData(item as TabsPageElement, tabsPageElementSettingsStyleKeys);
+            return processRequestElementData(item as TabsPageElement, { styles: tabsPageElementSettingsStyleKeys });
         }
 
         case SitePageElementType.TABS_ITEM: {
-            return processRequestElementData(item as TabsItemPageElement, tabsItemPageElementSettingsStyleKeys);
+            return processRequestElementData(item as TabsItemPageElement, { styles: tabsItemPageElementSettingsStyleKeys });
         }
 
         default: {
-            return processRequestElementData(item, []);
+            return processRequestElementData(item, {});
         }
     }
 }
@@ -133,33 +132,30 @@ export function getCampaignData(state: EditorState): CreateCampaignModel {
 }
 
 export function processCampaignResponseItemSettings(
-    settings: SitePageRequestElement<SitePageElementSettingsUnion, SitePageElementSettingsUnion>["settings"],
+    settings: SitePageRequestElement<SitePageElementSettingsUnion>["settings"],
 ): SitePageElement["settings"] {
     return Object.values(settings).reduce((result, settingsItem) => {
         return {
             ...result,
             ...settingsItem,
-        } as SitePageElementSettingsUnion;
-    }, {} as SitePageElementSettingsUnion);
+        };
+    }, {}) as SitePageElementSettingsUnion;
 }
 
 export function processCampaignResponse(campaign: CreateCampaignModel & { id: number }): EditorState {
     const { elements, id, campaignName, pages } = campaign;
-    const processedItems = Object.keys(elements).reduce(
-        (result, key) => {
-            const item = elements[key] as SitePageRequestElement<SitePageElementSettingsUnion, SitePageElementSettingsUnion>;
+    const processedItems = Object.keys(elements).reduce((result, key) => {
+        const item = elements[key] as SitePageRequestElement<SitePageElementSettingsUnion>;
 
-            result[key] = {
-                ...item,
-                settings: {
-                    ...processCampaignResponseItemSettings(item.settings),
-                },
-            };
+        result[key] = {
+            ...item,
+            settings: {
+                ...processCampaignResponseItemSettings(item.settings),
+            },
+        };
 
-            return result;
-        },
-        {} as Record<string, SitePageElementUnion>,
-    );
+        return result;
+    }, {});
 
     return {
         items: processedItems,

@@ -28,6 +28,7 @@ export {
     SitePageElementSettingsUnion,
     SitePageRequestElement,
     TypeKeys,
+    RequestElementSettings,
 } from "./types";
 export {
     defaultTextControlElement,
@@ -63,6 +64,7 @@ export {
     defaultBackgroundSizeItems,
     defaultBackgroundRepeatItems,
     defaultBackgroundColorItems,
+    defaultRequestElementSettingsKey,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -100,6 +102,8 @@ export {
     processObjectFitPositionValue,
     processObjectFitValue,
     processBackgroundValue,
+    processCampaignResponse,
+    processCampaignResponseItemSettings,
 } from "./utils";
 
 export {

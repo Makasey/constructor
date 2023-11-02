@@ -50,16 +50,13 @@ export type SitePageElement<T = SitePageElementSettingsUnion> = Readonly<{
     settings: T;
 }>;
 
-export type SitePageRequestElement<StylesType = unknown, AttributesType = unknown> = Readonly<{
+export type SitePageRequestElement<StylesType = unknown> = Readonly<{
     id: string;
     parentId: string | null;
     type: SitePageElementType;
     isExtendable: boolean;
     children: string[];
-    settings: {
-        styles: StylesType;
-        attributes: AttributesType;
-    };
+    settings: RequestElementSettings<StylesType>;
 }>;
 
 export type TypeKeys<K> = (keyof K)[];
@@ -126,4 +123,10 @@ export type CampaignPreviewModel = Readonly<{
     id: string;
     text: string;
     name: string;
+}>;
+
+export type RequestElementSettings<T> = Readonly<{
+    [key: string]: Partial<T>;
+
+    default: Partial<T>;
 }>;
