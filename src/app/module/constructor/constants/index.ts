@@ -320,7 +320,7 @@ export const defaultJustifyContentItems: SelectItem<JustifyContent, JustifyConte
     { label: JustifyContent.SPACE_EVENLY, value: JustifyContent.SPACE_EVENLY, image: "eicon-justify-space-evenly-h" },
 ];
 
-export const defaultBackgroundColorItems = [
+export const defaultBackgroundColorItems: SelectItem<BackgroundType>[] = [
     { label: BackgroundType.CLASSIC, value: BackgroundType.CLASSIC, image: "eicon-justify-start-h" },
     { label: BackgroundType.GRADIENT, value: BackgroundType.GRADIENT, image: "eicon-justify-center-h" },
 ];
