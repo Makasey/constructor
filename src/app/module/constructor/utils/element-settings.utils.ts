@@ -92,5 +92,6 @@ export function processBackgroundValue(settings: BackgroundFieldModel): string {
     const { image = {}, color = "transparent" } = settings;
     const { size = "unset", src = "", repeat = "no-repeat", position = ObjectFitPosition.CENTER_CENTER } = image;
     const processedPosition = processObjectFitPositionValue(position);
-    return `${color} ${repeat} ${processedPosition} / ${size} url(${src})`;
+    const processedURL = src ? `${repeat} ${processedPosition} / ${size} url(${src})` : "";
+    return `${color} ${processedURL}`;
 }

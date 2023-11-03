@@ -9,10 +9,10 @@ import {
 
 function getInnerItemBackgroundColorControl(element: InnerPageElement): APFormControl {
     return {
-        id: "backgroundColor",
-        name: "backgroundColor",
+        id: "background",
+        name: "background",
         value: element.settings.background,
-        valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
+        valueTemplateKey: APFormDefaultTemplateKeys.BACKGROUND_FIELD,
         options: {
             label: "Цвет бэкграунда",
         },

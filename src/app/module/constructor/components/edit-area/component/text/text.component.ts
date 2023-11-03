@@ -4,6 +4,7 @@ import {
     ELEMENT_ID,
     TextPageElement,
     TextPageElementSettings,
+    processBackgroundValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
@@ -42,9 +43,9 @@ export class TextComponent implements OnInit {
     @HostListener("$.style.color")
     public textColor$: Observable<string>;
 
-    @HostBinding("$.style.background-color")
-    @HostListener("$.style.background-color")
-    public textBackgroundColor$: Observable<string>;
+    @HostBinding("$.style.background")
+    @HostListener("$.style.background")
+    public background$: Observable<string>;
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TextPageElement>);
 
@@ -67,7 +68,7 @@ export class TextComponent implements OnInit {
 
         this.textColor$ = this.textSettings$.pipe(map(settings => settings.color));
 
-        this.textBackgroundColor$ = this.textSettings$.pipe(map(settings => settings.background?.color || ""));
+        this.background$ = this.textSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
 
         this.textText$ = this.textSettings$.pipe(map(settings => settings.text ?? ""));
     }

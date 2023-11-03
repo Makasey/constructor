@@ -109,10 +109,10 @@ function getSectionColorControl(element: SectionPageElement): APFormControl {
 
 function getSectionBackgroundColorControl(element: SectionPageElement): APFormControl {
     return {
-        id: "backgroundColor",
-        name: "backgroundColor",
-        value: element.settings.background ?? "#ffffff",
-        valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
+        id: "background",
+        name: "background",
+        value: element.settings.background,
+        valueTemplateKey: APFormDefaultTemplateKeys.BACKGROUND_FIELD,
         options: {
             label: "Цвет бэкграунда",
         },

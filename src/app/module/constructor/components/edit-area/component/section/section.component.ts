@@ -12,6 +12,7 @@ import {
     SectionSelectionService,
     SitePageElementType,
     columnStructureElements,
+    processBackgroundValue,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
@@ -45,9 +46,9 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.color")
     public sectionColor$: Observable<string>;
 
-    @HostBinding("$.style.background-color")
-    @HostListener("$.style.background-color")
-    public sectionBackgroundColor$: Observable<string>;
+    @HostBinding("$.style.background")
+    @HostListener("$.style.background")
+    public sectionBackground$: Observable<string>;
 
     @HostBinding("$.style.padding")
     @HostListener("$.style.padding")
@@ -118,7 +119,7 @@ export class SectionComponent implements OnInit {
 
         this.sectionColor$ = this.sectionSettings$.pipe(map(settings => settings.color));
 
-        this.sectionBackgroundColor$ = this.sectionSettings$.pipe(map(settings => settings.background.color || ""));
+        this.sectionBackground$ = this.sectionSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
 
         this.sectionPadding$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
 

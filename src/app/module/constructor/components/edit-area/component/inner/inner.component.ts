@@ -7,6 +7,7 @@ import {
     ELEMENT_ID,
     InnerPageElement,
     SectionPageElementSettings,
+    processBackgroundValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
@@ -37,9 +38,9 @@ export class InnerComponent implements OnInit {
     @HostListener("$.style.width")
     public width$: Observable<string>;
 
-    @HostBinding("$.style.background-color")
-    @HostListener("$.style.background-color")
-    public backgroundColor$: Observable<string>;
+    @HostBinding("$.style.background")
+    @HostListener("$.style.background")
+    public background$: Observable<string>;
 
     @HostBinding("$.style.justify-content")
     @HostListener("$.style.justify-content")
@@ -62,7 +63,7 @@ export class InnerComponent implements OnInit {
 
         this.height$ = this.innerSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
-        this.backgroundColor$ = this.innerSettings$.pipe(map(settings => settings.background.color || ""));
+        this.background$ = this.innerSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
 
         this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent));
     }

@@ -337,14 +337,14 @@ export const defaultAlignItemsItems: SelectItem<AlignItems, AlignItems>[] = [
     { label: AlignItems.END, value: AlignItems.END, image: "eicon-align-end-h" },
 ];
 
-export const defaultBackgroundRepeatItems = [
+export const defaultBackgroundRepeatItems: SelectItem<string>[] = [
     { label: "Повторение по оси X", value: "repeat-x" },
     { label: "Повторение по оси Y", value: "repeat-y" },
     { label: "Повторение по осям X и Y", value: "repeat" },
     { label: "Без повторения", value: "no-repeat" },
 ];
 
-export const defaultBackgroundSizeItems = [
+export const defaultBackgroundSizeItems: SelectItem<string>[] = [
     { label: "Вместить", value: "contain" },
     { label: "Расширить", value: "cover" },
     { label: "Автоматически", value: "auto" },

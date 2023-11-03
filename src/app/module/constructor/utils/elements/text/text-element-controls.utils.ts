@@ -4,10 +4,10 @@ import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@componen
 
 function getTextBackgroundColorControl(element: TextPageElement): APFormControl {
     return {
-        id: "backgroundColor",
-        name: "backgroundColor",
+        id: "background",
+        name: "background",
         value: element.settings.background ?? "#ffffff",
-        valueTemplateKey: APFormDefaultTemplateKeys.COLOR_FIELD,
+        valueTemplateKey: APFormDefaultTemplateKeys.BACKGROUND_FIELD,
         options: {
             label: "Цвет бэкграунда",
         },
