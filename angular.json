@@ -74,10 +74,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "lavka-roz-frontend:build:production"
+                          "buildTarget": "lavka-roz-frontend:build:production"
                         },
                         "development": {
-                            "browserTarget": "lavka-roz-frontend:build:development"
+                          "buildTarget": "lavka-roz-frontend:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "lavka-roz-frontend:build"
+                      "buildTarget": "lavka-roz-frontend:build"
                     }
                 },
                 "test": {
