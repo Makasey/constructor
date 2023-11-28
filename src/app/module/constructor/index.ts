@@ -173,6 +173,10 @@ export {
     TabElementItemComponent,
     TabsItemElementSettingsGroup,
     InnerPageElementSettings,
+    SpacerPageElementSettings,
+    SpacerComponent,
+    SpacerElementSettingsGroup,
+    SpacerPageElement,
 } from "./components";
 
 export {
