@@ -15,6 +15,7 @@ export {
     getTabsSettings,
     processedCreatedTabsCount,
     getTabsItemSettings,
+    getSpacerElementSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

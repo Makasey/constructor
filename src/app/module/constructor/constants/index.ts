@@ -15,6 +15,7 @@ import {
     SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
+    SpacerPageElement,
     StyleUnit,
     TabsItemPageElement,
     TabsItemPageElementSettings,
@@ -289,6 +290,33 @@ export function defaultTabsItemElementSettings(): () => Omit<TabsItemPageElement
     };
 }
 
+export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.SPACER,
+            children: [],
+            isExtendable: false,
+            settings: {
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PX,
+                },
+                background: { backgroundType: BackgroundType.CLASSIC },
+            },
+        };
+    };
+}
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings(),
     [SitePageElementType.SECTION]: defaultSectionElementSettings(),
@@ -298,6 +326,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.TABS]: defaultTabsElementSettings(),
     [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings(),
     [SitePageElementType.TEXT]: defaultTextElementSettings(),
+    [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
 };
 
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [

@@ -104,6 +104,7 @@ export {
     processBackgroundValue,
     processCampaignResponse,
     processCampaignResponseItemSettings,
+    getSpacerElementSettings,
 } from "./utils";
 
 export {

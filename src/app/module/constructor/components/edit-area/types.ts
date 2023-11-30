@@ -4,6 +4,7 @@ import {
     RootComponent,
     SectionComponent,
     SitePageElementType,
+    SpacerComponent,
     TabElementItemComponent,
     TabsComponent,
     TextComponent,
@@ -20,4 +21,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.TABS]: TabsComponent,
     [SitePageElementType.TABS_ITEM]: TabElementItemComponent,
     [SitePageElementType.TEXT]: TextComponent,
+    [SitePageElementType.SPACER]: SpacerComponent,
 };
