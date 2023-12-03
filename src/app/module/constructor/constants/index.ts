@@ -308,7 +308,7 @@ export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "i
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 100,
+                    value: 50,
                     unit: StyleUnit.PX,
                 },
                 background: { backgroundType: BackgroundType.CLASSIC },

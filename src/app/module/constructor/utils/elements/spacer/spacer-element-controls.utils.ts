@@ -36,12 +36,29 @@ function getSpacerElementMarginControl(element: SpacerPageElement): APFormContro
     };
 }
 
+function getSpacerElementPaddingControl(element: SpacerPageElement): APFormControl {
+    return {
+        id: "padding",
+        name: "padding",
+        value: element.settings.padding,
+        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
+        options: {
+            selectLabelKey: "label",
+            selectValueKey: "value",
+            max: 1000,
+            min: 0,
+            items: defaultSizeControlUnit,
+            label: "Padding",
+        },
+    };
+}
+
 function getSpacerElementSizeControl(element: SpacerPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
 
 function getSpacerElementStyleControl(element: SpacerPageElement): APFormControl[] {
-    return [getSpacerElementMarginControl(element), getSpacerElementBackgroundColorControl(element)];
+    return [getSpacerElementMarginControl(element), getSpacerElementPaddingControl(element), getSpacerElementBackgroundColorControl(element)];
 }
 
 export function getSpacerElementSettings(element: SpacerPageElement): APFormModel {
