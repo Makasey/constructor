@@ -41,4 +41,8 @@ export {
     TabsItemPageElement,
     TabsItemElementSettingsGroup,
     InnerPageElementSettings,
+    SpacerElementSettingsGroup,
+    SpacerComponent,
+    SpacerPageElement,
+    SpacerPageElementSettings,
 } from "./edit-area";

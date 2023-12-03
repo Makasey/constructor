@@ -8,6 +8,7 @@ import {
     SectionPageElement,
     SitePageElementType,
     SitePageElementUnion,
+    SpacerPageElement,
     StyleUnit,
     TabsItemPageElement,
     TabsPageElement,
@@ -16,6 +17,7 @@ import {
     getImageSettings,
     getInnerSettings,
     getSectionSettings,
+    getSpacerElementSettings,
     getTabsItemSettings,
     getTabsSettings,
     getTextSettings,
@@ -57,6 +59,10 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
 
         case SitePageElementType.TABS_ITEM: {
             return getTabsItemSettings(element as TabsItemPageElement);
+        }
+
+        case SitePageElementType.SPACER: {
+            return getSpacerElementSettings(element as SpacerPageElement);
         }
 
         default: {

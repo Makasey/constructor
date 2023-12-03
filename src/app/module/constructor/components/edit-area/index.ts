@@ -39,6 +39,10 @@ export {
     TabElementItemComponent,
     TabsItemElementSettingsGroup,
     InnerPageElementSettings,
+    SpacerPageElementSettings,
+    SpacerComponent,
+    SpacerElementSettingsGroup,
+    SpacerPageElement,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

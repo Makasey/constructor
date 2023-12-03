@@ -104,6 +104,7 @@ export {
     processBackgroundValue,
     processCampaignResponse,
     processCampaignResponseItemSettings,
+    getSpacerElementSettings,
 } from "./utils";
 
 export {
@@ -173,6 +174,10 @@ export {
     TabElementItemComponent,
     TabsItemElementSettingsGroup,
     InnerPageElementSettings,
+    SpacerPageElementSettings,
+    SpacerComponent,
+    SpacerElementSettingsGroup,
+    SpacerPageElement,
 } from "./components";
 
 export {

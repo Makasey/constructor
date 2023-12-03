@@ -70,6 +70,7 @@ export enum SitePageElementType {
     TABS = "tabs",
     TABS_ITEM = "tabs-item",
     TEXT = "text",
+    SPACER = "spacer",
 }
 
 export enum ElementHTMLTag {

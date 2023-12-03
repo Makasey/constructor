@@ -28,3 +28,4 @@ export {
 } from "./tabs";
 
 export { TextComponent, TextElementSettingsGroup, TextPageElementSettings, TextPageElement } from "./text";
+export { SpacerComponent, SpacerElementSettingsGroup, SpacerPageElement, SpacerPageElementSettings } from "./spacer";

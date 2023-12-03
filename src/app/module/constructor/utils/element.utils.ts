@@ -110,6 +110,11 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     type: SitePageElementType.TABS,
                     icon: "bx-dock-top",
                 },
+                {
+                    title: "Спэйсер",
+                    type: SitePageElementType.SPACER,
+                    icon: "bx-dock-top",
+                },
             ];
         }
 

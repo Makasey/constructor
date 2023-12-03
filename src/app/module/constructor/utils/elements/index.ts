@@ -17,3 +17,4 @@ export { getInnerSettings } from "./inner";
 export { getTabsSettings, processedCreatedTabsCount } from "./tabs";
 export { getTabsItemSettings } from "./tabs-item";
 export { getTextSettings } from "./text";
+export { getSpacerElementSettings } from "./spacer";
