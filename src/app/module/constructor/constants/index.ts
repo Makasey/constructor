@@ -317,6 +317,29 @@ export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "i
     };
 }
 
+export function defaultAccordionElementSettings(): () => Omit<TabsPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.ACCORDION,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                selectedElement: "",
+                items: [],
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                count: 1,
+            },
+        };
+    };
+}
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings(),
     [SitePageElementType.SECTION]: defaultSectionElementSettings(),
@@ -327,6 +350,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings(),
     [SitePageElementType.TEXT]: defaultTextElementSettings(),
     [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
+    [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
 };
 
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [

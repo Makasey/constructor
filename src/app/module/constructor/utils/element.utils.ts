@@ -113,7 +113,12 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                 {
                     title: "Спэйсер",
                     type: SitePageElementType.SPACER,
-                    icon: "bx-dock-top",
+                    icon: "bx-collapse-vertical",
+                },
+                {
+                    title: "Ассордион",
+                    type: SitePageElementType.ACCORDION,
+                    icon: "bx-list-check",
                 },
             ];
         }
@@ -152,6 +157,16 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     title: "Табы",
                     type: SitePageElementType.TABS,
                     icon: "bx-dock-top",
+                },
+                {
+                    title: "Спэйсер",
+                    type: SitePageElementType.SPACER,
+                    icon: "bx-collapse-vertical",
+                },
+                {
+                    title: "Ассордион",
+                    type: SitePageElementType.ACCORDION,
+                    icon: "bx-list-check",
                 },
             ];
         }

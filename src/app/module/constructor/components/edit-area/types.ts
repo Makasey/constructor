@@ -1,4 +1,5 @@
 import {
+    AccordionElementComponent,
     ImageComponent,
     InnerComponent,
     RootComponent,
@@ -22,4 +23,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.TABS_ITEM]: TabElementItemComponent,
     [SitePageElementType.TEXT]: TextComponent,
     [SitePageElementType.SPACER]: SpacerComponent,
+    [SitePageElementType.ACCORDION]: AccordionElementComponent,
 };

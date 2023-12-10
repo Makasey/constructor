@@ -43,6 +43,10 @@ export {
     SpacerComponent,
     SpacerElementSettingsGroup,
     SpacerPageElement,
+    AccordionElementComponent,
+    AccordionElementSettingsGroup,
+    AccordionPageElementSettings,
+    AccordionPageElement,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

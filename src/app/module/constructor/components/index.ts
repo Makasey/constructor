@@ -45,4 +45,8 @@ export {
     SpacerComponent,
     SpacerPageElement,
     SpacerPageElementSettings,
+    AccordionPageElement,
+    AccordionPageElementSettings,
+    AccordionElementSettingsGroup,
+    AccordionElementComponent,
 } from "./edit-area";

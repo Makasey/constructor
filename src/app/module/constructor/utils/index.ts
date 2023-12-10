@@ -16,6 +16,7 @@ export {
     processedCreatedTabsCount,
     getTabsItemSettings,
     getSpacerElementSettings,
+    getAccordionElementSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

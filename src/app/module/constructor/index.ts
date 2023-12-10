@@ -105,6 +105,7 @@ export {
     processCampaignResponse,
     processCampaignResponseItemSettings,
     getSpacerElementSettings,
+    getAccordionElementSettings,
 } from "./utils";
 
 export {
@@ -178,6 +179,10 @@ export {
     SpacerComponent,
     SpacerElementSettingsGroup,
     SpacerPageElement,
+    AccordionElementSettingsGroup,
+    AccordionPageElementSettings,
+    AccordionPageElement,
+    AccordionElementComponent,
 } from "./components";
 
 export {

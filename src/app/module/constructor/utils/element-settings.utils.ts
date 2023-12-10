@@ -1,5 +1,6 @@
 import { APFormModel, BackgroundFieldModel, Direction } from "@components";
 import {
+    AccordionPageElement,
     ElementSettingsWithUnit,
     ImagePageElement,
     InnerPageElement,
@@ -14,6 +15,7 @@ import {
     TabsPageElement,
     TextPageElement,
     TitlePageElement,
+    getAccordionElementSettings,
     getImageSettings,
     getInnerSettings,
     getSectionSettings,
@@ -63,6 +65,10 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
 
         case SitePageElementType.SPACER: {
             return getSpacerElementSettings(element as SpacerPageElement);
+        }
+
+        case SitePageElementType.ACCORDION: {
+            return getAccordionElementSettings(element as AccordionPageElement);
         }
 
         default: {

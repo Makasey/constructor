@@ -29,3 +29,4 @@ export {
 
 export { TextComponent, TextElementSettingsGroup, TextPageElementSettings, TextPageElement } from "./text";
 export { SpacerComponent, SpacerElementSettingsGroup, SpacerPageElement, SpacerPageElementSettings } from "./spacer";
+export { AccordionPageElement, AccordionElementSettingsGroup, AccordionPageElementSettings, AccordionElementComponent } from "./accordion-element";
