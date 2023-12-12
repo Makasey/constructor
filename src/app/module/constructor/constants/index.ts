@@ -1,4 +1,6 @@
 import {
+    AccordionItemPageElement,
+    AccordionPageElement,
     AlignItems,
     BackgroundType,
     ElementHTMLTag,
@@ -317,7 +319,7 @@ export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "i
     };
 }
 
-export function defaultAccordionElementSettings(): () => Omit<TabsPageElement, "id" | "parentId"> {
+export function defaultAccordionElementSettings(): () => Omit<AccordionPageElement, "id" | "parentId"> {
     return () => {
         return {
             type: SitePageElementType.ACCORDION,
@@ -340,6 +342,37 @@ export function defaultAccordionElementSettings(): () => Omit<TabsPageElement, "
     };
 }
 
+export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemPageElement, "id" | "parentId"> {
+    let uniqueCounter = 0;
+
+    return () => {
+        uniqueCounter++;
+
+        return {
+            type: SitePageElementType.ACCORDION_ITEM,
+            children: [],
+            isExtendable: false,
+            settings: {
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                title: `Асскордин-${uniqueCounter}`,
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+            },
+        };
+    };
+}
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings(),
     [SitePageElementType.SECTION]: defaultSectionElementSettings(),
@@ -351,6 +384,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.TEXT]: defaultTextElementSettings(),
     [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
     [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
+    [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
 };
 
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [

@@ -1,6 +1,6 @@
-import { BackgroundFieldModel } from "@components/ui";
-import { File } from "@shared-types";
 import {
+    AccordionItemPageElement,
+    AccordionPageElement,
     ImagePageElement,
     ImagePageElementSettings,
     InnerPageElement,
@@ -8,6 +8,7 @@ import {
     SectionPageElement,
     SectionPageElementSettings,
     SitePageElementType,
+    SpacerPageElement,
     StyleUnit,
     TabsItemPageElement,
     TabsItemPageElementSettings,
@@ -18,6 +19,8 @@ import {
     TitlePageElement,
     TitlePageElementSettings,
 } from "@modules/constructor";
+import { BackgroundFieldModel } from "@components/ui";
+import { File } from "@shared-types";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
 
@@ -29,7 +32,10 @@ export type SitePageElementUnion =
     | TextPageElement
     | InnerPageElement
     | ImagePageElement
-    | TabsPageElement;
+    | TabsPageElement
+    | SpacerPageElement
+    | AccordionPageElement
+    | AccordionItemPageElement;
 
 export type SitePageElementSettingsUnion =
     | TabsPageElementSettings
@@ -40,6 +46,7 @@ export type SitePageElementSettingsUnion =
     | InnerPageElementSettings
     | ImagePageElementSettings
     | TabsItemPageElementSettings;
+// todo fix this
 
 export type SitePageElement<T = SitePageElementSettingsUnion> = Readonly<{
     id: string;

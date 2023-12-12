@@ -1,5 +1,6 @@
 import {
     AccordionElementComponent,
+    AccordionElementItemComponent,
     ImageComponent,
     InnerComponent,
     RootComponent,
@@ -24,4 +25,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.TEXT]: TextComponent,
     [SitePageElementType.SPACER]: SpacerComponent,
     [SitePageElementType.ACCORDION]: AccordionElementComponent,
+    [SitePageElementType.ACCORDION_ITEM]: AccordionElementItemComponent,
 };

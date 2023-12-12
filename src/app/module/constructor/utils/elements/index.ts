@@ -19,3 +19,4 @@ export { getTabsItemSettings } from "./tabs-item";
 export { getTextSettings } from "./text";
 export { getSpacerElementSettings } from "./spacer";
 export { getAccordionElementSettings } from "./accordion";
+export { getAccordionItemElementSettings } from "./accordion-item";

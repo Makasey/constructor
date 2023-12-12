@@ -49,4 +49,8 @@ export {
     AccordionPageElementSettings,
     AccordionElementSettingsGroup,
     AccordionElementComponent,
+    AccordionElementItemComponent,
+    AccordionElementItemSettingsGroup,
+    AccordionItemPageElement,
+    AccordionItemPageElementSettings,
 } from "./edit-area";

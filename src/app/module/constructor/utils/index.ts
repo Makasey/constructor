@@ -17,6 +17,7 @@ export {
     getTabsItemSettings,
     getSpacerElementSettings,
     getAccordionElementSettings,
+    getAccordionItemElementSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

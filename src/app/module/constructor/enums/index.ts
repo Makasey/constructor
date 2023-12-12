@@ -72,6 +72,7 @@ export enum SitePageElementType {
     TEXT = "text",
     SPACER = "spacer",
     ACCORDION = "accordion",
+    ACCORDION_ITEM = "accordion-item",
 }
 
 export enum ElementHTMLTag {

@@ -106,6 +106,7 @@ export {
     processCampaignResponseItemSettings,
     getSpacerElementSettings,
     getAccordionElementSettings,
+    getAccordionItemElementSettings,
 } from "./utils";
 
 export {
@@ -183,6 +184,10 @@ export {
     AccordionPageElementSettings,
     AccordionPageElement,
     AccordionElementComponent,
+    AccordionElementItemComponent,
+    AccordionElementItemSettingsGroup,
+    AccordionItemPageElement,
+    AccordionItemPageElementSettings,
 } from "./components";
 
 export {
