@@ -2,19 +2,21 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
+    AccordionPageElement,
     AccordionPageElementSettings,
     ELEMENT_ID,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
-import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion-element",
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, ElementResolverDirective],
     templateUrl: "./accordion-element.component.html",
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,6 +44,8 @@ export class AccordionElementComponent implements OnInit {
     private readonly elementSelectionService = inject(AbstractEditorSelectionService);
 
     private settings$: Observable<AccordionPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+
+    public element: Signal<AccordionPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 

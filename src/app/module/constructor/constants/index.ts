@@ -336,7 +336,7 @@ export function defaultAccordionElementSettings(): () => Omit<AccordionPageEleme
                     value: 100,
                     unit: StyleUnit.PERCENT,
                 },
-                count: 1,
+                count: 3,
             },
         };
     };
@@ -365,8 +365,8 @@ export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemP
                 },
                 title: `Асскордин-${uniqueCounter}`,
                 height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: 50,
+                    unit: StyleUnit.PX,
                 },
             },
         };
