@@ -1,8 +1,28 @@
-import { APFormControl, APFormModel } from "@components";
-import { AccordionElementSettingsGroup, AccordionPageElement, DEFAULT_UPSERT_CONFIG, getDefaultSizeSettings } from "@modules/constructor";
+import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
+import {
+    AccordionElementSettingsGroup,
+    AccordionPageElement,
+    DEFAULT_UPSERT_CONFIG,
+    SitePageElementType,
+    defaultPageElementSettingsMap,
+    getDefaultSizeSettings,
+} from "@modules/constructor";
+
+function getTabsItemsControls(element: AccordionPageElement): APFormControl {
+    return {
+        id: "items",
+        name: "items",
+        value: element.settings.items,
+        valueTemplateKey: APFormDefaultTemplateKeys.ITEMS_CONTROL_FIELD,
+        options: {
+            label: "Элементы",
+            defaultItemFn: () => defaultPageElementSettingsMap[SitePageElementType.ACCORDION_ITEM]().settings,
+        },
+    };
+}
 
 function getAccordionElementControls(element: AccordionPageElement): APFormControl[] {
-    return [...getDefaultSizeSettings(element)];
+    return [...getDefaultSizeSettings(element), getTabsItemsControls(element)];
 }
 
 export function getAccordionElementSettings(element: AccordionPageElement): APFormModel {

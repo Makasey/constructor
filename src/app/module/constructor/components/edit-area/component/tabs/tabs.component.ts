@@ -14,7 +14,6 @@ import {
     TabsPageElement,
     TabsPageElementSettings,
     processSettingValueWithUnit,
-    processedCreatedTabsCount,
 } from "@modules/constructor";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -40,8 +39,6 @@ export class TabsComponent implements OnInit {
     @HostListener("$.style.width")
     public width$: Observable<string>;
 
-    public count$: Observable<number[]>;
-
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
@@ -65,8 +62,6 @@ export class TabsComponent implements OnInit {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-
-        this.count$ = this.settings$.pipe(map(settings => processedCreatedTabsCount(settings.count)));
     }
 
     public trackByTab(_: number, tab: TabsItemPageElement): string {

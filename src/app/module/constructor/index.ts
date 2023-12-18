@@ -88,7 +88,6 @@ export {
     getInnerSettings,
     processPossibleElements,
     getImageSettings,
-    processedCreatedTabsCount,
     getTabsItemSettings,
     getTabsSettings,
     getPreviewData,

@@ -1,7 +1,10 @@
 <div>
     {{ element().settings.title }}
-
-    @if (element()) { @if (element().children.length) { @for (child of element().children; track child) {
+    @if (element()) {
+      @if (element().children.length) {
+        @for (child of element().children; track child) {
     <ng-container *lzElementResolver="child; parent: element().id"></ng-container>
-    } } }
+        }
+      }
+    }
 </div>

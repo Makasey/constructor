@@ -13,7 +13,6 @@ export {
     getInnerSettings,
     getImageSettings,
     getTabsSettings,
-    processedCreatedTabsCount,
     getTabsItemSettings,
     getSpacerElementSettings,
     getAccordionElementSettings,
