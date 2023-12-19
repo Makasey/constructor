@@ -10,6 +10,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, 
 import { CommonModule } from "@angular/common";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
+import { animate, state, style, transition, trigger } from "@angular/animations";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -21,6 +22,13 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    animations: [
+        trigger("contentExpansion", [
+            state("expanded", style({ "min-height": "100px", opacity: 1, visibility: "visible" })),
+            state("collapsed", style({ height: "0px", opacity: 0, visibility: "hidden" })),
+            transition("expanded <=> collapsed", animate("500ms cubic-bezier(.37,1.04,.68,.98)")),
+        ]),
+    ],
 })
 export class AccordionElementItemComponent implements OnInit {
     @HostBinding("class.lz-accordion-element-item")
@@ -33,6 +41,8 @@ export class AccordionElementItemComponent implements OnInit {
     @HostBinding("$.style.width")
     @HostListener("$.style.width")
     public width$: Observable<string>;
+
+    public expanded = false;
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
@@ -48,5 +58,9 @@ export class AccordionElementItemComponent implements OnInit {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+    }
+
+    public toggleState(): void {
+        this.expanded = !this.expanded;
     }
 }

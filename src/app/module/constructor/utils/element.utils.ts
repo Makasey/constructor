@@ -171,6 +171,46 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
             ];
         }
 
+        case SitePageElementType.ACCORDION_ITEM: {
+            return [
+                {
+                    title: "Заголовок",
+                    type: SitePageElementType.TITLE,
+                    icon: "bx-font",
+                },
+                {
+                    title: "Текст",
+                    type: SitePageElementType.TEXT,
+                    icon: "bx-highlight",
+                },
+                {
+                    title: "Изображение",
+                    type: SitePageElementType.IMAGE,
+                    icon: "bxs-image-alt",
+                },
+                {
+                    title: "Секция",
+                    type: SitePageElementType.SECTION,
+                    icon: "bxs-layout",
+                },
+                {
+                    title: "Табы",
+                    type: SitePageElementType.TABS,
+                    icon: "bx-dock-top",
+                },
+                {
+                    title: "Спэйсер",
+                    type: SitePageElementType.SPACER,
+                    icon: "bx-collapse-vertical",
+                },
+                {
+                    title: "Ассордион",
+                    type: SitePageElementType.ACCORDION,
+                    icon: "bx-list-check",
+                },
+            ];
+        }
+
         default: {
             return [];
         }
