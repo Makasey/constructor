@@ -5,6 +5,7 @@ import {
     AccordionPageElement,
     AccordionPageElementSettings,
     ELEMENT_ID,
+    processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
@@ -35,6 +36,14 @@ export class AccordionElementComponent implements OnInit {
     @HostListener("$.style.width")
     public width$: Observable<string>;
 
+    @HostBinding("$.style.padding")
+    @HostListener("$.style.padding")
+    public padding$: Observable<string>;
+
+    @HostBinding("$.style.margin")
+    @HostListener("$.style.margin")
+    public margin$: Observable<string>;
+
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
@@ -50,5 +59,9 @@ export class AccordionElementComponent implements OnInit {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+
+        this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
+
+        this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
     }
 }

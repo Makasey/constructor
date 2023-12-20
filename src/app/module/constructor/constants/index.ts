@@ -327,15 +327,25 @@ export function defaultAccordionElementSettings(): () => Omit<AccordionPageEleme
             isExtendable: false,
             settings: {
                 width: {
-                    value: 100,
+                    value: 50,
                     unit: StyleUnit.PERCENT,
                 },
-                selectedElement: "",
-                items: [],
                 height: {
                     value: 100,
                     unit: StyleUnit.PERCENT,
                 },
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                    unit: StyleUnit.PX,
+                },
+                selectedElement: "",
+                items: [],
                 count: 3,
             },
         };
@@ -363,11 +373,12 @@ export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemP
                     value: 100,
                     unit: StyleUnit.PERCENT,
                 },
-                title: `Асскордин-${uniqueCounter}`,
                 height: {
                     value: 50,
                     unit: StyleUnit.PX,
                 },
+                title: `Асскордин-${uniqueCounter}`,
+                background: { backgroundType: BackgroundType.CLASSIC },
             },
         };
     };

@@ -4,7 +4,7 @@ import {
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
     ELEMENT_ID,
-    processSettingValueWithUnit,
+    processBackgroundValue,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -34,13 +34,9 @@ export class AccordionElementItemComponent implements OnInit {
     @HostBinding("class.lz-accordion-element-item")
     public hostClass = true;
 
-    @HostBinding("$.style.min-height")
-    @HostListener("$.style.min-height")
-    public height$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public width$: Observable<string>;
+    @HostBinding("$.style.background")
+    @HostListener("$.style.background")
+    public background$: Observable<string>;
 
     public expanded = false;
 
@@ -55,9 +51,7 @@ export class AccordionElementItemComponent implements OnInit {
     public element: Signal<AccordionItemPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
     public ngOnInit(): void {
-        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-
-        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));
     }
 
     public toggleState(): void {

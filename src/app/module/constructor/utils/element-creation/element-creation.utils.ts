@@ -1,5 +1,6 @@
 import {
     AccordionItemPageElement,
+    AccordionItemPageElementSettings,
     AccordionPageElement,
     AccordionPageElementSettings,
     SitePageElementSettingsUnion,
@@ -591,11 +592,11 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
                 }
 
                 const processedChildren: AccordionItemPageElement[] = children.map(children => {
-                    const childItem = items[children] as TabsItemPageElement;
+                    const childItem = items[children] as AccordionItemPageElement;
 
                     if (updatedSettings.items) {
                         const updatedElement = updatedSettings.items.find(updatedItem => updatedItem.id === children)!;
-                        const updatedChildSettings: TabsItemPageElementSettings = {
+                        const updatedChildSettings: AccordionItemPageElementSettings = {
                             ...childItem.settings,
                             ...updatedElement,
                         };

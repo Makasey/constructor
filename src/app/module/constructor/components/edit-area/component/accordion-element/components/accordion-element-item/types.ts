@@ -1,5 +1,5 @@
 import { Direction } from "@components";
-import { SitePageElement, SitePageElementSizeSettings } from "@modules/constructor";
+import { SitePageElement, SitePageElementBackground, SitePageElementSizeSettings } from "@modules/constructor";
 
 export type AccordionItemPageElement = SitePageElement<AccordionItemPageElementSettings>;
 
@@ -8,4 +8,5 @@ export type AccordionItemPageElementSettings = Readonly<{
     padding: Direction;
     title?: string;
 }> &
-    SitePageElementSizeSettings;
+    SitePageElementSizeSettings &
+    SitePageElementBackground;

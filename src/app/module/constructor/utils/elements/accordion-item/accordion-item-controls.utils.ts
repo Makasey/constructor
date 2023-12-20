@@ -1,48 +1,20 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
-import {
-    AccordionElementItemSettingsGroup,
-    AccordionItemPageElement,
-    DEFAULT_UPSERT_CONFIG,
-    TabsItemPageElement,
-    defaultSizeControlUnit,
-} from "@modules/constructor";
+import { AccordionElementItemSettingsGroup, AccordionItemPageElement, DEFAULT_UPSERT_CONFIG } from "@modules/constructor";
 
-function getAccordionItemElementMarginControl(element: TabsItemPageElement): APFormControl {
+function getAccordionBackgroundColorControl(element: AccordionItemPageElement): APFormControl {
     return {
-        id: "margin",
-        name: "margin",
-        value: element.settings.margin,
-        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
+        id: "background",
+        name: "background",
+        value: element.settings.background,
+        valueTemplateKey: APFormDefaultTemplateKeys.BACKGROUND_FIELD,
         options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            max: 1000,
-            min: -1000,
-            items: defaultSizeControlUnit,
-            label: "Margin",
-        },
-    };
-}
-
-function getAccordionItemPaddingControl(element: TabsItemPageElement): APFormControl {
-    return {
-        id: "padding",
-        name: "padding",
-        value: element.settings.padding,
-        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
-        options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            max: 1000,
-            min: 0,
-            items: defaultSizeControlUnit,
-            label: "Padding",
+            label: "Цвет бэкграунда",
         },
     };
 }
 
 function getAccordionItemElementControls(element: AccordionItemPageElement): APFormControl[] {
-    return [getAccordionItemPaddingControl(element), getAccordionItemElementMarginControl(element)];
+    return [getAccordionBackgroundColorControl(element)];
 }
 
 export function getAccordionItemElementSettings(element: AccordionItemPageElement): APFormModel {
