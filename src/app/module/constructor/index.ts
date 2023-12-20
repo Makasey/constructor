@@ -88,7 +88,6 @@ export {
     getInnerSettings,
     processPossibleElements,
     getImageSettings,
-    processedCreatedTabsCount,
     getTabsItemSettings,
     getTabsSettings,
     getPreviewData,
@@ -105,6 +104,8 @@ export {
     processCampaignResponse,
     processCampaignResponseItemSettings,
     getSpacerElementSettings,
+    getAccordionElementSettings,
+    getAccordionItemElementSettings,
 } from "./utils";
 
 export {
@@ -178,6 +179,14 @@ export {
     SpacerComponent,
     SpacerElementSettingsGroup,
     SpacerPageElement,
+    AccordionElementSettingsGroup,
+    AccordionPageElementSettings,
+    AccordionPageElement,
+    AccordionElementComponent,
+    AccordionElementItemComponent,
+    AccordionElementItemSettingsGroup,
+    AccordionItemPageElement,
+    AccordionItemPageElementSettings,
 } from "./components";
 
 export {

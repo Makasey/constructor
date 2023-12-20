@@ -71,6 +71,8 @@ export enum SitePageElementType {
     TABS_ITEM = "tabs-item",
     TEXT = "text",
     SPACER = "spacer",
+    ACCORDION = "accordion",
+    ACCORDION_ITEM = "accordion-item",
 }
 
 export enum ElementHTMLTag {
