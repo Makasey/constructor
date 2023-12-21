@@ -105,13 +105,13 @@ export function processElementCreation(
                             id: accordionItem.id,
                         };
                     }),
-                    selectedElement: accordionItems[0].id,
+                    selectedElement: newElement.id,
                 },
                 children: arrayAdd(newElement.children, childrenIds),
             };
 
             return {
-                selectedElement: accordionItems[0].id,
+                selectedElement: newElement.id,
                 items: {
                     ...updatedItems,
                     [parentId]: {
