@@ -106,6 +106,12 @@ export {
     getSpacerElementSettings,
     getAccordionElementSettings,
     getAccordionItemElementSettings,
+    processUpdateAccordionElementSettings,
+    processUpdateAccordionItemElementSettings,
+    processUpdateTabsElementSettings,
+    processUpdateTabsItemElementSettings,
+    processTabsElementCreation,
+    processAccordionElementCreation,
 } from "./utils";
 
 export {
