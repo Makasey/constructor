@@ -45,5 +45,13 @@ export {
     SpacerComponent,
     SpacerPageElement,
     SpacerPageElementSettings,
+    AccordionPageElement,
+    AccordionPageElementSettings,
+    AccordionElementSettingsGroup,
+    AccordionElementComponent,
+    AccordionElementItemComponent,
+    AccordionElementItemSettingsGroup,
+    AccordionItemPageElement,
+    AccordionItemPageElementSettings,
     defaultBorderTypeControls,
 } from "./edit-area";

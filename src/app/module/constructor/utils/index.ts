@@ -13,9 +13,16 @@ export {
     getInnerSettings,
     getImageSettings,
     getTabsSettings,
-    processedCreatedTabsCount,
     getTabsItemSettings,
     getSpacerElementSettings,
+    getAccordionElementSettings,
+    getAccordionItemElementSettings,
+    processUpdateAccordionElementSettings,
+    processUpdateAccordionItemElementSettings,
+    processUpdateTabsElementSettings,
+    processUpdateTabsItemElementSettings,
+    processTabsElementCreation,
+    processAccordionElementCreation,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

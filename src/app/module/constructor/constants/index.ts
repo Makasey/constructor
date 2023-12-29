@@ -1,4 +1,6 @@
 import {
+    AccordionItemPageElement,
+    AccordionPageElement,
     AlignItems,
     BackgroundType,
     ElementHTMLTag,
@@ -323,6 +325,71 @@ export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "i
     };
 }
 
+export function defaultAccordionElementSettings(): () => Omit<AccordionPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.ACCORDION,
+            children: [],
+            isExtendable: false,
+            settings: {
+                width: {
+                    value: 50,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 10,
+                    unit: StyleUnit.PX,
+                },
+                selectedElement: "",
+                items: [],
+                count: 3,
+            },
+        };
+    };
+}
+
+export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemPageElement, "id" | "parentId"> {
+    let uniqueCounter = 0;
+
+    return () => {
+        uniqueCounter++;
+
+        return {
+            type: SitePageElementType.ACCORDION_ITEM,
+            children: [],
+            isExtendable: false,
+            settings: {
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 50,
+                    unit: StyleUnit.PX,
+                },
+                title: `Асскордин-${uniqueCounter}`,
+                background: { backgroundType: BackgroundType.CLASSIC },
+            },
+        };
+    };
+}
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings(),
     [SitePageElementType.SECTION]: defaultSectionElementSettings(),
@@ -333,6 +400,8 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings(),
     [SitePageElementType.TEXT]: defaultTextElementSettings(),
     [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
+    [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
+    [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
 };
 
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [

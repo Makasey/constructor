@@ -1,0 +1,35 @@
+.lz-accordion-element-item {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #b4b3b3;
+
+    &:last-child {
+        border-bottom: 1px solid #b4b3b3;
+    }
+
+    .header {
+        display: flex;
+        padding: 0 1rem;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 50px;
+        cursor: pointer;
+        border-bottom: 1px solid #b4b3b3;
+        color: #b4b3b3;
+    }
+
+    .toggle-btn {
+        border: none;
+        transition: transform 0.3s ease-in;
+        background: none;
+    }
+
+    .open {
+        transform: rotate(180deg);
+    }
+
+    .body {
+        min-height: 0;
+        width: 100%;
+    }
+}

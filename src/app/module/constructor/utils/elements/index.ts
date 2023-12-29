@@ -14,7 +14,9 @@ export {
 } from "./title-element-controls.utils";
 export { getImageSettings } from "./image";
 export { getInnerSettings } from "./inner";
-export { getTabsSettings, processedCreatedTabsCount } from "./tabs";
-export { getTabsItemSettings } from "./tabs-item";
+export { getTabsSettings, processUpdateTabsElementSettings, processTabsElementCreation } from "./tabs";
+export { getTabsItemSettings, processUpdateTabsItemElementSettings } from "./tabs-item";
 export { getTextSettings } from "./text";
 export { getSpacerElementSettings } from "./spacer";
+export { getAccordionElementSettings, processUpdateAccordionElementSettings, processAccordionElementCreation } from "./accordion";
+export { getAccordionItemElementSettings, processUpdateAccordionItemElementSettings } from "./accordion-item";

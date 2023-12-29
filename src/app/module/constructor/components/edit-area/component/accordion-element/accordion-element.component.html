@@ -1,0 +1,5 @@
+@if (element()) {
+@for (child of element().children; track child) {
+    <ng-container *lzElementResolver="child; parent: element().id"></ng-container>
+  }
+}

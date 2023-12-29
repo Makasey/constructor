@@ -44,6 +44,14 @@ export {
     SpacerElementSettingsGroup,
     SpacerPageElement,
     defaultBorderTypeControls,
+    AccordionElementComponent,
+    AccordionElementSettingsGroup,
+    AccordionPageElementSettings,
+    AccordionPageElement,
+    AccordionElementItemSettingsGroup,
+    AccordionElementItemComponent,
+    AccordionItemPageElementSettings,
+    AccordionItemPageElement,
 } from "./component";
 
 export { sitePageElementMap } from "./types";
