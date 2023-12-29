@@ -197,6 +197,22 @@ export function getSectionElementStyleControl(element: SectionPageElement): APFo
     ];
 }
 
+function getSectionElementBorderControl(element: SectionPageElement): APFormControl {
+    return {
+        id: "border",
+        name: "border",
+        value: element.settings.border,
+        valueTemplateKey: APFormDefaultTemplateKeys.BORDER_FIELD,
+        options: {
+            label: "Border",
+        },
+    };
+}
+
+function getSectionElementBorderControls(element: SectionPageElement): APFormControl[] {
+    return [getSectionElementBorderControl(element)];
+}
+
 export function getSectionSettings(element: SectionPageElement): APFormModel {
     return {
         id: "elementSettings",
@@ -224,6 +240,13 @@ export function getSectionSettings(element: SectionPageElement): APFormModel {
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSectionElementStyleControl(element),
                 headerText: "Настройки стилей",
+            },
+            {
+                id: SectionElementSettingsGroup.BORDER_SETTINGS,
+                name: SectionElementSettingsGroup.BORDER_SETTINGS,
+                upsertConfig: DEFAULT_UPSERT_CONFIG,
+                controls: getSectionElementBorderControls(element),
+                headerText: "Настройки бордера",
             },
         ],
     };

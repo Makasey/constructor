@@ -43,6 +43,7 @@ export {
     SpacerComponent,
     SpacerElementSettingsGroup,
     SpacerPageElement,
+    defaultBorderTypeControls,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

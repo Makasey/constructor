@@ -7,5 +7,6 @@ export {
     columnStructureMap,
     columnStructureIconMap,
     columnStructureCountMap,
+    defaultBorderTypeControls,
 } from "./constants";
 export { SectionComponent } from "./section.component";

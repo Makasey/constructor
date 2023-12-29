@@ -12,3 +12,4 @@ export * from "./radio-group";
 export * from "./image-field";
 export * from "./background-field";
 export * from "./items-control-field";
+export * from "./border-field";

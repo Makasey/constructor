@@ -101,6 +101,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     @ViewChild("backgroundColor", { static: true })
     private backgroundColor: ControlTemplate;
 
+    @ViewChild("borderField", { static: true })
+    private borderField: ControlTemplate;
+
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
         this._templatesMap = {
@@ -144,6 +147,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
             [APFormDefaultTemplateKeys.IMAGE_UPLOAD_FIELD]: this.imageUploadField,
             [APFormDefaultTemplateKeys.ITEMS_CONTROL_FIELD]: this.itemsControlField,
             [APFormDefaultTemplateKeys.BACKGROUND_FIELD]: this.backgroundColor,
+            [APFormDefaultTemplateKeys.BORDER_FIELD]: this.borderField,
         };
 
         this._templatesMap = {

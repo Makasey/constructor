@@ -3,6 +3,7 @@ export {
     SitePageElementType,
     CampaignType,
     Directions,
+    BorderType,
     ElementHTMLTag,
     JustifyContent,
     FlexWrap,
@@ -26,6 +27,7 @@ export {
     CampaignPreviewModel,
     CreatePreviewModel,
     SitePageElementSettingsUnion,
+    SitePageElementBorder,
     SitePageRequestElement,
     TypeKeys,
     RequestElementSettings,
@@ -105,6 +107,8 @@ export {
     processCampaignResponse,
     processCampaignResponseItemSettings,
     getSpacerElementSettings,
+    processBorderValue,
+    processBorderSideData,
 } from "./utils";
 
 export {
@@ -134,6 +138,7 @@ export {
 export {
     defaultSectionTagControls,
     defaultTitleTagControls,
+    defaultBorderTypeControls,
     defaultSectionOpacityStep,
     TitlePageElement,
     SectionPageElement,

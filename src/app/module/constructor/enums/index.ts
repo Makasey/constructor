@@ -96,3 +96,11 @@ export enum Directions {
     BOTTOM = "bottom",
     LEFT = "left",
 }
+
+export enum BorderType {
+    NONE = "none",
+    DOTTED = "dotted",
+    DASHED = "dashed",
+    SOLID = "solid",
+    DOUBLE = "double",
+}

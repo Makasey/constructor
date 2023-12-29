@@ -45,4 +45,5 @@ export {
     SpacerComponent,
     SpacerPageElement,
     SpacerPageElementSettings,
+    defaultBorderTypeControls,
 } from "./edit-area";

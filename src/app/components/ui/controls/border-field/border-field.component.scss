@@ -1,0 +1,35 @@
+lz-border-field {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .select-border-direction {
+      margin-top: 10px;
+    }
+
+    .border-color {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &-select {
+        width: 60%;
+      }
+
+      &-items {
+        width: 100px;
+      }
+    }
+
+    .select-border-type {
+      width: 100%;
+
+      p {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+

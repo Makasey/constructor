@@ -147,6 +147,14 @@
     ></lz-color-picker>
 </ng-template>
 
+<ng-template #borderField let-controlModel="controlModel" let-nativeControl="nativeControl">
+  <lz-border-field
+      [formControl]="nativeControl"
+      [nativeControl]="nativeControl"
+      [controlModel]="controlModel"
+  ></lz-border-field>
+</ng-template>
+
 <ng-template #fileUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-file-upload [formControl]="nativeControl" [nativeControl]="nativeControl" [controlModel]="controlModel" />
 </ng-template>

@@ -1,9 +1,17 @@
-import { ColumnStructure, ColumnStructureElement, ElementHTMLTag } from "@modules/constructor";
+import { BorderType, ColumnStructure, ColumnStructureElement, ElementHTMLTag } from "@modules/constructor";
 
 export const defaultSectionTagControls = [
     { label: ElementHTMLTag.SECTION, value: ElementHTMLTag.SECTION },
     { label: ElementHTMLTag.DIV, value: ElementHTMLTag.DIV },
     { label: ElementHTMLTag.ARTICLE, value: ElementHTMLTag.ARTICLE },
+];
+
+export const defaultBorderTypeControls = [
+    { label: BorderType.NONE, value: BorderType.NONE },
+    { label: BorderType.SOLID, value: BorderType.SOLID },
+    { label: BorderType.DASHED, value: BorderType.DASHED },
+    { label: BorderType.DOTTED, value: BorderType.DOTTED },
+    { label: BorderType.DOUBLE, value: BorderType.DOUBLE },
 ];
 
 export const defaultSectionOpacityStep = 0.01;
