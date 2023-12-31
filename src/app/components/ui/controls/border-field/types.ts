@@ -8,7 +8,7 @@ export type BorderFieldModel = Readonly<{
     borderColor: string;
 }>;
 
-export const defaultBorderData = {
+export const defaultBorderData: BorderFieldModel = {
     borderWidth: {
         ...defaultDirectionValue,
     },
