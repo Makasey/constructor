@@ -1,7 +1,9 @@
-import { APFormModel, BackgroundFieldModel, Direction } from "@components";
+import { APFormModel, BackgroundFieldModel, BorderFieldModel, Direction } from "@components";
 import {
     AccordionItemPageElement,
     AccordionPageElement,
+    BorderType,
+    Directions,
     ElementSettingsWithUnit,
     ImagePageElement,
     InnerPageElement,
@@ -112,4 +114,21 @@ export function processBackgroundValue(settings: BackgroundFieldModel): string {
     const processedPosition = processObjectFitPositionValue(position);
     const processedURL = src ? `${repeat} ${processedPosition} / ${size} url(${src})` : "";
     return `${color} ${processedURL}`;
+}
+
+export function processBorderValue(width: string = "0px", type: BorderType = BorderType.NONE, color: string = "#000000"): string {
+    return `${width} ${type} ${color}`;
+}
+
+export function processBorderSideData(settings: BorderFieldModel, direction: Directions): string {
+    const { borderType } = settings;
+
+    if (borderType !== BorderType.NONE) {
+        const { borderColor, borderWidth } = settings;
+        const width = processSettingValueWithUnit({ value: borderWidth[direction], unit: borderWidth.unit });
+
+        return processBorderValue(width, borderType, borderColor);
+    } else {
+        return processBorderValue();
+    }
 }

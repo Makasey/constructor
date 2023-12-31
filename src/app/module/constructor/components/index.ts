@@ -53,4 +53,5 @@ export {
     AccordionElementItemSettingsGroup,
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
+    defaultBorderTypeControls,
 } from "./edit-area";

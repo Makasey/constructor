@@ -12,6 +12,7 @@ export {
     ColumnStructureElement,
     columnStructureIconMap,
     columnStructureCountMap,
+    defaultBorderTypeControls,
 } from "./section";
 export { InnerComponent, InnerPageElement, InnerItemElementSettingsGroup, InnerPageElementSettings } from "./inner";
 export { ImagePageElement, ImageComponent, ImagePageElementSettings, ImageElementSettingsGroup } from "./image";

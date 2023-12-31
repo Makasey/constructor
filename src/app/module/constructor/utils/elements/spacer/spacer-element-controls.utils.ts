@@ -53,6 +53,22 @@ function getSpacerElementPaddingControl(element: SpacerPageElement): APFormContr
     };
 }
 
+function getSpacerElementBorderControl(element: SpacerPageElement): APFormControl {
+    return {
+        id: "border",
+        name: "border",
+        value: element.settings.border,
+        valueTemplateKey: APFormDefaultTemplateKeys.BORDER_FIELD,
+        options: {
+            label: "Border",
+        },
+    };
+}
+
+function getSpacerElementBorderControls(element: SpacerPageElement): APFormControl[] {
+    return [getSpacerElementBorderControl(element)];
+}
+
 function getSpacerElementSizeControl(element: SpacerPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
@@ -80,6 +96,12 @@ export function getSpacerElementSettings(element: SpacerPageElement): APFormMode
                 name: SpacerElementSettingsGroup.STYLE_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSpacerElementStyleControl(element),
+            },
+            {
+                id: SpacerElementSettingsGroup.BORDER_SETTINGS,
+                name: SpacerElementSettingsGroup.BORDER_SETTINGS,
+                upsertConfig: DEFAULT_UPSERT_CONFIG,
+                controls: getSpacerElementBorderControls(element),
             },
         ],
     };

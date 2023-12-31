@@ -32,6 +32,8 @@ export {
     processObjectFitValue,
     processObjectFitPositionValue,
     processBackgroundValue,
+    processBorderValue,
+    processBorderSideData,
 } from "./element-settings.utils";
 export { deleteElementFromTree, processPossibleElements, duplicateTreeElement } from "./element.utils";
 export { getDefaultSizeSettings } from "./element-size-settings.utils";

@@ -1,8 +1,10 @@
 import {
     AbstractEditorElementSettingsService,
+    Directions,
     ELEMENT_ID,
     SectionPageElementSettings,
     processBackgroundValue,
+    processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
@@ -45,6 +47,26 @@ export class SpacerComponent implements OnInit {
     @HostListener("$.style.background")
     public background$: Observable<string>;
 
+    @HostBinding("$.style.border-radius")
+    @HostListener("$.style.border-radius")
+    public borderRadius$: Observable<string>;
+
+    @HostBinding("$.style.border-left")
+    @HostListener("$.style.border-left")
+    public borderLeft$: Observable<string>;
+
+    @HostBinding("$.style.border-right")
+    @HostListener("$.style.border-right")
+    public borderRight$: Observable<string>;
+
+    @HostBinding("$.style.border-top")
+    @HostListener("$.style.border-top")
+    public borderTop$: Observable<string>;
+
+    @HostBinding("$.style.border-bottom")
+    @HostListener("$.style.border-bottom")
+    public borderBottom$: Observable<string>;
+
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private readonly abstractEditorElementSettingsService = inject(AbstractEditorElementSettingsService);
@@ -63,5 +85,15 @@ export class SpacerComponent implements OnInit {
         this.padding$ = this.spacerSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
 
         this.background$ = this.spacerSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
+
+        this.borderLeft$ = this.spacerSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.LEFT)));
+
+        this.borderRight$ = this.spacerSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.RIGHT)));
+
+        this.borderTop$ = this.spacerSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.TOP)));
+
+        this.borderBottom$ = this.spacerSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.BOTTOM)));
+
+        this.borderRadius$ = this.spacerSettings$.pipe(map(settings => processDirectionValue(settings.border.borderRadius)));
     }
 }

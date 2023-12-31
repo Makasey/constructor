@@ -4,6 +4,7 @@ import {
     AbstractEditorSelectionService,
     AbstractSectionEditorActionsService,
     ColumnStructure,
+    Directions,
     EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     SECTION_PROVIDERS,
@@ -13,6 +14,7 @@ import {
     SitePageElementType,
     columnStructureElements,
     processBackgroundValue,
+    processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
@@ -82,6 +84,26 @@ export class SectionComponent implements OnInit {
     @HostListener("$.style.align-items")
     public alignItems$: Observable<string>;
 
+    @HostBinding("$.style.border-radius")
+    @HostListener("$.style.border-radius")
+    public borderRadius$: Observable<string>;
+
+    @HostBinding("$.style.border-left")
+    @HostListener("$.style.border-left")
+    public borderLeft$: Observable<string>;
+
+    @HostBinding("$.style.border-right")
+    @HostListener("$.style.border-right")
+    public borderRight$: Observable<string>;
+
+    @HostBinding("$.style.border-top")
+    @HostListener("$.style.border-top")
+    public borderTop$: Observable<string>;
+
+    @HostBinding("$.style.border-bottom")
+    @HostListener("$.style.border-bottom")
+    public borderBottom$: Observable<string>;
+
     @HostBinding("class")
     public readonly classes = {
         "editor-element": true,
@@ -136,6 +158,16 @@ export class SectionComponent implements OnInit {
         this.flexWrap$ = this.sectionSettings$.pipe(map(settings => settings.flexWrap));
 
         this.alignItems$ = this.sectionSettings$.pipe(map(settings => settings.alignItems));
+
+        this.borderLeft$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.LEFT)));
+
+        this.borderRight$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.RIGHT)));
+
+        this.borderTop$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.TOP)));
+
+        this.borderBottom$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.BOTTOM)));
+
+        this.borderRadius$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.border.borderRadius)));
     }
 
     public addElement(type: SitePageElementType): void {

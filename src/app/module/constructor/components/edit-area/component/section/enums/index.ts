@@ -8,4 +8,5 @@ export enum SectionElementSettingsGroup {
     SIZE_SETTINGS = "sizeSettings",
     TEXT_SETTINGS = "textSettings",
     STYLE_SETTINGS = "styleSettings",
+    BORDER_SETTINGS = "borderSettings",
 }

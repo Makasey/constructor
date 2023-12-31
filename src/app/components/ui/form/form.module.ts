@@ -8,6 +8,7 @@ import {
     APNumberFieldModule,
     APTextFieldModule,
     BackgroundFieldComponent,
+    BorderFieldComponent,
     DirectionFieldComponent,
     ItemsControlFieldComponent,
     LZColorPickerComponent,
@@ -27,6 +28,7 @@ const AP_MODULES = [APTextFieldModule, APNumberFieldModule, APDropdownFieldModul
     imports: [
         ...AP_MODULES,
         BackgroundFieldComponent,
+        BorderFieldComponent,
         CommonModule,
         DirectionFieldComponent,
         ItemsControlFieldComponent,

@@ -6,6 +6,7 @@ import {
     JustifyContent,
     SitePageElement,
     SitePageElementBackground,
+    SitePageElementBorder,
     SitePageElementSizeSettings,
     SitePageElementTextColor,
 } from "@modules/constructor";
@@ -28,7 +29,8 @@ export type SectionPageElementSettings = Readonly<
         alignItems: AlignItems;
     } & SitePageElementSizeSettings &
         SitePageElementTextColor &
-        SitePageElementBackground
+        SitePageElementBackground &
+        SitePageElementBorder
 >;
 
 export type ColumnStructureElement = Readonly<{

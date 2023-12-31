@@ -19,6 +19,7 @@ export enum APFormDefaultTemplateKeys {
     IMAGE_UPLOAD_FIELD = "imageUploadField",
     ITEMS_CONTROL_FIELD = "itemsControlField",
     BACKGROUND_FIELD = "backgroundColor",
+    BORDER_FIELD = "borderField",
 }
 
 export type APFormModel = {

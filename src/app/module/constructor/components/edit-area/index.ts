@@ -43,6 +43,7 @@ export {
     SpacerComponent,
     SpacerElementSettingsGroup,
     SpacerPageElement,
+    defaultBorderTypeControls,
     AccordionElementComponent,
     AccordionElementSettingsGroup,
     AccordionPageElementSettings,

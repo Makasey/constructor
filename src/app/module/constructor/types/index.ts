@@ -19,7 +19,7 @@ import {
     TitlePageElement,
     TitlePageElementSettings,
 } from "@modules/constructor";
-import { BackgroundFieldModel } from "@components/ui";
+import { BackgroundFieldModel, BorderFieldModel } from "@components/ui";
 import { File } from "@shared-types";
 import { Page } from "@core";
 import { ViewContainerRef } from "@angular/core";
@@ -79,6 +79,10 @@ export type SitePageElementTextColor = Readonly<{
 
 export type SitePageElementBackground = Readonly<{
     background: BackgroundFieldModel;
+}>;
+
+export type SitePageElementBorder = Readonly<{
+    border: BorderFieldModel;
 }>;
 
 export type SitePageElementSettings = Readonly<

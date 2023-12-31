@@ -32,7 +32,7 @@ import {
 import { InjectionToken } from "@angular/core";
 import { SelectItem } from "@shared-types";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
-import { defaultDirectionValue } from "@components";
+import { defaultBorderData, defaultDirectionValue } from "@components";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 200,
@@ -85,6 +85,9 @@ export function defaultSectionElementSettings(): () => Omit<SectionPageElement, 
                 letterSpacing: {
                     value: 0,
                     unit: StyleUnit.PX,
+                },
+                border: {
+                    ...defaultBorderData,
                 },
                 opacity: 1,
                 tag: ElementHTMLTag.SECTION,
@@ -313,6 +316,9 @@ export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "i
                     value: 50,
                     unit: StyleUnit.PX,
                 },
+                border: {
+                    ...defaultBorderData,
+                },
                 background: { backgroundType: BackgroundType.CLASSIC },
             },
         };
@@ -461,6 +467,7 @@ export const sectionPageElementSettingsStylesKeys: TypeKeys<SectionPageElementSe
     "margin",
     "padding",
     "opacity",
+    "border",
 ];
 
 export const innerPageElementSettingsStyleKeys: TypeKeys<InnerPageElementSettings> = [
