@@ -3,6 +3,7 @@ import {
     AccordionPageElement,
     AlignItems,
     BackgroundType,
+    BorderType,
     ElementHTMLTag,
     FlexWrap,
     ImagePageElement,
@@ -29,10 +30,10 @@ import {
     TitlePageElementSettings,
     TypeKeys,
 } from "@modules/constructor";
+import { BorderFieldModel, defaultBorderData, defaultDirectionValue } from "@components";
 import { InjectionToken } from "@angular/core";
 import { SelectItem } from "@shared-types";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
-import { defaultBorderData, defaultDirectionValue } from "@components";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
     debounceTime: 200,
@@ -55,6 +56,22 @@ export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.VH]: StyleUnit.VH,
     [StyleUnit.VW]: StyleUnit.VW,
     [StyleUnit.REM]: StyleUnit.REM,
+};
+
+export const defaultSpacerElementBorderSettings: BorderFieldModel = {
+    borderWidth: {
+        top: 1,
+        bottom: 1,
+        left: 1,
+        right: 1,
+        unit: StyleUnit.PX,
+    },
+
+    borderRadius: {
+        ...defaultDirectionValue,
+    },
+    borderColor: "#000000",
+    borderType: BorderType.SOLID,
 };
 
 export function defaultSectionElementSettings(): () => Omit<SectionPageElement, "id" | "parentId"> {
@@ -317,7 +334,7 @@ export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "i
                     unit: StyleUnit.PX,
                 },
                 border: {
-                    ...defaultBorderData,
+                    ...defaultSpacerElementBorderSettings,
                 },
                 background: { backgroundType: BackgroundType.CLASSIC },
             },
