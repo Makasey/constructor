@@ -1,6 +1,7 @@
 import {
     AccordionElementComponent,
     AccordionElementItemComponent,
+    DividerComponent,
     ImageComponent,
     InnerComponent,
     RootComponent,
@@ -26,4 +27,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.SPACER]: SpacerComponent,
     [SitePageElementType.ACCORDION]: AccordionElementComponent,
     [SitePageElementType.ACCORDION_ITEM]: AccordionElementItemComponent,
+    [SitePageElementType.DIVIDER]: DividerComponent,
 };

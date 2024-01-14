@@ -4,6 +4,7 @@ import {
     AccordionPageElement,
     BorderType,
     Directions,
+    DividerPageElement,
     ElementSettingsWithUnit,
     ImagePageElement,
     InnerPageElement,
@@ -20,6 +21,7 @@ import {
     TitlePageElement,
     getAccordionElementSettings,
     getAccordionItemElementSettings,
+    getDividerElementSettings,
     getImageSettings,
     getInnerSettings,
     getSectionSettings,
@@ -77,6 +79,10 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
 
         case SitePageElementType.ACCORDION_ITEM: {
             return getAccordionItemElementSettings(element as AccordionItemPageElement);
+        }
+
+        case SitePageElementType.DIVIDER: {
+            return getDividerElementSettings(element as DividerPageElement);
         }
 
         default: {

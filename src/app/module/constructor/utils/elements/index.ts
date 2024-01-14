@@ -20,3 +20,4 @@ export { getTextSettings } from "./text";
 export { getSpacerElementSettings } from "./spacer";
 export { getAccordionElementSettings, processUpdateAccordionElementSettings, processAccordionElementCreation } from "./accordion";
 export { getAccordionItemElementSettings, processUpdateAccordionItemElementSettings } from "./accordion-item";
+export { getDividerElementSettings } from "./divider";

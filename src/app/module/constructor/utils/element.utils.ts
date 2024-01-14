@@ -120,6 +120,11 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     type: SitePageElementType.ACCORDION,
                     icon: "bx-list-check",
                 },
+                {
+                    title: "Девайдер",
+                    type: SitePageElementType.DIVIDER,
+                    icon: "bx-expand-vertical",
+                },
             ];
         }
 
@@ -168,6 +173,11 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     type: SitePageElementType.ACCORDION,
                     icon: "bx-list-check",
                 },
+                {
+                    title: "Девайдер",
+                    type: SitePageElementType.DIVIDER,
+                    icon: "bx-expand-vertical",
+                },
             ];
         }
 
@@ -207,6 +217,11 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
                     title: "Ассордион",
                     type: SitePageElementType.ACCORDION,
                     icon: "bx-list-check",
+                },
+                {
+                    title: "Девайдер",
+                    type: SitePageElementType.DIVIDER,
+                    icon: "bx-expand-vertical",
                 },
             ];
         }

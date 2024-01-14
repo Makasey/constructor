@@ -23,6 +23,7 @@ export {
     processUpdateTabsItemElementSettings,
     processTabsElementCreation,
     processAccordionElementCreation,
+    getDividerElementSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

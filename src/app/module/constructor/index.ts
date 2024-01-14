@@ -116,6 +116,7 @@ export {
     processUpdateTabsItemElementSettings,
     processTabsElementCreation,
     processAccordionElementCreation,
+    getDividerElementSettings,
 } from "./utils";
 
 export {
@@ -198,6 +199,10 @@ export {
     AccordionElementItemSettingsGroup,
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
+    DividerPageElementSettings,
+    DividerElementSettingsGroup,
+    DividerPageElement,
+    DividerComponent,
 } from "./components";
 
 export {

@@ -4,6 +4,7 @@ import {
     AlignItems,
     BackgroundType,
     BorderType,
+    DividerPageElement,
     ElementHTMLTag,
     FlexWrap,
     ImagePageElement,
@@ -407,6 +408,37 @@ export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemP
     };
 }
 
+export function defaultDividerElementSettings(): () => Omit<DividerPageElement, "id" | "parentId"> {
+    return () => {
+        return {
+            type: SitePageElementType.DIVIDER,
+            children: [],
+            isExtendable: false,
+            settings: {
+                text: "",
+                margin: {
+                    ...defaultDirectionValue,
+                },
+                padding: {
+                    ...defaultDirectionValue,
+                },
+                width: {
+                    value: 100,
+                    unit: StyleUnit.PERCENT,
+                },
+                height: {
+                    value: 50,
+                    unit: StyleUnit.PX,
+                },
+                border: {
+                    ...defaultSpacerElementBorderSettings,
+                },
+                background: { backgroundType: BackgroundType.CLASSIC },
+            },
+        };
+    };
+}
+
 export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
     [SitePageElementType.TITLE]: defaultTitleElementSettings(),
     [SitePageElementType.SECTION]: defaultSectionElementSettings(),
@@ -419,6 +451,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
     [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
     [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
+    [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
 };
 
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [

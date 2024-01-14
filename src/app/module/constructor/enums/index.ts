@@ -73,6 +73,7 @@ export enum SitePageElementType {
     SPACER = "spacer",
     ACCORDION = "accordion",
     ACCORDION_ITEM = "accordion-item",
+    DIVIDER = "divider",
 }
 
 export enum ElementHTMLTag {

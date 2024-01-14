@@ -40,3 +40,4 @@ export {
     AccordionItemPageElementSettings,
     AccordionElementItemComponent,
 } from "./accordion-element";
+export { DividerComponent, DividerElementSettingsGroup, DividerPageElementSettings, DividerPageElement } from "./divider";

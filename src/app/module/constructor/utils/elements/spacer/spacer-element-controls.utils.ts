@@ -96,12 +96,14 @@ export function getSpacerElementSettings(element: SpacerPageElement): APFormMode
                 name: SpacerElementSettingsGroup.STYLE_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSpacerElementStyleControl(element),
+                headerText: "Настройки стиля",
             },
             {
                 id: SpacerElementSettingsGroup.BORDER_SETTINGS,
                 name: SpacerElementSettingsGroup.BORDER_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getSpacerElementBorderControls(element),
+                headerText: "Настройка бордера",
             },
         ],
     };

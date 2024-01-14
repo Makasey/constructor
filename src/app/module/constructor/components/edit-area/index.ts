@@ -52,6 +52,10 @@ export {
     AccordionElementItemComponent,
     AccordionItemPageElementSettings,
     AccordionItemPageElement,
+    DividerPageElement,
+    DividerPageElementSettings,
+    DividerElementSettingsGroup,
+    DividerComponent,
 } from "./component";
 
 export { sitePageElementMap } from "./types";

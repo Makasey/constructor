@@ -54,4 +54,8 @@ export {
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
     defaultBorderTypeControls,
+    DividerElementSettingsGroup,
+    DividerComponent,
+    DividerPageElement,
+    DividerPageElementSettings,
 } from "./edit-area";
