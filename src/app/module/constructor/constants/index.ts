@@ -415,7 +415,9 @@ export function defaultDividerElementSettings(): () => Omit<DividerPageElement, 
             children: [],
             isExtendable: false,
             settings: {
-                text: "",
+                text: "Divider",
+                alignItems: AlignItems.START,
+                lineBorderType: BorderType.SOLID,
                 margin: {
                     ...defaultDirectionValue,
                 },

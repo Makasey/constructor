@@ -1,5 +1,5 @@
 .lz-inner-element {
     display: flex;
-
+    flex-direction: column;
     --selected-element-color: red;
 }

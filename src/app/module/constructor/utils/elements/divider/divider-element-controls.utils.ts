@@ -3,6 +3,8 @@ import {
     DEFAULT_UPSERT_CONFIG,
     DividerElementSettingsGroup,
     DividerPageElement,
+    defaultAlignItemsItems,
+    defaultBorderTypeControls,
     defaultSizeControlUnit,
     getDefaultSizeSettings,
 } from "@modules/constructor";
@@ -15,6 +17,19 @@ function getDividerElementBackgroundControl(element: DividerPageElement): APForm
         valueTemplateKey: APFormDefaultTemplateKeys.BACKGROUND_FIELD,
         options: {
             label: "Цвет бэкграунда",
+        },
+    };
+}
+
+function getDividerElementTextControl(element: DividerPageElement): APFormControl {
+    return {
+        id: "text",
+        name: "text",
+        value: element.settings.text ?? null,
+        valueTemplateKey: APFormDefaultTemplateKeys.TEXTAREA_FIELD,
+        options: {
+            maxLength: 300,
+            label: "Текст элемента",
         },
     };
 }
@@ -32,6 +47,34 @@ function getDividerElementMarginControl(element: DividerPageElement): APFormCont
             min: -1000,
             items: defaultSizeControlUnit,
             label: "Margin",
+        },
+    };
+}
+
+function getDividerBorderControl(element: DividerPageElement): APFormControl {
+    return {
+        id: "tag",
+        name: "tag",
+        value: element.settings.lineBorderType,
+        valueTemplateKey: APFormDefaultTemplateKeys.DROPDOWN_FIELD,
+        options: {
+            selectLabelKey: "label",
+            selectValueKey: "value",
+            items: defaultBorderTypeControls,
+            label: "Тип линии",
+        },
+    };
+}
+
+function getDividerAlignItemsControl(element: DividerPageElement): APFormControl {
+    return {
+        id: "alignItems",
+        name: "alignItems",
+        value: element.settings.alignItems,
+        valueTemplateKey: APFormDefaultTemplateKeys.RADIO_GROUP_FIELD,
+        options: {
+            label: "align-items",
+            items: defaultAlignItemsItems,
         },
     };
 }
@@ -65,6 +108,10 @@ function getDividerElementBorderControl(element: DividerPageElement): APFormCont
     };
 }
 
+function getDividerLineSettings(element: DividerPageElement): APFormControl[] {
+    return [getDividerElementTextControl(element), getDividerBorderControl(element), getDividerAlignItemsControl(element)];
+}
+
 function getDividerElementSizeControls(element: DividerPageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element), getDividerElementPaddingControl(element), getDividerElementMarginControl(element)];
 }
@@ -84,6 +131,13 @@ export function getDividerElementSettings(element: DividerPageElement): APFormMo
         upsertConfig: DEFAULT_UPSERT_CONFIG,
         controls: [],
         innerGroups: [
+            {
+                id: DividerElementSettingsGroup.LINE_SETTINGS,
+                name: DividerElementSettingsGroup.LINE_SETTINGS,
+                upsertConfig: DEFAULT_UPSERT_CONFIG,
+                controls: getDividerLineSettings(element),
+                headerText: "Настройки линии",
+            },
             {
                 id: DividerElementSettingsGroup.SIZE_SETTINGS,
                 name: DividerElementSettingsGroup.SIZE_SETTINGS,

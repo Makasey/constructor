@@ -2,7 +2,7 @@ import {
     AbstractEditorElementSettingsService,
     Directions,
     ELEMENT_ID,
-    SectionPageElementSettings,
+    SpacerPageElementSettings,
     processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
@@ -71,7 +71,7 @@ export class SpacerComponent implements OnInit {
 
     private readonly abstractEditorElementSettingsService = inject(AbstractEditorElementSettingsService);
 
-    private readonly spacerSettings$: Observable<SectionPageElementSettings> = this.abstractEditorElementSettingsService.selectSettings(
+    private readonly spacerSettings$: Observable<SpacerPageElementSettings> = this.abstractEditorElementSettingsService.selectSettings(
         this.ELEMENT_ID,
     );
 
