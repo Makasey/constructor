@@ -9,7 +9,6 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -18,7 +17,6 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     templateUrl: "./spacer.component.html",
     styleUrl: "./spacer.component.scss",
     standalone: true,
-    imports: [CommonModule],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

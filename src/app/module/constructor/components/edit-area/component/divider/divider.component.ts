@@ -9,8 +9,8 @@ import {
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -22,7 +22,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [CommonModule],
+    imports: [AsyncPipe],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")
