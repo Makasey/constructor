@@ -60,7 +60,7 @@ function getBackgroundColorControl(element: TitlePageElement): APFormControl {
     };
 }
 
-export function getLinkElementControl(element: TitlePageElement): APFormControl {
+function getLinkElementControl(element: TitlePageElement): APFormControl {
     return {
         id: "link",
         name: "link",
@@ -74,15 +74,15 @@ export function getLinkElementControl(element: TitlePageElement): APFormControl 
     };
 }
 
-export function getTitleElementSizeControls(element: TitlePageElement): APFormControl[] {
+function getTitleElementSizeControls(element: TitlePageElement): APFormControl[] {
     return [...getDefaultSizeSettings(element)];
 }
 
-export function getTitleElementTextControl(element: TitlePageElement): APFormControl[] {
+function getTitleElementTextControl(element: TitlePageElement): APFormControl[] {
     return [getTitleTextControl(element), getTitleHTMLTagControl(element), getTitleColorControl(element), getLinkElementControl(element)];
 }
 
-export function getTitleElementStyleControl(element: TitlePageElement): APFormControl[] {
+function getTitleElementStyleControl(element: TitlePageElement): APFormControl[] {
     return [getBackgroundColorControl(element)];
 }
 

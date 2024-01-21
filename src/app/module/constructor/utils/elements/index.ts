@@ -4,20 +4,21 @@ export {
     getSectionElementSizeControls,
     getSectionElementTextControl,
     processStructureType,
+    defaultSectionElementSettings,
 } from "./section";
+export { getTitleSettings, defaultTitleElementSettings } from "./title";
+export { getImageSettings, defaultImageElementSettings } from "./image";
+export { getInnerSettings, defaultInnerElementSettings } from "./inner";
+export { getTabsSettings, processUpdateTabsElementSettings, processTabsElementCreation, defaultTabsElementSettings } from "./tabs";
+export { getTabsItemSettings, processUpdateTabsItemElementSettings, defaultTabsItemElementSettings } from "./tabs-item";
+export { getTextSettings, defaultTextElementSettings } from "./text";
+export { getSpacerElementSettings, defaultSpacerElementSettings } from "./spacer";
 export {
-    getTitleSettings,
-    getTitleElementSizeControls,
-    getLinkElementControl,
-    getTitleElementStyleControl,
-    getTitleElementTextControl,
-} from "./title-element-controls.utils";
-export { getImageSettings } from "./image";
-export { getInnerSettings } from "./inner";
-export { getTabsSettings, processUpdateTabsElementSettings, processTabsElementCreation } from "./tabs";
-export { getTabsItemSettings, processUpdateTabsItemElementSettings } from "./tabs-item";
-export { getTextSettings } from "./text";
-export { getSpacerElementSettings } from "./spacer";
-export { getAccordionElementSettings, processUpdateAccordionElementSettings, processAccordionElementCreation } from "./accordion";
-export { getAccordionItemElementSettings, processUpdateAccordionItemElementSettings } from "./accordion-item";
-export { getDividerElementSettings } from "./divider";
+    getAccordionElementSettings,
+    processUpdateAccordionElementSettings,
+    processAccordionElementCreation,
+    defaultAccordionElementSettings,
+} from "./accordion";
+export { getAccordionItemElementSettings, processUpdateAccordionItemElementSettings, defaultAccordionItemElementSettings } from "./accordion-item";
+export { getDividerElementSettings, defaultDividerElementSettings } from "./divider";
+export { defaultPageElementSettings } from "./page";

@@ -5,3 +5,4 @@ export {
     getSectionElementStyleControl,
     getSectionElementTextControl,
 } from "./section-element-controls.utils";
+export { defaultSectionElementSettings } from "./default-section-element-settings.utils";

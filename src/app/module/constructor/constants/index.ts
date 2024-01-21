@@ -1,37 +1,36 @@
 import {
-    AccordionItemPageElement,
-    AccordionPageElement,
     AlignItems,
     BackgroundType,
     BorderType,
-    DividerPageElement,
-    ElementHTMLTag,
     FlexWrap,
-    ImagePageElement,
     ImagePageElementSettings,
-    InnerPageElement,
     InnerPageElementSettings,
     JustifyContent,
     ObjectFit,
     ObjectFitPosition,
-    SectionPageElement,
     SectionPageElementSettings,
-    SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
-    SpacerPageElement,
     StyleUnit,
-    TabsItemPageElement,
     TabsItemPageElementSettings,
-    TabsPageElement,
     TabsPageElementSettings,
-    TextPageElement,
     TextPageElementSettings,
-    TitlePageElement,
     TitlePageElementSettings,
     TypeKeys,
+    defaultAccordionElementSettings,
+    defaultAccordionItemElementSettings,
+    defaultDividerElementSettings,
+    defaultImageElementSettings,
+    defaultInnerElementSettings,
+    defaultPageElementSettings,
+    defaultSectionElementSettings,
+    defaultSpacerElementSettings,
+    defaultTabsElementSettings,
+    defaultTabsItemElementSettings,
+    defaultTextElementSettings,
+    defaultTitleElementSettings,
 } from "@modules/constructor";
-import { BorderFieldModel, defaultBorderData, defaultDirectionValue } from "@components";
+import { BorderFieldModel, defaultDirectionValue } from "@components";
 import { InjectionToken } from "@angular/core";
 import { SelectItem } from "@shared-types";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
@@ -41,6 +40,8 @@ export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
 };
 
 export const ROOT_ELEMENT_ID = "rootID";
+
+export const defaultRequestElementSettingsKey = "default";
 
 export const ELEMENT_ID = new InjectionToken<string>("ELEMENT_ID", {
     factory: () => {
@@ -73,387 +74,6 @@ export const defaultSpacerElementBorderSettings: BorderFieldModel = {
     },
     borderColor: "#000000",
     borderType: BorderType.SOLID,
-};
-
-export function defaultSectionElementSettings(): () => Omit<SectionPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.SECTION,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 200,
-                    unit: StyleUnit.PX,
-                },
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    ...defaultDirectionValue,
-                },
-                gap: {
-                    value: 10,
-                    unit: StyleUnit.PX,
-                },
-                letterSpacing: {
-                    value: 0,
-                    unit: StyleUnit.PX,
-                },
-                border: {
-                    ...defaultBorderData,
-                },
-                opacity: 1,
-                tag: ElementHTMLTag.SECTION,
-                color: "#1b1c2d",
-                background: { backgroundType: BackgroundType.CLASSIC },
-                isInit: false,
-                justifyContent: JustifyContent.START,
-                flexWrap: FlexWrap.WRAP,
-                alignItems: AlignItems.START,
-            },
-        };
-    };
-}
-
-export function defaultTitleElementSettings(): () => Omit<TitlePageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.TITLE,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 20,
-                    unit: StyleUnit.PX,
-                },
-                tag: ElementHTMLTag.H1,
-                color: "#000000",
-                background: { backgroundType: BackgroundType.CLASSIC },
-                text: "Hello World",
-                link: "",
-            },
-        };
-    };
-}
-
-export function defaultTextElementSettings(): () => Omit<TextPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.TEXT,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 16,
-                    unit: StyleUnit.PX,
-                },
-                color: "#000000",
-                background: { backgroundType: BackgroundType.CLASSIC },
-                text: "Hello World",
-            },
-        };
-    };
-}
-
-export function defaultPageElementSettings(): () => Omit<SitePageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.PAGE,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-            },
-        };
-    };
-}
-
-export function defaultInnerElementSettings(): () => Omit<InnerPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.INNER,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 100,
-                    unit: StyleUnit.PX,
-                },
-                gap: {
-                    value: 0,
-                    unit: StyleUnit.PX,
-                },
-                letterSpacing: {
-                    value: 0,
-                    unit: StyleUnit.PX,
-                },
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    ...defaultDirectionValue,
-                },
-                opacity: 1,
-                color: "#000000",
-                background: { backgroundType: BackgroundType.CLASSIC },
-                justifyContent: JustifyContent.START,
-                tag: ElementHTMLTag.ARTICLE,
-            },
-        };
-    };
-}
-
-export function defaultImageElementSettings(): () => Omit<ImagePageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.IMAGE,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                image: {
-                    alt: "",
-
-                    title: "",
-                    src: "/assets/icons/placeholder/image.png",
-                },
-                maxWidth: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                objectFit: ObjectFit.DEFAULT,
-                objectPosition: ObjectFitPosition.CENTER_CENTER,
-            },
-        };
-    };
-}
-
-export function defaultTabsElementSettings(): () => Omit<TabsPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.TABS,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                selectedElement: "",
-                items: [],
-                height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                count: 2,
-            },
-        };
-    };
-}
-
-export function defaultTabsItemElementSettings(): () => Omit<TabsItemPageElement, "id" | "parentId"> {
-    let uniqueCounter = 0;
-
-    return () => {
-        uniqueCounter++;
-
-        return {
-            type: SitePageElementType.TABS_ITEM,
-            children: [],
-            isExtendable: false,
-            settings: {
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    ...defaultDirectionValue,
-                },
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                title: `Таб-${uniqueCounter}`,
-                height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-            },
-        };
-    };
-}
-
-export function defaultSpacerElementSettings(): () => Omit<SpacerPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.SPACER,
-            children: [],
-            isExtendable: false,
-            settings: {
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    ...defaultDirectionValue,
-                },
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 50,
-                    unit: StyleUnit.PX,
-                },
-                border: {
-                    ...defaultSpacerElementBorderSettings,
-                },
-                background: { backgroundType: BackgroundType.CLASSIC },
-            },
-        };
-    };
-}
-
-export function defaultAccordionElementSettings(): () => Omit<AccordionPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.ACCORDION,
-            children: [],
-            isExtendable: false,
-            settings: {
-                width: {
-                    value: 50,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    top: 10,
-                    bottom: 10,
-                    left: 10,
-                    right: 10,
-                    unit: StyleUnit.PX,
-                },
-                selectedElement: "",
-                items: [],
-                count: 3,
-            },
-        };
-    };
-}
-
-export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemPageElement, "id" | "parentId"> {
-    let uniqueCounter = 0;
-
-    return () => {
-        uniqueCounter++;
-
-        return {
-            type: SitePageElementType.ACCORDION_ITEM,
-            children: [],
-            isExtendable: false,
-            settings: {
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    ...defaultDirectionValue,
-                },
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 50,
-                    unit: StyleUnit.PX,
-                },
-                title: `Асскордин-${uniqueCounter}`,
-                background: { backgroundType: BackgroundType.CLASSIC },
-            },
-        };
-    };
-}
-
-export function defaultDividerElementSettings(): () => Omit<DividerPageElement, "id" | "parentId"> {
-    return () => {
-        return {
-            type: SitePageElementType.DIVIDER,
-            children: [],
-            isExtendable: false,
-            settings: {
-                text: "Divider",
-                alignItems: AlignItems.START,
-                lineBorderType: BorderType.SOLID,
-                margin: {
-                    ...defaultDirectionValue,
-                },
-                padding: {
-                    ...defaultDirectionValue,
-                },
-                width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
-                },
-                height: {
-                    value: 50,
-                    unit: StyleUnit.PX,
-                },
-                border: {
-                    ...defaultSpacerElementBorderSettings,
-                },
-                background: { backgroundType: BackgroundType.CLASSIC },
-            },
-        };
-    };
-}
-
-export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
-    [SitePageElementType.TITLE]: defaultTitleElementSettings(),
-    [SitePageElementType.SECTION]: defaultSectionElementSettings(),
-    [SitePageElementType.PAGE]: defaultPageElementSettings(),
-    [SitePageElementType.INNER]: defaultInnerElementSettings(),
-    [SitePageElementType.IMAGE]: defaultImageElementSettings(),
-    [SitePageElementType.TABS]: defaultTabsElementSettings(),
-    [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings(),
-    [SitePageElementType.TEXT]: defaultTextElementSettings(),
-    [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
-    [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
-    [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
-    [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
 };
 
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [
@@ -637,4 +257,17 @@ export const defaultObjectFitPositionItems: SelectItem<ObjectFitPosition>[] = [
     },
 ];
 
-export const defaultRequestElementSettingsKey = "default";
+export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Omit<SitePageElementUnion, "id" | "parentId">> = {
+    [SitePageElementType.TITLE]: defaultTitleElementSettings(),
+    [SitePageElementType.SECTION]: defaultSectionElementSettings(),
+    [SitePageElementType.PAGE]: defaultPageElementSettings(),
+    [SitePageElementType.INNER]: defaultInnerElementSettings(),
+    [SitePageElementType.IMAGE]: defaultImageElementSettings(),
+    [SitePageElementType.TABS]: defaultTabsElementSettings(),
+    [SitePageElementType.TABS_ITEM]: defaultTabsItemElementSettings(),
+    [SitePageElementType.TEXT]: defaultTextElementSettings(),
+    [SitePageElementType.SPACER]: defaultSpacerElementSettings(),
+    [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
+    [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
+    [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
+};
