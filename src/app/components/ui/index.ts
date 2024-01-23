@@ -30,3 +30,6 @@ export * from "./accordion";
 
 // Loader component
 export * from "./loader";
+
+// Elements-bar component
+export * from "./elements-bar";
