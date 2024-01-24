@@ -1,5 +1,10 @@
 @for (item of items; track item) {
-    <div class="elements-bar-item"></div>
+    <div class="elements-bar-item"
+        >{{ item }}
+        <div class="item-actions">
+            <button class="item-action"></button>
+        </div>
+    </div>
 }
 <div class="actions">
     <button class="action">add page</button>
