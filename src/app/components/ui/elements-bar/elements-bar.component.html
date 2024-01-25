@@ -1,11 +1,12 @@
 @for (item of items; track item) {
     <div class="elements-bar-item"
         >{{ item }}
-        <div class="item-actions">
-            <button class="item-action"></button>
+        <div class="actions">
+            <button class="actions-btn eicon-close" (click.stop)="delete(item)"></button>
+            <button class="actions-btn eicon-copy" (click.stop)="copy(item)"></button>
         </div>
     </div>
 }
-<div class="actions">
-    <button class="action">add page</button>
+<div class="action">
+    <button class="action-btn" (click.stop)="add()">add page</button>
 </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
 
 @Component({
     selector: "lz-elements-bar",
@@ -13,5 +13,27 @@ export class ElementsBarComponent {
     @HostBinding("class.elements-bar")
     public hostClass = true;
 
-    @Input() public items: unknown[] = [1, 2, 3];
+    @Input()
+    public items = ["Page-1", "Page-2", "Page-3"];
+
+    @Output()
+    public readonly addItem: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
+    public readonly copyItem: EventEmitter<string> = new EventEmitter<string>();
+
+    @Output()
+    public readonly deleteItem: EventEmitter<string> = new EventEmitter<string>();
+
+    public add(): void {
+        this.addItem.emit();
+    }
+
+    public copy(id: string): void {
+        this.copyItem.emit(id);
+    }
+
+    public delete(id: string): void {
+        this.deleteItem.emit(id);
+    }
 }

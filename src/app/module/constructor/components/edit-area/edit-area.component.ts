@@ -17,4 +17,16 @@ export class EditAreaComponent {
     public hostClass = true;
 
     public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
+    public addPage(): void {
+        return;
+    }
+
+    public copyPage(event: string): void {
+        return;
+    }
+
+    public deletePage(event: string): void {
+        return;
+    }
 }
