@@ -1,6 +1,6 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "@components";
 import { AbstractEditorOperationService, PageSettings } from "@modules/constructor";
-import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
@@ -112,6 +112,80 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
             return {
                 pages: updatedPages,
             };
+        });
+    }
+
+    public addPage(): void {
+        this.service.updateState(() => {
+            const pages: Page[] = this.getStoreElement("pages");
+
+            const newPage: Page = {
+                id: getRandomId(),
+                settings: {
+                    title: "My best page",
+                    logotype: null,
+                    siteDescription: "My best page",
+                    siteMetaTags: "",
+                },
+                children: [],
+            };
+            const newPageId = newPage.id;
+
+            return {
+                pages: [...pages, newPage],
+                selectedPage: newPageId,
+            };
+        });
+    }
+
+    public deletePageById(id: string): void {
+        this.service.updateState(() => {
+            const pages: Page[] = this.getStoreElement("pages");
+
+            if (pages.length > 1) {
+                const updatePages: Page[] = pages.filter(page => page.id !== id);
+
+                const selectedPageId = updatePages[0].id;
+
+                return {
+                    pages: updatePages,
+                    selectedPage: selectedPageId,
+                };
+            }
+
+            return;
+        });
+    }
+
+    public copyPageById(id: string): void {
+        this.service.updateState(() => {
+            const pages: Page[] = this.getStoreElement("pages");
+
+            const page: Page = pages.find(page => page.id === id)!;
+
+            const pageCopy: Page = {
+                ...page,
+                id: getRandomId(),
+                settings: {
+                    ...page?.settings,
+                    title: page?.settings.title + " копия",
+                },
+            };
+
+            const pageCopyId = pageCopy.id;
+
+            const updatePages = [...pages, pageCopy];
+
+            return {
+                pages: updatePages,
+                selectedPage: pageCopyId,
+            };
+        });
+    }
+
+    public getPages(): Observable<Page[]> {
+        return this.query.select(state => {
+            return state.pages;
         });
     }
 

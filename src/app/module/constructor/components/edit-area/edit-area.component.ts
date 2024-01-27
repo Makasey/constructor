@@ -1,7 +1,9 @@
+import { AbstractEditorPageSettingsService, EDITOR_SELECTED_ELEMENT, RootComponent } from "@modules/constructor";
 import { AsyncPipe, JsonPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT, RootComponent } from "@modules/constructor";
+import { ChangeDetectionStrategy, Component, HostBinding, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { ElementsBarComponent } from "@components";
+import { Page } from "@core";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-edit-area",
@@ -18,15 +20,19 @@ export class EditAreaComponent {
 
     public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
+    private readonly service = inject(AbstractEditorPageSettingsService);
+
+    public pages: Signal<Page[]> = toSignal(this.service.getPages(), { initialValue: [] });
+
     public addPage(): void {
-        return;
+        this.service.addPage();
     }
 
-    public copyPage(event: string): void {
-        return;
+    public copyPage(id: string): void {
+        this.service.copyPageById(id);
     }
 
-    public deletePage(event: string): void {
-        return;
+    public deletePage(id: string): void {
+        this.service.deletePageById(id);
     }
 }

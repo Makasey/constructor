@@ -1,9 +1,9 @@
 @for (item of items; track item) {
     <div class="elements-bar-item"
-        >{{ item }}
+        >{{ item.settings.title }}
         <div class="actions">
-            <button class="actions-btn eicon-close" (click.stop)="delete(item)"></button>
-            <button class="actions-btn eicon-copy" (click.stop)="copy(item)"></button>
+            <button class="actions-btn eicon-close" (click.stop)="delete(item.id)"></button>
+            <button class="actions-btn eicon-copy" (click.stop)="copy(item.id)"></button>
         </div>
     </div>
 }

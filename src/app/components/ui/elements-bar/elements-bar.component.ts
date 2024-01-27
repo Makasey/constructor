@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+import { Page } from "@core";
 
 @Component({
     selector: "lz-elements-bar",
@@ -14,7 +15,7 @@ export class ElementsBarComponent {
     public hostClass = true;
 
     @Input()
-    public items = ["Page-1", "Page-2", "Page-3"];
+    public items: Page[];
 
     @Output()
     public readonly addItem: EventEmitter<void> = new EventEmitter<void>();

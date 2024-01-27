@@ -1,5 +1,6 @@
 {{ selectedElement$ | async }}
 <lz-elements-bar
+    [items]="pages()"
     (copyItem)="copyPage($event)"
     (deleteItem)="deletePage($event)"
     (addItem)="addPage()"
