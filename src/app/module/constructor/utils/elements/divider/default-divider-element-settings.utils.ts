@@ -1,6 +1,6 @@
-import { AlignItems, BackgroundType, BorderType, DividerPageElement, SitePageElementType, StyleUnit } from "@modules/constructor";
+import { AlignItems, BackgroundType, DividerPageElement, SitePageElementType, StyleUnit } from "@modules/constructor";
 import { defaultDirectionValue } from "@components";
-import { defaultSpacerElementBorderSettings } from "@modules/constructor/constants";
+import { defaultDividerLineBorderSettings, defaultSpacerElementBorderSettings } from "@modules/constructor/constants";
 
 export function defaultDividerElementSettings(): () => Omit<DividerPageElement, "id" | "parentId"> {
     return () => {
@@ -11,7 +11,7 @@ export function defaultDividerElementSettings(): () => Omit<DividerPageElement, 
             settings: {
                 text: "Divider",
                 alignItems: AlignItems.START,
-                lineBorderType: BorderType.SOLID,
+                lineBorder: { ...defaultDividerLineBorderSettings },
                 margin: {
                     ...defaultDirectionValue,
                 },

@@ -1,1 +1,7 @@
-<article>{{ text$ | async }}</article> {{ lineBorderType$ | async }}
+<span
+    class="text-container"
+    [ngClass]="{
+        'empty-divider': !(text$ | async)
+    }"
+    ><span class="text" *ngIf="text$ | async">{{ text$ | async }}</span>
+</span>

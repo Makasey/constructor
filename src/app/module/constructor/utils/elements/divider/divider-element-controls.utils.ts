@@ -4,7 +4,6 @@ import {
     DividerElementSettingsGroup,
     DividerPageElement,
     defaultAlignItemsItems,
-    defaultBorderTypeControls,
     defaultSizeControlUnit,
     getDefaultSizeSettings,
 } from "@modules/constructor";
@@ -53,14 +52,14 @@ function getDividerElementMarginControl(element: DividerPageElement): APFormCont
 
 function getDividerBorderControl(element: DividerPageElement): APFormControl {
     return {
-        id: "tag",
-        name: "tag",
-        value: element.settings.lineBorderType,
-        valueTemplateKey: APFormDefaultTemplateKeys.DROPDOWN_FIELD,
+        id: "lineBorder",
+        name: "lineBorder",
+        value: element.settings.lineBorder,
+        valueTemplateKey: APFormDefaultTemplateKeys.BORDER_FIELD,
         options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            items: defaultBorderTypeControls,
+            // selectLabelKey: "label",
+            // selectValueKey: "value",
+            // items: defaultBorderTypeControls,
             label: "Тип линии",
         },
     };

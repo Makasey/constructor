@@ -76,6 +76,22 @@ export const defaultSpacerElementBorderSettings: BorderFieldModel = {
     borderType: BorderType.SOLID,
 };
 
+export const defaultDividerLineBorderSettings: BorderFieldModel = {
+    borderWidth: {
+        top: 1,
+        bottom: 1,
+        left: 1,
+        right: 1,
+        unit: StyleUnit.PX,
+    },
+
+    borderRadius: {
+        ...defaultDirectionValue,
+    },
+    borderColor: "#000000",
+    borderType: BorderType.SOLID,
+};
+
 export const defaultSizeControlUnit: SelectItem<StyleUnit>[] = [
     { label: "%", value: StyleUnit.PERCENT },
     { label: StyleUnit.PX, value: StyleUnit.PX },
