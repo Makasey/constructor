@@ -1,6 +1,5 @@
 import {
     AbstractEditorElementSettingsService,
-    BorderType,
     Directions,
     DividerPageElementSettings,
     ELEMENT_ID,
@@ -9,9 +8,9 @@ import {
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { AsyncPipe } from "@angular/common";
+import { AsyncPipe, NgClass, NgIf, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { Observable, map, shareReplay } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
@@ -22,7 +21,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe],
+    imports: [AsyncPipe, NgStyle, NgIf, NgClass],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")
@@ -32,6 +31,8 @@ export class DividerComponent implements OnInit {
     @HostListener("$.style.height")
     public height$: Observable<string>;
 
+    @HostBinding("$.style.--width")
+    @HostListener("$.style.--width")
     @HostBinding("$.style.width")
     @HostListener("$.style.width")
     public width$: Observable<string>;
@@ -60,6 +61,8 @@ export class DividerComponent implements OnInit {
     @HostListener("$.style.border-right")
     public borderRight$: Observable<string>;
 
+    @HostBinding("$.style.--border-color")
+    @HostListener("$.style.--border-color")
     @HostBinding("$.style.border-top")
     @HostListener("$.style.border-top")
     public borderTop$: Observable<string>;
@@ -74,7 +77,9 @@ export class DividerComponent implements OnInit {
 
     public text$: Observable<string>;
 
-    public lineBorderType$: Observable<BorderType>;
+    @HostBinding("$.style.--border-bottom")
+    @HostListener("$.style.--border-bottom")
+    public lineBorder$: Observable<string>;
 
     private readonly ELEMENT_ID = inject(ELEMENT_ID);
 
@@ -107,8 +112,11 @@ export class DividerComponent implements OnInit {
 
         this.alignItems$ = this.dividerSettings$.pipe(map(settings => settings.alignItems));
 
-        this.text$ = this.dividerSettings$.pipe(map(settings => settings.text));
+        this.text$ = this.dividerSettings$.pipe(
+            map(settings => settings.text),
+            shareReplay(),
+        );
 
-        this.lineBorderType$ = this.dividerSettings$.pipe(map(settings => settings.lineBorderType));
+        this.lineBorder$ = this.dividerSettings$.pipe(map(settings => processBorderSideData(settings.lineBorder, Directions.BOTTOM)));
     }
 }

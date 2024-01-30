@@ -1,12 +1,5 @@
-import {
-    AlignItems,
-    BorderType,
-    SitePageElement,
-    SitePageElementBackground,
-    SitePageElementBorder,
-    SitePageElementSizeSettings,
-} from "@modules/constructor";
-import { Direction } from "@components";
+import { AlignItems, SitePageElement, SitePageElementBackground, SitePageElementBorder, SitePageElementSizeSettings } from "@modules/constructor";
+import { BorderFieldModel, Direction } from "@components";
 
 export type DividerPageElement = SitePageElement<DividerPageElementSettings>;
 
@@ -15,7 +8,7 @@ export type DividerPageElementSettings = Readonly<
         padding: Direction;
         margin: Direction;
         text: string;
-        lineBorderType: BorderType;
+        lineBorder: BorderFieldModel;
         alignItems: AlignItems;
     } & SitePageElementSizeSettings &
         SitePageElementBackground &

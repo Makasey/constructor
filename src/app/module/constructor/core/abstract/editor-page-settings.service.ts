@@ -1,5 +1,5 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "@components";
-import { AbstractEditorOperationService, PageSettings } from "@modules/constructor";
+import { AbstractEditorOperationService, PageSettings, ROOT_ELEMENT_ID, SitePageElement, duplicateTreeElement } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
@@ -160,6 +160,7 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
     public copyPageById(id: string): void {
         this.service.updateState(() => {
             const pages: Page[] = this.getStoreElement("pages");
+            const items = this.getStoreElement("items");
 
             const page: Page = pages.find(page => page.id === id)!;
 
@@ -172,13 +173,45 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
                 },
             };
 
-            const pageCopyId = pageCopy.id;
+            if (!page.children.length) {
+                const pageCopyId = pageCopy.id;
 
-            const updatePages = [...pages, pageCopy];
+                const updatePages = [...pages, pageCopy];
+
+                return {
+                    pages: updatePages,
+                    selectedPage: pageCopyId,
+                };
+            }
+
+            let updatedTree: Record<string, SitePageElement> = { ...items };
+            const children: string[] = [];
+
+            pageCopy.children.forEach(child => {
+                const item = { ...items[child] };
+
+                const duplicatedItem = {
+                    ...item,
+                };
+                const newElementId = getRandomId();
+
+                children.push(newElementId);
+
+                updatedTree = duplicateTreeElement(items, duplicatedItem, ROOT_ELEMENT_ID, newElementId);
+            });
+
+            const updatePages: Page[] = [
+                ...pages,
+                {
+                    ...pageCopy,
+                    children: children,
+                },
+            ];
 
             return {
+                items: updatedTree,
                 pages: updatePages,
-                selectedPage: pageCopyId,
+                selectedPage: pageCopy.id,
             };
         });
     }
