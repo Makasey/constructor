@@ -3,5 +3,8 @@
     [ngClass]="{
         'empty-divider': !(text$ | async)
     }"
-    ><span class="text" *ngIf="text$ | async">{{ text$ | async }}</span>
+>
+    @if (text$ | async; as text) {
+        <span class="text">{{ text }}</span>
+    }
 </span>

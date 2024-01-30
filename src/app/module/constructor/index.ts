@@ -141,6 +141,8 @@ export {
     DefaultPreviewService,
     providePreviewService,
     AbstractPreviewService,
+    MultiPageOperationService,
+    AbstractMultiPageOperationService,
 } from "./core";
 
 export {

@@ -1,4 +1,4 @@
-import { AbstractEditorPageSettingsService, EDITOR_SELECTED_ELEMENT, PagesBarComponent, RootComponent } from "@modules/constructor";
+import { AbstractMultiPageOperationService, EDITOR_SELECTED_ELEMENT, PagesBarComponent, RootComponent } from "@modules/constructor";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { Page } from "@core";
@@ -19,7 +19,7 @@ export class EditAreaComponent {
 
     public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    private readonly service = inject(AbstractEditorPageSettingsService);
+    private readonly service = inject(AbstractMultiPageOperationService);
 
     public pages: Signal<Page[]> = toSignal(this.service.selectPages(), { initialValue: [] });
 
@@ -36,6 +36,6 @@ export class EditAreaComponent {
     }
 
     public selectPage(id: string): void {
-        this.service.selectPage(id);
+        this.service.updateSelectPage(id);
     }
 }

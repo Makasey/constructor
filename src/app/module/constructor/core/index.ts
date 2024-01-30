@@ -13,6 +13,8 @@ export {
     AbstractPreviewService,
     DefaultPreviewService,
     providePreviewService,
+    AbstractMultiPageOperationService,
+    MultiPageOperationService,
 } from "./abstract";
 export { SitePreviewDataService } from "./services";
 export {

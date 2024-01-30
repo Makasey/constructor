@@ -5,3 +5,4 @@ export { AbstractCampaignService, SinglePageCampaignService } from "./campaign.s
 export { AbstractEditorPageSettingsService, SinglePageEditorPageSettingsService } from "./editor-page-settings.service";
 export { AbstractEditorSelectionService, SinglePageEditorSelectionService } from "./editor-selection.service";
 export { AbstractPreviewService, DefaultPreviewService, providePreviewService } from "./preview.service";
+export { MultiPageOperationService, AbstractMultiPageOperationService } from "./multi-page-operation-service";

@@ -57,9 +57,6 @@ function getDividerBorderControl(element: DividerPageElement): APFormControl {
         value: element.settings.lineBorder,
         valueTemplateKey: APFormDefaultTemplateKeys.BORDER_FIELD,
         options: {
-            // selectLabelKey: "label",
-            // selectValueKey: "value",
-            // items: defaultBorderTypeControls,
             label: "Тип линии",
         },
     };

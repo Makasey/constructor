@@ -1,6 +1,6 @@
 import { APFormDefaultTemplateKeys, APFormModel } from "@components";
-import { AbstractEditorOperationService, PageSettings, ROOT_ELEMENT_ID, SitePageElement, duplicateTreeElement } from "@modules/constructor";
-import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
+import { AbstractEditorOperationService, PageSettings } from "@modules/constructor";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
@@ -111,121 +111,6 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
 
             return {
                 pages: updatedPages,
-            };
-        });
-    }
-
-    public addPage(): void {
-        this.service.updateState(() => {
-            const pages: Page[] = this.getStoreElement("pages");
-
-            const newPage: Page = {
-                id: getRandomId(),
-                settings: {
-                    title: "My best page",
-                    logotype: null,
-                    siteDescription: "My best page",
-                    siteMetaTags: "",
-                },
-                children: [],
-            };
-            const newPageId = newPage.id;
-
-            return {
-                pages: [...pages, newPage],
-                selectedPage: newPageId,
-            };
-        });
-    }
-
-    public deletePageById(id: string): void {
-        this.service.updateState(() => {
-            const pages: Page[] = this.getStoreElement("pages");
-
-            if (pages.length > 1) {
-                const updatePages: Page[] = pages.filter(page => page.id !== id);
-
-                const selectedPageId = updatePages[0].id;
-
-                return {
-                    pages: updatePages,
-                    selectedPage: selectedPageId,
-                };
-            }
-
-            return;
-        });
-    }
-
-    public copyPageById(id: string): void {
-        this.service.updateState(() => {
-            const pages: Page[] = this.getStoreElement("pages");
-            const items = this.getStoreElement("items");
-
-            const page: Page = pages.find(page => page.id === id)!;
-
-            const pageCopy: Page = {
-                ...page,
-                id: getRandomId(),
-                settings: {
-                    ...page?.settings,
-                    title: page?.settings.title + " копия",
-                },
-            };
-
-            if (!page.children.length) {
-                const pageCopyId = pageCopy.id;
-
-                const updatePages = [...pages, pageCopy];
-
-                return {
-                    pages: updatePages,
-                    selectedPage: pageCopyId,
-                };
-            }
-
-            let updatedTree: Record<string, SitePageElement> = { ...items };
-            const children: string[] = [];
-
-            pageCopy.children.forEach(child => {
-                const item = { ...items[child] };
-
-                const duplicatedItem = {
-                    ...item,
-                };
-                const newElementId = getRandomId();
-
-                children.push(newElementId);
-
-                updatedTree = duplicateTreeElement(items, duplicatedItem, ROOT_ELEMENT_ID, newElementId);
-            });
-
-            const updatePages: Page[] = [
-                ...pages,
-                {
-                    ...pageCopy,
-                    children: children,
-                },
-            ];
-
-            return {
-                items: updatedTree,
-                pages: updatePages,
-                selectedPage: pageCopy.id,
-            };
-        });
-    }
-
-    public selectPages(): Observable<Page[]> {
-        return this.query.select(state => {
-            return state.pages;
-        });
-    }
-
-    public selectPage(id: string): void {
-        this.service.updateState(() => {
-            return {
-                selectedPage: id,
             };
         });
     }
