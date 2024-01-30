@@ -1,4 +1,4 @@
-.elements-bar {
+.pages-bar {
     width: 100%;
     max-width: 1280px;
     padding: 10px;
@@ -27,6 +27,7 @@
         border: 1px solid lightblue;
         border-radius: 5px;
         padding: 5px;
+        cursor: pointer;
 
         .actions {
             gap: 5px;
@@ -45,6 +46,11 @@
                     transition: 0.5s;
                 }
             }
+        }
+
+        &:hover {
+            background-color: #e0e8ec;
+            transition: 0.5s;
         }
     }
 

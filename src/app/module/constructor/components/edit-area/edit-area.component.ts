@@ -1,7 +1,6 @@
-import { AbstractEditorPageSettingsService, EDITOR_SELECTED_ELEMENT, RootComponent } from "@modules/constructor";
+import { AbstractEditorPageSettingsService, EDITOR_SELECTED_ELEMENT, PagesBarComponent, RootComponent } from "@modules/constructor";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, Signal, ViewEncapsulation, inject } from "@angular/core";
-import { ElementsBarComponent } from "@components";
 import { Page } from "@core";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -12,7 +11,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     styleUrls: ["./edit-area.component.scss"],
     standalone: true,
     templateUrl: "./edit-area.component.html",
-    imports: [JsonPipe, AsyncPipe, RootComponent, ElementsBarComponent],
+    imports: [JsonPipe, AsyncPipe, RootComponent, PagesBarComponent],
 })
 export class EditAreaComponent {
     @HostBinding("class.lz-edit-area")
@@ -22,7 +21,7 @@ export class EditAreaComponent {
 
     private readonly service = inject(AbstractEditorPageSettingsService);
 
-    public pages: Signal<Page[]> = toSignal(this.service.getPages(), { initialValue: [] });
+    public pages: Signal<Page[]> = toSignal(this.service.selectPages(), { initialValue: [] });
 
     public addPage(): void {
         this.service.addPage();
@@ -34,5 +33,9 @@ export class EditAreaComponent {
 
     public deletePage(id: string): void {
         this.service.deletePageById(id);
+    }
+
+    public selectPage(id: string): void {
+        this.service.selectPage(id);
     }
 }

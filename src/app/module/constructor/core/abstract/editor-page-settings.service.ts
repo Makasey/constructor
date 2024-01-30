@@ -216,9 +216,17 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
         });
     }
 
-    public getPages(): Observable<Page[]> {
+    public selectPages(): Observable<Page[]> {
         return this.query.select(state => {
             return state.pages;
+        });
+    }
+
+    public selectPage(id: string): void {
+        this.service.updateState(() => {
+            return {
+                selectedPage: id,
+            };
         });
     }
 

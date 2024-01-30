@@ -58,4 +58,5 @@ export {
     DividerComponent,
     DividerPageElement,
     DividerPageElementSettings,
+    PagesBarComponent,
 } from "./edit-area";

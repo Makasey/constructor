@@ -41,3 +41,4 @@ export {
     AccordionElementItemComponent,
 } from "./accordion-element";
 export { DividerComponent, DividerElementSettingsGroup, DividerPageElementSettings, DividerPageElement } from "./divider";
+export { PagesBarComponent } from "./pages-bar";

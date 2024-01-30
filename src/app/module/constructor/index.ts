@@ -203,6 +203,7 @@ export {
     DividerElementSettingsGroup,
     DividerPageElement,
     DividerComponent,
+    PagesBarComponent,
 } from "./components";
 
 export {

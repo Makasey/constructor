@@ -2,16 +2,16 @@ import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, O
 import { Page } from "@core";
 
 @Component({
-    selector: "lz-elements-bar",
-    templateUrl: "./elements-bar.component.html",
-    styleUrl: "./elements-bar.component.scss",
+    selector: "lz-pages-bar",
+    templateUrl: "./pages-bar.component.html",
+    styleUrl: "./pages-bar.component.scss",
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [],
 })
-export class ElementsBarComponent {
-    @HostBinding("class.elements-bar")
+export class PagesBarComponent {
+    @HostBinding("class.pages-bar")
     public hostClass = true;
 
     @Input()
@@ -26,6 +26,9 @@ export class ElementsBarComponent {
     @Output()
     public readonly deleteItem: EventEmitter<string> = new EventEmitter<string>();
 
+    @Output()
+    public readonly selectPage: EventEmitter<string> = new EventEmitter<string>();
+
     public add(): void {
         this.addItem.emit();
     }
@@ -36,5 +39,9 @@ export class ElementsBarComponent {
 
     public delete(id: string): void {
         this.deleteItem.emit(id);
+    }
+
+    public select(id: string): void {
+        this.selectPage.emit(id);
     }
 }

@@ -56,6 +56,7 @@ export {
     DividerPageElementSettings,
     DividerElementSettingsGroup,
     DividerComponent,
+    PagesBarComponent,
 } from "./component";
 
 export { sitePageElementMap } from "./types";
