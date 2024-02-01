@@ -1,10 +1,12 @@
-<span
-    class="text-container"
-    [ngClass]="{
-        'empty-divider': !(text$ | async)
-    }"
->
-    @if (text$ | async; as text) {
-        <span class="text">{{ text }}</span>
-    }
-</span>
+<ng-container *initVar="text$ | async as text">
+    <span
+        class="text-container"
+        [ngClass]="{
+            'empty-divider': !text
+        }"
+    >
+        @if (text) {
+            <span class="text">{{ text }}</span>
+        }
+    </span>
+</ng-container>

@@ -19,14 +19,14 @@
       &:after {
         content: "";
         border-bottom: var(--border-bottom);
-        width: var(--width);
+        width: 100%;
         border-bottom: var(--border-bottom);
       }
 
       &:before {
         content: "";
         display: block;
-        width: var(--width);
+        width: 100%;
         border-bottom: var(--border-bottom);
       }
     }
