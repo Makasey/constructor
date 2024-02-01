@@ -59,6 +59,9 @@ export {
     defaultBackgroundRepeatItems,
     defaultBackgroundColorItems,
     defaultRequestElementSettingsKey,
+    possibleSiteElementsMap,
+    defaultDividerLineBorderSettings,
+    defaultSpacerElementBorderSettings,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -117,6 +120,11 @@ export {
     defaultAccordionItemElementSettings,
     defaultDividerElementSettings,
     defaultPageElementSettings,
+    possiblePageSiteElements,
+    possibleSectionSiteElements,
+    possibleInnerSiteElements,
+    possibleAccordionItemSiteElements,
+    possibleTabsItemSiteElements,
 } from "./utils";
 
 export {

@@ -2,6 +2,7 @@ import {
     AlignItems,
     BackgroundType,
     BorderType,
+    ElementButton,
     FlexWrap,
     ImagePageElementSettings,
     InnerPageElementSettings,
@@ -29,6 +30,11 @@ import {
     defaultTabsItemElementSettings,
     defaultTextElementSettings,
     defaultTitleElementSettings,
+    possibleAccordionItemSiteElements,
+    possibleInnerSiteElements,
+    possiblePageSiteElements,
+    possibleSectionSiteElements,
+    possibleTabsItemSiteElements,
 } from "@modules/constructor";
 import { BorderFieldModel, defaultDirectionValue } from "@components";
 import { InjectionToken } from "@angular/core";
@@ -286,4 +292,12 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
     [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
     [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
+};
+
+export const possibleSiteElementsMap: Record<string, ElementButton[]> = {
+    [SitePageElementType.PAGE]: possiblePageSiteElements(),
+    [SitePageElementType.SECTION]: possibleSectionSiteElements(),
+    [SitePageElementType.INNER]: possibleInnerSiteElements(),
+    [SitePageElementType.ACCORDION_ITEM]: possibleAccordionItemSiteElements(),
+    [SitePageElementType.TABS_ITEM]: possibleTabsItemSiteElements(),
 };

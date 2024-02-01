@@ -32,6 +32,11 @@ export {
     defaultAccordionItemElementSettings,
     defaultDividerElementSettings,
     defaultPageElementSettings,
+    possiblePageSiteElements,
+    possibleSectionSiteElements,
+    possibleInnerSiteElements,
+    possibleAccordionItemSiteElements,
+    possibleTabsItemSiteElements,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

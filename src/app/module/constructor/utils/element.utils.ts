@@ -1,4 +1,4 @@
-import { ElementButton, SitePageElement, SitePageElementType } from "@modules/constructor";
+import { ElementButton, SitePageElement, SitePageElementType, possibleSiteElementsMap } from "@modules/constructor";
 import { arrayAdd } from "@datorama/akita";
 import { getRandomId } from "@shared-utils";
 
@@ -64,166 +64,23 @@ export function duplicateTreeElement(
 export function processPossibleElements(type: SitePageElementType): ElementButton[] {
     switch (type) {
         case SitePageElementType.PAGE: {
-            return [
-                {
-                    title: "Секция",
-                    type: SitePageElementType.SECTION,
-                    icon: "bxs-layout",
-                },
-            ];
+            return possibleSiteElementsMap[SitePageElementType.PAGE];
         }
 
         case SitePageElementType.SECTION: {
-            return [
-                {
-                    title: "Элемент секции",
-                    type: SitePageElementType.INNER,
-                    icon: "bx-rectangle",
-                },
-            ];
+            return possibleSiteElementsMap[SitePageElementType.SECTION];
         }
 
         case SitePageElementType.INNER: {
-            return [
-                {
-                    title: "Заголовок",
-                    type: SitePageElementType.TITLE,
-                    icon: "bx-font",
-                },
-                {
-                    title: "Изображение",
-                    type: SitePageElementType.IMAGE,
-                    icon: "bxs-image-alt",
-                },
-                {
-                    title: "Текст",
-                    type: SitePageElementType.TEXT,
-                    icon: "bx-highlight",
-                },
-                {
-                    title: "Секция",
-                    type: SitePageElementType.SECTION,
-                    icon: "bxs-layout",
-                },
-                {
-                    title: "Табы",
-                    type: SitePageElementType.TABS,
-                    icon: "bx-dock-top",
-                },
-                {
-                    title: "Спэйсер",
-                    type: SitePageElementType.SPACER,
-                    icon: "bx-collapse-vertical",
-                },
-                {
-                    title: "Ассордион",
-                    type: SitePageElementType.ACCORDION,
-                    icon: "bx-list-check",
-                },
-                {
-                    title: "Девайдер",
-                    type: SitePageElementType.DIVIDER,
-                    icon: "bx-expand-vertical",
-                },
-            ];
-        }
-
-        case SitePageElementType.TITLE: {
-            return [];
-        }
-
-        case SitePageElementType.TEXT: {
-            return [];
+            return possibleSiteElementsMap[SitePageElementType.INNER];
         }
 
         case SitePageElementType.TABS_ITEM: {
-            return [
-                {
-                    title: "Заголовок",
-                    type: SitePageElementType.TITLE,
-                    icon: "bx-font",
-                },
-                {
-                    title: "Текст",
-                    type: SitePageElementType.TEXT,
-                    icon: "bx-highlight",
-                },
-                {
-                    title: "Изображение",
-                    type: SitePageElementType.IMAGE,
-                    icon: "bxs-image-alt",
-                },
-                {
-                    title: "Секция",
-                    type: SitePageElementType.SECTION,
-                    icon: "bxs-layout",
-                },
-                {
-                    title: "Табы",
-                    type: SitePageElementType.TABS,
-                    icon: "bx-dock-top",
-                },
-                {
-                    title: "Спэйсер",
-                    type: SitePageElementType.SPACER,
-                    icon: "bx-collapse-vertical",
-                },
-                {
-                    title: "Ассордион",
-                    type: SitePageElementType.ACCORDION,
-                    icon: "bx-list-check",
-                },
-                {
-                    title: "Девайдер",
-                    type: SitePageElementType.DIVIDER,
-                    icon: "bx-expand-vertical",
-                },
-            ];
+            return possibleSiteElementsMap[SitePageElementType.TABS_ITEM];
         }
 
         case SitePageElementType.ACCORDION_ITEM: {
-            return [
-                {
-                    title: "Заголовок",
-                    type: SitePageElementType.TITLE,
-                    icon: "bx-font",
-                },
-                {
-                    title: "Текст",
-                    type: SitePageElementType.TEXT,
-                    icon: "bx-highlight",
-                },
-                {
-                    title: "Изображение",
-                    type: SitePageElementType.IMAGE,
-                    icon: "bxs-image-alt",
-                },
-                {
-                    title: "Секция",
-                    type: SitePageElementType.SECTION,
-                    icon: "bxs-layout",
-                },
-                {
-                    title: "Табы",
-                    type: SitePageElementType.TABS,
-                    icon: "bx-dock-top",
-                },
-                {
-                    title: "Спэйсер",
-                    type: SitePageElementType.SPACER,
-                    icon: "bx-collapse-vertical",
-                },
-                {
-                    title: "Ассордион",
-                    type: SitePageElementType.ACCORDION,
-                    icon: "bx-list-check",
-                },
-                {
-                    title: "Девайдер",
-                    type: SitePageElementType.DIVIDER,
-                    icon: "bx-expand-vertical",
-                },
-            ];
+            return possibleSiteElementsMap[SitePageElementType.ACCORDION_ITEM];
         }
 
         default: {
