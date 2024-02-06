@@ -47,11 +47,6 @@
                 }
             }
         }
-
-        &:hover {
-            background-color: #e0e8ec;
-            transition: 0.5s;
-        }
     }
 
     .action {
@@ -75,5 +70,9 @@
                 transition: 0.5s;
             }
         }
+    }
+
+    .active {
+        background-color: #e0e8ec;
     }
 }

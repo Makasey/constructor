@@ -10,12 +10,14 @@ import {
     DefaultEditorElementActionsService,
     DefaultEditorElementSettingsService,
     EDITOR_SELECTED_ELEMENT,
+    EDITOR_SELECTED_PAGE,
     MultiPageOperationService,
     SinglePageCampaignService,
     SinglePageEditorPageSettingsService,
     SinglePageEditorSelectionService,
     SitePreviewDataService,
     editorSelectedElementFactory,
+    editorSelectedPageFactory,
     providePreviewService,
 } from "@modules/constructor";
 import { LzStateKey, createStoreProviders, providePreviewDataService } from "@core";
@@ -31,6 +33,7 @@ export const EDITOR_PROVIDERS: Provider[] = [
     { provide: AbstractEditorElementActionsService, useClass: DefaultEditorElementActionsService },
     { provide: AbstractCampaignService, useClass: SinglePageCampaignService },
     { provide: EDITOR_SELECTED_ELEMENT, useFactory: editorSelectedElementFactory() },
+    { provide: EDITOR_SELECTED_PAGE, useFactory: editorSelectedPageFactory() },
     providePreviewDataService(SitePreviewDataService),
     providePreviewService(),
 ];

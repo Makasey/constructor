@@ -1,4 +1,10 @@
-import { AbstractMultiPageOperationService, EDITOR_SELECTED_ELEMENT, PagesBarComponent, RootComponent } from "@modules/constructor";
+import {
+    AbstractMultiPageOperationService,
+    EDITOR_SELECTED_ELEMENT,
+    EDITOR_SELECTED_PAGE,
+    PagesBarComponent,
+    RootComponent,
+} from "@modules/constructor";
 import { AsyncPipe, JsonPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { Page } from "@core";
@@ -18,6 +24,8 @@ export class EditAreaComponent {
     public hostClass = true;
 
     public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
+    public selectedPage$ = inject(EDITOR_SELECTED_PAGE);
 
     private readonly service = inject(AbstractMultiPageOperationService);
 

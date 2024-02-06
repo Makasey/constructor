@@ -127,6 +127,10 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
             };
         });
     }
+
+    public selectSelectedPage(): Observable<string> {
+        return this.query.select(state => state.selectedPage);
+    }
 }
 
 @Injectable()

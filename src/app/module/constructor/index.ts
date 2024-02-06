@@ -232,6 +232,12 @@ export {
     PREVIEW_ROUTES,
 } from "./module";
 
-export { editorSelectedElementFactory, EDITOR_SELECTED_ELEMENT, EDITOR_PROVIDERS } from "./providers";
+export {
+    editorSelectedElementFactory,
+    EDITOR_SELECTED_ELEMENT,
+    EDITOR_PROVIDERS,
+    EDITOR_SELECTED_PAGE,
+    editorSelectedPageFactory,
+} from "./providers";
 export { LZConstructorComponent } from "./constructor.component";
 export { CONSTRUCTOR_ROUTES } from "./constructor.routes";

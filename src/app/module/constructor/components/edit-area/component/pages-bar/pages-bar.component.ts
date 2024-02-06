@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+import { NgClass } from "@angular/common";
 import { Page } from "@core";
 
 @Component({
@@ -8,7 +9,7 @@ import { Page } from "@core";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [],
+    imports: [NgClass],
 })
 export class PagesBarComponent {
     @HostBinding("class.pages-bar")
@@ -16,6 +17,9 @@ export class PagesBarComponent {
 
     @Input()
     public items: Page[];
+
+    @Input()
+    public activeItem: string;
 
     @Output()
     public readonly addItem: EventEmitter<void> = new EventEmitter<void>();
