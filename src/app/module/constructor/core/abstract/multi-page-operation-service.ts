@@ -1,4 +1,4 @@
-import { AbstractEditorOperationService, ROOT_ELEMENT_ID, SitePageElement, duplicateTreeElement } from "@modules/constructor";
+import { AbstractEditorOperationService, ROOT_ELEMENT_ID, SitePageElement, deleteElementFromTree, duplicateTreeElement } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
@@ -45,7 +45,18 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
                 const selectedPageId = updatePages[0].id;
 
+                const items = this.getStoreElement("items");
+
+                const children = pages.find(page => page.id === id)?.children[0] as string;
+
+                let updatedItems: Record<string, SitePageElement> = { ...items };
+
+                if (children) {
+                    updatedItems = deleteElementFromTree(items, children);
+                }
+
                 return {
+                    items: updatedItems,
                     pages: updatePages,
                     selectedPage: selectedPageId,
                 };
