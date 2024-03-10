@@ -5,6 +5,7 @@
             [ngTemplateOutletContext]="{text: element.settings.text, value: element.settings.link}"
         ></ng-template>
     </h1>
+  <button (click.stop)="duplicate()">duplicate</button>
 </ng-container>
 
 <ng-template #textTemplate let-text="text"> {{text}} </ng-template>

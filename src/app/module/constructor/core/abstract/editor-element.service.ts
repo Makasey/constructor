@@ -1,8 +1,16 @@
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { ROOT_ELEMENT_ID, SitePageElementType, SitePageElementUnion, deleteElementFromTree, processElementCreation } from "@modules/constructor";
+import {
+    ROOT_ELEMENT_ID,
+    SitePageElementType,
+    SitePageElementUnion,
+    deleteElementFromTree,
+    duplicateTreeElement,
+    processElementCreation,
+} from "@modules/constructor";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { getRandomId } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
@@ -85,6 +93,25 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                     },
                     [elementID]: element,
                 },
+            };
+        });
+    }
+
+    public duplicateElementById(id: string): void {
+        logAction(`Duplicate element with id: ${id}`);
+        this.service.updateState(state => {
+            const items = state.items;
+            const newId = getRandomId();
+            const element = items[id];
+            const parentId = element.parentId;
+
+            const updateTree = duplicateTreeElement(items, element, parentId!, newId);
+
+            return {
+                items: {
+                    ...updateTree,
+                },
+                selectedElement: newId,
             };
         });
     }

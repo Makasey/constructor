@@ -76,4 +76,8 @@ export class TitleComponent implements OnInit {
 
         this.titleText$ = this.titleSettings$.pipe(map(settings => settings.text ?? ""));
     }
+
+    public duplicate(): void {
+        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
+    }
 }
