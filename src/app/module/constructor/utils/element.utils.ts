@@ -22,14 +22,14 @@ export function duplicateTreeElement(
     parentId: string,
     newElementId: string | null = null,
 ): Record<string, SitePageElement> {
-    const stack = [targetElement];
+    const queue = [targetElement];
     let itemId: string | null = newElementId ?? getRandomId();
     const parentCache = {
         [targetElement.parentId!]: parentId,
     };
 
-    while (stack.length) {
-        const duplicatedElement = stack.pop()!;
+    while (queue.length) {
+        const duplicatedElement = queue.shift()!;
         const newElementId = itemId ?? getRandomId();
         const parentId = parentCache[duplicatedElement.parentId!];
 
@@ -52,7 +52,7 @@ export function duplicateTreeElement(
         };
 
         duplicatedElement.children.forEach(child => {
-            stack.push(items[child]);
+            queue.push(items[child]);
         });
 
         itemId = null;
