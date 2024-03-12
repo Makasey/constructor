@@ -1,13 +1,17 @@
 import {
+    AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     Directions,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     SpacerPageElementSettings,
+    TitlePageElement,
     processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
@@ -20,6 +24,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    imports: [AsyncPipe],
 })
 export class SpacerComponent implements OnInit {
     @HostBinding("class.lz-spacer")
@@ -73,6 +78,10 @@ export class SpacerComponent implements OnInit {
         this.ELEMENT_ID,
     );
 
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
+
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
     public ngOnInit(): void {
         this.width$ = this.spacerSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
@@ -93,5 +102,9 @@ export class SpacerComponent implements OnInit {
         this.borderBottom$ = this.spacerSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.BOTTOM)));
 
         this.borderRadius$ = this.spacerSettings$.pipe(map(settings => processDirectionValue(settings.border.borderRadius)));
+    }
+
+    public duplicate(): void {
+        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }

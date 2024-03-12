@@ -1,1 +1,3 @@
-
+@if ((selectedElement$ | async) === ELEMENT_ID) {
+  <button class="add-element" (click.stop)="duplicate()"><i class="bx bx-copy"></i></button>
+}

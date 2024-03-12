@@ -12,7 +12,7 @@ export function defaultTextElementSettings(): () => Omit<TextPageElement, "id" |
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 16,
+                    value: 40,
                     unit: StyleUnit.PX,
                 },
                 color: "#000000",

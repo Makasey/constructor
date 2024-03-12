@@ -1,6 +1,7 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     TextPageElement,
     TextPageElementSettings,
@@ -49,6 +50,8 @@ export class TextComponent implements OnInit {
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TextPageElement>);
 
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
     public textText$: Observable<string>;
 
     public element$: Observable<TextPageElement>;
@@ -71,5 +74,9 @@ export class TextComponent implements OnInit {
         this.background$ = this.textSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
 
         this.textText$ = this.textSettings$.pipe(map(settings => settings.text ?? ""));
+    }
+
+    public duplicate(): void {
+        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }

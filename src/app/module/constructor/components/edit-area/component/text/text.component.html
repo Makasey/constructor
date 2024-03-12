@@ -1,5 +1,9 @@
-<ng-container *ngIf="element$ | async as element">
-    <p>{{ element.settings.text }}</p>
-</ng-container>
+@if (element$ | async; as element) {
+  <p>{{ element.settings.text }}</p>
+}
+
+@if ((selectedElement$ | async) === ELEMENT_ID) {
+  <button class="add-element" (click.stop)="duplicate()"><i class="bx bx-copy"></i></button>
+}
 
 

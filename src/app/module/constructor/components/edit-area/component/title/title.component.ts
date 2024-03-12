@@ -1,6 +1,7 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     TitlePageElement,
     TitlePageElementSettings,
@@ -49,11 +50,13 @@ export class TitleComponent implements OnInit {
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
 
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
+
     public titleText$: Observable<string>;
 
     public element$: Observable<TitlePageElement>;
-
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private titleSettings$: Observable<TitlePageElementSettings>;
 

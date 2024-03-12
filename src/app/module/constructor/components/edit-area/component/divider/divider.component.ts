@@ -1,8 +1,11 @@
 import {
+    AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     Directions,
     DividerPageElementSettings,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
+    TitlePageElement,
     processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
@@ -79,9 +82,13 @@ export class DividerComponent implements OnInit {
     @HostListener("$.style.--border-bottom")
     public lineBorder$: Observable<string>;
 
-    private readonly ELEMENT_ID = inject(ELEMENT_ID);
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
+
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly abstractEditorElementSettingsService = inject(AbstractEditorElementSettingsService);
+
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
 
     private readonly dividerSettings$: Observable<DividerPageElementSettings> = this.abstractEditorElementSettingsService.selectSettings(
         this.ELEMENT_ID,
@@ -116,5 +123,9 @@ export class DividerComponent implements OnInit {
         );
 
         this.lineBorder$ = this.dividerSettings$.pipe(map(settings => processBorderSideData(settings.lineBorder, Directions.BOTTOM)));
+    }
+
+    public duplicate(): void {
+        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }

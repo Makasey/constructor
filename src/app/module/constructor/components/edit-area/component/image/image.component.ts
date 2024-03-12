@@ -3,9 +3,12 @@ import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Observable, map } from "rxjs";
 
 import {
+    AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     ImagePageElementSettings,
+    TitlePageElement,
     processObjectFitPositionValue,
     processObjectFitValue,
     processSettingValueWithUnit,
@@ -53,6 +56,10 @@ export class ImageComponent implements OnInit {
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
+    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
+
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
     private readonly settings$: Observable<ImagePageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
@@ -73,5 +80,9 @@ export class ImageComponent implements OnInit {
         this.objectPosition$ = this.settings$.pipe(map(settings => processObjectFitPositionValue(settings.objectPosition)));
 
         this.objectFit$ = this.settings$.pipe(map(settings => processObjectFitValue(settings.objectFit)));
+    }
+
+    public duplicate(): void {
+        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }
