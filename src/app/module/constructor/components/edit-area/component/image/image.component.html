@@ -10,6 +10,4 @@
     <figcaption *ngIf="title$ | async as title" class="title">{{ title }}</figcaption>
 </figure>
 
-@if ((selectedElement$ | async) === ELEMENT_ID) {
-  <button class="add-element" (click.stop)="duplicate()"><i class="bx bx-copy"></i></button>
-}
+<lz-duplicate-element [elementId]="ELEMENT_ID"></lz-duplicate-element>

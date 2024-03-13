@@ -1,11 +1,8 @@
 import {
-    AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     Directions,
     DividerPageElementSettings,
-    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
-    TitlePageElement,
     processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
@@ -13,6 +10,7 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe, NgClass, NgIf, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { LZInitVarDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map, shareReplay } from "rxjs";
 
@@ -24,7 +22,7 @@ import { Observable, map, shareReplay } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective],
+    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective, DuplicateElementComponent],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")
@@ -84,11 +82,7 @@ export class DividerComponent implements OnInit {
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
-    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
-
     private readonly abstractEditorElementSettingsService = inject(AbstractEditorElementSettingsService);
-
-    private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
 
     private readonly dividerSettings$: Observable<DividerPageElementSettings> = this.abstractEditorElementSettingsService.selectSettings(
         this.ELEMENT_ID,
@@ -123,9 +117,5 @@ export class DividerComponent implements OnInit {
         );
 
         this.lineBorder$ = this.dividerSettings$.pipe(map(settings => processBorderSideData(settings.lineBorder, Directions.BOTTOM)));
-    }
-
-    public duplicate(): void {
-        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }

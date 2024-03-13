@@ -1,7 +1,6 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
-    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     TextPageElement,
     TextPageElementSettings,
@@ -10,6 +9,7 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -20,7 +20,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./text.component.html",
     styleUrls: ["./text.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, DuplicateElementComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TextComponent implements OnInit {
@@ -50,8 +50,6 @@ export class TextComponent implements OnInit {
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TextPageElement>);
 
-    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
-
     public textText$: Observable<string>;
 
     public element$: Observable<TextPageElement>;
@@ -74,9 +72,5 @@ export class TextComponent implements OnInit {
         this.background$ = this.textSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
 
         this.textText$ = this.textSettings$.pipe(map(settings => settings.text ?? ""));
-    }
-
-    public duplicate(): void {
-        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }
