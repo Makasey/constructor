@@ -182,6 +182,10 @@ export class SectionComponent implements OnInit {
         this.editorActionsService.deleteElement(this.ELEMENT_ID);
     }
 
+    public duplicateElement(): void {
+        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
+    }
+
     public chooseStructure(type: ColumnStructure): void {
         this.selectionService.updateSectionSelection(this.ELEMENT_ID);
         this.editorActionsService.chooseColumnStructureType(this.ELEMENT_ID, type);

@@ -15,12 +15,13 @@ import {
     TabsPageElementSettings,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-tabs-element",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective],
+    imports: [CommonModule, ElementResolverDirective, DuplicateElementComponent],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,

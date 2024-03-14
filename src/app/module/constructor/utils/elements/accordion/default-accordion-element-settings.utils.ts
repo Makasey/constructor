@@ -21,7 +21,7 @@ export function defaultAccordionElementSettings(): () => Omit<AccordionPageEleme
                 },
                 padding: {
                     top: 10,
-                    bottom: 10,
+                    bottom: 20,
                     left: 10,
                     right: 10,
                     unit: StyleUnit.PX,

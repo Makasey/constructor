@@ -1,7 +1,6 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
-    AbstractEditorSelectionService,
     AccordionPageElement,
     AccordionPageElementSettings,
     ELEMENT_ID,
@@ -10,6 +9,7 @@ import {
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
@@ -17,7 +17,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 @Component({
     selector: "lz-accordion-element",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective],
+    imports: [CommonModule, ElementResolverDirective, DuplicateElementComponent],
     templateUrl: "./accordion-element.component.html",
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,8 +49,6 @@ export class AccordionElementComponent implements OnInit {
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
 
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
-
-    private readonly elementSelectionService = inject(AbstractEditorSelectionService);
 
     private settings$: Observable<AccordionPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 

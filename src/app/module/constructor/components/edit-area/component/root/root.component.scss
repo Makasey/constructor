@@ -10,6 +10,7 @@
 }
 
 .add-element,
+.copy-element,
 .delete-element {
     width: 24px;
     height: 24px;
@@ -24,4 +25,8 @@
 
 .delete-element {
     left: calc(50% + 24px);
+}
+
+.copy-element {
+    left: calc(50% + 48px);
 }
