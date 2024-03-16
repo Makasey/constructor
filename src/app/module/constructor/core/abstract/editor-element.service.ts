@@ -6,11 +6,10 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     deleteElementFromTree,
-    duplicateTreeElement,
+    processDuplicateElementsById,
     processElementCreation,
 } from "@modules/constructor";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
-import { getRandomId } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
@@ -135,19 +134,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     public duplicateElementById(id: string): void {
         logAction(`Duplicate element with id: ${id}`);
         this.service.updateState(state => {
-            const items = state.items;
-            const newId = getRandomId();
-            const element = items[id];
-            const parentId = element.parentId;
-
-            const updateTree = duplicateTreeElement(items, element, parentId!, newId);
-
-            return {
-                items: {
-                    ...updateTree,
-                },
-                selectedElement: newId,
-            };
+            return processDuplicateElementsById(state, id);
         });
     }
 
