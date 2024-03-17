@@ -6,6 +6,7 @@ export {
     processStructureType,
     defaultSectionElementSettings,
     possibleSectionSiteElements,
+    processDuplicateSectionElement,
 } from "./section";
 export { getTitleSettings, defaultTitleElementSettings } from "./title";
 export { getImageSettings, defaultImageElementSettings } from "./image";

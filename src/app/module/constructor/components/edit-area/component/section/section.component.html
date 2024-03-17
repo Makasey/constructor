@@ -35,12 +35,16 @@
 
 <ng-template #emptyTemplate> Сейчас тут нет элементов... </ng-template>
 
-<ng-container *ngIf="(selectedElement$ | async) === ELEMENT_ID">
+@if ((selectedElement$ | async) === ELEMENT_ID) {
     <button class="add-element" (click.stop)="addElement(sitePageElementType.TITLE)">
         <i class="bx bx-plus-circle"></i>
+    </button>
+
+    <button class="copy-element" (click.stop)="duplicateElement()">
+        <i class="bx bx-copy"></i>
     </button>
 
     <button class="delete-element" (click.stop)="deleteElement()">
         <i class="bx bx-trash"></i>
     </button>
-</ng-container>
+}

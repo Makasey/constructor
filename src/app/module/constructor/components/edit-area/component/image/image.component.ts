@@ -10,12 +10,13 @@ import {
     processObjectFitValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-image-element",
     standalone: true,
-    imports: [CommonModule, NgOptimizedImage],
+    imports: [CommonModule, NgOptimizedImage, DuplicateElementComponent],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,

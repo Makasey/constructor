@@ -125,6 +125,8 @@ export {
     possibleInnerSiteElements,
     possibleAccordionItemSiteElements,
     possibleTabsItemSiteElements,
+    processDuplicateElementsById,
+    processDuplicateSectionElement,
 } from "./utils";
 
 export {

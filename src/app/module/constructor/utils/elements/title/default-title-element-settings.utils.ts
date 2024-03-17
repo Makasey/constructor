@@ -12,7 +12,7 @@ export function defaultTitleElementSettings(): () => Omit<TitlePageElement, "id"
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 20,
+                    value: 40,
                     unit: StyleUnit.PX,
                 },
                 tag: ElementHTMLTag.H1,

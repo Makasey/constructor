@@ -1,5 +1,7 @@
-<ng-container *ngIf="element$ | async as element">
-    <p>{{ element.settings.text }}</p>
-</ng-container>
+@if (element$ | async; as element) {
+  <p>{{ element.settings.text }}</p>
+}
+
+<lz-duplicate-element [elementId]="ELEMENT_ID"></lz-duplicate-element>
 
 

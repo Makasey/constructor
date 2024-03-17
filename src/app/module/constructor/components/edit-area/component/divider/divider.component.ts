@@ -10,6 +10,7 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe, NgClass, NgIf, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { LZInitVarDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map, shareReplay } from "rxjs";
 
@@ -21,7 +22,7 @@ import { Observable, map, shareReplay } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective],
+    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective, DuplicateElementComponent],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")
@@ -79,7 +80,7 @@ export class DividerComponent implements OnInit {
     @HostListener("$.style.--border-bottom")
     public lineBorder$: Observable<string>;
 
-    private readonly ELEMENT_ID = inject(ELEMENT_ID);
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private readonly abstractEditorElementSettingsService = inject(AbstractEditorElementSettingsService);
 

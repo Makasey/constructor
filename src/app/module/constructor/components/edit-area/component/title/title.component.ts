@@ -4,13 +4,14 @@ import {
     ELEMENT_ID,
     TitlePageElement,
     TitlePageElementSettings,
+    processBackgroundValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { processBackgroundValue } from "@modules/constructor";
 
 @Component({
     selector: "lz-title-element",
@@ -19,12 +20,10 @@ import { processBackgroundValue } from "@modules/constructor";
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./title.component.html",
     styleUrls: ["./title.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, DuplicateElementComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {
-    private readonly service = inject(AbstractEditorElementSettingsService);
-
     @HostBinding("class")
     public readonly hostClasses = {
         "lz-title-element": true,
@@ -47,13 +46,15 @@ export class TitleComponent implements OnInit {
     @HostListener("$.style.background")
     public titleBackground$: Observable<string>;
 
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
+
+    private readonly service = inject(AbstractEditorElementSettingsService);
+
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<TitlePageElement>);
 
     public titleText$: Observable<string>;
 
     public element$: Observable<TitlePageElement>;
-
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     private titleSettings$: Observable<TitlePageElementSettings>;
 
@@ -68,16 +69,12 @@ export class TitleComponent implements OnInit {
 
         this.titleColor$ = this.titleSettings$.pipe(map(settings => settings.color));
 
+        this.titleText$ = this.titleSettings$.pipe(map(settings => settings.text ?? ""));
+
         this.titleBackground$ = this.titleSettings$.pipe(
             map(settings => {
                 return processBackgroundValue(settings.background);
             }),
         );
-
-        this.titleText$ = this.titleSettings$.pipe(map(settings => settings.text ?? ""));
-    }
-
-    public duplicate(): void {
-        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
     }
 }

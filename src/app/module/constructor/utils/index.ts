@@ -37,6 +37,7 @@ export {
     possibleInnerSiteElements,
     possibleAccordionItemSiteElements,
     possibleTabsItemSiteElements,
+    processDuplicateSectionElement,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {
@@ -61,3 +62,4 @@ export {
     processCampaignResponseItemSettings,
 } from "./response.utils";
 export { processElementCreation, processUpdateElementSettings } from "./element-creation";
+export { processDuplicateElementsById } from "./element-duplicate.utils";
