@@ -1,6 +1,7 @@
 import {
     AbstractEditorElementSettingsService,
     Directions,
+    DuplicateElementComponent,
     ELEMENT_ID,
     SpacerPageElementSettings,
     processBackgroundValue,
@@ -10,7 +11,6 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 

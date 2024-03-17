@@ -3,13 +3,13 @@ import {
     AbstractEditorElementSettingsService,
     AccordionPageElement,
     AccordionPageElementSettings,
+    DuplicateElementComponent,
     ELEMENT_ID,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";

@@ -2,6 +2,7 @@ import {
     AbstractEditorElementSettingsService,
     Directions,
     DividerPageElementSettings,
+    DuplicateElementComponent,
     ELEMENT_ID,
     processBackgroundValue,
     processBorderSideData,
@@ -10,7 +11,6 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe, NgClass, NgIf, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { LZInitVarDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map, shareReplay } from "rxjs";
 

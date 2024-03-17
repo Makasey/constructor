@@ -1,7 +1,9 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
+    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     TitlePageElement,
     TitlePageElementSettings,
     processBackgroundValue,
@@ -9,7 +11,6 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -20,7 +21,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./title.component.html",
     styleUrls: ["./title.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, DuplicateElementComponent],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, DuplicateElementComponent, ElementActionsComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {

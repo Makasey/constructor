@@ -9,13 +9,13 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
+    DuplicateElementComponent,
     ELEMENT_ID,
     TabsItemPageElement,
     TabsPageElement,
     TabsPageElementSettings,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({

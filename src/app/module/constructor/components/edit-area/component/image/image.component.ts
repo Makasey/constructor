@@ -10,7 +10,7 @@ import {
     processObjectFitValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
+import { DuplicateElementComponent } from "app/module/constructor/components/shared/duplicate-element";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
