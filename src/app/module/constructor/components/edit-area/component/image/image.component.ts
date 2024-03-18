@@ -4,13 +4,13 @@ import { Observable, map } from "rxjs";
 
 import {
     AbstractEditorElementSettingsService,
+    DuplicateElementComponent,
     ELEMENT_ID,
     ImagePageElementSettings,
     processObjectFitPositionValue,
     processObjectFitValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { DuplicateElementComponent } from "app/module/constructor/components/shared/duplicate-element";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
