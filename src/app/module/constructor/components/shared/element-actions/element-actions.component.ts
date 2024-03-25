@@ -1,5 +1,13 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, inject, signal } from "@angular/core";
-import { EDITOR_SELECTED_ELEMENT, ELEMENT_ID } from "@modules/constructor";
+import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation, inject, signal } from "@angular/core";
+
+import {
+    AbstractEditorElementActionsService,
+    EDITOR_SELECTED_ELEMENT,
+    ELEMENT_ID,
+    ElementActionType,
+    ElementActionsConfigItem,
+} from "@modules/constructor";
 
 @Component({
     selector: "lz-element-actions",
@@ -8,25 +16,38 @@ import { EDITOR_SELECTED_ELEMENT, ELEMENT_ID } from "@modules/constructor";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [],
+    imports: [AsyncPipe],
 })
-export class ElementActionsComponent {
+export class ElementActionsComponent implements OnInit {
     @HostBinding("class.element-actions")
     public hostClass = true;
 
-    public configItems = signal<unknown[]>([]);
+    public configItems = signal<ElementActionsConfigItem[]>([]);
 
     public elementId = inject(ELEMENT_ID);
 
     public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    @Input() public config: any;
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService);
 
-    // constructor() {
-    //     console.log(this.elementId, this.selectedElement$.subscribe(console.log));
-    // }
-    //
-    // public getElementConfig(): void {
-    //     this.configItems.set(this.editorActionsService.processElementActions(this.elementId));
-    // }
+    public ngOnInit(): void {
+        this.getElementConfig();
+    }
+
+    public getElementConfig(): void {
+        this.configItems.set(this.editorActionsService.processElementActions(this.elementId));
+    }
+
+    public applyAction(action: ElementActionType): void {
+        switch (action) {
+            case ElementActionType.DUPLICATE: {
+                this.editorActionsService.duplicateElementById(this.elementId);
+                break;
+            }
+            case ElementActionType.DELETE: {
+                this.editorActionsService.deleteElement(this.elementId);
+                break;
+            }
+        }
+    }
 }

@@ -1,14 +1,16 @@
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
-import { Inject, Injectable } from "@angular/core";
-import { Observable, map } from "rxjs";
 import {
+    ElementActionsConfigItem,
     ROOT_ELEMENT_ID,
     SitePageElementType,
     SitePageElementUnion,
     deleteElementFromTree,
+    processCreateElementActions,
     processDuplicateElementsById,
     processElementCreation,
 } from "@modules/constructor";
+import { Inject, Injectable } from "@angular/core";
+import { Observable, map } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
@@ -136,6 +138,12 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         this.service.updateState(state => {
             return processDuplicateElementsById(state, id);
         });
+    }
+
+    public processElementActions(elementId: string): ElementActionsConfigItem[] {
+        logAction(`Process create  element actions with id: ${elementId}`);
+        const { type } = this.getStoreElement("items")[elementId];
+        return processCreateElementActions(type);
     }
 
     protected deleteItemFromPage(elementId: string): Page[] {

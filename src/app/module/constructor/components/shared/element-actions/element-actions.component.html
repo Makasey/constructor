@@ -1,1 +1,5 @@
-<p>element-actions works!</p>
+@if ((selectedElement$ | async) === elementId) {
+    @for (item of configItems(); track item.action) {
+        <button [title]="item.title" (click.stop)="applyAction(item.action)"><i [class]="item.icon"></i></button>
+    }
+}
