@@ -2,8 +2,8 @@ import {
     AbstractEditorElementSettingsService,
     Directions,
     DividerPageElementSettings,
-    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
@@ -22,7 +22,7 @@ import { Observable, map, shareReplay } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective, DuplicateElementComponent],
+    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective, ElementActionsComponent],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")

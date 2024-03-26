@@ -1,8 +1,8 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
-    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     TextPageElement,
     TextPageElementSettings,
     processBackgroundValue,
@@ -20,7 +20,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./text.component.html",
     styleUrls: ["./text.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, DuplicateElementComponent],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, ElementActionsComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TextComponent implements OnInit {

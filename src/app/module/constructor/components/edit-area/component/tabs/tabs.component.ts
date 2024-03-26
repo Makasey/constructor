@@ -9,8 +9,8 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
-    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     TabsItemPageElement,
     TabsPageElement,
     TabsPageElementSettings,
@@ -21,7 +21,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 @Component({
     selector: "lz-tabs-element",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective, DuplicateElementComponent],
+    imports: [CommonModule, ElementResolverDirective, ElementActionsComponent],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,

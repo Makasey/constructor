@@ -1,7 +1,6 @@
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
-    DuplicateElementComponent,
     ELEMENT_ID,
     ElementActionsComponent,
     TitlePageElement,
@@ -21,7 +20,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./title.component.html",
     styleUrls: ["./title.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, DuplicateElementComponent, ElementActionsComponent],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, ElementActionsComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TitleComponent implements OnInit {

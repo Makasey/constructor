@@ -3,8 +3,8 @@ import {
     AbstractEditorElementSettingsService,
     AccordionPageElement,
     AccordionPageElementSettings,
-    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
@@ -17,7 +17,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 @Component({
     selector: "lz-accordion-element",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective, DuplicateElementComponent],
+    imports: [CommonModule, ElementResolverDirective, ElementActionsComponent],
     templateUrl: "./accordion-element.component.html",
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,

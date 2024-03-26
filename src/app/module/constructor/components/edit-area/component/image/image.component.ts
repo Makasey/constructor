@@ -4,8 +4,8 @@ import { Observable, map } from "rxjs";
 
 import {
     AbstractEditorElementSettingsService,
-    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     ImagePageElementSettings,
     processObjectFitPositionValue,
     processObjectFitValue,
@@ -16,7 +16,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
 @Component({
     selector: "lz-image-element",
     standalone: true,
-    imports: [CommonModule, NgOptimizedImage, DuplicateElementComponent],
+    imports: [CommonModule, NgOptimizedImage, ElementActionsComponent],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,

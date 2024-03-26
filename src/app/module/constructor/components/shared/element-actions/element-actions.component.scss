@@ -1,6 +1,6 @@
 .element-actions {
-    width: 30px;
-    height: 30px;
+    display: flex;
+    gap: 5px;
     position: absolute;
     transform: translateX(-50%);
     bottom: 0;

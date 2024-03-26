@@ -222,7 +222,6 @@ export {
     DividerComponent,
     PagesBarComponent,
     ElementActionsComponent,
-    DuplicateElementComponent,
 } from "./components";
 
 export {

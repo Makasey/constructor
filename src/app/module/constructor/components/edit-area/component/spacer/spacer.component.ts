@@ -1,8 +1,8 @@
 import {
     AbstractEditorElementSettingsService,
     Directions,
-    DuplicateElementComponent,
     ELEMENT_ID,
+    ElementActionsComponent,
     SpacerPageElementSettings,
     processBackgroundValue,
     processBorderSideData,
@@ -22,7 +22,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [AsyncPipe, DuplicateElementComponent],
+    imports: [AsyncPipe, ElementActionsComponent],
 })
 export class SpacerComponent implements OnInit {
     @HostBinding("class.lz-spacer")
