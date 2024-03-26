@@ -11,6 +11,7 @@ export {
     ObjectFit,
     ObjectFitPosition,
     BackgroundType,
+    ElementActionType,
 } from "./enums";
 export {
     ElementSettingsWithUnit,
@@ -31,6 +32,7 @@ export {
     SitePageRequestElement,
     TypeKeys,
     RequestElementSettings,
+    ElementActionsConfigItem,
 } from "./types";
 export {
     defaultTextControlElement,
@@ -62,6 +64,8 @@ export {
     possibleSiteElementsMap,
     defaultDividerLineBorderSettings,
     defaultSpacerElementBorderSettings,
+    deleteElementActionConfig,
+    duplicateElementActionConfig,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -127,6 +131,7 @@ export {
     possibleTabsItemSiteElements,
     processDuplicateElementsById,
     processDuplicateSectionElement,
+    processCreateElementActions,
 } from "./utils";
 
 export {
@@ -216,6 +221,7 @@ export {
     DividerPageElement,
     DividerComponent,
     PagesBarComponent,
+    ElementActionsComponent,
 } from "./components";
 
 export {

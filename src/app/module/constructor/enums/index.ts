@@ -107,3 +107,8 @@ export enum BorderType {
     SOLID = "solid",
     DOUBLE = "double",
 }
+
+export enum ElementActionType {
+    DUPLICATE = "duplicate",
+    DELETE = "delete",
+}

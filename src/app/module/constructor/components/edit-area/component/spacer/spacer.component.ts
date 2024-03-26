@@ -2,6 +2,7 @@ import {
     AbstractEditorElementSettingsService,
     Directions,
     ELEMENT_ID,
+    ElementActionsComponent,
     SpacerPageElementSettings,
     processBackgroundValue,
     processBorderSideData,
@@ -10,7 +11,6 @@ import {
 } from "@modules/constructor";
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -22,7 +22,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [AsyncPipe, DuplicateElementComponent],
+    imports: [AsyncPipe, ElementActionsComponent],
 })
 export class SpacerComponent implements OnInit {
     @HostBinding("class.lz-spacer")

@@ -1,3 +1,5 @@
+export { ElementActionsComponent } from "./shared";
+
 export {
     TitlePageElement,
     TitlePageElementSettings,

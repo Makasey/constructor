@@ -1,6 +1,7 @@
 import {
     AccordionItemPageElement,
     AccordionPageElement,
+    ElementActionType,
     ImagePageElement,
     ImagePageElementSettings,
     InnerPageElement,
@@ -140,4 +141,10 @@ export type RequestElementSettings<T> = Readonly<{
     [key: string]: Partial<T>;
 
     default: Partial<T>;
+}>;
+
+export type ElementActionsConfigItem = Readonly<{
+    title: string;
+    icon: string;
+    action: ElementActionType;
 }>;

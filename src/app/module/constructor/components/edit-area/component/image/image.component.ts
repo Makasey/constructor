@@ -5,18 +5,18 @@ import { Observable, map } from "rxjs";
 import {
     AbstractEditorElementSettingsService,
     ELEMENT_ID,
+    ElementActionsComponent,
     ImagePageElementSettings,
     processObjectFitPositionValue,
     processObjectFitValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { DuplicateElementComponent } from "@modules/constructor/components/edit-area/component/duplicate-element";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-image-element",
     standalone: true,
-    imports: [CommonModule, NgOptimizedImage, DuplicateElementComponent],
+    imports: [CommonModule, NgOptimizedImage, ElementActionsComponent],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,

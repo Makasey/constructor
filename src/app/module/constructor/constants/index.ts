@@ -2,6 +2,8 @@ import {
     AlignItems,
     BackgroundType,
     BorderType,
+    ElementActionType,
+    ElementActionsConfigItem,
     ElementButton,
     FlexWrap,
     ImagePageElementSettings,
@@ -300,4 +302,16 @@ export const possibleSiteElementsMap: Record<string, ElementButton[]> = {
     [SitePageElementType.INNER]: possibleInnerSiteElements(),
     [SitePageElementType.ACCORDION_ITEM]: possibleAccordionItemSiteElements(),
     [SitePageElementType.TABS_ITEM]: possibleTabsItemSiteElements(),
+};
+
+export const duplicateElementActionConfig: ElementActionsConfigItem = {
+    title: "Duplicate",
+    icon: "bx bx-copy",
+    action: ElementActionType.DUPLICATE,
+};
+
+export const deleteElementActionConfig: ElementActionsConfigItem = {
+    title: "Delete",
+    icon: "bx bx-trash",
+    action: ElementActionType.DELETE,
 };
