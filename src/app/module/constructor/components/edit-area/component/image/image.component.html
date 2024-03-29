@@ -7,7 +7,9 @@
         [src]="src$ | async"
         [alt]="alt$ | async"
     />
-    <figcaption *ngIf="title$ | async as title" class="title">{{ title }}</figcaption>
+    @if (title$ | async; as title) {
+        <figcaption class="title">{{ title }}</figcaption>
+    }
 </figure>
 
 <lz-element-actions></lz-element-actions>

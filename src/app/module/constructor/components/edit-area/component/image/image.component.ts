@@ -1,5 +1,5 @@
+import { AsyncPipe, NgOptimizedImage, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { Observable, map } from "rxjs";
 
 import {
@@ -16,7 +16,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
 @Component({
     selector: "lz-image-element",
     standalone: true,
-    imports: [CommonModule, NgOptimizedImage, ElementActionsComponent],
+    imports: [NgOptimizedImage, ElementActionsComponent, AsyncPipe, NgStyle],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
