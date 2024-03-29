@@ -1,5 +1,6 @@
+import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Observable, map } from "rxjs";
 
 import {
     AbstractEditorElementActionsService,
@@ -11,14 +12,13 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { Observable, map } from "rxjs";
 
 @Component({
     selector: "lz-inner-element",
     templateUrl: "./inner.component.html",
     styleUrls: ["./inner.component.scss"],
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective],
+    imports: [ElementResolverDirective, AsyncPipe],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,9 +66,5 @@ export class InnerComponent implements OnInit {
         this.background$ = this.innerSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
 
         this.justifyContent$ = this.innerSettings$.pipe(map(settings => settings.justifyContent));
-    }
-
-    public _trackBy(_: number, item: string): string {
-        return item;
     }
 }
