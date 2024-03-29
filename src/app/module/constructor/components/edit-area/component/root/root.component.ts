@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
 import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -22,11 +22,7 @@ export class RootComponent {
         "editor-element": true,
     };
 
-    constructor(private service: AbstractEditorElementActionsService<SectionPageElement>) {}
+    private readonly service = inject(AbstractEditorElementActionsService<SectionPageElement>);
 
     public rootElements = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
-
-    public _trackById(_: number, item: string): string {
-        return item;
-    }
 }
