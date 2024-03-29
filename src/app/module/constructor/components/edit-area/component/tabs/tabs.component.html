@@ -1,17 +1,17 @@
-<ng-container *ngIf="element() as element">
+@if (element()) {
     <header class="nav">
-        <button
-            class="nav-item"
-            *ngFor="let item of items$ | async; trackBy: trackByTab"
-            [class._active]="element.settings.selectedElement === item.id"
-            (click.stop)="selectTabItem(item.id)"
-        >
-            {{ item.settings.title }}
-        </button>
+        @for (item of items$ | async; track item.id) {
+            <button
+                class="nav-item"
+                [class._active]="element().settings.selectedElement === item.id"
+                (click.stop)="selectTabItem(item.id)"
+            >
+                {{ item.settings.title }}
+            </button>
+        }
     </header>
-
     <section>
-        <ng-container *lzElementResolver="element.settings.selectedElement; parent: element.id"></ng-container>
+        <ng-container *lzElementResolver="element().settings.selectedElement; parent: element().id"></ng-container>
     </section>
-</ng-container>
+}
 <lz-element-actions></lz-element-actions>

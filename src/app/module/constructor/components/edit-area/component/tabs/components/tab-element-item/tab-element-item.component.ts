@@ -1,5 +1,5 @@
+import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 import { Observable, map } from "rxjs";
 
@@ -16,7 +16,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 @Component({
     selector: "lz-tab-element-item",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective],
+    imports: [ElementResolverDirective, AsyncPipe],
     templateUrl: "./tab-element-item.component.html",
     styleUrls: ["./tab-element-item.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -49,9 +49,5 @@ export class TabElementItemComponent implements OnInit {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-    }
-
-    public _trackBy(_: number, item: string): string {
-        return item;
     }
 }

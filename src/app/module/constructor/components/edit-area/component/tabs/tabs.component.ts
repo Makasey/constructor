@@ -1,5 +1,5 @@
+import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
 import { Observable, combineLatest, filter, map } from "rxjs";
 import { switchMap } from "rxjs/operators";
@@ -21,7 +21,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 @Component({
     selector: "lz-tabs-element",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective, ElementActionsComponent],
+    imports: [ElementResolverDirective, ElementActionsComponent, AsyncPipe],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,14 +63,6 @@ export class TabsComponent implements OnInit {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
 
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-    }
-
-    public trackByTab(_: number, tab: TabsItemPageElement): string {
-        return tab.id;
-    }
-
-    public _trackBy(_: number, child: string): string {
-        return child;
     }
 
     public selectTabItem(id: string): void {
