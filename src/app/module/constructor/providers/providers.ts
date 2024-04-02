@@ -10,7 +10,6 @@ import {
     DefaultEditorElementActionsService,
     DefaultEditorElementSettingsService,
     EDITOR_SELECTED_ELEMENT,
-    EDITOR_SELECTED_ELEMENT_SIGNAL_EXAMPLE,
     EDITOR_SELECTED_PAGE,
     MultiPageOperationService,
     SinglePageCampaignService,
@@ -18,7 +17,6 @@ import {
     SinglePageEditorSelectionService,
     SitePreviewDataService,
     editorSelectedElementFactory,
-    editorSelectedElementSignalFactory,
     editorSelectedPageFactory,
     providePreviewService,
 } from "@modules/constructor";
@@ -36,7 +34,6 @@ export const EDITOR_PROVIDERS: Provider[] = [
     { provide: AbstractCampaignService, useClass: SinglePageCampaignService },
     { provide: EDITOR_SELECTED_ELEMENT, useFactory: editorSelectedElementFactory() },
     { provide: EDITOR_SELECTED_PAGE, useFactory: editorSelectedPageFactory() },
-    { provide: EDITOR_SELECTED_ELEMENT_SIGNAL_EXAMPLE, useFactory: editorSelectedElementSignalFactory() },
     providePreviewDataService(SitePreviewDataService),
     providePreviewService(),
 ];

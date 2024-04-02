@@ -36,7 +36,7 @@
 
 <ng-template #emptyStructureTemplate></ng-template>
 
-@if ((selectedElement$ | async) === ELEMENT_ID) {
+@if (selectedElement() === ELEMENT_ID) {
     <button class="add-element" (click.stop)="addElement(sitePageElementType.TITLE)">
         <i class="bx bx-plus-circle"></i>
     </button>

@@ -242,12 +242,10 @@ export {
 
 export {
     editorSelectedElementFactory,
-    editorSelectedElementSignalFactory,
     EDITOR_SELECTED_ELEMENT,
     EDITOR_PROVIDERS,
     EDITOR_SELECTED_PAGE,
     editorSelectedPageFactory,
-    EDITOR_SELECTED_ELEMENT_SIGNAL_EXAMPLE,
 } from "./providers";
 export { LZConstructorComponent } from "./constructor.component";
 export { CONSTRUCTOR_ROUTES } from "./constructor.routes";

@@ -14,7 +14,7 @@ import {
 
 import {
     AbstractEditorElementActionsService,
-    EDITOR_SELECTED_ELEMENT_SIGNAL_EXAMPLE,
+    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     ElementActionType,
     ElementActionsConfigItem,
@@ -39,7 +39,7 @@ export class ElementActionsComponent implements OnInit {
 
     public readonly elementId: string = inject(ELEMENT_ID);
 
-    public readonly selectedElement: Signal<string> = inject(EDITOR_SELECTED_ELEMENT_SIGNAL_EXAMPLE);
+    public readonly selectedElement: Signal<string> = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService);
 

@@ -1,8 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, computed, inject } from "@angular/core";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
-
-import { map } from "rxjs";
-import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
     AbstractEditorElementActionsService,
@@ -28,20 +25,26 @@ export class SiteElementsComponent {
 
     private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
 
-    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+    // public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
 
-    public readonly selectedElement = toSignal(this.selectedElement$);
+    public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    public elements = toSignal(
-        this.selectedElement$.pipe(
-            map(selectedElement => {
-                const { type } = this.service.getElement(selectedElement);
+    // public elements = toSignal(
+    //     this.selectedElement$.pipe(
+    //         map(selectedElement => {
+    //             const { type } = this.service.getElement(selectedElement);
+    //
+    //             return processPossibleElements(type);
+    //         }),
+    //     ),
+    //     { initialValue: [] },
+    // );
 
-                return processPossibleElements(type);
-            }),
-        ),
-        { initialValue: [] },
-    );
+    public elements = computed(() => {
+        const { type } = this.service.getElement(this.selectedElement());
+
+        return processPossibleElements(type);
+    });
 
     public createNewElement(type: SitePageElementType): void {
         if (this.selectedElement() === ROOT_ELEMENT_ID) {
