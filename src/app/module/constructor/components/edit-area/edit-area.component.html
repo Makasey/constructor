@@ -1,7 +1,7 @@
 {{ selectedElement() }}
 <lz-pages-bar
     [items]="pages()"
-    [activeItem]="selectedPage$ | async"
+    [activeItem]="selectedPage()"
     (copyItem)="copyPage($event)"
     (deleteItem)="deletePage($event)"
     (selectPage)="selectPage($event)"
