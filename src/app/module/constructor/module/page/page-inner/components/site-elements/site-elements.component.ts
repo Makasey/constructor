@@ -25,20 +25,7 @@ export class SiteElementsComponent {
 
     private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
 
-    // public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
-
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
-
-    // public elements = toSignal(
-    //     this.selectedElement$.pipe(
-    //         map(selectedElement => {
-    //             const { type } = this.service.getElement(selectedElement);
-    //
-    //             return processPossibleElements(type);
-    //         }),
-    //     ),
-    //     { initialValue: [] },
-    // );
 
     public elements = computed(() => {
         const { type } = this.service.getElement(this.selectedElement());
