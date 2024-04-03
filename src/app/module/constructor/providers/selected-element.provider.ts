@@ -1,13 +1,14 @@
 import { AbstractEditorSelectionService } from "@modules/constructor";
-import { InjectionToken, inject } from "@angular/core";
-import { Observable, shareReplay } from "rxjs";
+import { InjectionToken, Injector, Signal, inject } from "@angular/core";
+import { shareReplay } from "rxjs";
+import { toSignal } from "@angular/core/rxjs-interop";
 
-export const EDITOR_SELECTED_ELEMENT = new InjectionToken<Observable<string>>("EDITOR_SELECTED_ELEMENT");
+export const EDITOR_SELECTED_ELEMENT = new InjectionToken<Signal<string>>("EDITOR_SELECTED_ELEMENT_SIGNAL");
 
-export function editorSelectedElementFactory(): () => Observable<string> {
+export function editorSelectedElementFactory(): () => Signal<string | undefined> {
     return () => {
-        const editorService = inject(AbstractEditorSelectionService);
-
-        return editorService.selectSelectedElement().pipe(shareReplay(1));
+        return toSignal(inject(AbstractEditorSelectionService).selectSelectedElement().pipe(shareReplay(1)), {
+            injector: inject(Injector),
+        });
     };
 }

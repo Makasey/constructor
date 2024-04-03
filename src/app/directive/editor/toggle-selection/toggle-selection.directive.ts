@@ -1,7 +1,7 @@
 import { AbstractEditorSelectionService, EDITOR_SELECTED_ELEMENT, ELEMENT_ID, ROOT_ELEMENT_ID } from "@modules/constructor";
 import { Directive, HostBinding, HostListener, OnInit, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { toObservable } from "@angular/core/rxjs-interop";
 
 @Directive({
     selector: "[toggleSelection]",
@@ -10,9 +10,9 @@ import { toSignal } from "@angular/core/rxjs-interop";
 export class ToggleSelectionDirective implements OnInit {
     private readonly elementId = inject(ELEMENT_ID);
 
-    private readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+    private readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    private readonly selectedElement = toSignal(this.selectedElement$);
+    private readonly selectedElement$ = toObservable(this.selectedElement);
 
     private readonly service = inject(AbstractEditorSelectionService);
 

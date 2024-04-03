@@ -23,9 +23,9 @@ export class EditAreaComponent {
     @HostBinding("class.lz-edit-area")
     public hostClass = true;
 
-    public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+    public readonly selectedPage: Signal<string> = inject(EDITOR_SELECTED_PAGE);
 
-    public selectedPage$ = inject(EDITOR_SELECTED_PAGE);
+    public readonly selectedElement: Signal<string> = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly service = inject(AbstractMultiPageOperationService);
 

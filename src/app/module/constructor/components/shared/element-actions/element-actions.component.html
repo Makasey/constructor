@@ -1,4 +1,4 @@
-@if ((selectedElement$ | async) === elementId) {
+@if (showActions()) {
     @for (item of configItems(); track item.action) {
         <button [title]="item.title" (click.stop)="applyAction(item.action)"><i [class]="item.icon"></i></button>
     }

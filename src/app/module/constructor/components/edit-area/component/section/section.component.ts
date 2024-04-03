@@ -120,7 +120,7 @@ export class SectionComponent implements OnInit {
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
-    public readonly selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+    public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
     public readonly columnStructureElement = ColumnStructure;
 

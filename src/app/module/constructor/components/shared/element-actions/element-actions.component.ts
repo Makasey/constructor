@@ -1,5 +1,16 @@
 import { AsyncPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation, inject, signal } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    OnInit,
+    Signal,
+    ViewEncapsulation,
+    WritableSignal,
+    computed,
+    inject,
+    signal,
+} from "@angular/core";
 
 import {
     AbstractEditorElementActionsService,
@@ -22,19 +33,17 @@ export class ElementActionsComponent implements OnInit {
     @HostBinding("class.element-actions")
     public hostClass = true;
 
-    public configItems = signal<ElementActionsConfigItem[]>([]);
+    public configItems: WritableSignal<ElementActionsConfigItem[]> = signal<ElementActionsConfigItem[]>([]);
 
-    public elementId = inject(ELEMENT_ID);
+    public showActions: Signal<boolean> = computed(() => this.selectedElement() === this.elementId);
 
-    public selectedElement$ = inject(EDITOR_SELECTED_ELEMENT);
+    public readonly elementId: string = inject(ELEMENT_ID);
+
+    public readonly selectedElement: Signal<string> = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService);
 
     public ngOnInit(): void {
-        this.getElementConfig();
-    }
-
-    public getElementConfig(): void {
         this.configItems.set(this.editorActionsService.processElementActions(this.elementId));
     }
 
