@@ -1,4 +1,4 @@
-<ng-container *ngIf="colorControlValueChange$ | async"></ng-container>
+@if (colorControlValueChange$ | async) {}
 
 <article class="form-control">
     <label class="form-control-label text-field" [for]="controlModel?.id">

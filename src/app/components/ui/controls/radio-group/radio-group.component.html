@@ -1,15 +1,17 @@
 <span class="label">{{ label }}</span>
 
 <article class="list">
-    <label *ngFor="let item of items" class="item" [title]="item.label" [class.active]="item.value === _value">
-        <i class="eicon-flex" [ngClass]="item.image"></i>
+    @for (item of items; track item.value) {
+        <label class="item" [title]="item.label" [class.active]="item.value === _value">
+            <i class="eicon-flex" [ngClass]="item.image"></i>
 
-        <input
-            type="radio"
-            [name]="label"
-            [ngModel]="_value"
-            [value]="item.value"
-            (ngModelChange)="updateRadioGroup($event)"
-        />
-    </label>
+            <input
+                type="radio"
+                [name]="label"
+                [ngModel]="_value"
+                [value]="item.value"
+                (ngModelChange)="updateRadioGroup($event)"
+            />
+        </label>
+    }
 </article>

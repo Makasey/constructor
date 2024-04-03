@@ -1,9 +1,11 @@
 <ng-container>
     <div class="form-control">
         <label class="form-control-label text-field" [for]="controlModel?.id">
-            <span *ngIf="label" class="form-control-text" [class.focused]="!!_value || touched || _options.placeholder">
-                {{ label || _options.label }}
-            </span>
+            @if (label) {
+                <span class="form-control-text" [class.focused]="!!_value || touched || _options.placeholder">
+                    {{ label || _options.label }}
+                </span>
+            }
             <input
                 type="text"
                 class="form-control-input"
@@ -20,12 +22,15 @@
                 (input)="_onInput($event)"
             />
         </label>
-        <div class="form-control-errors" *ngIf="nativeControl?.dirty">
-            <ng-container *ngFor="let error of nativeControl?.errors | keyvalue">
-                <span class="form-control-error">
-                    {{ error.key }}
-                </span>
-            </ng-container>
-        </div>
+
+        @if (nativeControl?.dirty) {
+            <div class="form-control-errors">
+                @for (error of nativeControl?.errors | keyvalue; track error.key) {
+                    <span class="form-control-error">
+                        {{ error.key }}
+                    </span>
+                }
+            </div>
+        }
     </div>
 </ng-container>

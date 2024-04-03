@@ -67,10 +67,6 @@ export class ItemsControlFieldComponent implements ControlValueAccessor {
         this.value = obj;
     }
 
-    public trackById(_: number, item: ControlItem): string {
-        return item.id;
-    }
-
     public delete(id: string): void {
         this.value = this._value.filter(item => item.id !== id);
 

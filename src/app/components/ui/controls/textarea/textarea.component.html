@@ -19,14 +19,13 @@
         ></textarea>
     </label>
 
-    <div
-        class="form-control-errors"
-        *ngIf="nativeControl.dirty && !touched && (nativeControl.errors | keyvalue)?.length"
-    >
-        <ng-container *ngFor="let error of nativeControl.errors | keyvalue">
-            <span class="form-control-error">
-                {{ error.key }}
-            </span>
-        </ng-container>
-    </div>
+    @if (nativeControl.dirty && !touched && (nativeControl.errors | keyvalue)?.length) {
+        <div class="form-control-errors">
+            @for (error of nativeControl.errors | keyvalue; track error.key) {
+                <span class="form-control-error">
+                    {{ error.key }}
+                </span>
+            }
+        </div>
+    }
 </article>

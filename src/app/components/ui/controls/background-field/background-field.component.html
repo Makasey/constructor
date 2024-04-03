@@ -22,7 +22,7 @@
             ><lz-file-upload [ngModel]="_value?.image" (onValueChange)="updateImageValue($event)"></lz-file-upload></div
     ></article>
 
-    <ng-container *ngIf="_value.backgroundType === BackgroundType.IMAGE">
+    @if (_value.backgroundType === BackgroundType.IMAGE) {
         <article class="select-repeat-option"
             ><p>Repeat</p
             ><ap-dropdown-field
@@ -54,5 +54,5 @@
                 (onValueChange)="handlePosition($event.newValue)"
             ></ap-dropdown-field
         ></article>
-    </ng-container>
+    }
 </div>
