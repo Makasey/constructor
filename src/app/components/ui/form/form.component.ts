@@ -402,12 +402,4 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     public ngOnDestroy(): void {
         this.unsubscribeForm();
     }
-
-    public trackByGroup(_: number, group: APFormModel): string {
-        return group.id;
-    }
-
-    public trackByControl(_: number, control: ApFormControlInner): string {
-        return control.name;
-    }
 }

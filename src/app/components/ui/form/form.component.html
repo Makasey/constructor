@@ -1,4 +1,4 @@
-<ng-container *ngIf="valueChanges$ | async"></ng-container>
+@if (valueChanges$ | async) {}
 
 <div class="form-inner">
     <ng-container
@@ -11,57 +11,63 @@
 </div>
 
 <ng-template #groupTemplate let-formModel="formModel" let-index="index">
-    <ng-container
-        *ngIf="formModel"
-        [ngTemplateOutlet]="defaultGroupTemplate"
-        [ngTemplateOutletContext]="{
-            formModel: formModel,
-            formGroup: formModel.path ? mainFormGroup?.get(formModel.path) : mainFormGroup,
-            defaultTemplate: defaultGroupTemplate,
-            index: index
-        }"
-    >
-    </ng-container>
-    <ng-container *ngIf="formModel?.innerGroups">
+    @if (formModel) {
         <ng-container
-            *ngFor="let group of formModel.innerGroups; let i = index; trackBy: trackByGroup"
-            [ngTemplateOutlet]="groupTemplate"
+            [ngTemplateOutlet]="defaultGroupTemplate"
             [ngTemplateOutletContext]="{
-                formModel: group,
-                index: i
+                formModel: formModel,
+                formGroup: formModel.path ? mainFormGroup?.get(formModel.path) : mainFormGroup,
+                defaultTemplate: defaultGroupTemplate,
+                index: index
             }"
         >
         </ng-container>
-    </ng-container>
+    }
+    @if (formModel?.innerGroups) {
+        @for (group of formModel.innerGroups; track group.id; let i = $index) {
+            <ng-container
+                [ngTemplateOutlet]="groupTemplate"
+                [ngTemplateOutletContext]="{
+                    formModel: group,
+                    index: i
+                }"
+            >
+            </ng-container>
+        }
+    }
 </ng-template>
 
 <ng-template #defaultGroupTemplate let-formModel="formModel" let-formGroup="formGroup" let-index="index">
-    <div class="form__wrapper" *ngIf="formModel?.innerControls?.length">
-        <form class="form" [formGroup]="formGroup">
-            <div class="form-controls">
-                <ng-container *ngIf="formModel.innerControls">
-                    <ng-container *ngFor="let control of formModel.innerControls; trackBy: trackByControl">
-                        <div [ngClass]="control.controlClass" *ngIf="control && !control.hidden">
-                            <h2 [ngClass]="control.options?.titleClass" *ngIf="control.options?.title">{{
-                                control.options.title
-                            }}</h2>
-                            <ng-template
-                                [ngTemplateOutlet]="
-                                    (control.valueTemplateKey && _templatesMap[control.valueTemplateKey]) ||
-                                    defaultFieldTemplate
-                                "
-                                [ngTemplateOutletContext]="{
-                                    controlModel: control,
-                                    nativeControl: mainFormGroup!.get(control.path)
-                                }"
-                            >
-                            </ng-template>
-                        </div>
-                    </ng-container>
-                </ng-container>
-            </div>
-        </form>
-    </div>
+    @if (formModel?.innerControls?.length) {
+        <div class="form__wrapper">
+            <form class="form" [formGroup]="formGroup">
+                <div class="form-controls">
+                    @if (formModel.innerControls) {
+                        @for (control of formModel.innerControls; track control.name) {
+                            @if (control && !control.hidden) {
+                                <div [ngClass]="control.controlClass">
+                                    @if (control.options?.title) {
+                                        <h2 [ngClass]="control.options?.titleClass">{{ control.options.title }}</h2>
+                                    }
+                                    <ng-template
+                                        [ngTemplateOutlet]="
+                                            (control.valueTemplateKey && _templatesMap[control.valueTemplateKey]) ||
+                                            defaultFieldTemplate
+                                        "
+                                        [ngTemplateOutletContext]="{
+                                            controlModel: control,
+                                            nativeControl: mainFormGroup!.get(control.path)
+                                        }"
+                                    >
+                                    </ng-template>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </form>
+        </div>
+    }
 </ng-template>
 
 <ng-template
@@ -148,11 +154,11 @@
 </ng-template>
 
 <ng-template #borderControlTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
-  <lz-border-field
-      [formControl]="nativeControl"
-      [nativeControl]="nativeControl"
-      [controlModel]="controlModel"
-  ></lz-border-field>
+    <lz-border-field
+        [formControl]="nativeControl"
+        [nativeControl]="nativeControl"
+        [controlModel]="controlModel"
+    ></lz-border-field>
 </ng-template>
 
 <ng-template #fileUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
