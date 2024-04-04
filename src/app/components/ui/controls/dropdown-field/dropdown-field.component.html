@@ -1,7 +1,10 @@
 <div class="dropdown" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (focus)="_onDropdownFieldFocus()">
-    <span class="form-control-text" *ngIf="label">
-        {{ label }}
-    </span>
+    @if (label) {
+        <span class="form-control-text">
+            {{ label }}
+        </span>
+    }
+
     <button class="dropdown-button" type="button" (click)="_onToggleDropdownListVisibility($event)">
         <span class="dropdown-value">
             {{ _value | lzDropdownLabel: _selectLabelKey }}
@@ -17,7 +20,7 @@
     (overlayOutsideClick)="_onCloseDropdownList($event)"
 >
     <div class="dropdown-list">
-        <ng-container *ngFor="let item of items">
+        @for (item of items; track item.id) {
             <ap-dropdown-field-item
                 [item]="item"
                 [selectLabelKey]="_selectLabelKey"
@@ -25,6 +28,6 @@
                 (onItemClick)="_onDropdownItemChoose(item)"
             >
             </ap-dropdown-field-item>
-        </ng-container>
+        }
     </div>
 </ng-template>

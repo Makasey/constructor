@@ -2,17 +2,21 @@
     <span class="gallery-upload-text">Загрузить изображения</span>
     <input #fileUpload id="file-upload" type="file" [multiple]="true" (change)="onFilesUpload()" />
 
-    <ng-container *ngIf="_loading$ | async"> LOADING... </ng-container>
+    @if (_loading$ | async) {
+        LOADING...
+    }
 </label>
 
 <section class="files">
-    <article class="file" *ngFor="let item of files$ | async" [class.active]="item.id === selectedElement?.id">
-        <img [src]="item.src" [alt]="item.alt" />
-        <button class="file-button" (click)="selectElement(item)"></button>
-        <button class="file-remove" (click)="removeFile(item.id)">
-            <i class="bx bx-trash"></i>
-        </button>
-    </article>
+    @for (item of files$ | async; track item.id) {
+        <article class="file" [class.active]="item.id === selectedElement?.id">
+            <img [src]="item.src" [alt]="item.alt" />
+            <button class="file-button" (click)="selectElement(item)"></button>
+            <button class="file-remove" (click)="removeFile(item.id!)">
+                <i class="bx bx-trash"></i>
+            </button>
+        </article>
+    }
 </section>
 
 <article class="gallery-controls">
