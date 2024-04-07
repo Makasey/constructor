@@ -66,6 +66,10 @@ export {
     defaultSpacerElementBorderSettings,
     deleteElementActionConfig,
     duplicateElementActionConfig,
+    accordionItemPageElementSettingsStyleKeys,
+    dividerPageElementSettingsStyleKeys,
+    accordionPageElementSettingsStyleKeys,
+    spacerPageElementSettingsStyleKeys,
 } from "./constants";
 export {
     getDefaultSizeSettings,

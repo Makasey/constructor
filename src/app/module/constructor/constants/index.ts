@@ -1,7 +1,10 @@
 import {
+    AccordionItemPageElementSettings,
+    AccordionPageElementSettings,
     AlignItems,
     BackgroundType,
     BorderType,
+    DividerPageElementSettings,
     ElementActionType,
     ElementActionsConfigItem,
     ElementButton,
@@ -14,6 +17,7 @@ import {
     SectionPageElementSettings,
     SitePageElementType,
     SitePageElementUnion,
+    SpacerPageElementSettings,
     StyleUnit,
     TabsItemPageElementSettings,
     TabsPageElementSettings,
@@ -188,6 +192,46 @@ export const imagePageElementSettingsStylesKeys: TypeKeys<ImagePageElementSettin
 export const tabsPageElementSettingsStyleKeys: TypeKeys<TabsPageElementSettings> = ["width", "height"];
 
 export const tabsItemPageElementSettingsStyleKeys: TypeKeys<TabsItemPageElementSettings> = ["width", "height", "padding", "margin"];
+
+export const spacerPageElementSettingsStyleKeys: TypeKeys<SpacerPageElementSettings> = [
+    "margin",
+    "padding",
+    "height",
+    "width",
+    "border",
+    "background",
+];
+
+export const dividerPageElementSettingsStyleKeys: TypeKeys<DividerPageElementSettings> = [
+    "margin",
+    "padding",
+    "height",
+    "width",
+    "background",
+    "alignItems",
+    "border",
+    "text",
+    "lineBorder",
+];
+
+export const accordionPageElementSettingsStyleKeys: TypeKeys<AccordionPageElementSettings> = [
+    "margin",
+    "padding",
+    "height",
+    "width",
+    "count",
+    "items",
+    "selectedElement",
+];
+
+export const accordionItemPageElementSettingsStyleKeys: TypeKeys<AccordionItemPageElementSettings> = [
+    "margin",
+    "padding",
+    "height",
+    "width",
+    "background",
+    "title",
+];
 
 export const objectFitMap: Record<ObjectFit, string> = {
     [ObjectFit.DEFAULT]: "none",

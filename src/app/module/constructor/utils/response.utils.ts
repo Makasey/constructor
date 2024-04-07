@@ -1,6 +1,9 @@
 import {
+    AccordionItemPageElement,
+    AccordionPageElement,
     CreateCampaignModel,
     CreatePreviewModel,
+    DividerPageElement,
     ImagePageElement,
     InnerPageElement,
     ROOT_ELEMENT_ID,
@@ -11,15 +14,20 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     SitePageRequestElement,
+    SpacerPageElement,
     TabsItemPageElement,
     TabsPageElement,
     TextPageElement,
     TitlePageElement,
     TypeKeys,
+    accordionItemPageElementSettingsStyleKeys,
+    accordionPageElementSettingsStyleKeys,
     defaultRequestElementSettingsKey,
+    dividerPageElementSettingsStyleKeys,
     imagePageElementSettingsStylesKeys,
     innerPageElementSettingsStyleKeys,
     sectionPageElementSettingsStylesKeys,
+    spacerPageElementSettingsStyleKeys,
     tabsItemPageElementSettingsStyleKeys,
     tabsPageElementSettingsStyleKeys,
     textPageElementSettingsStylesKeys,
@@ -98,15 +106,31 @@ export function processElementDataCreation(item: SitePageElementUnion): SitePage
         }
 
         case SitePageElementType.INNER: {
-            return processRequestElementData(item as InnerPageElement, { styles: innerPageElementSettingsStyleKeys });
+            return processRequestElementData(item as InnerPageElement, { styles: innerPageElementSettingsStyleKeys, default: [] });
         }
 
         case SitePageElementType.TABS: {
-            return processRequestElementData(item as TabsPageElement, { styles: tabsPageElementSettingsStyleKeys });
+            return processRequestElementData(item as TabsPageElement, { styles: tabsPageElementSettingsStyleKeys, default: [] });
         }
 
         case SitePageElementType.TABS_ITEM: {
-            return processRequestElementData(item as TabsItemPageElement, { styles: tabsItemPageElementSettingsStyleKeys });
+            return processRequestElementData(item as TabsItemPageElement, { styles: tabsItemPageElementSettingsStyleKeys, default: [] });
+        }
+
+        case SitePageElementType.ACCORDION_ITEM: {
+            return processRequestElementData(item as AccordionItemPageElement, { styles: accordionItemPageElementSettingsStyleKeys, default: [] });
+        }
+
+        case SitePageElementType.ACCORDION: {
+            return processRequestElementData(item as AccordionPageElement, { styles: accordionPageElementSettingsStyleKeys, default: [] });
+        }
+
+        case SitePageElementType.DIVIDER: {
+            return processRequestElementData(item as DividerPageElement, { styles: dividerPageElementSettingsStyleKeys, default: [] });
+        }
+
+        case SitePageElementType.SPACER: {
+            return processRequestElementData(item as SpacerPageElement, { styles: spacerPageElementSettingsStyleKeys, default: [] });
         }
 
         default: {
