@@ -15,8 +15,8 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./edit-area.component.scss"],
-    standalone: true,
     templateUrl: "./edit-area.component.html",
+    standalone: true,
     imports: [JsonPipe, AsyncPipe, RootComponent, PagesBarComponent],
 })
 export class EditAreaComponent {
