@@ -12,7 +12,7 @@ import {
     TabsItemComponent,
     defaultDirectionValue,
 } from "@components";
-import { BorderType, ElementSettingsComponent, defaultBorderTypeControls, defaultSizeControlUnit } from "@modules/constructor";
+import { BorderType, defaultBorderTypeControls, defaultSizeControlUnit } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
 import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { NgIf } from "@angular/common";
@@ -28,7 +28,6 @@ import { NgIf } from "@angular/common";
         LZColorPickerComponent,
         FormsModule,
         LzTabsComponent,
-        ElementSettingsComponent,
         TabsItemComponent,
         RadioGroupComponent,
         NgIf,
