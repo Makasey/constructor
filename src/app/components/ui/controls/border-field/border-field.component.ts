@@ -7,9 +7,7 @@ import {
     LZColorPickerComponent,
     LZFileUploadComponent,
     LZImageFieldComponent,
-    LzTabsComponent,
     RadioGroupComponent,
-    TabsItemComponent,
     defaultDirectionValue,
 } from "@components";
 import { BorderType, defaultBorderTypeControls, defaultSizeControlUnit } from "@modules/constructor";
@@ -27,8 +25,6 @@ import { NgIf } from "@angular/common";
     imports: [
         LZColorPickerComponent,
         FormsModule,
-        LzTabsComponent,
-        TabsItemComponent,
         RadioGroupComponent,
         NgIf,
         LZImageFieldComponent,

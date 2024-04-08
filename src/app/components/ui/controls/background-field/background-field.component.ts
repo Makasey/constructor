@@ -4,9 +4,7 @@ import {
     LZColorPickerComponent,
     LZFileUploadComponent,
     LZImageFieldComponent,
-    LzTabsComponent,
     RadioGroupComponent,
-    TabsItemComponent,
 } from "@components/ui";
 import { BackgroundFieldModel } from "@components";
 import {
@@ -29,17 +27,7 @@ import { NgIf } from "@angular/common";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [
-        LZColorPickerComponent,
-        FormsModule,
-        LzTabsComponent,
-        TabsItemComponent,
-        RadioGroupComponent,
-        NgIf,
-        LZImageFieldComponent,
-        LZFileUploadComponent,
-        APDropdownFieldModule,
-    ],
+    imports: [LZColorPickerComponent, FormsModule, RadioGroupComponent, NgIf, LZImageFieldComponent, LZFileUploadComponent, APDropdownFieldModule],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
