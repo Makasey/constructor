@@ -6,11 +6,11 @@ import { EDITOR_PROVIDERS } from "@modules/constructor";
 
 @Component({
     selector: "lz-constructor",
+    templateUrl: "./constructor.component.html",
+    styleUrls: ["./constructor.component.scss"],
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    templateUrl: "./constructor.component.html",
-    styleUrls: ["./constructor.component.scss"],
     imports: [RouterOutlet, LZToastrModule],
     providers: [...EDITOR_PROVIDERS],
 })
