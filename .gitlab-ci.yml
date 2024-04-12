@@ -38,7 +38,6 @@ Lint Project:
   stage: lint
   script:
     - npm link eslint \
-    - eslint-plugin-billing-rmi-rules \
     - eslint-plugin-local-rules \
     - eslint-plugin-prettier \
     - eslint-plugin-sort-imports-es6-autofix
