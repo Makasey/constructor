@@ -37,7 +37,12 @@ Lint Project:
   image: node:18-alpine
   stage: lint
   script:
-    - npm link eslint
+    - npm link eslint \
+    - eslint-config-prettier \
+    - eslint-plugin-billing-rmi-rules \
+    - eslint-plugin-local-rules \
+    - eslint-plugin-prettier \
+    - eslint-plugin-sort-imports-es6-autofix
   cache:
     key:
       files:
