@@ -23,7 +23,7 @@ export class LZCalendarComponent implements ControlValueAccessor {
     }
 
     @Output()
-    public valueChange: EventEmitter<LZDay> = new EventEmitter<LZDay>();
+    public readonly valueChange: EventEmitter<LZDay> = new EventEmitter<LZDay>();
 
     @HostBinding("class.lz-calendar")
     public hostClass = true;
@@ -71,10 +71,6 @@ export class LZCalendarComponent implements ControlValueAccessor {
         this.onChange(day);
         this.onTouched();
         this.valueChange.emit(day);
-    }
-
-    public _trackByDay(index: number, day: LZDay): string {
-        return day.toString();
     }
 
     public onNextMonthClick(): void {

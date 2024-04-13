@@ -26,14 +26,17 @@
     </button>
 </header>
 <div class="lz-calendar-wrapper">
-    <div class="lz-calendar-item _weekday" *ngFor="let weekday of weekdays">
-        {{ weekday }}
-    </div>
-    <ng-container *ngFor="let week of _month | lzMonthSheet : true">
-        <ng-container *ngFor="let day of week; trackBy: _trackByDay">
+    @for (weekday of weekdays; track weekday) {
+        <div class="lz-calendar-item _weekday">
+            {{ weekday }}
+        </div>
+    }
+
+    @for (week of _month | lzMonthSheet: true; track week) {
+        @for (day of week; track day) {
             <button class="lz-calendar-item" [class.active]="day.daySame(_value)" (click)="pickDate(day)">
                 {{ day.day }}
             </button>
-        </ng-container>
-    </ng-container>
+        }
+    }
 </div>
