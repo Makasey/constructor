@@ -1,6 +1,6 @@
 import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, QueryList, ViewEncapsulation } from "@angular/core";
-import { CommonModule } from "@angular/common";
 
+import { CommonModule, NgClass, NgTemplateOutlet } from "@angular/common";
 import { TabsItemComponent } from "@components";
 
 @Component({
@@ -10,7 +10,7 @@ import { TabsItemComponent } from "@components";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, TabsItemComponent],
+    imports: [TabsItemComponent, NgClass, NgTemplateOutlet, CommonModule, NgClass],
 })
 export class LzTabsComponent implements AfterContentInit {
     @HostBinding("class.lz-tabs")
@@ -27,9 +27,5 @@ export class LzTabsComponent implements AfterContentInit {
 
     public activateTab(tab: TabsItemComponent): void {
         this.activeComponent = tab;
-    }
-
-    public trackByTab(_: number, tab: TabsItemComponent): string {
-        return tab.title;
     }
 }

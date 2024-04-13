@@ -1,15 +1,11 @@
 <div class="nav">
-    <button
-        class="nav-item"
-        *ngFor="let tab of tabs; trackBy: trackByTab"
-        [class.active]="tab === activeComponent"
-        (click)="activateTab(tab)"
-    >
-        <span>{{ tab.title }}</span>
-    </button>
+    @for (tab of tabs; track tab.title) {
+        <button class="nav-item" [class.active]="tab === activeComponent" (click)="activateTab(tab)">
+            <span>{{ tab.title }}</span>
+        </button>
+    }
 </div>
 
 <section class="_scrollable tab-section" [ngClass]="activeComponent!.customClass">
-  <ng-template [ngTemplateOutlet]="activeComponent!.template"></ng-template>
+    <ng-template [ngTemplateOutlet]="activeComponent!.template"></ng-template>
 </section>
-
