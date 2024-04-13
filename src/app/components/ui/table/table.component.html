@@ -1,7 +1,7 @@
-<ng-container *ngIf="scrollBottomSubject$ | async"></ng-container>
-<ng-container *ngIf="_tableExtra.hasCheckboxes">
-    <ng-container *ngIf="selectedRows$ | async"></ng-container>
-</ng-container>
+@if (scrollBottomSubject$ | async) {}
+@if (_tableExtra.hasCheckboxes) {
+    @if (selectedRows$ | async) {}
+}
 
 <ng-template #draggableWrapper>
     <div
@@ -18,7 +18,8 @@
             [tableMeta]="tableMeta$ | async"
             [tableExtra]="tableExtra$ | async"
         ></lz-table-head>
-        <ng-container *ngIf="!!_tableRows.length; else noRecordsTemplate">
+
+        @if (!!_tableRows.length) {
             <lz-table-body
                 [tableRows]="tableRows$ | async"
                 [tableExtra]="tableExtra$ | async"
@@ -28,7 +29,10 @@
                 [templateMap]="templatesMap"
             >
             </lz-table-body>
-        </ng-container>
+        } @else {
+            <ng-template [ngTemplateOutlet]="noRecordsTemplate"></ng-template>
+        }
+
         <lz-table-foot>
             <ng-template [ngTemplateOutlet]="footerTemplate ?? defaultFooterTemplate"> </ng-template>
             <ng-template [ngTemplateOutlet]="content"></ng-template>
@@ -43,7 +47,7 @@
             [tableMeta]="tableMeta$ | async"
             [tableExtra]="tableExtra$ | async"
         ></lz-table-head>
-        <ng-container *ngIf="!!_tableRows.length; else noRecordsTemplate">
+        @if (!!_tableRows.length) {
             <lz-table-body
                 [tableRows]="tableRows$ | async"
                 [tableExtra]="tableExtra$ | async"
@@ -53,7 +57,10 @@
                 [templateMap]="templatesMap"
             >
             </lz-table-body>
-        </ng-container>
+        } @else {
+            <ng-template [ngTemplateOutlet]="noRecordsTemplate"></ng-template>
+        }
+
         <lz-table-foot>
             <ng-template [ngTemplateOutlet]="footerTemplate ?? defaultFooterTemplate"> </ng-template>
             <ng-template [ngTemplateOutlet]="content"></ng-template>
@@ -63,7 +70,9 @@
 
 <ng-template [ngTemplateOutlet]="_tableExtra.draggableHeader ? draggableWrapper : defaultWrapper"></ng-template>
 
-<lz-loader *ngIf="_loading" class="table-loader">{{ loadMoreLabel }} </lz-loader>
+@if (_loading) {
+    <lz-loader class="table-loader">{{ loadMoreLabel }} </lz-loader>
+}
 
 <ng-template #defaultFooterTemplate></ng-template>
 
