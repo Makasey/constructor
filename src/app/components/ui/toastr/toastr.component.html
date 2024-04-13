@@ -1,4 +1,8 @@
 <ng-container *initVar="_alwaysOnDisplay$ | async as alwaysOnDisplay">
-    <lz-toastr-list *ngIf="!(_enableDNDMode$ | async) && !alwaysOnDisplay"></lz-toastr-list>
-    <lz-toastr-box *ngIf="alwaysOnDisplay"></lz-toastr-box>
+    @if (!(_enableDNDMode$ | async) && !alwaysOnDisplay) {
+        <lz-toastr-list></lz-toastr-list>
+    }
+    @if (alwaysOnDisplay) {
+        <lz-toastr-box></lz-toastr-box>
+    }
 </ng-container>
