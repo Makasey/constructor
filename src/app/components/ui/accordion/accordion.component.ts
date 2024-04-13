@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { LZAccordionItemDirective } from "@components";
@@ -7,12 +7,12 @@ import { Observable } from "rxjs";
 
 @Component({
     selector: "lz-accordion",
-    standalone: true,
-    imports: [CommonModule],
     templateUrl: "./accordion.component.html",
     styleUrls: ["./accordion.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [AsyncPipe, NgTemplateOutlet],
     animations: [
         trigger("contentExpansion", [
             state("expanded", style({ height: "*", opacity: 1, visibility: "visible" })),
@@ -47,9 +47,5 @@ export class AccordionComponent implements AfterViewInit {
         }
 
         item.expanded = !item.expanded;
-    }
-
-    public trackByItem(_: number, item: LZAccordionItemDirective): string {
-        return item.title;
     }
 }

@@ -1,9 +1,9 @@
-import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@angular/core";
+import { NgIf } from "@angular/common";
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormModel, APFormModule, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
+import { APFormModule, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
 import { AbstractEditorElementSettingsService } from "@modules/constructor";
 
 @Component({
@@ -13,7 +13,7 @@ import { AbstractEditorElementSettingsService } from "@modules/constructor";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormModule, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective, NgForOf, AsyncPipe],
+    imports: [APFormModule, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective],
 })
 export class ElementSettingsComponent {
     private readonly service = inject(AbstractEditorElementSettingsService);
@@ -28,9 +28,5 @@ export class ElementSettingsComponent {
 
     private defaultMapper(data: unknown): unknown {
         return data;
-    }
-
-    public trackByGroup(_: number, group: APFormModel): string {
-        return group.id;
     }
 }

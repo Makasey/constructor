@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -23,7 +23,6 @@ import { RouteKey, RouteParams } from "@shared-types";
     standalone: true,
     encapsulation: ViewEncapsulation.None,
     imports: [
-        CommonModule,
         EditAreaComponent,
         APFormModule,
         LzTabsComponent,
@@ -33,6 +32,7 @@ import { RouteKey, RouteParams } from "@shared-types";
         SiteSettingsComponent,
         RouterLink,
         NavigationLinkPipe,
+        NgTemplateOutlet,
     ],
     templateUrl: "./page-inner.component.html",
     styleUrls: ["./page-inner.component.scss"],

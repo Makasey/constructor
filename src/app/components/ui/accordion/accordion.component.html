@@ -1,25 +1,26 @@
-<ng-container *ngIf="itemsChanges$ | async"></ng-container>
+@if (itemsChanges$ | async) {}
 
 <section class="accordion">
-    <div
-        *ngFor="let item of items; index as i; trackBy: trackByItem"
-        class="accordion__item"
-        [class.disabled]="item.disabled"
-        [class.active]="item.expanded"
-    >
-        <ng-container
-            [ngTemplateOutlet]="defaultHeader"
-            [ngTemplateOutletContext]="{ $implicit: item, index: i, toggle: toggleState.bind(this, item) }"
-        ></ng-container>
+    @for (item of items;  track item.title; let i = $index;) {
         <div
-            class="accordion__content"
-            [class.expanded]="item.expanded"
+            class="accordion__item"
+            [class.disabled]="item.disabled"
             [class.active]="item.expanded"
-            [@contentExpansion]="item.expanded ? 'expanded' : 'collapsed'"
         >
-            <ng-container *ngTemplateOutlet="item?.content?.templateRef!"></ng-container>
+            <ng-container
+                [ngTemplateOutlet]="defaultHeader"
+                [ngTemplateOutletContext]="{ $implicit: item, index: i, toggle: toggleState.bind(this, item) }"
+            ></ng-container>
+            <div
+                class="accordion__content"
+                [class.expanded]="item.expanded"
+                [class.active]="item.expanded"
+                [@contentExpansion]="item.expanded ? 'expanded' : 'collapsed'"
+            >
+                <ng-container *ngTemplateOutlet="item?.content?.templateRef!"></ng-container>
+            </div>
         </div>
-    </div>
+    }
 </section>
 
 <ng-template #defaultHeader let-item>
