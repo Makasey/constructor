@@ -25,10 +25,6 @@ export class TableHeadComponent {
 
     constructor(private service: AbstractAwesomeTableService) {}
 
-    public trackByFieldKey(index: number, cell: TableMeta): string {
-        return cell.fieldKey;
-    }
-
     public selectAllRowsHandler(event: Event): void {
         event.stopPropagation();
 

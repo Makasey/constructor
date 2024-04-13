@@ -1,14 +1,17 @@
-<div class="table-body-row-wrapper" *ngIf="tableExtra">
-    <lz-table-row
-        class="table-body-row"
-        *ngFor="let row of tableRows; trackBy: trackByRow; let rowIndex = index"
-        [tableRow]="row"
-        [tableMeta]="tableMeta"
-        [templatesMap]="templateMap"
-        [tableExtra]="tableExtra"
-        [valuesExtra]="valuesExtra"
-        [rowIndex]="rowIndex"
-        [trackByRow]="trackByRow"
-        (onBottomScrolled)="onBottomScrolled($event)"
-    ></lz-table-row>
-</div>
+@if (tableExtra) {
+    <div class="table-body-row-wrapper">
+        @for (row of tableRows; track trackByRow; let rowIndex = $index) {
+            <lz-table-row
+                class="table-body-row"
+                [tableRow]="row"
+                [tableMeta]="tableMeta"
+                [templatesMap]="templateMap"
+                [tableExtra]="tableExtra"
+                [valuesExtra]="valuesExtra"
+                [rowIndex]="rowIndex"
+                [trackByRow]="trackByRow"
+                (onBottomScrolled)="onBottomScrolled($event)"
+            ></lz-table-row>
+        }
+    </div>
+}
