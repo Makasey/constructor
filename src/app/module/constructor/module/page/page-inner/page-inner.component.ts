@@ -10,6 +10,7 @@ import {
     AbstractCampaignService,
     EditAreaComponent,
     ElementSettingsComponent,
+    PageElementsTreeComponent,
     SiteElementsComponent,
     SiteSettingsComponent,
 } from "@modules/constructor";
@@ -20,8 +21,11 @@ import { RouteKey, RouteParams } from "@shared-types";
 @UntilDestroy()
 @Component({
     selector: "lz-page-inner",
-    standalone: true,
+    templateUrl: "./page-inner.component.html",
+    styleUrls: ["./page-inner.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
     imports: [
         EditAreaComponent,
         APFormModule,
@@ -33,10 +37,8 @@ import { RouteKey, RouteParams } from "@shared-types";
         RouterLink,
         NavigationLinkPipe,
         NgTemplateOutlet,
+        PageElementsTreeComponent,
     ],
-    templateUrl: "./page-inner.component.html",
-    styleUrls: ["./page-inner.component.scss"],
-    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PageInnerComponent implements OnInit {
     @HostBinding("class.lz-page-inner")

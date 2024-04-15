@@ -226,6 +226,7 @@ export {
     DividerComponent,
     PagesBarComponent,
     ElementActionsComponent,
+    PageElementsTreeComponent,
 } from "./components";
 
 export {

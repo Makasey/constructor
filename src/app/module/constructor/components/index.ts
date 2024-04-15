@@ -1,4 +1,4 @@
-export { ElementActionsComponent } from "./shared";
+export { ElementActionsComponent, PageElementsTreeComponent } from "./shared";
 
 export {
     TitlePageElement,
