@@ -22,10 +22,12 @@ export class PageElementsTreeComponent {
     public items = toSignal(this.service.getItems());
 
     public elements = computed(() => {
-        return this.mapElements(this.items()!, this.rootElements()[0]);
+        return this.rootElements().map(element => ({
+            ...this.mapElementsToTreeModel(this.items()!, element),
+        }));
     });
 
-    public mapElements(items: Record<string, SitePageElement>, element: string): Tree {
+    public mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree {
         if (!element || !items) {
             return {} as Tree;
         }
@@ -36,7 +38,7 @@ export class PageElementsTreeComponent {
             value: id,
             label: type,
             children: children.map(child => {
-                return this.mapElements(items, child);
+                return this.mapElementsToTreeModel(items, child);
             }),
         };
     }
