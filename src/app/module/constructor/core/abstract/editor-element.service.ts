@@ -2,6 +2,7 @@ import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzS
 import {
     ElementActionsConfigItem,
     ROOT_ELEMENT_ID,
+    SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
     deleteElementFromTree,
@@ -43,6 +44,10 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
     public getElement(id: string): T {
         return this.getStoreElement("items")[id] as T;
+    }
+
+    public getItems(): Observable<Record<string, SitePageElement>> {
+        return this.query.select(state => state.items)!;
     }
 
     public addPageElement(type: SitePageElementType): void {
