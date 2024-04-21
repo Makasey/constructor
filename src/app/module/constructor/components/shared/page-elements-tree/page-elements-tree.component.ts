@@ -1,5 +1,5 @@
-import { AbstractEditorElementActionsService, SectionPageElement, SitePageElement } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, computed, inject } from "@angular/core";
+import { AbstractEditorElementActionsService, AbstractEditorSelectionService, SectionPageElement, SitePageElement } from "@modules/constructor";
+import { ChangeDetectionStrategy, Component, HostBinding, Signal, computed, inject } from "@angular/core";
 import { Tree, TreeComponent } from "@components/ui/tree/tree.component";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -17,21 +17,19 @@ export class PageElementsTreeComponent {
 
     private readonly service = inject(AbstractEditorElementActionsService<SectionPageElement>);
 
-    public rootElements = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
+    private readonly selectionService = inject(AbstractEditorSelectionService);
 
-    public items = toSignal(this.service.getItems());
+    public rootElements: Signal<string[]> = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
 
-    public elements = computed(() => {
+    public items: Signal<Record<string, SitePageElement> | undefined> = toSignal(this.service.getItems());
+
+    public elements: Signal<Tree[]> = computed(() => {
         return this.rootElements().map(element => ({
             ...this.mapElementsToTreeModel(this.items()!, element),
         }));
     });
 
     public mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree {
-        if (!element || !items) {
-            return {} as Tree;
-        }
-
         const { id, children, type } = items[element];
 
         return {
@@ -43,47 +41,7 @@ export class PageElementsTreeComponent {
         };
     }
 
-    //todo for example
-
-    // public itemss: Tree = {
-    //     value: 1,
-    //     children: [
-    //         {
-    //             value: 2,
-    //             children: [
-    //                 {
-    //                     value: 4,
-    //                     children: [],
-    //                 },
-    //                 {
-    //                     value: 5,
-    //                     children: [
-    //                         {
-    //                             value: 6,
-    //                             children: [],
-    //                         },
-    //                         {
-    //                             value: 7,
-    //                             children: [
-    //                                 {
-    //                                     value: 3,
-    //                                     children: [
-    //                                         {
-    //                                             value: 8,
-    //                                             children: [],
-    //                                         },
-    //                                         {
-    //                                             value: 9,
-    //                                             children: [],
-    //                                         },
-    //                                     ],
-    //                                 },
-    //                             ],
-    //                         },
-    //                     ],
-    //                 },
-    //             ],
-    //         },
-    //     ],
-    // };
+    public updateSelection(item: Tree): void {
+        this.selectionService.updateSelection(item.value);
+    }
 }

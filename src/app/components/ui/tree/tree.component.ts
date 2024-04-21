@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input, Optional, SkipSelf, ViewEncapsulation } from "@angular/core";
 import { NgFor, NgIf } from "@angular/common";
 
-export type Tree<V = string | number> = {
+export type Tree<V = string> = {
     value: V;
     children: Tree<V>[];
     label?: string;
