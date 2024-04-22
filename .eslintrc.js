@@ -139,6 +139,7 @@ module.exports = {
                     },
                 ],
                 "@typescript-eslint/indent": 0,
+                "@typescript-eslint/no-unsafe-enum-comparison": 0,
                 "@typescript-eslint/no-var-requires": 1,
                 "@typescript-eslint/no-empty-function": 1,
                 "@typescript-eslint/no-unsafe-assignment": 0,
