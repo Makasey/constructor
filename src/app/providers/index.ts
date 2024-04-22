@@ -11,3 +11,4 @@ export {
     provideGetRouterParams, 
     provideSelectRouterParams 
 } from "./provide-router-params.provider";
+export { APP_ROUTES } from "./routes";
