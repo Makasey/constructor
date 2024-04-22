@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 import { LZToastrService, LzToastrQuery } from "@components";
 import { LZToastrItemComponent } from "../toastr-item/toastr-item.component";
