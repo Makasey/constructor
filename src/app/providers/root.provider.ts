@@ -5,6 +5,6 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 
 export const ROOT_PROVIDERS = [
     ...NAVIGATION_PROVIDERS,
-    provideHttpClient(withInterceptors, []),
+    provideHttpClient(withInterceptors([])),
     provideAnimations(),
 ];
