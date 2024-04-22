@@ -9,6 +9,6 @@ export const APP_ROUTES: Routes = [
     },
     {
         path: RouteKey.BUILDER,
-        loadComponent: () => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
+        loadChildren: () => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
     },
 ]
