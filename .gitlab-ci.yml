@@ -37,7 +37,7 @@ Lint Project:
   image: node:18-alpine
   stage: lint
   script:
-    - npm link eslint
+    - npm run eslint:fix
   cache:
     key:
       files:
