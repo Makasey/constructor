@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 
-import { LZToastrService, LzToastrQuery, LZToastrItemComponent } from "@components";
+import { LZToastrService, LzToastrQuery } from "@components";
+import { LZToastrItemComponent } from "../toastr-item/toastr-item.component";
 
 @Component({
     selector: "lz-toastr-box",
