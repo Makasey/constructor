@@ -1,4 +1,4 @@
-import { Route, Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 import { RouteKey } from "@shared-types";
 
 export const APP_ROUTES: Routes = [
