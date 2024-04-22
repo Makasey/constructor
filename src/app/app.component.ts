@@ -6,7 +6,7 @@ import { LZToastrModule } from "@components/ui";
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./app.component.html",
     standalone: true,
-    imports: [LZToastrModule.forRoot()],
+    imports: [LZToastrModule],
     styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {}

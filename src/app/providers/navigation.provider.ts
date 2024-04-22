@@ -7,5 +7,5 @@ export const NAVIGATION_PROVIDERS = [
         provide: AbstractNavigationService,
         useClass: NavigationService,
     },
-    ...provideRouter(APP_ROUTES, withRouterConfig({paramsInheritanceStrategy: 'always'})),
+    provideRouter(APP_ROUTES, withRouterConfig({paramsInheritanceStrategy: 'always'})),
 ];
