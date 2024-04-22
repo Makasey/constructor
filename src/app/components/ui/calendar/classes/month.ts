@@ -14,7 +14,7 @@ export class LZMonth extends LZYear implements LZMonthLike {
         return LZYear.isValidYear(year) && LZMonth.isValidMonthPart(month);
     }
 
-    public static getMonthDaysCount(month: number, isLeapYear: boolean): number {
+    public static getMonthDaysCount(month: number | MonthNumber, isLeapYear: boolean): number {
         switch (month) {
             case MonthNumber.FEBRUARY: {
                 return isLeapYear ? 29 : 28;
