@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { LZToastrService, LzToastrQuery } from "@components";
+import { LZToastrService, LzToastrQuery, LZToastrListComponent } from "@components";
 import { LZToastrItemComponent } from "../toastr-item/toastr-item.component";
 
 @Component({
@@ -9,7 +9,7 @@ import { LZToastrItemComponent } from "../toastr-item/toastr-item.component";
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-box.component.html",
     standalone: true,
-    imports: [LZToastrItemComponent, CommonModule],
+    imports: [LZToastrItemComponent, LZToastrListComponent, CommonModule],
 })
 export class LZToastrBoxComponent {
     public _enabledDNDMode$ = this.toastrQuery.selectDNDMode$;
