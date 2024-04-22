@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from "@angular/core";
-import { LZToastrModule } from "@components";
 import { RouterOutlet } from "@angular/router";
 
 import { EDITOR_PROVIDERS } from "@modules/constructor";
+import { LZToastrComponent } from "@components";
 
 @Component({
     selector: "lz-constructor",
@@ -11,7 +11,7 @@ import { EDITOR_PROVIDERS } from "@modules/constructor";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [RouterOutlet, LZToastrModule],
+    imports: [RouterOutlet, LZToastrComponent],
     providers: [...EDITOR_PROVIDERS],
 })
 export class LZConstructorComponent {

@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 
-import { LZToastrService, LzToastrQuery } from "@components";
+import { LZToastrService, LzToastrQuery, LZToastrItemComponent } from "@components";
 
 @Component({
     selector: "lz-toastr-box",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-box.component.html",
+    standalone: true,
+    imports: [LZToastrItemComponent, CommonModule],
 })
 export class LZToastrBoxComponent {
     public _enabledDNDMode$ = this.toastrQuery.selectDNDMode$;
