@@ -1,7 +1,9 @@
-<span class="lz-tree-value">
-    {{ tree.value }}
+<span class="lz-tree-value" (click)="emit(tree)">
+    {{ tree.label }}
 </span>
 
-<ng-container *ngIf="tree.children.length && !closed">
-    <lz-tree *ngFor="let childTree of tree.children" [tree]="childTree"></lz-tree>
-</ng-container>
+@if (tree?.children?.length && !closed) {
+    @for (childTree of tree.children; track childTree.value) {
+        <lz-tree [tree]="childTree" (emitTree)="emit($event)"></lz-tree>
+    }
+}
