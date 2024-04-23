@@ -8,7 +8,7 @@ Install dependencies:
   image: node:18-alpine
   stage: dependencies
   script:
-    - npm install
+    - npm install --legacy-peer-deps
   cache:
     key:
       files:
@@ -20,7 +20,7 @@ Build project:
   image: node:18-alpine
   stage: build
   script:
-    - npm install
+    - npm install --legacy-peer-deps
     - npm run build
   artifacts:
     paths:
@@ -37,7 +37,7 @@ Lint Project:
   image: node:18-alpine
   stage: lint
   script:
-    - npm link eslint
+    - npm run eslint:fix
   cache:
     key:
       files:
@@ -61,7 +61,7 @@ Run Tests:
 image: node:18-alpine
 # Functions that should be executed before the build script is run
 before_script:
-  - npm install
+  - npm install --legacy-peer-deps
 pages:
   script:
     - npm run build

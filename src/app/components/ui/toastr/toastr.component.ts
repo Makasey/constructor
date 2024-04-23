@@ -1,6 +1,14 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
-import { LzToastrQuery } from "@components";
+import { LZInitVarDirective } from "@shared-directives";
+import {
+    LZToastrBoxComponent,
+    LZToastrListComponent,
+    LZToastrService,
+    LZToastrStore,
+    LzToastrQuery,
+} from "@components";
 import { enterAnimation } from "@core";
 
 @Component({
@@ -8,6 +16,9 @@ import { enterAnimation } from "@core";
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./toastr.component.scss"],
     templateUrl: "./toastr.component.html",
+    standalone: true,
+    imports: [LZToastrBoxComponent, LZToastrListComponent, LZInitVarDirective, CommonModule],
+    providers: [LZToastrStore, LZToastrService, LzToastrQuery],
     animations: [enterAnimation],
 })
 export class LZToastrComponent {

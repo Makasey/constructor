@@ -13,4 +13,3 @@ export {
 export { LzToastrQuery, LZToastrStore, LZToastrService } from "./store";
 export { LZToastrItemComponent, LZToastrListComponent, LZToastrBoxComponent } from "./components";
 export { LZToastrComponent } from "./toastr.component";
-export { LZToastrModule } from "./toastr.module";

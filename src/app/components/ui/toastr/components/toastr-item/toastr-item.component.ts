@@ -15,6 +15,7 @@ import {
     ViewContainerRef,
     inject,
 } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 import { fadeInAnimation, fadeOutAnimation } from "@core";
 
@@ -25,6 +26,8 @@ import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem, TOASTR_ITEM
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-item.component.html",
     animations: [fadeInAnimation, fadeOutAnimation],
+    standalone: true,
+    imports: [CommonModule],
 })
 export class LZToastrItemComponent implements OnInit {
     @Input()

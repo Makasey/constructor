@@ -1,15 +1,18 @@
 import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 import { ID } from "@datorama/akita";
 
 import { enterAnimation } from "@core";
 
-import { LZToastrItem, LZToastrService, LzToastrQuery } from "@components";
+import { LZToastrItem, LZToastrService, LzToastrQuery, LZToastrItemComponent } from "@components";
 
 @Component({
     selector: "lz-toastr-list",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-list.component.html",
+    standalone: true,
+    imports: [CommonModule, LZToastrItemComponent],
     animations: [enterAnimation],
 })
 export class LZToastrListComponent {
