@@ -46,7 +46,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         return this.getStoreElement("items")[id] as T;
     }
 
-    public getItems(): Observable<Record<string, SitePageElement>> {
+    public selectItems(): Observable<Record<string, SitePageElement>> {
         return this.query.select(state => state.items)!;
     }
 

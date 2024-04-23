@@ -1,4 +1,5 @@
 import { ElementButton, SitePageElement, SitePageElementType, possibleSiteElementsMap } from "@modules/constructor";
+import { Tree } from "@components/ui/tree/tree.component";
 import { arrayAdd } from "@datorama/akita";
 import { getRandomId } from "@shared-utils";
 
@@ -87,4 +88,16 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
             return [];
         }
     }
+}
+
+export function mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree {
+    const { id, children, type } = items[element];
+
+    return {
+        value: id,
+        label: type,
+        children: children.map(child => {
+            return mapElementsToTreeModel(items, child);
+        }),
+    };
 }

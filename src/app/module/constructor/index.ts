@@ -136,6 +136,7 @@ export {
     processDuplicateElementsById,
     processDuplicateSectionElement,
     processCreateElementActions,
+    mapElementsToTreeModel,
 } from "./utils";
 
 export {
