@@ -4,6 +4,6 @@
 
 @if (tree?.children?.length && !closed) {
     @for (childTree of tree.children; track childTree.value) {
-        <lz-tree [tree]="childTree"></lz-tree>
+        <lz-tree [tree]="childTree" (emitTree)="emit($event)"></lz-tree>
     }
 }

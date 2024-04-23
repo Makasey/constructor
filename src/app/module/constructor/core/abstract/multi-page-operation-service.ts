@@ -1,7 +1,7 @@
 import { AbstractEditorOperationService, ROOT_ELEMENT_ID, SitePageElement, deleteElementFromTree, duplicateTreeElement } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
 import { Inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import { getRandomId } from "@shared-utils";
 
 @Injectable()
@@ -141,6 +141,21 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
     public selectSelectedPage(): Observable<string> {
         return this.query.select(state => state.selectedPage);
+    }
+
+    public selectActivePage(): Observable<Page> {
+        return this.query
+            .select(state => {
+                return {
+                    selectedPage: state.selectedPage,
+                    pages: state.pages,
+                };
+            })
+            .pipe(
+                map(({ selectedPage, pages }) => {
+                    return pages.find(page => page.id === selectedPage)!;
+                }),
+            );
     }
 }
 

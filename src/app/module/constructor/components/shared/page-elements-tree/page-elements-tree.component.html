@@ -1,3 +1,4 @@
+{{ pageTitle() }}
 @for (element of elements(); track element.value) {
     <lz-tree [tree]="element" (emitTree)="updateSelection($event)"></lz-tree>
 }
