@@ -7,7 +7,7 @@
             #rowElement
             [class._disabled]="valueExtra()?.disabled"
             [class._hoverable]="tableExtra().hoverableRows"
-            [class._highlighted]="$any(tableExtra().clickableRows && highlighterId === tableRow[tableExtra.idKey])"
+            [class._highlighted]="$any(tableExtra().clickableRows && highlighterId === tableRow[tableExtra().idKey])"
             [ngClass]="valueExtra()?.rowCustomClass"
             (click)="tableExtra().clickableRows && onRowClick()"
         >
@@ -32,9 +32,9 @@
                     }"
                     [ngClass]="metaItem.customClass"
                     [style.padding-left.px]="
-                        tableExtra.isHierarchical &&
+                        tableExtra().isHierarchical &&
                         !index &&
-                        (valueExtra | lzRowPadding: _paddingType.CELL : tableExtra.hasCheckboxes)
+                        (valueExtra | lzRowPadding: _paddingType.CELL : tableExtra().hasCheckboxes)
                     "
                 >
                     @if (valueExtra) {
