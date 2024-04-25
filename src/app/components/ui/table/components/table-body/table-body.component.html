@@ -1,4 +1,4 @@
-@if (tableExtra) {
+@if (tableExtra()) {
     <div class="table-body-row-wrapper">
         @for (row of tableRows(); track trackByRow(); let rowIndex = $index) {
             <lz-table-row

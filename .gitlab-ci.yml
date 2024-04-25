@@ -1,20 +1,7 @@
 stages:
   - lint
   - test
-  - dependencies
   - build
-
-Install dependencies:
-  image: node:18-alpine
-  stage: dependencies
-  script:
-    - npm install --legacy-peer-deps
-  cache:
-    key:
-      files:
-        - package-lock.json
-    paths:
-      - node_modules
 
 Build project:
   image: node:18-alpine

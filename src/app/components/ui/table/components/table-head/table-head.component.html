@@ -1,5 +1,5 @@
-@if (tableExtra) {
-    <ng-template [ngTemplateOutlet]="tableExtra.draggableHeader ? draggableRow : defaultRow"></ng-template>
+@if (tableExtra()) {
+    <ng-template [ngTemplateOutlet]="tableExtra().draggableHeader ? draggableRow : defaultRow"></ng-template>
 }
 
 <ng-template #draggableRow>
