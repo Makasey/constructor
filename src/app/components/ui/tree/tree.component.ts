@@ -1,9 +1,22 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, Inject, Input, Optional, SkipSelf, ViewEncapsulation } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    HostBinding,
+    HostListener,
+    Inject,
+    Input,
+    Optional,
+    Output,
+    SkipSelf,
+    ViewEncapsulation,
+} from "@angular/core";
 import { NgFor, NgIf } from "@angular/common";
 
-export type Tree<V = number> = {
+export type Tree<V = string> = {
     value: V;
     children: Tree<V>[];
+    label?: string;
 };
 
 @Component({
@@ -28,6 +41,13 @@ export class TreeComponent {
         required: true,
     })
     public tree: Tree;
+
+    @Output()
+    public readonly emitTree: EventEmitter<Tree> = new EventEmitter<Tree>();
+
+    public emit(tree: Tree): void {
+        this.emitTree.emit(tree);
+    }
 
     public closed = false;
 

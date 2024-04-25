@@ -1,5 +1,5 @@
-import { HostBinderAsyncPlugin, PreventEventPlugin, SilentEventPlugin, StopEventPlugin } from "@shared-plugins";
 import { EVENT_MANAGER_PLUGINS } from "@angular/platform-browser";
+import { HostBinderAsyncPlugin, PreventEventPlugin, SilentEventPlugin, StopEventPlugin } from "@shared-plugins";
 
 export const EVENT_MANAGER_PLUGIN_PROVIDERS = [
     {

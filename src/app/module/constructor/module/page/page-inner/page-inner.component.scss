@@ -1,7 +1,9 @@
 .lz-page-inner {
     --editor-sidebar-width: 400px;
 
-    padding: 20px 20px 20px var(--editor-sidebar-width);
+    --tree-sidebar-width: 300px;
+
+    padding: 20px calc(var(--tree-sidebar-width) + 20px) 20px calc(var(--editor-sidebar-width) + 20px);
 
     .settings-title {
         font-size: 24px;
@@ -33,6 +35,18 @@
             align-items: center;
             gap: 16px;
         }
+    }
+
+    .tree-sidebar {
+        position: fixed;
+        right: 0;
+        top: 0;
+        background: #1b1c21;
+        height: 100vh;
+        width: 100%;
+        max-width: var(--tree-sidebar-width);
+        color: #fff;
+        padding: 20px;
     }
 
     .form-controls {

@@ -12,7 +12,7 @@ export const DATA_SERVICES_PROVIDERS = [
         provide: LZAbstractAuthDataService,
         useClass: LZDefaultAuthDataService,
     },
-   
+
     {
         provide: AbstractCampaignDataService,
         useClass: CampaignDataService,
@@ -20,5 +20,5 @@ export const DATA_SERVICES_PROVIDERS = [
     {
         provide: AbstractFilesDataService,
         useClass: DefaultFilesDataService,
-    },  
+    },
 ];

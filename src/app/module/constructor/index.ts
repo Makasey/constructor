@@ -136,6 +136,7 @@ export {
     processDuplicateElementsById,
     processDuplicateSectionElement,
     processCreateElementActions,
+    mapElementsToTreeModel,
 } from "./utils";
 
 export {
@@ -226,6 +227,7 @@ export {
     DividerComponent,
     PagesBarComponent,
     ElementActionsComponent,
+    PageElementsTreeComponent,
 } from "./components";
 
 export {
