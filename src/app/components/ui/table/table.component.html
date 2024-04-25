@@ -19,7 +19,7 @@
             [tableExtra]="tableExtra$ | async"
         ></lz-table-head>
 
-        @if (!!_tableRows.length) {
+        @if (!!tableRows().length) {
             <lz-table-body
                 [tableRows]="tableRows$ | async"
                 [tableExtra]="tableExtra$ | async"
