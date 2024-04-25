@@ -1,1 +1,1 @@
-export { TableRowComponent } from "./table-row.component";
+export { LZTableRowComponent } from "./table-row.component";

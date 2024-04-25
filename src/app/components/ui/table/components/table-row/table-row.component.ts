@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, input, WritableSignal } from "@angular/core";
+import { AsyncPipe, NgTemplateOutlet, NgClass, NgStyle } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 import { BehaviorSubject, Observable } from "rxjs";
 import { debounceTime, filter } from "rxjs/operators";
@@ -14,16 +18,21 @@ import {
     checkScrollPosition,
 } from "@components";
 import { shouldCall } from "@shared-decorators";
+import { LZInitVarDirective } from "@shared-directives/init-var";
+
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
 import { defaultTrackBy } from "../../constants";
+import { LZRowPaddingPipe } from "../../pipes";
 
 @Component({
     selector: "lz-table-row",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./table-row.component.html",
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [AsyncPipe, LZInitVarDirective, LZRowPaddingPipe, NgTemplateOutlet, FormsModule, NgClass, NgStyle, DragDropModule],
 })
-export class TableRowComponent {
+export class LZTableRowComponent {
     @HostBinding("class.table-row")
     public hostClass = true;
 

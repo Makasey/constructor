@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 
-import { Observable, shareReplay } from "rxjs";
+import { Observable, shareReplay, skip, map, distinctUntilChanged } from "rxjs";
 
 import {
     TableExtra,
@@ -96,7 +96,12 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
 
     public valuesExtra$: Observable<TableValueExtraInternal> = this.query.select(state => state.valuesExtra).pipe(shareReplay(1));
 
-    public selectedRows$: Observable<unknown[]> = this.query.select(state => state.selectedRows).pipe(shareReplay(1));
+    public selectedRows$: Observable<unknown[]> = this.query.select(state => state.selectedRows).pipe(
+        skip(1),
+        distinctUntilChanged((previous, current) => isArrayEquals(previous, current)),
+        map(rows => [...rows]),
+        shareReplay(1)
+    );
 
     public isDragging$: Observable<boolean> =  this.query.select(state => state.isDragging).pipe(shareReplay(1));
 

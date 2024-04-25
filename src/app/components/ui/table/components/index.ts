@@ -1,4 +1,4 @@
-export { TableBodyComponent } from "./table-body";
-export { TableHeadComponent } from "./table-head";
-export { TableRowComponent } from "./table-row";
-export { TableFootComponent } from "./table-foot";
+export { LZTableBodyComponent } from "./table-body";
+export { LZTableHeadComponent } from "./table-head";
+export { LZTableRowComponent } from "./table-row";
+export { LZTableFootComponent } from "./table-foot";

@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./table-foot.component.html",
 })
-export class TableFootComponent {
+export class LZTableFootComponent {
     @HostBinding("class.table-foot")
     public hostClass = true;
 }

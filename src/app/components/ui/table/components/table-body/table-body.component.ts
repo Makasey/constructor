@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, input, WritableSignal } from "@angular/core";
 
-import { TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
+import { LZTableRowComponent, TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 import { defaultTrackBy } from "../../constants";
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers/table.transformers";
 
@@ -8,8 +8,10 @@ import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../
     selector: "lz-table-body",
     templateUrl: "./table-body.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [LZTableRowComponent],
 })
-export class TableBodyComponent {
+export class LZTableBodyComponent {
     @HostBinding("class.table-body")
     public hostClass = true;
 

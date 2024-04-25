@@ -1,19 +1,4 @@
 import {
-    AbstractAwesomeTableService,
-    ColumnDropEvent,
-    DEFAULT_LOAD_MORE_LABEL,
-    TableExtra,
-    TableMeta,
-    TableRow,
-    TableValueExtraInternal,
-    TemplateMap,
-    checkScrollPosition,
-    defaultTableExtra,
-    provideTableStore,
-} from "@components";
-import { BehaviorSubject, Observable, debounceTime, filter, skip, tap, distinctUntilChanged } from "rxjs";
-import { CdkDragDrop } from "@angular/cdk/drag-drop";
-import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
@@ -27,8 +12,29 @@ import {
     computed,
     untracked,
 } from "@angular/core";
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
+
+import { BehaviorSubject, Observable, debounceTime, filter, tap } from "rxjs";
+import { CdkDragDrop, DragDropModule } from "@angular/cdk/drag-drop";
+
+import {
+    AbstractAwesomeTableService,
+    ColumnDropEvent,
+    DEFAULT_LOAD_MORE_LABEL,
+    TableExtra,
+    TableMeta,
+    TableRow,
+    TableValueExtraInternal,
+    TemplateMap,
+    checkScrollPosition,
+    defaultTableExtra,
+    provideTableStore,
+    LZLoaderComponent,
+    LZTableBodyComponent,
+    LZTableHeadComponent,
+} from "@components";
 import { shouldCall } from "@shared-decorators";
-import { isArrayEquals } from "@shared-utils/object.utils";
+
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
 
@@ -37,11 +43,13 @@ import { defaultTrackBy } from "./constants";
     templateUrl: "./table.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
     providers: [
         ...provideTableStore(),
     ],
 })
-export class TableComponent implements OnInit {
+export class LZTableComponent implements OnInit {
     public templatesMap: WritableSignal<TemplateMap> = input({});
 
     public loadMoreLabel: WritableSignal<string> = input(DEFAULT_LOAD_MORE_LABEL);
@@ -72,8 +80,7 @@ export class TableComponent implements OnInit {
     public valuesExtra$: Observable<TableValueExtraInternal> = this.service.valuesExtra$;
 
     public selectedRows$: Observable<unknown[]> = this.service.selectedRows$.pipe(
-        skip(1),
-        distinctUntilChanged((previous, current) => isArrayEquals(previous, current)),
+      
         tap(rows => this.onSelect.emit(rows)),
     );
 

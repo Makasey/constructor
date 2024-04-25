@@ -1,1 +1,1 @@
-export { TableHeadComponent } from "./table-head.component";
+export { LZTableHeadComponent } from "./table-head.component";

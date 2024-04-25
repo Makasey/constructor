@@ -77,7 +77,7 @@
 <ng-template #defaultFooterTemplate></ng-template>
 
 <ng-template #noRecordsTemplate>
-    <ng-template [ngTemplateOutlet]="templatesMap.noRecordsTemplate ?? defaultNoRecordsTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="templatesMap().noRecordsTemplate ?? defaultNoRecordsTemplate"></ng-template>
 </ng-template>
 
 <ng-template #defaultNoRecordsTemplate>

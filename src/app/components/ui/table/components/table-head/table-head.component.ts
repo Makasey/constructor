@@ -1,14 +1,21 @@
 import { ChangeDetectionStrategy, Component, HostBinding, input, WritableSignal } from "@angular/core";
+import { AsyncPipe, NgTemplateOutlet, NgClass, NgStyle } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+
+import { DragDropModule } from "@angular/cdk/drag-drop";
+
+import { Observable } from "rxjs";
 
 import { AbstractAwesomeTableService, TableExtra, TableMeta, TemplateMap } from "@components";
-import { Observable } from "rxjs";
 
 @Component({
     selector: "lz-table-head",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./table-head.component.html",
+    standalone: true,
+    imports: [AsyncPipe, NgTemplateOutlet, FormsModule, NgClass, NgStyle, DragDropModule],
 })
-export class TableHeadComponent {
+export class LZTableHeadComponent {
     @HostBinding("class.table-head")
     public hostClass = true;
 

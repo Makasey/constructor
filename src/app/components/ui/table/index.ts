@@ -1,9 +1,8 @@
-export { TableRowComponent, TableHeadComponent, TableFootComponent, TableBodyComponent } from "./components";
+export { LZTableBodyComponent, LZTableFootComponent, LZTableHeadComponent, LZTableRowComponent } from "./components";
 export { TableQuery, TableService, TableStore, provideTableStore } from "./store/table-store.providers";
 export { AbstractAwesomeTableService, DefaultAwesomeTableService } from "./store/table-component.store";
-export { RowPaddingPipe } from "./pipes/row-padding.pipe";
-export { TableComponent } from "./table.component";
-export { LzTableModule } from "./table.module";
+export { LZRowPaddingPipe } from "./pipes";
+export { LZTableComponent } from "./table.component";
 export {
     TableMeta,
     TableRow,

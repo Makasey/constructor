@@ -1,1 +1,1 @@
-export { TableFootComponent } from "./table-foot.component";
+export { LZTableFootComponent } from "./table-foot.component";
