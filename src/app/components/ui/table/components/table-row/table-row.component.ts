@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, Output, ViewEncapsulation, input, WritableSignal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, input, WritableSignal } from "@angular/core";
 
 import { BehaviorSubject, Observable } from "rxjs";
 import { debounceTime, filter } from "rxjs/operators";

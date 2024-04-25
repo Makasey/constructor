@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, input, WritableSignal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, input, WritableSignal } from "@angular/core";
 
 import { TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 import { defaultTrackBy } from "../../constants";

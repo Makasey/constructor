@@ -23,7 +23,7 @@ import {
     TemplateRef,
     ViewEncapsulation,
     input,
-    Signal,
+    WritableSignal,
     computed,
     untracked,
 } from "@angular/core";
@@ -42,13 +42,13 @@ import { defaultTrackBy } from "./constants";
     ],
 })
 export class TableComponent implements OnInit {
-    public templatesMap: Signal<TemplateMap> = input({});
+    public templatesMap: WritableSignal<TemplateMap> = input({});
 
-    public loadMoreLabel: Signal<string> = input(DEFAULT_LOAD_MORE_LABEL);
+    public loadMoreLabel: WritableSignal<string> = input(DEFAULT_LOAD_MORE_LABEL);
 
-    public footerTemplate: Signal<TemplateRef<unknown> | undefined> = input(undefined);
+    public footerTemplate: WritableSignal<TemplateRef<unknown> | undefined> = input(undefined);
 
-    public relations: Signal<Record<string, unknown[]>> = input({});
+    public relations: WritableSignal<Record<string, unknown[]>> = input({});
 
     @Output()
     public onBottomScrolled: Observable<boolean>;
@@ -104,7 +104,7 @@ export class TableComponent implements OnInit {
         transform: coerceNullableArray
     });
 
-    public selectedRows = input([], {
+    public selectedRows: WritableSignal<unknown> = input([], {
         transform: coerceNullableArray,
     })
 

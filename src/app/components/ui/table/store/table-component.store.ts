@@ -27,8 +27,7 @@ import {
     TableStateUpdateModel,
     convertPlainRowsToValueExtraParams,
 } from "@components";
-import { TableState, UIDataState } from "@core";
-import { TableValueExtraInternalParams } from "../interfaces";
+import { TableState } from "@core";
 import { convertSelectedRows } from "../utils";
 
 @Injectable()

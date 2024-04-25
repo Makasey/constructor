@@ -52,4 +52,4 @@ export const initialTableStore: TableState = {
     isDragging: false,
 };
 
-export const defaultTrackBy = <T>(index: number, item: T) => index;
+export const defaultTrackBy = <T>(index: number, item: T): number => index;
