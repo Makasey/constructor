@@ -111,7 +111,7 @@ export class LZTableComponent implements OnInit {
         transform: coerceNullableArray
     });
 
-    public selectedRows: WritableSignal<unknown> = input([], {
+    public selectedRows: WritableSignal<unknown[]> = input([], {
         transform: coerceNullableArray,
     })
 

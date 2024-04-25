@@ -93,7 +93,7 @@ export function initialTableState(): TableState {
         tableMeta: [],
         tableRows: [],
         valuesExtra: {},
-        selectedRows: [],
+        selectedRows: new Set(),
         isDragging: false,
     };
 }
