@@ -102,10 +102,10 @@ export class LZTableRowComponent {
         }
     }
 
-    public onArrowClick(event: Event, row: TableRow): void {
+    public onArrowClick(event: Event): void {
         event.stopPropagation();
 
-        const id = this.getChildRowId(row);
+        const id = this.getChildRowId(this.tableRow());
         const isOpened = this.valuesExtra[id].opened;
 
         if(isOpened) {

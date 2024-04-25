@@ -42,7 +42,7 @@
                             <div
                                 class="table-row-cell-arrow"
                                 [class._opened]="valueExtra?.opened"
-                                (click)="onArrowClick($event, tableRow)"
+                                (click)="onArrowClick($event)"
                             >
                                 @if (!valueExtra?.opened) {
                                     <svg class="table-row-cell-arrow-icon">
@@ -69,9 +69,9 @@
                         <ng-template
                             [ngTemplateOutlet]="$any(templatesMap()[metaItem.templateKey!] ?? defaultItemTemplate)"
                             [ngTemplateOutletContext]="{
-                                row: tableRow,
+                                row: tableRow(),
                                 key: metaItem.fieldKey,
-                                value: tableRow[metaItem.fieldKey],
+                                value: tableRow()[metaItem.fieldKey],
                                 metaItem: metaItem,
                                 tableMeta: tableMeta,
                                 valueExtra: valueExtra,
@@ -91,7 +91,7 @@
             <ng-template
                 [ngTemplateOutlet]="$any(templatesMap()[valueExtra?.rowSubTemplateKey])"
                 [ngTemplateOutletContext]="{
-                    row: tableRow,
+                    row: tableRow(),
                     tableMeta: tableMeta,
                     rowElement: rowElement
                 }"
@@ -104,7 +104,7 @@
                 <ng-template
                     [ngTemplateOutlet]="$any(templatesMap()[valueExtra.expandTemplateKey])"
                     [ngTemplateOutletContext]="{
-                        row: tableRow
+                        row: tableRow()
                     }"
                 ></ng-template>
             </div>
