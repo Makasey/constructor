@@ -2,36 +2,35 @@ import {
     AbstractAwesomeTableService,
     ColumnDropEvent,
     DEFAULT_LOAD_MORE_LABEL,
-    DefaultAwesomeTableService,
     TableExtra,
     TableMeta,
-    TableQuery,
     TableRow,
-    TableService,
-    TableStateUpdateModel,
-    TableStore,
     TableValueExtraInternal,
     TemplateMap,
     checkScrollPosition,
-    convertPlainRowsToValueExtraParams,
     defaultTableExtra,
+    provideTableStore,
 } from "@components";
-import { BehaviorSubject, Observable, debounceTime, filter, skip, tap } from "rxjs";
+import { BehaviorSubject, Observable, debounceTime, filter, skip, tap, distinctUntilChanged } from "rxjs";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
 import {
     ChangeDetectionStrategy,
     Component,
     EventEmitter,
     Input,
-    OnChanges,
-    OnDestroy,
     OnInit,
     Output,
-    SimpleChanges,
     TemplateRef,
     ViewEncapsulation,
+    input,
+    Signal,
+    computed,
+    untracked,
 } from "@angular/core";
 import { shouldCall } from "@shared-decorators";
+import { isArrayEquals } from "@shared-utils/object.utils";
+import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
+import { defaultTrackBy } from "./constants";
 
 @Component({
     selector: "lz-table",
@@ -39,30 +38,17 @@ import { shouldCall } from "@shared-decorators";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
-        TableStore,
-        TableQuery,
-        TableService,
-        {
-            provide: AbstractAwesomeTableService,
-            useClass: DefaultAwesomeTableService,
-        },
+        ...provideTableStore(),
     ],
 })
-export class TableComponent implements OnInit, OnChanges, OnDestroy {
-    @Input()
-    public templatesMap: TemplateMap = {};
+export class TableComponent implements OnInit {
+    public templatesMap: Signal<TemplateMap> = input({});
 
-    @Input()
-    public loadMoreLabel = DEFAULT_LOAD_MORE_LABEL;
+    public loadMoreLabel: Signal<string> = input(DEFAULT_LOAD_MORE_LABEL);
 
-    @Input()
-    public footerTemplate: TemplateRef<unknown>;
+    public footerTemplate: Signal<TemplateRef<unknown> | undefined> = input(undefined);
 
-    @Input()
-    public height = 400;
-
-    @Input()
-    public relations: Record<string, unknown[]> = {};
+    public relations: Signal<Record<string, unknown[]>> = input({});
 
     @Output()
     public onBottomScrolled: Observable<boolean>;
@@ -75,28 +61,19 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
 
     public _tableExtra: TableExtra = { ...defaultTableExtra };
 
-    public _selectedRows: unknown[] = [];
-
-    public _loading: boolean;
-
-    public _tableRows: TableRow[] = [];
-
-    public _tableMeta: TableMeta[] = [];
-
     public previousScrollPosition: number;
 
-    public _valuesExtra: TableValueExtraInternal = {};
+    public tableRows$: Observable<TableRow[]> = this.service.tableRows$;
 
-    public tableRows$: Observable<TableRow[]> = this.service.selectTableRows();
+    public tableExtra$: Observable<TableExtra> = this.service.tableExtra$;
 
-    public tableExtra$: Observable<TableExtra> = this.service.selectTableExtra();
+    public tableMeta$: Observable<TableMeta[]> = this.service.tableMeta$;
 
-    public tableMeta$: Observable<TableMeta[]> = this.service.selectTableMeta();
+    public valuesExtra$: Observable<TableValueExtraInternal> = this.service.valuesExtra$;
 
-    public valuesExtra$: Observable<TableValueExtraInternal> = this.service.selectValuesExtra();
-
-    public selectedRows$: Observable<unknown[]> = this.service.selectSelectedRows().pipe(
+    public selectedRows$: Observable<unknown[]> = this.service.selectedRows$.pipe(
         skip(1),
+        distinctUntilChanged((previous, current) => isArrayEquals(previous, current)),
         tap(rows => this.onSelect.emit(rows)),
     );
 
@@ -111,32 +88,43 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
         );
     }
 
-    @Input()
-    public set tableMeta(tableMeta: TableMeta[] | null) {
-        this._tableMeta = tableMeta ?? [];
-    }
+    public tableMeta = input.required([], {
+        transform: coerceNullableArray,
+    });
 
-    @Input()
-    public set trackByRow(trackByRow: (index: number, item: unknown) => unknown) {
-        if (trackByRow) {
-            this._trackByRow = trackByRow;
-        }
-    }
+    public trackByRow  = input(defaultTrackBy, {
+        transform: transformTrackBy,
+    });
 
-    @Input()
-    public set loading(loading: boolean) {
-        this._loading = loading ?? false;
-    }
+    public loading = input(false, {
+        transform: coerceBoolean,
+    })
 
-    @Input({ required: true })
-    public set tableRows(tableRows: TableRow[] | null) {
-        this._tableRows = tableRows ?? [];
-    }
+    public tableRows = input.required([], {
+        transform: coerceNullableArray
+    });
 
-    @Input()
-    public set selectedRows(selectedRows: unknown[]) {
-        this._selectedRows = Array.isArray(selectedRows) ? [...selectedRows] : [];
-    }
+    public selectedRows = input([], {
+        transform: coerceNullableArray,
+    })
+
+    public valuesExtra = input({}, {
+        transform: coerceNullableObject,
+    })
+
+    public calculateValueExtra = computed(() => {
+        this.service.calculateTableState({
+            selectedRows: untracked(() => this.selectedRows()),
+            tableExtra: this._tableExtra,
+            tableMeta: this.tableMeta(),
+            tableRows: this.tableRows(),
+            valuesExtra: this.valuesExtra(),
+        }, this.relations())
+    });
+
+    public calculateSelectedRows = computed(() => {
+        this.service.calculateSelectedRows(this.selectedRows());
+    });
 
     @Input({ required: true })
     public set tableExtra(tableExtra: Partial<TableExtra> | null) {
@@ -145,10 +133,6 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
         this._tableExtra = { ...this._tableExtra, ...processedTableExtra };
     }
 
-    @Input()
-    public set valuesExtra(valuesExtra: TableValueExtraInternal | null) {
-        this._valuesExtra = valuesExtra ?? {};
-    }
 
     @shouldCall(checkScrollPosition)
     public onScroll(_: Event): void {
@@ -156,30 +140,9 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public ngOnInit(): void {
-        this.trackByRow = (_: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey];
-    }
-
-    public ngOnDestroy(): void {
-        this.service.resetState();
-    }
-
-    public updateComponentStore(state: TableStateUpdateModel, relations: Record<string, unknown[]>): void {
-        const { tableRows, tableMeta, tableExtra, valuesExtra, selectedRows } = state;
-
-        const { tableRows: processedTableRows, valuesExtra: processedValuesExtra } = convertPlainRowsToValueExtraParams(
-            tableRows,
-            relations,
-            tableExtra,
-            valuesExtra,
-            selectedRows,
-        );
-
-        this.service.patchState({
-            tableExtra: tableExtra,
-            tableRows: processedTableRows,
-            tableMeta: tableMeta,
-            valuesExtra: processedValuesExtra,
-        });
+        if(!this.trackByRow()) {
+            this.trackByRow.set((_: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey]);
+        }
     }
 
     public deselect(): void {
@@ -187,30 +150,12 @@ export class TableComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     public dropColumn(event: CdkDragDrop<unknown, unknown>): void {
-        const { currentIndex, previousIndex } = event;
+        const dragEvent = this.service.dropColumn(event);
 
-        if (currentIndex === previousIndex) {
+        if(!dragEvent) {
             return;
         }
 
-        this.columnDropped.emit({
-            previousIndex: previousIndex,
-            currentIndex: currentIndex,
-        });
-    }
-
-    public ngOnChanges(changes: SimpleChanges): void {
-        if ((changes.tableMeta && !changes.tableMeta.firstChange) || (changes.tableRows && !changes.tableRows.firstChange)) {
-            this.updateComponentStore(
-                {
-                    tableRows: this._tableRows,
-                    valuesExtra: this._valuesExtra,
-                    tableMeta: this._tableMeta,
-                    tableExtra: this._tableExtra,
-                    selectedRows: this._selectedRows,
-                },
-                this.relations,
-            );
-        }
+        this.columnDropped.emit(dragEvent);
     }
 }

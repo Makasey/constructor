@@ -1,15 +1,15 @@
 @if (tableExtra) {
     <div class="table-body-row-wrapper">
-        @for (row of tableRows; track trackByRow; let rowIndex = $index) {
+        @for (row of tableRows(); track trackByRow(); let rowIndex = $index) {
             <lz-table-row
                 class="table-body-row"
                 [tableRow]="row"
-                [tableMeta]="tableMeta"
-                [templatesMap]="templateMap"
-                [tableExtra]="tableExtra"
-                [valuesExtra]="valuesExtra"
+                [tableMeta]="tableMeta()"
+                [templatesMap]="templateMap()"
+                [tableExtra]="tableExtra()"
+                [valuesExtra]="valuesExtra()"
                 [rowIndex]="rowIndex"
-                [trackByRow]="trackByRow"
+                [trackByRow]="trackByRow()"
                 (onBottomScrolled)="onBottomScrolled($event)"
             ></lz-table-row>
         }

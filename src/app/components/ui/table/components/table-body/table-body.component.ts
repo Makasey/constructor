@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, input, WritableSignal } from "@angular/core";
 
 import { TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
+import { defaultTrackBy } from "../../constants";
+import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers/table.transformers";
 
 @Component({
     selector: "lz-table-body",
@@ -11,23 +13,27 @@ export class TableBodyComponent {
     @HostBinding("class.table-body")
     public hostClass = true;
 
-    @Input()
-    public templateMap: TemplateMap = {};
+    public templateMap: WritableSignal<TemplateMap> = input({});
 
-    @Input()
-    public tableMeta: TableMeta[] = [];
+    public tableMeta: WritableSignal<TableMeta[]> = input([], {
+        transform: coerceNullableArray,
+    });
 
-    @Input()
-    public tableRows: TableRow[] = [];
+    public tableRows: WritableSignal<TableRow[]> = input([], {
+        transform: coerceNullableArray,
+    });
 
-    @Input()
-    public tableExtra: Partial<TableExtra> = {};
+    public tableExtra: WritableSignal<Partial<TableExtra>> = input({}, {
+        transform: coerceNullableObject,
+    });
 
-    @Input()
-    public valuesExtra: TableValueExtraInternal = {};
+    public valuesExtra: WritableSignal<TableValueExtraInternal> = input({}, {
+        transform: coerceNullableObject,
+    });
 
-    @Input()
-    public trackByRow: (index: number, row: unknown) => unknown;
+    public trackByRow = input(defaultTrackBy, {
+        transform: transformTrackBy,
+    })
 
     @Output()
     public rowScrolledBottom: EventEmitter<boolean> = new EventEmitter<boolean>();

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, input, WritableSignal } from "@angular/core";
 
 import { AbstractAwesomeTableService, TableExtra, TableMeta, TemplateMap } from "@components";
 import { Observable } from "rxjs";
@@ -12,23 +12,24 @@ export class TableHeadComponent {
     @HostBinding("class.table-head")
     public hostClass = true;
 
-    @Input()
-    public templateMap: TemplateMap = {};
+    public templateMap: WritableSignal<TemplateMap> = input({});
 
-    @Input()
-    public tableExtra: Partial<TableExtra> = {};
+    public tableExtra: WritableSignal<Partial<TableExtra>> = input({});
 
-    @Input()
-    public tableMeta: TableMeta[] = [];
+    public tableMeta: WritableSignal<TableMeta[]> = input([]);
 
-    public isDragging$: Observable<boolean> = this.service.selectIsDragging();
+    public isDragging$: Observable<boolean> = this.service.isDragging$;
 
     constructor(private service: AbstractAwesomeTableService) {}
 
-    public selectAllRowsHandler(event: Event): void {
-        event.stopPropagation();
+    public selectAllRowsHandler(): void {
+        if(this.tableExtra().selectAll) {
+            this.service.deselectAllRows()
 
-        !this.tableExtra.selectAll ? this.service.selectAllRows() : this.service.deselectAllRows();
+            return;
+        }
+
+        this.service.selectAllRows();
     }
 
     public startColumnDrag(): void {

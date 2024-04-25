@@ -1,7 +1,7 @@
-import { Injectable, OnDestroy } from "@angular/core";
+import { Injectable, OnDestroy, Provider } from "@angular/core";
 import { Query, Store, UpdateStateCallback, guid } from "@datorama/akita";
 import { TableState } from "@core";
-import { initialTableStore } from "@components";
+import { AbstractAwesomeTableService, DefaultAwesomeTableService, initialTableStore } from "@components";
 
 @Injectable()
 export class TableStore extends Store<TableState> {
@@ -32,4 +32,16 @@ export class TableService implements OnDestroy {
             };
         });
     }
+}
+
+export function provideTableStore(): Provider[] {
+    return [
+        TableStore,
+        TableQuery,
+        TableService,
+        {
+            provide: AbstractAwesomeTableService,
+            useClass: DefaultAwesomeTableService,
+        },
+    ]
 }

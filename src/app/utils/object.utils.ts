@@ -13,11 +13,9 @@ export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T)
         const targetItem = target[key];
         const otherItem = other[key];
 
+
         if (Array.isArray(targetItem) && Array.isArray(otherItem)) {
-            return (
-                targetItem.length === otherItem.length &&
-                targetItem.every(element => !!otherItem.find(otherElement => isObjectEquals(element, otherElement)))
-            );
+            return isArrayEquals(targetItem, otherItem);
         }
 
         if (isObject(targetItem) && isObject(otherItem)) {
@@ -26,4 +24,17 @@ export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T)
 
         return targetItem === otherItem;
     });
+}
+
+export function isArrayEquals<T = unknown>(target: T[], other: T[]): boolean {
+    if(!target || !other) {
+        return false;
+    }
+
+    target = Array.from(target);
+
+    return (
+        target.length === other.length &&
+        target.every(element => !!other.find(otherElement => isObjectEquals(element, otherElement)))
+    );
 }

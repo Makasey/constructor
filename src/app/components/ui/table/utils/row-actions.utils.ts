@@ -103,3 +103,7 @@ export function enableRowById(id: string, valuesExtra: TableValueExtraInternal):
         },
     };
 }
+
+export function convertSelectedRows(selectedRows: unknown[]): Set<unknown> {
+    return new Set(selectedRows);
+}

@@ -5,7 +5,7 @@ export function convertPlainRowsToValueExtraParams(
     relations: Record<string, unknown[]>,
     tableExtra: TableExtra,
     valuesExtra: TableValueExtraInternal,
-    selectedRows: unknown[],
+    selectedRows: Set<unknown>,
 ): { tableRows: TableRow[]; valuesExtra: TableValueExtraInternal } {
     let valueExtra: TableValueExtraInternal = {} as TableValueExtraInternal;
     const processedRows: TableRow[] = [];
@@ -52,7 +52,7 @@ export function convertPlainRowsToValueExtraParams(
                     children: children,
                     parentId: parentId,
                     level: 1 + +(parentId ?? 0) ? 1 : 0,
-                    selected: selectedRows.includes(id),
+                    selected: selectedRows.has(id),
                 },
                 ...(valuesExtra[id] ?? {}),
             },

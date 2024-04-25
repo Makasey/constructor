@@ -23,4 +23,4 @@ export {
     convertRouteParamsToParamsWithConditions,
     ValueWithCondition,
 } from "./router-parameters/router-parameters";
-export { isObjectEquals } from "./object.utils";
+export { isObjectEquals, isArrayEquals } from "./object.utils";

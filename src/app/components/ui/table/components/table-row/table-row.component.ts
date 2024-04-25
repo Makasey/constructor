@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, Output, ViewEncapsulation, input, WritableSignal } from "@angular/core";
 
 import { BehaviorSubject, Observable } from "rxjs";
 import { debounceTime, filter } from "rxjs/operators";
@@ -14,6 +14,8 @@ import {
     checkScrollPosition,
 } from "@components";
 import { shouldCall } from "@shared-decorators";
+import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
+import { defaultTrackBy } from "../../constants";
 
 @Component({
     selector: "lz-table-row",
@@ -25,29 +27,31 @@ export class TableRowComponent {
     @HostBinding("class.table-row")
     public hostClass = true;
 
-    @Input()
-    public templatesMap: TemplateMap = {};
+    public templatesMap: WritableSignal<TemplateMap> = input({});
 
-    @Input()
-    public tableMeta: TableMeta[];
+    public tableMeta: WritableSignal<TableMeta[]> = input([], {
+        transform: coerceNullableArray
+    });
 
-    @Input()
-    public tableExtra: TableExtra;
+    public tableExtra: WritableSignal<TableExtra> = input({} as TableExtra, {
+        transform: coerceNullableObject,
+    });
 
-    @Input()
-    public valuesExtra: TableValueExtraInternal = {};
+    public valuesExtra: WritableSignal<TableValueExtraInternal> = input({}, {
+        transform: coerceNullableObject,
+    });
 
-    @Input()
-    public rowIndex: number;
+    public rowIndex: WritableSignal<number | undefined> = input(undefined);
 
-    @Input()
-    public highlighterId: string;
+    public highlighterId: WritableSignal<string | undefined> = input(undefined);
 
-    @Input()
-    public tableRow: TableRow = {};
+    public tableRow: WritableSignal<TableRow> = input({}, {
+        transform: coerceNullableObject,
+    });
 
-    @Input()
-    public trackByRow: (index: number, value: unknown) => unknown;
+    public trackByRow = input(defaultTrackBy, {
+        transform: transformTrackBy,
+    })
 
     @Output()
     public onBottomScrolled: Observable<boolean>;
@@ -78,8 +82,8 @@ export class TableRowComponent {
         this.scrollBottomSubject$.next(value);
     }
 
-    public onRowClick(tableRow: TableRow): void {
-        const rowId: string = tableRow[this.tableExtra.idKey] as string;
+    public onRowClick(): void {
+        const rowId: string = this.rowId as string;
         const item = this.valuesExtra[rowId];
 
         if (!item.disabled) {
@@ -95,17 +99,21 @@ export class TableRowComponent {
         const id = this.getChildRowId(row);
         const isOpened = this.valuesExtra[id].opened;
 
-        isOpened ? this.service.closeRowById(id) : this.service.openRowById(id);
+        if(isOpened) {
+            this.service.closeRowById(id);
+
+            return;
+        }
+
+        this.service.openRowById(id);
     }
 
-    public trackByFieldKey(index: number, metaItem: TableMeta): string {
+    public trackByFieldKey(_: number, metaItem: TableMeta): string {
         return metaItem.fieldKey;
     }
 
-    public onSelectRow(event: Event, id: string): void {
-        event.stopPropagation();
-
-        this.service.selectRowById(id);
+    public onSelectRow(id: string): void {
+        this.service.processRowSelectingById(id);
     }
 
     private getChildRowId(child: TableRow): string {

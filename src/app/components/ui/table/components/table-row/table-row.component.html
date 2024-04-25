@@ -5,16 +5,16 @@
         <div
             class="table-row-inner"
             #rowElement
-            [class._disabled]="valueExtra?.disabled"
-            [class._hoverable]="tableExtra.hoverableRows"
-            [class._highlighted]="$any(tableExtra.clickableRows && highlighterId === tableRow[tableExtra.idKey])"
-            [ngClass]="valueExtra?.rowCustomClass"
-            (click)="tableExtra.clickableRows && onRowClick(tableRow)"
+            [class._disabled]="valueExtra()?.disabled"
+            [class._hoverable]="tableExtra().hoverableRows"
+            [class._highlighted]="$any(tableExtra().clickableRows && highlighterId === tableRow[tableExtra.idKey])"
+            [ngClass]="valueExtra()?.rowCustomClass"
+            (click)="tableExtra().clickableRows && onRowClick()"
         >
-            @if (tableExtra.hasCheckboxes) {
+            @if (tableExtra().hasCheckboxes) {
                 <div class="table-row-checkbox">
                     <ng-template
-                        [ngTemplateOutlet]="$any(templatesMap.checkboxTemplate ?? defaultCheckboxTemplate)"
+                        [ngTemplateOutlet]="$any(templatesMap().checkboxTemplate ?? defaultCheckboxTemplate)"
                         [ngTemplateOutletContext]="{
                             valueExtra: valueExtra,
                             rowId: rowId,
@@ -24,7 +24,7 @@
                 </div>
             }
 
-            @for (metaItem of tableMeta; track trackByFieldKey; let index = $index) {
+            @for (metaItem of tableMeta(); track metaItem.fieldKey; let index = $index) {
                 <div
                     class="table-row-cell"
                     [ngStyle]="{
@@ -33,12 +33,12 @@
                     [ngClass]="metaItem.customClass"
                     [style.padding-left.px]="
                         tableExtra.isHierarchical &&
-                        index === 0 &&
+                        !index &&
                         (valueExtra | lzRowPadding: _paddingType.CELL : tableExtra.hasCheckboxes)
                     "
                 >
                     @if (valueExtra) {
-                        @if (index === 0 && valueExtra?.hasChild) {
+                        @if (!index && valueExtra?.hasChild) {
                             <div
                                 class="table-row-cell-arrow"
                                 [class._opened]="valueExtra?.opened"
@@ -67,7 +67,7 @@
                         }
 
                         <ng-template
-                            [ngTemplateOutlet]="$any(templatesMap[metaItem.templateKey!] ?? defaultItemTemplate)"
+                            [ngTemplateOutlet]="$any(templatesMap()[metaItem.templateKey!] ?? defaultItemTemplate)"
                             [ngTemplateOutletContext]="{
                                 row: tableRow,
                                 key: metaItem.fieldKey,
@@ -89,7 +89,7 @@
             }
 
             <ng-template
-                [ngTemplateOutlet]="$any(templatesMap[valueExtra?.rowSubTemplateKey])"
+                [ngTemplateOutlet]="$any(templatesMap()[valueExtra?.rowSubTemplateKey])"
                 [ngTemplateOutletContext]="{
                     row: tableRow,
                     tableMeta: tableMeta,
@@ -102,7 +102,7 @@
         @if (valueExtra?.expandTemplateKey && valueExtra?.isExpanded) {
             <div class="table-row-extra" [class._expanded]="valueExtra.isExpanded">
                 <ng-template
-                    [ngTemplateOutlet]="$any(templatesMap[valueExtra.expandTemplateKey])"
+                    [ngTemplateOutlet]="$any(templatesMap()[valueExtra.expandTemplateKey])"
                     [ngTemplateOutletContext]="{
                         row: tableRow
                     }"
@@ -127,5 +127,5 @@
 </ng-container>
 
 <ng-template #defaultCheckboxTemplate let-valueExtra="valueExtra">
-    <input type="checkbox" [ngModel]="!!valueExtra?.selected" (click)="onSelectRow($event, rowId)" />
+    <input type="checkbox" [ngModel]="!!valueExtra?.selected" (ngModelChange)="onSelectRow(rowId)" (click.stop)="0" />
 </ng-template>

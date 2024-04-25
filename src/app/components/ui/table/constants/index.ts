@@ -48,6 +48,8 @@ export const initialTableStore: TableState = {
     tableMeta: [],
     tableRows: [],
     valuesExtra: {},
-    selectedRows: [],
+    selectedRows: new Set(),
     isDragging: false,
 };
+
+export const defaultTrackBy = <T>(index: number, item: T) => index;

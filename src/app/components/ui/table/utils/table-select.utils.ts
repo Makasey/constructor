@@ -38,41 +38,36 @@ export function deselectRowById(id: string, tableExtra: Partial<TableExtra>, val
     };
 }
 
-export function selectParentRowById(selectedRows: unknown[], id: string, tableExtra: TableExtra, valueExtra: TableValueExtraInternal): unknown[] {
+export function selectParentRowById(selectedRows: Set<unknown>, id: string, tableExtra: TableExtra, valueExtra: TableValueExtraInternal): Set<unknown> {
     const item = valueExtra[id];
 
-    let updatedSelectedRows = [...selectedRows];
-
-    const itemExist = updatedSelectedRows.find(selectedRow => `${selectedRow}` === `${id}`);
+    const itemExist = selectedRows.has(id);
 
     if (!itemExist) {
-        updatedSelectedRows = [...selectedRows, id];
+        selectedRows.add(id);
     }
 
     if (item.hasChild) {
         (item.children ?? []).forEach(child => {
-            updatedSelectedRows = selectParentRowById(updatedSelectedRows, child[tableExtra.idKey] as string, tableExtra, valueExtra);
+            selectParentRowById(selectedRows, child[tableExtra.idKey] as string, tableExtra, valueExtra);
         });
-
-        return updatedSelectedRows;
-    } else {
-        return updatedSelectedRows;
-    }
+    } 
+    
+    return selectedRows;
 }
 
-export function deselectParentRowById(selectedRows: unknown[], id: string, tableExtra: TableExtra, valueExtra: TableValueExtraInternal): unknown[] {
+export function deselectParentRowById(selectedRows: Set<unknown>, id: string, tableExtra: TableExtra, valueExtra: TableValueExtraInternal): Set<unknown> {
     const item = valueExtra[id];
-    let updatedSelectedRows = selectedRows.filter(selectedRow => `${selectedRow}` !== `${id}`);
+    
+    selectedRows.delete(id);
 
     if (item.hasChild) {
         (item.children ?? []).forEach(child => {
-            updatedSelectedRows = deselectParentRowById(updatedSelectedRows, child[tableExtra.idKey] as string, tableExtra, valueExtra);
+            deselectParentRowById(selectedRows, child[tableExtra.idKey] as string, tableExtra, valueExtra);
         });
+    } 
 
-        return updatedSelectedRows;
-    } else {
-        return updatedSelectedRows;
-    }
+    return selectedRows;
 }
 
 export function selectAllRows(valuesExtra: TableValueExtraInternal): TableValueExtraInternal {

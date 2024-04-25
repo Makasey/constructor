@@ -4,14 +4,14 @@
 
 <ng-template #draggableRow>
     <div class="table-head-row">
-        @if (tableExtra.hasCheckboxes) {
+        @if (tableExtra().hasCheckboxes) {
             <div class="table-head-checkbox">
-                @if (tableExtra.hasSelectAllCheckbox) {
-                    <input type="checkbox" (click)="selectAllRowsHandler($event)" [ngModel]="tableExtra.selectAll" />
+                @if (tableExtra().hasSelectAllCheckbox) {
+                    <input type="checkbox" [ngModel]="tableExtra().selectAll" (click.stop)="0" (ngModelChange)="selectAllRowsHandler()" />
                 }
             </div>
         }
-        @for (cell of tableMeta; track cell.fieldKey) {
+        @for (cell of tableMeta(); track cell.fieldKey) {
             <ng-template
                 [ngTemplateOutlet]="!cell.dragDisabled ? draggableRowCell : defaultRowCell"
                 [ngTemplateOutletContext]="{ cell: cell }"
@@ -29,8 +29,8 @@
             '--table-column-width.px': cell.width
         }"
         [ngClass]="cell.customClass"
-        [class._hierarchical]="tableExtra.isHierarchical"
-        [class._checkbox]="tableExtra.hasCheckboxes"
+        [class._hierarchical]="tableExtra().isHierarchical"
+        [class._checkbox]="tableExtra().hasCheckboxes"
         (cdkDragStarted)="startColumnDrag()"
         (cdkDragEnded)="endColumnDrag()"
     >
@@ -48,7 +48,7 @@
             </div>
         }
         <ng-template
-            [ngTemplateOutlet]="templateMap[cell.headerTemplateKey] ?? defaultItemTemplate"
+            [ngTemplateOutlet]="templateMap()[cell.headerTemplateKey] ?? defaultItemTemplate"
             [ngTemplateOutletContext]="{
                 cell: cell,
                 isDragging: isDragging$ | async
@@ -75,11 +75,11 @@
             '--table-column-width.px': cell.width
         }"
         [ngClass]="cell.customClass"
-        [class._hierarchical]="tableExtra.isHierarchical"
-        [class._checkbox]="tableExtra.hasCheckboxes"
+        [class._hierarchical]="tableExtra().isHierarchical"
+        [class._checkbox]="tableExtra().hasCheckboxes"
     >
         <ng-template
-            [ngTemplateOutlet]="templateMap[cell.headerTemplateKey] ?? defaultItemTemplate"
+            [ngTemplateOutlet]="templateMap()[cell.headerTemplateKey] ?? defaultItemTemplate"
             [ngTemplateOutletContext]="{ cell: cell }"
         >
         </ng-template>
@@ -88,26 +88,26 @@
 
 <ng-template #defaultRow>
     <div class="table-head-row">
-        @if (tableExtra.hasCheckboxes) {
+        @if (tableExtra().hasCheckboxes) {
             <div class="table-head-checkbox">
-                @if (tableExtra.hasSelectAllCheckbox) {
-                    <input type="checkbox" (click)="selectAllRowsHandler($event)" [ngModel]="tableExtra.selectAll" />
+                @if (tableExtra().hasSelectAllCheckbox) {
+                    <input type="checkbox" [ngModel]="tableExtra().selectAll" (click.stop)="0" (ngModelChange)="selectAllRowsHandler()"  />
                 }
             </div>
         }
 
-        @for (cell of tableMeta; track cell.fieldKey) {
+        @for (cell of tableMeta(); track cell.fieldKey) {
             <div
                 class="table-head-cell"
                 [ngStyle]="{
                     '--table-column-width.px': cell.width
                 }"
                 [ngClass]="cell.customClass"
-                [class._hierarchical]="tableExtra.isHierarchical"
-                [class._checkbox]="tableExtra.hasCheckboxes"
+                [class._hierarchical]="tableExtra().isHierarchical"
+                [class._checkbox]="tableExtra().hasCheckboxes"
             >
                 <ng-template
-                    [ngTemplateOutlet]="templateMap[cell.headerTemplateKey!] ?? defaultItemTemplate"
+                    [ngTemplateOutlet]="templateMap()[cell.headerTemplateKey!] ?? defaultItemTemplate"
                     [ngTemplateOutletContext]="{ cell: cell }"
                 >
                 </ng-template>

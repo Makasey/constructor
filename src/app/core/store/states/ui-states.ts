@@ -53,7 +53,7 @@ export type TableState = Readonly<
         tableRows: TableRow[];
         tableExtra: TableExtra;
         valuesExtra: TableValueExtraInternal;
-        selectedRows: unknown[];
+        selectedRows: Set<unknown>;
         isDragging: boolean;
     } & ModuleState
 >;

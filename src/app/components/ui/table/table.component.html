@@ -14,7 +14,7 @@
         (cdkDropListDropped)="dropColumn($event)"
     >
         <lz-table-head
-            [templateMap]="templatesMap"
+            [templateMap]="templatesMap()"
             [tableMeta]="tableMeta$ | async"
             [tableExtra]="tableExtra$ | async"
         ></lz-table-head>
@@ -25,8 +25,8 @@
                 [tableExtra]="tableExtra$ | async"
                 [valuesExtra]="valuesExtra$ | async"
                 [tableMeta]="tableMeta$ | async"
-                [trackByRow]="_trackByRow"
-                [templateMap]="templatesMap"
+                [trackByRow]="trackByRow()"
+                [templateMap]="templatesMap()"
             >
             </lz-table-body>
         } @else {
@@ -34,7 +34,7 @@
         }
 
         <lz-table-foot>
-            <ng-template [ngTemplateOutlet]="footerTemplate ?? defaultFooterTemplate"> </ng-template>
+            <ng-template [ngTemplateOutlet]="footerTemplate() ?? defaultFooterTemplate"> </ng-template>
             <ng-template [ngTemplateOutlet]="content"></ng-template>
         </lz-table-foot>
     </div>
@@ -43,18 +43,18 @@
 <ng-template #defaultWrapper>
     <div class="table-scroll-wrapper" (scroll.silent)="onScroll($event)">
         <lz-table-head
-            [templateMap]="templatesMap"
+            [templateMap]="templatesMap()"
             [tableMeta]="tableMeta$ | async"
             [tableExtra]="tableExtra$ | async"
         ></lz-table-head>
-        @if (!!_tableRows.length) {
+        @if (!!tableRows().length) {
             <lz-table-body
                 [tableRows]="tableRows$ | async"
                 [tableExtra]="tableExtra$ | async"
                 [valuesExtra]="valuesExtra$ | async"
                 [tableMeta]="tableMeta$ | async"
-                [trackByRow]="_trackByRow"
-                [templateMap]="templatesMap"
+                [trackByRow]="trackByRow()"
+                [templateMap]="templatesMap()"
             >
             </lz-table-body>
         } @else {
@@ -62,7 +62,7 @@
         }
 
         <lz-table-foot>
-            <ng-template [ngTemplateOutlet]="footerTemplate ?? defaultFooterTemplate"> </ng-template>
+            <ng-template [ngTemplateOutlet]="footerTemplate() ?? defaultFooterTemplate"> </ng-template>
             <ng-template [ngTemplateOutlet]="content"></ng-template>
         </lz-table-foot>
     </div>
@@ -70,8 +70,8 @@
 
 <ng-template [ngTemplateOutlet]="_tableExtra.draggableHeader ? draggableWrapper : defaultWrapper"></ng-template>
 
-@if (_loading) {
-    <lz-loader class="table-loader">{{ loadMoreLabel }} </lz-loader>
+@if (loading()) {
+    <lz-loader class="table-loader">{{ loadMoreLabel() }} </lz-loader>
 }
 
 <ng-template #defaultFooterTemplate></ng-template>

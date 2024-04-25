@@ -1,4 +1,5 @@
 import { TableState } from "@core";
+
 import { TemplateRef } from "@angular/core";
 
 export type TableMeta<T = unknown> = Readonly<{
