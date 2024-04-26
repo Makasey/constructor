@@ -96,7 +96,7 @@ export class LZTableComponent implements OnInit {
         );
     }
 
-    public tableMeta = input<TableMeta[]>.required([], {
+    public tableMeta = input.required<TableMeta[]>([], {
         transform: coerceNullableArray,
     });
 
@@ -108,7 +108,7 @@ export class LZTableComponent implements OnInit {
         transform: coerceBoolean,
     })
 
-    public tableRows = input<TableRow[]>.required([], {
+    public tableRows = input.required<TableRow[]>([], {
         transform: coerceNullableArray
     });
 
