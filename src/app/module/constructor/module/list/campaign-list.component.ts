@@ -2,11 +2,11 @@ import { AbstractCampaignListService, DefaultCampaignListService } from "@module
 import { AbstractModuleComponent } from "@core";
 import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
-import { LZTableComponent } from "@components";
 import { NavigationLinkPipe } from "@shared-pipes";
 import { RouteKey } from "@shared-types";
 import { RouterLink } from "@angular/router";
 import { untilDestroyed } from "@ngneat/until-destroy";
+import { LZTableComponent } from "@components/ui/table/table.component";
 // import { provideWebsocket } from "@core";
 // import { defaultWebsocketConfig } from "@core";
 
