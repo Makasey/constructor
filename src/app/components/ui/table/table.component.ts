@@ -32,6 +32,7 @@ import {
     LZLoaderComponent,
     LZTableBodyComponent,
     LZTableHeadComponent,
+    LZTableFootComponent,
 } from "@components";
 import { shouldCall } from "@shared-decorators";
 
@@ -45,7 +46,7 @@ import { TrackByFn } from "./interfaces";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
+    imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, LZTableFootComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
     providers: [
         ...provideTableStore(),
     ],
