@@ -89,3 +89,5 @@ export type ColumnDropEvent = Readonly<{
     previousIndex: number;
     currentIndex: number;
 }>;
+
+export type TrackByFn<T = unknown> = (index: number, item: T) => unknown;

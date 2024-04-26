@@ -37,6 +37,7 @@ import { shouldCall } from "@shared-decorators";
 
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
+import { TrackByFn } from "./interfaces";
 
 @Component({
     selector: "lz-table",
@@ -50,13 +51,13 @@ import { defaultTrackBy } from "./constants";
     ],
 })
 export class LZTableComponent implements OnInit {
-    public templatesMap: WritableSignal<TemplateMap> = input({});
+    public templatesMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
 
-    public loadMoreLabel: WritableSignal<string> = input(DEFAULT_LOAD_MORE_LABEL);
+    public loadMoreLabel: WritableSignal<string> = input<string>(DEFAULT_LOAD_MORE_LABEL);
 
-    public footerTemplate: WritableSignal<TemplateRef<unknown> | undefined> = input(undefined);
+    public footerTemplate: WritableSignal<TemplateRef<unknown> | undefined> = input<TemplateRef<unknown> | undefined>(undefined);
 
-    public relations: WritableSignal<Record<string, unknown[]>> = input({});
+    public relations: WritableSignal<Record<string, unknown[]>> = input<Record<string, unknown[]>>({});
 
     @Output()
     public onBottomScrolled: Observable<boolean>;
@@ -95,19 +96,19 @@ export class LZTableComponent implements OnInit {
         );
     }
 
-    public tableMeta = input.required([], {
+    public tableMeta = input<TableMeta[]>.required([], {
         transform: coerceNullableArray,
     });
 
-    public trackByRow  = input(defaultTrackBy, {
+    public trackByRow  = input<TrackByFn>(defaultTrackBy, {
         transform: transformTrackBy,
     });
 
-    public loading = input(false, {
+    public loading = input<boolean>(false, {
         transform: coerceBoolean,
     })
 
-    public tableRows = input.required([], {
+    public tableRows = input<TableRow[]>.required([], {
         transform: coerceNullableArray
     });
 
@@ -115,7 +116,7 @@ export class LZTableComponent implements OnInit {
         transform: coerceNullableArray,
     })
 
-    public valuesExtra = input({}, {
+    public valuesExtra = input<TableValueExtraInternal>({}, {
         transform: coerceNullableObject,
     })
 

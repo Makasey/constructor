@@ -19,11 +19,11 @@ export class LZTableHeadComponent {
     @HostBinding("class.table-head")
     public hostClass = true;
 
-    public templateMap: WritableSignal<TemplateMap> = input({});
+    public templateMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
 
-    public tableExtra: WritableSignal<Partial<TableExtra>> = input({});
+    public tableExtra: WritableSignal<Partial<TableExtra>> = input<Partial<TableExtra>>({});
 
-    public tableMeta: WritableSignal<TableMeta[]> = input([]);
+    public tableMeta: WritableSignal<TableMeta[]> = input<TableMeta[]>([]);
 
     public isDragging$: Observable<boolean> = this.service.isDragging$;
 

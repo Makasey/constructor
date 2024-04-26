@@ -1,4 +1,5 @@
 import { defaultTrackBy } from "../constants";
+import { TrackByFn } from "../interfaces";
 
 
 export function coerceNullableArray<T>(items: T[] | null): T[] {
@@ -9,7 +10,7 @@ export function coerceNullableObject<T>(object: T | null): T {
     return object ?? {} as T;
 }
 
-export function transformTrackBy(trackBy: ((index: number, item: unknown) => unknown) | null): (index: number, item: unknown) => unknown {
+export function transformTrackBy(trackBy: TrackByFn | null): TrackByFn {
     if(trackBy) {
        return trackBy;
     }

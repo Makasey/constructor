@@ -23,6 +23,7 @@ import { LZInitVarDirective } from "@shared-directives/init-var";
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
 import { defaultTrackBy } from "../../constants";
 import { LZRowPaddingPipe } from "../../pipes";
+import { TrackByFn } from "../../interfaces";
 
 @Component({
     selector: "lz-table-row",
@@ -36,29 +37,29 @@ export class LZTableRowComponent {
     @HostBinding("class.table-row")
     public hostClass = true;
 
-    public templatesMap: WritableSignal<TemplateMap> = input({});
+    public templatesMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
 
-    public tableMeta: WritableSignal<TableMeta[]> = input([], {
+    public tableMeta: WritableSignal<TableMeta[]> = input<TableMeta[]>([], {
         transform: coerceNullableArray
     });
 
-    public tableExtra: WritableSignal<TableExtra> = input({} as TableExtra, {
+    public tableExtra: WritableSignal<TableExtra> = input<TableExtra>({} as TableExtra, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra: WritableSignal<TableValueExtraInternal> = input({}, {
+    public valuesExtra: WritableSignal<TableValueExtraInternal> = input<TableValueExtraInternal>({}, {
         transform: coerceNullableObject,
     });
 
-    public rowIndex: WritableSignal<number | undefined> = input(undefined);
+    public rowIndex: WritableSignal<number | undefined> = input<number | undefined>(undefined);
 
-    public highlighterId: WritableSignal<string | undefined> = input(undefined);
+    public highlighterId: WritableSignal<string | undefined> = input<string | undefined>(undefined);
 
-    public tableRow: WritableSignal<TableRow> = input({}, {
+    public tableRow: WritableSignal<TableRow> = input<TableRow>({}, {
         transform: coerceNullableObject,
     });
 
-    public trackByRow = input(defaultTrackBy, {
+    public trackByRow = input<TrackByFn>(defaultTrackBy, {
         transform: transformTrackBy,
     })
 

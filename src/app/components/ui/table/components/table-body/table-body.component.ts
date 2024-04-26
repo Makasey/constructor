@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, 
 
 import { LZTableRowComponent, TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 import { defaultTrackBy } from "../../constants";
+import { TrackByFn } from "../../interfaces";
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers/table.transformers";
 
 @Component({
@@ -15,25 +16,25 @@ export class LZTableBodyComponent {
     @HostBinding("class.table-body")
     public hostClass = true;
 
-    public templateMap: WritableSignal<TemplateMap> = input({});
+    public templateMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
 
-    public tableMeta: WritableSignal<TableMeta[]> = input([], {
+    public tableMeta: WritableSignal<TableMeta[]> = input<TableMeta[]>([], {
         transform: coerceNullableArray,
     });
 
-    public tableRows: WritableSignal<TableRow[]> = input([], {
+    public tableRows: WritableSignal<TableRow[]> = input<TableRow[]>([], {
         transform: coerceNullableArray,
     });
 
-    public tableExtra: WritableSignal<Partial<TableExtra>> = input({}, {
+    public tableExtra: WritableSignal<Partial<TableExtra>> = input<Partial<TableExtra>>({}, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra: WritableSignal<TableValueExtraInternal> = input({}, {
+    public valuesExtra: WritableSignal<TableValueExtraInternal> = input<TableValueExtraInternal>({}, {
         transform: coerceNullableObject,
     });
 
-    public trackByRow = input(defaultTrackBy, {
+    public trackByRow = input<TrackByFn>(defaultTrackBy, {
         transform: transformTrackBy,
     })
 
