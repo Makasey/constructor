@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, input, WritableSignal } from "@angular/core";
-import { AsyncPipe, NgTemplateOutlet, NgClass, NgStyle } from "@angular/common";
+import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 import { DragDropModule } from "@angular/cdk/drag-drop";
@@ -13,7 +13,7 @@ import { AbstractAwesomeTableService, TableExtra, TableMeta, TemplateMap } from 
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./table-head.component.html",
     standalone: true,
-    imports: [AsyncPipe, NgTemplateOutlet, FormsModule, NgClass, NgStyle, DragDropModule],
+    imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class LZTableHeadComponent {
     @HostBinding("class.table-head")
