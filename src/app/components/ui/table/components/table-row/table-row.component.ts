@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, input, WritableSignal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, input } from "@angular/core";
 import { AsyncPipe, NgTemplateOutlet, NgClass, NgStyle } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
@@ -37,25 +37,25 @@ export class LZTableRowComponent {
     @HostBinding("class.table-row")
     public hostClass = true;
 
-    public templatesMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
+    public templatesMap = input<TemplateMap>({});
 
-    public tableMeta: WritableSignal<TableMeta[]> = input<TableMeta[]>([], {
+    public tableMeta = input<TableMeta[]>([], {
         transform: coerceNullableArray
     });
 
-    public tableExtra: WritableSignal<TableExtra> = input<TableExtra>({} as TableExtra, {
+    public tableExtra = input<TableExtra>({} as TableExtra, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra: WritableSignal<TableValueExtraInternal> = input<TableValueExtraInternal>({}, {
+    public valuesExtra = input<TableValueExtraInternal>({}, {
         transform: coerceNullableObject,
     });
 
-    public rowIndex: WritableSignal<number | undefined> = input<number | undefined>(undefined);
+    public rowIndex = input<number | undefined>(undefined);
 
-    public highlighterId: WritableSignal<string | undefined> = input<string | undefined>(undefined);
+    public highlighterId = input<string | undefined>(undefined);
 
-    public tableRow: WritableSignal<TableRow> = input<TableRow>({}, {
+    public tableRow = input<TableRow>({}, {
         transform: coerceNullableObject,
     });
 

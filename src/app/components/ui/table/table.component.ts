@@ -3,12 +3,10 @@ import {
     Component,
     EventEmitter,
     Input,
-    OnInit,
     Output,
     TemplateRef,
     ViewEncapsulation,
     input,
-    WritableSignal,
     computed,
     untracked,
 } from "@angular/core";
@@ -51,14 +49,14 @@ import { TrackByFn } from "./interfaces";
         ...provideTableStore(),
     ],
 })
-export class LZTableComponent implements OnInit {
-    public templatesMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
+export class LZTableComponent {
+    public templatesMap = input<TemplateMap>({});
 
-    public loadMoreLabel: WritableSignal<string> = input<string>(DEFAULT_LOAD_MORE_LABEL);
+    public loadMoreLabel = input<string>(DEFAULT_LOAD_MORE_LABEL);
 
-    public footerTemplate: WritableSignal<TemplateRef<unknown> | undefined> = input<TemplateRef<unknown> | undefined>(undefined);
+    public footerTemplate = input<TemplateRef<unknown> | undefined>(undefined);
 
-    public relations: WritableSignal<Record<string, unknown[]>> = input<Record<string, unknown[]>>({});
+    public relations = input<Record<string, unknown[]>>({});
 
     @Output()
     public onBottomScrolled: Observable<boolean>;
@@ -113,7 +111,7 @@ export class LZTableComponent implements OnInit {
         transform: coerceNullableArray
     });
 
-    public selectedRows: WritableSignal<unknown[]> = input([], {
+    public selectedRows = input([], {
         transform: coerceNullableArray,
     })
 
@@ -146,12 +144,6 @@ export class LZTableComponent implements OnInit {
     @shouldCall(checkScrollPosition)
     public onScroll(_: Event): void {
         this.scrollBottomSubject$.next(true);
-    }
-
-    public ngOnInit(): void {
-        if(!this.trackByRow()) {
-            this.trackByRow.set((_: number, row: unknown): unknown => (row as TableRow)[this._tableExtra.idKey]);
-        }
     }
 
     public deselect(): void {

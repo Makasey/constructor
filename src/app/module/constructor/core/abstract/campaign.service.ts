@@ -101,7 +101,7 @@ export class SinglePageCampaignService extends AbstractCampaignService {
 
                 void this.router.navigate([link]);
 
-                return throwError(err);
+                return throwError(() => err);
             }),
         );
     }
@@ -119,7 +119,7 @@ export class SinglePageCampaignService extends AbstractCampaignService {
 
                 void this.router.navigate([link]);
 
-                return throwError(err);
+                return throwError(() => err);
             }),
         );
     }
@@ -137,7 +137,7 @@ export class SinglePageCampaignService extends AbstractCampaignService {
 
                 void this.router.navigate([link]);
 
-                return throwError(err);
+                return throwError(() => err);
             }),
         );
     }

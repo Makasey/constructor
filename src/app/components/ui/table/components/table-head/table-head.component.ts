@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, input, WritableSignal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, input } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
@@ -19,11 +19,11 @@ export class LZTableHeadComponent {
     @HostBinding("class.table-head")
     public hostClass = true;
 
-    public templateMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
+    public templateMap = input<TemplateMap>({});
 
-    public tableExtra: WritableSignal<Partial<TableExtra>> = input<Partial<TableExtra>>({});
+    public tableExtra = input<Partial<TableExtra>>({});
 
-    public tableMeta: WritableSignal<TableMeta[]> = input<TableMeta[]>([]);
+    public tableMeta = input<TableMeta[]>([]);
 
     public isDragging$: Observable<boolean> = this.service.isDragging$;
 

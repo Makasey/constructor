@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, input, WritableSignal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, input } from "@angular/core";
 
 import { LZTableRowComponent, TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 import { defaultTrackBy } from "../../constants";
@@ -16,21 +16,21 @@ export class LZTableBodyComponent {
     @HostBinding("class.table-body")
     public hostClass = true;
 
-    public templateMap: WritableSignal<TemplateMap> = input<TemplateMap>({});
+    public templateMap = input<TemplateMap>({});
 
-    public tableMeta: WritableSignal<TableMeta[]> = input<TableMeta[]>([], {
+    public tableMeta = input<TableMeta[]>([], {
         transform: coerceNullableArray,
     });
 
-    public tableRows: WritableSignal<TableRow[]> = input<TableRow[]>([], {
+    public tableRows = input<TableRow[]>([], {
         transform: coerceNullableArray,
     });
 
-    public tableExtra: WritableSignal<Partial<TableExtra>> = input<Partial<TableExtra>>({}, {
+    public tableExtra = input<Partial<TableExtra>>({}, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra: WritableSignal<TableValueExtraInternal> = input<TableValueExtraInternal>({}, {
+    public valuesExtra = input<TableValueExtraInternal>({}, {
         transform: coerceNullableObject,
     });
 
