@@ -23,7 +23,7 @@ import { LZInitVarDirective } from "@shared-directives/init-var";
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
 import { defaultTrackBy } from "../../constants";
 import { LZRowPaddingPipe } from "../../pipes";
-import { TrackByFn } from "../../interfaces";
+import { TrackByFn, TransformFn } from "../../interfaces";
 
 @Component({
     selector: "lz-table-row",
@@ -39,15 +39,15 @@ export class LZTableRowComponent {
 
     public templatesMap = input<TemplateMap>({});
 
-    public tableMeta = input<TableMeta[]>([], {
+    public tableMeta = input<TableMeta[], TransformFn<TableMeta[]>>([], {
         transform: coerceNullableArray
     });
 
-    public tableExtra = input<TableExtra>({} as TableExtra, {
+    public tableExtra = input<TableExtra, TransformFn<TableExtra>>({} as TableExtra, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra = input<TableValueExtraInternal>({}, {
+    public valuesExtra = input<TableValueExtraInternal, TransformFn<TableValueExtraInternal>>({}, {
         transform: coerceNullableObject,
     });
 
@@ -55,11 +55,11 @@ export class LZTableRowComponent {
 
     public highlighterId = input<string | undefined>(undefined);
 
-    public tableRow = input<TableRow>({}, {
+    public tableRow = input<TableRow, TransformFn<TableRow>>({}, {
         transform: coerceNullableObject,
     });
 
-    public trackByRow = input<TrackByFn>(defaultTrackBy, {
+    public trackByRow = input<TrackByFn, TransformFn<TrackByFn | null>>(defaultTrackBy, {
         transform: transformTrackBy,
     })
 

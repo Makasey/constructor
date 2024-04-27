@@ -36,7 +36,7 @@ import { shouldCall } from "@shared-decorators";
 
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
-import { TrackByFn } from "./interfaces";
+import { TrackByFn, TransformFn } from "./interfaces";
 
 @Component({
     selector: "lz-table",
@@ -95,27 +95,27 @@ export class LZTableComponent {
         );
     }
 
-    public tableMeta = input.required<TableMeta[]>([], {
+    public tableMeta = input.required<TableMeta[], TransformFn<TableMeta[]>>([], {
         transform: coerceNullableArray,
     });
 
-    public trackByRow  = input<TrackByFn>(defaultTrackBy, {
+    public trackByRow  = input<TrackByFn, TransformFn<TrackByFn>>(defaultTrackBy, {
         transform: transformTrackBy,
     });
 
-    public loading = input<boolean>(false, {
+    public loading = input<boolean, TransformFn<boolean>>(false, {
         transform: coerceBoolean,
     })
 
-    public tableRows = input.required<TableRow[]>([], {
+    public tableRows = input.required<TableRow[], TransformFn<TableRow[]>>([], {
         transform: coerceNullableArray
     });
 
-    public selectedRows = input([], {
+    public selectedRows = input<unknown[], TransformFn<unknown[]>>([], {
         transform: coerceNullableArray,
     })
 
-    public valuesExtra = input<TableValueExtraInternal>({}, {
+    public valuesExtra = input<TableValueExtraInternal, TransformFn<TableValueExtraInternal>>({}, {
         transform: coerceNullableObject,
     })
 

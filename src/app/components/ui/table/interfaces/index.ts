@@ -91,3 +91,5 @@ export type ColumnDropEvent = Readonly<{
 }>;
 
 export type TrackByFn<T = unknown> = (index: number, item: T) => unknown;
+
+export type TransformFn<T> = (value: T | null) => T;
