@@ -29,6 +29,7 @@ import {
 } from "@components";
 import { TableState } from "@core";
 import { convertSelectedRows } from "../utils";
+import { isArrayEquals } from "@shared-utils";
 
 @Injectable()
 export abstract class AbstractAwesomeTableService {

@@ -80,7 +80,7 @@ export class LZTableRowComponent {
     }
 
     public get rowId(): string {
-        return this.tableRow[this.tableExtra.idKey] as string;
+        return this.tableRow[this.tableExtra().idKey] as string;
     }
 
     @shouldCall(checkScrollPosition)
@@ -94,7 +94,7 @@ export class LZTableRowComponent {
 
     public onRowClick(): void {
         const rowId: string = this.rowId as string;
-        const item = this.valuesExtra[rowId];
+        const item = this.valuesExtra()[rowId];
 
         if (!item.disabled) {
             const isExpanded = item.isExpanded;
@@ -107,7 +107,7 @@ export class LZTableRowComponent {
         event.stopPropagation();
 
         const id = this.getChildRowId(this.tableRow());
-        const isOpened = this.valuesExtra[id].opened;
+        const isOpened = this.valuesExtra()[id].opened;
 
         if(isOpened) {
             this.service.closeRowById(id);
@@ -127,6 +127,6 @@ export class LZTableRowComponent {
     }
 
     private getChildRowId(child: TableRow): string {
-        return child[this.tableExtra.idKey] as string;
+        return child[this.tableExtra().idKey] as string;
     }
 }
