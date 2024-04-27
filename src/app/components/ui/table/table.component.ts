@@ -95,33 +95,33 @@ export class LZTableComponent {
         );
     }
 
-    public tableMeta = input.required<TableMeta[], TransformFn<TableMeta[]>>([], {
+    public tableMeta = input.required<TableMeta[], TableMeta[] | null>([], {
         transform: coerceNullableArray,
     });
 
-    public trackByRow  = input<TrackByFn, TransformFn<TrackByFn>>(defaultTrackBy, {
+    public trackByRow  = input<TrackByFn, TrackByFn | null>(defaultTrackBy, {
         transform: transformTrackBy,
     });
 
-    public loading = input<boolean, TransformFn<boolean>>(false, {
+    public loading = input<boolean, boolean | null>(false, {
         transform: coerceBoolean,
     })
 
-    public tableRows = input.required<TableRow[], TransformFn<TableRow[]>>([], {
+    public tableRows = input.required<TableRow[], TableRow[] | null>([], {
         transform: coerceNullableArray
     });
 
-    public selectedRows = input<unknown[], TransformFn<unknown[]>>([], {
+    public selectedRows = input<unknown[], unknown[] | null>([], {
         transform: coerceNullableArray,
     })
 
-    public valuesExtra = input<TableValueExtraInternal, TransformFn<TableValueExtraInternal>>({}, {
+    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>({}, {
         transform: coerceNullableObject,
     })
 
     public calculateValueExtra = computed(() => {
         this.service.calculateTableState({
-            selectedRows: untracked(() => this.selectedRows()),
+            selectedRows: untracked(() => new Set(this.selectedRows())),
             tableExtra: this._tableExtra,
             tableMeta: this.tableMeta(),
             tableRows: this.tableRows(),

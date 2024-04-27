@@ -39,15 +39,15 @@ export class LZTableRowComponent {
 
     public templatesMap = input<TemplateMap>({});
 
-    public tableMeta = input<TableMeta[], TransformFn<TableMeta[]>>([], {
+    public tableMeta = input<TableMeta[], TableMeta[] | null>([], {
         transform: coerceNullableArray
     });
 
-    public tableExtra = input<TableExtra, TransformFn<TableExtra>>({} as TableExtra, {
+    public tableExtra = input<TableExtra, TableExtra | null>({} as TableExtra, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra = input<TableValueExtraInternal, TransformFn<TableValueExtraInternal>>({}, {
+    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>({}, {
         transform: coerceNullableObject,
     });
 
@@ -55,11 +55,11 @@ export class LZTableRowComponent {
 
     public highlighterId = input<string | undefined>(undefined);
 
-    public tableRow = input<TableRow, TransformFn<TableRow>>({}, {
+    public tableRow = input<TableRow, TableRow | null>({}, {
         transform: coerceNullableObject,
     });
 
-    public trackByRow = input<TrackByFn, TransformFn<TrackByFn | null>>(defaultTrackBy, {
+    public trackByRow = input<TrackByFn, TrackByFn | null>(defaultTrackBy, {
         transform: transformTrackBy,
     })
 

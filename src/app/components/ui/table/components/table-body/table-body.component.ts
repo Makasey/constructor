@@ -18,23 +18,23 @@ export class LZTableBodyComponent {
 
     public templateMap = input<TemplateMap>({});
 
-    public tableMeta = input<TableMeta[], TransformFn<TableMeta[]>>([], {
+    public tableMeta = input<TableMeta[], TableMeta[] | null>([], {
         transform: coerceNullableArray,
     });
 
-    public tableRows = input<TableRow[], TransformFn<TableRow[]>>([], {
+    public tableRows = input<TableRow[], TableRow[] | null>([], {
         transform: coerceNullableArray,
     });
 
-    public tableExtra = input<Partial<TableExtra>, TransformFn<Partial<TableExtra>>>({}, {
+    public tableExtra = input<Partial<TableExtra>, Partial<TableExtra> | null>({}, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra = input<TableValueExtraInternal, TransformFn<TableValueExtraInternal>>({}, {
+    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>({}, {
         transform: coerceNullableObject,
     });
 
-    public trackByRow = input<TrackByFn, TransformFn<TrackByFn>>(defaultTrackBy, {
+    public trackByRow = input<TrackByFn, TrackByFn | null>(defaultTrackBy, {
         transform: transformTrackBy,
     })
 
