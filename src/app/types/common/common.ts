@@ -27,3 +27,5 @@ export type SelectItem<Value = number, Label = string> = Readonly<{
     label: Label;
     [key: string]: unknown;
 }>;
+
+export type ArrayOrIterable<T = unknown> = T[] | Iterable<T> | ArrayLike<T>;

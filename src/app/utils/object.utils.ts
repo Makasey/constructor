@@ -1,4 +1,5 @@
 import { isObject } from "@datorama/akita";
+import { ArrayOrIterable } from "@shared-types/";
 
 export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T): boolean {
     if ((!isObject(target) && isObject(other)) || (isObject(target) && !isObject(other))) {
@@ -26,15 +27,16 @@ export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T)
     });
 }
 
-export function isArrayEquals<T = unknown>(target: T[], other: T[]): boolean {
+export function isArrayEquals<T = unknown>(target: ArrayOrIterable<T>, other: ArrayOrIterable<T>): boolean {
     if(!target || !other) {
         return false;
     }
 
-    target = Array.from(target);
+    const targetArray = Array.isArray(target) ? target : Array.from(target);
+    const otherArray =  Array.isArray(other) ? other : Array.from(other);
 
     return (
-        target.length === other.length &&
-        target.every(element => !!other.find(otherElement => isObjectEquals(element, otherElement)))
+        targetArray.length === otherArray.length &&
+        targetArray.every(element => !!otherArray.find(otherElement => isObjectEquals(element, otherElement)))
     );
 }
