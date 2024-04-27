@@ -32,8 +32,8 @@ export function isArrayEquals<T = unknown>(target: ArrayOrIterable<T>, other: Ar
         return false;
     }
 
-    const targetArray: T[] = Array.isArray(target) ? target as unknown as T[]: Array.from<T>(target);
-    const otherArray: T[] =  Array.isArray(other) ? other as unknown as T[] : Array.from<T>(other);
+    const targetArray = Array.isArray(target) ? target as unknown as T[]: Array.from<T>(target);
+    const otherArray =  Array.isArray(other) ? other as unknown as T[] : Array.from<T>(other);
 
     return (
         targetArray.length === otherArray.length &&
