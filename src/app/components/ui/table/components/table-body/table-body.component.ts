@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, 
 
 import { LZTableRowComponent, TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 import { defaultTrackBy } from "../../constants";
-import { TrackByFn, TransformFn } from "../../interfaces";
+import { TrackByFn } from "../../interfaces";
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers/table.transformers";
 
 @Component({

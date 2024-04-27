@@ -23,7 +23,7 @@ import { LZInitVarDirective } from "@shared-directives/init-var";
 import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
 import { defaultTrackBy } from "../../constants";
 import { LZRowPaddingPipe } from "../../pipes";
-import { TrackByFn, TransformFn } from "../../interfaces";
+import { TrackByFn } from "../../interfaces";
 
 @Component({
     selector: "lz-table-row",

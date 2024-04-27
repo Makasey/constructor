@@ -36,7 +36,7 @@ import { shouldCall } from "@shared-decorators";
 
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
-import { TrackByFn, TransformFn } from "./interfaces";
+import { TrackByFn } from "./interfaces";
 
 @Component({
     selector: "lz-table",
