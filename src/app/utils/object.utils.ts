@@ -1,5 +1,5 @@
 import { isObject } from "@datorama/akita";
-import { ArrayOrIterable } from "@shared-types/";
+import { ArrayOrIterable } from "@shared-types";
 
 export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T): boolean {
     if ((!isObject(target) && isObject(other)) || (isObject(target) && !isObject(other))) {

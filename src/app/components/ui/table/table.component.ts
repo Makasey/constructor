@@ -95,7 +95,7 @@ export class LZTableComponent {
         );
     }
 
-    public tableMeta = input.required<TableMeta[]>([], {
+    public tableMeta = input<TableMeta[], TableMeta[] | null>([], {
         transform: coerceNullableArray,
     });
 
@@ -107,7 +107,7 @@ export class LZTableComponent {
         transform: coerceBoolean,
     })
 
-    public tableRows = input.required<TableRow[]>([], {
+    public tableRows = input<TableRow[], TableRow[] | null>([], {
         transform: coerceNullableArray
     });
 
