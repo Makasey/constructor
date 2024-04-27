@@ -153,6 +153,8 @@ module.exports = {
                     },
                 ],
                 "@typescript-eslint/no-unsafe-call": 1,
+                // TODO: remove after army
+                "@typescript-eslint/no-unsafe-argument": 0,
                 "@typescript-eslint/unbound-method": 0,
                 "@typescript-eslint/no-parameter-properties": 0,
                 "@typescript-eslint/no-inferrable-types": [1, { ignoreParameters: true }],
