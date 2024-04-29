@@ -1,4 +1,7 @@
-export { ElementActionsComponent, PageElementsTreeComponent } from "./shared";
+export { LZEditorElement } from "./editor-element";
+export { LZElementActionsComponent } from "./element-actions";
+export { PageElementsTreeComponent } from "./page-elements-tree";
+export { PagesBarComponent } from "./pages-bar";
 
 export {
     TitlePageElement,
@@ -60,5 +63,4 @@ export {
     DividerComponent,
     DividerPageElement,
     DividerPageElementSettings,
-    PagesBarComponent,
 } from "./edit-area";
