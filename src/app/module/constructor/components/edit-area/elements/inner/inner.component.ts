@@ -10,7 +10,7 @@ import {
     SectionPageElementSettings,
     processBackgroundValue,
     processSettingValueWithUnit,
-    LZEditorElement,
+    LZEditorElementComponent,
 } from "@modules/constructor";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
@@ -19,7 +19,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
     templateUrl: "./inner.component.html",
     styleUrls: ["./inner.component.scss"],
     standalone: true,
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElement],
+    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

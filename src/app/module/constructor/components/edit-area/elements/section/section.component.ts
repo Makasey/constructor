@@ -17,12 +17,12 @@ import {
     processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
+    LZEditorElementComponent,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
 import { Observable, map } from "rxjs";
-import { LZEditorElement } from "@modules/constructor";
 
 @Component({
     selector: "lz-section-element",
@@ -33,7 +33,7 @@ import { LZEditorElement } from "@modules/constructor";
     styleUrls: ["section.component.scss"],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     providers: [...SECTION_PROVIDERS],
-    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElement],
+    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent],
 })
 export class SectionComponent implements OnInit {
     @HostBinding("$.style.min-height")

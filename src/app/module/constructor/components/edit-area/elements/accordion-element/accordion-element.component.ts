@@ -4,7 +4,7 @@ import {
     AccordionPageElement,
     AccordionPageElementSettings,
     ELEMENT_ID,
-    LZEditorElement,
+    LZEditorElementComponent,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
@@ -17,7 +17,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 @Component({
     selector: "lz-accordion-element",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective, LZEditorElement],
+    imports: [CommonModule, ElementResolverDirective, LZEditorElementComponent],
     templateUrl: "./accordion-element.component.html",
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,

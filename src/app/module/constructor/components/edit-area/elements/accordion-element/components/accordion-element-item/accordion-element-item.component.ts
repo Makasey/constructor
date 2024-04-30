@@ -4,7 +4,7 @@ import {
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
     ELEMENT_ID,
-    LZEditorElement,
+    LZEditorElementComponent,
     processBackgroundValue,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
@@ -17,7 +17,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 @Component({
     selector: "lz-accordion-element-item",
     standalone: true,
-    imports: [CommonModule, ElementResolverDirective, LZEditorElement],
+    imports: [CommonModule, ElementResolverDirective, LZEditorElementComponent],
     templateUrl: "./accordion-element-item.component.html",
     styleUrl: "./accordion-element-item.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
