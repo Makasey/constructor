@@ -1,5 +1,5 @@
 @for (child of rootElements(); track child){
-  <lz-editor-element>
+  <lz-editor-element [elementId]="child">
     <ng-container *lzElementResolver="child; parent: 'rootID'"></ng-container>
   </lz-editor-element>
 }

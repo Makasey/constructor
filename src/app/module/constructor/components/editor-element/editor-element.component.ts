@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, HostBinding } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, HostBinding, input } from "@angular/core";
 
 import { EDITOR_SELECTED_ELEMENT, LZElementActionsComponent } from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
@@ -16,6 +16,8 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
 export class LZEditorElementComponent {
     @HostBinding('class.lz-editor-element')
     public readonly hostClass = true;
+
+    public readonly elementId = input.required<string>();
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 }
