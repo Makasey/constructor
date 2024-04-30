@@ -10,7 +10,8 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective, LZElementActionsComponent],
+    imports: [LZElementActionsComponent],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class LZEditorElementComponent {
     @HostBinding('class.lz-editor-element')
