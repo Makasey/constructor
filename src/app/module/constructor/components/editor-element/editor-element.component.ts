@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject, HostBinding } from "@angular/core";
 
-import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor";
+import { EDITOR_SELECTED_ELEMENT, LZElementActionsComponent } from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
