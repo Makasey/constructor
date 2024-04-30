@@ -1,3 +1,8 @@
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
+
+import { Observable, map } from "rxjs";
+
 import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
@@ -19,10 +24,10 @@ import {
     processSettingValueWithUnit,
     LZEditorElementComponent,
 } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
-import { Observable, map } from "rxjs";
+
 
 @Component({
     selector: "lz-section-element",
@@ -33,7 +38,7 @@ import { Observable, map } from "rxjs";
     styleUrls: ["section.component.scss"],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     providers: [...SECTION_PROVIDERS],
-    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent],
+    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet],
 })
 export class SectionComponent implements OnInit {
     @HostBinding("$.style.min-height")
