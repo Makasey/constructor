@@ -2,9 +2,8 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { AbstractEditorElementActionsService, SectionPageElement } from "@modules/constructor";
+import { AbstractEditorElementActionsService, SectionPageElement, LZEditorElementComponent } from "@modules/constructor";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { LZEditorElement } from "@modules/constructor/components/editor-element/editor-element.component";
 
 @Component({
     selector: "lz-root-element",
@@ -13,7 +12,7 @@ import { LZEditorElement } from "@modules/constructor/components/editor-element/
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
-    imports: [NgForOf, ElementResolverDirective, LZEditorElement],
+    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent],
     hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective],
 })
 export class RootComponent {

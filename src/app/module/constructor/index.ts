@@ -228,7 +228,7 @@ export {
     PagesBarComponent,
     LZElementActionsComponent,
     PageElementsTreeComponent,
-    LZEditorElement,
+    LZEditorElementComponent,
 } from "./components";
 
 export {

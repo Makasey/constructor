@@ -12,7 +12,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     standalone: true,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective, LZElementActionsComponent],
 })
-export class LZEditorElement {
+export class LZEditorElementComponent {
     @HostBinding('class.lz-editor-element')
     public readonly hostClass = true;
 

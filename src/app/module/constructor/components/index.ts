@@ -1,4 +1,4 @@
-export { LZEditorElement } from "./editor-element";
+export { LZEditorElementComponent } from "./editor-element";
 export { LZElementActionsComponent } from "./element-actions";
 export { PageElementsTreeComponent } from "./page-elements-tree";
 export { PagesBarComponent } from "./pages-bar";

@@ -10,14 +10,14 @@ import {
     TabsItemPageElement,
     TabsItemPageElementSettings,
     processSettingValueWithUnit,
-    LZEditorElement,
+    LZEditorElementComponent,
 } from "@modules/constructor";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-tab-element-item",
     standalone: true,
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElement],
+    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
     templateUrl: "./tab-element-item.component.html",
     styleUrls: ["./tab-element-item.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
