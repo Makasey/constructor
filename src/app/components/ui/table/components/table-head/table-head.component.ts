@@ -30,8 +30,8 @@ export class LZTableHeadComponent {
     constructor(private service: AbstractAwesomeTableService) {}
 
     public selectAllRowsHandler(): void {
-        if(this.tableExtra().selectAll) {
-            this.service.deselectAllRows()
+        if (this.tableExtra().selectAll) {
+            this.service.deselectAllRows();
 
             return;
         }

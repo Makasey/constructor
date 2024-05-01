@@ -1,3 +1,4 @@
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
@@ -6,11 +7,10 @@ import {
     Output,
     TemplateRef,
     ViewEncapsulation,
-    input,
     computed,
+    input,
     untracked,
 } from "@angular/core";
-import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 
 import { BehaviorSubject, Observable, debounceTime, filter, tap } from "rxjs";
 import { CdkDragDrop, DragDropModule } from "@angular/cdk/drag-drop";
@@ -19,6 +19,10 @@ import {
     AbstractAwesomeTableService,
     ColumnDropEvent,
     DEFAULT_LOAD_MORE_LABEL,
+    LZLoaderComponent,
+    LZTableBodyComponent,
+    LZTableFootComponent,
+    LZTableHeadComponent,
     TableExtra,
     TableMeta,
     TableRow,
@@ -27,16 +31,12 @@ import {
     checkScrollPosition,
     defaultTableExtra,
     provideTableStore,
-    LZLoaderComponent,
-    LZTableBodyComponent,
-    LZTableHeadComponent,
-    LZTableFootComponent,
 } from "@components";
 import { shouldCall } from "@shared-decorators";
 
+import { TrackByFn } from "./interfaces";
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
-import { TrackByFn } from "./interfaces";
 
 @Component({
     selector: "lz-table",
@@ -45,9 +45,7 @@ import { TrackByFn } from "./interfaces";
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, LZTableFootComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
-    providers: [
-        ...provideTableStore(),
-    ],
+    providers: [...provideTableStore()],
 })
 export class LZTableComponent {
     public templatesMap = input<TemplateMap>({});
@@ -79,10 +77,7 @@ export class LZTableComponent {
 
     public valuesExtra$: Observable<TableValueExtraInternal> = this.service.valuesExtra$;
 
-    public selectedRows$: Observable<unknown[]> = this.service.selectedRows$.pipe(
-      
-        tap(rows => this.onSelect.emit(rows)),
-    );
+    public selectedRows$: Observable<unknown[]> = this.service.selectedRows$.pipe(tap(rows => this.onSelect.emit(rows)));
 
     public scrollBottomSubject$ = new BehaviorSubject(false);
 
@@ -99,34 +94,40 @@ export class LZTableComponent {
         transform: coerceNullableArray,
     });
 
-    public trackByRow  = input<TrackByFn, TrackByFn | null>(defaultTrackBy, {
+    public trackByRow = input<TrackByFn, TrackByFn | null>(defaultTrackBy, {
         transform: transformTrackBy,
     });
 
     public loading = input<boolean, boolean | null>(false, {
         transform: coerceBoolean,
-    })
+    });
 
     public tableRows = input<TableRow[], TableRow[] | null>([], {
-        transform: coerceNullableArray
+        transform: coerceNullableArray,
     });
 
     public selectedRows = input<unknown[], unknown[] | null>([], {
         transform: coerceNullableArray,
-    })
+    });
 
-    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>({}, {
-        transform: coerceNullableObject,
-    })
+    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>(
+        {},
+        {
+            transform: coerceNullableObject,
+        },
+    );
 
     public calculateValueExtra = computed(() => {
-        this.service.calculateTableState({
-            selectedRows: untracked(() => new Set(this.selectedRows())),
-            tableExtra: this._tableExtra,
-            tableMeta: this.tableMeta(),
-            tableRows: this.tableRows(),
-            valuesExtra: this.valuesExtra(),
-        }, this.relations())
+        this.service.calculateTableState(
+            {
+                selectedRows: untracked(() => new Set(this.selectedRows())),
+                tableExtra: this._tableExtra,
+                tableMeta: this.tableMeta(),
+                tableRows: this.tableRows(),
+                valuesExtra: this.valuesExtra(),
+            },
+            this.relations(),
+        );
     });
 
     public calculateSelectedRows = computed(() => {
@@ -140,7 +141,6 @@ export class LZTableComponent {
         this._tableExtra = { ...this._tableExtra, ...processedTableExtra };
     }
 
-
     @shouldCall(checkScrollPosition)
     public onScroll(_: Event): void {
         this.scrollBottomSubject$.next(true);
@@ -153,7 +153,7 @@ export class LZTableComponent {
     public dropColumn(event: CdkDragDrop<unknown, unknown>): void {
         const dragEvent = this.service.dropColumn(event);
 
-        if(!dragEvent) {
+        if (!dragEvent) {
             return;
         }
 
