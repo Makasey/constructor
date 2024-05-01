@@ -1,3 +1,9 @@
+import { Inject, Injectable, Provider, Type, inject } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+
+import { Observable, catchError, throwError } from "rxjs";
+
+import { getPreviewData } from "@modules/constructor";
 import {
     AbstractLzStoreService,
     AbstractNavigationService,
@@ -7,12 +13,10 @@ import {
     LzServiceInjectionTokensMap,
     LzStateKey,
 } from "@core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Inject, Injectable, Provider, Type, inject } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components";
-import { Observable, catchError, throwError } from "rxjs";
-import { ResponseError, RouteKey, RouteParams } from "@shared-types";
-import { getPreviewData } from "@modules/constructor";
+
+import { ResponseError } from "@shared-types";
+import { RouteKey, RouteParams } from "@shared-enums";
 
 @Injectable()
 export abstract class AbstractPreviewService<T> {

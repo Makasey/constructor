@@ -1,5 +1,6 @@
 import { Route } from "@angular/router";
-import { RouteKey, RouteParams } from "@shared-types";
+
+import { RouteKey, RouteParams } from "@shared-enums";
 
 export const CONSTRUCTOR_ROUTES: Route[] = [
     {

@@ -1,3 +1,9 @@
+import { Inject, Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+
+import { Observable, catchError, map, tap, throwError } from "rxjs";
+
+import { AbstractEditorOperationService, CampaignModel, CreateCampaignModel, getCampaignData } from "@modules/constructor";
 import {
     AbstractCampaignDataService,
     AbstractLzStoreService,
@@ -7,12 +13,9 @@ import {
     LzServiceInjectionTokensMap,
     LzStateKey,
 } from "@core";
-import { AbstractEditorOperationService, CampaignModel, CreateCampaignModel, getCampaignData } from "@modules/constructor";
-import { Inject, Injectable } from "@angular/core";
 import { LZToastrItemType, LZToastrService } from "@components";
-import { Observable, catchError, map, tap, throwError } from "rxjs";
-import { PaginationListItems, RouteKey } from "@shared-types";
-import { Router } from "@angular/router";
+import { PaginationListItems } from "@shared-types";
+import { RouteKey } from "@shared-enums";
 
 @Injectable()
 export abstract class AbstractCampaignService<T = CampaignModel> extends AbstractEditorOperationService {

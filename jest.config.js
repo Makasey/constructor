@@ -20,6 +20,10 @@ const aliases = {
     "@shared-utils": ["<rootDir>/src/app/utils/index.ts"],
     "@shared-directives/*": ["<rootDir>/src/app/directive/*"],
     "@shared-directives": ["<rootDir>/src/app/directive/index.ts"],
+    "@shared-constants/*": ["<rootDir>/src/app/constants/*"],
+    "@shared-constants": ["<rootDir>/src/app/constants/index.ts"],
+    "@shared-enums/*": ["<rootDir>/src/app/enums/*"],
+    "@shared-enums": ["<rootDir>/src/app/enums/index.ts"]
 };
 
 module.exports = {

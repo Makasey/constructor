@@ -1,10 +1,14 @@
-import { AbstractEditAreaService } from "@modules/constructor";
-import { ActivatedRoute, RouterOutlet } from "@angular/router";
 import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { RouteParams } from "@shared-types";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import { ActivatedRoute, RouterOutlet } from "@angular/router";
+
 import { filter, map } from "rxjs";
 import { switchMap } from "rxjs/operators";
+
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+
+import { AbstractEditAreaService } from "@modules/constructor";
+
+import { RouteParams } from "@shared-types";
 
 @UntilDestroy()
 @Component({

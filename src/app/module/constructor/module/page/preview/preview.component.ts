@@ -1,7 +1,3 @@
-import { APDropdownFieldModule, LZLoaderComponent } from "@components";
-import { AbstractCampaignService, AbstractPreviewService, CampaignPreviewModel } from "@modules/constructor";
-import { ActivatedRoute, RouterLink } from "@angular/router";
-import { AsyncPipe, NgIf } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
@@ -14,13 +10,24 @@ import {
     inject,
     signal,
 } from "@angular/core";
-import { CreatePreviewDirective } from "@shared-directives";
-import { FormsModule } from "@angular/forms";
-import { NavigationLinkPipe } from "@shared-pipes";
-import { Observable, delay, tap } from "rxjs";
-import { RouteKey, RouteParams } from "@shared-types";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { toSignal } from "@angular/core/rxjs-interop";
+import { AsyncPipe, NgIf } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { ActivatedRoute, RouterLink } from "@angular/router";
+
+import { Observable, delay, tap } from "rxjs";
+
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+
+import { AbstractCampaignService, AbstractPreviewService, CampaignPreviewModel } from "@modules/constructor";
+import { APDropdownFieldModule, LZLoaderComponent } from "@components";
+
+
+import { CreatePreviewDirective } from "@shared-directives";
+import { NavigationLinkPipe } from "@shared-pipes";
+import { RouteKey, RouteParams } from "@shared-enums";
+
+
 
 @UntilDestroy()
 @Component({

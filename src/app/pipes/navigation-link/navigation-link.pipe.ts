@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform, inject } from "@angular/core";
 
 import { AbstractNavigationService } from "@core";
-import { RouteKey } from "@shared-types";
+import { RouteKey } from "@shared-enums";
 
 @Pipe({
     name: "lzNavigationLink",

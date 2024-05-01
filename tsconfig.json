@@ -45,7 +45,11 @@
             "@shared-decorators/*": ["app/decorators/index.ts"],
             "@shared-utils": ["app/utils/index.ts"],
             "@shared-directives/*": ["app/directive/*"],
-            "@shared-directives": ["app/directive/index.ts"]
+            "@shared-directives": ["app/directive/index.ts"],
+            "@shared-constants/*": ["app/constants/*"],
+            "@shared-constants": ["app/constants/index.ts"],
+            "@shared-enums/*": ["app/enums/*"],
+            "@shared-enums": ["app/enums/index.ts"]
         }
     },
     "angularCompilerOptions": {

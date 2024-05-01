@@ -1,5 +1,6 @@
 import { Route } from "@angular/router";
-import { RouteKey } from "@shared-types";
+
+import { RouteKey } from "@shared-enums";
 
 export const PAGE_ROUTES: Route[] = [
     {

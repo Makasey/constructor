@@ -1,5 +1,11 @@
-import { RouteParams, SearchConditions } from "@shared-types";
-import { conditionsMap } from "@shared-utils";
+import { conditionsMap } from "@shared-constants";
+import { SearchConditions, RouteParams } from "@shared-enums";
+import { FiltersMap } from "@shared-types";
+
+export function filterToQueryParameter(condition: SearchConditions, value: number | string | string[] | number[]): string {
+    const stringValue = Array.isArray(value) ? value.join(",") : String(value);
+    return `${condition}(${stringValue})`;
+}
 
 export function convertRouteParamsToParamsWithConditions(params: Record<string, unknown>): FiltersMap {
     const filtersMap: FiltersMap = {} as FiltersMap;
@@ -19,12 +25,3 @@ export function convertRouteParamsToParamsWithConditions(params: Record<string, 
 
     return filtersMap;
 }
-
-export type FiltersMap = {
-    [key in RouteParams]: ValueWithCondition;
-};
-
-export type ValueWithCondition = {
-    value: string;
-    condition: SearchConditions;
-};
