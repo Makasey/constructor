@@ -8,7 +8,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { AbstractEditAreaService } from "@modules/constructor";
 
-import { RouteParams } from "@shared-types";
+import { RouteParams } from "@shared-enums";
 
 @UntilDestroy()
 @Component({

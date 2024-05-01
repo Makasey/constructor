@@ -12,7 +12,7 @@ import { AbstractModuleComponent } from "@core";
 import { LZTableComponent } from "@components";
 
 import { NavigationLinkPipe } from "@shared-pipes";
-import { RouteKey } from "@shared-types";
+import { RouteKey } from "@shared-enums";
 
 // import { provideWebsocket } from "@core";
 // import { defaultWebsocketConfig } from "@core";
