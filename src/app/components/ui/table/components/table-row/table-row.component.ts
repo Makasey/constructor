@@ -1,5 +1,5 @@
+import { AsyncPipe, NgClass, NgStyle, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, input } from "@angular/core";
-import { AsyncPipe, NgTemplateOutlet, NgClass, NgStyle } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
 import { DragDropModule } from "@angular/cdk/drag-drop";
@@ -17,13 +17,13 @@ import {
     TemplateMap,
     checkScrollPosition,
 } from "@components";
-import { shouldCall } from "@shared-decorators";
 import { LZInitVarDirective } from "@shared-directives/init-var";
+import { shouldCall } from "@shared-decorators";
 
-import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
-import { defaultTrackBy } from "../../constants";
 import { LZRowPaddingPipe } from "../../pipes";
 import { TrackByFn } from "../../interfaces";
+import { coerceNullableArray, coerceNullableObject, transformTrackBy } from "../../transformers";
+import { defaultTrackBy } from "../../constants";
 
 @Component({
     selector: "lz-table-row",
@@ -40,28 +40,34 @@ export class LZTableRowComponent {
     public templatesMap = input<TemplateMap>({});
 
     public tableMeta = input<TableMeta[], TableMeta[] | null>([], {
-        transform: coerceNullableArray
+        transform: coerceNullableArray,
     });
 
     public tableExtra = input<TableExtra, TableExtra | null>({} as TableExtra, {
         transform: coerceNullableObject,
     });
 
-    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>({}, {
-        transform: coerceNullableObject,
-    });
+    public valuesExtra = input<TableValueExtraInternal, TableValueExtraInternal | null>(
+        {},
+        {
+            transform: coerceNullableObject,
+        },
+    );
 
     public rowIndex = input<number | undefined>(undefined);
 
     public highlighterId = input<string | undefined>(undefined);
 
-    public tableRow = input<TableRow, TableRow | null>({}, {
-        transform: coerceNullableObject,
-    });
+    public tableRow = input<TableRow, TableRow | null>(
+        {},
+        {
+            transform: coerceNullableObject,
+        },
+    );
 
     public trackByRow = input<TrackByFn, TrackByFn | null>(defaultTrackBy, {
         transform: transformTrackBy,
-    })
+    });
 
     @Output()
     public onBottomScrolled: Observable<boolean>;
@@ -93,7 +99,7 @@ export class LZTableRowComponent {
     }
 
     public onRowClick(): void {
-        const rowId: string = this.rowId as string;
+        const rowId: string = this.rowId;
         const item = this.valuesExtra()[rowId];
 
         if (!item.disabled) {
@@ -109,7 +115,7 @@ export class LZTableRowComponent {
         const id = this.getChildRowId(this.tableRow());
         const isOpened = this.valuesExtra()[id].opened;
 
-        if(isOpened) {
+        if (isOpened) {
             this.service.closeRowById(id);
 
             return;

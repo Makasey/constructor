@@ -12,4 +12,4 @@ export const APP_ROUTES: Routes = [
         path: RouteKey.BUILDER,
         loadChildren: () => import("@modules/constructor").then(module => module.CONSTRUCTOR_ROUTES),
     },
-]
+];
