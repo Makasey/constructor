@@ -7,10 +7,10 @@ import {
     AbstractEditorElementSettingsService,
     ELEMENT_ID,
     InnerPageElement,
+    LZEditorElementComponent,
     SectionPageElementSettings,
     processBackgroundValue,
     processSettingValueWithUnit,
-    LZEditorElementComponent,
 } from "@modules/constructor";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 

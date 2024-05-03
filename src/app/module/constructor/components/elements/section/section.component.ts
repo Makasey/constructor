@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 
 import { Observable, map } from "rxjs";
 
@@ -12,6 +12,7 @@ import {
     Directions,
     EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
+    LZEditorElementComponent,
     SECTION_PROVIDERS,
     SectionPageElement,
     SectionPageElementSettings,
@@ -22,12 +23,10 @@ import {
     processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
-    LZEditorElementComponent,
 } from "@modules/constructor";
 
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
-
 
 @Component({
     selector: "lz-section-element",
