@@ -4,7 +4,7 @@
     <ng-container
         [ngTemplateOutlet]="groupTemplate"
         [ngTemplateOutletContext]="{
-            formModel: _convertedFormModel
+            formModel: convertedFormModel()
         }"
     >
     </ng-container>
@@ -16,7 +16,7 @@
             [ngTemplateOutlet]="defaultGroupTemplate"
             [ngTemplateOutletContext]="{
                 formModel: formModel,
-                formGroup: formModel.path ? mainFormGroup?.get(formModel.path) : mainFormGroup,
+                formGroup: formModel.path ? mainFormGroup()?.get(formModel.path) : mainFormGroup(),
                 defaultTemplate: defaultGroupTemplate,
                 index: index
             }"
@@ -56,7 +56,7 @@
                                         "
                                         [ngTemplateOutletContext]="{
                                             controlModel: control,
-                                            nativeControl: mainFormGroup!.get(control.path)
+                                            nativeControl: mainFormGroup()!.get(control.path)
                                         }"
                                     >
                                     </ng-template>

@@ -13,7 +13,7 @@ import {
     SiteElementsComponent,
     SiteSettingsComponent,
 } from "@modules/constructor";
-import { APFormModule, LzTabsComponent, TabsItemComponent } from "@components";
+import { APFormComponent, LzTabsComponent, TabsItemComponent } from "@components";
 
 import { NavigationLinkPipe } from "@shared-pipes";
 import { RouteKey, RouteParams } from "@shared-enums";
@@ -28,7 +28,7 @@ import { RouteKey, RouteParams } from "@shared-enums";
     standalone: true,
     imports: [
         EditAreaComponent,
-        APFormModule,
+        APFormComponent,
         LzTabsComponent,
         TabsItemComponent,
         SiteElementsComponent,

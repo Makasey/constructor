@@ -1,4 +1,5 @@
-export {} from "./form.service";
+export { AbstractFormService, DefaultFormService } from "./form.service";
+export { provideForm } from "./form.providers";
 export {
     APFormControl,
     APFormModel,
@@ -9,4 +10,3 @@ export {
     gridAreasFromColumns,
 } from "./types";
 export { APFormComponent } from "./form.component";
-export { APFormModule } from "./form.module";

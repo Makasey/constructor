@@ -10,7 +10,6 @@ export {
     providePreviewDataService,
 } from "./data-service";
 export { enterAnimation, fadeInAnimation, fadeOutAnimation } from "./animations";
-export { APP_REF, AppRefConfig } from "./app-ref";
 export { AbstractNavigationService, NavigationService } from "./navigation";
 export {
     StateCallbackOrPart,

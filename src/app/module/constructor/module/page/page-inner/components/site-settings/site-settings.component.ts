@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormModel, APFormModule, APTextFieldModule } from "@components";
+import { APFormModel, APFormComponent, APTextFieldModule } from "@components";
 import { AbstractEditorPageSettingsService } from "@modules/constructor";
 import { FormsModule } from "@angular/forms";
 
@@ -13,7 +13,7 @@ import { FormsModule } from "@angular/forms";
     styleUrls: ["./site-settings.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormModule, APTextFieldModule, FormsModule],
+    imports: [APFormComponent, APTextFieldModule, FormsModule],
 })
 export class SiteSettingsComponent {
     @HostBinding("class.lz-site-settings")

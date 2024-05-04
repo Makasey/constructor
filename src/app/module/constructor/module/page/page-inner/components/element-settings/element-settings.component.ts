@@ -3,7 +3,7 @@ import { NgIf } from "@angular/common";
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormModule, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
+import { APFormComponent, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
 import { AbstractEditorElementSettingsService } from "@modules/constructor";
 
 @Component({
@@ -13,7 +13,7 @@ import { AbstractEditorElementSettingsService } from "@modules/constructor";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormModule, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective],
+    imports: [APFormComponent, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective],
 })
 export class ElementSettingsComponent {
     private readonly service = inject(AbstractEditorElementSettingsService);

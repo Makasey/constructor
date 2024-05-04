@@ -38,7 +38,7 @@ export class LZGridListComponent {
         private host: ElementRef<HTMLElement>,
     ) {}
 
-    public _trackBy(index: number, item: LZGridItem): string | number {
+    public _trackBy(_: number, item: LZGridItem): string | number {
         return item.id;
     }
 }

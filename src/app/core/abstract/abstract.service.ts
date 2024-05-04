@@ -1,10 +1,11 @@
-import { Directive, OnDestroy, OnInit } from "@angular/core";
+import { Directive, OnDestroy, OnInit, inject } from "@angular/core";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { Observable, catchError, debounceTime, filter, map, of, switchMap, tap, throwError } from "rxjs";
 
-import { LzQuery, LzService, LzState, ModuleState, StateCallbackOrPart, UIDataState } from "@core";
+import { LzQuery, LzService, LzState, LzStateKey, ModuleState, StateCallbackOrPart, UIDataState } from "@core";
+import { LZToastrItemType, LZToastrService } from "@components";
 
 type Rec = Record<string, unknown>;
 
@@ -24,6 +25,8 @@ export abstract class AbstractModuleService<T extends Rec = Rec> {
     public abstract reloadState(): void;
 
     public abstract onComponentDestroy(): Observable<unknown>;
+
+    public abstract getStateKey(): keyof LzState;
 
     public abstract selectToLoadState(): Observable<unknown>;
 }
@@ -107,6 +110,10 @@ export abstract class AbstractDefaultModuleService<K extends keyof LzState, T ex
         );
     }
 
+    public getStateKey(): LzStateKey {
+        return this.stateKey;
+    }
+
     public selectToLoadState(): Observable<unknown> {
         return this.query.selectStatePart<K>(this.stateKey).pipe(
             map(state => {
@@ -129,6 +136,8 @@ export abstract class AbstractModuleComponent<T extends Rec = Rec> implements On
 
     public readonly _saving$ = this.service.selectUiSaving();
 
+    private readonly toastrService: LZToastrService = inject(LZToastrService);
+
     protected constructor(protected service: AbstractModuleService<T>) {}
 
     public ngOnInit(options?: T): void {
@@ -139,8 +148,16 @@ export abstract class AbstractModuleComponent<T extends Rec = Rec> implements On
         return this.service.selectToLoadState().pipe(
             switchMap(() => this.service.asyncInit(options)),
             catchError(err => {
+                const stateKey = this.service.getStateKey();
+
+                this.toastrService.addToastrItem({
+                    type: LZToastrItemType.ERROR,
+                    title: `Can't load store ${stateKey}`,
+                    text: `Something went wrong with state ${stateKey}, ${JSON.stringify(err || {})}`,
+                })
                 this.service.updateDataState(UIDataState.ERROR);
-                return throwError(err);
+
+                return throwError(() => err);
             }),
         );
     }
