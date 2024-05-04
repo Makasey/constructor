@@ -39,7 +39,7 @@ export class DefaultFormService extends AbstractFormService {
 
     private mainFormGroup: WritableSignal<FormGroup | null> = signal(null);
 
-    private convertedFormModel: WritableSignal<ApFormInnerModel> = signal(undefined);
+    private convertedFormModel: WritableSignal<ApFormInnerModel> = signal({} as ApFormInnerModel);
 
     private subscribedForms: WritableSignal<string[]> = signal([]);
 
@@ -171,37 +171,37 @@ export class DefaultFormService extends AbstractFormService {
         this.convertedFormModel.set(updatedFormInner);
     }
 
-    private getFormGroupCopy(formGroup: FormGroup): FormGroup {
+    private getFormGroupCopy(formGroup: FormGroup): FormGroup<unknown> {
         const { controls, validator, asyncValidator, updateOn } = formGroup;
 
-        const formGroupCopy = new FormGroup({}, {
+        const formGroupCopy = new FormGroup<unknown>({}, {
             validators: validator,
             asyncValidators: asyncValidator,
             updateOn: updateOn,
         });
 
-        controls.forEach(control => {
+        Object.entries(controls).forEach(([name, control]) => {
             if(control instanceof FormGroup) {
-                formGroupCopy.addControl(control.name, this.getFormGroupCopy(control));
+                formGroupCopy.addControl(name, this.getFormGroupCopy(control));
                 
                 return;
             }
 
             if(control instanceof FormArray) {
-                formGroup.addControl(control.name, this.getFormArrayCopy(control));
+                formGroup.addControl(name, this.getFormArrayCopy(control));
 
                 return;
             }
 
-            formGroupCopy.addControl(control.name, this.getFormControlCopy(control as FormControl));
+            formGroupCopy.addControl(name, this.getFormControlCopy(control as FormControl));
         });
 
-        return formGroupCopy;
+        return formGroupCopy as FormGroup<unknown>;
     }
 
-    private getFormArrayCopy(formArray: FormArray): FormArray {
+    private getFormArrayCopy(formArray: FormArray): FormArray<unknown> {
         const { controls, validator, asyncValidator, updateOn } = formArray;
-        const formArrayCopy = new FormArray([], {
+        const formArrayCopy = new FormArray<unknown>([], {
             validators: validator,
             asyncValidators: asyncValidator,
             updateOn: updateOn,
@@ -209,32 +209,32 @@ export class DefaultFormService extends AbstractFormService {
 
         controls.forEach((control, index) => {
             if(control instanceof FormGroup) {
-                formArrayCopy.setControl(index, this.getFormGroupCopy(control));
+                formArrayCopy.insert(index, this.getFormGroupCopy(control));
                 
                 return;
             }
 
             if(control instanceof FormArray) {
-                formArrayCopy.addControl(index, this.getFormArrayCopy(control));
+                formArrayCopy.insert(index, this.getFormArrayCopy(control));
 
                 return;
             }
 
-            formArrayCopy.addControl(index, this.getFormControlCopy(control as FormControl));
+            formArrayCopy.insert(index, this.getFormControlCopy(control as FormControl));
         })
 
-        return formArrayCopy;
+        return formArrayCopy as FormArray<unknown>;
     }
 
     private getFormControlCopy(control: FormControl): FormControl {
-        const { value, disabled, validators, asyncValidators, updateOn } = control;
+        const { value, disabled, validator, asyncValidator, updateOn } = control;
         
         return new FormControl({
             value: value,
             disabled: disabled,
         }, {
-            validators: validators,
-            asyncValidators: asyncValidators,
+            validators: validator,
+            asyncValidators: asyncValidator,
             updateOn: updateOn,
         });
     }
@@ -338,7 +338,7 @@ export class DefaultFormService extends AbstractFormService {
         }
 
         this.formsManager.upsert(formModel.name, this.mainFormGroup()!, formModel.upsertConfig);
-        this.subscribedForms.set(...this.subscribedForms(), formModel.name);
+        this.subscribedForms.set([...this.subscribedForms(), formModel.name]);
 
         this.valueChanges$ = this.formsManager.valueChanges(formModel.name).pipe(
             skip(1),
@@ -373,9 +373,10 @@ export class DefaultFormService extends AbstractFormService {
     public processFormModel(formModel: APFormModel, previousValue: APFormModel): void {
         this.unsubscribeForm();
         this.convertedFormModel.set(this.normalizeFields(formModel)!);
+        const formGroup = this.mainFormGroup();
 
-        if (this.mainFormGroup()) {
-            this.updateFormGroup(this.mainFormGroup(), this.convertedFormModel(), previousValue as APFormModel);
+        if (formGroup) {
+            this.updateFormGroup(formGroup, this.convertedFormModel(), previousValue as APFormModel);
         } else {
             this.mainFormGroup.set(this.convertToNativeGroup(this.convertedFormModel()));
         }
