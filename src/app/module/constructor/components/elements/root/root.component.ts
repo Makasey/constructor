@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { AbstractEditorElementActionsService, SectionPageElement, LZEditorElementComponent } from "@modules/constructor";
+import { AbstractEditorElementActionsService, LZEditorElementComponent, SectionPageElement } from "@modules/constructor";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({

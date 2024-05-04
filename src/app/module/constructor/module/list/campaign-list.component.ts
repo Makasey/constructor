@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
 import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
 import { RouterLink } from "@angular/router";
 
 import { untilDestroyed } from "@ngneat/until-destroy";
-
 
 import { AbstractCampaignListService, DefaultCampaignListService } from "@modules/constructor";
 import { AbstractModuleComponent } from "@core";
