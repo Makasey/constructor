@@ -1,17 +1,11 @@
-import { Injectable, WritableSignal, signal, Signal } from "@angular/core";
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
+import { Injectable, Signal, WritableSignal, signal } from "@angular/core";
 
 import { Observable, distinctUntilChanged, skip } from "rxjs";
 
 import { NgFormsManager } from "@ngneat/forms-manager";
 
-import {
-    APFormControl,
-    APFormModel,
-    ApFormControlInner,
-    ApFormInnerModel,
-    gridAreasFromColumns,
-} from "@components";
+import { APFormControl, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "@components";
 import { getRandomId, isObjectEquals } from "@shared-utils";
 
 @Injectable()
@@ -101,22 +95,22 @@ export class DefaultFormService extends AbstractFormService {
     }
 
     private convertToGroupsMap(models: ApFormInnerModel[]): Record<string, FormGroup | FormArray> | null {
-        if(!models) {
+        if (!models) {
             return null;
         }
 
         return models.reduce(
-                (result, next) => {
-                    if (next?.isFormArray) {
-                        result[next.name] = this.convertToNativeFormArray(next)!;
-                    } else {
-                        result[next.name] = this.convertToNativeGroup(next)!;
-                    }
+            (result, next) => {
+                if (next?.isFormArray) {
+                    result[next.name] = this.convertToNativeFormArray(next)!;
+                } else {
+                    result[next.name] = this.convertToNativeGroup(next)!;
+                }
 
-                    return result;
-                },
-                {} as Record<string, FormGroup | FormArray>,
-            );
+                return result;
+            },
+            {} as Record<string, FormGroup | FormArray>,
+        );
     }
 
     private updateFormGroup(formGroup: FormGroup, updatedFormInner: ApFormInnerModel, oldFormInner: APFormModel): void {
@@ -171,23 +165,26 @@ export class DefaultFormService extends AbstractFormService {
         this.convertedFormModel.set(updatedFormInner);
     }
 
-    private getFormGroupCopy(formGroup: FormGroup): FormGroup<unknown> {
+    private getFormGroupCopy(formGroup: FormGroup): FormGroup {
         const { controls, validator, asyncValidator, updateOn } = formGroup;
 
-        const formGroupCopy = new FormGroup<unknown>({}, {
-            validators: validator,
-            asyncValidators: asyncValidator,
-            updateOn: updateOn,
-        });
+        const formGroupCopy = new FormGroup(
+            {},
+            {
+                validators: validator,
+                asyncValidators: asyncValidator,
+                updateOn: updateOn,
+            },
+        );
 
         Object.entries(controls).forEach(([name, control]) => {
-            if(control instanceof FormGroup) {
+            if (control instanceof FormGroup) {
                 formGroupCopy.addControl(name, this.getFormGroupCopy(control));
-                
+
                 return;
             }
 
-            if(control instanceof FormArray) {
+            if (control instanceof FormArray) {
                 formGroup.addControl(name, this.getFormArrayCopy(control));
 
                 return;
@@ -196,47 +193,50 @@ export class DefaultFormService extends AbstractFormService {
             formGroupCopy.addControl(name, this.getFormControlCopy(control as FormControl));
         });
 
-        return formGroupCopy as FormGroup<unknown>;
+        return formGroupCopy;
     }
 
-    private getFormArrayCopy(formArray: FormArray): FormArray<unknown> {
+    private getFormArrayCopy(formArray: FormArray): FormArray<AbstractControl<unknown, unknown>> {
         const { controls, validator, asyncValidator, updateOn } = formArray;
-        const formArrayCopy = new FormArray<unknown>([], {
+        const formArrayCopy = new FormArray<AbstractControl<unknown, unknown>>([], {
             validators: validator,
             asyncValidators: asyncValidator,
             updateOn: updateOn,
         });
 
         controls.forEach((control, index) => {
-            if(control instanceof FormGroup) {
+            if (control instanceof FormGroup) {
                 formArrayCopy.insert(index, this.getFormGroupCopy(control));
-                
+
                 return;
             }
 
-            if(control instanceof FormArray) {
+            if (control instanceof FormArray) {
                 formArrayCopy.insert(index, this.getFormArrayCopy(control));
 
                 return;
             }
 
             formArrayCopy.insert(index, this.getFormControlCopy(control as FormControl));
-        })
+        });
 
-        return formArrayCopy as FormArray<unknown>;
+        return formArrayCopy;
     }
 
     private getFormControlCopy(control: FormControl): FormControl {
         const { value, disabled, validator, asyncValidator, updateOn } = control;
-        
-        return new FormControl({
-            value: value,
-            disabled: disabled,
-        }, {
-            validators: validator,
-            asyncValidators: asyncValidator,
-            updateOn: updateOn,
-        });
+
+        return new FormControl(
+            {
+                value: value,
+                disabled: disabled,
+            },
+            {
+                validators: validator,
+                asyncValidators: asyncValidator,
+                updateOn: updateOn,
+            },
+        );
     }
 
     private normalizeFields(formModel: APFormModel, currentPath: string[] = []): ApFormInnerModel | null {
@@ -244,18 +244,19 @@ export class DefaultFormService extends AbstractFormService {
             return null;
         }
 
-        if(!formModel.controls) {
+        if (!formModel.controls) {
             return null;
         }
 
         let i = 65;
 
-        const coerceControls = Array.isArray(formModel.controls[0]) ? (formModel.controls as APFormControl[][]) : [formModel.controls as APFormControl[]];
+        const coerceControls = Array.isArray(formModel.controls[0])
+            ? (formModel.controls as APFormControl[][])
+            : [formModel.controls as APFormControl[]];
 
         const resultControls: ApFormControlInner[][] = coerceControls.map(item => {
-                return this.normalizeControls(item, currentPath, i++);
-            }
-        );
+            return this.normalizeControls(item, currentPath, i++);
+        });
 
         const filteredInnerGroups = formModel.innerGroups?.filter(group => !!group);
         const mappedInnerGroups = filteredInnerGroups?.map((group, i) => {
@@ -273,7 +274,7 @@ export class DefaultFormService extends AbstractFormService {
         };
     }
 
-    private normalizeControl (control: APFormControl, currentPath: string[], charIndex: number): ApFormControlInner {
+    private normalizeControl(control: APFormControl, currentPath: string[], charIndex: number): ApFormControlInner {
         const path = [...currentPath, control.name];
 
         return {
@@ -287,28 +288,28 @@ export class DefaultFormService extends AbstractFormService {
             id: control.id ?? getRandomId(),
             gridClass: String.fromCharCode(charIndex++),
         };
-    };  
+    }
 
-    private normalizeControls (controls: APFormControl[], currentPath: string[], startIndex: number): ApFormControlInner[] {
+    private normalizeControls(controls: APFormControl[], currentPath: string[], startIndex: number): ApFormControlInner[] {
         return controls.filter(it => !!it).map(item => this.normalizeControl(item, currentPath, startIndex++));
-    };
+    }
 
     private convertToControlsMap(controls: APFormControl[]): Record<string, FormControl> | null {
-        if(!controls) {
+        if (!controls) {
             return null;
         }
 
         return controls.reduce<Record<string, FormControl>>((result, next) => {
-                result[next.name] = this.toNativeControl(next);
-                return result;
-            }, {});
+            result[next.name] = this.toNativeControl(next);
+            return result;
+        }, {});
     }
 
     private convertToNativeGroup(formModel: ApFormInnerModel): FormGroup | null {
         if (!formModel) {
             return null;
         }
-        
+
         const controls = (formModel.innerControls && this.convertToControlsMap(formModel.innerControls)) ?? {};
         const innerGroups = this.convertToGroupsMap(formModel.innerGroups ?? []) ?? {};
         const newFormGroup: FormGroup = new FormGroup(
@@ -376,7 +377,7 @@ export class DefaultFormService extends AbstractFormService {
         const formGroup = this.mainFormGroup();
 
         if (formGroup) {
-            this.updateFormGroup(formGroup, this.convertedFormModel(), previousValue as APFormModel);
+            this.updateFormGroup(formGroup, this.convertedFormModel(), previousValue);
         } else {
             this.mainFormGroup.set(this.convertToNativeGroup(this.convertedFormModel()));
         }

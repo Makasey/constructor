@@ -21,10 +21,13 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 
 import {
     APDropdownFieldModule,
+    APFormDefaultTemplateKeys,
+    APFormModel,
     APNumberFieldModule,
     APTextFieldModule,
     BackgroundFieldComponent,
     BorderFieldComponent,
+    ControlTemplate,
     DirectionFieldComponent,
     ItemsControlFieldComponent,
     LZColorPickerComponent,
@@ -35,13 +38,10 @@ import {
     RangeFieldComponent,
     RangeFieldWithUnitComponent,
     TextareaComponent,
-    APFormDefaultTemplateKeys,
-    APFormModel,
-    ControlTemplate,
 } from "@components";
 
 import { AbstractFormService } from "./form.service";
-import { provideForm } from "./form.providers";
+import { provideForm } from "@components/ui";
 
 @UntilDestroy()
 @Component({
@@ -51,8 +51,8 @@ import { provideForm } from "./form.providers";
     styleUrls: ["./form.component.scss"],
     encapsulation: ViewEncapsulation.None,
     imports: [
-        APTextFieldModule, 
-        APNumberFieldModule, 
+        APTextFieldModule,
+        APNumberFieldModule,
         APDropdownFieldModule,
         BackgroundFieldComponent,
         BorderFieldComponent,
@@ -151,7 +151,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     public readonly submitForm: EventEmitter<unknown> = new EventEmitter<unknown>();
 
     private readonly service: AbstractFormService = inject(AbstractFormService);
-    
+
     public _templatesMap: Record<string, TemplateRef<unknown>>;
 
     public mainFormGroup = this.service.getMainFormGroup();
@@ -189,9 +189,9 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.formModel) {
-           this.service.processFormModel(this.formModel, changes.formModel.previousValue);
+            this.service.processFormModel(this.formModel, changes.formModel.previousValue);
 
-           this.valueChanges$ = this.service.valueChanges$;
+            this.valueChanges$ = this.service.valueChanges$;
         }
     }
 
@@ -206,7 +206,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     private unsubscribeForm(): void {
-       this.service.unsubscribeForm();
+        this.service.unsubscribeForm();
     }
 
     public ngOnDestroy(): void {
