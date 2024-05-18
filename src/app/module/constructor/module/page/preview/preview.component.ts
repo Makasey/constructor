@@ -1,3 +1,5 @@
+import { ActivatedRoute, RouterLink } from "@angular/router";
+import { AsyncPipe, NgIf } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
@@ -10,24 +12,19 @@ import {
     inject,
     signal,
 } from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { AsyncPipe, NgIf } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 import { Observable, delay, tap } from "rxjs";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
-import { AbstractCampaignService, AbstractPreviewService, CampaignPreviewModel } from "@modules/constructor";
 import { APDropdownFieldModule, LZLoaderComponent } from "@components";
-
+import { AbstractCampaignService, AbstractPreviewService, CampaignPreviewModel } from "@modules/constructor";
 
 import { CreatePreviewDirective } from "@shared-directives";
 import { NavigationLinkPipe } from "@shared-pipes";
 import { RouteKey, RouteParams } from "@shared-enums";
-
-
 
 @UntilDestroy()
 @Component({

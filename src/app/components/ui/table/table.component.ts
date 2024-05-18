@@ -19,7 +19,6 @@ import {
     AbstractAwesomeTableService,
     ColumnDropEvent,
     DEFAULT_LOAD_MORE_LABEL,
-    LZLoaderComponent,
     LZTableBodyComponent,
     LZTableFootComponent,
     LZTableHeadComponent,
@@ -34,6 +33,7 @@ import {
 } from "@components";
 import { shouldCall } from "@shared-decorators";
 
+import { LZLoaderComponent } from "../loader";
 import { TrackByFn } from "./interfaces";
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
@@ -57,13 +57,13 @@ export class LZTableComponent {
     public relations = input<Record<string, unknown[]>>({});
 
     @Output()
-    public onBottomScrolled: Observable<boolean>;
+    public readonly onBottomScrolled: Observable<boolean>;
 
     @Output()
-    public onSelect: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
+    public readonly onSelect: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
 
     @Output()
-    public columnDropped: EventEmitter<ColumnDropEvent> = new EventEmitter<ColumnDropEvent>();
+    public readonly columnDropped: EventEmitter<ColumnDropEvent> = new EventEmitter<ColumnDropEvent>();
 
     public _tableExtra: TableExtra = { ...defaultTableExtra };
 
