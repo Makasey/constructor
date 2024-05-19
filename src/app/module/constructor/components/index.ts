@@ -62,9 +62,4 @@ export {
 
 export { LZElementActionsComponent } from "./element-actions";
 
-export {
-    EditAreaComponent,
-    sitePageElementMap,
-    DefaultEditAreaService,
-    AbstractEditAreaService,
-} from "./edit-area";
+export { EditAreaComponent, sitePageElementMap, DefaultEditAreaService, AbstractEditAreaService } from "./edit-area";
