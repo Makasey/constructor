@@ -106,7 +106,10 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
                 children.push(newElementId);
 
-                updatedTree = duplicateTreeElement(items, duplicatedItem, ROOT_ELEMENT_ID, newElementId);
+                updatedTree = {
+                    ...updatedTree,
+                    ...duplicateTreeElement(items, duplicatedItem, ROOT_ELEMENT_ID, newElementId),
+                };
             });
 
             const updatePages: Page[] = [

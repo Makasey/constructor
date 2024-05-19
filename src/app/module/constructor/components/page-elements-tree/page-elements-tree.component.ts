@@ -43,7 +43,7 @@ export class PageElementsTreeComponent {
 
     public elements: Signal<Tree[]> = computed(() => {
         return this.rootElements().map(element => ({
-            ...mapElementsToTreeModel(this.items()!, element),
+            ...mapElementsToTreeModel(this.items(), element),
         }));
     });
 
