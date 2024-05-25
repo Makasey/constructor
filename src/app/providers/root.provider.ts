@@ -8,7 +8,7 @@ import { provideAkitaDevtools, STORE_PROVIDERS } from "./store.provider";
 import { TOASTR_PROVIDERS } from "./toastr.providers";
 
 export const ROOT_PROVIDERS = [
-    ...provideAkitaDevtools(),
+    provideAkitaDevtools(),
     ...STORE_PROVIDERS,
     ...NAVIGATION_PROVIDERS,
     ...EVENT_MANAGER_PLUGIN_PROVIDERS,
