@@ -4,10 +4,11 @@ import { provideHttpClient, withInterceptors } from "@angular/common/http";
 import { DATA_SERVICES_PROVIDERS } from "./data-service.provider";
 import { EVENT_MANAGER_PLUGIN_PROVIDERS } from "./event-manager.provider";
 import { NAVIGATION_PROVIDERS } from "./navigation.provider";
-import { STORE_PROVIDERS } from "./store.provider";
+import { provideAkitaDevtools, STORE_PROVIDERS } from "./store.provider";
 import { TOASTR_PROVIDERS } from "./toastr.providers";
 
 export const ROOT_PROVIDERS = [
+    ...provideAkitaDevtools(),
     ...STORE_PROVIDERS,
     ...NAVIGATION_PROVIDERS,
     ...EVENT_MANAGER_PLUGIN_PROVIDERS,
