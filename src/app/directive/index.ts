@@ -16,3 +16,4 @@ export {
     LzPreloadFiltersComponent,
 } from "./preload";
 export { CreatePreviewDirective } from "./preview";
+export { DraggableDirective } from "./drag-and-drop";

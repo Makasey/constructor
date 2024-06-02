@@ -9,6 +9,7 @@ import {
     SitePageElementUnion,
     processPossibleElements,
 } from "@modules/constructor";
+import { DraggableDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-site-elements",
@@ -17,7 +18,7 @@ import {
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass, NgForOf, NgIf],
+    imports: [NgClass, NgForOf, NgIf, DraggableDirective],
 })
 export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")
