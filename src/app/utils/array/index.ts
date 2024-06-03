@@ -1,1 +1,1 @@
-export { isItemsInDifferentArray, defaultCompareFunction, isArrayEquals } from "./array.utils";
+export { hasIntersection, defaultCollectFn, isArrayEquals } from "./array.utils";

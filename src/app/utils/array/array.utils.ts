@@ -1,16 +1,30 @@
 import { ArrayOrIterable } from "@shared-types";
+import { CollectFnConfig, Primitive } from "@shared-types/common/common";
 import { isObjectEquals } from "@shared-utils";
 
-export function defaultCompareFunction<T = unknown, K = T>(sourceItem: T, destinationItem: K): boolean {
-    return Object.is(sourceItem, destinationItem);
+export function defaultCollectFn<T = unknown>(sourceItem: T): Primitive {
+    return sourceItem as unknown as Primitive;
 }
 
-export function isItemsInDifferentArray<T = string, K = T>(
-    source: T[],
-    dest: K[],
-    findFunction: (sourceItem: T, destinationItem: K) => boolean = defaultCompareFunction,
-): boolean {
-    return source.some(sourceItem => !!dest.find(destinationItem => findFunction(sourceItem, destinationItem)));
+export function hasIntersection<T = string, K = T>(
+    {
+        source = [], 
+        destination = [], 
+        destinationCollectFn = defaultCollectFn, 
+        sourceCollectFn = defaultCollectFn 
+    }: CollectFnConfig<T, K>): boolean {
+    if(!source.length || !destination.length) {
+        return false;
+    }
+
+    const mappedSource = source.map(sourceItem => sourceCollectFn(sourceItem));
+    const sourceCollection = new Set(mappedSource);
+    
+    return destination.some(destinationItem => {
+        const processedDestinationItem = destinationCollectFn(destinationItem);
+
+        return sourceCollection.has(processedDestinationItem);
+    });
 }
 
 export function isArrayEquals<T = unknown>(target: ArrayOrIterable<T>, other: ArrayOrIterable<T>): boolean {

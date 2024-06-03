@@ -29,3 +29,14 @@ export type SelectItem<Value = number, Label = string> = Readonly<{
 }>;
 
 export type ArrayOrIterable<T = unknown> = T[] | Iterable<T> | ArrayLike<T>;
+
+export type Primitive = number | null | undefined | string | boolean | Symbol | bigint;
+
+export type CollectItemFn<Source> = (sourceItem: Source) => Primitive;
+
+export type CollectFnConfig<Source = unknown, Destination = Source> = Readonly<{
+    source: Source[];
+    destination: Destination[];
+    sourceCollectFn?: CollectItemFn<Source>;
+    destinationCollectFn?: CollectItemFn<Destination>;
+}>
