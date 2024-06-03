@@ -1,5 +1,4 @@
-import { ArrayOrIterable } from "@shared-types";
-import { CollectFnConfig, Primitive } from "@shared-types/common/common";
+import { ArrayOrIterable, CollectFnConfig, Primitive } from "@shared-types";
 import { isObjectEquals } from "@shared-utils";
 
 export function defaultCollectFn<T = unknown>(sourceItem: T): Primitive {
