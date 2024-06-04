@@ -47,6 +47,7 @@ export class DraggableDirective {
             this.dragPosition.x = x - this.touchOffset.x;
             this.dragPosition.y = y - this.touchOffset.y;
 
+            this.renderer.setStyle(this.el.nativeElement, "position", "absolute");
             this.renderer.setStyle(this.el.nativeElement, "transform", `translate(${this.dragPosition.x}px, ${this.dragPosition.y}px)`);
         }
     }
