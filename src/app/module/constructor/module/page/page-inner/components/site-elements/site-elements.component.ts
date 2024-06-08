@@ -3,6 +3,7 @@ import { NgClass, NgForOf, NgIf } from "@angular/common";
 
 import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, SitePageElementUnion, processPossibleElements } from "@modules/constructor";
 import { DraggableDirective } from "@shared-directives";
+import { DraggableV2Directive } from "@shared-directives/drag-and-drop";
 
 @Component({
     selector: "lz-site-elements",
@@ -11,7 +12,7 @@ import { DraggableDirective } from "@shared-directives";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass, NgForOf, NgIf, DraggableDirective],
+    imports: [NgClass, NgForOf, NgIf, DraggableDirective, DraggableV2Directive],
 })
 export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")
