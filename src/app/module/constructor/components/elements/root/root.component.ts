@@ -20,7 +20,6 @@ import { DroppableDirective } from "@shared-directives/drag-and-drop";
         TabSelectionDirective,
         {
             directive: DroppableDirective,
-            inputs: ["lzDroppable"],
         },
     ],
 })

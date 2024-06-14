@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable, WritableSignal, signal } from "@angular/core";
 
 @Injectable({
     providedIn: "root",
 })
 export class DragDropService {
-    public draggedItem: unknown | null = null;
+    public draggedItem: WritableSignal<unknown | null> = signal(null);
 
     public setDraggedItem(item: unknown): void {
-        this.draggedItem = item;
+        this.draggedItem.set(item);
     }
 
     public clearDraggedItem(): void {
-        this.draggedItem = null;
+        this.draggedItem.set(null);
     }
 }

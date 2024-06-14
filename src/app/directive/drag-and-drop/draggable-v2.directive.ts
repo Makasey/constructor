@@ -11,6 +11,7 @@ export class DraggableV2Directive {
     private readonly dragDropService: DragDropService = inject(DragDropService);
 
     @Input() public lzDraggableV2: unknown;
+
     private offsetX = 0;
     private offsetY = 0;
 
