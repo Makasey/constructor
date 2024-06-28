@@ -28,9 +28,8 @@ export class DroppableDirective {
         }
     }
 
-    @HostListener("document:mouseup", ["$event"])
+    @HostListener("mouseup", ["$event"])
     public onDrop(event: MouseEvent): void {
-        console.log("triggered mouseup");
         event.preventDefault();
         if (this.dragDropService.draggedItem()) {
             this.itemDropped.emit(this.dragDropService.draggedItem());

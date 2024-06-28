@@ -26,14 +26,4 @@ export class SiteElementsComponent {
 
         return processPossibleElements(type);
     });
-
-    // public createNewElement(type: SitePageElementType): void {
-    //     if (this.selectedElement() === ROOT_ELEMENT_ID) {
-    //         this.service.addPageElement(type);
-    //
-    //         return;
-    //     }
-    //
-    //     this.service.addElementByType(type);
-    // }
 }

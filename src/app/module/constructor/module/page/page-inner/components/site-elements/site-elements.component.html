@@ -2,10 +2,6 @@
     <section class="elements-settings">
         <h2 class="settings-title">Элементы сайта</h2>
         <article class="elements-wrapper">
-            <!--        <button lzDraggable class="element" *ngFor="let element of elements()" (click)="createNewElement(element.type)">-->
-            <!--            <i class="bx" [ngClass]="element.icon"></i>-->
-            <!--            {{ element.title }}-->
-            <!--        </button>-->
             @for (element of elements(); track element.type) {
                 <button [lzDraggable]="element" class="element" draggable="true">
                     <i class="bx" [ngClass]="element.icon"></i>
