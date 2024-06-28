@@ -14,14 +14,7 @@ import { DroppableDirective } from "@shared-directives/drag-and-drop";
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
     imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent, DroppableDirective],
-    hostDirectives: [
-        ToggleSelectionDirective,
-        DeleteSelectedElementDirective,
-        TabSelectionDirective,
-        {
-            directive: DroppableDirective,
-        },
-    ],
+    hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective, DroppableDirective],
 })
 export class RootComponent {
     @HostBinding("class")

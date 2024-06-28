@@ -1,6 +1,5 @@
-import { Directive, ElementRef, HostListener, Renderer2, inject } from "@angular/core";
-
-export type DraggablePositionType = Record<string, number>;
+import { Directive, ElementRef, HostListener, Input, Renderer2, inject } from "@angular/core";
+import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 
 @Directive({
     selector: "[lzDraggable]",
@@ -9,53 +8,43 @@ export type DraggablePositionType = Record<string, number>;
 export class DraggableDirective {
     private readonly el: ElementRef<HTMLElement> = inject(ElementRef);
     private readonly renderer: Renderer2 = inject(Renderer2);
+    private readonly dragDropService: DragDropService = inject(DragDropService);
 
-    private isDragging = false;
+    @Input() public lzDraggable: unknown;
 
-    private dragPosition: DraggablePositionType = {
-        x: 0,
-        y: 0,
-    };
-
-    private touchOffset: DraggablePositionType = {
-        x: 0,
-        y: 0,
-    };
+    private offsetX = 0;
+    private offsetY = 0;
 
     @HostListener("mousedown", ["$event"])
-    public onMouseDown(event: MouseEvent): void {
+    public onDragStart(event: MouseEvent): void {
         event.preventDefault();
-        this.isDragging = true;
+        this.dragDropService.setDraggedItem(this.lzDraggable);
 
-        const { x, y } = this.prepareDragging(event);
+        const rect = this.el.nativeElement.getBoundingClientRect();
+        this.offsetX = event.clientX - rect.left;
+        this.offsetY = event.clientY - rect.top;
 
-        this.touchOffset.x = x - this.dragPosition.x;
-        this.touchOffset.y = y - this.dragPosition.y;
-    }
+        const target = event.target as HTMLElement;
 
-    @HostListener("document:mouseup", ["$event"])
-    public onMouseUp(): void {
-        if (this.isDragging) {
-            this.isDragging = false;
-        }
-    }
+        const clone = this.el.nativeElement.cloneNode(true);
+        this.renderer.setStyle(clone, "position", "absolute");
+        this.renderer.setStyle(clone, "left", event.clientX - this.offsetX + "px");
+        this.renderer.setStyle(clone, "top", event.clientY - this.offsetY - target?.clientHeight + "px");
+        this.renderer.setStyle(clone, "width", target?.clientWidth + "px");
+        this.renderer.setStyle(clone, "height", target?.clientHeight + "px");
+        this.renderer.setStyle(clone, "background-color", "red");
+        document.body.appendChild(clone);
 
-    @HostListener("document:mousemove", ["$event"])
-    public onMouseMove(event: MouseEvent): void {
-        if (this.isDragging) {
-            const { x, y } = this.prepareDragging(event);
-            this.dragPosition.x = x - this.touchOffset.x;
-            this.dragPosition.y = y - this.touchOffset.y;
+        const moveListener = this.renderer.listen("document", "mousemove", (moveEvent: MouseEvent) => {
+            this.renderer.setStyle(clone, "left", moveEvent.clientX - this.offsetX + "px");
+            this.renderer.setStyle(clone, "top", moveEvent.clientY - this.offsetY - target?.clientHeight + "px");
+        });
 
-            this.renderer.setStyle(this.el.nativeElement, "position", "absolute");
-            this.renderer.setStyle(this.el.nativeElement, "transform", `translate(${this.dragPosition.x}px, ${this.dragPosition.y}px)`);
-        }
-    }
-
-    private prepareDragging(event: MouseEvent): DraggablePositionType {
-        return {
-            x: event.clientX,
-            y: event.clientY,
-        };
+        const upListener = this.renderer.listen("document", "mouseup", () => {
+            moveListener();
+            upListener();
+            this.renderer.removeChild(document.body, clone);
+            this.dragDropService.clearDraggedItem();
+        });
     }
 }

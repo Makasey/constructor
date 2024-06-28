@@ -7,7 +7,7 @@
             <!--            {{ element.title }}-->
             <!--        </button>-->
             @for (element of elements(); track element.type) {
-                <button [lzDraggableV2]="element" class="element" draggable="true">
+                <button [lzDraggable]="element" class="element" draggable="true">
                     <i class="bx" [ngClass]="element.icon"></i>
                     {{ element.title }}
                 </button>

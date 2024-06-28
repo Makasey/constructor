@@ -14,7 +14,6 @@ export class DroppableDirective {
 
     @HostListener("mouseenter", ["$event"])
     public onDragEnter(event: MouseEvent): void {
-        console.log("mouseenter trigger", this.dragDropService.draggedItem());
         event.preventDefault();
         if (this.dragDropService.draggedItem()) {
             this.renderer.setStyle(this.el.nativeElement, "border", "1px dashed #475A68");
@@ -25,7 +24,6 @@ export class DroppableDirective {
     public onDragLeave(event: MouseEvent): void {
         event.preventDefault();
         if (this.dragDropService.draggedItem()) {
-            console.log("triggered mouseleave", this.dragDropService.draggedItem());
             this.renderer.removeStyle(this.el.nativeElement, "border");
         }
     }
