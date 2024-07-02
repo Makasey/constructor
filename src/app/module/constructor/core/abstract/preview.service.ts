@@ -1,9 +1,8 @@
-import { Inject, Injectable, Provider, Type, inject } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Inject, Injectable, Provider, Type, inject } from "@angular/core";
 
 import { Observable, catchError, throwError } from "rxjs";
 
-import { getPreviewData } from "@modules/constructor";
 import {
     AbstractLzStoreService,
     AbstractNavigationService,
@@ -14,6 +13,7 @@ import {
     LzStateKey,
 } from "@core";
 import { LZToastrItemType, LZToastrService } from "@components";
+import { getPreviewData } from "@modules/constructor";
 
 import { ResponseError } from "@shared-types";
 import { RouteKey, RouteParams } from "@shared-enums";

@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-import { NgTemplateOutlet } from "@angular/common";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
+import { APFormComponent, LzTabsComponent, TabsItemComponent } from "@components";
 import {
     AbstractCampaignService,
     EditAreaComponent,
@@ -13,7 +14,6 @@ import {
     SiteElementsComponent,
     SiteSettingsComponent,
 } from "@modules/constructor";
-import { APFormComponent, LzTabsComponent, TabsItemComponent } from "@components";
 
 import { NavigationLinkPipe } from "@shared-pipes";
 import { RouteKey, RouteParams } from "@shared-enums";

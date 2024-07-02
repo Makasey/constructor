@@ -1,17 +1,20 @@
-import { Injectable } from "@angular/core";
 import { CdkDragDrop } from "@angular/cdk/drag-drop";
+import { Injectable } from "@angular/core";
 
-import { Observable, shareReplay, skip, map, distinctUntilChanged } from "rxjs";
+import { Observable, distinctUntilChanged, map, shareReplay, skip } from "rxjs";
 
 import {
+    ColumnDropEvent,
     TableExtra,
     TableMeta,
     TableQuery,
     TableRow,
     TableService,
+    TableStateUpdateModel,
     TableValueExtraInternal,
     closeRowById,
     collapseRowById,
+    convertPlainRowsToValueExtraParams,
     deselectAllRows,
     deselectParentRowById,
     deselectRowById,
@@ -23,9 +26,6 @@ import {
     selectAllRows,
     selectParentRowById,
     selectRowById,
-    ColumnDropEvent,
-    TableStateUpdateModel,
-    convertPlainRowsToValueExtraParams,
 } from "@components";
 import { TableState } from "@core";
 import { convertSelectedRows } from "../utils";
@@ -88,7 +88,7 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
     ) {
         super();
     }
-    
+
     public tableExtra$: Observable<TableExtra> = this.query.select(state => state.tableExtra).pipe(shareReplay(1));
 
     public tableMeta$: Observable<TableMeta[]> = this.query.select(state => state.tableMeta).pipe(shareReplay(1));
@@ -97,14 +97,16 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
 
     public valuesExtra$: Observable<TableValueExtraInternal> = this.query.select(state => state.valuesExtra).pipe(shareReplay(1));
 
-    public selectedRows$: Observable<unknown[]> = this.query.select(state => state.selectedRows).pipe(
-        skip(1),
-        distinctUntilChanged((previous, current) => isArrayEquals(previous, current)),
-        map(rows => [...rows]),
-        shareReplay(1)
-    );
+    public selectedRows$: Observable<unknown[]> = this.query
+        .select(state => state.selectedRows)
+        .pipe(
+            skip(1),
+            distinctUntilChanged((previous, current) => isArrayEquals(previous, current)),
+            map(rows => [...rows]),
+            shareReplay(1),
+        );
 
-    public isDragging$: Observable<boolean> =  this.query.select(state => state.isDragging).pipe(shareReplay(1));
+    public isDragging$: Observable<boolean> = this.query.select(state => state.isDragging).pipe(shareReplay(1));
 
     public openRowById(id: string): void {
         const { valuesExtra } = this.query.getValue();
@@ -153,9 +155,9 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
         const { selectedRows } = this.query.getValue();
         const isSelected = selectedRows.has(id);
 
-        if(isSelected) {
-            this.deselectRowById(id)
-            
+        if (isSelected) {
+            this.deselectRowById(id);
+
             return;
         }
 
@@ -167,14 +169,14 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
 
         const updatedSelectedRows = selectParentRowById(selectedRows, id, tableExtra, valuesExtra);
 
-            this.patchState({
-                valuesExtra: selectRowById(id, tableExtra, valuesExtra),
-                selectedRows: updatedSelectedRows,
-                tableExtra: {
-                    ...tableExtra,
-                    selectAll: updatedSelectedRows.size === Object.keys(valuesExtra).length,
-                },
-            });
+        this.patchState({
+            valuesExtra: selectRowById(id, tableExtra, valuesExtra),
+            selectedRows: updatedSelectedRows,
+            tableExtra: {
+                ...tableExtra,
+                selectAll: updatedSelectedRows.size === Object.keys(valuesExtra).length,
+            },
+        });
     }
 
     public deselectRowById(id: string): void {
@@ -183,12 +185,12 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
         const updatedSelectedRows = deselectParentRowById(selectedRows, id, tableExtra, valuesExtra);
 
         this.patchState({
-                valuesExtra: deselectRowById(id, tableExtra, valuesExtra),
-                selectedRows: updatedSelectedRows,
-                tableExtra: {
-                    ...tableExtra,
-                    selectAll: updatedSelectedRows.size === Object.keys(valuesExtra).length,
-                },
+            valuesExtra: deselectRowById(id, tableExtra, valuesExtra),
+            selectedRows: updatedSelectedRows,
+            tableExtra: {
+                ...tableExtra,
+                selectAll: updatedSelectedRows.size === Object.keys(valuesExtra).length,
+            },
         });
     }
 
@@ -246,7 +248,7 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
         this.service.updateState(() => {
             return {
                 ...data,
-            }
+            };
         });
     }
 
@@ -264,7 +266,7 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
         return {
             currentIndex: currentIndex,
             previousIndex: previousIndex,
-        }
+        };
     }
 
     public calculateTableState(state: TableStateUpdateModel, relations: Record<string, unknown[]>): void {
@@ -291,6 +293,6 @@ export class DefaultAwesomeTableService extends AbstractAwesomeTableService {
 
         this.patchState({
             selectedRows: updatedSelectedRows,
-        })
+        });
     }
 }

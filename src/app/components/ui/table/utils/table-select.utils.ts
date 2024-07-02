@@ -38,7 +38,12 @@ export function deselectRowById(id: string, tableExtra: Partial<TableExtra>, val
     };
 }
 
-export function selectParentRowById(selectedRows: Set<unknown>, id: string, tableExtra: TableExtra, valueExtra: TableValueExtraInternal): Set<unknown> {
+export function selectParentRowById(
+    selectedRows: Set<unknown>,
+    id: string,
+    tableExtra: TableExtra,
+    valueExtra: TableValueExtraInternal,
+): Set<unknown> {
     const item = valueExtra[id];
 
     const itemExist = selectedRows.has(id);
@@ -51,21 +56,26 @@ export function selectParentRowById(selectedRows: Set<unknown>, id: string, tabl
         (item.children ?? []).forEach(child => {
             selectParentRowById(selectedRows, child[tableExtra.idKey] as string, tableExtra, valueExtra);
         });
-    } 
-    
+    }
+
     return selectedRows;
 }
 
-export function deselectParentRowById(selectedRows: Set<unknown>, id: string, tableExtra: TableExtra, valueExtra: TableValueExtraInternal): Set<unknown> {
+export function deselectParentRowById(
+    selectedRows: Set<unknown>,
+    id: string,
+    tableExtra: TableExtra,
+    valueExtra: TableValueExtraInternal,
+): Set<unknown> {
     const item = valueExtra[id];
-    
+
     selectedRows.delete(id);
 
     if (item.hasChild) {
         (item.children ?? []).forEach(child => {
             deselectParentRowById(selectedRows, child[tableExtra.idKey] as string, tableExtra, valueExtra);
         });
-    } 
+    }
 
     return selectedRows;
 }

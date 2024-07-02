@@ -23,7 +23,7 @@ const aliases = {
     "@shared-constants/*": ["<rootDir>/src/app/constants/*"],
     "@shared-constants": ["<rootDir>/src/app/constants/index.ts"],
     "@shared-enums/*": ["<rootDir>/src/app/enums/*"],
-    "@shared-enums": ["<rootDir>/src/app/enums/index.ts"]
+    "@shared-enums": ["<rootDir>/src/app/enums/index.ts"],
 };
 
 module.exports = {

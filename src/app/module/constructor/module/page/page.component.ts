@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { ActivatedRoute, RouterOutlet } from "@angular/router";
+import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
 
 import { filter, map } from "rxjs";
 import { switchMap } from "rxjs/operators";

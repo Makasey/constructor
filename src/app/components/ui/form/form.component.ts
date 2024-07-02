@@ -8,10 +8,12 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    Signal,
     SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewEncapsulation,
+    computed,
     inject,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -158,7 +160,13 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public convertedFormModel = this.service.getConvertedFormModel();
 
-    public valueChanges$ = this.service.valueChanges$;
+    public formValue = this.service.valueChanges;
+
+    public readonly valueChanges: Signal<undefined> = computed(() => {
+        this.submitForm.emit(this.formValue());
+
+        return undefined;
+    });
 
     public _defaultTemplatesMap: Record<APFormDefaultTemplateKeys | string, TemplateRef<ControlTemplate | unknown>>;
 
@@ -190,8 +198,6 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.formModel) {
             this.service.processFormModel(this.formModel, changes.formModel.previousValue);
-
-            this.valueChanges$ = this.service.valueChanges$;
         }
     }
 

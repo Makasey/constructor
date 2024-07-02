@@ -5,7 +5,7 @@ import { ID } from "@datorama/akita";
 
 import { enterAnimation } from "@core";
 
-import { LZToastrItem, LZToastrService, LzToastrQuery, LZToastrItemComponent } from "@components";
+import { LZToastrItem, LZToastrItemComponent, LZToastrService, LzToastrQuery } from "@components";
 
 @Component({
     selector: "lz-toastr-list",

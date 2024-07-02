@@ -2,13 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { LZInitVarDirective } from "@shared-directives";
-import {
-    LZToastrBoxComponent,
-    LZToastrListComponent,
-    LZToastrService,
-    LZToastrStore,
-    LzToastrQuery,
-} from "@components";
+import { LZToastrBoxComponent, LZToastrListComponent, LZToastrService, LZToastrStore, LzToastrQuery } from "@components";
 import { enterAnimation } from "@core";
 
 @Component({

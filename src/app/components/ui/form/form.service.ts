@@ -1,12 +1,13 @@
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from "@angular/forms";
-import { Injectable, Signal, WritableSignal, signal } from "@angular/core";
+import { Injectable, Injector, Signal, WritableSignal, inject, signal } from "@angular/core";
 
-import { Observable, distinctUntilChanged, skip } from "rxjs";
+import { distinctUntilChanged, skip, tap } from "rxjs";
 
 import { NgFormsManager } from "@ngneat/forms-manager";
 
 import { APFormControl, APFormModel, ApFormControlInner, ApFormInnerModel, gridAreasFromColumns } from "@components";
 import { getRandomId, isObjectEquals } from "@shared-utils";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Injectable()
 export abstract class AbstractFormService {
@@ -16,7 +17,7 @@ export abstract class AbstractFormService {
 
     public abstract processFormModel(formModel: APFormModel, previousValue: APFormModel): void;
 
-    public abstract valueChanges$: Observable<unknown>;
+    public abstract valueChanges: Signal<unknown>;
 
     public abstract getMainFormGroup(): Signal<FormGroup | null>;
 
@@ -25,11 +26,11 @@ export abstract class AbstractFormService {
 
 @Injectable()
 export class DefaultFormService extends AbstractFormService {
-    constructor(private formsManager: NgFormsManager) {
-        super();
-    }
+    private readonly injector = inject(Injector);
 
-    public valueChanges$: Observable<unknown>;
+    private readonly formsManager = inject(NgFormsManager);
+
+    public valueChanges: WritableSignal<unknown> = signal({});
 
     private mainFormGroup: WritableSignal<FormGroup | null> = signal(null);
 
@@ -341,9 +342,15 @@ export class DefaultFormService extends AbstractFormService {
         this.formsManager.upsert(formModel.name, this.mainFormGroup()!, formModel.upsertConfig);
         this.subscribedForms.set([...this.subscribedForms(), formModel.name]);
 
-        this.valueChanges$ = this.formsManager.valueChanges(formModel.name).pipe(
-            skip(1),
-            distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
+        toSignal(
+            this.formsManager.valueChanges(formModel.name).pipe(
+                skip(1),
+                distinctUntilChanged((previous, current) => isObjectEquals(previous, current)),
+                tap(value => this.valueChanges.set(value)),
+            ),
+            {
+                injector: this.injector,
+            },
         );
     }
 

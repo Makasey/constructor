@@ -1,1 +1,1 @@
-export { LZEditorElementComponent } from "./editor-element.component"; 
+export { LZEditorElementComponent } from "./editor-element.component";
