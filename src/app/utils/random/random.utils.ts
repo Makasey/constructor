@@ -12,5 +12,5 @@ export function getRandomId(): string {
         return crypto.randomUUID();
     }
 
-    return getRandomString(36);
+    return `${getRandomString(8)}-${getRandomString(4)}-${getRandomString(4)}-${getRandomString(4)}-${getRandomString(12)}`;
 }

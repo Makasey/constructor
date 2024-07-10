@@ -4,9 +4,9 @@ export interface UIState<T> {
 
 export type SimpleMap<T> = Readonly<Record<string, T>>;
 
-export type ItemsWithId<T> = Readonly<{
+export type ItemsWithId<T, ID = number> = Readonly<{
     items: T[];
-    id: number;
+    id: ID;
 }>;
 
 export type ServerError = Readonly<{
