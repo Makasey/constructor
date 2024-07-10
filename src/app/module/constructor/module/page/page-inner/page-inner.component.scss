@@ -74,12 +74,15 @@
         padding: 10px 0;
         color: #fff;
         border: 2px solid #fff;
+        background-color: #1b1c21;
         flex-direction: column;
         justify-content: center;
         gap: 4px;
         border-radius: 8px;
         align-items: center;
         font-size: 18px;
+        width: 110px;
+        height: 65px;
     }
 
     .create-campaign {

@@ -1,5 +1,5 @@
-import { enableProdMode } from "@angular/core";
 import { bootstrapApplication } from "@angular/platform-browser";
+import { enableProdMode } from "@angular/core";
 
 import { AppComponent } from "app/app.component";
 import { ROOT_PROVIDERS } from "app/providers";
@@ -10,9 +10,5 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, {
-    providers: [
-        ...ROOT_PROVIDERS,
-    ]
+    providers: [...ROOT_PROVIDERS],
 }).catch(err => console.error(err));
-
-   

@@ -5,8 +5,8 @@ import { Observable, map } from "rxjs";
 import {
     AbstractEditorElementSettingsService,
     ELEMENT_ID,
-    LZElementActionsComponent,
     ImagePageElementSettings,
+    LZElementActionsComponent,
     processObjectFitPositionValue,
     processObjectFitValue,
     processSettingValueWithUnit,

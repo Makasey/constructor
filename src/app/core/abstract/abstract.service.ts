@@ -4,8 +4,8 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
 import { Observable, catchError, debounceTime, filter, map, of, switchMap, tap, throwError } from "rxjs";
 
-import { LzQuery, LzService, LzState, LzStateKey, ModuleState, StateCallbackOrPart, UIDataState } from "@core";
 import { LZToastrItemType, LZToastrService } from "@components";
+import { LzQuery, LzService, LzState, LzStateKey, ModuleState, StateCallbackOrPart, UIDataState } from "@core";
 
 type Rec = Record<string, unknown>;
 
@@ -154,7 +154,7 @@ export abstract class AbstractModuleComponent<T extends Rec = Rec> implements On
                     type: LZToastrItemType.ERROR,
                     title: `Can't load store ${stateKey}`,
                     text: `Something went wrong with state ${stateKey}, ${JSON.stringify(err || {})}`,
-                })
+                });
                 this.service.updateDataState(UIDataState.ERROR);
 
                 return throwError(() => err);

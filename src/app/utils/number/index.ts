@@ -1,9 +1,9 @@
-export { 
+export {
     calculateFractionNumber,
     normalizeMaxValue,
     normalizeMinValue,
     normalizeNumberValue,
     normalizeToIntNumber,
     roundNumberWithFraction,
-    isNumberInRange
+    isNumberInRange,
 } from "./number.utils";

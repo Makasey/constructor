@@ -1,7 +1,7 @@
+import { AbstractAwesomeTableService, DefaultAwesomeTableService, initialTableStore } from "@components";
 import { Injectable, OnDestroy, Provider } from "@angular/core";
 import { Query, Store, UpdateStateCallback, guid } from "@datorama/akita";
 import { TableState } from "@core";
-import { AbstractAwesomeTableService, DefaultAwesomeTableService, initialTableStore } from "@components";
 
 @Injectable()
 export class TableStore extends Store<TableState> {
@@ -43,5 +43,5 @@ export function provideTableStore(): Provider[] {
             provide: AbstractAwesomeTableService,
             useClass: DefaultAwesomeTableService,
         },
-    ]
+    ];
 }

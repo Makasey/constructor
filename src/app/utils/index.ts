@@ -1,11 +1,11 @@
-export { 
+export {
     calculateFractionNumber,
     normalizeMaxValue,
     normalizeMinValue,
     normalizeNumberValue,
     normalizeToIntNumber,
     roundNumberWithFraction,
-    isNumberInRange
+    isNumberInRange,
 } from "./number";
 export { getRandomId, getRandomString } from "./random";
 export { isObjectEquals, objectWithoutNulls } from "./object";

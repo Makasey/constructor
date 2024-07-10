@@ -1,5 +1,5 @@
-import { ENVIRONMENT_INITIALIZER, NgZone, inject, Provider } from "@angular/core";
-import { akitaDevtools, DevtoolsOptions} from "@datorama/akita";
+import { DevtoolsOptions, akitaDevtools } from "@datorama/akita";
+import { ENVIRONMENT_INITIALIZER, NgZone, Provider, inject } from "@angular/core";
 
 import { LzQuery, LzService, LzStore } from "@core";
 
@@ -12,7 +12,7 @@ export function provideAkitaDevtools(options: Partial<DevtoolsOptions> = {}): Pr
         useFactory() {
             return () => {
                 akitaDevtools(inject(NgZone), options);
-            }
-        }
-    }
+            };
+        },
+    };
 }

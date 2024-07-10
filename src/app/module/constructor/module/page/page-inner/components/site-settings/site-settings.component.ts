@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormModel, APFormComponent, APTextFieldModule } from "@components";
+import { APFormComponent, APFormModel, APTextFieldModule } from "@components";
 import { AbstractEditorPageSettingsService } from "@modules/constructor";
 import { FormsModule } from "@angular/forms";
 

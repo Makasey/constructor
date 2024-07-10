@@ -1,6 +1,6 @@
-import { conditionsMap } from "@shared-constants";
-import { SearchConditions, RouteParams } from "@shared-enums";
 import { FiltersMap } from "@shared-types";
+import { RouteParams, SearchConditions } from "@shared-enums";
+import { conditionsMap } from "@shared-constants";
 
 export function filterToQueryParameter(condition: SearchConditions, value: number | string | string[] | number[]): string {
     const stringValue = Array.isArray(value) ? value.join(",") : String(value);

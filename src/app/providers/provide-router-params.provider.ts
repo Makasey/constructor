@@ -1,9 +1,9 @@
-import { inject, InjectionToken, Provider } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { map } from "rxjs/operators";
+import { InjectionToken, Provider, inject } from "@angular/core";
 import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
-export const GET_ROUTER_PARAMS_TOKEN = new InjectionToken('Get router params token');
+export const GET_ROUTER_PARAMS_TOKEN = new InjectionToken("Get router params token");
 
 export function getRouterParamsFactory(paramNames: string[]): (paramNames: string) => Record<string, unknown> {
     return () => {
@@ -16,17 +16,17 @@ export function getRouterParamsFactory(paramNames: string[]): (paramNames: strin
         });
 
         return queryMap;
-    }
+    };
 }
 
 export function provideGetRouterParams(paramNames: string[]): Provider {
     return {
         provide: GET_ROUTER_PARAMS_TOKEN,
-        useFactory: getRouterParamsFactory(paramNames)
-    }
+        useFactory: getRouterParamsFactory(paramNames),
+    };
 }
 
-export const SELECT_ROUTER_PARAMS_TOKEN = new InjectionToken('Select router params token');
+export const SELECT_ROUTER_PARAMS_TOKEN = new InjectionToken("Select router params token");
 
 export function selectRouterParamsFactory(paramNames: string[]): (paramNames: string) => Observable<Record<string, unknown>> {
     return () => {
@@ -40,12 +40,12 @@ export function selectRouterParamsFactory(paramNames: string[]): (paramNames: st
                 return queryMap;
             }),
         );
-    }
+    };
 }
 
 export function provideSelectRouterParams(paramNames: string[]): Provider {
     return {
         provide: SELECT_ROUTER_PARAMS_TOKEN,
         useFactory: selectRouterParamsFactory(paramNames),
-    }
+    };
 }
