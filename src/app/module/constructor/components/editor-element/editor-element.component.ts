@@ -24,10 +24,10 @@ export class LZEditorElementComponent {
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    public ngOnInit(): void {
-        // TODO: Check this solution
-            // setInterval(() => {
-            //     console.log(this.element.nativeElement.getBoundingClientRect())
-            // }, 1000)
-    }
+    // public ngOnInit(): void {
+    //     // TODO: Check this solution
+    //         // setInterval(() => {
+    //         //     console.log(this.element.nativeElement.getBoundingClientRect())
+    //         // }, 1000)
+    // }
 }
