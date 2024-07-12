@@ -1,19 +1,30 @@
 import { Injector, Renderer2 } from "@angular/core";
 
-
-export const DEFAULT_COPY_STYLES = ['flex', 'padding', 'color', 'border', 'background-color', 'flex-direction', 'justify-content', 'gap', 'border-radius', 'align-items', 'font-size', 'width', 'height'];
-
+export const DEFAULT_COPY_STYLES = [
+    "display",
+    "padding",
+    "color",
+    "border",
+    "background-color",
+    "flex-direction",
+    "justify-content",
+    "gap",
+    "border-radius",
+    "align-items",
+    "font-size",
+    "width",
+    "height",
+];
 
 export function getCopyElementStyles(sourceElement: HTMLElement, copyStyleKeys: string[] = DEFAULT_COPY_STYLES): Record<string, string> {
     const result: Record<string, string> = {};
-    const rootElementStyles = sourceElement.computedStyleMap();    
+    const rootElementStyles = sourceElement.computedStyleMap();
 
-    
-    for(let key of copyStyleKeys) {    
+    for (const key of copyStyleKeys) {
         const value = rootElementStyles.get(key)?.toString() ?? "";
         const condition = copyStyleKeys.includes(key) && !result[key] && value;
 
-        if(condition) {
+        if (condition) {
             result[key] = value;
         }
     }
@@ -26,20 +37,20 @@ export function copyCloneNodeStyles(sourceElement: HTMLElement, destinationEleme
 
     const rootStyles = getCopyElementStyles(sourceElement);
 
-    for(let [key, value] of Object.entries(rootStyles)) {
+    for (const [key, value] of Object.entries(rootStyles)) {
         renderer.setStyle(destinationElement, key, value);
     }
 
     const srcElements = sourceElement.getElementsByTagName("*") as HTMLCollectionOf<HTMLElement>;
     const dstElements = destinationElement.getElementsByTagName("*") as HTMLCollectionOf<HTMLElement>;
 
-    if(!srcElements.length) {
+    if (!srcElements.length) {
         return;
     }
 
-    for(let index = 0; index < srcElements.length; index++) {
+    for (let index = 0; index < srcElements.length; index++) {
         copyCloneNodeStyles(srcElements[index], dstElements[index], injector);
     }
-  
+
     return;
 }
