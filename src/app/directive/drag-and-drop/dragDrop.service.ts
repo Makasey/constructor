@@ -1,6 +1,6 @@
 import { DOCUMENT } from "@angular/common";
 import { Injectable, WritableSignal, inject, signal } from "@angular/core";
-import { debounceTime, filter, from, fromEvent, map, Observable, shareReplay, skipWhile } from "rxjs";
+import { debounceTime, filter, fromEvent, map, Observable, shareReplay } from "rxjs";
 
 @Injectable({
     providedIn: "root",

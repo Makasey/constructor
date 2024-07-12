@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, ViewEncaps
 
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor";
 import { LZElementActionsComponent } from "../element-actions";
-import { DroppableDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-editor-element",

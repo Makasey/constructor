@@ -1,15 +1,4 @@
-import {
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Injector,
-    OnInit,
-    Output,
-    Renderer2,
-    afterRender,
-    inject,
-    input,
-} from "@angular/core";
+import { Directive, ElementRef, EventEmitter, Injector, OnInit, Output, Renderer2, inject, input } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ELEMENT_ID } from "@modules/constructor";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
@@ -33,7 +22,7 @@ export class DroppableDirective implements OnInit {
     private readonly droppableEvent$ = this.dragDropService.mouseUpEvent$.pipe(
         withLatestFrom(this.dragDropService.isIntersect$),
         debounceTime(0),
-        tap(([,name]) => console.log(this.id, name)),
+        tap(([, name]) => console.log(this.id, name)),
         filter(([, name]) => name === this.id()),
         tap(([, name]) => {
             console.log(name);
@@ -72,8 +61,8 @@ export class DroppableDirective implements OnInit {
     @Output() public readonly itemDropped = new EventEmitter<unknown>();
 
     public ngOnInit(): void {
-        this.dragDropService.addDropArea(this.id(), { container: this.el.nativeElement , name: this.id() });
-    
+        this.dragDropService.addDropArea(this.id(), { container: this.el.nativeElement, name: this.id() });
+
         this.droppableEvent$.subscribe();
         this.mouseEnterEvent$.subscribe();
         this.mouseLeaveEvent$.subscribe();
