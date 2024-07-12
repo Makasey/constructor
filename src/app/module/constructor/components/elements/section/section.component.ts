@@ -25,7 +25,7 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 
-import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { DroppableDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
 
 @Component({
@@ -35,7 +35,9 @@ import { ImageLinkPipe } from "@shared-pipes";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective,  {
+        directive: DroppableDirective,
+    }],
     providers: [...SECTION_PROVIDERS],
     imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet],
 })

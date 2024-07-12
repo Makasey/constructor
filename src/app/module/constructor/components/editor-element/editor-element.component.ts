@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inject, input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, ViewEncapsulation, inject, input } from "@angular/core";
 
 import { EDITOR_SELECTED_ELEMENT } from "@modules/constructor";
 import { LZElementActionsComponent } from "../element-actions";
-import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { DroppableDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-editor-element",
@@ -20,5 +20,14 @@ export class LZEditorElementComponent {
 
     public readonly elementId = input.required<string>();
 
+    public readonly element = inject(ElementRef);
+
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
+
+    public ngOnInit(): void {
+        // TODO: Check this solution
+            // setInterval(() => {
+            //     console.log(this.element.nativeElement.getBoundingClientRect())
+            // }, 1000)
+    }
 }
