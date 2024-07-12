@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Injector, Input, Renderer2, WritableSignal, inject, signal } from "@angular/core";
+import { Directive, ElementRef, HostListener, Injector, Input, Renderer2, inject } from "@angular/core";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 import { copyCloneNodeStyles } from "./utils";
 
@@ -52,7 +52,7 @@ export class DraggableDirective {
 
     public upListener(clone: HTMLElement): void {
         this.renderer.listen("document", "mouseup", () => {
-            this.renderer.removeChild(document.body, clone);     
+            this.renderer.removeChild(document.body, clone);
             this.dragDropService.clearDraggedItem();
         });
     }
