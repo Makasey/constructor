@@ -1,8 +1,9 @@
-import { Directive, ElementRef, EventEmitter, Injector, OnInit, Output, Renderer2, inject, input } from "@angular/core";
+import { Directive, ElementRef, EventEmitter, OnInit, Output, Renderer2, inject, input } from "@angular/core";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 import { ELEMENT_ID } from "@modules/constructor";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 import { debounceTime, distinctUntilChanged, filter, tap, withLatestFrom } from "rxjs";
+import { LZDropEvent } from "./types";
 
 @Directive({
     selector: "[lzDroppable]",
@@ -10,8 +11,6 @@ import { debounceTime, distinctUntilChanged, filter, tap, withLatestFrom } from 
 })
 export class DroppableDirective implements OnInit {
     private readonly el: ElementRef<HTMLElement> = inject(ElementRef);
-
-    private readonly injector = inject(Injector);
 
     private readonly renderer: Renderer2 = inject(Renderer2);
 
@@ -21,16 +20,19 @@ export class DroppableDirective implements OnInit {
 
     private readonly droppableEvent$ = this.dragDropService.mouseUpEvent$.pipe(
         withLatestFrom(this.dragDropService.isIntersect$),
-        debounceTime(0),
-        tap(([, name]) => console.log(this.id, name)),
-        filter(([, name]) => name === this.id()),
+        filter(([, name]) => name === this.id() && !!this.dragDropService.draggedItem()),
         tap(([, name]) => {
-            console.log(name);
-            this.itemDropped.emit(this.dragDropService.draggedItem());
-            this.renderer.removeStyle(this.el.nativeElement, "border");
+            const dragArea = this.dragDropService.getDragArea(name!);
 
-            this.dragDropService.clearDraggedItem();
+            this.itemDropped.emit({
+                data: this.dragDropService.draggedItem(),
+                ...dragArea,
+            });
+
+            this.renderer.removeStyle(this.el.nativeElement, "border");
         }),
+        debounceTime(0),
+        tap(() => this.dragDropService.clearDraggedItem()),
         takeUntilDestroyed(),
     );
 
@@ -58,7 +60,7 @@ export class DroppableDirective implements OnInit {
         takeUntilDestroyed(),
     );
 
-    @Output() public readonly itemDropped = new EventEmitter<unknown>();
+    @Output() public readonly itemDropped = new EventEmitter<LZDropEvent>();
 
     public ngOnInit(): void {
         this.dragDropService.addDropArea(this.id(), { container: this.el.nativeElement, name: this.id() });

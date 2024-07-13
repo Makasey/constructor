@@ -1,4 +1,18 @@
-import { DestroyRef, Directive, ElementRef, HostListener, Injector, Input, OnInit, Renderer2, WritableSignal, inject, signal } from "@angular/core";
+import {
+    DestroyRef,
+    Directive,
+    ElementRef,
+    HostListener,
+    Injector,
+    Input,
+    OnDestroy,
+    OnInit,
+    Renderer2,
+    WritableSignal,
+    inject,
+    input,
+    signal,
+} from "@angular/core";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 import { copyCloneNodeStyles } from "./utils";
 import { filter, tap } from "rxjs";
@@ -8,7 +22,7 @@ import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
     selector: "[lzDraggable]",
     standalone: true,
 })
-export class DraggableDirective implements OnInit {
+export class DraggableDirective implements OnInit, OnDestroy {
     private readonly el: ElementRef<HTMLElement> = inject(ElementRef);
     private readonly injector = inject(Injector);
     private readonly destroyRef = inject(DestroyRef);
@@ -19,13 +33,17 @@ export class DraggableDirective implements OnInit {
     private readonly isMove = signal(false);
     private readonly mouseUpEvent$ = this.dragDropService.mouseUpEvent$;
 
+    public id = input.required<string>();
+
     public ngOnInit(): void {
         this.dragDropService.moveEvent$
             .pipe(
                 filter(() => !!this.clone()),
                 tap(({ x, y }) => {
-                    this.renderer.setStyle(this.clone(), "left", x - this.offsetX + "px");
-                    this.renderer.setStyle(this.clone(), "top", y + this.offsetY - (this.target()?.clientHeight ?? 0) + "px");
+                    const clone = this.clone();
+
+                    this.renderer.setStyle(clone, "left", x - this.offsetX + "px");
+                    this.renderer.setStyle(clone, "top", y + this.offsetY - (this.target()?.clientHeight ?? 0) + "px");
                 }),
                 takeUntilDestroyed(this.destroyRef),
             )
@@ -33,11 +51,7 @@ export class DraggableDirective implements OnInit {
 
         this.mouseUpEvent$
             .pipe(
-                filter(() => {
-                    return !!this.clone();
-                }),
                 tap(() => {
-                    this.renderer.removeChild(document.body, this.clone());
                     this.resetDraggableState();
                 }),
                 takeUntilDestroyed(this.destroyRef),
@@ -52,17 +66,18 @@ export class DraggableDirective implements OnInit {
 
     private resetDraggableState(): void {
         this.isMove.set(false);
-        this.clone.set(null);
+        this.removeClone();
         this.target.set(null);
     }
 
-    @HostListener("mousedown", ["$event"])
+    @HostListener("mousedown.stop.prevent", ["$event"])
     public onDragStart(event: MouseEvent): void {
-        event.preventDefault();
+        this.removeClone();
 
         this.isMove.set(true);
         this.dragDropService.setDraggedItem(this.lzDraggable);
         this.target.set(this.el.nativeElement);
+
         this.clone.set(this.el.nativeElement.cloneNode(true) as unknown as HTMLElement);
 
         this.processOffset(event);
@@ -92,5 +107,17 @@ export class DraggableDirective implements OnInit {
         this.renderer.setStyle(clone, "width", target?.clientWidth + "px");
         this.renderer.setStyle(clone, "height", target?.clientHeight + "px");
         document.body.appendChild(clone);
+    }
+
+    public ngOnDestroy(): void {
+        this.removeClone();
+    }
+
+    private removeClone(): void {
+        const clone = this.clone();
+
+        if (this.clone()) {
+            this.renderer.removeChild(document.body, clone);
+        }
     }
 }

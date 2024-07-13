@@ -12,6 +12,7 @@ import {
 } from "@modules/constructor";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { DroppableDirective } from "@shared-directives/drag-and-drop";
+import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
 
 @Component({
     selector: "lz-root-element",
@@ -39,8 +40,8 @@ export class RootComponent {
     };
 
     @HostListener("itemDropped", ["$event"])
-    public createNewElement(event: ElementButton): void {
-        const { type } = event;
+    public createNewElement(event: LZDropEvent<string, ElementButton>): void {
+        const { type } = event.data;
         if (this.selectedElement() === ROOT_ELEMENT_ID) {
             this.service.addPageElement(type);
 
