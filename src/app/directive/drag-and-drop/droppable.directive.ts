@@ -1,9 +1,9 @@
 import { Directive, ElementRef, EventEmitter, OnInit, Output, Renderer2, inject, input } from "@angular/core";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { ELEMENT_ID } from "@modules/constructor";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
-import { debounceTime, distinctUntilChanged, filter, tap, withLatestFrom } from "rxjs";
+import { ELEMENT_ID } from "@modules/constructor";
 import { LZDropEvent } from "./types";
+import { debounceTime, distinctUntilChanged, filter, tap, withLatestFrom } from "rxjs";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Directive({
     selector: "[lzDroppable]",

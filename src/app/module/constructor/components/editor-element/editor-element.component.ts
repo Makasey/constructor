@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, ViewEncapsulation, inject, input } from "@angular/core";
 
 import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, ElementButton } from "@modules/constructor";
-import { LZElementActionsComponent } from "../element-actions";
 import { DroppableDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
+import { LZElementActionsComponent } from "../element-actions";
 
 @Component({
     selector: "lz-editor-element",

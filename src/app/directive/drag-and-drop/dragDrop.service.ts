@@ -1,7 +1,7 @@
+import { Coordinates, DragArea, RectangleCoordinates } from "./types";
 import { DOCUMENT } from "@angular/common";
 import { Injectable, WritableSignal, inject, signal } from "@angular/core";
-import { debounceTime, filter, fromEvent, map, Observable, shareReplay } from "rxjs";
-import { Coordinates, DragArea, RectangleCoordinates } from "./types";
+import { Observable, debounceTime, filter, fromEvent, map, shareReplay } from "rxjs";
 
 @Injectable({
     providedIn: "root",
