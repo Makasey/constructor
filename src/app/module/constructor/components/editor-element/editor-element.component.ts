@@ -19,6 +19,7 @@ import { LZElementActionsComponent } from "../element-actions";
         {
             directive: DroppableDirective,
             outputs: ["itemDropped"],
+            inputs: ["id:elementId"],
         },
     ],
 })

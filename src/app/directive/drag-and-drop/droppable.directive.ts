@@ -37,8 +37,8 @@ export class DroppableDirective implements OnInit {
     );
 
     private readonly mouseEnterEvent$ = this.dragDropService.isIntersect$.pipe(
-        distinctUntilChanged((prev, next) => {
-            return prev === this.id() && next !== this.id();
+        filter(intersectionName => {
+            return intersectionName === this.id();
         }),
         tap(() => {
             if (this.dragDropService.draggedItem()) {
