@@ -34,6 +34,7 @@ export class DraggableDirective implements OnInit, OnDestroy {
     private readonly mouseUpEvent$ = this.dragDropService.mouseUpEvent$;
 
     public id = input.required<string>();
+    public prohibitDrag = input<boolean>(false);
 
     public ngOnInit(): void {
         this.dragDropService.moveEvent$
@@ -72,16 +73,17 @@ export class DraggableDirective implements OnInit, OnDestroy {
 
     @HostListener("mousedown.stop.prevent", ["$event"])
     public onDragStart(event: MouseEvent): void {
-        this.removeClone();
+        if (!this.prohibitDrag()) {
+            this.removeClone();
+            this.isMove.set(true);
+            this.dragDropService.setDraggedItem(this.lzDraggable);
+            this.target.set(this.el.nativeElement);
 
-        this.isMove.set(true);
-        this.dragDropService.setDraggedItem(this.lzDraggable);
-        this.target.set(this.el.nativeElement);
+            this.clone.set(this.el.nativeElement.cloneNode(true) as unknown as HTMLElement);
 
-        this.clone.set(this.el.nativeElement.cloneNode(true) as unknown as HTMLElement);
-
-        this.processOffset(event);
-        this.processCloneElement(event);
+            this.processOffset(event);
+            this.processCloneElement(event);
+        }
     }
 
     private processOffset(event: MouseEvent): void {
