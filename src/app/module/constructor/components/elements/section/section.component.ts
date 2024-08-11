@@ -27,6 +27,7 @@ import {
 
 import { DroppableDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
+import { LocalStorageService } from "@modules/constructor/core";
 
 @Component({
     selector: "lz-section-element",
@@ -35,9 +36,13 @@ import { ImageLinkPipe } from "@shared-pipes";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective,  {
-        directive: DroppableDirective,
-    }],
+    hostDirectives: [
+        TabSelectionDirective,
+        ToggleSelectionDirective,
+        {
+            directive: DroppableDirective,
+        },
+    ],
     providers: [...SECTION_PROVIDERS],
     imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet],
 })
@@ -128,6 +133,8 @@ export class SectionComponent implements OnInit {
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
+    public readonly localStorageService = inject(LocalStorageService);
+
     public readonly columnStructureElement = ColumnStructure;
 
     public readonly columnStructureElements = columnStructureElements;
@@ -180,10 +187,6 @@ export class SectionComponent implements OnInit {
         this.editorActionsService.addElementByType(type, this.ELEMENT_ID);
     }
 
-    public _trackByChild(_: number, child: string): string {
-        return child;
-    }
-
     public deleteElement(): void {
         this.editorActionsService.deleteElement(this.ELEMENT_ID);
     }
@@ -199,5 +202,12 @@ export class SectionComponent implements OnInit {
 
     public selectElement(): void {
         this.selectionService.updateSectionSelection(this.ELEMENT_ID);
+    }
+
+    public saveElement(): void {
+        // todo for test
+        const element = this.editorActionsService.getElement(this.ELEMENT_ID);
+        const test = JSON.stringify(element);
+        this.localStorageService.setItem(this.ELEMENT_ID, test);
     }
 }
