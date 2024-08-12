@@ -151,13 +151,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     public saveElement(id: string): void {
         const sections = JSON.parse(this.localStorageService.getItem("sections")!);
         const element = this.getElement(id);
-        let data: SitePageElementUnion[];
-
-        if (sections) {
-            data = [...sections, element];
-        } else {
-            data = [element];
-        }
+        const data: SitePageElementUnion[] = sections ? [...sections, element] : [element];
 
         this.localStorageService.setItem("sections", JSON.stringify(data));
     }
