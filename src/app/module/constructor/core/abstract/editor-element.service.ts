@@ -10,7 +10,8 @@ import {
     processDuplicateElementsById,
     processElementCreation,
 } from "@modules/constructor";
-import { Inject, Injectable } from "@angular/core";
+import { Inject, Injectable, inject } from "@angular/core";
+import { LocalStorageService } from "@modules/constructor/core";
 import { Observable, map } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
@@ -20,6 +21,8 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
     ) {}
+
+    public readonly localStorageService = inject(LocalStorageService);
 
     public selectElement(id: string): Observable<T> {
         return this.query.select(state => state.items[id] as T);
@@ -143,6 +146,20 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         this.service.updateState(state => {
             return processDuplicateElementsById(state, id);
         });
+    }
+
+    public saveElement(id: string): void {
+        const sections = JSON.parse(this.localStorageService.getItem("sections")!);
+        const element = this.getElement(id);
+        let data: SitePageElementUnion[];
+
+        if (sections) {
+            data = [...sections, element];
+        } else {
+            data = [element];
+        }
+
+        this.localStorageService.setItem("sections", JSON.stringify(data));
     }
 
     public processElementActions(elementId: string): ElementActionsConfigItem[] {

@@ -205,9 +205,6 @@ export class SectionComponent implements OnInit {
     }
 
     public saveElement(): void {
-        // todo for test
-        const element = this.editorActionsService.getElement(this.ELEMENT_ID);
-        const test = JSON.stringify(element);
-        this.localStorageService.setItem(this.ELEMENT_ID, test);
+        this.editorActionsService.saveElement(this.ELEMENT_ID);
     }
 }
