@@ -27,7 +27,6 @@ import {
 
 import { DroppableDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
-import { LocalStorageService } from "@modules/constructor/core";
 
 @Component({
     selector: "lz-section-element",
@@ -132,8 +131,6 @@ export class SectionComponent implements OnInit {
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
-
-    public readonly localStorageService = inject(LocalStorageService);
 
     public readonly columnStructureElement = ColumnStructure;
 

@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
+
+import { AbstractEditorElementActionsService, SectionPageElement } from "@modules/constructor";
+import { LocalStorageService } from "@modules/constructor/core";
 
 @Component({
     selector: "lz-saved-elements",
@@ -8,4 +11,9 @@ import { ChangeDetectionStrategy, Component } from "@angular/core";
     standalone: true,
     imports: [],
 })
-export class SavedElementsComponent {}
+export class SavedElementsComponent {
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>);
+    private readonly localStorageService = inject(LocalStorageService);
+
+    public savedElements = signal(JSON.parse(this.localStorageService.getItem("sections")!) || []);
+}
