@@ -3,6 +3,7 @@
         <lz-tabs-item title="Элементы сайта" [template]="siteElements" />
         <lz-tabs-item customClass="element-settings" title="Настройки элемента" [template]="elementSettings" />
         <lz-tabs-item title="Настройки сайта" [template]="siteSettings" />
+        <lz-tabs-item title="Секции SAVE" [template]="savedElements" />
     </lz-tabs>
 
     <footer class="editor-sidebar-footer">
@@ -27,6 +28,10 @@
 
 <ng-template #siteSettings>
     <lz-site-settings />
+</ng-template>
+
+<ng-template #savedElements>
+    <lz-saved-elements />
 </ng-template>
 
 <ng-template #createCampaignTemplate>

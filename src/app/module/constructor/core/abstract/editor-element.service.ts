@@ -149,11 +149,23 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     }
 
     public saveElement(id: string): void {
-        const sections = JSON.parse(this.localStorageService.getItem("sections")!);
+        const sections = this.getItems();
         const element = this.getElement(id);
-        const data: SitePageElementUnion[] = sections ? [...sections, element] : [element];
 
-        this.localStorageService.setItem("sections", JSON.stringify(data));
+        if (sections.some((section: SitePageElementUnion) => section.id === id)) {
+            return;
+        }
+
+        this.setItems([...sections, element]);
+    }
+
+    private getItems(): SitePageElementUnion[] {
+        const sectionsString = this.localStorageService.getItem("sections");
+        return sectionsString ? JSON.parse(sectionsString) : [];
+    }
+
+    private setItems(sections: SitePageElementUnion[]): void {
+        this.localStorageService.setItem("sections", JSON.stringify(sections));
     }
 
     public processElementActions(elementId: string): ElementActionsConfigItem[] {

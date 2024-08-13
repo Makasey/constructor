@@ -245,6 +245,7 @@ export {
     CampaignListComponent,
     LZSitePreviewComponent,
     PREVIEW_ROUTES,
+    SavedElementsComponent,
 } from "./module";
 
 export {
