@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, WritableSignal, inject, signal } from "@angular/core";
 
-import { AbstractEditorElementActionsService, SectionPageElement } from "@modules/constructor";
+import { AbstractEditorElementActionsService, SectionPageElement, SitePageElementUnion } from "@modules/constructor";
 import { LocalStorageService } from "@modules/constructor/core";
 
 @Component({
@@ -8,12 +8,26 @@ import { LocalStorageService } from "@modules/constructor/core";
     templateUrl: "./saved-elements.component.html",
     styleUrl: "./saved-elements.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [],
 })
 export class SavedElementsComponent {
+    @HostBinding("class.saved-elements")
+    public hostClass = true;
+
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>);
     private readonly localStorageService = inject(LocalStorageService);
 
-    public savedElements = signal(JSON.parse(this.localStorageService.getItem("sections")!) || []);
+    public savedElements: WritableSignal<SitePageElementUnion[]> = signal(this.editorActionsService.getItems());
+
+    public deleteElement(elementId: string): void {
+        const elements = this.savedElements().filter(el => el.id !== elementId);
+
+        this.editorActionsService.setItems(elements);
+    }
+
+    public addElement(elementId: string): void {
+        return;
+    }
 }

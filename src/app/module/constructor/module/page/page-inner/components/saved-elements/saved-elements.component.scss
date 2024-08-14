@@ -1,0 +1,52 @@
+.saved-elements {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow: auto;
+    font-size: 12px;
+    color: #faf9f9;
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #faf9f9;
+        border-radius: 20px;
+    }
+
+    &::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    &-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 40px;
+        border: 1px solid #faf9f9;
+        border-radius: 5px;
+        padding: 5px;
+        cursor: pointer;
+
+        .actions {
+            gap: 5px;
+            display: flex;
+            align-items: center;
+
+            &-btn {
+                border: 1px solid #faf9f9;
+                border-radius: 4px;
+                padding: 3px;
+                color: #faf9f9;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #faf9f9;
+                    transition: 0.5s;
+                    color: #1b1c21;
+                }
+            }
+        }
+    }
+}

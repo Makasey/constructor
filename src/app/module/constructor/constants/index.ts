@@ -359,3 +359,5 @@ export const deleteElementActionConfig: ElementActionsConfigItem = {
     icon: "bx bx-trash",
     action: ElementActionType.DELETE,
 };
+
+export const SAVE_ELEMENTS_LOCALE_STORAGE_KEY = "sections";

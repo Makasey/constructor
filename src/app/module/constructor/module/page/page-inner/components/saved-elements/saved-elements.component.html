@@ -1,2 +1,9 @@
-<p>saved-elements works! ;)</p>
-{{ savedElements()}}
+@for (element of savedElements(); track element.id) {
+    <div class="saved-elements-item"
+        >{{ element.type }}<span> {{ element.id }}</span>
+        <div class="actions">
+            <button class="actions-btn eicon-close" (click.stop)="deleteElement(element.id)"></button>
+            <button class="actions-btn eicon-copy" (click.stop)="addElement(element.id)"></button>
+        </div>
+    </div>
+}

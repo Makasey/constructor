@@ -2,6 +2,7 @@ import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzS
 import {
     ElementActionsConfigItem,
     ROOT_ELEMENT_ID,
+    SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
     SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
@@ -149,6 +150,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     }
 
     public saveElement(id: string): void {
+        logAction(`Save element ${id} to localStorage`);
         const sections = this.getItems();
         const element = this.getElement(id);
 
@@ -159,13 +161,13 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         this.setItems([...sections, element]);
     }
 
-    private getItems(): SitePageElementUnion[] {
-        const sectionsString = this.localStorageService.getItem("sections");
+    public getItems(): SitePageElementUnion[] {
+        const sectionsString = this.localStorageService.getItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY);
         return sectionsString ? JSON.parse(sectionsString) : [];
     }
 
-    private setItems(sections: SitePageElementUnion[]): void {
-        this.localStorageService.setItem("sections", JSON.stringify(sections));
+    public setItems(sections: SitePageElementUnion[]): void {
+        this.localStorageService.setItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY, JSON.stringify(sections));
     }
 
     public processElementActions(elementId: string): ElementActionsConfigItem[] {

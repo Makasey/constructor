@@ -70,6 +70,7 @@ export {
     dividerPageElementSettingsStyleKeys,
     accordionPageElementSettingsStyleKeys,
     spacerPageElementSettingsStyleKeys,
+    SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
 } from "./constants";
 export {
     getDefaultSizeSettings,
