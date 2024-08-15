@@ -149,6 +149,36 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         });
     }
 
+    public setSaveElements(): void {
+        logAction(`Set save elements`);
+        const elements: SitePageElementUnion[] = this.getItems();
+
+        this.service.updateState(state => {
+            return {
+                ...state,
+                savedItems: elements,
+            };
+        });
+    }
+
+    public removeSavedElementById(elementId: string): void {
+        const savedElements: SitePageElementUnion[] = this.getStoreElement("savedItems");
+        const data: SitePageElementUnion[] = savedElements.filter(el => el.id !== elementId);
+
+        this.service.updateState(state => {
+            return {
+                ...state,
+                savedItems: data,
+            };
+        });
+
+        this.setItems(data);
+    }
+
+    public getSavedElements(): Observable<SitePageElementUnion[]> {
+        return this.query.select("savedItems") ?? [];
+    }
+
     public saveElement(id: string): void {
         logAction(`Save element ${id} to localStorage`);
         const sections = this.getItems();

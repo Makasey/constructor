@@ -189,5 +189,6 @@ export function processCampaignResponse(campaign: CreateCampaignModel & { id: nu
         selectedElement: ROOT_ELEMENT_ID,
         id: id,
         campaignName: campaignName,
+        savedItems: [],
     };
 }
