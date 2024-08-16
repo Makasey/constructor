@@ -149,6 +149,13 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         });
     }
 
+    public setSavedElementIntoEditor(elementId: string): void {
+        logAction(`Set saved element with id: ${elementId}`);
+        this.service.updateState(state => {
+            return processDuplicateElementsById(state, elementId);
+        });
+    }
+
     public setSaveElements(): void {
         logAction(`Set save elements`);
         const elements: SitePageElementUnion[] = this.getItems();

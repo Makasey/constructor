@@ -29,6 +29,6 @@ export class SavedElementsComponent implements OnInit {
     }
 
     public addElement(elementId: string): void {
-        return;
+        this.editorActionsService.setSavedElementIntoEditor(elementId);
     }
 }
