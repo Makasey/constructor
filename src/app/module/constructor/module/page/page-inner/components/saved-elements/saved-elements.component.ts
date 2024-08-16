@@ -24,11 +24,11 @@ export class SavedElementsComponent implements OnInit {
         this.editorActionsService.setSaveElements();
     }
 
-    public deleteElement(elementId: string): void {
-        this.editorActionsService.removeSavedElementById(elementId);
-    }
-
     public addElement(elementId: string): void {
         this.editorActionsService.setSavedElementIntoEditor(elementId);
+    }
+
+    public deleteElement(elementId: string): void {
+        this.editorActionsService.removeSavedElementById(elementId);
     }
 }
