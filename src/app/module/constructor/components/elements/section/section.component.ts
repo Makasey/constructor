@@ -7,6 +7,7 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
+    AbstractSaveEditorElementsService,
     AbstractSectionEditorActionsService,
     ColumnStructure,
     Directions,
@@ -124,6 +125,8 @@ export class SectionComponent implements OnInit {
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>) as AbstractSectionEditorActionsService;
 
+    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
+
     private readonly selectionService = inject(AbstractEditorSelectionService) as SectionSelectionService;
 
     public element$: Observable<SectionPageElement> = new Observable();
@@ -202,6 +205,6 @@ export class SectionComponent implements OnInit {
     }
 
     public saveElement(): void {
-        this.editorActionsService.saveElement(this.ELEMENT_ID);
+        this.saveEditorElementsService.saveElement(this.ELEMENT_ID);
     }
 }

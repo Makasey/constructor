@@ -164,6 +164,9 @@ export {
     AbstractPreviewService,
     MultiPageOperationService,
     AbstractMultiPageOperationService,
+    AbstractSaveEditorElementsService,
+    SaveEditorElementsService,
+    LocalStorageService,
 } from "./core";
 
 export {

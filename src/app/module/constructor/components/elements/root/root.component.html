@@ -1,3 +1,4 @@
-@for (child of rootElements(); track child){
+@if (autoSaveInLocaleStorage()) {}
+@for (child of rootElements(); track child) {
     <ng-container *lzElementResolver="child; parent: 'rootID'"></ng-container>
 }

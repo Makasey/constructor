@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, Injector, OnInit, Sign
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { AbstractEditorElementActionsService, SectionPageElement, SitePageElementUnion } from "@modules/constructor";
+import { AbstractSaveEditorElementsService, SitePageElementUnion } from "@modules/constructor";
 
 @Component({
     selector: "lz-saved-elements",
@@ -17,24 +17,22 @@ export class SavedElementsComponent implements OnInit {
     @HostBinding("class.saved-elements")
     public hostClass = true;
 
-    private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>);
+    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
     private readonly injector = inject(Injector);
 
-    public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.editorActionsService.getSavedElements(), {
+    public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.saveEditorElementsService.getSavedElements(), {
         injector: this.injector,
     });
 
-    public autoSaveInLocaleStorage = toSignal(this.editorActionsService.autoSaveElementsInLocaleStorage(), { injector: this.injector });
-
     public ngOnInit(): void {
-        this.editorActionsService.setSaveElements();
+        this.saveEditorElementsService.setSaveElementsToState();
     }
 
     public addElement(elementId: string): void {
-        this.editorActionsService.setSavedElementIntoEditor(elementId);
+        this.saveEditorElementsService.setSavedElementIntoEditor(elementId);
     }
 
     public deleteElement(elementId: string): void {
-        this.editorActionsService.removeSavedElementById(elementId);
+        this.saveEditorElementsService.removeSavedElementById(elementId);
     }
 }
