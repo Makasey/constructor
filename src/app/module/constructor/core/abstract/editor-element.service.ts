@@ -13,7 +13,7 @@ import {
 } from "@modules/constructor";
 import { Inject, Injectable, inject } from "@angular/core";
 import { LocalStorageService } from "@modules/constructor/core";
-import { Observable, map } from "rxjs";
+import { Observable, interval, map, tap } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
@@ -149,6 +149,31 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         });
     }
 
+    public autoSaveElementsInLocaleStorage(): Observable<number> {
+        logAction(`Auto save elements in locale storage`);
+        return interval(20000).pipe(
+            tap(() => {
+                const savedElements = this.getItems();
+
+                if (savedElements.length < 1) {
+                    return;
+                }
+
+                const currentElements = this.getStoreElement("items");
+                const data = savedElements.map(element => {
+                    if (currentElements[element.id]) {
+                        return currentElements[element.id];
+                    }
+
+                    return element;
+                });
+
+                this.setItems(data);
+                this.setSaveElements();
+            }),
+        );
+    }
+
     public setSavedElementIntoEditor(elementId: string): void {
         logAction(`Set saved element with id: ${elementId}`);
         this.service.updateState(state => {
@@ -157,7 +182,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     }
 
     public setSaveElements(): void {
-        logAction(`Set save elements`);
+        logAction(`Set save elements from locale storage to store`);
         const elements: SitePageElementUnion[] = this.getItems();
 
         this.service.updateState(state => {

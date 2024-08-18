@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Injector, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+
+import { toSignal } from "@angular/core/rxjs-interop";
 
 import { AbstractEditorElementActionsService, SectionPageElement, SitePageElementUnion } from "@modules/constructor";
-import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-saved-elements",
@@ -17,8 +18,13 @@ export class SavedElementsComponent implements OnInit {
     public hostClass = true;
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>);
+    private readonly injector = inject(Injector);
 
-    public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.editorActionsService.getSavedElements());
+    public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.editorActionsService.getSavedElements(), {
+        injector: this.injector,
+    });
+
+    public autoSaveInLocaleStorage = toSignal(this.editorActionsService.autoSaveElementsInLocaleStorage(), { injector: this.injector });
 
     public ngOnInit(): void {
         this.editorActionsService.setSaveElements();

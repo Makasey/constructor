@@ -1,3 +1,4 @@
+@if (autoSaveInLocaleStorage()) {}
 @for (element of savedElements(); track element.id) {
     <div class="saved-elements-item"
         >{{ element.type }}<span> {{ element.id }}</span>
