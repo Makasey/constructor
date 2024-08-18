@@ -1,11 +1,24 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
+import { LZToastrItemType, LZToastrService } from "@components";
+import { guid } from "@datorama/akita";
 
 @Injectable({
     providedIn: "root",
 })
 export class LocalStorageService {
+    private toastrService = inject(LZToastrService);
+
     public setItem(key: string, value: string): void {
-        localStorage.setItem(key, value);
+        try {
+            localStorage.setItem(key, value);
+        } catch (error) {
+            this.toastrService.addToastrItem({
+                type: LZToastrItemType.ERROR,
+                title: "Элементы не сохранились",
+                id: guid(),
+                text: "Пожалуйста, попробуйте снова",
+            });
+        }
     }
 
     public getItem(key: string): string | null {

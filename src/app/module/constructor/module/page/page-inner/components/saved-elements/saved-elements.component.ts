@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Injector, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -18,11 +18,8 @@ export class SavedElementsComponent implements OnInit {
     public hostClass = true;
 
     private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
-    private readonly injector = inject(Injector);
 
-    public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.saveEditorElementsService.getSavedElements(), {
-        injector: this.injector,
-    });
+    public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.saveEditorElementsService.getSavedElements());
 
     public ngOnInit(): void {
         this.saveEditorElementsService.setSaveElementsToState();

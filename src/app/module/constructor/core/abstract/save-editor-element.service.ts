@@ -27,7 +27,7 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
             tap(() => {
                 const savedElements = this.getItems();
 
-                if (savedElements.length < 1) {
+                if (!savedElements.length) {
                     return;
                 }
 
@@ -87,8 +87,9 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
         logAction(`Save element ${id} to localStorage`);
         const sections = this.getItems();
         const element = this.getElement(id);
+        const isElementExists = sections.some((section: SitePageElementUnion) => section.id === id);
 
-        if (sections.some((section: SitePageElementUnion) => section.id === id)) {
+        if (isElementExists) {
             return;
         }
 
