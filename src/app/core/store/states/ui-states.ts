@@ -31,6 +31,7 @@ export type EditorState = Readonly<
         selectedElement: string;
         id: number | undefined;
         campaignName: string;
+        savedItems: SitePageElementUnion[];
     } & ModuleState
 >;
 

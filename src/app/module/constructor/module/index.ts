@@ -9,4 +9,5 @@ export {
     ElementButton,
     PREVIEW_ROUTES,
     LZSitePreviewComponent,
+    SavedElementsComponent,
 } from "./page";

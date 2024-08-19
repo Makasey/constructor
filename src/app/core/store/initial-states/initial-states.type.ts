@@ -42,6 +42,7 @@ export function initialEditorState(): EditorState {
         campaignName: "My best campaign",
         selectedElement: ROOT_ELEMENT_ID,
         selectedPage: pageID,
+        savedItems: [],
         pages: [
             {
                 id: pageID,

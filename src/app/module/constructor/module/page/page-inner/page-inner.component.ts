@@ -11,6 +11,7 @@ import {
     EditAreaComponent,
     ElementSettingsComponent,
     PageElementsTreeComponent,
+    SavedElementsComponent,
     SiteElementsComponent,
     SiteSettingsComponent,
 } from "@modules/constructor";
@@ -38,6 +39,7 @@ import { RouteKey, RouteParams } from "@shared-enums";
         NavigationLinkPipe,
         NgTemplateOutlet,
         PageElementsTreeComponent,
+        SavedElementsComponent,
     ],
 })
 export class PageInnerComponent implements OnInit {

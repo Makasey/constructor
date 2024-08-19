@@ -1,0 +1,9 @@
+@for (element of savedElements(); track element.id) {
+    <div class="saved-elements-item"
+        >{{ element.type }}<span> {{ element.id }}</span>
+        <div class="actions">
+            <button class="actions-btn eicon-close" (click.stop)="deleteElement(element.id)"></button>
+            <button class="actions-btn eicon-anchor" (click.stop)="addElement(element.id)"></button>
+        </div>
+    </div>
+}

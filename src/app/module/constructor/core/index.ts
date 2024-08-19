@@ -15,8 +15,10 @@ export {
     providePreviewService,
     AbstractMultiPageOperationService,
     MultiPageOperationService,
+    SaveEditorElementsService,
+    AbstractSaveEditorElementsService,
 } from "./abstract";
-export { SitePreviewDataService } from "./services";
+export { SitePreviewDataService, LocalStorageService } from "./services";
 export {
     SectionSelectionService,
     sectionSelectionProvider,

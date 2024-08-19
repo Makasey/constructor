@@ -7,6 +7,7 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
+    AbstractSaveEditorElementsService,
     AbstractSectionEditorActionsService,
     ColumnStructure,
     Directions,
@@ -35,9 +36,13 @@ import { ImageLinkPipe } from "@shared-pipes";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective,  {
-        directive: DroppableDirective,
-    }],
+    hostDirectives: [
+        TabSelectionDirective,
+        ToggleSelectionDirective,
+        {
+            directive: DroppableDirective,
+        },
+    ],
     providers: [...SECTION_PROVIDERS],
     imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet],
 })
@@ -120,6 +125,8 @@ export class SectionComponent implements OnInit {
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>) as AbstractSectionEditorActionsService;
 
+    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
+
     private readonly selectionService = inject(AbstractEditorSelectionService) as SectionSelectionService;
 
     public element$: Observable<SectionPageElement> = new Observable();
@@ -180,10 +187,6 @@ export class SectionComponent implements OnInit {
         this.editorActionsService.addElementByType(type, this.ELEMENT_ID);
     }
 
-    public _trackByChild(_: number, child: string): string {
-        return child;
-    }
-
     public deleteElement(): void {
         this.editorActionsService.deleteElement(this.ELEMENT_ID);
     }
@@ -199,5 +202,9 @@ export class SectionComponent implements OnInit {
 
     public selectElement(): void {
         this.selectionService.updateSectionSelection(this.ELEMENT_ID);
+    }
+
+    public saveElement(): void {
+        this.saveEditorElementsService.saveElement(this.ELEMENT_ID);
     }
 }

@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
     AbstractEditorElementActionsService,
+    AbstractSaveEditorElementsService,
     EDITOR_SELECTED_ELEMENT,
     ElementButton,
     LZEditorElementComponent,
@@ -32,7 +33,7 @@ import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
         },
     ],
 })
-export class RootComponent {
+export class RootComponent implements OnInit {
     @HostBinding("class")
     public readonly hostClass = {
         "lz-root-element": true,
@@ -53,7 +54,15 @@ export class RootComponent {
 
     private readonly service = inject(AbstractEditorElementActionsService<SectionPageElement>);
 
+    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
+
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
     public rootElements = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
+
+    public readonly autoSaveInLocaleStorage = toSignal(this.saveEditorElementsService.autoSaveElementsInLocaleStorage());
+
+    public ngOnInit(): void {
+        this.autoSaveInLocaleStorage();
+    }
 }
