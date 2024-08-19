@@ -97,6 +97,10 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
         this.setSaveElementsToState();
     }
 
+    public clearSaveElements(): void {
+        this.localStorageService.removeItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY);
+    }
+
     public getItems(): SitePageElementUnion[] {
         const sectionsString = this.localStorageService.getItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY);
         return sectionsString ? JSON.parse(sectionsString) : [];

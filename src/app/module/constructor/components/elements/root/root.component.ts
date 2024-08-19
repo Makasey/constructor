@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -33,7 +33,7 @@ import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
         },
     ],
 })
-export class RootComponent implements OnInit {
+export class RootComponent implements OnInit, OnDestroy {
     @HostBinding("class")
     public readonly hostClass = {
         "lz-root-element": true,
@@ -64,5 +64,9 @@ export class RootComponent implements OnInit {
 
     public ngOnInit(): void {
         this.autoSaveInLocaleStorage();
+    }
+
+    public ngOnDestroy(): void {
+        this.saveEditorElementsService.clearSaveElements();
     }
 }
