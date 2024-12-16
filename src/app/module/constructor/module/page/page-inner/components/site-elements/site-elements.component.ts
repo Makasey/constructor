@@ -1,8 +1,14 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, computed, inject } from "@angular/core";
 import { NgClass, NgForOf, NgIf } from "@angular/common";
 
-import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, SitePageElementUnion, processPossibleElements } from "@modules/constructor";
-import { DraggableDirective } from "@shared-directives/drag-and-drop";
+import {
+    AbstractEditorElementActionsService,
+    EDITOR_SELECTED_ELEMENT,
+    ROOT_ELEMENT_ID,
+    SitePageElementType,
+    SitePageElementUnion,
+    processPossibleElements,
+} from "@modules/constructor";
 
 @Component({
     selector: "lz-site-elements",
@@ -11,7 +17,7 @@ import { DraggableDirective } from "@shared-directives/drag-and-drop";
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass, NgForOf, NgIf, DraggableDirective],
+    imports: [NgClass, NgForOf, NgIf],
 })
 export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")
@@ -26,4 +32,14 @@ export class SiteElementsComponent {
 
         return processPossibleElements(type);
     });
+
+    public createNewElement(type: SitePageElementType): void {
+        if (this.selectedElement() === ROOT_ELEMENT_ID) {
+            this.service.addPageElement(type);
+
+            return;
+        }
+
+        this.service.addElementByType(type);
+    }
 }

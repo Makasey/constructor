@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -6,14 +6,10 @@ import {
     AbstractEditorElementActionsService,
     AbstractSaveEditorElementsService,
     EDITOR_SELECTED_ELEMENT,
-    ElementButton,
     LZEditorElementComponent,
-    ROOT_ELEMENT_ID,
     SectionPageElement,
 } from "@modules/constructor";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { DroppableDirective } from "@shared-directives/drag-and-drop";
-import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
 
 @Component({
     selector: "lz-root-element",
@@ -22,16 +18,8 @@ import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
-    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent, DroppableDirective],
-    hostDirectives: [
-        ToggleSelectionDirective,
-        DeleteSelectedElementDirective,
-        TabSelectionDirective,
-        {
-            directive: DroppableDirective,
-            outputs: ["itemDropped"],
-        },
-    ],
+    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent],
+    hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective],
 })
 export class RootComponent implements OnInit, OnDestroy {
     @HostBinding("class")
@@ -39,18 +27,6 @@ export class RootComponent implements OnInit, OnDestroy {
         "lz-root-element": true,
         "editor-element": true,
     };
-
-    @HostListener("itemDropped", ["$event"])
-    public createNewElement(event: LZDropEvent<string, ElementButton>): void {
-        const { type } = event.data;
-        if (this.selectedElement() === ROOT_ELEMENT_ID) {
-            this.service.addPageElement(type);
-
-            return;
-        }
-
-        this.service.addElementByType(type);
-    }
 
     private readonly service = inject(AbstractEditorElementActionsService<SectionPageElement>);
 
