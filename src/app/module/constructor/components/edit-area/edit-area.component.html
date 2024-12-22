@@ -7,4 +7,8 @@
     (selectPage)="selectPage($event)"
     (addItem)="addPage()"
 ></lz-pages-bar>
-<lz-root-element></lz-root-element>
+<lz-root-element
+    cdkDropList
+    [id]="'root-element'"
+    (cdkDropListDropped)="onDrop($event)"
+></lz-root-element>

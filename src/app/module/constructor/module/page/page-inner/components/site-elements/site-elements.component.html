@@ -1,9 +1,14 @@
 @if (elements().length) {
     <section class="elements-settings">
         <h2 class="settings-title">Элементы сайта</h2>
-        <article cdkDropList class="elements-wrapper">
+        <article
+            cdkDropList
+            [cdkDropListConnectedTo]="['root-element']"
+            [cdkDropListSortingDisabled]="true"
+            class="elements-wrapper"
+        >
             @for (element of elements(); track element.type) {
-                <button cdkDrag (cdkDragEnded)="onDragEnd(element.type)" class="element">
+                <button cdkDrag [cdkDragData]="element" class="element">
                     <i class="bx" [ngClass]="element.icon"></i>
                     {{ element.title }}
                 </button>

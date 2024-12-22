@@ -2,14 +2,7 @@ import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, computed, inject } from "@angular/core";
 import { NgClass } from "@angular/common";
 
-import {
-    AbstractEditorElementActionsService,
-    EDITOR_SELECTED_ELEMENT,
-    ROOT_ELEMENT_ID,
-    SitePageElementType,
-    SitePageElementUnion,
-    processPossibleElements,
-} from "@modules/constructor";
+import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, SitePageElementUnion, processPossibleElements } from "@modules/constructor";
 
 @Component({
     selector: "lz-site-elements",
@@ -33,14 +26,4 @@ export class SiteElementsComponent {
 
         return processPossibleElements(type);
     });
-
-    public onDragEnd(type: SitePageElementType): void {
-        if (this.selectedElement() === ROOT_ELEMENT_ID) {
-            this.service.addPageElement(type);
-
-            return;
-        }
-
-        this.service.addElementByType(type);
-    }
 }
