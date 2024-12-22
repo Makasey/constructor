@@ -1,9 +1,9 @@
 @if (elements().length) {
     <section class="elements-settings">
         <h2 class="settings-title">Элементы сайта</h2>
-        <article class="elements-wrapper">
+        <article cdkDropList class="elements-wrapper">
             @for (element of elements(); track element.type) {
-                <button class="element" (click)="createNewElement(element.type)">
+                <button cdkDrag (cdkDragEnded)="onDragEnd(element.type)" class="element">
                     <i class="bx" [ngClass]="element.icon"></i>
                     {{ element.title }}
                 </button>

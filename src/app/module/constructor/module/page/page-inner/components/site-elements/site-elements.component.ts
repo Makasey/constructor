@@ -1,5 +1,6 @@
+import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, computed, inject } from "@angular/core";
-import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { NgClass } from "@angular/common";
 
 import {
     AbstractEditorElementActionsService,
@@ -17,7 +18,7 @@ import {
     standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass, NgForOf, NgIf],
+    imports: [CdkDropList, CdkDrag, NgClass],
 })
 export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")
@@ -33,7 +34,7 @@ export class SiteElementsComponent {
         return processPossibleElements(type);
     });
 
-    public createNewElement(type: SitePageElementType): void {
+    public onDragEnd(type: SitePageElementType): void {
         if (this.selectedElement() === ROOT_ELEMENT_ID) {
             this.service.addPageElement(type);
 
