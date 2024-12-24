@@ -3,11 +3,14 @@ import { enableProdMode } from "@angular/core";
 
 import { AppComponent } from "app/app.component";
 import { ROOT_PROVIDERS } from "app/providers";
+import { applyPatch } from "@shared-utils";
 import { environment } from "environments/environment";
 
 if (environment.production) {
     enableProdMode();
 }
+
+applyPatch();
 
 bootstrapApplication(AppComponent, {
     providers: [...ROOT_PROVIDERS],

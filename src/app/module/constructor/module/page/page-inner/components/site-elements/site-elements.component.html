@@ -8,10 +8,23 @@
             class="elements-wrapper"
         >
             @for (element of elements(); track element.type) {
-                <button cdkDrag [cdkDragData]="element" class="element">
+                <button
+                    cdkDrag
+                    [cdkDragData]="element"
+                    (cdkDragStarted)="onDragStart(element.type)"
+                    (cdkDragEnded)="onDragEnd()"
+                    class="element"
+                >
                     <i class="bx" [ngClass]="element.icon"></i>
                     {{ element.title }}
                 </button>
+
+                @if (currentDragElement() === element.type) {
+                    <button class="element">
+                        <i class="bx" [ngClass]="element.icon"></i>
+                        {{ element.title }}
+                    </button>
+                }
             }
         </article>
     </section>

@@ -1,8 +1,14 @@
 import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, computed, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, WritableSignal, computed, inject, signal } from "@angular/core";
 import { NgClass } from "@angular/common";
 
-import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, SitePageElementUnion, processPossibleElements } from "@modules/constructor";
+import {
+    AbstractEditorElementActionsService,
+    EDITOR_SELECTED_ELEMENT,
+    SitePageElementType,
+    SitePageElementUnion,
+    processPossibleElements,
+} from "@modules/constructor";
 
 @Component({
     selector: "lz-site-elements",
@@ -26,4 +32,14 @@ export class SiteElementsComponent {
 
         return processPossibleElements(type);
     });
+
+    public currentDragElement: WritableSignal<SitePageElementType | null> = signal(null);
+
+    public onDragStart(type: SitePageElementType): void {
+        this.currentDragElement.set(type);
+    }
+
+    public onDragEnd(): void {
+        this.currentDragElement.set(null);
+    }
 }

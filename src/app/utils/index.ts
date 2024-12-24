@@ -12,3 +12,4 @@ export { isObjectEquals, objectWithoutNulls } from "./object";
 export { filterToQueryParameter, convertRouteParamsToParamsWithConditions } from "./filter";
 export { hasIntersection, defaultCollectFn, isArrayEquals } from "./array";
 export { getPaginationRequestParams, mapPaginationResponseToListModel } from "./pagination";
+export { applyPatch } from "./drag-and-drop";
