@@ -7,3 +7,4 @@ export { AbstractEditorSelectionService, SinglePageEditorSelectionService } from
 export { AbstractPreviewService, DefaultPreviewService, providePreviewService } from "./preview.service";
 export { MultiPageOperationService, AbstractMultiPageOperationService } from "./multi-page-operation-service";
 export { SaveEditorElementsService, AbstractSaveEditorElementsService } from "./save-editor-element.service";
+export { provideDragService, DefaultDragService, AbstractDragService } from "./drag-service.abstract";

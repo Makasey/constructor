@@ -17,6 +17,9 @@ export {
     MultiPageOperationService,
     SaveEditorElementsService,
     AbstractSaveEditorElementsService,
+    AbstractDragService,
+    DefaultDragService,
+    provideDragService,
 } from "./abstract";
 export { SitePreviewDataService, LocalStorageService } from "./services";
 export {
