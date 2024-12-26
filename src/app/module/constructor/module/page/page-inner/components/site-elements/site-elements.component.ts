@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, Wri
 import { NgClass } from "@angular/common";
 
 import {
+    AbstractDragService,
     AbstractEditorElementActionsService,
     EDITOR_SELECTED_ELEMENT,
     SitePageElementType,
@@ -24,6 +25,7 @@ export class SiteElementsComponent {
     public hostClass = true;
 
     private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
+    private readonly dragService: AbstractDragService<SitePageElementType> = inject(AbstractDragService);
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
@@ -37,9 +39,11 @@ export class SiteElementsComponent {
 
     public onDragStart(type: SitePageElementType): void {
         this.currentDragElement.set(type);
+        this.dragService.setDraggableItem(type);
     }
 
     public onDragEnd(): void {
         this.currentDragElement.set(null);
+        this.dragService.setDraggableItem(null);
     }
 }
