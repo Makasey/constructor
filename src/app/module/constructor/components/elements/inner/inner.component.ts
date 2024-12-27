@@ -8,10 +8,12 @@ import {
     ELEMENT_ID,
     InnerPageElement,
     LZEditorElementComponent,
+    RootComponent,
     SectionPageElementSettings,
     processBackgroundValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { CdkDropList } from "@angular/cdk/drag-drop";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
@@ -19,7 +21,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
     templateUrl: "./inner.component.html",
     styleUrls: ["./inner.component.scss"],
     standalone: true,
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
+    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent, CdkDropList, RootComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

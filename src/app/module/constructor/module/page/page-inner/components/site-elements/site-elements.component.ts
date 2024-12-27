@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
+import { CdkDrag, CdkDragDrop, CdkDropList } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, WritableSignal, computed, inject, signal } from "@angular/core";
 import { NgClass } from "@angular/common";
 
@@ -45,5 +45,19 @@ export class SiteElementsComponent {
     public onDragEnd(): void {
         this.currentDragElement.set(null);
         this.dragService.setDraggableItem(null);
+    }
+
+    public onDrop(event: CdkDragDrop<unknown>): void {
+        // const { item } = event;
+        // const { data } = item;
+        // const { type } = data;
+        //
+        // if (this.isRootElement()) {
+        //   this.actionService.addPageElement(type);
+        //
+        //   return;
+        // }
+        //
+        // this.actionService.addElementByType(type);
     }
 }

@@ -1,9 +1,17 @@
-@if (element$ | async; as element) {
-    @if (element.children.length) {
-        @for (child of element.children; track child) {
-           <lz-editor-element [elementId]="child">
-                <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
-           </lz-editor-element>
+<div
+    cdkDropList
+    [id]="'123'"
+    [cdkDropListConnectedTo]="['root-element', '123', 'site-elements']"
+    [style]="{ height: '100px' }"
+>
+    @if (element$ | async; as element) {
+        @if (element.children.length) {
+            @for (child of element.children; track child) {
+                <lz-editor-element [elementId]="child">
+                    <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
+                </lz-editor-element>
+            }
         }
     }
-}
+</div>
+

@@ -3,7 +3,8 @@
         <h2 class="settings-title">Элементы сайта</h2>
         <article
             cdkDropList
-            [cdkDropListConnectedTo]="['root-element']"
+            [id]="'site-elements'"
+            [cdkDropListConnectedTo]="['root-element', '123']"
             [cdkDropListSortingDisabled]="true"
             class="elements-wrapper"
         >
@@ -13,6 +14,7 @@
                     [cdkDragData]="element"
                     (cdkDragStarted)="onDragStart(element.type)"
                     (cdkDragEnded)="onDragEnd()"
+                    (cdkDragDropped)="onDrop($event)"
                     class="element"
                 >
                     <i class="bx" [ngClass]="element.icon"></i>
