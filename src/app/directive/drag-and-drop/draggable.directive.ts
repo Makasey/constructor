@@ -1,16 +1,16 @@
 import {
-  DestroyRef,
-  Directive,
-  ElementRef,
-  HostListener,
-  Injector,
-  OnDestroy,
-  OnInit,
-  Renderer2,
-  WritableSignal,
-  inject,
-  input,
-  signal
+    DestroyRef,
+    Directive,
+    ElementRef,
+    HostListener,
+    Injector,
+    OnDestroy,
+    OnInit,
+    Renderer2,
+    WritableSignal,
+    inject,
+    input,
+    signal,
 } from "@angular/core";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 import { copyCloneNodeStyles } from "./utils";

@@ -6,12 +6,12 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inp
     imports: [],
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./loader.component.scss"],
-    templateUrl: "./loader.component.html"
+    templateUrl: "./loader.component.html",
 })
 export class LZLoaderComponent {
     @HostBinding("class.lz-loader")
     public hostClass = true;
 
     @HostBinding("class")
-public readonly customClass = input("test");
+    public readonly customClass = input("test");
 }

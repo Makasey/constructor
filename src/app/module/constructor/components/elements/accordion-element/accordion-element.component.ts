@@ -21,7 +21,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective]
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class AccordionElementComponent implements OnInit {
     @HostBinding("class.lz-accordion-element")

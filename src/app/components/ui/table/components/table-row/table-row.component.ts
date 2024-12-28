@@ -108,7 +108,13 @@ export class LZTableRowComponent {
         if (!item.disabled) {
             const isExpanded = item.isExpanded;
 
-            isExpanded ? this.service.collapseRowById(rowId) : this.service.expandRowById(rowId);
+            if (isExpanded) {
+                this.service.collapseRowById(rowId);
+
+                return;
+            }
+
+            this.service.expandRowById(rowId);
         }
     }
 

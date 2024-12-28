@@ -17,7 +17,7 @@ import { RouteParams } from "@shared-enums";
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./page.component.scss"],
     templateUrl: "./page.component.html",
-    imports: [RouterOutlet]
+    imports: [RouterOutlet],
 })
 export class PageComponent implements OnInit, OnDestroy {
     @HostBinding("class.lz-page")

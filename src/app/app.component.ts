@@ -8,6 +8,6 @@ import { LZToastrComponent } from "@components/ui";
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./app.component.html",
     imports: [LZToastrComponent, RouterOutlet],
-    styleUrls: ["./app.component.scss"]
+    styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {}

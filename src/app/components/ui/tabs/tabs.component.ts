@@ -9,18 +9,18 @@ import { TabsItemComponent } from "@components";
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [TabsItemComponent, NgClass, NgTemplateOutlet, CommonModule, NgClass]
+    imports: [TabsItemComponent, NgClass, NgTemplateOutlet, CommonModule, NgClass],
 })
 export class LzTabsComponent implements AfterContentInit {
     @HostBinding("class.lz-tabs")
     public hostClass = true;
 
-    readonly tabs = contentChildren(TabsItemComponent);
+    public readonly tabs = contentChildren(TabsItemComponent);
 
     public activeComponent: TabsItemComponent;
 
     public ngAfterContentInit(): void {
-        this.activeComponent = this.tabs()?.at(0)!;
+        this.activeComponent = this.tabs().at(0)!;
     }
 
     public activateTab(tab: TabsItemComponent): void {

@@ -1,5 +1,5 @@
 import { bootstrapApplication } from "@angular/platform-browser";
-import { enableProdMode, provideExperimentalZonelessChangeDetection } from "@angular/core";
+import { enableProdMode } from "@angular/core";
 
 import { AppComponent } from "app/app.component";
 import { ROOT_PROVIDERS } from "app/providers";

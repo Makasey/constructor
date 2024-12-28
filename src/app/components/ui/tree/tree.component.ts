@@ -1,16 +1,15 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  HostListener,
-  Inject,
-  Optional,
-  SkipSelf,
-  ViewEncapsulation,
-  input,
-  output
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    HostListener,
+    Inject,
+    Optional,
+    SkipSelf,
+    ViewEncapsulation,
+    input,
+    output,
 } from "@angular/core";
-
 
 export type Tree<V = string> = {
     value: V;
@@ -24,7 +23,7 @@ export type Tree<V = string> = {
     styleUrls: ["./tree.component.scss"],
     imports: [],
     encapsulation: ViewEncapsulation.None,
-    templateUrl: "./tree.component.html"
+    templateUrl: "./tree.component.html",
 })
 export class TreeComponent {
     @HostBinding("class.lz-tree")

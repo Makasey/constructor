@@ -21,7 +21,7 @@ import { Observable, map, shareReplay } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe, NgStyle, NgClass, LZInitVarDirective, LZElementActionsComponent]
+    imports: [AsyncPipe, NgStyle, NgClass, LZInitVarDirective, LZElementActionsComponent],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")

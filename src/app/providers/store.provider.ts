@@ -1,5 +1,5 @@
 import { DevtoolsOptions, akitaDevtools } from "@datorama/akita";
-import { NgZone, inject, provideEnvironmentInitializer, EnvironmentProviders } from "@angular/core";
+import { EnvironmentProviders, NgZone, inject, provideEnvironmentInitializer } from "@angular/core";
 
 import { LzQuery, LzService, LzStore } from "@core";
 

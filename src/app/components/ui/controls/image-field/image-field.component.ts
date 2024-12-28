@@ -1,9 +1,9 @@
 import { APFormControl, LZFileUploadComponent } from "@components";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input } from "@angular/core";
 
+import { APTextFieldComponent } from "../text-field/text-field.component";
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { File } from "@shared-types";
-import { APTextFieldComponent } from "../text-field/text-field.component";
 
 @Component({
     selector: "lz-image-field",
@@ -18,7 +18,7 @@ import { APTextFieldComponent } from "../text-field/text-field.component";
             multi: true,
             useExisting: LZImageFieldComponent,
         },
-    ]
+    ],
 })
 export class LZImageFieldComponent implements ControlValueAccessor {
     @HostBinding("class.lz-image-field")

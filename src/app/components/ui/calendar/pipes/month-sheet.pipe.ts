@@ -4,7 +4,7 @@ import { DayOfWeek, LZDay, LZMonth, getDayFromMonthRowCol } from "@components";
 
 @Pipe({
     name: "lzMonthSheet",
-    pure: true
+    pure: true,
 })
 export class LZMonthSheetPipe implements PipeTransform {
     private currentMonth: LZMonth | null = null;

@@ -30,7 +30,7 @@ import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
             directive: DroppableDirective,
             outputs: ["itemDropped"],
         },
-    ]
+    ],
 })
 export class RootComponent implements OnInit, OnDestroy {
     @HostBinding("class")

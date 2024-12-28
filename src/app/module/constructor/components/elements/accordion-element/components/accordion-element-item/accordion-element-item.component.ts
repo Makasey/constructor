@@ -28,7 +28,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
             state("collapsed", style({ height: "0px", opacity: 0, visibility: "hidden" })),
             transition("expanded <=> collapsed", animate("500ms cubic-bezier(.37,1.04,.68,.98)")),
         ]),
-    ]
+    ],
 })
 export class AccordionElementItemComponent implements OnInit {
     @HostBinding("class.lz-accordion-element-item")

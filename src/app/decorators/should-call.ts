@@ -16,8 +16,8 @@ export function shouldCall<T>(predicate: Predicate<T>): MethodDecorator {
 
             if (SilentEventPlugin.ngZone) {
                 SilentEventPlugin.ngZone.run(() => value.apply(this, args));
-            } else {
-                isFunction(value) && value.apply(this, args);
+            } else if (isFunction(value)) {
+                value.apply(this, args);
             }
         };
     };

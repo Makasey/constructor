@@ -11,12 +11,12 @@ export class LocalStorageService {
     public setItem(key: string, value: string): void {
         try {
             localStorage.setItem(key, value);
-        } catch (error) {
+        } catch (error: unknown) {
             this.toastrService.addToastrItem({
                 type: LZToastrItemType.ERROR,
                 title: "Элементы не сохранились",
                 id: guid(),
-                text: "Пожалуйста, попробуйте снова",
+                text: error?.message ?? "Пожалуйста, попробуйте снова",
             });
         }
     }

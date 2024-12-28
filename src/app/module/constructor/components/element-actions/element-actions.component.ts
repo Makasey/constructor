@@ -26,7 +26,7 @@ import {
     styleUrl: "./element-actions.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [AsyncPipe]
+    imports: [AsyncPipe],
 })
 export class LZElementActionsComponent implements OnInit {
     @HostBinding("class.element-actions")

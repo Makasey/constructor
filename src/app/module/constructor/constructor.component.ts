@@ -11,7 +11,7 @@ import { LZToastrComponent } from "@components";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [RouterOutlet, LZToastrComponent],
-    providers: [...EDITOR_PROVIDERS]
+    providers: [...EDITOR_PROVIDERS],
 })
 export class LZConstructorComponent {
     @HostBinding("class.lz-constructor")

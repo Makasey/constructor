@@ -4,7 +4,7 @@ import { APDropdownFieldItem } from "./types";
 
 @Pipe({
     name: "lzDropdownLabel",
-    pure: true
+    pure: true,
 })
 export class APDropdownFieldLabelPipe implements PipeTransform {
     public transform(value: APDropdownFieldItem[], labelKey: string): string {

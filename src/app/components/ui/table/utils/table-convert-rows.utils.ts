@@ -27,7 +27,9 @@ export function convertPlainRowsToValueExtraParams(
 
         const children: TableRow[] | undefined = isParent ? [] : undefined;
 
-        !parentId && processedRows.push(plainRow);
+        if (!parentId) {
+            processedRows.push(plainRow);
+        }
 
         if (parentId) {
             const parent = valueExtra[parentId];

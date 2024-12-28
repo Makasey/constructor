@@ -8,7 +8,7 @@ import { LZToastrListComponent, LZToastrService, LzToastrQuery } from "@componen
     selector: "lz-toastr-box",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-box.component.html",
-    imports: [LZToastrItemComponent, LZToastrListComponent, CommonModule]
+    imports: [LZToastrItemComponent, LZToastrListComponent, CommonModule],
 })
 export class LZToastrBoxComponent {
     public _enabledDNDMode$ = this.toastrQuery.selectDNDMode$;

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, HostListener, input, output } from "@angular/core";
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 
 import { APFormControl, APNumberFieldValueChangeEvent } from "@components";
-import { calculateFractionNumber, normalizeMaxValue, normalizeMinValue, normalizeNumberValue, roundNumberWithFraction } from "@shared-utils";
 import { KeyValuePipe } from "@angular/common";
+import { calculateFractionNumber, normalizeMaxValue, normalizeMinValue, normalizeNumberValue, roundNumberWithFraction } from "@shared-utils";
 
 @Component({
     selector: "ap-number-field",
@@ -17,7 +17,7 @@ import { KeyValuePipe } from "@angular/common";
             multi: true,
         },
     ],
-    imports: [ReactiveFormsModule, FormsModule, KeyValuePipe]
+    imports: [ReactiveFormsModule, FormsModule, KeyValuePipe],
 })
 export class APNumberFieldComponent implements ControlValueAccessor {
     public readonly nativeControl = input<FormControl>();
@@ -106,7 +106,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     }
 
     public updateValue(newValue: number, oldValue: number): void {
-        const value = !isNaN(+newValue) ? +newValue : this.min() ?? 0;
+        const value = !isNaN(+newValue) ? +newValue : (this.min() ?? 0);
         this.writeValue(value);
         this.emitEvent(oldValue);
     }

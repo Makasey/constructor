@@ -47,7 +47,11 @@ export class DragDropService {
 
     public deleteDraggableCloneMapItem(): void {
         for (const [key, value] of this.draggableCloneMap) {
-            key && this.document.body.removeChild(value);
+            if (!key) {
+                continue;
+            }
+
+            this.document.body.removeChild(value);
         }
 
         this.draggableCloneMap.clear();

@@ -8,7 +8,7 @@ import { Page } from "@core";
     styleUrl: "./pages-bar.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass]
+    imports: [NgClass],
 })
 export class PagesBarComponent {
     @HostBinding("class.pages-bar")

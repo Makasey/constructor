@@ -17,7 +17,7 @@ import { getRandomId } from "@shared-utils";
             useExisting: ItemsControlFieldComponent,
         },
     ],
-    imports: [ItemsControlItemComponent]
+    imports: [ItemsControlItemComponent],
 })
 export class ItemsControlFieldComponent implements ControlValueAccessor {
     @HostBinding("class.lz-items-control-field")

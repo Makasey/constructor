@@ -1,8 +1,8 @@
 import { isNil, isObject } from "@datorama/akita";
 
+import { TypeKeys } from "@modules/constructor";
 import { Valuable } from "@shared-types";
 import { isArrayEquals } from "@shared-utils";
-import { TypeKeys } from "@modules/constructor";
 
 export function objectWithoutNulls<T extends Record<string, unknown>>(obj: T): Valuable<T> {
     return Object.fromEntries(Object.entries(obj).filter(([, v]) => !isNil(v))) as Valuable<T>;

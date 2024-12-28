@@ -1,14 +1,5 @@
 import { APFormControl, APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "@components";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnChanges,
-  SimpleChanges,
-  ViewEncapsulation,
-  forwardRef,
-  input,
-  output
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { KeyValuePipe } from "@angular/common";
 
@@ -25,7 +16,7 @@ import { KeyValuePipe } from "@angular/common";
             multi: true,
         },
     ],
-    imports: [KeyValuePipe]
+    imports: [KeyValuePipe],
 })
 export class TextareaComponent implements ControlValueAccessor, OnChanges {
     public readonly nativeControl = input.required<FormControl>();

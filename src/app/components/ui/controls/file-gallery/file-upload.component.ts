@@ -1,16 +1,16 @@
 import { APFormControl, ModalService, ModalType } from "@components";
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  HostBinding,
-  Injector,
-  ViewContainerRef,
-  ViewEncapsulation,
-  forwardRef,
-  inject,
-  input,
-  output
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    HostBinding,
+    Injector,
+    ViewContainerRef,
+    ViewEncapsulation,
+    forwardRef,
+    inject,
+    input,
+    output,
 } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { File } from "@shared-types";
@@ -33,7 +33,7 @@ import { filter, tap } from "rxjs";
             useExisting: forwardRef(() => LZFileUploadComponent),
         },
     ],
-    imports: [NgTemplateOutlet]
+    imports: [NgTemplateOutlet],
 })
 export class LZFileUploadComponent implements ControlValueAccessor {
     @HostBinding("class.lz-file-upload")

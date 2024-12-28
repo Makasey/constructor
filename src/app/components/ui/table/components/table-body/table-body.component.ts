@@ -9,7 +9,7 @@ import { defaultTrackBy } from "../../constants";
     selector: "lz-table-body",
     templateUrl: "./table-body.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [LZTableRowComponent]
+    imports: [LZTableRowComponent],
 })
 export class LZTableBodyComponent {
     @HostBinding("class.table-body")

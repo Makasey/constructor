@@ -8,7 +8,7 @@ import {
     processBackgroundValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { AsyncPipe, JsonPipe, NgTemplateOutlet } from "@angular/common";
+import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";

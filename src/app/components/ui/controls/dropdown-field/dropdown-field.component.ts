@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation, input, output } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
-import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
-import { CdkOverlayOrigin, CdkConnectedOverlay } from "@angular/cdk/overlay";
-import { APDropdownFieldItemComponent } from "./components/dropdown-field-item/dropdown-field-item.component";
 import { APDropdownFieldActivePipe, APDropdownFieldLabelPipe } from "@components";
+import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
+import { APDropdownFieldItemComponent } from "./components/dropdown-field-item/dropdown-field-item.component";
+import { CdkConnectedOverlay, CdkOverlayOrigin } from "@angular/cdk/overlay";
 
 @Component({
     selector: "ap-dropdown-field",
@@ -19,13 +19,7 @@ import { APDropdownFieldActivePipe, APDropdownFieldLabelPipe } from "@components
             useExisting: APDropdownFieldComponent,
         },
     ],
-    imports: [
-        CdkOverlayOrigin,
-        CdkConnectedOverlay,
-        APDropdownFieldItemComponent,
-        APDropdownFieldActivePipe,
-        APDropdownFieldLabelPipe,
-    ],
+    imports: [CdkOverlayOrigin, CdkConnectedOverlay, APDropdownFieldItemComponent, APDropdownFieldActivePipe, APDropdownFieldLabelPipe],
 })
 export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
     public readonly items = input<APDropdownFieldItem[]>([]);

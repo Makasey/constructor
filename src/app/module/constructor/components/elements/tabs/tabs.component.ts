@@ -25,7 +25,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective]
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TabsComponent implements OnInit {
     @HostBinding("class.lz-tabs-element")

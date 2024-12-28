@@ -20,7 +20,7 @@ import { LZElementActionsComponent } from "../element-actions";
             outputs: ["itemDropped"],
             inputs: ["id:elementId"],
         },
-    ]
+    ],
 })
 export class LZEditorElementComponent {
     @HostBinding("class.lz-editor-element")

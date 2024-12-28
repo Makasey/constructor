@@ -21,7 +21,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [AsyncPipe, LZElementActionsComponent]
+    imports: [AsyncPipe, LZElementActionsComponent],
 })
 export class SpacerComponent implements OnInit {
     @HostBinding("class.lz-spacer")

@@ -1,5 +1,5 @@
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject, Signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 
 import { Observable, map } from "rxjs";
 

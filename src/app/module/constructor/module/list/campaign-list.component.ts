@@ -28,7 +28,7 @@ import { RouteKey } from "@shared-enums";
             useClass: DefaultCampaignListService,
         },
         // ...provideWebsocket(defaultWebsocketConfig),
-    ]
+    ],
 })
 export class CampaignListComponent extends AbstractModuleComponent implements OnInit {
     @HostBinding("class.lz-campaign-list")

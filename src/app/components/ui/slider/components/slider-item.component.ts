@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef, input } from "@angular/core";
+import { JsonPipe, NgTemplateOutlet } from "@angular/common";
 import { SliderItemTemplateData } from "@components";
-import { NgTemplateOutlet, JsonPipe } from "@angular/common";
 
 @Component({
     selector: "lz-slider-item",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./slider-item.component.html",
-    imports: [NgTemplateOutlet, JsonPipe]
+    imports: [NgTemplateOutlet, JsonPipe],
 })
 export class LZSliderItemComponent {
     public readonly itemTemplate = input<TemplateRef<SliderItemTemplateData>>();

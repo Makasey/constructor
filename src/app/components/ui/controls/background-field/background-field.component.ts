@@ -1,5 +1,5 @@
+import { APDropdownFieldComponent, BackgroundFieldModel } from "@components";
 import { APFormControl, LZColorPickerComponent, LZFileUploadComponent, LZImageFieldComponent, RadioGroupComponent } from "@components/ui";
-import { BackgroundFieldModel, APDropdownFieldComponent } from "@components";
 import {
     BackgroundType,
     ObjectFitPosition,
@@ -11,7 +11,6 @@ import {
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from "@angular/core";
 import { File } from "@shared-types";
 import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-
 
 @Component({
     selector: "lz-background-field",
@@ -26,7 +25,7 @@ import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
             multi: true,
             useExisting: BackgroundFieldComponent,
         },
-    ]
+    ],
 })
 export class BackgroundFieldComponent {
     public readonly nativeControl = input<FormControl>();

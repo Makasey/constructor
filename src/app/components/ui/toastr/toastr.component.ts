@@ -12,7 +12,7 @@ import { enterAnimation } from "@core";
     templateUrl: "./toastr.component.html",
     imports: [LZToastrBoxComponent, LZToastrListComponent, LZInitVarDirective, CommonModule],
     providers: [LZToastrStore, LZToastrService, LzToastrQuery],
-    animations: [enterAnimation]
+    animations: [enterAnimation],
 })
 export class LZToastrComponent {
     public _alwaysOnDisplay$ = this.toastrQuery.selectAlwaysOnDisplay$;

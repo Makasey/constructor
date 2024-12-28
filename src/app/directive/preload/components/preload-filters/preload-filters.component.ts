@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Inject, ViewEncapsulation } from "@angular/core";
 
-
 import { NumberToArrayPipe } from "@shared-pipes";
 import { PRELOAD_COMPONENTS_CONFIG } from "@shared-directives";
 
@@ -10,7 +9,7 @@ import { PRELOAD_COMPONENTS_CONFIG } from "@shared-directives";
     styleUrls: ["./preload-filters.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NumberToArrayPipe]
+    imports: [NumberToArrayPipe],
 })
 export class LzPreloadFiltersComponent {
     constructor(@Inject(PRELOAD_COMPONENTS_CONFIG) public config: Record<string, number>) {}

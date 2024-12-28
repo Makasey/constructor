@@ -10,7 +10,7 @@ import { DraggableDirective } from "@shared-directives/drag-and-drop";
     styleUrls: ["./site-elements.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass, DraggableDirective]
+    imports: [NgClass, DraggableDirective],
 })
 export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")

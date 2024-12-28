@@ -8,7 +8,7 @@ import { LZMonthSheetPipe } from "./pipes/month-sheet.pipe";
     selector: "lz-calendar",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./calendar.component.html",
-    imports: [LZMonthSheetPipe]
+    imports: [LZMonthSheetPipe],
 })
 export class LZCalendarComponent implements ControlValueAccessor {
     @Input()

@@ -1,12 +1,9 @@
-import { assertInInjectionContext, inject, Injector } from '@angular/core';
+import { Injector, assertInInjectionContext, inject } from "@angular/core";
 
-export function assertInjector(
-  debugFn: Function,
-  injector: Injector | undefined | null
-): Injector {
-  if (!injector) {
-    assertInInjectionContext(debugFn);
-  }
+export function assertInjector(debugFn: Function, injector: Injector | undefined | null): Injector {
+    if (!injector) {
+        assertInInjectionContext(debugFn);
+    }
 
-  return injector ?? inject(Injector);
+    return injector ?? inject(Injector);
 }

@@ -20,7 +20,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     templateUrl: "./text.component.html",
     styleUrls: ["./text.component.scss"],
     imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, LZElementActionsComponent],
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective]
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TextComponent implements OnInit {
     private readonly service = inject(AbstractEditorElementSettingsService);
