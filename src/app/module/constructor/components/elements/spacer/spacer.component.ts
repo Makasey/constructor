@@ -18,7 +18,6 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     selector: "lz-spacer",
     templateUrl: "./spacer.component.html",
     styleUrl: "./spacer.component.scss",
-    standalone: true,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,

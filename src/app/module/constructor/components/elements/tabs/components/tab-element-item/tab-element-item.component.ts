@@ -16,7 +16,6 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 
 @Component({
     selector: "lz-tab-element-item",
-    standalone: true,
     imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
     templateUrl: "./tab-element-item.component.html",
     styleUrls: ["./tab-element-item.component.scss"],

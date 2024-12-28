@@ -7,7 +7,7 @@ import { APDropdownFieldItem } from "./types";
     pure: true,
 })
 export class APDropdownFieldActivePipe implements PipeTransform {
-    public transform(id: string, items: APDropdownFieldItem[], valueKey: string): boolean {
+    public transform(id: unknown, items: APDropdownFieldItem[], valueKey: string): boolean {
         return !!items.find(item => item[valueKey] === id);
     }
 }

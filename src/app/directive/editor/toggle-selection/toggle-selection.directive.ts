@@ -1,7 +1,6 @@
 import { AbstractEditorSelectionService, EDITOR_SELECTED_ELEMENT, ELEMENT_ID, ROOT_ELEMENT_ID } from "@modules/constructor";
-import { Directive, HostBinding, HostListener, OnInit, inject } from "@angular/core";
-import { Observable, map } from "rxjs";
-import { toObservable } from "@angular/core/rxjs-interop";
+import { ChangeDetectorRef, Directive, HostListener, Injector, OnInit, computed, inject } from "@angular/core";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Directive({
     selector: "[toggleSelection]",
@@ -12,13 +11,11 @@ export class ToggleSelectionDirective implements OnInit {
 
     private readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    private readonly selectedElement$ = toObservable(this.selectedElement);
+    private readonly cdr = inject(ChangeDetectorRef);
+
+    private readonly injector = inject(Injector);
 
     private readonly service = inject(AbstractEditorSelectionService);
-
-    @HostBinding("$.class._selected")
-    @HostListener("$.class._selected")
-    public isSelected$: Observable<boolean>;
 
     @HostListener("click.stop")
     public toggleSelection(): void {
@@ -32,6 +29,12 @@ export class ToggleSelectionDirective implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.isSelected$ = this.selectedElement$.pipe(map(selectedIndex => selectedIndex === this.elementId));
+        hostBinding(
+            computed(() => {
+                return this.selectedElement() === this.elementId;
+            }),
+            "class._selected",
+            this.injector,
+        );
     }
 }

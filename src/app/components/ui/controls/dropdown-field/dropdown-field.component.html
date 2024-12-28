@@ -1,7 +1,7 @@
 <div class="dropdown" cdkOverlayOrigin #trigger="cdkOverlayOrigin" (focus)="_onDropdownFieldFocus()">
-    @if (label) {
+    @if (label()) {
         <span class="form-control-text">
-            {{ label }}
+            {{ label() }}
         </span>
     }
 
@@ -14,13 +14,13 @@
 
 <ng-template
     cdkConnectedOverlay
-    [cdkConnectedOverlayPanelClass]="customClass"
+    [cdkConnectedOverlayPanelClass]="customClass()"
     [cdkConnectedOverlayOpen]="_isDropdownItemsVisible"
     [cdkConnectedOverlayOrigin]="trigger"
     (overlayOutsideClick)="_onCloseDropdownList($event)"
 >
     <div class="dropdown-list">
-        @for (item of items; track item.id) {
+        @for (item of items(); track item.id) {
             <ap-dropdown-field-item
                 [item]="item"
                 [selectLabelKey]="_selectLabelKey"

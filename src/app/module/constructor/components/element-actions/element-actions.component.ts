@@ -26,7 +26,6 @@ import {
     styleUrl: "./element-actions.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [AsyncPipe],
 })
 export class LZElementActionsComponent implements OnInit {

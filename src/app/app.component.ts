@@ -7,7 +7,6 @@ import { LZToastrComponent } from "@components/ui";
     selector: "app-root",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./app.component.html",
-    standalone: true,
     imports: [LZToastrComponent, RouterOutlet],
     styleUrls: ["./app.component.scss"],
 })

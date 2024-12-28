@@ -1,15 +1,15 @@
 <span>
-    {{ label }}
+    {{ label() }}
 </span>
 
 <article class="controls-wrapper">
     <ap-number-field
         [ngModel]="value.value"
-        [controlModel]="controlModel"
-        [nativeControl]="nativeControl"
+        [controlModel]="controlModel()"
+        [nativeControl]="nativeControl()"
         [disabled]="isDisabled"
-        [min]="min"
-        [max]="max"
+        [min]="min()"
+        [max]="max()"
         (onBlur)="onBlur()"
         (onFocus)="onFocus()"
         (ngModelChange)="updateNumberValue($event)"
@@ -18,9 +18,9 @@
     <ap-dropdown-field
         customClass="unit-dropdown"
         [ngModel]="value.unit"
-        [items]="items"
-        [selectLabelKey]="selectLabelKey"
-        [selectValueKey]="selectValueKey"
+        [items]="items()"
+        [selectLabelKey]="selectLabelKey()"
+        [selectValueKey]="selectValueKey()"
         [disabled]="isDisabled"
         (ngModelChange)="updateDropdownValue($event)"
     ></ap-dropdown-field>

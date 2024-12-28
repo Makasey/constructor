@@ -1,12 +1,12 @@
 import { APFormControl, RadioGroupItem } from "@components";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
-import { CommonModule, NgForOf } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
+
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NgClass } from "@angular/common";
 
 @Component({
     selector: "lz-radio-group",
-    standalone: true,
-    imports: [CommonModule, FormsModule, NgForOf],
+    imports: [FormsModule, NgClass],
     templateUrl: "./radio-group.component.html",
     styleUrls: ["./radio-group.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,20 +23,15 @@ export class RadioGroupComponent implements ControlValueAccessor {
     @HostBinding("class.radio-group")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input({ required: true })
-    public items: RadioGroupItem[];
+    public readonly items = input.required<RadioGroupItem[]>();
 
-    @Input()
-    public label: string;
+    public readonly label = input<string>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
+    public readonly onValueChange = output<unknown>();
 
     public _value: string;
 

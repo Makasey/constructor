@@ -2,13 +2,15 @@ import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
-    EventEmitter,
+    DestroyRef,
     Input,
-    Output,
+    OnInit,
     TemplateRef,
     ViewEncapsulation,
     computed,
+    inject,
     input,
+    output,
     untracked,
 } from "@angular/core";
 
@@ -37,17 +39,17 @@ import { LZLoaderComponent } from "../loader";
 import { TrackByFn } from "./interfaces";
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-table",
     templateUrl: "./table.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, LZTableFootComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
     providers: [...provideTableStore()],
 })
-export class LZTableComponent {
+export class LZTableComponent implements OnInit {
     public templatesMap = input<TemplateMap>({});
 
     public loadMoreLabel = input<string>(DEFAULT_LOAD_MORE_LABEL);
@@ -56,14 +58,11 @@ export class LZTableComponent {
 
     public relations = input<Record<string, unknown[]>>({});
 
-    @Output()
-    public readonly onBottomScrolled: Observable<boolean>;
+    public readonly onBottomScrolled = output<boolean>();
 
-    @Output()
-    public readonly onSelect: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
+    public readonly onSelect = output<unknown[]>();
 
-    @Output()
-    public readonly columnDropped: EventEmitter<ColumnDropEvent> = new EventEmitter<ColumnDropEvent>();
+    public readonly columnDropped = output<ColumnDropEvent>();
 
     public _tableExtra: TableExtra = { ...defaultTableExtra };
 
@@ -81,13 +80,21 @@ export class LZTableComponent {
 
     public scrollBottomSubject$ = new BehaviorSubject(false);
 
+    private readonly destroyRef = inject(DestroyRef);
+
     public _trackByRow: (index: number, row: unknown) => unknown;
 
-    constructor(private service: AbstractAwesomeTableService) {
-        this.onBottomScrolled = this.scrollBottomSubject$.pipe(
-            debounceTime(100),
-            filter(isEnd => isEnd),
-        );
+    constructor(private service: AbstractAwesomeTableService) {}
+
+    public ngOnInit(): void {
+        this.scrollBottomSubject$
+            .pipe(
+                debounceTime(100),
+                filter(isEnd => isEnd),
+                tap(isEnd => this.onBottomScrolled.emit(isEnd)),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe();
     }
 
     public tableMeta = input<TableMeta[], TableMeta[] | null>([], {

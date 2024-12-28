@@ -17,7 +17,6 @@ import { RouteKey } from "@shared-enums";
 
 @Component({
     selector: "lz-campaign-list",
-    standalone: true,
     templateUrl: "./campaign-list.component.html",
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

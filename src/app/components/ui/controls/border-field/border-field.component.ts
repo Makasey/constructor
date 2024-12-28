@@ -1,5 +1,5 @@
 import {
-    APDropdownFieldModule,
+    APDropdownFieldComponent,
     APFormControl,
     BorderFieldModel,
     Direction,
@@ -11,13 +11,11 @@ import {
     defaultDirectionValue,
 } from "@components";
 import { BorderType, defaultBorderTypeControls, defaultSizeControlUnit } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from "@angular/core";
 import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { NgIf } from "@angular/common";
 
 @Component({
     selector: "lz-border-field",
-    standalone: true,
     templateUrl: "./border-field.component.html",
     styleUrl: "./border-field.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,10 +24,9 @@ import { NgIf } from "@angular/common";
         LZColorPickerComponent,
         FormsModule,
         RadioGroupComponent,
-        NgIf,
         LZImageFieldComponent,
         LZFileUploadComponent,
-        APDropdownFieldModule,
+        APDropdownFieldComponent,
         DirectionFieldComponent,
     ],
     providers: [
@@ -41,11 +38,9 @@ import { NgIf } from "@angular/common";
     ],
 })
 export class BorderFieldComponent {
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
     public _value: BorderFieldModel = {
         borderWidth: {

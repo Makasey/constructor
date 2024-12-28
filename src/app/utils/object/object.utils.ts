@@ -1,5 +1,6 @@
 import { isNil, isObject } from "@datorama/akita";
 
+import { TypeKeys } from "@modules/constructor";
 import { Valuable } from "@shared-types";
 import { isArrayEquals } from "@shared-utils";
 
@@ -16,7 +17,7 @@ export function isObjectEquals<T = Record<string, unknown>>(target: T, other: T)
         return target === other;
     }
 
-    return Object.keys(target as Record<string, unknown>).every(key => {
+    return (Object.keys(target as Record<string, unknown>) as TypeKeys<T>).every(key => {
         const targetItem = target[key];
         const otherItem = other[key];
 

@@ -1,7 +1,7 @@
 import { AbstractFileGalleryService, FILE_UPLOAD_PROVIDERS, MODAL_DATA_TOKEN, MODAL_ID_TOKEN, ModalService, ModalWithData } from "@components";
 import { AbstractModuleComponent } from "@core";
-import { AsyncPipe, NgForOf, NgIf } from "@angular/common";
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, ViewChild, ViewEncapsulation, inject } from "@angular/core";
+import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, ViewEncapsulation, inject, viewChild } from "@angular/core";
 import { File } from "@shared-types";
 import { tap } from "rxjs";
 import { untilDestroyed } from "@ngneat/until-destroy";
@@ -12,16 +12,14 @@ import { untilDestroyed } from "@ngneat/until-destroy";
     styleUrls: ["./file-gallery.component.scss"],
     templateUrl: "./file-gallery.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     providers: [...FILE_UPLOAD_PROVIDERS],
-    imports: [AsyncPipe, NgForOf, NgIf],
+    imports: [AsyncPipe],
 })
 export class FileGalleryComponent extends AbstractModuleComponent implements ModalWithData<File | undefined> {
     @HostBinding("class.lz-file-gallery")
     public hostClass = true;
 
-    @ViewChild("fileUpload", { static: true })
-    private fileUpload: ElementRef<HTMLInputElement>;
+    public readonly fileUpload = viewChild.required<ElementRef<HTMLInputElement>>("fileUpload");
 
     public data: File | undefined;
 
@@ -48,13 +46,13 @@ export class FileGalleryComponent extends AbstractModuleComponent implements Mod
     }
 
     public onFilesUpload(): void {
-        const value = this.fileUpload.nativeElement.files as FileList;
+        const value = this.fileUpload().nativeElement.files as FileList;
 
         this.service
             .createEntity(value)
             .pipe(
                 tap(() => {
-                    this.fileUpload.nativeElement.value = "";
+                    this.fileUpload().nativeElement.value = "";
                 }),
                 untilDestroyed(this),
             )

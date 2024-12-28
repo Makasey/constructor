@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges, input, output } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { APFormControl, APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "@components";
+import { KeyValuePipe } from "@angular/common";
 
 @Component({
     selector: "ap-text-field",
@@ -15,31 +16,24 @@ import { APFormControl, APTextFieldValueChangeEvent, ApTextFormControlOptions, d
         },
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [KeyValuePipe],
 })
 export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label = "";
+    public readonly label = input("");
 
-    @Input()
-    public maxLength: number;
+    public readonly maxLength = input<number>();
 
-    @Input()
-    public minLength: number;
+    public readonly minLength = input<number>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<APTextFieldValueChangeEvent> = new EventEmitter<APTextFieldValueChangeEvent>();
+    public readonly onValueChange = output<APTextFieldValueChangeEvent>();
 
-    @Output()
-    public readonly onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onBlur = output<FocusEvent>();
 
-    @Output()
-    public readonly onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onFocus = output<FocusEvent>();
 
     public _value: string;
 
@@ -57,7 +51,7 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
         if (changes.controlModel) {
             this._options = {
                 ...defaultAPTextFieldOptions,
-                ...(this.controlModel.options ?? {}),
+                ...((this.controlModel() ?? {}).options ?? {}),
             };
         }
     }

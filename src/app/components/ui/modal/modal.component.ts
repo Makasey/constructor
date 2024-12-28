@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, TemplateRef, ViewChild, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, TemplateRef, ViewEncapsulation, inject, viewChild } from "@angular/core";
 
 import { Subject } from "rxjs";
 
@@ -10,6 +10,7 @@ import { HostModalContentDirective, ModalConfig, ModalService } from "@component
     styleUrls: ["./modal.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    imports: [HostModalContentDirective],
 })
 export class ModalComponent {
     public config: ModalConfig;
@@ -18,15 +19,9 @@ export class ModalComponent {
 
     private readonly modalService = inject(ModalService);
 
-    @ViewChild(HostModalContentDirective, {
-        static: true,
-    })
-    public hostView: HostModalContentDirective;
+    public readonly hostView = viewChild.required(HostModalContentDirective);
 
-    @ViewChild("defaultContent", {
-        static: true,
-    })
-    public defaultContent: TemplateRef<unknown>;
+    public readonly defaultContent = viewChild.required<TemplateRef<unknown>>("defaultContent");
 
     @HostBinding("class")
     public get hostClass(): string {

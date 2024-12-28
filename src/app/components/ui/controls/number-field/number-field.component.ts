@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output } from "@angular/core";
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { ChangeDetectionStrategy, Component, HostListener, input, output } from "@angular/core";
+import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 
 import { APFormControl, APNumberFieldValueChangeEvent } from "@components";
+import { KeyValuePipe } from "@angular/common";
 import { calculateFractionNumber, normalizeMaxValue, normalizeMinValue, normalizeNumberValue, roundNumberWithFraction } from "@shared-utils";
 
 @Component({
@@ -16,49 +17,41 @@ import { calculateFractionNumber, normalizeMaxValue, normalizeMinValue, normaliz
             multi: true,
         },
     ],
+    imports: [ReactiveFormsModule, FormsModule, KeyValuePipe],
 })
 export class APNumberFieldComponent implements ControlValueAccessor {
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label = "";
+    public readonly label = input("");
 
-    @Input()
-    public step = 1;
+    public readonly step = input(1);
 
-    @Input()
-    public max = Number.MAX_SAFE_INTEGER;
+    public readonly max = input(Number.MAX_SAFE_INTEGER);
 
-    @Input()
-    public min = 0;
+    public readonly min = input(0);
 
-    @Output()
-    public readonly onValueChange: EventEmitter<APNumberFieldValueChangeEvent> = new EventEmitter<APNumberFieldValueChangeEvent>();
+    public readonly onValueChange = output<APNumberFieldValueChangeEvent>();
 
-    @Output()
-    public readonly onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onBlur = output<FocusEvent>();
 
-    @Output()
-    public readonly onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onFocus = output<FocusEvent>();
 
     @HostListener("keydown.arrowUp.prevent")
     public onCountIncrease(): void {
-        const fractionNumber = calculateFractionNumber(this.step);
-        const processedValue = roundNumberWithFraction(Number(this._value) + this.step, fractionNumber);
-        const clampedValue = normalizeMaxValue(processedValue, this.max);
+        const fractionNumber = calculateFractionNumber(this.step());
+        const processedValue = roundNumberWithFraction(Number(this._value) + this.step(), fractionNumber);
+        const clampedValue = normalizeMaxValue(processedValue, this.max());
 
         this.updateValue(clampedValue, this._value);
     }
 
     @HostListener("keydown.arrowDown.prevent")
     public onCountDecrease(): void {
-        const fractionNumber = calculateFractionNumber(this.step);
-        const processedValue = roundNumberWithFraction(Number(this._value) - this.step, fractionNumber);
-        const clampedValue = normalizeMinValue(processedValue, this.min);
+        const fractionNumber = calculateFractionNumber(this.step());
+        const processedValue = roundNumberWithFraction(Number(this._value) - this.step(), fractionNumber);
+        const clampedValue = normalizeMinValue(processedValue, this.min());
 
         this.updateValue(clampedValue, this._value);
     }
@@ -91,7 +84,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
 
     public _onInput(value: string): void {
         const parsedValue = this.getNumbersFromString(value);
-        const clampedValue = normalizeNumberValue(+parsedValue, this.min, this.max);
+        const clampedValue = normalizeNumberValue(+parsedValue, this.min(), this.max());
         this.updateValue(clampedValue, this._value);
     }
 
@@ -113,7 +106,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     }
 
     public updateValue(newValue: number, oldValue: number): void {
-        const value = !isNaN(+newValue) ? +newValue : this.min ?? 0;
+        const value = !isNaN(+newValue) ? +newValue : (this.min() ?? 0);
         this.writeValue(value);
         this.emitEvent(oldValue);
     }
@@ -126,7 +119,7 @@ export class APNumberFieldComponent implements ControlValueAccessor {
     }
 
     public processBoundariesValue(value: number): number {
-        return normalizeNumberValue(value, this.min, this.max);
+        return normalizeNumberValue(value, this.min(), this.max());
     }
 
     private emitEvent(oldValue: number): void {

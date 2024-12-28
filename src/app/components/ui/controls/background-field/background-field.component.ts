@@ -1,12 +1,5 @@
-import {
-    APDropdownFieldModule,
-    APFormControl,
-    LZColorPickerComponent,
-    LZFileUploadComponent,
-    LZImageFieldComponent,
-    RadioGroupComponent,
-} from "@components/ui";
-import { BackgroundFieldModel } from "@components";
+import { APDropdownFieldComponent, BackgroundFieldModel } from "@components";
+import { APFormControl, LZColorPickerComponent, LZFileUploadComponent, LZImageFieldComponent, RadioGroupComponent } from "@components/ui";
 import {
     BackgroundType,
     ObjectFitPosition,
@@ -15,19 +8,17 @@ import {
     defaultBackgroundSizeItems,
     defaultObjectFitPositionItems,
 } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from "@angular/core";
 import { File } from "@shared-types";
 import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { NgIf } from "@angular/common";
 
 @Component({
     selector: "lz-background-field",
     templateUrl: "./background-field.component.html",
     styleUrls: ["./background-field.component.scss"],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [LZColorPickerComponent, FormsModule, RadioGroupComponent, NgIf, LZImageFieldComponent, LZFileUploadComponent, APDropdownFieldModule],
+    imports: [LZColorPickerComponent, FormsModule, RadioGroupComponent, LZImageFieldComponent, LZFileUploadComponent, APDropdownFieldComponent],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -37,11 +28,9 @@ import { NgIf } from "@angular/common";
     ],
 })
 export class BackgroundFieldComponent {
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
     public _value: BackgroundFieldModel = { backgroundType: BackgroundType.CLASSIC };
 

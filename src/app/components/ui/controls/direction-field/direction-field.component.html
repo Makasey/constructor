@@ -1,60 +1,60 @@
 <article class="controls">
     <div class="unit">
-        <span class="label">{{ label }}</span>
+        <span class="label">{{ label() }}</span>
         <ap-dropdown-field
             customClass="unit-dropdown"
             [ngModel]="_value.unit"
-            [items]="items"
-            [selectLabelKey]="selectLabelKey"
-            [selectValueKey]="selectValueKey"
+            [items]="items()"
+            [selectLabelKey]="selectLabelKey()"
+            [selectValueKey]="selectValueKey()"
             [disabled]="isDisabled"
             (ngModelChange)="updateUnitValue($event)"
         >
         </ap-dropdown-field>
     </div>
     <div class="directions">
-        <label class="direction-label" [for]="label + '-top'">
+        <label class="direction-label" [for]="label() + '-top'">
             <ap-number-field
                 class="item"
-                [controlModel]="controlModel"
-                [nativeControl]="nativeControl"
-                [id]="label + '-top'"
+                [controlModel]="controlModel()"
+                [nativeControl]="nativeControl()"
+                [id]="label() + '-top'"
                 [ngModel]="_value.top"
                 (ngModelChange)="updateDirectionValue($event, Directions.TOP)"
             />
             <span class="item-label">Top</span>
         </label>
 
-        <label class="direction-label" [for]="label + '-right'">
+        <label class="direction-label" [for]="label() + '-right'">
             <ap-number-field
                 class="item"
-                [nativeControl]="nativeControl"
-                [controlModel]="controlModel"
-                [id]="label + '-right'"
+                [nativeControl]="nativeControl()"
+                [controlModel]="controlModel()"
+                [id]="label() + '-right'"
                 [ngModel]="_value.right"
                 (ngModelChange)="updateDirectionValue($event, Directions.RIGHT)"
             />
             <span class="item-label">Right</span>
         </label>
 
-        <label class="direction-label" [for]="label + '-bottom'">
+        <label class="direction-label" [for]="label() + '-bottom'">
             <ap-number-field
                 class="item"
-                [controlModel]="controlModel"
-                [nativeControl]="nativeControl"
-                [id]="label + '-bottom'"
+                [controlModel]="controlModel()"
+                [nativeControl]="nativeControl()"
+                [id]="label() + '-bottom'"
                 [ngModel]="_value.bottom"
                 (ngModelChange)="updateDirectionValue($event, Directions.BOTTOM)"
             />
             <span class="item-label">Bottom</span>
         </label>
 
-        <label class="direction-label" [for]="label + '-left'">
+        <label class="direction-label" [for]="label() + '-left'">
             <ap-number-field
                 class="item"
-                [controlModel]="controlModel"
-                [nativeControl]="nativeControl"
-                [id]="label + '-left'"
+                [controlModel]="controlModel()"
+                [nativeControl]="nativeControl()"
+                [id]="label() + '-left'"
                 [ngModel]="_value.left"
                 (ngModelChange)="updateDirectionValue($event, Directions.LEFT)"
             />

@@ -8,7 +8,6 @@ import { LZToastrListComponent, LZToastrService, LzToastrQuery } from "@componen
     selector: "lz-toastr-box",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-box.component.html",
-    standalone: true,
     imports: [LZToastrItemComponent, LZToastrListComponent, CommonModule],
 })
 export class LZToastrBoxComponent {

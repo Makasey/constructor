@@ -3,16 +3,17 @@ import {
     Component,
     ElementRef,
     HostBinding,
-    Input,
     OnInit,
     Renderer2,
     RendererStyleFlags2,
     TemplateRef,
-    ViewChild,
+    input,
+    viewChild,
 } from "@angular/core";
 
 import { Observable, interval, tap } from "rxjs";
 
+import { AsyncPipe } from "@angular/common";
 import {
     LZSliderConfig,
     LZSliderItem,
@@ -21,37 +22,34 @@ import {
     lzDefaultSliderConfig,
     sliderItemWidthVariableName,
 } from "@components";
+import { LZSliderItemComponent } from "./components/slider-item.component";
 
 @Component({
     selector: "lz-slider",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./slider.component.html",
+    imports: [LZSliderItemComponent, AsyncPipe],
 })
 export class LZSliderComponent implements OnInit {
-    @Input()
-    public items: LZSliderItem[] = [
+    public readonly items = input<LZSliderItem[]>([
         { title: "12345" },
         { title: "12345" },
         { title: "12345" },
         { title: "12345" },
         { title: "12345" },
         { title: "12345" },
-    ];
+    ]);
 
-    @Input()
-    public itemTemplate: TemplateRef<SliderItemTemplateData>;
+    public readonly itemTemplate = input<TemplateRef<SliderItemTemplateData>>();
 
-    @Input()
-    public sliderConfig: LZSliderConfig = lzDefaultSliderConfig;
+    public readonly sliderConfig = input<LZSliderConfig>(lzDefaultSliderConfig);
 
-    @Input()
-    public itemClass: string = lzDefaultItemClass;
+    public readonly itemClass = input<string>(lzDefaultItemClass);
 
     @HostBinding("class.lz-slider")
     public hostClass = true;
 
-    @ViewChild("slider", { static: true })
-    public sliderRef: ElementRef<unknown>;
+    public readonly sliderRef = viewChild.required<ElementRef<unknown>>("slider");
 
     public get position(): number {
         return this._sliderPosition;
@@ -101,9 +99,9 @@ export class LZSliderComponent implements OnInit {
     public ngOnInit(): void {
         this._sliderWidth = (this.elementRef.nativeElement as HTMLElement).offsetWidth;
 
-        this._sliderItemsCount = this.items.length;
+        this._sliderItemsCount = this.items().length;
 
-        const { itemsPerPage, itemsPerSlide, autoSlide, timeout } = this.sliderConfig;
+        const { itemsPerPage, itemsPerSlide, autoSlide, timeout } = this.sliderConfig();
 
         if (autoSlide) {
             this._sliderTimeout = timeout;
@@ -130,7 +128,12 @@ export class LZSliderComponent implements OnInit {
     }
 
     private updateSliderItemWidth(): void {
-        this.renderer.setStyle(this.sliderRef.nativeElement, sliderItemWidthVariableName, this._sliderItemWidth + "px", RendererStyleFlags2.DashCase);
+        this.renderer.setStyle(
+            this.sliderRef().nativeElement,
+            sliderItemWidthVariableName,
+            this._sliderItemWidth + "px",
+            RendererStyleFlags2.DashCase,
+        );
     }
 
     private onNextItem(): void {
@@ -159,7 +162,11 @@ export class LZSliderComponent implements OnInit {
                     this.rightEdge = false;
                 }
 
-                this.rightEdge ? this.onPrevItem() : this.onNextItem();
+                if (this.rightEdge) {
+                    this.onPrevItem();
+                }
+
+                this.onNextItem();
             }),
         );
     }

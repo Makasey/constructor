@@ -108,7 +108,9 @@ export class ModalService {
         switch (contentType) {
             case ModalType.TEMPLATE: {
                 const item = this.modalMap[id];
-                const contentRef = componentRef.instance.hostView.viewContainerRef.createEmbeddedView(innerTemplate as TemplateRef<unknown>, context);
+                const contentRef = componentRef.instance
+                    .hostView()
+                    .viewContainerRef.createEmbeddedView(innerTemplate as TemplateRef<unknown>, context);
 
                 this.modalMap = {
                     ...this.modalMap,
@@ -136,7 +138,7 @@ export class ModalService {
                     ],
                 });
 
-                const contentRef = componentRef.instance.hostView.viewContainerRef.createComponent(model.component as Type<unknown>, {
+                const contentRef = componentRef.instance.hostView().viewContainerRef.createComponent(model.component as Type<unknown>, {
                     injector: updatedInjector,
                 });
                 // TODO: Remove mutation of component instance
@@ -160,7 +162,7 @@ export class ModalService {
 
                 const item = this.modalMap[id];
 
-                const contentRef = componentRef.instance.hostView.viewContainerRef.createEmbeddedView(componentRef.instance.defaultContent);
+                const contentRef = componentRef.instance.hostView().viewContainerRef.createEmbeddedView(componentRef.instance.defaultContent());
 
                 this.modalMap = {
                     ...this.modalMap,

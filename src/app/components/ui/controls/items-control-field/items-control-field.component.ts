@@ -1,14 +1,13 @@
 import { APFormControl, ControlItem, ItemsControlItemComponent } from "@components";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, input, output } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { NgForOf } from "@angular/common";
+
 import { getRandomId } from "@shared-utils";
 
 @Component({
     selector: "lz-items-control-field",
     templateUrl: "./items-control-field.component.html",
     styleUrls: ["./items-control-field.component.scss"],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [
@@ -18,30 +17,25 @@ import { getRandomId } from "@shared-utils";
             useExisting: ItemsControlFieldComponent,
         },
     ],
-    imports: [ItemsControlItemComponent, NgForOf],
+    imports: [ItemsControlItemComponent],
 })
 export class ItemsControlFieldComponent implements ControlValueAccessor {
     @HostBinding("class.lz-items-control-field")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label = "";
+    public readonly label = input("");
 
     @Input() public set value(value: ControlItem[]) {
         this._value = value;
     }
 
-    @Input({ required: true })
-    public defaultItemFn: () => ControlItem;
+    public readonly defaultItemFn = input.required<() => ControlItem>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<ControlItem[]> = new EventEmitter<ControlItem[]>();
+    public readonly onValueChange = output<ControlItem[]>();
 
     public _value: ControlItem[] = [];
 
@@ -100,7 +94,7 @@ export class ItemsControlFieldComponent implements ControlValueAccessor {
     }
 
     public addItem(): void {
-        const item = { ...this.defaultItemFn(), id: getRandomId() };
+        const item = { ...this.defaultItemFn()(), id: getRandomId() };
 
         this.value = [...this._value, item];
 

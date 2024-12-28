@@ -1,5 +1,5 @@
 import { AbstractEditorElementActionsService, ELEMENT_ID, PARENT_ID, SitePageElementUnion, sitePageElementMap } from "@modules/constructor";
-import { Directive, Injector, Input, OnChanges, Type, ViewContainerRef, inject } from "@angular/core";
+import { Directive, Injector, OnChanges, Type, ViewContainerRef, inject, input } from "@angular/core";
 
 @Directive({
     selector: "[lzElementResolver]",
@@ -12,16 +12,16 @@ export class ElementResolverDirective implements OnChanges {
 
     private readonly injector = inject(Injector);
 
-    @Input({ required: true })
-    public lzElementResolver: string | undefined;
+    public readonly lzElementResolver = input.required<string | undefined>();
 
-    @Input({ required: true })
-    public lzElementResolverParent: string | undefined;
+    public readonly lzElementResolverParent = input.required<string | undefined>();
 
     public ngOnChanges(): void {
-        if (this.lzElementResolver && this.lzElementResolverParent) {
+        const lzElementResolver = this.lzElementResolver();
+        const lzElementResolverParent = this.lzElementResolverParent();
+        if (lzElementResolver && lzElementResolverParent) {
             this.viewContainerRef.clear();
-            const { type, id } = this.service.getElement(this.lzElementResolver);
+            const { type, id } = this.service.getElement(lzElementResolver);
             const componentType: Type<unknown> = sitePageElementMap[type];
             const newInjector = Injector.create({
                 providers: [
@@ -31,7 +31,7 @@ export class ElementResolverDirective implements OnChanges {
                     },
                     {
                         provide: PARENT_ID,
-                        useValue: this.lzElementResolverParent,
+                        useValue: lzElementResolverParent,
                     },
                 ],
                 parent: this.injector,

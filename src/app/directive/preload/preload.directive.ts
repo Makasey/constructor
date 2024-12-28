@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Inject, Injector, Input, OnChanges, TemplateRef, Type, ViewContainerRef } from "@angular/core";
+import { ChangeDetectorRef, Directive, Inject, Injector, OnChanges, TemplateRef, Type, ViewContainerRef, input } from "@angular/core";
 
 import { PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_COMPONENTS_CONFIG, PreloadBackgroundComponentKey } from "@shared-directives";
 
@@ -7,14 +7,11 @@ import { PRELOAD_BACKGROUND_CONFIG_TOKEN, PRELOAD_COMPONENTS_CONFIG, PreloadBack
     standalone: true,
 })
 export class PreloadDirective implements OnChanges {
-    @Input("preloadBackground")
-    public preloadBackgroundType: string;
+    public readonly preloadBackgroundType = input<string>(undefined, { alias: "preloadBackground" });
 
-    @Input("preloadBackgroundLoading")
-    public loading = true;
+    public readonly loading = input(true, { alias: "preloadBackgroundLoading" });
 
-    @Input("preloadBackgroundConfig")
-    public preloadConfig: Record<string, unknown>;
+    public readonly preloadConfig = input<Record<string, unknown>>(undefined, { alias: "preloadBackgroundConfig" });
 
     constructor(
         private templateRef: TemplateRef<unknown>,
@@ -26,15 +23,15 @@ export class PreloadDirective implements OnChanges {
 
     public ngOnChanges(): void {
         this.viewContainerRef.clear();
-        if (this.loading) {
-            const component = this.preloadBackgroundComponentsMap[this.preloadBackgroundType as PreloadBackgroundComponentKey];
+        if (this.loading()) {
+            const component = this.preloadBackgroundComponentsMap[this.preloadBackgroundType() as PreloadBackgroundComponentKey];
 
             if (component) {
                 const newInjector = Injector.create({
                     providers: [
                         {
                             provide: PRELOAD_COMPONENTS_CONFIG,
-                            useValue: this.preloadConfig,
+                            useValue: this.preloadConfig(),
                         },
                     ],
                     parent: this.injector,
@@ -51,7 +48,7 @@ export class PreloadDirective implements OnChanges {
                 });
             } else {
                 throw Error(
-                    `There is no component corresponding to the (${this.preloadBackgroundType}) key.
+                    `There is no component corresponding to the (${this.preloadBackgroundType()}) key.
                      Add it using the forRoot() method of the PreloadBackgroundModule module, or select
                      a different one from the existing ones`,
                 );

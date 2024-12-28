@@ -1,9 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, Input, QueryList, ViewEncapsulation } from "@angular/core";
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, contentChildren, input } from "@angular/core";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { LZAccordionItemDirective } from "@components";
 import { Observable } from "rxjs";
+import { toObservable } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion",
@@ -11,7 +12,6 @@ import { Observable } from "rxjs";
     styleUrls: ["./accordion.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [AsyncPipe, NgTemplateOutlet],
     animations: [
         trigger("contentExpansion", [
@@ -21,31 +21,28 @@ import { Observable } from "rxjs";
         ]),
     ],
 })
-export class AccordionComponent implements AfterViewInit {
+export class AccordionComponent {
     @HostBinding("class.lz-accordion")
     public hostClass = true;
 
-    public itemsChanges$: Observable<QueryList<LZAccordionItemDirective>>;
+    public readonly items = contentChildren(LZAccordionItemDirective);
 
-    @Input() public collapsing = true;
+    public readonly collapsing = input(true);
 
-    @ContentChildren(LZAccordionItemDirective) public items: QueryList<LZAccordionItemDirective>;
-
-    public ngAfterViewInit(): void {
-        this.itemsChanges$ = this.items.changes;
-    }
+    public itemsChanges$: Observable<readonly LZAccordionItemDirective[]> = toObservable(this.items);
 
     public toggleState(item: LZAccordionItemDirective): void {
-        if (item.disabled) {
+        if (item.disabled()) {
             return;
         }
 
-        if (!item.expanded && this.collapsing) {
-            this.items.toArray().forEach(item => {
+        const expanded = item.expanded;
+        if (!expanded && this.collapsing()) {
+            this.items().forEach(item => {
                 item.expanded = false;
             });
         }
 
-        item.expanded = !item.expanded;
+        item.expanded = !expanded;
     }
 }

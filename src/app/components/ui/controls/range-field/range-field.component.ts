@@ -1,12 +1,11 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule, defaultRangeStep, defaultRangeValue } from "@components";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { APDropdownFieldComponent, APFormControl, APNumberFieldComponent, defaultRangeStep, defaultRangeValue } from "@components";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
+
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
     selector: "lz-range-field",
-    standalone: true,
-    imports: [CommonModule, APDropdownFieldModule, APNumberFieldModule, FormsModule],
+    imports: [APDropdownFieldComponent, APNumberFieldComponent, FormsModule],
     templateUrl: "./range-field.component.html",
     styleUrls: ["./range-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,31 +22,24 @@ export class RangeFieldComponent implements ControlValueAccessor {
     @HostBinding("class.lz-range-field")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label: string;
+    public readonly label = input<string>();
 
-    @Input()
-    public step = defaultRangeStep;
+    public readonly step = input(defaultRangeStep);
 
-    @Input()
-    public min: number = Number.MIN_VALUE;
+    public readonly min = input<number>(Number.MIN_VALUE);
 
-    @Input()
-    public max: number = Number.MAX_VALUE;
+    public readonly max = input<number>(Number.MAX_VALUE);
 
     @Input()
     public set value(value: number) {
         this._value = value ?? defaultRangeValue;
     }
 
-    @Output()
-    public readonly onValueChange: EventEmitter<number> = new EventEmitter<number>();
+    public readonly onValueChange = output<number>();
 
     public _value: number;
 

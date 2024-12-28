@@ -1,9 +1,9 @@
 <ng-container>
     <div class="form-control">
-        <label class="form-control-label number-field" [for]="controlModel.id">
-            @if (label) {
+        <label class="form-control-label number-field" [for]="controlModel()?.id">
+            @if (label()) {
                 <span class="form-control-text">
-                    {{ label }}
+                    {{ label() }}
                 </span>
             }
 
@@ -11,9 +11,9 @@
                 type="text"
                 class="form-control-input"
                 autocomplete="off"
-                [attr.id]="controlModel.id"
-                [attr.required]="controlModel.required"
-                [attr.name]="controlModel.name"
+                [attr.id]="controlModel()?.id"
+                [attr.required]="controlModel()?.required"
+                [attr.name]="controlModel()?.name"
                 [class.disabled]="disabled"
                 [disabled]="disabled"
                 [ngModel]="_value"
@@ -22,9 +22,9 @@
                 (ngModelChange)="_onInput($event)"
             />
         </label>
-        @if (nativeControl.dirty && (nativeControl.errors | keyvalue)?.length) {
+        @if (nativeControl()?.dirty && (nativeControl()?.errors | keyvalue)?.length) {
             <div class="form-control-errors">
-                @for (error of nativeControl.errors | keyvalue; track error.key) {
+                @for (error of nativeControl()?.errors | keyvalue; track error.key) {
                     {{ error.key }}
                 }
             </div>

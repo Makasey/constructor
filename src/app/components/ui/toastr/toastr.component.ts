@@ -10,7 +10,6 @@ import { enterAnimation } from "@core";
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./toastr.component.scss"],
     templateUrl: "./toastr.component.html",
-    standalone: true,
     imports: [LZToastrBoxComponent, LZToastrListComponent, LZInitVarDirective, CommonModule],
     providers: [LZToastrStore, LZToastrService, LzToastrQuery],
     animations: [enterAnimation],

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input, output } from "@angular/core";
 
 import { APDropdownFieldItem } from "@components";
 
@@ -10,23 +10,18 @@ import { APDropdownFieldItem } from "@components";
     styleUrls: ["./dropdown-field-item.component.scss"],
 })
 export class APDropdownFieldItemComponent {
-    @Input()
-    public active = false;
+    public readonly active = input(false);
 
-    @Input()
-    public item: APDropdownFieldItem;
+    public readonly item = input.required<APDropdownFieldItem>();
 
-    @Input()
-    public selectLabelKey = "label";
+    public readonly selectLabelKey = input("label");
 
-    @Output()
-    public readonly onItemClick: EventEmitter<APDropdownFieldItem> = new EventEmitter<APDropdownFieldItem>();
+    public readonly onItemClick = output<APDropdownFieldItem>();
 
     @HostBinding("class.dropdown-field-item")
     public hostClass = true;
 
     public _onItemClick(item: APDropdownFieldItem): void {
-        this.active = !this.active;
         this.onItemClick.emit(item);
     }
 }

@@ -1,9 +1,9 @@
-<span class="lz-tree-value" (click)="emit(tree)">
-    {{ tree.label }}
+<span class="lz-tree-value" (click)="emit(tree())">
+    {{ tree().label }}
 </span>
 
-@if (tree?.children?.length && !closed) {
-    @for (childTree of tree.children; track childTree.value) {
+@if (tree()?.children?.length && !closed) {
+    @for (childTree of tree().children; track childTree.value) {
         <lz-tree [tree]="childTree" (emitTree)="emit($event)"></lz-tree>
     }
 }

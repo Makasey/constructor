@@ -1,13 +1,12 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule, RangeWithUnit, defaultRangeWithUnitValue } from "@components";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation, forwardRef } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { APDropdownFieldComponent, APFormControl, APNumberFieldComponent, RangeWithUnit, defaultRangeWithUnitValue } from "@components";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
+
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { StyleUnit } from "@modules/constructor";
 
 @Component({
     selector: "lz-range-with-unit-field",
-    standalone: true,
-    imports: [CommonModule, FormsModule, APDropdownFieldModule, APNumberFieldModule],
+    imports: [FormsModule, APDropdownFieldComponent, APNumberFieldComponent],
     templateUrl: "./range-field-with-unit.component.html",
     styleUrls: ["./range-field-with-unit.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,40 +23,35 @@ export class RangeFieldWithUnitComponent<T> implements ControlValueAccessor {
     @HostBinding("class.lz-range-with-unit-field")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label: string;
+    public readonly label = input<string>();
 
-    @Input()
-    public min = 0;
+    public readonly min = input(0);
 
-    @Input()
-    public max: number = Number.MAX_SAFE_INTEGER;
+    public readonly max = input<number>(Number.MAX_SAFE_INTEGER);
 
-    @Input()
-    public step: 1;
+    public readonly step = input<1>();
 
-    @Input()
-    public items: { label: string; value: T }[] = [];
+    public readonly items = input<
+        {
+            label: string;
+            value: T;
+        }[]
+    >([]);
 
-    @Input()
-    public selectLabelKey = "label";
+    public readonly selectLabelKey = input("label");
 
-    @Input()
-    public selectValueKey = "value";
+    public readonly selectValueKey = input("value");
 
     @Input()
     public set value(value: RangeWithUnit | null) {
         this._value = value ?? { ...defaultRangeWithUnitValue };
     }
 
-    @Output()
-    public readonly onValueChange: EventEmitter<RangeWithUnit> = new EventEmitter<RangeWithUnit>();
+    public readonly onValueChange = output<RangeWithUnit>();
 
     public _value: RangeWithUnit;
 

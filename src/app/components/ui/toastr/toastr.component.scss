@@ -1,6 +1,6 @@
-@import "components/toastr-box/toastr-box.component";
-@import "components/toastr-item/toastr-item.component";
-@import "components/toastr-list/toastr-list.component";
+@use "components/toastr-box/toastr-box.component";
+@use "components/toastr-item/toastr-item.component";
+@use "components/toastr-list/toastr-list.component";
 
 .lz-toastr {
     max-width: 360px;

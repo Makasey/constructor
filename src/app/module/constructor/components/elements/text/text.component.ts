@@ -8,7 +8,7 @@ import {
     processBackgroundValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from "@angular/common";
+import { AsyncPipe, JsonPipe, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
@@ -16,11 +16,10 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
 @Component({
     selector: "lz-text-element",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./text.component.html",
     styleUrls: ["./text.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, NgIf, LZElementActionsComponent],
+    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, LZElementActionsComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class TextComponent implements OnInit {

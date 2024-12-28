@@ -11,7 +11,6 @@ import { LZElementActionsComponent } from "../element-actions";
     styleUrl: "./editor-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [LZElementActionsComponent],
     hostDirectives: [
         TabSelectionDirective,

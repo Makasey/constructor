@@ -1,4 +1,4 @@
-<span>{{ label }}</span>
+<span>{{ label() }}</span>
 @for (item of _value; track item.id) {
     <lz-items-control-item
         [item]="item"

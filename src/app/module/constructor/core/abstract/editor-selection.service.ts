@@ -16,7 +16,13 @@ export abstract class AbstractEditorSelectionService {
 
         const shouldDeselectItem = elementId === selectedElement;
 
-        shouldDeselectItem ? this.deselectElement(elementId) : this.selectElement(elementId);
+        if (shouldDeselectItem) {
+            this.deselectElement(elementId);
+
+            return;
+        }
+
+        this.selectElement(elementId);
     }
 
     protected selectElement(elementId: string): void {

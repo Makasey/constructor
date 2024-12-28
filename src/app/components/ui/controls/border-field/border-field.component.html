@@ -1,43 +1,42 @@
 <div class="container">
-    <article class="select-border-type">
-      <p>Border type</p>
-      <ap-dropdown-field
-        [ngModel]="_value.borderType"
-        [items]="defaultBorderTypeControls"
-        selectValueKey="value"
-        selectLabelKey="label"
-        (onValueChange)="handleBorderType($event.newValue)"
+  <article class="select-border-type">
+    <p>Border type</p>
+    <ap-dropdown-field
+      [ngModel]="_value.borderType"
+      [items]="defaultBorderTypeControls"
+      selectValueKey="value"
+      selectLabelKey="label"
+      (onValueChange)="handleBorderType($event.newValue)"
       ></ap-dropdown-field
     ></article>
 
-    <ng-container *ngIf="_value.borderType !== BorderType.NONE">
+    @if (_value.borderType !== BorderType.NONE) {
       <article class="border-color">
         <p class="border-color-select">Border color</p>
         <div class="border-color-items">
           <lz-color-picker [ngModel]="_value.borderColor" (ngModelChange)="handleBorderColor($event)"></lz-color-picker>
         </div>
       </article>
-
       <article class="select-border-direction">
         <lz-direction-field
           [ngModel]="_value.borderWidth"
           (onValueChange)="handleBorderWidth($event)"
-          [controlModel]="controlModel"
-          [nativeControl]="nativeControl"
+          [controlModel]="controlModel()"
+          [nativeControl]="nativeControl()"
           [items]="defaultSizeControlUnit"
           [label]="'Border width'"
         ></lz-direction-field>
       </article>
-    </ng-container>
+    }
 
-  <article class="select-border-direction">
-    <lz-direction-field
-      [ngModel]="_value.borderRadius"
-      (onValueChange)="handleBorderRadius($event)"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [items]="defaultSizeControlUnit"
-      [label]="'Border radius'"
-    ></lz-direction-field>
-  </article>
-</div>
+    <article class="select-border-direction">
+      <lz-direction-field
+        [ngModel]="_value.borderRadius"
+        (onValueChange)="handleBorderRadius($event)"
+        [controlModel]="controlModel()"
+        [nativeControl]="nativeControl()"
+        [items]="defaultSizeControlUnit"
+        [label]="'Border radius'"
+      ></lz-direction-field>
+    </article>
+  </div>

@@ -4,7 +4,6 @@ import {
     ElementRef,
     HostListener,
     Injector,
-    Input,
     OnDestroy,
     OnInit,
     Renderer2,
@@ -60,7 +59,7 @@ export class DraggableDirective implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    @Input() public lzDraggable: unknown;
+    public readonly lzDraggable = input<unknown>();
 
     private offsetX = 0;
     private offsetY = 0;
@@ -76,7 +75,7 @@ export class DraggableDirective implements OnInit, OnDestroy {
         if (!this.prohibitDrag()) {
             this.removeClone();
             this.isMove.set(true);
-            this.dragDropService.setDraggedItem(this.lzDraggable);
+            this.dragDropService.setDraggedItem(this.lzDraggable());
             this.target.set(this.el.nativeElement);
 
             this.clone.set(this.el.nativeElement.cloneNode(true) as unknown as HTMLElement);

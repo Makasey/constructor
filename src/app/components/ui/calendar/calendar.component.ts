@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Optional, Output, Self } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, Optional, Self, output } from "@angular/core";
 import { ControlValueAccessor, NgControl } from "@angular/forms";
 
 import { LZDay, LZMonth } from "./classes";
+import { LZMonthSheetPipe } from "./pipes/month-sheet.pipe";
 
 @Component({
     selector: "lz-calendar",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./calendar.component.html",
+    imports: [LZMonthSheetPipe],
 })
 export class LZCalendarComponent implements ControlValueAccessor {
     @Input()
@@ -22,8 +24,7 @@ export class LZCalendarComponent implements ControlValueAccessor {
         this._month = value ?? LZMonth.currentLocal();
     }
 
-    @Output()
-    public readonly valueChange: EventEmitter<LZDay> = new EventEmitter<LZDay>();
+    public readonly valueChange = output<LZDay>();
 
     @HostBinding("class.lz-calendar")
     public hostClass = true;

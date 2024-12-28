@@ -2,18 +2,18 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    EventEmitter,
     HostBinding,
     HostListener,
     Injector,
     Input,
     NgZone,
     OnInit,
-    Output,
     TemplateRef,
-    ViewChild,
     ViewContainerRef,
     inject,
+    input,
+    output,
+    viewChild,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
@@ -26,12 +26,10 @@ import { DISAPPEARING_TIME_TOKEN, EXISTING_TIME_TOKEN, LZToastrItem, TOASTR_ITEM
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-item.component.html",
     animations: [fadeInAnimation, fadeOutAnimation],
-    standalone: true,
     imports: [CommonModule],
 })
 export class LZToastrItemComponent implements OnInit {
-    @Input()
-    public item: LZToastrItem;
+    public readonly item = input.required<LZToastrItem>();
 
     @Input()
     public set alwaysOnDisplay(value: boolean) {
@@ -42,17 +40,11 @@ export class LZToastrItemComponent implements OnInit {
         }
     }
 
-    @Output()
-    public readonly onTimeExpired: EventEmitter<void> = new EventEmitter();
+    public readonly onTimeExpired = output();
 
-    @Output()
-    public readonly onClose: EventEmitter<void> = new EventEmitter();
+    public readonly onClose = output();
 
-    @ViewChild("embedded", {
-        read: ViewContainerRef,
-        static: true,
-    })
-    public embeddedContainer: ViewContainerRef;
+    public readonly embeddedContainer = viewChild.required("embedded", { read: ViewContainerRef });
 
     @HostBinding("@fadeIn")
     public fadeInAnimation = true;
@@ -64,7 +56,8 @@ export class LZToastrItemComponent implements OnInit {
     public hostClass = true;
 
     public get itemClass(): string {
-        return this.item.customColor ? "" : `_${this.item.type}`;
+        const item = this.item();
+        return item.customColor ? "" : `_${item.type}`;
     }
 
     private _alwaysOnDisplay: boolean;
@@ -91,11 +84,11 @@ export class LZToastrItemComponent implements OnInit {
             this.startExisting();
         }
 
-        const itemTemplate = this.item.template;
+        const itemTemplate = this.item().template;
 
         if (itemTemplate) {
             if (itemTemplate instanceof TemplateRef) {
-                this.embeddedContainer.createEmbeddedView(itemTemplate, { context: this.item.context });
+                this.embeddedContainer().createEmbeddedView(itemTemplate, { context: this.item().context });
             } else {
                 const injector = Injector.create({
                     providers: [
@@ -105,7 +98,7 @@ export class LZToastrItemComponent implements OnInit {
                         },
                     ],
                 });
-                this.embeddedContainer.createComponent(itemTemplate.component, { index: 0, injector: injector });
+                this.embeddedContainer().createComponent(itemTemplate.component, { index: 0, injector: injector });
             }
         }
     }

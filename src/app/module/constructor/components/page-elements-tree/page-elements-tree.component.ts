@@ -18,7 +18,6 @@ import { Tree, TreeComponent } from "@components/ui/tree/tree.component";
     styleUrl: "./page-elements-tree.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [TreeComponent],
 })
 export class PageElementsTreeComponent {

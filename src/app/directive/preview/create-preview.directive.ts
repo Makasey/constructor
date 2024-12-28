@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnDestroy, Renderer2, SimpleChanges, inject } from "@angular/core";
+import { Directive, ElementRef, OnChanges, OnDestroy, Renderer2, SimpleChanges, inject, input } from "@angular/core";
 
 @Directive({
     selector: "[lzCreatePreview]",
@@ -13,14 +13,14 @@ export class CreatePreviewDirective implements OnChanges, OnDestroy {
 
     private readonly renderer2 = inject(Renderer2);
 
-    @Input()
-    public lzCreatePreview: string | undefined;
+    public readonly lzCreatePreview = input<string>();
 
     public ngOnChanges(changes: SimpleChanges): void {
         this.removeIframe();
 
-        if (changes.lzCreatePreview && this.lzCreatePreview) {
-            const htmlDocument = this.parser.parseFromString(this.lzCreatePreview, "text/html");
+        const lzCreatePreview = this.lzCreatePreview();
+        if (changes.lzCreatePreview && lzCreatePreview) {
+            const htmlDocument = this.parser.parseFromString(lzCreatePreview, "text/html");
 
             this.iframe = this.renderer2.createElement("iframe") as HTMLIFrameElement;
 

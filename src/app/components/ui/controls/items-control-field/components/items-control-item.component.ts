@@ -1,12 +1,12 @@
-import { APTextFieldModule, ControlItem } from "@components/ui";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input, output } from "@angular/core";
+import { ControlItem } from "@components/ui";
+
+import { APTextFieldComponent } from "@components/ui";
 import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: "lz-items-control-item",
-    standalone: true,
-    imports: [CommonModule, APTextFieldModule, FormsModule],
+    imports: [APTextFieldComponent, FormsModule],
     templateUrl: "./items-control-item.component.html",
     styleUrls: ["./items-control-item.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,25 +16,16 @@ export class ItemsControlItemComponent {
     @HostBinding("class.lz-items-control-item")
     public hostClass = true;
 
-    @Input({ required: true })
-    public item: ControlItem;
+    public readonly item = input.required<ControlItem>();
 
-    @Output()
-    public onUpdate: EventEmitter<ControlItem> = new EventEmitter<ControlItem>();
+    public readonly onUpdate = output<ControlItem>();
 
-    @Output()
-    public onDelete: EventEmitter<string> = new EventEmitter<string>();
+    public readonly onDelete = output<string>();
 
-    @Output()
-    public onDuplicate: EventEmitter<string> = new EventEmitter<string>();
+    public readonly onDuplicate = output<string>();
 
     public change(event: string): void {
-        this.item = {
-            ...this.item,
-            title: event,
-        };
-
-        this.onUpdate.emit(this.item);
+        this.onUpdate.emit({ ...this.item(), title: event });
     }
 
     public duplicate(id: string): void {

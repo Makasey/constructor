@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation, input, output } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
+import { APDropdownFieldActivePipe, APDropdownFieldLabelPipe } from "@components";
 import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
+import { APDropdownFieldItemComponent } from "./components/dropdown-field-item/dropdown-field-item.component";
+import { CdkConnectedOverlay, CdkOverlayOrigin } from "@angular/cdk/overlay";
 
 @Component({
     selector: "ap-dropdown-field",
@@ -16,16 +19,14 @@ import { APDropdownFieldItem, APDropdownFieldValueChangeEvent } from "./types";
             useExisting: APDropdownFieldComponent,
         },
     ],
+    imports: [CdkOverlayOrigin, CdkConnectedOverlay, APDropdownFieldItemComponent, APDropdownFieldActivePipe, APDropdownFieldLabelPipe],
 })
 export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, OnChanges {
-    @Input()
-    public items: APDropdownFieldItem[] = [];
+    public readonly items = input<APDropdownFieldItem[]>([]);
 
-    @Input()
-    public multi = false;
+    public readonly multi = input(false);
 
-    @Input()
-    public customClass: string;
+    public readonly customClass = input<string>();
 
     @Input()
     public set value(items: APDropdownFieldItem | APDropdownFieldItem[]) {
@@ -38,8 +39,7 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
         this.processDropdownValue(this._rawValue);
     }
 
-    @Input()
-    public label = "";
+    public readonly label = input("");
 
     @Input()
     public set selectValueKey(valueKey: string) {
@@ -55,8 +55,7 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
         }
     }
 
-    @Output()
-    public readonly onValueChange: EventEmitter<APDropdownFieldValueChangeEvent> = new EventEmitter<APDropdownFieldValueChangeEvent>();
+    public readonly onValueChange = output<APDropdownFieldValueChangeEvent>();
 
     public _isDropdownItemsVisible = false;
 
@@ -79,7 +78,8 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
     public _onDropdownItemChoose(item: APDropdownFieldItem): void {
         const oldValue = [...this._value];
 
-        if (this.multi) {
+        const multi = this.multi();
+        if (multi) {
             this.processMultiDropdownMode(item);
         } else {
             this.processSingleDropdownMode(item);
@@ -87,21 +87,21 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
             this._onToggleDropdownListVisibility();
         }
 
-        const processedValue = this._value.map(item => item[this._selectValueKey]);
-        const processedOldValue = oldValue.map(item => item[this._selectValueKey]);
+        const processedValue = this._value.map(item => item[this._selectValueKey] as number);
+        const processedOldValue = oldValue.map(item => item[this._selectValueKey] as number);
 
-        if (this.multi) {
+        if (multi) {
             this.onChange(processedValue);
             this.onValueChange.emit({
                 newValue: processedValue,
                 oldValue: processedOldValue,
             });
         } else {
-            this.onChange(processedValue[0] as number);
+            this.onChange(processedValue[0]);
 
             this.onValueChange.emit({
-                newValue: processedValue[0] as number,
-                oldValue: processedOldValue[0] as number,
+                newValue: processedValue[0],
+                oldValue: processedOldValue[0],
             });
         }
     }
@@ -166,13 +166,14 @@ export class APDropdownFieldComponent implements ControlValueAccessor, OnInit, O
         if (Array.isArray(value) && value.length) {
             this._value = [...value];
         } else {
-            const processedValue = this.items.filter(item => {
-                const condition = item[this._selectValueKey] === value || item[this._selectValueKey] === value?.[this._selectValueKey];
+            const processedValue = this.items().filter(item => {
+                const condition =
+                    item[this._selectValueKey] === value || item[this._selectValueKey] === (value as APDropdownFieldItem)?.[this._selectValueKey];
 
                 return condition;
             });
 
-            this._value = processedValue.length ? processedValue : this.items.slice(0, 1);
+            this._value = processedValue.length ? processedValue : this.items().slice(0, 1);
         }
     }
 }

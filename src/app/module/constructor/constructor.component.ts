@@ -8,7 +8,6 @@ import { LZToastrComponent } from "@components";
     selector: "lz-constructor",
     templateUrl: "./constructor.component.html",
     styleUrls: ["./constructor.component.scss"],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [RouterOutlet, LZToastrComponent],

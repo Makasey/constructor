@@ -10,6 +10,7 @@
             padding: 16px;
             position: absolute;
             inset: 0;
+            height: fit-content;
             background: lightgrey;
             @include flexbox(column, center, unset, unset, 24px);
 

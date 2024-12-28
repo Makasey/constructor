@@ -1,10 +1,10 @@
-<ng-container *ngFor="let item of items; trackBy: _trackBy">
-    <ng-template
-        [ngTemplateOutlet]="itemTemplate || defaultTemplate"
-        [ngTemplateOutletContext]="{ item: item }"
-    ></ng-template>
-</ng-container>
+@for (item of items(); track item.id) {
+  <ng-template
+    [ngTemplateOutlet]="itemTemplate() || defaultTemplate"
+    [ngTemplateOutletContext]="{ item: item }"
+  ></ng-template>
+}
 
 <ng-template #defaultTemplate let-item="item">
-    <div>{{ item | json }}</div>
+  <div>{{ item | json }}</div>
 </ng-template>

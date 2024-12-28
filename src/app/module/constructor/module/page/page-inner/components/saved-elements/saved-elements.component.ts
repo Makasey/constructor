@@ -10,7 +10,6 @@ import { AbstractSaveEditorElementsService, SitePageElementUnion } from "@module
     styleUrl: "./saved-elements.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [],
 })
 export class SavedElementsComponent implements OnInit {

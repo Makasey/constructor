@@ -20,7 +20,6 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 
 @Component({
     selector: "lz-tabs-element",
-    standalone: true,
     imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],

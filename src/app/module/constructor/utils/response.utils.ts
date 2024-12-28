@@ -51,35 +51,36 @@ export function processRequestElementSettings<T extends SitePageElementSettingsU
     settings: T,
     styleKeys: Record<string, TypeKeys<T>>,
 ): RequestElementSettings<T> {
-    return (Object.keys(settings) as TypeKeys<T>).reduce(
-        (result, key) => {
-            const settingsKey = Object.keys(styleKeys).reduce((resultKey, currentKey) => {
-                const item = styleKeys[currentKey];
+    const defaultValue: RequestElementSettings<T> = {
+        default: {},
+    };
 
-                if (item.includes(key)) {
-                    return currentKey;
-                }
+    return (Object.keys(settings) as TypeKeys<T>).reduce((result, key) => {
+        const settingsKey = Object.keys(styleKeys).reduce((resultKey, currentKey) => {
+            const item = styleKeys[currentKey];
 
-                return resultKey;
-            }, defaultRequestElementSettingsKey);
+            if (item.includes(key)) {
+                return currentKey;
+            }
 
-            return {
-                ...result,
-                [settingsKey]: {
-                    ...(result[settingsKey] ?? {}),
-                    [key]: settings[key],
-                },
-            };
-        },
-        { default: {} },
-    );
+            return resultKey;
+        }, defaultRequestElementSettingsKey);
+
+        return {
+            ...result,
+            [settingsKey]: {
+                ...(result[settingsKey] ?? {}),
+                [key]: settings[key],
+            },
+        };
+    }, defaultValue);
 }
 
 export function processRequestElementData<T extends SitePageElementUnion>(
     item: T,
     stylesKeys: Record<string, TypeKeys<T["settings"]>>,
 ): SitePageRequestElement<Partial<T["settings"]>> {
-    const processedSettings = processRequestElementSettings(item.settings, stylesKeys);
+    const processedSettings = processRequestElementSettings<T["settings"]>(item.settings, stylesKeys);
 
     return {
         ...item,
@@ -168,18 +169,21 @@ export function processCampaignResponseItemSettings(
 
 export function processCampaignResponse(campaign: CreateCampaignModel & { id: number }): EditorState {
     const { elements, id, campaignName, pages } = campaign;
-    const processedItems = Object.keys(elements).reduce((result, key) => {
-        const item = elements[key] as SitePageRequestElement<SitePageElementSettingsUnion>;
+    const processedItems = Object.keys(elements).reduce(
+        (result, key) => {
+            const item = elements[key] as SitePageRequestElement<SitePageElementSettingsUnion>;
 
-        result[key] = {
-            ...item,
-            settings: {
-                ...processCampaignResponseItemSettings(item.settings),
-            },
-        };
+            result[key] = {
+                ...item,
+                settings: {
+                    ...processCampaignResponseItemSettings(item.settings),
+                },
+            };
 
-        return result;
-    }, {});
+            return result;
+        },
+        {} as Record<string, SitePageElementUnion>,
+    );
 
     return {
         items: processedItems,

@@ -15,7 +15,6 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
 
 @Component({
     selector: "lz-image-element",
-    standalone: true,
     imports: [NgOptimizedImage, LZElementActionsComponent, AsyncPipe, NgStyle],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],

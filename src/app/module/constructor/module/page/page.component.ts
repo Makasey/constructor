@@ -16,7 +16,6 @@ import { RouteParams } from "@shared-enums";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./page.component.scss"],
-    standalone: true,
     templateUrl: "./page.component.html",
     imports: [RouterOutlet],
 })

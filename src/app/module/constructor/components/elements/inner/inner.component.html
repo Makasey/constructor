@@ -1,9 +1,9 @@
-@if (element$ | async; as element) {
+@if (element(); as element) {
     @if (element.children.length) {
         @for (child of element.children; track child) {
-           <lz-editor-element [elementId]="child">
+            <lz-editor-element [elementId]="child">
                 <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
-           </lz-editor-element>
+            </lz-editor-element>
         }
     }
 }

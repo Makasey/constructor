@@ -5,8 +5,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-    imports: [CommonModule, ReactiveFormsModule],
-    declarations: [LZLoginComponent],
+    imports: [CommonModule, ReactiveFormsModule, LZLoginComponent],
     providers: [
         {
             provide: LZAbstractLoginService,

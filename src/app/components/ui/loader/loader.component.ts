@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input } from "@angular/core";
 
 @Component({
     selector: "lz-loader",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [],
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./loader.component.scss"],
@@ -14,6 +13,5 @@ export class LZLoaderComponent {
     public hostClass = true;
 
     @HostBinding("class")
-    @Input()
-    public customClass = "test";
+    public readonly customClass = input("test");
 }

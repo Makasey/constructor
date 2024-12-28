@@ -177,17 +177,10 @@ module.exports = {
                 "@typescript-eslint/no-require-imports": 2,
                 "@typescript-eslint/no-unsafe-return": 0,
                 "@typescript-eslint/no-explicit-any": 1,
+                "@typescript-eslint/no-unsafe-function-type": 0,
                 "@typescript-eslint/explicit-module-boundary-types": ["error"],
                 "@typescript-eslint/restrict-template-expressions": 0,
                 "@typescript-eslint/restrict-plus-operands": 0,
-                "@typescript-eslint/ban-types": [
-                    "error",
-                    {
-                        types: {
-                            Function: false,
-                        },
-                    },
-                ],
 
                 // angular-eslint
                 "@angular-eslint/component-selector": [
@@ -198,7 +191,6 @@ module.exports = {
                         style: "kebab-case",
                     },
                 ],
-                "@angular-eslint/sort-ngmodule-metadata-arrays": 1, //
                 "@angular-eslint/contextual-decorator": 2,
                 "@angular-eslint/no-pipe-impure": 2,
                 "@angular-eslint/no-input-rename": 0,
@@ -210,7 +202,6 @@ module.exports = {
                 "@angular-eslint/use-component-view-encapsulation": 0,
                 "@angular-eslint/component-class-suffix": 2,
                 "@angular-eslint/directive-class-suffix": 2,
-                "@angular-eslint/no-host-metadata-property": 2,
                 "@angular-eslint/no-queries-metadata-property": 2,
                 "@angular-eslint/use-lifecycle-interface": 1,
                 "@angular-eslint/pipe-prefix": [2, { prefixes: ["ap", "app", "lz", "ac"] }],

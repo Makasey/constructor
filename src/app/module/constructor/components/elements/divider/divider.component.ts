@@ -9,7 +9,7 @@ import {
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { AsyncPipe, NgClass, NgIf, NgStyle } from "@angular/common";
+import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { LZInitVarDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map, shareReplay } from "rxjs";
@@ -18,11 +18,10 @@ import { Observable, map, shareReplay } from "rxjs";
     selector: "lz-divider",
     templateUrl: "./divider.component.html",
     styleUrl: "./divider.component.scss",
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe, NgStyle, NgIf, NgClass, LZInitVarDirective, LZElementActionsComponent],
+    imports: [AsyncPipe, NgStyle, NgClass, LZInitVarDirective, LZElementActionsComponent],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")

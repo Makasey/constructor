@@ -1,29 +1,26 @@
-<ng-container *ngIf="previewData() as items; else loadingTemplate">
-    <header class="lz-site-preview-header">
-        <h2 class="lz-site-preview-title">Превью вашего сайта</h2>
-
-        <ap-dropdown-field
-            class="lz-site-preview-pages"
-            selectLabelKey="name"
-            selectValueKey="id"
-            customClass="lz-site-preview-modal"
-            [ngModel]="selectedPage()"
-            [items]="items"
-            (ngModelChange)="updateSelectedPage($event)"
-        />
+@if (previewData(); as items) {
+  <header class="lz-site-preview-header">
+    <h2 class="lz-site-preview-title">Превью вашего сайта</h2>
+    <ap-dropdown-field
+      class="lz-site-preview-pages"
+      selectLabelKey="name"
+      selectValueKey="id"
+      customClass="lz-site-preview-modal"
+      [ngModel]="selectedPage()"
+      [items]="items"
+      (ngModelChange)="updateSelectedPage($event)"
+      />
     </header>
-
     <section class="lz-site-preview-section">
-        <article class="lz-site-preview-section-container" [lzCreatePreview]="selectedPage()?.text"> </article>
+      <article class="lz-site-preview-section-container" [lzCreatePreview]="selectedPage()?.text"> </article>
     </section>
     <footer class="lz-site-preview-footer">
-        <a class="lz-site-preview-footer-item" [routerLink]="editorPath | lzNavigationLink: { campaignId: campaignId }"
-            >Назад</a
+      <a class="lz-site-preview-footer-item" [routerLink]="editorPath | lzNavigationLink: { campaignId: campaignId }"
+        >Назад</a
         >
         <button class="lz-site-preview-footer-item" (click)="createCampaign()">Создать компанию</button>
-    </footer>
-</ng-container>
+      </footer>
+    } @else {
+      <lz-loader></lz-loader>
+    }
 
-<ng-template #loadingTemplate>
-    <lz-loader></lz-loader>
-</ng-template>

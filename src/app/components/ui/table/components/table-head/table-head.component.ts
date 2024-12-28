@@ -12,7 +12,6 @@ import { AbstractAwesomeTableService, TableExtra, TableMeta, TemplateMap } from 
     selector: "lz-table-head",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./table-head.component.html",
-    standalone: true,
     imports: [CommonModule, FormsModule, DragDropModule],
 })
 export class LZTableHeadComponent {

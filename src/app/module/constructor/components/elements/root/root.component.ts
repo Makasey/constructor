@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { NgForOf } from "@angular/common";
+
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
@@ -18,11 +18,10 @@ import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
 @Component({
     selector: "lz-root-element",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
-    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent, DroppableDirective],
+    imports: [ElementResolverDirective, LZEditorElementComponent, DroppableDirective],
     hostDirectives: [
         ToggleSelectionDirective,
         DeleteSelectedElementDirective,

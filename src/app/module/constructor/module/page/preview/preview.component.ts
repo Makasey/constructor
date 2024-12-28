@@ -1,5 +1,4 @@
 import { ActivatedRoute, RouterLink } from "@angular/router";
-import { AsyncPipe, NgIf } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
@@ -19,7 +18,7 @@ import { Observable, delay, tap } from "rxjs";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
-import { APDropdownFieldModule, LZLoaderComponent } from "@components";
+import { APDropdownFieldComponent, LZLoaderComponent } from "@components";
 import { AbstractCampaignService, AbstractPreviewService, CampaignPreviewModel } from "@modules/constructor";
 
 import { CreatePreviewDirective } from "@shared-directives";
@@ -31,10 +30,9 @@ import { RouteKey, RouteParams } from "@shared-enums";
     selector: "lz-site-preview",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     styleUrls: ["./preview.component.scss"],
     templateUrl: "./preview.component.html",
-    imports: [AsyncPipe, APDropdownFieldModule, FormsModule, RouterLink, NavigationLinkPipe, CreatePreviewDirective, NgIf, LZLoaderComponent],
+    imports: [APDropdownFieldComponent, FormsModule, RouterLink, NavigationLinkPipe, CreatePreviewDirective, LZLoaderComponent],
 })
 export class LZSitePreviewComponent implements OnInit {
     @HostBinding("class.lz-site-preview")
