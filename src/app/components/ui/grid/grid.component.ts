@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, Renderer2, RendererStyleFlags2, TemplateRef, input } from "@angular/core";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    Renderer2,
+    RendererStyleFlags2,
+    TemplateRef,
+    input,
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName } from "@components";
 
@@ -7,7 +17,7 @@ import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName
     templateUrl: "./grid.component.html",
     styleUrls: ["./grid.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CommonModule]
+    imports: [CommonModule],
 })
 export class LZGridListComponent {
     @HostBinding("class.list-view")
@@ -18,7 +28,7 @@ export class LZGridListComponent {
     @HostBinding("class.lz-grid")
     public hostClass = true;
 
-    public readonly items = input.required<unknown[]>();
+    public readonly items = input.required<LZGridItem[]>();
 
     @Input({ required: true })
     public set columns(value: number) {
@@ -33,8 +43,4 @@ export class LZGridListComponent {
         private renderer: Renderer2,
         private host: ElementRef<HTMLElement>,
     ) {}
-
-    public _trackBy(_: number, item: LZGridItem): string | number {
-        return item.id;
-    }
 }

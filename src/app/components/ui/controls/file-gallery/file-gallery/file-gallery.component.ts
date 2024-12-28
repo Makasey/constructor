@@ -13,13 +13,13 @@ import { untilDestroyed } from "@ngneat/until-destroy";
     templateUrl: "./file-gallery.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [...FILE_UPLOAD_PROVIDERS],
-    imports: [AsyncPipe]
+    imports: [AsyncPipe],
 })
 export class FileGalleryComponent extends AbstractModuleComponent implements ModalWithData<File | undefined> {
     @HostBinding("class.lz-file-gallery")
     public hostClass = true;
 
-    readonly fileUpload = viewChild<ElementRef<HTMLInputElement>>("fileUpload");
+    public readonly fileUpload = viewChild.required<ElementRef<HTMLInputElement>>("fileUpload");
 
     public data: File | undefined;
 

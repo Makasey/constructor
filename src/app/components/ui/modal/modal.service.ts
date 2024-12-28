@@ -108,7 +108,9 @@ export class ModalService {
         switch (contentType) {
             case ModalType.TEMPLATE: {
                 const item = this.modalMap[id];
-                const contentRef = componentRef.instance.hostView().viewContainerRef.createEmbeddedView(innerTemplate as TemplateRef<unknown>, context);
+                const contentRef = componentRef.instance
+                    .hostView()
+                    .viewContainerRef.createEmbeddedView(innerTemplate as TemplateRef<unknown>, context);
 
                 this.modalMap = {
                     ...this.modalMap,

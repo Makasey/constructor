@@ -1,4 +1,4 @@
-import { APFormControl, Direction, defaultDirectionValue } from "@components";
+import { APDropdownFieldComponent, APFormControl, APNumberFieldComponent, Direction, defaultDirectionValue } from "@components";
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, input, output } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -17,7 +17,7 @@ import { Directions, StyleUnit } from "@modules/constructor";
             multi: true,
             useExisting: DirectionFieldComponent,
         },
-    ]
+    ],
 })
 export class DirectionFieldComponent<T> implements ControlValueAccessor {
     @HostBinding("class.direction-field")
@@ -33,10 +33,12 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
 
     public readonly max = input<number>(Number.MAX_VALUE);
 
-    public readonly items = input<{
-    label: string;
-    value: T;
-}[]>([]);
+    public readonly items = input<
+        {
+            label: string;
+            value: T;
+        }[]
+    >([]);
 
     public readonly selectLabelKey = input("label");
 
@@ -77,7 +79,11 @@ export class DirectionFieldComponent<T> implements ControlValueAccessor {
     }
 
     public updateDirectionValue(value: number, type: string): void {
-        this.isConnected ? this.updateConnectedValue(value) : this.updateNoConnectedValue(value, type);
+        if (this.isConnected) {
+            this.updateConnectedValue(value);
+        } else {
+            this.updateNoConnectedValue(value, type);
+        }
 
         this.emitControlValue();
     }

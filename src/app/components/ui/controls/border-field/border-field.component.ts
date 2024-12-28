@@ -1,8 +1,18 @@
-import { APFormControl, BorderFieldModel, Direction, DirectionFieldComponent, LZColorPickerComponent, LZFileUploadComponent, LZImageFieldComponent, RadioGroupComponent, defaultDirectionValue } from "@components";
+import {
+    APDropdownFieldComponent,
+    APFormControl,
+    BorderFieldModel,
+    Direction,
+    DirectionFieldComponent,
+    LZColorPickerComponent,
+    LZFileUploadComponent,
+    LZImageFieldComponent,
+    RadioGroupComponent,
+    defaultDirectionValue,
+} from "@components";
 import { BorderType, defaultBorderTypeControls, defaultSizeControlUnit } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, input } from "@angular/core";
 import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
-
 
 @Component({
     selector: "lz-border-field",
@@ -11,21 +21,21 @@ import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [
-    LZColorPickerComponent,
-    FormsModule,
-    RadioGroupComponent,
-    LZImageFieldComponent,
-    LZFileUploadComponent,
-    APDropdownFieldComponent,
-    DirectionFieldComponent
-],
+        LZColorPickerComponent,
+        FormsModule,
+        RadioGroupComponent,
+        LZImageFieldComponent,
+        LZFileUploadComponent,
+        APDropdownFieldComponent,
+        DirectionFieldComponent,
+    ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             multi: true,
             useExisting: BorderFieldComponent,
         },
-    ]
+    ],
 })
 export class BorderFieldComponent {
     public readonly nativeControl = input<FormControl>();

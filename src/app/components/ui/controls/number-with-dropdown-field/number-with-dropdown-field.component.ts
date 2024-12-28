@@ -1,4 +1,4 @@
-import { APFormControl, NumberWithDropdownEvent } from "@components";
+import { APDropdownFieldComponent, APFormControl, APNumberFieldComponent, NumberWithDropdownEvent } from "@components";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input, output } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -17,7 +17,7 @@ import { SelectItem } from "@shared-types";
             multi: true,
             useExisting: NumberWithDropdownFieldComponent,
         },
-    ]
+    ],
 })
 export class NumberWithDropdownFieldComponent<T> implements ControlValueAccessor {
     @HostBinding("class.lz-number-with-dropdown-field")

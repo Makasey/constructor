@@ -1,11 +1,11 @@
-import { APFormControl, defaultRangeStep, defaultRangeValue } from "@components";
+import { APDropdownFieldComponent, APFormControl, APNumberFieldComponent, defaultRangeStep, defaultRangeValue } from "@components";
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
     selector: "lz-range-field",
-    imports: [APDropdownFieldModule, APNumberFieldComponent, FormsModule],
+    imports: [APDropdownFieldComponent, APNumberFieldComponent, FormsModule],
     templateUrl: "./range-field.component.html",
     styleUrls: ["./range-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +16,7 @@ import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } fro
             multi: true,
             useExisting: forwardRef(() => RangeFieldComponent),
         },
-    ]
+    ],
 })
 export class RangeFieldComponent implements ControlValueAccessor {
     @HostBinding("class.lz-range-field")

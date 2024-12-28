@@ -1,16 +1,6 @@
 import { APFormControl, ApTextFormControlOptions } from "@components";
 import { AsyncPipe } from "@angular/common";
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewEncapsulation,
-  forwardRef,
-  input,
-  output
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 import { Observable, distinctUntilChanged, tap } from "rxjs";
@@ -31,7 +21,7 @@ import { defaultColorPickerOptions } from "@components";
             useExisting: forwardRef(() => LZColorPickerComponent),
             multi: true,
         },
-    ]
+    ],
 })
 export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnChanges {
     public readonly nativeControl = input<FormControl>();
@@ -69,7 +59,7 @@ export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnC
         if (changes.controlModel) {
             this._options = {
                 ...defaultColorPickerOptions,
-                ...this.controlModel().options,
+                ...((this.controlModel() ?? {}).options ?? {}),
             };
         }
     }

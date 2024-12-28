@@ -7,12 +7,12 @@ import { APDropdownFieldItem } from "@components";
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./dropdown-field-item.component.html",
     encapsulation: ViewEncapsulation.None,
-    styleUrls: ["./dropdown-field-item.component.scss"]
+    styleUrls: ["./dropdown-field-item.component.scss"],
 })
 export class APDropdownFieldItemComponent {
     public readonly active = input(false);
 
-    public readonly item = input<APDropdownFieldItem>();
+    public readonly item = input.required<APDropdownFieldItem>();
 
     public readonly selectLabelKey = input("label");
 
@@ -22,7 +22,6 @@ export class APDropdownFieldItemComponent {
     public hostClass = true;
 
     public _onItemClick(item: APDropdownFieldItem): void {
-        this.active = !this.active();
         this.onItemClick.emit(item);
     }
 }

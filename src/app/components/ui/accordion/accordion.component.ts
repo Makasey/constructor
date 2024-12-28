@@ -1,9 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, HostBinding, QueryList, ViewEncapsulation, input, contentChildren } from "@angular/core";
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, contentChildren, input } from "@angular/core";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { LZAccordionItemDirective } from "@components";
 import { Observable } from "rxjs";
+import { toObservable } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion",
@@ -18,28 +19,24 @@ import { Observable } from "rxjs";
             state("collapsed", style({ height: "0px", opacity: 0, visibility: "hidden" })),
             transition("expanded <=> collapsed", animate("200ms cubic-bezier(.37,1.04,.68,.98)")),
         ]),
-    ]
+    ],
 })
-export class AccordionComponent implements AfterViewInit {
+export class AccordionComponent {
     @HostBinding("class.lz-accordion")
     public hostClass = true;
 
-    public itemsChanges$: Observable<QueryList<LZAccordionItemDirective>>;
+    public readonly items = contentChildren(LZAccordionItemDirective);
 
     public readonly collapsing = input(true);
 
-    readonly items = contentChildren(LZAccordionItemDirective);
-
-    public ngAfterViewInit(): void {
-        this.itemsChanges$ = this.items().changes;
-    }
+    public itemsChanges$: Observable<readonly LZAccordionItemDirective[]> = toObservable(this.items);
 
     public toggleState(item: LZAccordionItemDirective): void {
         if (item.disabled()) {
             return;
         }
 
-        const expanded = item.expanded();
+        const expanded = item.expanded;
         if (!expanded && this.collapsing()) {
             this.items().forEach(item => {
                 item.expanded = false;

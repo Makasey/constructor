@@ -20,8 +20,6 @@ export function hostBinding<T, TSignalType extends Signal<T> | WritableSignal<T>
     injector = assertInjector(hostBinding, injector);
 
     runInInjectionContext(injector, () => {
-        debugger;
-
         const renderer = inject(Renderer2);
         const element = inject(ElementRef).nativeElement;
 

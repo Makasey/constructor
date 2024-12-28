@@ -1,4 +1,4 @@
-import { APFormControl, RangeWithUnit, defaultRangeWithUnitValue } from "@components";
+import { APDropdownFieldComponent, APFormControl, APNumberFieldComponent, RangeWithUnit, defaultRangeWithUnitValue } from "@components";
 import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
@@ -17,7 +17,7 @@ import { StyleUnit } from "@modules/constructor";
             multi: true,
             useExisting: forwardRef(() => RangeFieldWithUnitComponent),
         },
-    ]
+    ],
 })
 export class RangeFieldWithUnitComponent<T> implements ControlValueAccessor {
     @HostBinding("class.lz-range-with-unit-field")
@@ -35,10 +35,12 @@ export class RangeFieldWithUnitComponent<T> implements ControlValueAccessor {
 
     public readonly step = input<1>();
 
-    public readonly items = input<{
-    label: string;
-    value: T;
-}[]>([]);
+    public readonly items = input<
+        {
+            label: string;
+            value: T;
+        }[]
+    >([]);
 
     public readonly selectLabelKey = input("label");
 

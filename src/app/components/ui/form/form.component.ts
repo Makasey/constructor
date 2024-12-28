@@ -1,45 +1,34 @@
 import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Signal,
-  SimpleChanges,
-  TemplateRef,
-  ViewEncapsulation,
-  computed,
-  inject,
-  input,
-  output,
-  viewChild
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Signal,
+    SimpleChanges,
+    TemplateRef,
+    ViewEncapsulation,
+    computed,
+    inject,
+    input,
+    output,
+    viewChild,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { UntilDestroy } from "@ngneat/until-destroy";
 
-import { APFormDefaultTemplateKeys, APFormModel, BackgroundFieldComponent, BorderFieldComponent, ControlTemplate, DirectionFieldComponent, ItemsControlFieldComponent, LZColorPickerComponent, LZFileUploadComponent, LZImageFieldComponent, NumberWithDropdownFieldComponent, RadioGroupComponent, RangeFieldComponent, RangeFieldWithUnitComponent, TextareaComponent } from "@components";
-
-import { AbstractFormService } from "./form.service";
-import { provideForm } from "@components/ui";
-import { APTextFieldComponent } from "../controls/text-field/text-field.component";
-
-@UntilDestroy()
-@Component({
-    selector: "ap-form",
-    templateUrl: "./form.component.html",
-    styleUrls: ["./form.component.scss"],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-    APTextFieldComponent,
-    APNumberFieldComponent,
+import {
     APDropdownFieldComponent,
+    APFormDefaultTemplateKeys,
+    APFormModel,
+    APNumberFieldComponent,
     BackgroundFieldComponent,
     BorderFieldComponent,
-    CommonModule,
+    ControlTemplate,
     DirectionFieldComponent,
     ItemsControlFieldComponent,
     LZColorPickerComponent,
@@ -49,48 +38,77 @@ import { APTextFieldComponent } from "../controls/text-field/text-field.componen
     RadioGroupComponent,
     RangeFieldComponent,
     RangeFieldWithUnitComponent,
-    ReactiveFormsModule,
-    TextareaComponent
-],
+    TextareaComponent,
+} from "@components";
+
+import { APTextFieldComponent } from "../controls/text-field/text-field.component";
+import { AbstractFormService } from "./form.service";
+import { provideForm } from "@components/ui";
+
+@UntilDestroy()
+@Component({
+    selector: "ap-form",
+    templateUrl: "./form.component.html",
+    styleUrls: ["./form.component.scss"],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        APTextFieldComponent,
+        APNumberFieldComponent,
+        APDropdownFieldComponent,
+        BackgroundFieldComponent,
+        BorderFieldComponent,
+        CommonModule,
+        DirectionFieldComponent,
+        ItemsControlFieldComponent,
+        LZColorPickerComponent,
+        LZFileUploadComponent,
+        LZImageFieldComponent,
+        NumberWithDropdownFieldComponent,
+        RadioGroupComponent,
+        RangeFieldComponent,
+        RangeFieldWithUnitComponent,
+        ReactiveFormsModule,
+        TextareaComponent,
+    ],
     providers: [provideForm()],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class APFormComponent implements OnChanges, OnInit, OnDestroy {
-    public readonly formModel = input<APFormModel>();
+    public readonly formModel = input.required<APFormModel>();
 
     @HostBinding("class.ap-form")
     public hostClass = true;
 
-    // TODO: refactor to new viewChild API
-    readonly textField = viewChild<ControlTemplate>("textFieldTemplate");
+    // TODO: refactor to new viewChild.required API
+    public readonly textField = viewChild.required<ControlTemplate>("textFieldTemplate");
 
-    readonly numberField = viewChild<ControlTemplate>("numberFieldTemplate");
+    public readonly numberField = viewChild.required<ControlTemplate>("numberFieldTemplate");
 
-    readonly textAreaField = viewChild<ControlTemplate>("textAreaFieldTemplate");
+    public readonly textAreaField = viewChild.required<ControlTemplate>("textAreaFieldTemplate");
 
-    readonly dropdownField = viewChild<ControlTemplate>("dropdownFieldTemplate");
+    public readonly dropdownField = viewChild.required<ControlTemplate>("dropdownFieldTemplate");
 
-    readonly fileUploadField = viewChild<ControlTemplate>("fileUploadTemplate");
+    public readonly fileUploadField = viewChild.required<ControlTemplate>("fileUploadTemplate");
 
-    readonly rangeWithUnitField = viewChild<ControlTemplate>("rangeFieldWithUnitTemplate");
+    public readonly rangeWithUnitField = viewChild.required<ControlTemplate>("rangeFieldWithUnitTemplate");
 
-    readonly rangeField = viewChild<ControlTemplate>("rangeFieldTemplate");
+    public readonly rangeField = viewChild.required<ControlTemplate>("rangeFieldTemplate");
 
-    readonly colorField = viewChild<ControlTemplate>("colorPickerTemplate");
+    public readonly colorField = viewChild.required<ControlTemplate>("colorPickerTemplate");
 
-    readonly directionField = viewChild<ControlTemplate>("directionFieldTemplate");
+    public readonly directionField = viewChild.required<ControlTemplate>("directionFieldTemplate");
 
-    readonly numberWithDropdownField = viewChild<ControlTemplate>("numberWithDropdownField");
+    public readonly numberWithDropdownField = viewChild.required<ControlTemplate>("numberWithDropdownField");
 
-    readonly radioGroupField = viewChild<ControlTemplate>("radioGroupTemplate");
+    public readonly radioGroupField = viewChild.required<ControlTemplate>("radioGroupTemplate");
 
-    readonly imageUploadField = viewChild<ControlTemplate>("imageUploadTemplate");
+    public readonly imageUploadField = viewChild.required<ControlTemplate>("imageUploadTemplate");
 
-    readonly itemsControlField = viewChild<ControlTemplate>("itemsControlTemplate");
+    public readonly itemsControlField = viewChild.required<ControlTemplate>("itemsControlTemplate");
 
-    readonly backgroundColorField = viewChild<ControlTemplate>("backgroundColorTemplate");
+    public readonly backgroundColorField = viewChild.required<ControlTemplate>("backgroundColorTemplate");
 
-    readonly borderControlField = viewChild<ControlTemplate>("borderControlTemplate");
+    public readonly borderControlField = viewChild.required<ControlTemplate>("borderControlTemplate");
 
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {

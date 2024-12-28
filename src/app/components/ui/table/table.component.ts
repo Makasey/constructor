@@ -1,15 +1,17 @@
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  TemplateRef,
-  ViewEncapsulation,
-  computed,
-  input,
-  untracked,
-  output,
-  OnInit,
+    ChangeDetectionStrategy,
+    Component,
+    DestroyRef,
+    Input,
+    OnInit,
+    TemplateRef,
+    ViewEncapsulation,
+    computed,
+    inject,
+    input,
+    output,
+    untracked,
 } from "@angular/core";
 
 import { BehaviorSubject, Observable, debounceTime, filter, tap } from "rxjs";
@@ -37,6 +39,7 @@ import { LZLoaderComponent } from "../loader";
 import { TrackByFn } from "./interfaces";
 import { coerceBoolean, coerceNullableArray, coerceNullableObject, transformTrackBy } from "./transformers/table.transformers";
 import { defaultTrackBy } from "./constants";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-table",
@@ -46,7 +49,7 @@ import { defaultTrackBy } from "./constants";
     imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, LZTableFootComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
     providers: [...provideTableStore()],
 })
-export class LZTableComponent implements OnInit{
+export class LZTableComponent implements OnInit {
     public templatesMap = input<TemplateMap>({});
 
     public loadMoreLabel = input<string>(DEFAULT_LOAD_MORE_LABEL);
@@ -77,14 +80,21 @@ export class LZTableComponent implements OnInit{
 
     public scrollBottomSubject$ = new BehaviorSubject(false);
 
+    private readonly destroyRef = inject(DestroyRef);
+
     public _trackByRow: (index: number, row: unknown) => unknown;
 
-    constructor(private service: AbstractAwesomeTableService) {
-        this.scrollBottomSubject$.pipe(
-            debounceTime(100),
-            filter(isEnd => isEnd),
-            tap(isEnd => this.onBottomScrolled.emit(isEnd)),
-        );
+    constructor(private service: AbstractAwesomeTableService) {}
+
+    public ngOnInit(): void {
+        this.scrollBottomSubject$
+            .pipe(
+                debounceTime(100),
+                filter(isEnd => isEnd),
+                tap(isEnd => this.onBottomScrolled.emit(isEnd)),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe();
     }
 
     public tableMeta = input<TableMeta[], TableMeta[] | null>([], {

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@angular/core";
 
-
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import { APFormComponent, AccordionComponent, LZAccordionContentDirective, LZAccordionItemDirective } from "@components";
@@ -12,14 +11,14 @@ import { AbstractEditorElementSettingsService } from "@modules/constructor";
     styleUrls: ["./element-settings.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormComponent, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective]
+    imports: [APFormComponent, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective],
 })
 export class ElementSettingsComponent {
     private readonly service = inject(AbstractEditorElementSettingsService);
 
     public readonly elementSettingsFormModel = toSignal(this.service.selectElementSettingsFormModel());
 
-    public updateElementSettings(settings: unknown, mapperFn: <T, V>(data: T) => V): void {
+    public updateElementSettings(settings: unknown, mapperFn?: <T = unknown, V = unknown>(data: T) => V): void {
         const processedSettings = mapperFn ? mapperFn(settings) : this.defaultMapper(settings);
 
         this.service.updateElementSettings(processedSettings);

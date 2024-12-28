@@ -16,7 +16,7 @@ import { KeyValuePipe } from "@angular/common";
         },
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [KeyValuePipe]
+    imports: [KeyValuePipe],
 })
 export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
     public readonly nativeControl = input<FormControl>();
@@ -51,7 +51,7 @@ export class APTextFieldComponent implements ControlValueAccessor, OnChanges {
         if (changes.controlModel) {
             this._options = {
                 ...defaultAPTextFieldOptions,
-                ...(this.controlModel().options ?? {}),
+                ...((this.controlModel() ?? {}).options ?? {}),
             };
         }
     }

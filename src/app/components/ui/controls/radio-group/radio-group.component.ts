@@ -2,10 +2,11 @@ import { APFormControl, RadioGroupItem } from "@components";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, forwardRef, input, output } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { NgClass } from "@angular/common";
 
 @Component({
     selector: "lz-radio-group",
-    imports: [FormsModule],
+    imports: [FormsModule, NgClass],
     templateUrl: "./radio-group.component.html",
     styleUrls: ["./radio-group.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +17,7 @@ import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } fro
             multi: true,
             useExisting: forwardRef(() => RadioGroupComponent),
         },
-    ]
+    ],
 })
 export class RadioGroupComponent implements ControlValueAccessor {
     @HostBinding("class.radio-group")
