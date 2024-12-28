@@ -1,12 +1,32 @@
 @if (elements().length) {
     <section class="elements-settings">
         <h2 class="settings-title">Элементы сайта</h2>
-        <article class="elements-wrapper">
+        <article
+            cdkDropList
+            [id]="'site-elements'"
+            [cdkDropListConnectedTo]="['root-element', '123']"
+            [cdkDropListSortingDisabled]="true"
+            class="elements-wrapper"
+        >
             @for (element of elements(); track element.type) {
-                <button [lzDraggable]="element" [id]="element.type" class="element" draggable="true">
+                <button
+                    cdkDrag
+                    [cdkDragData]="element"
+                    (cdkDragStarted)="onDragStart(element.type)"
+                    (cdkDragEnded)="onDragEnd()"
+                    (cdkDragDropped)="onDrop($event)"
+                    class="element"
+                >
                     <i class="bx" [ngClass]="element.icon"></i>
                     {{ element.title }}
                 </button>
+
+                @if (currentDragElement() === element.type) {
+                    <button class="element">
+                        <i class="bx" [ngClass]="element.icon"></i>
+                        {{ element.title }}
+                    </button>
+                }
             }
         </article>
     </section>

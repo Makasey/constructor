@@ -167,6 +167,9 @@ export {
     AbstractSaveEditorElementsService,
     SaveEditorElementsService,
     LocalStorageService,
+    provideDragService,
+    DefaultDragService,
+    AbstractDragService,
 } from "./core";
 
 export {

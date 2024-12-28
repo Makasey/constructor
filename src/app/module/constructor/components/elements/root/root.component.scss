@@ -35,3 +35,9 @@
 .save-element {
     left: calc(50% + 72px);
 }
+
+.cdk-drag.element.cdk-drag-placeholder {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
