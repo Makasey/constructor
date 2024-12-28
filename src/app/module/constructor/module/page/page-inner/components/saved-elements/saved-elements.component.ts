@@ -10,8 +10,7 @@ import { AbstractSaveEditorElementsService, SitePageElementUnion } from "@module
     styleUrl: "./saved-elements.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    imports: [],
+    imports: []
 })
 export class SavedElementsComponent implements OnInit {
     @HostBinding("class.saved-elements")

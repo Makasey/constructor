@@ -1,14 +1,15 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, TemplateRef, input } from "@angular/core";
 import { SliderItemTemplateData } from "@components";
+import { NgTemplateOutlet, JsonPipe } from "@angular/common";
 
 @Component({
     selector: "lz-slider-item",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./slider-item.component.html",
+    imports: [NgTemplateOutlet, JsonPipe]
 })
 export class LZSliderItemComponent {
-    @Input()
-    public itemTemplate: TemplateRef<SliderItemTemplateData>;
+    public readonly itemTemplate = input<TemplateRef<SliderItemTemplateData>>();
 
     @Input()
     @HostBinding("class")
@@ -20,8 +21,7 @@ export class LZSliderItemComponent {
         this._itemClass = itemClass ?? "";
     }
 
-    @Input()
-    public item: unknown;
+    public readonly item = input<unknown>();
 
     @HostBinding("class.lz-slider-item")
     public hostClass = true;

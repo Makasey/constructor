@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from "@angular/core";
-import { NgIf } from "@angular/common";
+
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -10,10 +10,9 @@ import { AbstractEditorElementSettingsService } from "@modules/constructor";
     selector: "lz-element-settings",
     templateUrl: "./element-settings.component.html",
     styleUrls: ["./element-settings.component.scss"],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormComponent, NgIf, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective],
+    imports: [APFormComponent, AccordionComponent, LZAccordionItemDirective, LZAccordionContentDirective]
 })
 export class ElementSettingsComponent {
     private readonly service = inject(AbstractEditorElementSettingsService);

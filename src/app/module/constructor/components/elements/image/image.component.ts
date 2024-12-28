@@ -15,13 +15,12 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
 
 @Component({
     selector: "lz-image-element",
-    standalone: true,
     imports: [NgOptimizedImage, LZElementActionsComponent, AsyncPipe, NgStyle],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective]
 })
 export class ImageComponent implements OnInit {
     @HostBinding("class")

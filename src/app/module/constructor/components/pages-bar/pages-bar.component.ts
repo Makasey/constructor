@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input, output } from "@angular/core";
 import { NgClass } from "@angular/common";
 import { Page } from "@core";
 
@@ -6,32 +6,25 @@ import { Page } from "@core";
     selector: "lz-pages-bar",
     templateUrl: "./pages-bar.component.html",
     styleUrl: "./pages-bar.component.scss",
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [NgClass],
+    imports: [NgClass]
 })
 export class PagesBarComponent {
     @HostBinding("class.pages-bar")
     public hostClass = true;
 
-    @Input()
-    public items: Page[];
+    public readonly items = input<Page[]>();
 
-    @Input()
-    public activeItem: string;
+    public readonly activeItem = input<string>();
 
-    @Output()
-    public readonly addItem: EventEmitter<void> = new EventEmitter<void>();
+    public readonly addItem = output<void>();
 
-    @Output()
-    public readonly copyItem: EventEmitter<string> = new EventEmitter<string>();
+    public readonly copyItem = output<string>();
 
-    @Output()
-    public readonly deleteItem: EventEmitter<string> = new EventEmitter<string>();
+    public readonly deleteItem = output<string>();
 
-    @Output()
-    public readonly selectPage: EventEmitter<string> = new EventEmitter<string>();
+    public readonly selectPage = output<string>();
 
     public add(): void {
         this.addItem.emit();

@@ -1,6 +1,6 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule, NumberWithDropdownEvent } from "@components";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { APFormControl, NumberWithDropdownEvent } from "@components";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input, output } from "@angular/core";
+
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { SelectItem } from "@shared-types";
 
@@ -9,50 +9,39 @@ import { SelectItem } from "@shared-types";
     templateUrl: "./number-with-dropdown-field.component.html",
     styleUrls: ["./number-with-dropdown-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
-    imports: [CommonModule, APNumberFieldModule, APDropdownFieldModule, FormsModule],
+    imports: [APNumberFieldComponent, APDropdownFieldComponent, FormsModule],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             multi: true,
             useExisting: NumberWithDropdownFieldComponent,
         },
-    ],
+    ]
 })
 export class NumberWithDropdownFieldComponent<T> implements ControlValueAccessor {
     @HostBinding("class.lz-number-with-dropdown-field")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public items: SelectItem<T>[] = [];
+    public readonly items = input<SelectItem<T>[]>([]);
 
-    @Input()
-    public nativeId = "newID";
+    public readonly nativeId = input("newID");
 
-    @Input()
-    public selectLabelKey = "label";
+    public readonly selectLabelKey = input("label");
 
-    @Input()
-    public selectValueKey = "value";
+    public readonly selectValueKey = input("value");
 
-    @Input()
-    public label = "";
+    public readonly label = input("");
 
-    @Input()
-    public max: number;
+    public readonly max = input<number>();
 
-    @Input()
-    public min: number;
+    public readonly min = input<number>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<NumberWithDropdownEvent<T>> = new EventEmitter<NumberWithDropdownEvent<T>>();
+    public readonly onValueChange = output<NumberWithDropdownEvent<T>>();
 
     public value: NumberWithDropdownEvent<T>;
 

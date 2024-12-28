@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
@@ -16,6 +16,7 @@ import { LoginFormControl } from "./types";
     templateUrl: "./login.component.html",
     styleUrls: ["./login.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [ReactiveFormsModule]
 })
 export class LZLoginComponent implements ModalWithData<Record<string, unknown>>, OnInit {
     public data: Record<string, unknown>;

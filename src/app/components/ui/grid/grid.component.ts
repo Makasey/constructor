@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, Renderer2, RendererStyleFlags2, TemplateRef } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, Renderer2, RendererStyleFlags2, TemplateRef, input } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName } from "@components";
 
@@ -7,31 +7,27 @@ import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName
     templateUrl: "./grid.component.html",
     styleUrls: ["./grid.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule]
 })
 export class LZGridListComponent {
     @HostBinding("class.list-view")
     public get selectedView(): boolean {
-        return this.viewMode === ViewModeTypes.LIST;
+        return this.viewMode() === ViewModeTypes.LIST;
     }
 
     @HostBinding("class.lz-grid")
     public hostClass = true;
 
-    @Input({ required: true })
-    public items: unknown[];
+    public readonly items = input.required<unknown[]>();
 
     @Input({ required: true })
     public set columns(value: number) {
         this.renderer.setStyle(this.host.nativeElement, columnsCountVariableName, value, RendererStyleFlags2.DashCase);
     }
 
-    @Input()
-    public itemTemplate: TemplateRef<LZGridTemplateData>;
+    public readonly itemTemplate = input<TemplateRef<LZGridTemplateData>>();
 
-    @Input()
-    public viewMode: ViewModeTypes = ViewModeTypes.CARD;
+    public readonly viewMode = input<ViewModeTypes>(ViewModeTypes.CARD);
 
     constructor(
         private renderer: Renderer2,

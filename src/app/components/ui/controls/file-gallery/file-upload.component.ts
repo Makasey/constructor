@@ -1,17 +1,16 @@
 import { APFormControl, ModalService, ModalType } from "@components";
 import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    HostBinding,
-    Injector,
-    Input,
-    Output,
-    ViewContainerRef,
-    ViewEncapsulation,
-    forwardRef,
-    inject,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  Injector,
+  ViewContainerRef,
+  ViewEncapsulation,
+  forwardRef,
+  inject,
+  input,
+  output
 } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { File } from "@shared-types";
@@ -27,7 +26,6 @@ import { filter, tap } from "rxjs";
     styleUrls: ["./file-upload.component.scss"],
     templateUrl: "./file-upload.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -35,20 +33,17 @@ import { filter, tap } from "rxjs";
             useExisting: forwardRef(() => LZFileUploadComponent),
         },
     ],
-    imports: [NgTemplateOutlet],
+    imports: [NgTemplateOutlet]
 })
 export class LZFileUploadComponent implements ControlValueAccessor {
     @HostBinding("class.lz-file-upload")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<File> = new EventEmitter<File>();
+    public readonly onValueChange = output<File>();
 
     private readonly changeDetectorRef = inject(ChangeDetectorRef);
 

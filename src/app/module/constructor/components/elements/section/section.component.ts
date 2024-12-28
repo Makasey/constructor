@@ -1,5 +1,5 @@
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject, Signal } from "@angular/core";
 
 import { Observable, map } from "rxjs";
 
@@ -28,11 +28,11 @@ import {
 
 import { DroppableDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-section-element",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["section.component.scss"],
@@ -129,9 +129,11 @@ export class SectionComponent implements OnInit {
 
     private readonly selectionService = inject(AbstractEditorSelectionService) as SectionSelectionService;
 
-    public element$: Observable<SectionPageElement> = new Observable();
-
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
+
+    public element: Signal<SectionPageElement> = toSignal(this.editorActionsService.selectElement(this.ELEMENT_ID), {
+        initialValue: {} as SectionPageElement,
+    });
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
@@ -144,7 +146,7 @@ export class SectionComponent implements OnInit {
     private sectionSettings$: Observable<SectionPageElementSettings>;
 
     public ngOnInit(): void {
-        this.element$ = this.editorActionsService.selectElement(this.ELEMENT_ID);
+        // this.element$ = this.editorActionsService.selectElement(this.ELEMENT_ID);
 
         this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
 

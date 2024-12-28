@@ -1,13 +1,12 @@
-import { APDropdownFieldModule, APFormControl, APNumberFieldModule, Direction, defaultDirectionValue } from "@components";
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewEncapsulation } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { APFormControl, Direction, defaultDirectionValue } from "@components";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation, input, output } from "@angular/core";
+
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { Directions, StyleUnit } from "@modules/constructor";
 
 @Component({
     selector: "lz-direction-field",
-    standalone: true,
-    imports: [CommonModule, APDropdownFieldModule, FormsModule, APNumberFieldModule],
+    imports: [APDropdownFieldComponent, FormsModule, APNumberFieldComponent],
     templateUrl: "./direction-field.component.html",
     styleUrls: ["./direction-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,42 +17,36 @@ import { Directions, StyleUnit } from "@modules/constructor";
             multi: true,
             useExisting: DirectionFieldComponent,
         },
-    ],
+    ]
 })
 export class DirectionFieldComponent<T> implements ControlValueAccessor {
     @HostBinding("class.direction-field")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label: string;
+    public readonly label = input<string>();
 
-    @Input()
-    public min: number = Number.MIN_VALUE;
+    public readonly min = input<number>(Number.MIN_VALUE);
 
-    @Input()
-    public max: number = Number.MAX_VALUE;
+    public readonly max = input<number>(Number.MAX_VALUE);
 
-    @Input()
-    public items: { label: string; value: T }[] = [];
+    public readonly items = input<{
+    label: string;
+    value: T;
+}[]>([]);
 
-    @Input()
-    public selectLabelKey = "label";
+    public readonly selectLabelKey = input("label");
 
-    @Input()
-    public selectValueKey = "value";
+    public readonly selectValueKey = input("value");
 
     @Input() public set value(value: Direction | null) {
         this._value = value ?? { ...defaultDirectionValue };
     }
 
-    @Output()
-    public readonly onValueChange: EventEmitter<Direction> = new EventEmitter<Direction>();
+    public readonly onValueChange = output<Direction>();
 
     public _value: Direction = { ...defaultDirectionValue };
 

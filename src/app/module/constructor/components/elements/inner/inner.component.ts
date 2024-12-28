@@ -18,11 +18,10 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
     selector: "lz-inner-element",
     templateUrl: "./inner.component.html",
     styleUrls: ["./inner.component.scss"],
-    standalone: true,
     imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InnerComponent implements OnInit {
     @HostBinding("class")

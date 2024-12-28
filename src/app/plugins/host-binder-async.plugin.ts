@@ -1,6 +1,10 @@
-import { EMPTY } from "rxjs";
+import { EMPTY, ObservableInput, of } from "rxjs";
 import { EventManager } from "@angular/platform-browser";
 import { switchMap, take } from "rxjs/operators";
+
+type HTMLElementType = {
+    [key in keyof HTMLElement]: HTMLElement[key];
+} & Record<string, unknown>;
 
 export class HostBinderAsyncPlugin {
     private manager!: EventManager;
@@ -9,22 +13,21 @@ export class HostBinderAsyncPlugin {
         return event.startsWith("$.");
     }
 
-    public addEventListener(element: HTMLElement, event: string): () => void {
+    public addEventListener(element: HTMLElementType, event: string): () => void {
         element[event] = EMPTY;
 
         const method = this.getMethod(element, event);
-        const sub = this.manager
-            .getZone()
-            .onStable.pipe(
+        const sub = of(null)
+            .pipe(
                 take(1),
-                switchMap(() => element[event]),
+                switchMap(() => element[event] as ObservableInput<unknown>),
             )
             .subscribe(value => method(value));
 
         return () => sub.unsubscribe();
     }
 
-    private getMethod(element: HTMLElement, event: string): (...attr: unknown[]) => void {
+    private getMethod(element: HTMLElementType, event: string): (...attr: unknown[]) => void {
         const [, key, value, unit = ""] = event.split(".");
 
         if (event.endsWith(".attr")) {

@@ -1,13 +1,13 @@
-<span class="label">{{ label }}</span>
+<span class="label">{{ label() }}</span>
 
 <article class="list">
-    @for (item of items; track item.value) {
+    @for (item of items(); track item.value) {
         <label class="item" [title]="item.label" [class.active]="item.value === _value">
             <i class="eicon-flex" [ngClass]="item.image"></i>
 
             <input
                 type="radio"
-                [name]="label"
+                [name]="label()"
                 [ngModel]="_value"
                 [value]="item.value"
                 (ngModelChange)="updateRadioGroup($event)"

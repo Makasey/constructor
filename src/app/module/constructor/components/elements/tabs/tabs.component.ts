@@ -20,13 +20,12 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 
 @Component({
     selector: "lz-tabs-element",
-    standalone: true,
     imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective]
 })
 export class TabsComponent implements OnInit {
     @HostBinding("class.lz-tabs-element")

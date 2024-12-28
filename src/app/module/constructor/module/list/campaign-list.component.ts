@@ -17,7 +17,6 @@ import { RouteKey } from "@shared-enums";
 
 @Component({
     selector: "lz-campaign-list",
-    standalone: true,
     templateUrl: "./campaign-list.component.html",
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +28,7 @@ import { RouteKey } from "@shared-enums";
             useClass: DefaultCampaignListService,
         },
         // ...provideWebsocket(defaultWebsocketConfig),
-    ],
+    ]
 })
 export class CampaignListComponent extends AbstractModuleComponent implements OnInit {
     @HostBinding("class.lz-campaign-list")

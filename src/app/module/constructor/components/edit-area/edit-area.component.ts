@@ -16,8 +16,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./edit-area.component.scss"],
     templateUrl: "./edit-area.component.html",
-    standalone: true,
-    imports: [JsonPipe, AsyncPipe, RootComponent, PagesBarComponent],
+    imports: [JsonPipe, AsyncPipe, RootComponent, PagesBarComponent]
 })
 export class EditAreaComponent {
     @HostBinding("class.lz-edit-area")

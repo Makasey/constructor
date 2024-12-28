@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Output, input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, input, output } from "@angular/core";
 
 import { LZTableRowComponent, TableExtra, TableMeta, TableRow, TableValueExtraInternal, TemplateMap } from "@components";
 import { TrackByFn } from "../../interfaces";
@@ -9,8 +9,7 @@ import { defaultTrackBy } from "../../constants";
     selector: "lz-table-body",
     templateUrl: "./table-body.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [LZTableRowComponent],
+    imports: [LZTableRowComponent]
 })
 export class LZTableBodyComponent {
     @HostBinding("class.table-body")
@@ -44,8 +43,7 @@ export class LZTableBodyComponent {
         transform: transformTrackBy,
     });
 
-    @Output()
-    public readonly rowScrolledBottom: EventEmitter<boolean> = new EventEmitter<boolean>();
+    public readonly rowScrolledBottom = output<boolean>();
 
     public onBottomScrolled(event: boolean): void {
         this.rowScrolledBottom.emit(event);

@@ -81,6 +81,8 @@ export function deselectParentRowById(
 }
 
 export function selectAllRows(valuesExtra: TableValueExtraInternal): TableValueExtraInternal {
+    const accumulator: TableValueExtraInternal = {};
+
     return Object.entries(valuesExtra).reduce((accumulator, [key, value]) => {
         return {
             ...accumulator,
@@ -90,10 +92,12 @@ export function selectAllRows(valuesExtra: TableValueExtraInternal): TableValueE
                 selected: true,
             },
         };
-    }, {});
+    }, accumulator);
 }
 
 export function deselectAllRows(valuesExtra: TableValueExtraInternal): TableValueExtraInternal {
+    const accumulator: TableValueExtraInternal = {};
+
     return Object.entries(valuesExtra).reduce((accumulator, [key, value]) => {
         return {
             ...accumulator,
@@ -103,5 +107,5 @@ export function deselectAllRows(valuesExtra: TableValueExtraInternal): TableValu
                 selected: false,
             },
         };
-    }, {});
+    }, accumulator);
 }

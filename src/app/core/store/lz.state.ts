@@ -9,6 +9,7 @@ import {
     initialFilesState,
     initialTableState,
 } from "@core";
+import { TypeKeys } from "@modules/constructor";
 
 export enum LzStateKey {
     TABLE_STATE = "tableState",
@@ -32,8 +33,8 @@ export const lzInitialStateFunctions: InitialStateFunctions = {
 };
 
 export function createLZInitialState(): LzState {
-    return Object.keys(lzInitialStateFunctions).reduce((result, next: string) => {
-        const initialFunction = lzInitialStateFunctions[next] as () => LzState;
+    return (Object.keys(lzInitialStateFunctions) as TypeKeys<LzState>).reduce((result, next) => {
+        const initialFunction = lzInitialStateFunctions[next];
 
         if (!initialFunction) {
             return result;

@@ -1,4 +1,4 @@
-<ng-container *initVar="valuesExtra[rowId] as valueExtra">
+<ng-container *initVar="valuesExtra()[rowId()] as valueExtra">
     @if (valueExtra?.scrollable && scrollBottomSubject$ | async) {}
 
     <div class="table-scrollable-row" (scroll.silent)="onRowScroll($event)">
@@ -7,7 +7,7 @@
             #rowElement
             [class._disabled]="valueExtra()?.disabled"
             [class._hoverable]="tableExtra().hoverableRows"
-            [class._highlighted]="$any(tableExtra().clickableRows && highlighterId === tableRow[tableExtra().idKey])"
+            [class._highlighted]="$any(tableExtra().clickableRows && highlighterId() === rowId())"
             [ngClass]="valueExtra()?.rowCustomClass"
             (click)="tableExtra().clickableRows && onRowClick()"
         >
@@ -17,7 +17,7 @@
                         [ngTemplateOutlet]="$any(templatesMap().checkboxTemplate ?? defaultCheckboxTemplate)"
                         [ngTemplateOutletContext]="{
                             valueExtra: valueExtra,
-                            rowId: rowId,
+                            rowId: rowId(),
                             row: tableRow
                         }"
                     ></ng-template>
@@ -114,11 +114,11 @@
             @for (child of valueExtra?.children; track trackByRow) {
                 <lz-table-row
                     [tableRow]="child"
-                    [tableMeta]="tableMeta"
-                    [valuesExtra]="valuesExtra"
-                    [tableExtra]="tableExtra"
-                    [highlighterId]="highlighterId"
-                    [templatesMap]="templatesMap"
+                    [tableMeta]="tableMeta()"
+                    [valuesExtra]="valuesExtra()"
+                    [tableExtra]="tableExtra()"
+                    [highlighterId]="highlighterId()"
+                    [templatesMap]="templatesMap()"
                     [trackByRow]="trackByRow"
                 ></lz-table-row>
             }
@@ -127,5 +127,5 @@
 </ng-container>
 
 <ng-template #defaultCheckboxTemplate let-valueExtra="valueExtra">
-    <input type="checkbox" [ngModel]="!!valueExtra?.selected" (ngModelChange)="onSelectRow(rowId)" (click.stop)="0" />
+    <input type="checkbox" [ngModel]="!!valueExtra?.selected" (ngModelChange)="onSelectRow(rowId())" (click.stop)="0" />
 </ng-template>

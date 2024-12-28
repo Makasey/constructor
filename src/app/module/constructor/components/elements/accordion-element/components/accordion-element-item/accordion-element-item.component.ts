@@ -8,7 +8,7 @@ import {
     processBackgroundValue,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
 import { animate, state, style, transition, trigger } from "@angular/animations";
@@ -16,8 +16,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion-element-item",
-    standalone: true,
-    imports: [CommonModule, ElementResolverDirective, LZEditorElementComponent],
+    imports: [ElementResolverDirective, LZEditorElementComponent],
     templateUrl: "./accordion-element-item.component.html",
     styleUrl: "./accordion-element-item.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +28,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
             state("collapsed", style({ height: "0px", opacity: 0, visibility: "hidden" })),
             transition("expanded <=> collapsed", animate("500ms cubic-bezier(.37,1.04,.68,.98)")),
         ]),
-    ],
+    ]
 })
 export class AccordionElementItemComponent implements OnInit {
     @HostBinding("class.lz-accordion-element-item")

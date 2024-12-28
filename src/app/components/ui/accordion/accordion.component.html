@@ -1,11 +1,11 @@
 @if (itemsChanges$ | async) {}
 
 <section class="accordion">
-    @for (item of items;  track item.title; let i = $index;) {
+    @for (item of items();  track item.title(); let i = $index;) {
         <div
             class="accordion__item"
-            [class.disabled]="item.disabled"
-            [class.active]="item.expanded"
+            [class.disabled]="item.disabled()"
+            [class.active]="item.expanded()"
         >
             <ng-container
                 [ngTemplateOutlet]="defaultHeader"
@@ -13,9 +13,9 @@
             ></ng-container>
             <div
                 class="accordion__content"
-                [class.expanded]="item.expanded"
-                [class.active]="item.expanded"
-                [@contentExpansion]="item.expanded ? 'expanded' : 'collapsed'"
+                [class.expanded]="item.expanded()"
+                [class.active]="item.expanded()"
+                [@contentExpansion]="item.expanded() ? 'expanded' : 'collapsed'"
             >
                 <ng-container *ngTemplateOutlet="item?.content?.templateRef!"></ng-container>
             </div>

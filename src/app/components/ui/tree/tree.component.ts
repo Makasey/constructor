@@ -1,17 +1,16 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    HostBinding,
-    HostListener,
-    Inject,
-    Input,
-    Optional,
-    Output,
-    SkipSelf,
-    ViewEncapsulation,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  Inject,
+  Optional,
+  SkipSelf,
+  ViewEncapsulation,
+  input,
+  output
 } from "@angular/core";
-import { NgFor, NgIf } from "@angular/common";
+
 
 export type Tree<V = string> = {
     value: V;
@@ -23,10 +22,9 @@ export type Tree<V = string> = {
     selector: "lz-tree",
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ["./tree.component.scss"],
-    imports: [NgFor, NgIf],
+    imports: [],
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
-    templateUrl: "./tree.component.html",
+    templateUrl: "./tree.component.html"
 })
 export class TreeComponent {
     @HostBinding("class.lz-tree")
@@ -37,13 +35,9 @@ export class TreeComponent {
         this.closed = !this.closed;
     }
 
-    @Input({
-        required: true,
-    })
-    public tree: Tree;
+    public readonly tree = input.required<Tree>();
 
-    @Output()
-    public readonly emitTree: EventEmitter<Tree> = new EventEmitter<Tree>();
+    public readonly emitTree = output<Tree>();
 
     public emit(tree: Tree): void {
         this.emitTree.emit(tree);

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, OnInit, Output, Renderer2, inject, input } from "@angular/core";
+import { Directive, ElementRef, OnInit, Renderer2, inject, input, output } from "@angular/core";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 import { ELEMENT_ID } from "@modules/constructor";
 import { LZDropEvent } from "./types";
@@ -60,7 +60,7 @@ export class DroppableDirective implements OnInit {
         takeUntilDestroyed(),
     );
 
-    @Output() public readonly itemDropped = new EventEmitter<LZDropEvent>();
+    public readonly itemDropped = output<LZDropEvent>();
 
     public ngOnInit(): void {
         this.dragDropService.addDropArea(this.id(), { container: this.el.nativeElement, name: this.id() });

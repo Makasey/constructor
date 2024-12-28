@@ -1,35 +1,45 @@
 import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    Output,
-    Signal,
-    SimpleChanges,
-    TemplateRef,
-    ViewChild,
-    ViewEncapsulation,
-    computed,
-    inject,
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Signal,
+  SimpleChanges,
+  TemplateRef,
+  ViewEncapsulation,
+  computed,
+  inject,
+  input,
+  output,
+  viewChild
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { UntilDestroy } from "@ngneat/until-destroy";
 
-import {
-    APDropdownFieldModule,
-    APFormDefaultTemplateKeys,
-    APFormModel,
-    APNumberFieldModule,
-    APTextFieldModule,
+import { APFormDefaultTemplateKeys, APFormModel, BackgroundFieldComponent, BorderFieldComponent, ControlTemplate, DirectionFieldComponent, ItemsControlFieldComponent, LZColorPickerComponent, LZFileUploadComponent, LZImageFieldComponent, NumberWithDropdownFieldComponent, RadioGroupComponent, RangeFieldComponent, RangeFieldWithUnitComponent, TextareaComponent } from "@components";
+
+import { AbstractFormService } from "./form.service";
+import { provideForm } from "@components/ui";
+import { APTextFieldComponent } from "../controls/text-field/text-field.component";
+
+@UntilDestroy()
+@Component({
+    selector: "ap-form",
+    templateUrl: "./form.component.html",
+    styleUrls: ["./form.component.scss"],
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+    APTextFieldComponent,
+    APNumberFieldComponent,
+    APDropdownFieldComponent,
     BackgroundFieldComponent,
     BorderFieldComponent,
-    ControlTemplate,
+    CommonModule,
     DirectionFieldComponent,
     ItemsControlFieldComponent,
     LZColorPickerComponent,
@@ -39,107 +49,48 @@ import {
     RadioGroupComponent,
     RangeFieldComponent,
     RangeFieldWithUnitComponent,
-    TextareaComponent,
-} from "@components";
-
-import { AbstractFormService } from "./form.service";
-import { provideForm } from "@components/ui";
-
-@UntilDestroy()
-@Component({
-    selector: "ap-form",
-    standalone: true,
-    templateUrl: "./form.component.html",
-    styleUrls: ["./form.component.scss"],
-    encapsulation: ViewEncapsulation.None,
-    imports: [
-        APTextFieldModule,
-        APNumberFieldModule,
-        APDropdownFieldModule,
-        BackgroundFieldComponent,
-        BorderFieldComponent,
-        CommonModule,
-        DirectionFieldComponent,
-        ItemsControlFieldComponent,
-        LZColorPickerComponent,
-        LZFileUploadComponent,
-        LZImageFieldComponent,
-        NumberWithDropdownFieldComponent,
-        RadioGroupComponent,
-        RangeFieldComponent,
-        RangeFieldWithUnitComponent,
-        ReactiveFormsModule,
-        TextareaComponent,
-    ],
+    ReactiveFormsModule,
+    TextareaComponent
+],
     providers: [provideForm()],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class APFormComponent implements OnChanges, OnInit, OnDestroy {
-    @Input()
-    public formModel: APFormModel;
+    public readonly formModel = input<APFormModel>();
 
     @HostBinding("class.ap-form")
     public hostClass = true;
 
     // TODO: refactor to new viewChild API
-    @ViewChild("textFieldTemplate", {
-        static: true,
-    })
-    private textField: ControlTemplate;
+    readonly textField = viewChild<ControlTemplate>("textFieldTemplate");
 
-    @ViewChild("numberFieldTemplate", {
-        static: true,
-    })
-    private numberField: ControlTemplate;
+    readonly numberField = viewChild<ControlTemplate>("numberFieldTemplate");
 
-    @ViewChild("textAreaFieldTemplate", {
-        static: true,
-    })
-    private textAreaField: ControlTemplate;
+    readonly textAreaField = viewChild<ControlTemplate>("textAreaFieldTemplate");
 
-    @ViewChild("dropdownFieldTemplate", {
-        static: true,
-    })
-    private dropdownField: ControlTemplate;
+    readonly dropdownField = viewChild<ControlTemplate>("dropdownFieldTemplate");
 
-    @ViewChild("fileUploadTemplate", {
-        static: true,
-    })
-    private fileUploadField: ControlTemplate;
+    readonly fileUploadField = viewChild<ControlTemplate>("fileUploadTemplate");
 
-    @ViewChild("rangeFieldWithUnitTemplate", {
-        static: true,
-    })
-    private rangeWithUnitField: ControlTemplate;
+    readonly rangeWithUnitField = viewChild<ControlTemplate>("rangeFieldWithUnitTemplate");
 
-    @ViewChild("rangeFieldTemplate", { static: true })
-    private rangeField: ControlTemplate;
+    readonly rangeField = viewChild<ControlTemplate>("rangeFieldTemplate");
 
-    @ViewChild("colorPickerTemplate", {
-        static: true,
-    })
-    private colorField: ControlTemplate;
+    readonly colorField = viewChild<ControlTemplate>("colorPickerTemplate");
 
-    @ViewChild("directionFieldTemplate", { static: true })
-    private directionField: ControlTemplate;
+    readonly directionField = viewChild<ControlTemplate>("directionFieldTemplate");
 
-    @ViewChild("numberWithDropdownField", { static: true })
-    private numberWithDropdownField: ControlTemplate;
+    readonly numberWithDropdownField = viewChild<ControlTemplate>("numberWithDropdownField");
 
-    @ViewChild("radioGroupTemplate", { static: true })
-    private radioGroupField: ControlTemplate;
+    readonly radioGroupField = viewChild<ControlTemplate>("radioGroupTemplate");
 
-    @ViewChild("imageUploadTemplate", { static: true })
-    private imageUploadField: ControlTemplate;
+    readonly imageUploadField = viewChild<ControlTemplate>("imageUploadTemplate");
 
-    @ViewChild("itemsControlTemplate", { static: true })
-    private itemsControlField: ControlTemplate;
+    readonly itemsControlField = viewChild<ControlTemplate>("itemsControlTemplate");
 
-    @ViewChild("backgroundColorTemplate", { static: true })
-    private backgroundColorField: ControlTemplate;
+    readonly backgroundColorField = viewChild<ControlTemplate>("backgroundColorTemplate");
 
-    @ViewChild("borderControlTemplate", { static: true })
-    private borderControlField: ControlTemplate;
+    readonly borderControlField = viewChild<ControlTemplate>("borderControlTemplate");
 
     @Input()
     public set templatesMap(templatesMap: Record<string, TemplateRef<unknown>>) {
@@ -149,8 +100,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
         };
     }
 
-    @Output()
-    public readonly submitForm: EventEmitter<unknown> = new EventEmitter<unknown>();
+    public readonly submitForm = output<unknown>();
 
     private readonly service: AbstractFormService = inject(AbstractFormService);
 
@@ -172,21 +122,21 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this._defaultTemplatesMap = {
-            [APFormDefaultTemplateKeys.TEXT_FIELD]: this.textField,
-            [APFormDefaultTemplateKeys.NUMBER_FIELD]: this.numberField,
-            [APFormDefaultTemplateKeys.DROPDOWN_FIELD]: this.dropdownField,
-            [APFormDefaultTemplateKeys.RANGE_FIELD_WITH_UNIT_FIELD]: this.rangeWithUnitField,
-            [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField,
-            [APFormDefaultTemplateKeys.FILE_UPLOAD]: this.fileUploadField,
-            [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField,
-            [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField,
-            [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField,
-            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField,
-            [APFormDefaultTemplateKeys.RADIO_GROUP_FIELD]: this.radioGroupField,
-            [APFormDefaultTemplateKeys.IMAGE_UPLOAD_FIELD]: this.imageUploadField,
-            [APFormDefaultTemplateKeys.ITEMS_CONTROL_FIELD]: this.itemsControlField,
-            [APFormDefaultTemplateKeys.BACKGROUND_FIELD]: this.backgroundColorField,
-            [APFormDefaultTemplateKeys.BORDER_FIELD]: this.borderControlField,
+            [APFormDefaultTemplateKeys.TEXT_FIELD]: this.textField(),
+            [APFormDefaultTemplateKeys.NUMBER_FIELD]: this.numberField(),
+            [APFormDefaultTemplateKeys.DROPDOWN_FIELD]: this.dropdownField(),
+            [APFormDefaultTemplateKeys.RANGE_FIELD_WITH_UNIT_FIELD]: this.rangeWithUnitField(),
+            [APFormDefaultTemplateKeys.COLOR_FIELD]: this.colorField(),
+            [APFormDefaultTemplateKeys.FILE_UPLOAD]: this.fileUploadField(),
+            [APFormDefaultTemplateKeys.TEXTAREA_FIELD]: this.textAreaField(),
+            [APFormDefaultTemplateKeys.NUMBER_WITH_DROPDOWN_FIELD]: this.numberWithDropdownField(),
+            [APFormDefaultTemplateKeys.DIRECTION_FIELD]: this.directionField(),
+            [APFormDefaultTemplateKeys.RANGE_FIELD]: this.rangeField(),
+            [APFormDefaultTemplateKeys.RADIO_GROUP_FIELD]: this.radioGroupField(),
+            [APFormDefaultTemplateKeys.IMAGE_UPLOAD_FIELD]: this.imageUploadField(),
+            [APFormDefaultTemplateKeys.ITEMS_CONTROL_FIELD]: this.itemsControlField(),
+            [APFormDefaultTemplateKeys.BACKGROUND_FIELD]: this.backgroundColorField(),
+            [APFormDefaultTemplateKeys.BORDER_FIELD]: this.borderControlField(),
         };
 
         this._templatesMap = {
@@ -197,7 +147,7 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public ngOnChanges(changes: SimpleChanges): void {
         if (changes.formModel) {
-            this.service.processFormModel(this.formModel, changes.formModel.previousValue);
+            this.service.processFormModel(this.formModel(), changes.formModel.previousValue);
         }
     }
 

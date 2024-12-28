@@ -1,20 +1,18 @@
 import { APFormControl, APTextFieldValueChangeEvent, ApTextFormControlOptions, defaultAPTextFieldOptions } from "@components";
 import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    OnChanges,
-    Output,
-    SimpleChanges,
-    ViewEncapsulation,
-    forwardRef,
+  ChangeDetectionStrategy,
+  Component,
+  OnChanges,
+  SimpleChanges,
+  ViewEncapsulation,
+  forwardRef,
+  input,
+  output
 } from "@angular/core";
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { KeyValuePipe, NgForOf, NgIf } from "@angular/common";
+import { KeyValuePipe } from "@angular/common";
 
 @Component({
-    standalone: true,
     selector: "lz-textarea",
     templateUrl: "./textarea.component.html",
     styleUrls: ["./textarea.component.scss"],
@@ -27,23 +25,18 @@ import { KeyValuePipe, NgForOf, NgIf } from "@angular/common";
             multi: true,
         },
     ],
-    imports: [KeyValuePipe, NgForOf, NgIf],
+    imports: [KeyValuePipe]
 })
 export class TextareaComponent implements ControlValueAccessor, OnChanges {
-    @Input({ required: true })
-    public nativeControl: FormControl;
+    public readonly nativeControl = input.required<FormControl>();
 
-    @Input({ required: true })
-    public controlModel: APFormControl;
+    public readonly controlModel = input.required<APFormControl>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<APTextFieldValueChangeEvent> = new EventEmitter<APTextFieldValueChangeEvent>();
+    public readonly onValueChange = output<APTextFieldValueChangeEvent>();
 
-    @Output()
-    public readonly onBlur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onBlur = output<FocusEvent>();
 
-    @Output()
-    public readonly onFocus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+    public readonly onFocus = output<FocusEvent>();
 
     public _value: string;
 
@@ -61,7 +54,7 @@ export class TextareaComponent implements ControlValueAccessor, OnChanges {
         if (changes.controlModel) {
             this._options = {
                 ...defaultAPTextFieldOptions,
-                ...this.controlModel.options,
+                ...this.controlModel().options,
             };
         }
     }

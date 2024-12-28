@@ -9,20 +9,19 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion-element",
-    standalone: true,
-    imports: [CommonModule, ElementResolverDirective, LZEditorElementComponent],
+    imports: [ElementResolverDirective, LZEditorElementComponent],
     templateUrl: "./accordion-element.component.html",
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective]
 })
 export class AccordionElementComponent implements OnInit {
     @HostBinding("class.lz-accordion-element")

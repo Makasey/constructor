@@ -1,34 +1,35 @@
-<ng-container *ngIf="autoSlide$ | async"></ng-container>
+@if (autoSlide$ | async) {
+}
 
 <div class="lz-slider-wrapper" #slider [style.transform]="convertedPosition">
-    <ng-container *ngFor="let item of items">
-        <lz-slider-item [itemClass]="itemClass" [item]="item" [itemTemplate]="itemTemplate"></lz-slider-item>
-    </ng-container>
+  @for (item of items(); track item) {
+    <lz-slider-item [itemClass]="itemClass()" [item]="item" [itemTemplate]="itemTemplate()"></lz-slider-item>
+  }
 </div>
 
 <button class="lz-slider-control lz-slider-control--left" [class.disabled]="isLeftEdge" (click)="onPrev()">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M13.585 7.30533L8.52813 10.8772C8.19678 11.0974 8 11.4538 8 11.8337C8 12.2136 8.19678 12.57 8.52813 12.7902L13.585 16.6948C14.0128 17.0146 14.5939 17.0893 15.0983 16.8894C15.6026 16.6895 15.9489 16.2472 16 15.7377L16 8.25998C15.948 7.75089 15.6014 7.30941 15.0972 7.1101C14.593 6.91078 14.0124 6.98574 13.585 7.30533Z"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        />
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M13.585 7.30533L8.52813 10.8772C8.19678 11.0974 8 11.4538 8 11.8337C8 12.2136 8.19678 12.57 8.52813 12.7902L13.585 16.6948C14.0128 17.0146 14.5939 17.0893 15.0983 16.8894C15.6026 16.6895 15.9489 16.2472 16 15.7377L16 8.25998C15.948 7.75089 15.6014 7.30941 15.0972 7.1101C14.593 6.91078 14.0124 6.98574 13.585 7.30533Z"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      />
     </svg>
-</button>
-<button class="lz-slider-control lz-slider-control--right" [class.disabled]="isRightEdge" (click)="onNext()">
+  </button>
+  <button class="lz-slider-control lz-slider-control--right" [class.disabled]="isRightEdge" (click)="onNext()">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M10.415 7.30533L15.4719 10.8772C15.8032 11.0974 16 11.4538 16 11.8337C16 12.2136 15.8032 12.57 15.4719 12.7902L10.415 16.6948C9.98722 17.0146 9.4061 17.0893 8.90173 16.8894C8.39737 16.6895 8.05109 16.2472 8 15.7377L8 8.25998C8.05197 7.75089 8.39858 7.30941 8.90279 7.1101C9.40699 6.91078 9.98759 6.98574 10.415 7.30533Z"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10.415 7.30533L15.4719 10.8772C15.8032 11.0974 16 11.4538 16 11.8337C16 12.2136 15.8032 12.57 15.4719 12.7902L10.415 16.6948C9.98722 17.0146 9.4061 17.0893 8.90173 16.8894C8.39737 16.6895 8.05109 16.2472 8 15.7377L8 8.25998C8.05197 7.75089 8.39858 7.30941 8.90279 7.1101C9.40699 6.91078 9.98759 6.98574 10.415 7.30533Z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
         />
-    </svg>
-</button>
+      </svg>
+    </button>

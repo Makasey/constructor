@@ -1,16 +1,15 @@
 import { APFormControl, ApTextFormControlOptions } from "@components";
-import { AsyncPipe, NgIf } from "@angular/common";
+import { AsyncPipe } from "@angular/common";
 import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    OnChanges,
-    OnInit,
-    Output,
-    SimpleChanges,
-    ViewEncapsulation,
-    forwardRef,
+  ChangeDetectionStrategy,
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewEncapsulation,
+  forwardRef,
+  input,
+  output
 } from "@angular/core";
 
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
@@ -23,27 +22,23 @@ import { defaultColorPickerOptions } from "@components";
     selector: "lz-color-picker",
     templateUrl: "./color-picker.component.html",
     styleUrls: ["./color-picker.component.scss"],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [ReactiveFormsModule, NgIf, AsyncPipe],
+    imports: [ReactiveFormsModule, AsyncPipe],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => LZColorPickerComponent),
             multi: true,
         },
-    ],
+    ]
 })
 export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnChanges {
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Output()
-    public readonly onValueChange: EventEmitter<string> = new EventEmitter<string>();
+    public readonly onValueChange = output<string>();
 
     public readonly colorControl = new FormControl("");
 
@@ -74,7 +69,7 @@ export class LZColorPickerComponent implements ControlValueAccessor, OnInit, OnC
         if (changes.controlModel) {
             this._options = {
                 ...defaultColorPickerOptions,
-                ...this.controlModel.options,
+                ...this.controlModel().options,
             };
         }
     }

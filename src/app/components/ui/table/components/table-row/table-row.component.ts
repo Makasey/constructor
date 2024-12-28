@@ -1,5 +1,5 @@
 import { AsyncPipe, NgClass, NgStyle, NgTemplateOutlet } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Output, ViewEncapsulation, computed, input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { DragDropModule } from "@angular/cdk/drag-drop";
@@ -85,9 +85,12 @@ export class LZTableRowComponent {
         );
     }
 
-    public get rowId(): string {
-        return this.tableRow[this.tableExtra().idKey] as string;
-    }
+    public rowId = computed(() => {
+        const tableRow = this.tableRow();
+        const idKey = this.tableExtra().idKey;
+
+        return tableRow[idKey] as string;
+    });
 
     @shouldCall(checkScrollPosition)
     public onRowScroll(event: Event): void {
@@ -99,7 +102,7 @@ export class LZTableRowComponent {
     }
 
     public onRowClick(): void {
-        const rowId: string = this.rowId;
+        const rowId: string = this.rowId();
         const item = this.valuesExtra()[rowId];
 
         if (!item.disabled) {

@@ -1,19 +1,19 @@
 <ng-container>
     <div class="form-control">
-        <label class="form-control-label text-field" [for]="controlModel?.id">
-            @if (label) {
+        <label class="form-control-label text-field" [for]="controlModel()?.id">
+            @if (label()) {
                 <span class="form-control-text" [class.focused]="!!_value || touched || _options.placeholder">
-                    {{ label || _options.label }}
+                    {{ label() || _options.label }}
                 </span>
             }
             <input
                 type="text"
                 class="form-control-input"
-                [attr.id]="controlModel?.id"
+                [attr.id]="controlModel()?.id"
                 [attr.placeholder]="_options.placeholder"
-                [attr.name]="controlModel?.name"
-                [attr.maxlength]="maxLength || _options?.maxLength"
-                [attr.minlength]="minLength || _options?.minLength"
+                [attr.name]="controlModel()?.name"
+                [attr.maxlength]="maxLength() || _options?.maxLength"
+                [attr.minlength]="minLength() || _options?.minLength"
                 [class.disabled]="disabled"
                 [disabled]="disabled"
                 [value]="_value"
@@ -23,9 +23,9 @@
             />
         </label>
 
-        @if (nativeControl?.dirty) {
+        @if (nativeControl()?.dirty) {
             <div class="form-control-errors">
-                @for (error of nativeControl?.errors | keyvalue; track error.key) {
+                @for (error of nativeControl()?.errors | keyvalue; track error.key) {
                     <span class="form-control-error">
                         {{ error.key }}
                     </span>

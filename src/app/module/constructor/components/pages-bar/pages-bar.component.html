@@ -1,5 +1,5 @@
-@for (item of items; track item) {
-    <div class="pages-bar-item" (click.stop)="select(item.id)" [ngClass]="{ active: activeItem === item.id }"
+@for (item of items(); track item.id) {
+    <div class="pages-bar-item" (click.stop)="select(item.id)" [ngClass]="{ active: activeItem() === item.id }"
         >{{ item.settings.title }}
         <div class="actions">
             <button class="actions-btn eicon-close" (click.stop)="delete(item.id)"></button>

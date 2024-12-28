@@ -1,17 +1,16 @@
 import {
-    DestroyRef,
-    Directive,
-    ElementRef,
-    HostListener,
-    Injector,
-    Input,
-    OnDestroy,
-    OnInit,
-    Renderer2,
-    WritableSignal,
-    inject,
-    input,
-    signal,
+  DestroyRef,
+  Directive,
+  ElementRef,
+  HostListener,
+  Injector,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  WritableSignal,
+  inject,
+  input,
+  signal
 } from "@angular/core";
 import { DragDropService } from "@shared-directives/drag-and-drop/dragDrop.service";
 import { copyCloneNodeStyles } from "./utils";
@@ -60,7 +59,7 @@ export class DraggableDirective implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    @Input() public lzDraggable: unknown;
+    public readonly lzDraggable = input<unknown>();
 
     private offsetX = 0;
     private offsetY = 0;
@@ -76,7 +75,7 @@ export class DraggableDirective implements OnInit, OnDestroy {
         if (!this.prohibitDrag()) {
             this.removeClone();
             this.isMove.set(true);
-            this.dragDropService.setDraggedItem(this.lzDraggable);
+            this.dragDropService.setDraggedItem(this.lzDraggable());
             this.target.set(this.el.nativeElement);
 
             this.clone.set(this.el.nativeElement.cloneNode(true) as unknown as HTMLElement);

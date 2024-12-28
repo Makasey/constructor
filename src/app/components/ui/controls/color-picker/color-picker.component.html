@@ -1,7 +1,7 @@
 @if (colorControlValueChange$ | async) {}
 
 <article class="form-control">
-    <label class="form-control-label text-field" [for]="controlModel?.id">
+    <label class="form-control-label text-field" [for]="controlModel()?.id">
         <span class="form-control-text"> {{ _options?.label }}</span>
         <input type="color" [formControl]="colorControl" />
     </label>

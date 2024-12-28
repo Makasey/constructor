@@ -2,18 +2,18 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, inj
 
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { APFormComponent, APFormModel, APTextFieldModule } from "@components";
+import { APFormComponent, APFormModel } from "@components";
 import { AbstractEditorPageSettingsService } from "@modules/constructor";
 import { FormsModule } from "@angular/forms";
+import { APTextFieldComponent } from "../../../../../../../components/ui/controls/text-field/text-field.component";
 
 @Component({
     selector: "lz-site-settings",
-    standalone: true,
     templateUrl: "./site-settings.component.html",
     styleUrls: ["./site-settings.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [APFormComponent, APTextFieldModule, FormsModule],
+    imports: [APFormComponent, APTextFieldComponent, FormsModule]
 })
 export class SiteSettingsComponent {
     @HostBinding("class.lz-site-settings")

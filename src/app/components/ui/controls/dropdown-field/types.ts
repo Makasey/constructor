@@ -2,6 +2,7 @@ export type APDropdownFieldItem = Readonly<{
     id: string;
     label: string;
     customData?: Record<string, unknown>;
+    [key: string]: unknown;
 }>;
 
 export type ApDropdownFormControlOptions<T> = Readonly<{

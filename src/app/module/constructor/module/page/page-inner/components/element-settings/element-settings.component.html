@@ -1,12 +1,14 @@
-<section class="element-settings" *ngIf="elementSettingsFormModel() as formModel">
+@if (elementSettingsFormModel(); as formModel) {
+  <section class="element-settings">
     <h2 class="settings-title">Настройки элемента</h2>
     <lz-accordion [collapsing]="false">
-        @for (group of formModel.innerGroups; track group.id) {
-            <lz-accordion-item [expanded]="true" [title]="group.headerText!">
-                <ng-template lzAccordionContent>
-                    <ap-form [formModel]="group" (submitForm)="updateElementSettings($event, formModel.mapperFn)" />
-                </ng-template>
-            </lz-accordion-item>
-        }
+      @for (group of formModel.innerGroups; track group.id) {
+        <lz-accordion-item [expanded]="true" [title]="group.headerText!">
+          <ng-template lzAccordionContent>
+            <ap-form [formModel]="group" (submitForm)="updateElementSettings($event, formModel.mapperFn)" />
+          </ng-template>
+        </lz-accordion-item>
+      }
     </lz-accordion>
-</section>
+  </section>
+}

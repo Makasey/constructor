@@ -1,15 +1,15 @@
 import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-    TemplateRef,
-    ViewEncapsulation,
-    computed,
-    input,
-    untracked,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  TemplateRef,
+  ViewEncapsulation,
+  computed,
+  input,
+  untracked,
+  output,
+  OnInit,
 } from "@angular/core";
 
 import { BehaviorSubject, Observable, debounceTime, filter, tap } from "rxjs";
@@ -43,11 +43,10 @@ import { defaultTrackBy } from "./constants";
     templateUrl: "./table.component.html",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    standalone: true,
     imports: [LZTableBodyComponent, LZLoaderComponent, LZTableHeadComponent, LZTableFootComponent, AsyncPipe, NgTemplateOutlet, DragDropModule],
     providers: [...provideTableStore()],
 })
-export class LZTableComponent {
+export class LZTableComponent implements OnInit{
     public templatesMap = input<TemplateMap>({});
 
     public loadMoreLabel = input<string>(DEFAULT_LOAD_MORE_LABEL);
@@ -56,14 +55,11 @@ export class LZTableComponent {
 
     public relations = input<Record<string, unknown[]>>({});
 
-    @Output()
-    public readonly onBottomScrolled: Observable<boolean>;
+    public readonly onBottomScrolled = output<boolean>();
 
-    @Output()
-    public readonly onSelect: EventEmitter<unknown[]> = new EventEmitter<unknown[]>();
+    public readonly onSelect = output<unknown[]>();
 
-    @Output()
-    public readonly columnDropped: EventEmitter<ColumnDropEvent> = new EventEmitter<ColumnDropEvent>();
+    public readonly columnDropped = output<ColumnDropEvent>();
 
     public _tableExtra: TableExtra = { ...defaultTableExtra };
 
@@ -84,9 +80,10 @@ export class LZTableComponent {
     public _trackByRow: (index: number, row: unknown) => unknown;
 
     constructor(private service: AbstractAwesomeTableService) {
-        this.onBottomScrolled = this.scrollBottomSubject$.pipe(
+        this.scrollBottomSubject$.pipe(
             debounceTime(100),
             filter(isEnd => isEnd),
+            tap(isEnd => this.onBottomScrolled.emit(isEnd)),
         );
     }
 

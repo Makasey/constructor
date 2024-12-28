@@ -1,20 +1,20 @@
-<span>{{ label }}</span>
+<span>{{ label() }}</span>
 <lz-file-upload
-    [nativeControl]="nativeControl"
+    [nativeControl]="nativeControl()"
     [ngModel]="value"
     (onValueChange)="updateValue($event)"
 ></lz-file-upload>
 <ap-text-field
     label="Название картинки"
     [ngModel]="value.title"
-    [maxLength]="maxLength"
-    [minLength]="minLength"
+    [maxLength]="maxLength()"
+    [minLength]="minLength()"
     (onValueChange)="updateTitleValue($event.newValue)"
 ></ap-text-field>
 <ap-text-field
     label="Альтернативный текст"
     [ngModel]="value.alt"
-    [maxLength]="maxLength"
-    [minlength]="minLength"
+    [maxLength]="maxLength()"
+    [minlength]="minLength()"
     (onValueChange)="updateAltValue($event.newValue)"
 ></ap-text-field>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation, input } from "@angular/core";
 
 @Component({
     selector: "lz-tabs-item",
@@ -9,12 +9,9 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef, ViewEncapsulati
     encapsulation: ViewEncapsulation.None,
 })
 export class TabsItemComponent {
-    @Input({ required: true })
-    public title: string;
+    public readonly title = input.required<string>();
 
-    @Input()
-    public customClass: string;
+    public readonly customClass = input<string>();
 
-    @Input({ required: true })
-    public template: TemplateRef<unknown>;
+    public readonly template = input.required<TemplateRef<unknown>>();
 }

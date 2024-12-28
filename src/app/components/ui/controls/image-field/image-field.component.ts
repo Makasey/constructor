@@ -1,13 +1,13 @@
-import { APFormControl, APTextFieldModule, LZFileUploadComponent } from "@components";
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { APFormControl, LZFileUploadComponent } from "@components";
+import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input } from "@angular/core";
+
 import { ControlValueAccessor, FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { File } from "@shared-types";
+import { APTextFieldComponent } from "../text-field/text-field.component";
 
 @Component({
     selector: "lz-image-field",
-    standalone: true,
-    imports: [CommonModule, LZFileUploadComponent, FormsModule, APTextFieldModule],
+    imports: [LZFileUploadComponent, FormsModule, APTextFieldComponent],
     templateUrl: "./image-field.component.html",
     styleUrls: ["./image-field.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,26 +18,21 @@ import { File } from "@shared-types";
             multi: true,
             useExisting: LZImageFieldComponent,
         },
-    ],
+    ]
 })
 export class LZImageFieldComponent implements ControlValueAccessor {
     @HostBinding("class.lz-image-field")
     public hostClass = true;
 
-    @Input()
-    public nativeControl: FormControl;
+    public readonly nativeControl = input<FormControl>();
 
-    @Input()
-    public controlModel: APFormControl;
+    public readonly controlModel = input<APFormControl>();
 
-    @Input()
-    public label: string;
+    public readonly label = input<string>();
 
-    @Input()
-    public maxLength: number;
+    public readonly maxLength = input<number>();
 
-    @Input()
-    public minLength: number;
+    public readonly minLength = input<number>();
 
     public disabled = false;
 

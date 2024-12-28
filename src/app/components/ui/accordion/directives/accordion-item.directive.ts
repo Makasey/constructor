@@ -1,4 +1,4 @@
-import { ContentChild, Directive, Input } from "@angular/core";
+import { Directive, input, contentChild } from "@angular/core";
 
 import { LZAccordionContentDirective } from "@components";
 
@@ -7,8 +7,8 @@ import { LZAccordionContentDirective } from "@components";
     standalone: true,
 })
 export class LZAccordionItemDirective {
-    @Input({ required: true }) public title: string;
-    @Input() public disabled = false;
-    @Input() public expanded = true;
-    @ContentChild(LZAccordionContentDirective) public content: LZAccordionContentDirective;
+    public readonly title = input.required<string>();
+    public readonly disabled = input(false);
+    public readonly expanded = input(true);
+    readonly content = contentChild(LZAccordionContentDirective);
 }

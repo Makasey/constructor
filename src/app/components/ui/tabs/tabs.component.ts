@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, HostBinding, QueryList, ViewEncapsulation } from "@angular/core";
+import { AfterContentInit, ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, contentChildren } from "@angular/core";
 
 import { CommonModule, NgClass, NgTemplateOutlet } from "@angular/common";
 import { TabsItemComponent } from "@components";
@@ -7,22 +7,20 @@ import { TabsItemComponent } from "@components";
     selector: "lz-tabs",
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
-    standalone: true,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [TabsItemComponent, NgClass, NgTemplateOutlet, CommonModule, NgClass],
+    imports: [TabsItemComponent, NgClass, NgTemplateOutlet, CommonModule, NgClass]
 })
 export class LzTabsComponent implements AfterContentInit {
     @HostBinding("class.lz-tabs")
     public hostClass = true;
 
-    @ContentChildren(TabsItemComponent)
-    public tabs: QueryList<TabsItemComponent>;
+    readonly tabs = contentChildren(TabsItemComponent);
 
     public activeComponent: TabsItemComponent;
 
     public ngAfterContentInit(): void {
-        this.activeComponent = this.tabs?.first;
+        this.activeComponent = this.tabs()?.at(0)!;
     }
 
     public activateTab(tab: TabsItemComponent): void {

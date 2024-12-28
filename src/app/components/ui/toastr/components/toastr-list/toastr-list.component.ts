@@ -11,7 +11,6 @@ import { LZToastrItem, LZToastrItemComponent, LZToastrService, LzToastrQuery } f
     selector: "lz-toastr-list",
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: "./toastr-list.component.html",
-    standalone: true,
     imports: [CommonModule, LZToastrItemComponent],
     animations: [enterAnimation],
 })
@@ -32,11 +31,19 @@ export class LZToastrListComponent {
         return item.id!;
     }
 
-    public _hideItem(itemId: ID): void {
+    public _hideItem(itemId: ID | undefined): void {
+        if (!itemId) {
+            return;
+        }
+
         this.toastrService.hideToastrItem(itemId);
     }
 
-    public _removeItem(itemId: ID): void {
+    public _removeItem(itemId: ID | undefined): void {
+        if (!itemId) {
+            return;
+        }
+
         this.toastrService.removeToastrItem(itemId);
     }
 }
