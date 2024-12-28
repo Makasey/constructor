@@ -16,7 +16,7 @@ export class LocalStorageService {
                 type: LZToastrItemType.ERROR,
                 title: "Элементы не сохранились",
                 id: guid(),
-                text: error?.message ?? "Пожалуйста, попробуйте снова",
+                text: (error as Error)?.message ?? "Пожалуйста, попробуйте снова",
             });
         }
     }
