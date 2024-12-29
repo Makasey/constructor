@@ -7,7 +7,6 @@ import {
     AbstractSaveEditorElementsService,
     EDITOR_SELECTED_ELEMENT,
     LZEditorElementComponent,
-    SectionPageElement,
 } from "@modules/constructor";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
@@ -29,7 +28,7 @@ export class RootComponent implements OnInit, OnDestroy {
         "editor-element": true,
     };
 
-    private readonly service = inject(AbstractEditorElementActionsService<SectionPageElement>);
+    private readonly service = inject(AbstractEditorElementActionsService);
 
     private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
 
