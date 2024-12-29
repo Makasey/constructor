@@ -1,0 +1,3 @@
+@for (child of element()?.children; track element) {
+    <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child" [parentId]="element()?.id"></lz-editor-element>
+}

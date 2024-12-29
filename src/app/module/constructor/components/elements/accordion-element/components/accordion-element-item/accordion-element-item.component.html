@@ -13,7 +13,7 @@
      [class.expanded]="expanded"
      [@contentExpansion]="expanded ? 'expanded' : 'collapsed'">
       @for (child of editorElement.children; track child) {
-       <lz-editor-element [elementId]="child">
+       <lz-editor-element [elementId]="child" [parentId]="editorElement.id">
           <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
        </lz-editor-element>
       }

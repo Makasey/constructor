@@ -1,5 +1,9 @@
 .lz-inner-element {
     display: flex;
     flex-direction: column;
+
+    outline: 1px solid #61aaf2;
+    outline-offset: 2px;
+
     --selected-element-color: red;
 }

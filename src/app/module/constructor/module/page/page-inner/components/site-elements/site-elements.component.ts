@@ -43,15 +43,18 @@ export class SiteElementsComponent {
     }
 
     public onDragEnd(): void {
-        this.currentDragElement.set(null);
-        this.dragService.setDraggableItem(null);
+        //
+        //     this.currentDragElement.set(null);
+        //     this.dragService.setDraggableItem(null);
     }
 
     public onDrop(event: CdkDragDrop<unknown>): void {
-        // const { item } = event;
-        // const { data } = item;
-        // const { type } = data;
-        //
+        const { item } = event;
+        const { data } = item;
+        const { type } = data;
+
+        console.log(event, type);
+
         // if (this.isRootElement()) {
         //   this.actionService.addPageElement(type);
         //

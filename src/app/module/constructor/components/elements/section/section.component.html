@@ -2,7 +2,7 @@
 
 @if (elementValue.children?.length) {
     @for (child of elementValue.children; track child) {
-        <lz-editor-element [elementId]="child">
+        <lz-editor-element [elementId]="child" [parentId]="elementValue.id">
             <ng-container *lzElementResolver="child; parent: elementValue.id"></ng-container>
         </lz-editor-element>
     }

@@ -10,6 +10,7 @@ import {
     SectionPageElement,
 } from "@modules/constructor";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
 
 @Component({
     selector: "lz-root-element",
@@ -18,7 +19,7 @@ import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionD
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
-    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent],
+    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent, LZEditorElementFlexComponent],
     hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective],
 })
 export class RootComponent implements OnInit, OnDestroy {

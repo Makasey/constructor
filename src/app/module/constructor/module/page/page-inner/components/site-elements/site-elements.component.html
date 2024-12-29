@@ -2,11 +2,13 @@
     <section class="elements-settings">
         <h2 class="settings-title">Элементы сайта</h2>
         <article
-            cdkDropList
-            [id]="'site-elements'"
-            [cdkDropListConnectedTo]="['root-element', '123']"
-            [cdkDropListSortingDisabled]="true"
             class="elements-wrapper"
+            cdkDropList
+            cdkDropListOrientation="horizontal"
+            [id]="'elements'"
+            [cdkDropListSortingDisabled]="true"
+            [cdkDropListConnectedTo]="['root-element']"
+            [cdkDropListData]="elements()"
         >
             @for (element of elements(); track element.type) {
                 <button
@@ -14,7 +16,6 @@
                     [cdkDragData]="element"
                     (cdkDragStarted)="onDragStart(element.type)"
                     (cdkDragEnded)="onDragEnd()"
-                    (cdkDragDropped)="onDrop($event)"
                     class="element"
                 >
                     <i class="bx" [ngClass]="element.icon"></i>

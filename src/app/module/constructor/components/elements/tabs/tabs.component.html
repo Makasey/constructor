@@ -11,8 +11,10 @@
         }
     </header>
     <section>
-       <lz-editor-element [elementId]="editorElement.settings.selectedElement">
-            <ng-container *lzElementResolver="editorElement.settings.selectedElement; parent: editorElement.id"></ng-container>
-       </lz-editor-element>
+        <lz-editor-element [elementId]="editorElement.settings.selectedElement" [parentId]="editorElement.id">
+            <ng-container
+                *lzElementResolver="editorElement.settings.selectedElement; parent: editorElement.id"
+            ></ng-container>
+        </lz-editor-element>
     </section>
 }

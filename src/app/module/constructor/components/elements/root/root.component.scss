@@ -1,7 +1,7 @@
 .lz-root-element {
     border: 1px solid var(--root-selected-color);
     width: 100%;
-    height: fit-content;
+    height: 100%;
     min-height: calc(100vh - 160px);
     display: flex;
     flex-direction: column;

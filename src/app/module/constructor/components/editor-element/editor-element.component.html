@@ -1,4 +1,4 @@
-<ng-content></ng-content>
+<ng-container *lzElementResolver="elementId(); parent: parentId()"> 123 </ng-container>
 
 @if (selectedElement() === elementId()) {
     <lz-element-actions></lz-element-actions>
