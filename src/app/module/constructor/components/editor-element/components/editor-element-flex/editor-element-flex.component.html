@@ -1,3 +1,14 @@
-@for (child of element()?.children; track element) {
-    <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child" [parentId]="element()?.id"></lz-editor-element>
+@for (child of children(); track child.id) {
+    <ng-template
+        [ngTemplateOutlet]="child.isExtendable ? flexTemplate : blockTemplate"
+        [ngTemplateOutletContext]="{ child: child.id }"
+    ></ng-template>
 }
+
+<ng-template #flexTemplate let-child="child">
+    <lz-editor-element-flex [elementID]="child" [parentID]="elementID()"></lz-editor-element-flex>
+</ng-template>
+
+<ng-template #blockTemplate let-child="child">
+    <lz-editor-element-block [elementID]="child" [parentID]="elementID()"></lz-editor-element-block>
+</ng-template>

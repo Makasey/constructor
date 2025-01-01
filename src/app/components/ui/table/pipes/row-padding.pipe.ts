@@ -10,7 +10,6 @@ import { RowPaddingType, TableValueExtraInternalParams } from "@components";
 export class LZRowPaddingPipe implements PipeTransform {
     public transform(valueExtra: TableValueExtraInternalParams, type: RowPaddingType, hasCheckboxes: boolean): number {
         switch (type) {
-            // eslint-disable-next-line no-fallthrough
             case RowPaddingType.CELL: {
                 return (
                     ((valueExtra?.level ?? 1) - (valueExtra?.levelToShow ?? 0)) * 20 +
@@ -20,7 +19,6 @@ export class LZRowPaddingPipe implements PipeTransform {
                 );
             }
 
-            // eslint-disable-next-line no-fallthrough
             case RowPaddingType.ARROW_LINE: {
                 return (
                     (valueExtra?.level ?? 1) -

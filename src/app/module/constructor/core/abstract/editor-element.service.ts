@@ -15,7 +15,7 @@ import { Observable, map } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
-export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
+export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion = SitePageElementUnion> {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,

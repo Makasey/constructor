@@ -15,7 +15,7 @@ export function defaultSectionElementSettings(): () => Omit<SectionPageElement, 
         return {
             type: SitePageElementType.SECTION,
             children: [],
-            isExtendable: false,
+            isExtendable: true,
             settings: {
                 width: {
                     value: 100,

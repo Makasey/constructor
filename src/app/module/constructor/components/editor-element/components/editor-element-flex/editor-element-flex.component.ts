@@ -1,7 +1,9 @@
 import { AbstractEditorElementActionsService, LZEditorElementComponent, SitePageElementUnion } from "@modules/constructor";
 import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
-import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewEncapsulation, inject, input, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewEncapsulation, computed, inject, input, signal } from "@angular/core";
 import { ElementResolverDirective } from "@shared-directives";
+import { LZEditorElementBlockComponent } from "@modules/constructor/components/editor-element/components/editor-element-block/editor-element-block.component";
+import { NgTemplateOutlet } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -10,11 +12,11 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     providers: [],
-    imports: [ElementResolverDirective, LZEditorElementComponent, CdkDropList, CdkDrag],
+    imports: [ElementResolverDirective, LZEditorElementComponent, CdkDropList, CdkDrag, NgTemplateOutlet, LZEditorElementBlockComponent],
     host: {
         "[class.editor-element-flex]": "true",
     },
-    hostDirectives: [CdkDrag],
+    hostDirectives: [CdkDrag, { directive: ElementResolverDirective, inputs: ["lzElementResolver:elementID", "lzElementResolverParent:parentID"] }],
     templateUrl: "./editor-element-flex.component.html",
     styleUrl: "./editor-element-flex.component.scss",
 })
@@ -26,6 +28,16 @@ export class LZEditorElementFlexComponent implements OnInit {
     private readonly editorElementsActions = inject(AbstractEditorElementActionsService);
 
     public element = signal<SitePageElementUnion | undefined>(undefined).asReadonly();
+
+    public children = computed<SitePageElementUnion[]>(() => {
+        const children = this.element()?.children;
+
+        if (!children) {
+            return [];
+        }
+
+        return children.map(child => this.editorElementsActions.getElement(child));
+    });
 
     private readonly injector = inject(Injector);
 
