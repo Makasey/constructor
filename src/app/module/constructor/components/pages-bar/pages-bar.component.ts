@@ -9,6 +9,7 @@ import { Page } from "@core";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [NgClass],
+    standalone: true,
 })
 export class PagesBarComponent {
     @HostBinding("class.pages-bar")

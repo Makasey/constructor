@@ -12,6 +12,7 @@ import { LZElementActionsComponent } from "../element-actions";
     encapsulation: ViewEncapsulation.None,
     imports: [LZElementActionsComponent, ElementResolverDirective],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    standalone: true,
 })
 export class LZEditorElementComponent {
     @HostBinding("class.lz-editor-element")
@@ -21,7 +22,7 @@ export class LZEditorElementComponent {
 
     public readonly parentId = input.required<string>();
 
-    public readonly element: ElementRef<HTMLElement> = inject(ElementRef);
+    public readonly element: ElementRef<HTMLElement> = inject(ElementRef<HTMLElement>);
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 }
