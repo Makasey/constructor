@@ -16,7 +16,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     host: {
         "[class.editor-element-flex]": "true",
     },
-    hostDirectives: [CdkDrag, { directive: ElementResolverDirective, inputs: ["lzElementResolver:elementID", "lzElementResolverParent:parentID"] }],
+    hostDirectives: [CdkDrag],
     templateUrl: "./editor-element-flex.component.html",
     styleUrl: "./editor-element-flex.component.scss",
 })

@@ -28,6 +28,7 @@ import {
 
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -38,7 +39,8 @@ import { toSignal } from "@angular/core/rxjs-interop";
     styleUrls: ["section.component.scss"],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     providers: [...SECTION_PROVIDERS],
-    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet],
+    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet, LZEditorElementFlexComponent],
+    standalone: true,
 })
 export class SectionComponent implements OnInit {
     @HostBinding("$.style.min-height")

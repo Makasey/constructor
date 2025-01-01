@@ -1,1 +1,3 @@
-<lz-editor-element-flex [elementID]="'rootID'" [parentID]="null"></lz-editor-element-flex>
+@for (child of rootElements(); track child) {
+  <ng-container *lzElementResolver="child; parent: 'rootID'"></ng-container>
+}

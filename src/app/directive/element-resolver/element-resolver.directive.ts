@@ -1,11 +1,11 @@
 import { AbstractEditorElementActionsService, ELEMENT_ID, PARENT_ID, SitePageElementUnion, sitePageElementMap } from "@modules/constructor";
-import { Directive, Injector, OnChanges, OnInit, Type, ViewContainerRef, inject, input } from "@angular/core";
+import { Directive, Injector, OnChanges, Type, ViewContainerRef, inject, input } from "@angular/core";
 
 @Directive({
     selector: "[lzElementResolver]",
     standalone: true,
 })
-export class ElementResolverDirective implements OnChanges, OnInit {
+export class ElementResolverDirective implements OnChanges {
     private readonly viewContainerRef = inject(ViewContainerRef);
 
     private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
