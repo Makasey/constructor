@@ -6,6 +6,7 @@ import {
     AbstractDragService,
     AbstractEditorElementActionsService,
     EDITOR_SELECTED_ELEMENT,
+    ElementButton,
     SitePageElementType,
     SitePageElementUnion,
     processPossibleElements,
@@ -29,6 +30,10 @@ export class SiteElementsComponent {
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
+    private readonly actionService = inject(AbstractEditorElementActionsService);
+
+    public test = this.dragService.getConnectedDropListsId();
+
     public elements = computed(() => {
         const { type } = this.service.getElement(this.selectedElement());
 
@@ -43,24 +48,24 @@ export class SiteElementsComponent {
     }
 
     public onDragEnd(): void {
-        //
-        //     this.currentDragElement.set(null);
-        //     this.dragService.setDraggableItem(null);
+        this.currentDragElement.set(null);
+        this.dragService.setDraggableItem(null);
     }
 
-    public onDrop(event: CdkDragDrop<unknown>): void {
-        const { item } = event;
+    public onDrop(event: CdkDragDrop<string, string, ElementButton>): void {
+        const { item, container } = event;
         const { data } = item;
+        const { data: parentId } = container;
         const { type } = data;
 
         console.log(event, type);
 
-        // if (this.isRootElement()) {
-        //   this.actionService.addPageElement(type);
-        //
-        //   return;
-        // }
-        //
-        // this.actionService.addElementByType(type);
+        if (parentId === "rootID") {
+            this.actionService.addPageElement(type);
+
+            return;
+        }
+
+        this.actionService.addElementByType(type, parentId);
     }
 }

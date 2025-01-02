@@ -1,6 +1,6 @@
 import { AbstractEditorOperationService } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
-import { Inject, Injectable, Provider, WritableSignal, signal } from "@angular/core";
+import { Inject, Injectable, Provider, Signal, WritableSignal, computed, signal } from "@angular/core";
 
 @Injectable()
 export abstract class AbstractDragService<T> extends AbstractEditorOperationService {
@@ -14,6 +14,12 @@ export abstract class AbstractDragService<T> extends AbstractEditorOperationServ
     public abstract setDraggableItem(element: T | null): void;
 
     public abstract getDraggableItem(): T | null;
+
+    public abstract addConnectedElement(element: string): void;
+
+    public abstract getConnectedDropListsId(): Signal<string[]>;
+
+    public abstract removeConnectedList(id: string): void;
 }
 
 @Injectable()
@@ -27,12 +33,26 @@ export class DefaultDragService<T> extends AbstractDragService<T> {
 
     private readonly draggableItem: WritableSignal<T | null> = signal(null);
 
+    private readonly connectedDropListsIds: WritableSignal<string[]> = signal(["elements", "root-element"]);
+
     public setDraggableItem(element: T): void {
         this.draggableItem.set(element);
     }
 
     public getDraggableItem(): T | null {
         return this.draggableItem();
+    }
+
+    public addConnectedElement(element: string): void {
+        this.connectedDropListsIds.update(value => value.concat(element));
+    }
+
+    public removeConnectedList(id: string): void {
+        this.connectedDropListsIds.update(value => value.filter(connectedId => connectedId !== id));
+    }
+
+    public getConnectedDropListsId(): Signal<string[]> {
+        return computed(() => this.connectedDropListsIds());
     }
 }
 

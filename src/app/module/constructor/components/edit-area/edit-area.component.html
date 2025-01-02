@@ -10,9 +10,9 @@
 <lz-root-element
   cdkDropList
   [id]="'root-element'"
-  [cdkDropListConnectedTo]="['elements']"
+  [cdkDropListConnectedTo]="connectedDropListsIds()"
   (cdkDropListDropped)="onDrop($event)"
-  [cdkDropListData]="{ index: 1 }"
+  [cdkDropListData]="'rootID'"
   [cdkDropListDisabled]="false"
   [cdkDropListSortingDisabled]="true"
 ></lz-root-element>

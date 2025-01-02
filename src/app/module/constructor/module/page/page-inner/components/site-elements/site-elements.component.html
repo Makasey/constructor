@@ -1,34 +1,33 @@
-@if (elements().length) {
-    <section class="elements-settings">
-        <h2 class="settings-title">Элементы сайта</h2>
-        <article
-            class="elements-wrapper"
-            cdkDropList
-            cdkDropListOrientation="horizontal"
-            [id]="'elements'"
-            [cdkDropListSortingDisabled]="true"
-            [cdkDropListConnectedTo]="['root-element']"
-            [cdkDropListData]="elements()"
-        >
-            @for (element of elements(); track element.type) {
-                <button
-                    cdkDrag
-                    [cdkDragData]="element"
-                    (cdkDragStarted)="onDragStart(element.type)"
-                    (cdkDragEnded)="onDragEnd()"
-                    class="element"
-                >
+<section class="elements-settings">
+    <h2 class="settings-title">Элементы сайта</h2>
+    <article
+        class="elements-wrapper"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        [id]="'elements'"
+        [cdkDropListSortingDisabled]="true"
+        [cdkDropListConnectedTo]="test()"
+        [cdkDropListData]="elements()"
+    >
+        @for (element of elements(); track element.type) {
+            <button
+                cdkDrag
+                [cdkDragData]="element"
+                (cdkDragStarted)="onDragStart(element.type)"
+                (cdkDragDropped)="onDrop($event)"
+                (cdkDragEnded)="onDragEnd()"
+                class="element"
+            >
+                <i class="bx" [ngClass]="element.icon"></i>
+                {{ element.title }}
+            </button>
+
+            @if (currentDragElement() === element.type) {
+                <button class="element">
                     <i class="bx" [ngClass]="element.icon"></i>
                     {{ element.title }}
                 </button>
-
-                @if (currentDragElement() === element.type) {
-                    <button class="element">
-                        <i class="bx" [ngClass]="element.icon"></i>
-                        {{ element.title }}
-                    </button>
-                }
             }
-        </article>
-    </section>
-}
+        }
+    </article>
+</section>

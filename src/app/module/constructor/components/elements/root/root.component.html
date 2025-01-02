@@ -1,3 +1,7 @@
 @for (child of rootElements(); track child) {
-  <ng-container *lzElementResolver="child; parent: 'rootID'"></ng-container>
+<!--    <div [style.min-height.px]="300" cdkDropList [cdkDropListData]="child" [id]="child" [cdkDropListConnectedTo]="connectListsId()" (cdkDropListEntered)="console1.log($event)" [cdkDropListSortingDisabled]="false">-->
+        <ng-container *lzElementResolver="child; parent: 'rootID'"></ng-container>
+<!--    </div>-->
 }
+
+{{connectListsId()}}

@@ -3,10 +3,12 @@ import { ChangeDetectionStrategy, Component, HostBinding, Signal, ViewEncapsulat
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
+    AbstractDragService,
     AbstractEditorElementActionsService,
     AbstractMultiPageOperationService,
     EDITOR_SELECTED_ELEMENT,
     EDITOR_SELECTED_PAGE,
+    ElementButton,
     PagesBarComponent,
     ROOT_ELEMENT_ID,
     RootComponent,
@@ -28,6 +30,8 @@ export class EditAreaComponent {
     public hostClass = true;
 
     public readonly selectedPage: Signal<string> = inject(EDITOR_SELECTED_PAGE);
+
+    public readonly connectedDropListsIds = inject(AbstractDragService).getConnectedDropListsId();
 
     public readonly selectedElement: Signal<string> = inject(EDITOR_SELECTED_ELEMENT);
 
@@ -55,17 +59,16 @@ export class EditAreaComponent {
         this.service.updateSelectPage(id);
     }
 
-    public onDrop(event: CdkDragDrop<unknown>): void {
-        const { item } = event;
-        const { data } = item;
-        const { type } = data;
-
-        if (this.isRootElement()) {
-            this.actionService.addPageElement(type);
-
-            return;
-        }
-
-        this.actionService.addElementByType(type);
+    public onDrop(_: CdkDragDrop<string, string, ElementButton>): void {
+        // const { item, container } = event;
+        // const { data } = item;
+        // const { type } = data;
+        // if (this.isRootElement()) {
+        //     this.actionService.addPageElement(type);
+        //
+        //     return;
+        // }
+        //
+        // this.actionService.addElementByType(type, container.data);
     }
 }

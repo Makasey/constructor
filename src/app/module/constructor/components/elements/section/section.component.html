@@ -1,7 +1,11 @@
 @let elementValue = element();
 
 @if (elementValue.children?.length) {
-    <lz-editor-element-flex [parentID]="elementValue.parentId" [elementID]="elementValue.id"></lz-editor-element-flex>
+    @for (child of elementValue.children; track child) {
+        <!--        <lz-editor-element cdkDropList [cdkDropListConnectedTo]="connectListsId()" [cdkDropListData]="child" [id]="child" [elementId]="child" [parentId]="elementValue.id">-->
+        <ng-container *lzElementResolver="child; parent: elementValue.id"></ng-container>
+        <!--        </lz-editor-element>-->
+    }
 } @else {
     Сейчас тут нет элементов...
 }

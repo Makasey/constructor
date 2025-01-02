@@ -1,9 +1,11 @@
-@if (element(); as element) {
-    @if (element.children.length) {
-        @for (child of element.children; track child) {
-            <lz-editor-element [elementId]="child" [parentId]="element.id">
-                <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
-            </lz-editor-element>
+<div [style.min-height.px]="100" cdkDropList [cdkDropListData]="element().id" [id]="element().id" [cdkDropListConnectedTo]="connectedLists()">
+    @if (element(); as element) {
+        @if (element.children.length) {
+            @for (child of element.children; track child) {
+                <lz-editor-element [elementId]="child" [parentId]="element.id">
+                    <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
+                </lz-editor-element>
+            }
         }
     }
-}
+</div>
