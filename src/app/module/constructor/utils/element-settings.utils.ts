@@ -13,6 +13,7 @@ import {
     SectionPageElement,
     SitePageElementType,
     SitePageElementUnion,
+    SliderPageElement,
     SpacerPageElement,
     StyleUnit,
     TabsItemPageElement,
@@ -34,6 +35,7 @@ import {
     objectFitPositionMap,
     styleUnitMap,
 } from "@modules/constructor";
+import { getSliderElementSettings } from "@modules/constructor/utils/elements/slider/slider-element-controls.utils";
 
 export function processElementSettings<T extends SitePageElementUnion>(type: SitePageElementType, element: T): APFormModel {
     switch (type) {
@@ -83,6 +85,9 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
 
         case SitePageElementType.DIVIDER: {
             return getDividerElementSettings(element as DividerPageElement);
+        }
+        case SitePageElementType.SLIDER: {
+            return getSliderElementSettings(element as SliderPageElement);
         }
 
         default: {

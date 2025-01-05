@@ -240,6 +240,7 @@ export {
     SliderPageElementSettings,
     SliderPageElementItemSettings,
     SliderPageElement,
+    SliderElementSettingsGroup,
 } from "./components";
 
 export {

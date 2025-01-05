@@ -9,7 +9,7 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
             isExtendable: false,
             settings: {
                 width: {
-                    value: 50,
+                    value: 100,
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
@@ -21,7 +21,7 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
                 },
                 padding: {
                     top: 10,
-                    bottom: 20,
+                    bottom: 10,
                     left: 10,
                     right: 10,
                     unit: StyleUnit.PX,

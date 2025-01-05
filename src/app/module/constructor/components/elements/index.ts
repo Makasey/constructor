@@ -48,4 +48,5 @@ export {
     SliderPageElementItemSettings,
     SliderPageElement,
     SliderPageElementSettings,
+    SliderElementSettingsGroup,
 } from "./slider-element";
