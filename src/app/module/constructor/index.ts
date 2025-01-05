@@ -138,6 +138,7 @@ export {
     processDuplicateSectionElement,
     processCreateElementActions,
     mapElementsToTreeModel,
+    defaultSliderElementSettings,
 } from "./utils";
 
 export {
@@ -233,6 +234,12 @@ export {
     LZElementActionsComponent,
     PageElementsTreeComponent,
     LZEditorElementComponent,
+    SliderElementItemComponent,
+    SliderElementComponent,
+    SliderItemPageElement,
+    SliderPageElementSettings,
+    SliderPageElementItemSettings,
+    SliderPageElement,
 } from "./components";
 
 export {

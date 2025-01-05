@@ -31,6 +31,7 @@ import {
     defaultInnerElementSettings,
     defaultPageElementSettings,
     defaultSectionElementSettings,
+    defaultSliderElementSettings,
     defaultSpacerElementSettings,
     defaultTabsElementSettings,
     defaultTabsItemElementSettings,
@@ -338,6 +339,8 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
     [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
     [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
+    [SitePageElementType.SLIDER]: defaultSliderElementSettings(),
+    [SitePageElementType.SLIDER_ITEM]: defaultSliderElementSettings(),
 };
 
 export const possibleSiteElementsMap: Record<string, ElementButton[]> = {

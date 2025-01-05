@@ -42,5 +42,10 @@ export function possibleTabsItemSiteElements(): ElementButton[] {
             type: SitePageElementType.DIVIDER,
             icon: "bx-expand-vertical",
         },
+        {
+            title: "Слайдер",
+            type: SitePageElementType.SLIDER,
+            icon: "bx-list-check",
+        },
     ];
 }

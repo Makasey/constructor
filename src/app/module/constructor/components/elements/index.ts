@@ -41,3 +41,11 @@ export {
     AccordionElementItemComponent,
 } from "./accordion-element";
 export { DividerComponent, DividerElementSettingsGroup, DividerPageElementSettings, DividerPageElement } from "./divider";
+export {
+    SliderElementComponent,
+    SliderItemPageElement,
+    SliderElementItemComponent,
+    SliderPageElementItemSettings,
+    SliderPageElement,
+    SliderPageElementSettings,
+} from "./slider-element";

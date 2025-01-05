@@ -29,3 +29,4 @@ export {
 } from "./accordion-item";
 export { getDividerElementSettings, defaultDividerElementSettings } from "./divider";
 export { defaultPageElementSettings, possiblePageSiteElements } from "./page";
+export { defaultSliderElementSettings } from "./slider";

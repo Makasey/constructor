@@ -74,6 +74,8 @@ export enum SitePageElementType {
     ACCORDION = "accordion",
     ACCORDION_ITEM = "accordion-item",
     DIVIDER = "divider",
+    SLIDER = "slider",
+    SLIDER_ITEM = "slider-item",
 }
 
 export enum ElementHTMLTag {

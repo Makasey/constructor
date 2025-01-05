@@ -7,6 +7,8 @@ import {
     RootComponent,
     SectionComponent,
     SitePageElementType,
+    SliderElementComponent,
+    SliderElementItemComponent,
     SpacerComponent,
     TabElementItemComponent,
     TabsComponent,
@@ -28,4 +30,6 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.ACCORDION]: AccordionElementComponent,
     [SitePageElementType.ACCORDION_ITEM]: AccordionElementItemComponent,
     [SitePageElementType.DIVIDER]: DividerComponent,
+    [SitePageElementType.SLIDER]: SliderElementComponent,
+    [SitePageElementType.SLIDER_ITEM]: SliderElementItemComponent,
 };

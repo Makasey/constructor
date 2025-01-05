@@ -38,6 +38,7 @@ export {
     possibleAccordionItemSiteElements,
     possibleTabsItemSiteElements,
     processDuplicateSectionElement,
+    defaultSliderElementSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

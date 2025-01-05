@@ -58,6 +58,12 @@ export {
     DividerPageElementSettings,
     DividerElementSettingsGroup,
     DividerComponent,
+    SliderElementItemComponent,
+    SliderItemPageElement,
+    SliderPageElementSettings,
+    SliderPageElement,
+    SliderPageElementItemSettings,
+    SliderElementComponent,
 } from "./elements";
 
 export { LZElementActionsComponent } from "./element-actions";
