@@ -1,29 +1,31 @@
-@for (child of children(); track child.id) {
-    <ng-template
-        [ngTemplateOutlet]="child.isExtendable ? flexTemplate : blockTemplate"
-        [ngTemplateOutletContext]="{ child: child.id }"
-    ></ng-template>
-}
+<div
+    [style.width.%]="100"
+    [style.min-height.px]="300"
+    cdkDropList
+    [id]="elementID()"
+    [cdkDropListConnectedTo]="connectedLists()"
+    [cdkDropListData]="elementID()"
+>
+    @for (child of children(); track child.id) {
+        <ng-template
+            [ngTemplateOutlet]="child.isExtendable ? flexTemplate : blockTemplate"
+            [ngTemplateOutletContext]="{ child: child.id }"
+        ></ng-template>
+    }
 
-<ng-template #flexTemplate let-child="child">
-    <lz-editor-element
-        cdkDropList
-        [cdkDropListData]="child"
-        [id]="child"
-        [cdkDropListConnectedTo]="connectedLists()"
-        [elementId]="child"
-        [parentId]="elementID()"
-    >
-        <ng-container *lzElementResolver="child; parent: parentID()"></ng-container>
-    </lz-editor-element>
-</ng-template>
+    <ng-template #flexTemplate let-child="child">
+        <lz-editor-element [elementId]="child" [parentId]="elementID()">
+            <ng-container *lzElementResolver="child; parent: parentID()"></ng-container>
+        </lz-editor-element>
+    </ng-template>
 
-<ng-template #blockTemplate let-child="child">
-    <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child" [parentId]="elementID()">
-        <ng-container *lzElementResolver="child; parent: parentID()"></ng-container>
-    </lz-editor-element>
+    <ng-template #blockTemplate let-child="child">
+        <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child" [parentId]="elementID()">
+            <ng-container *lzElementResolver="child; parent: parentID()"></ng-container>
+        </lz-editor-element>
 
-    <div *cdkDragPlaceholder>
-        {{ child }}
-    </div>
-</ng-template>
+        <div *cdkDragPlaceholder>
+            {{ child }}
+        </div>
+    </ng-template>
+</div>
