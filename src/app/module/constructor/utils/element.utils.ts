@@ -3,18 +3,29 @@ import { Tree } from "@components/ui/tree/tree.component";
 import { arrayAdd } from "@datorama/akita";
 import { getRandomId } from "@shared-utils";
 
-export function deleteElementFromTree(items: Record<string, SitePageElement>, element: string): Record<string, SitePageElement> {
+export function deleteElementFromTree(
+    items: Record<string, SitePageElement>,
+    element: string,
+    itemsToRemove: string[] = [],
+): { items: Record<string, SitePageElement>; itemsToRemove: string[] } {
     const { id, children } = items[element];
+
+    itemsToRemove.push(id);
 
     let itemsCopy = { ...items };
 
     children.forEach(child => {
-        itemsCopy = deleteElementFromTree(itemsCopy, child);
+        itemsToRemove.push(child);
+
+        const { items, itemsToRemove: removedItems } = deleteElementFromTree(itemsCopy, child, itemsToRemove);
+
+        itemsCopy = items;
+        itemsToRemove = removedItems;
     });
 
     delete itemsCopy[id];
 
-    return itemsCopy;
+    return { items: itemsCopy, itemsToRemove };
 }
 
 export function duplicateTreeElement(

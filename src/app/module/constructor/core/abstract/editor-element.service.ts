@@ -138,7 +138,13 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
             const parentElement: SitePageElementUnion = items[parentId];
 
-            items = deleteElementFromTree(state.items, elementId);
+            const result = deleteElementFromTree(state.items, elementId);
+
+            result.itemsToRemove.forEach(itemToRemove => {
+                this.dragService.removeConnectedList(itemToRemove);
+            });
+
+            items = result.items;
 
             return {
                 items: {

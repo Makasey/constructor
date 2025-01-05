@@ -1,8 +1,6 @@
-import { AbstractEditorElementActionsService, LZEditorElementComponent, SitePageElementUnion } from "@modules/constructor";
-import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
+import { AbstractDragService, AbstractEditorElementActionsService, LZEditorElementComponent, SitePageElementUnion } from "@modules/constructor";
+import { CdkDrag, CdkDragPlaceholder, CdkDropList } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewEncapsulation, computed, inject, input, signal } from "@angular/core";
-import { ElementResolverDirective } from "@shared-directives";
-import { LZEditorElementBlockComponent } from "@modules/constructor/components/editor-element/components/editor-element-block/editor-element-block.component";
 import { NgTemplateOutlet } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -12,11 +10,10 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     providers: [],
-    imports: [ElementResolverDirective, LZEditorElementComponent, CdkDropList, CdkDrag, NgTemplateOutlet, LZEditorElementBlockComponent],
+    imports: [CdkDrag, NgTemplateOutlet, CdkDragPlaceholder, CdkDropList, LZEditorElementComponent],
     host: {
         "[class.editor-element-flex]": "true",
     },
-    hostDirectives: [CdkDrag],
     templateUrl: "./editor-element-flex.component.html",
     styleUrl: "./editor-element-flex.component.scss",
 })
@@ -38,6 +35,8 @@ export class LZEditorElementFlexComponent implements OnInit {
 
         return children.map(child => this.editorElementsActions.getElement(child));
     });
+
+    public readonly connectedLists = inject(AbstractDragService).getConnectedDropListsId();
 
     private readonly injector = inject(Injector);
 

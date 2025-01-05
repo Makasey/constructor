@@ -1,5 +1,5 @@
-import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { Observable, map } from "rxjs";
 
@@ -14,7 +14,6 @@ import {
     Directions,
     EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
-    LZEditorElementComponent,
     SECTION_PROVIDERS,
     SectionPageElement,
     SectionPageElementSettings,
@@ -28,9 +27,9 @@ import {
 } from "@modules/constructor";
 
 import { CdkDropList } from "@angular/cdk/drag-drop";
-import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { ImageLinkPipe } from "@shared-pipes";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -39,27 +38,12 @@ import { toSignal } from "@angular/core/rxjs-interop";
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
     styleUrls: ["./section.component.scss"],
-    hostDirectives: [
-        TabSelectionDirective,
-        ToggleSelectionDirective,
-        {
-            directive: CdkDropList,
-            inputs: ["id: ELEMENT_ID", "cdkDropListData:cdkDropListData", "cdkDropListConnectedTo:connectListsId"],
-        },
-    ],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     host: {
         "[attr.id]": "ELEMENT_ID",
     },
     providers: [...SECTION_PROVIDERS],
-    imports: [
-        ElementResolverDirective,
-        ImageLinkPipe,
-        LZEditorElementComponent,
-        AsyncPipe,
-        NgTemplateOutlet,
-        LZEditorElementFlexComponent,
-        CdkDropList,
-    ],
+    imports: [ImageLinkPipe, NgTemplateOutlet, LZEditorElementFlexComponent, CdkDropList],
     standalone: true,
 })
 export class SectionComponent implements OnInit {
@@ -147,8 +131,6 @@ export class SectionComponent implements OnInit {
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
 
-    public readonly cdkDropListData = this.ELEMENT_ID;
-
     public readonly connectListsId = inject(AbstractDragService).getConnectedDropListsId();
 
     public element: Signal<SectionPageElement> = toSignal(this.editorActionsService.selectElement(this.ELEMENT_ID), {
@@ -159,8 +141,6 @@ export class SectionComponent implements OnInit {
 
     public readonly columnStructureElement = ColumnStructure;
 
-    public readonly cdkDropList = inject(CdkDropList);
-
     public readonly columnStructureElements = columnStructureElements;
 
     public readonly sitePageElementType = SitePageElementType;
@@ -169,8 +149,6 @@ export class SectionComponent implements OnInit {
 
     public ngOnInit(): void {
         // this.element$ = this.editorActionsService.selectElement(this.ELEMENT_ID);
-
-        console.log((this.cdkDropList.connectedTo = this.connectListsId()));
 
         this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
 

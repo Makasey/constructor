@@ -1,11 +1,24 @@
-<div [style.min-height.px]="100" cdkDropList [cdkDropListData]="element().id" [id]="element().id" [cdkDropListConnectedTo]="connectedLists()">
-    @if (element(); as element) {
-        @if (element.children.length) {
-            @for (child of element.children; track child) {
-                <lz-editor-element [elementId]="child" [parentId]="element.id">
-                    <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
-                </lz-editor-element>
-            }
-        }
-    }
-</div>
+<!--<div [style.min-height.px]="100" cdkDropList [cdkDropListData]="element().id" [id]="element().id" [cdkDropListConnectedTo]="connectedLists()">-->
+<!--    @if (element(); as element) {-->
+<!--        @if (element.children.length) {-->
+<!--            @for (child of element.children; track child) {-->
+<!--                <lz-editor-element [elementId]="child" [parentId]="element.id">-->
+<!--                    <ng-container *lzElementResolver="child; parent: element.id"></ng-container>-->
+<!--                </lz-editor-element>-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+<!--</div>-->
+
+@let id = element().id;
+
+@if (id) {
+    <lz-editor-element-flex
+        cdkDropList
+        [elementID]="element().id"
+        [id]="element().id"
+        [parentID]="element().parentId"
+        [cdkDropListConnectedTo]="connectedLists()"
+        [cdkDropListData]="element().id"
+    ></lz-editor-element-flex>
+}

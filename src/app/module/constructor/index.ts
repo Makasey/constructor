@@ -236,6 +236,7 @@ export {
     LZElementActionsComponent,
     PageElementsTreeComponent,
     LZEditorElementComponent,
+    LZEditorElementBlockComponent,
 } from "./components";
 
 export {

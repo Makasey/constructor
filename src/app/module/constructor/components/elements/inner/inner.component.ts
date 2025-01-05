@@ -1,16 +1,10 @@
-import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation, inject } from "@angular/core";
 
-import {
-    AbstractDragService,
-    InnerPageElement,
-    LZEditorElementComponent,
-    processBackgroundValue,
-    processSettingValueWithUnit,
-} from "@modules/constructor";
+import { AbstractDragService, InnerPageElement, processBackgroundValue, processSettingValueWithUnit } from "@modules/constructor";
 import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
 import { DragDropModule } from "@angular/cdk/drag-drop";
-import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
@@ -18,7 +12,7 @@ import { hostBinding } from "@modules/constructor/utils/host-binding";
     templateUrl: "./inner.component.html",
     styleUrls: ["./inner.component.scss"],
     standalone: true,
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent, DragDropModule],
+    imports: [DragDropModule, LZEditorElementFlexComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,

@@ -49,7 +49,7 @@ export function processUpdateAccordionElementSettings<K extends SitePageElementS
                 };
             }, items);
 
-            updatedItems = deleteElementFromTree(updatedItems, deletedItemId);
+            updatedItems = deleteElementFromTree(updatedItems, deletedItemId).items;
 
             const processedChildrenSettings = updatedChildren.map(child => {
                 return {
