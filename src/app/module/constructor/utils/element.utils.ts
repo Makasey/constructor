@@ -1,7 +1,19 @@
-import { ElementButton, SitePageElement, SitePageElementType, possibleSiteElementsMap } from "@modules/constructor";
+import {
+    AbstractEditorElementSettingsService,
+    EDITOR_SELECTED_ELEMENT,
+    ElementButton,
+    SitePageElement,
+    SitePageElementSettingsUnion,
+    SitePageElementType,
+    possibleSiteElementsMap,
+} from "@modules/constructor";
+import { DestroyRef, Injector, Signal, WritableSignal, effect, inject, runInInjectionContext, signal } from "@angular/core";
+import { Subscription, tap } from "rxjs";
 import { Tree } from "@components/ui/tree/tree.component";
 import { arrayAdd } from "@datorama/akita";
+import { assertInjector } from "@modules/constructor/utils/assert-injector";
 import { getRandomId } from "@shared-utils";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 export function deleteElementFromTree(
     items: Record<string, SitePageElement>,
@@ -111,4 +123,39 @@ export function mapElementsToTreeModel(items: Record<string, SitePageElement>, e
             return mapElementsToTreeModel(items, child);
         }),
     };
+}
+
+export function provideElementSettings<TElementSettings extends SitePageElementSettingsUnion>(
+    element?: Signal<string>,
+    injector?: Injector,
+): Signal<TElementSettings> {
+    injector = assertInjector(provideElementSettings, injector);
+
+    return runInInjectionContext(injector, () => {
+        const selectedElement = element ?? inject(EDITOR_SELECTED_ELEMENT);
+        const elementSettingsService = inject<AbstractEditorElementSettingsService<TElementSettings>>(AbstractEditorElementSettingsService);
+        const destroyRef = inject(DestroyRef);
+        const resultSignal: WritableSignal<TElementSettings> = signal({} as TElementSettings);
+
+        let subscription: Subscription | null = null;
+
+        effect(() => {
+            const elementId = selectedElement();
+
+            if (subscription) {
+                subscription.unsubscribe();
+                subscription = null;
+            }
+
+            subscription = elementSettingsService
+                .selectSettings(elementId)
+                .pipe(
+                    tap(settings => resultSignal.set(settings)),
+                    takeUntilDestroyed(destroyRef),
+                )
+                .subscribe();
+        });
+
+        return resultSignal;
+    });
 }

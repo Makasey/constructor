@@ -2,4 +2,9 @@
     position: relative;
     display: flex;
     width: 100%;
+
+    & > *:first-child {
+      height: 100%;
+      width: 100%;
+    }
 }

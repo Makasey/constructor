@@ -17,15 +17,13 @@ import { getRandomId } from "@shared-utils";
 export function getNewElement<T extends SitePageElementUnion>(type: SitePageElementType, parentId: string): T {
     const newElementID = getRandomId();
     logAction(`Add element with id: ${newElementID}, type: ${type}`);
-    const defaultElementData = defaultPageElementSettingsMap[type]();
+    const defaultElementData = defaultPageElementSettingsMap[type]() as T;
+
     return {
         ...defaultElementData,
         id: newElementID,
         parentId: parentId,
-        settings: {
-            ...defaultElementData.settings,
-        },
-    } as T;
+    };
 }
 
 export function processElementCreation(
