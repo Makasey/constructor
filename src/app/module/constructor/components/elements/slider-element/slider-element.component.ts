@@ -1,6 +1,6 @@
 import { AbstractEditorElementActionsService, ELEMENT_ID, LZEditorElementComponent, SliderPageElement } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, Signal, ViewEncapsulation, inject } from "@angular/core";
-import { ElementResolverDirective } from "@shared-directives";
+import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -11,6 +11,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     imports: [ElementResolverDirective, LZEditorElementComponent],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     host: {
         class: "lz-slider-element",
     },

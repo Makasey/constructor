@@ -30,4 +30,4 @@ export {
 export { getDividerElementSettings, defaultDividerElementSettings } from "./divider";
 export { defaultPageElementSettings, possiblePageSiteElements } from "./page";
 export { defaultSliderElementSettings, processSliderElementCreation } from "./slider";
-export { defaultSliderItemElementSettings } from "./slider-item";
+export { defaultSliderItemElementSettings, getSliderItemElementSettings } from "./slider-item";

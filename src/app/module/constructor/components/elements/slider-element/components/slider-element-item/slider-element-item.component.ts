@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/core";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-slider-element-item",
@@ -6,6 +7,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/
     styleUrl: "./slider-element-item.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     standalone: true,
     host: {
         class: "lz-slider-element-item",

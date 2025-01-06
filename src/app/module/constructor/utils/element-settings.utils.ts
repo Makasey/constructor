@@ -13,6 +13,7 @@ import {
     SectionPageElement,
     SitePageElementType,
     SitePageElementUnion,
+    SliderItemPageElement,
     SliderPageElement,
     SpacerPageElement,
     StyleUnit,
@@ -26,6 +27,7 @@ import {
     getImageSettings,
     getInnerSettings,
     getSectionSettings,
+    getSliderItemElementSettings,
     getSpacerElementSettings,
     getTabsItemSettings,
     getTabsSettings,
@@ -88,6 +90,9 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
         }
         case SitePageElementType.SLIDER: {
             return getSliderElementSettings(element as SliderPageElement);
+        }
+        case SitePageElementType.SLIDER_ITEM: {
+            return getSliderItemElementSettings(element as SliderItemPageElement);
         }
 
         default: {
