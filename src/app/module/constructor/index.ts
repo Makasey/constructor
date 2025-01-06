@@ -139,6 +139,8 @@ export {
     processCreateElementActions,
     mapElementsToTreeModel,
     defaultSliderElementSettings,
+    defaultSliderItemElementSettings,
+    processSliderElementCreation,
 } from "./utils";
 
 export {

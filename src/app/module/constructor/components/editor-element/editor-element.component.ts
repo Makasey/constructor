@@ -21,6 +21,7 @@ import { LZElementActionsComponent } from "../element-actions";
             inputs: ["id:elementId"],
         },
     ],
+    standalone: true,
 })
 export class LZEditorElementComponent {
     @HostBinding("class.lz-editor-element")

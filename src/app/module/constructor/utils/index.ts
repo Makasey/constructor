@@ -39,6 +39,8 @@ export {
     possibleTabsItemSiteElements,
     processDuplicateSectionElement,
     defaultSliderElementSettings,
+    defaultSliderItemElementSettings,
+    processSliderElementCreation,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

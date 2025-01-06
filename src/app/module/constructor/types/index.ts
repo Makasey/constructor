@@ -9,6 +9,8 @@ import {
     SectionPageElement,
     SectionPageElementSettings,
     SitePageElementType,
+    SliderItemPageElement,
+    SliderPageElement,
     SpacerPageElement,
     StyleUnit,
     TabsItemPageElement,
@@ -36,7 +38,9 @@ export type SitePageElementUnion =
     | TabsPageElement
     | SpacerPageElement
     | AccordionPageElement
-    | AccordionItemPageElement;
+    | AccordionItemPageElement
+    | SliderPageElement
+    | SliderItemPageElement;
 
 export type SitePageElementSettingsUnion =
     | TabsPageElementSettings

@@ -7,6 +7,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
+    host: {
+        class: "lz-slider-element-item",
+    },
     imports: [],
 })
 export class SliderElementItemComponent {}

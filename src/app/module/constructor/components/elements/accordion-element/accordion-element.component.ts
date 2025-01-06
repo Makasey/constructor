@@ -22,6 +22,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    standalone: true,
 })
 export class AccordionElementComponent implements OnInit {
     @HostBinding("class.lz-accordion-element")

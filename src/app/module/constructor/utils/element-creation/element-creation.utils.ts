@@ -5,6 +5,7 @@ import {
     SitePageElementUnion,
     defaultPageElementSettingsMap,
     processAccordionElementCreation,
+    processSliderElementCreation,
     processTabsElementCreation,
     processUpdateAccordionElementSettings,
     processUpdateAccordionItemElementSettings,
@@ -40,6 +41,10 @@ export function processElementCreation(
 
         case SitePageElementType.ACCORDION: {
             return processAccordionElementCreation(type, items, parentId);
+        }
+
+        case SitePageElementType.SLIDER: {
+            return processSliderElementCreation(type, items, parentId);
         }
 
         default: {
