@@ -2,7 +2,10 @@ import { BackgroundType, SitePageElementType, SliderItemPageElement, StyleUnit }
 import { defaultDirectionValue } from "@components";
 
 export function defaultSliderItemElementSettings(): () => Omit<SliderItemPageElement, "id" | "parentId"> {
+    let counter = 0;
+
     return () => {
+        counter++;
         return {
             type: SitePageElementType.SLIDER_ITEM,
             children: [],
@@ -23,6 +26,7 @@ export function defaultSliderItemElementSettings(): () => Omit<SliderItemPageEle
                     unit: StyleUnit.PX,
                 },
                 background: { backgroundType: BackgroundType.CLASSIC },
+                title: `element-${counter}`,
             },
         };
     };

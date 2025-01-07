@@ -142,6 +142,8 @@ export {
     defaultSliderItemElementSettings,
     processSliderElementCreation,
     getSliderItemElementSettings,
+    processUpdateSliderSettings,
+    processUpdateSliderItemElementSettings,
 } from "./utils";
 
 export {

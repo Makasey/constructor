@@ -42,6 +42,8 @@ export {
     defaultSliderItemElementSettings,
     processSliderElementCreation,
     getSliderItemElementSettings,
+    processUpdateSliderSettings,
+    processUpdateSliderItemElementSettings,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {
