@@ -1,7 +1,9 @@
+<button>previous</button>
 @if (element(); as editorElement) {
-  @for (child of editorElement.children; track child) {
-    <lz-editor-element [elementId]="child">
-      <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
-    </lz-editor-element>
-  }
+    @for (child of editorElement.children; track child) {
+        <lz-editor-element [elementId]="child">
+            <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
+        </lz-editor-element>
+    }
 }
+<button>next</button>

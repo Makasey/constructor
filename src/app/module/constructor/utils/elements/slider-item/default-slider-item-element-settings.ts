@@ -18,7 +18,7 @@ export function defaultSliderItemElementSettings(): () => Omit<SliderItemPageEle
                     ...defaultDirectionValue,
                 },
                 width: {
-                    value: 100,
+                    value: 30,
                     unit: StyleUnit.PERCENT,
                 },
                 height: {

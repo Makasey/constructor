@@ -42,6 +42,7 @@ import {
     possibleInnerSiteElements,
     possiblePageSiteElements,
     possibleSectionSiteElements,
+    possibleSliderItemSiteElements,
     possibleTabsItemSiteElements,
 } from "@modules/constructor";
 import { BorderFieldModel, defaultDirectionValue } from "@components";
@@ -350,6 +351,7 @@ export const possibleSiteElementsMap: Record<string, ElementButton[]> = {
     [SitePageElementType.INNER]: possibleInnerSiteElements(),
     [SitePageElementType.ACCORDION_ITEM]: possibleAccordionItemSiteElements(),
     [SitePageElementType.TABS_ITEM]: possibleTabsItemSiteElements(),
+    [SitePageElementType.SLIDER_ITEM]: possibleSliderItemSiteElements(),
 };
 
 export const duplicateElementActionConfig: ElementActionsConfigItem = {

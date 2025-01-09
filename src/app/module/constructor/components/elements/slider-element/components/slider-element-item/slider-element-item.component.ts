@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from "@angular/core";
-import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { AbstractEditorElementActionsService, ELEMENT_ID, LZEditorElementComponent, SliderItemPageElement } from "@modules/constructor";
+import { AsyncPipe } from "@angular/common";
+import { ChangeDetectionStrategy, Component, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-slider-element-item",
@@ -12,6 +15,10 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     host: {
         class: "lz-slider-element-item",
     },
-    imports: [],
+    imports: [AsyncPipe, LZEditorElementComponent, ElementResolverDirective],
 })
-export class SliderElementItemComponent {}
+export class SliderElementItemComponent {
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
+    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
+    public readonly element: Signal<SliderItemPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+}

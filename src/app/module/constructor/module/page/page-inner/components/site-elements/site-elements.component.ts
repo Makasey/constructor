@@ -11,6 +11,7 @@ import { DraggableDirective } from "@shared-directives/drag-and-drop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [NgClass, DraggableDirective],
+    standalone: true,
 })
 export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")

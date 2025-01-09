@@ -144,6 +144,7 @@ export {
     getSliderItemElementSettings,
     processUpdateSliderSettings,
     processUpdateSliderItemElementSettings,
+    possibleSliderItemSiteElements,
 } from "./utils";
 
 export {
