@@ -1,5 +1,5 @@
 import { AbstractEditorElementActionsService, ELEMENT_ID, LZEditorElementComponent, SliderPageElement } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, ElementRef, Signal, ViewEncapsulation, inject, viewChild } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { toSignal } from "@angular/core/rxjs-interop";
 
@@ -20,4 +20,12 @@ export class SliderElementComponent {
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+
+    private elementRef = inject(ElementRef);
+
+    private wrapRef = viewChild("wrapper");
+
+    public onNext(): void {
+        return;
+    }
 }

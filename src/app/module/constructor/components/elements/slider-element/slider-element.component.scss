@@ -1,5 +1,13 @@
 .lz-slider-element {
     display: flex;
-    justify-content: space-between;
-    border: 2px solid #c3f608;
+
+    min-width: 100%;
+    border: 2px solid #cc1ba4;
+
+    .slider-wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+        border: 2px solid #c3f608;
+    }
 }
