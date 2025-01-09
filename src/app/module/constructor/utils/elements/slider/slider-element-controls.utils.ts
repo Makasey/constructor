@@ -22,6 +22,30 @@ function getSliderElementItemsControls(element: SliderPageElement): APFormContro
     };
 }
 
+function getSliderElementShowItemsControl(element: SliderPageElement): APFormControl {
+    return {
+        id: "showItemsCount",
+        name: "showItemsCount",
+        value: element.settings.showItemsCount,
+        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+        options: {
+            label: "Количество показываемых элементов",
+        },
+    };
+}
+
+function getSliderElementScrollingItemsControl(element: SliderPageElement): APFormControl {
+    return {
+        id: "scrollingItemsCount",
+        name: "scrollingItemsCount",
+        value: element.settings.scrollingItemsCount,
+        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+        options: {
+            label: "Количество прокручиваемых элементов",
+        },
+    };
+}
+
 function getSliderPaddingControl(element: SliderPageElement): APFormControl {
     return {
         id: "padding",
@@ -62,6 +86,8 @@ function getSliderElementSettingsControls(element: SliderPageElement): APFormCon
         getSliderPaddingControl(element),
         getAccordionMarginControl(element),
         getSliderElementItemsControls(element),
+        getSliderElementShowItemsControl(element),
+        getSliderElementScrollingItemsControl(element),
     ];
 }
 

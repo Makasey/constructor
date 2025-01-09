@@ -13,8 +13,8 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: 180,
+                    unit: StyleUnit.PX,
                 },
                 margin: {
                     ...defaultDirectionValue,
@@ -29,6 +29,8 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
                 selectedElement: "",
                 count: 3,
                 items: [],
+                scrollingItemsCount: 1,
+                showItemsCount: 3,
             },
         };
     };

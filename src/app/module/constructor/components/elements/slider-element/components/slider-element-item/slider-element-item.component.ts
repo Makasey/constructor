@@ -1,7 +1,18 @@
-import { AbstractEditorElementActionsService, ELEMENT_ID, LZEditorElementComponent, SliderItemPageElement } from "@modules/constructor";
+import {
+    AbstractEditorElementActionsService,
+    AbstractEditorElementSettingsService,
+    ELEMENT_ID,
+    LZEditorElementComponent,
+    SliderItemPageElement,
+    SliderPageElementItemSettings,
+    processBackgroundValue,
+    processDirectionValue,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
 import { AsyncPipe } from "@angular/common";
-import { ChangeDetectionStrategy, Component, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { Observable, map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -17,8 +28,39 @@ import { toSignal } from "@angular/core/rxjs-interop";
     },
     imports: [AsyncPipe, LZEditorElementComponent, ElementResolverDirective],
 })
-export class SliderElementItemComponent {
+export class SliderElementItemComponent implements OnInit {
+    @HostBinding("$.style.height")
+    @HostListener("$.style.height")
+    public height$: Observable<string>;
+
+    @HostBinding("$.style.width")
+    @HostListener("$.style.width")
+    public width$: Observable<string>;
+
+    @HostBinding("$.style.padding")
+    @HostListener("$.style.padding")
+    public padding$: Observable<string>;
+
+    @HostBinding("$.style.margin")
+    @HostListener("$.style.margin")
+    public margin$: Observable<string>;
+
+    @HostBinding("$.style.background")
+    @HostListener("$.style.background")
+    public background$: Observable<string>;
+
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     public readonly element: Signal<SliderItemPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
+
+    private settings$: Observable<SliderPageElementItemSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+
+    public ngOnInit(): void {
+        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
+        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
+        this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
+        this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));
+    }
 }

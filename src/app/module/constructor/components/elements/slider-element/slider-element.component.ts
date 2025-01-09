@@ -1,6 +1,27 @@
-import { AbstractEditorElementActionsService, ELEMENT_ID, LZEditorElementComponent, SliderPageElement } from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, ElementRef, Signal, ViewEncapsulation, inject, viewChild } from "@angular/core";
+import {
+    AbstractEditorElementActionsService,
+    AbstractEditorElementSettingsService,
+    ELEMENT_ID,
+    LZEditorElementComponent,
+    SliderPageElement,
+    SliderPageElementSettings,
+    processDirectionValue,
+    processSettingValueWithUnit,
+} from "@modules/constructor";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    OnInit,
+    Signal,
+    ViewEncapsulation,
+    inject,
+    viewChild,
+} from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { Observable, map } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -16,14 +37,39 @@ import { toSignal } from "@angular/core/rxjs-interop";
         class: "lz-slider-element",
     },
 })
-export class SliderElementComponent {
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
-    public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+export class SliderElementComponent implements OnInit {
+    @HostBinding("$.style.height")
+    @HostListener("$.style.height")
+    public height$: Observable<string>;
+
+    @HostBinding("$.style.width")
+    @HostListener("$.style.width")
+    public width$: Observable<string>;
+
+    @HostBinding("$.style.padding")
+    @HostListener("$.style.padding")
+    public padding$: Observable<string>;
+
+    @HostBinding("$.style.margin")
+    @HostListener("$.style.margin")
+    public margin$: Observable<string>;
 
     private elementRef = inject(ElementRef);
+    public readonly ELEMENT_ID = inject(ELEMENT_ID);
+    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
+    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
+    public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+
+    private settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     private wrapRef = viewChild("wrapper");
+
+    public ngOnInit(): void {
+        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
+        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
+        this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
+    }
 
     public onNext(): void {
         return;

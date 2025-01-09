@@ -9,6 +9,8 @@ export type SliderPageElementSettings = Readonly<{
     margin: Direction;
     count: number;
     selectedElement: string;
+    scrollingItemsCount: number;
+    showItemsCount: number;
     items: (SliderPageElementItemSettings & { id?: string; duplicatedId?: string })[];
 }> &
     SitePageElementSizeSettings;

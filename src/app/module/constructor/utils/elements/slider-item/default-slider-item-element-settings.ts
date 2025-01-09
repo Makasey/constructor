@@ -18,11 +18,11 @@ export function defaultSliderItemElementSettings(): () => Omit<SliderItemPageEle
                     ...defaultDirectionValue,
                 },
                 width: {
-                    value: 30,
-                    unit: StyleUnit.PERCENT,
+                    value: 200,
+                    unit: StyleUnit.PX,
                 },
                 height: {
-                    value: 50,
+                    value: 150,
                     unit: StyleUnit.PX,
                 },
                 background: { backgroundType: BackgroundType.CLASSIC },
