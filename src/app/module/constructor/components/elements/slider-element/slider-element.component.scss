@@ -1,12 +1,36 @@
 .lz-slider-element {
-    display: flex;
-    gap: 10px;
     border: 2px solid #cc1ba4;
 
     .slider-wrapper {
         display: flex;
+        overflow: hidden;
+        position: relative;
+
         justify-content: space-between;
         flex-grow: 1;
         border: 2px solid #c3f608;
+        transition: 0.4s transform;
+    }
+
+    .slider-control {
+        width: 50px;
+        height: 50px;
+        background: transparent;
+        text-transform: uppercase;
+        border: 1px solid #706a6a;
+        border-radius: 50%;
+        cursor: pointer;
+        outline: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &.prev {
+            left: 5px;
+        }
+
+        &.next {
+            right: 5px;
+        }
     }
 }

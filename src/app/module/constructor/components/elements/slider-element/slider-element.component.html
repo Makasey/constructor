@@ -1,11 +1,11 @@
-<button>prev</button>
 @if (element(); as editorElement) {
-    <div class="slider-wrapper" #wrapper>
+    <div #wrapper class="slider-wrapper" [style.transform]="convertedPosition()">
         @for (child of editorElement.children; track child) {
             <lz-editor-element [elementId]="child">
                 <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
             </lz-editor-element>
         }
+        <button class="slider-control prev" (click)="onPrev()">prev</button>
+        <button class="slider-control next" (click)="onNext()">next</button>
     </div>
 }
-<button (click)="onNext()">next</button>

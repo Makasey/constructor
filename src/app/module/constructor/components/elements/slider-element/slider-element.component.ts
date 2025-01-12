@@ -17,7 +17,9 @@ import {
     OnInit,
     Signal,
     ViewEncapsulation,
+    computed,
     inject,
+    signal,
     viewChild,
 } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
@@ -54,15 +56,28 @@ export class SliderElementComponent implements OnInit {
     @HostListener("$.style.margin")
     public margin$: Observable<string>;
 
+    private wrapRef = viewChild("wrapper");
+
     private elementRef = inject(ElementRef);
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
+
     public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
-    private settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+    public readonly scrollingItemsCount: Signal<number> = computed(() => this.element().settings.scrollingItemsCount);
 
-    private wrapRef = viewChild("wrapper");
+    public readonly showItemsCount: Signal<number> = computed(() => this.element().settings.showItemsCount);
+
+    public position = signal(0);
+
+    public autoSlide: Signal<boolean> = computed(() => this.element().settings.autoSlide);
+
+    public autoSlideTimeout: Signal<number> = computed(() => this.element().settings.autoSlideTimeout);
+
+    public convertedPosition = computed(() => `translateX(${this.position()}px)`);
+
+    private settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
@@ -72,6 +87,10 @@ export class SliderElementComponent implements OnInit {
     }
 
     public onNext(): void {
+        return;
+    }
+
+    public onPrev(): void {
         return;
     }
 }
