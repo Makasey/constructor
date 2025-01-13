@@ -167,6 +167,9 @@ export {
     AbstractSaveEditorElementsService,
     SaveEditorElementsService,
     LocalStorageService,
+    provideDragService,
+    DefaultDragService,
+    AbstractDragService,
 } from "./core";
 
 export {
@@ -233,6 +236,7 @@ export {
     LZElementActionsComponent,
     PageElementsTreeComponent,
     LZEditorElementComponent,
+    LZEditorElementBlockComponent,
 } from "./components";
 
 export {

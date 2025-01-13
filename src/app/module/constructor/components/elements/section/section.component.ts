@@ -1,9 +1,10 @@
-import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 import { Observable, map } from "rxjs";
 
 import {
+    AbstractDragService,
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
@@ -13,7 +14,6 @@ import {
     Directions,
     EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
-    LZEditorElementComponent,
     SECTION_PROVIDERS,
     SectionPageElement,
     SectionPageElementSettings,
@@ -26,8 +26,10 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 
-import { DroppableDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { CdkDropList } from "@angular/cdk/drag-drop";
 import { ImageLinkPipe } from "@shared-pipes";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -35,16 +37,14 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     templateUrl: `./section.component.html`,
-    styleUrls: ["section.component.scss"],
-    hostDirectives: [
-        TabSelectionDirective,
-        ToggleSelectionDirective,
-        {
-            directive: DroppableDirective,
-        },
-    ],
+    styleUrls: ["./section.component.scss"],
+    hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    host: {
+        "[attr.id]": "ELEMENT_ID",
+    },
     providers: [...SECTION_PROVIDERS],
-    imports: [ElementResolverDirective, ImageLinkPipe, LZEditorElementComponent, AsyncPipe, NgTemplateOutlet],
+    imports: [ImageLinkPipe, NgTemplateOutlet, LZEditorElementFlexComponent, CdkDropList],
+    standalone: true,
 })
 export class SectionComponent implements OnInit {
     @HostBinding("$.style.min-height")
@@ -123,13 +123,15 @@ export class SectionComponent implements OnInit {
 
     private readonly service = inject(AbstractEditorElementSettingsService);
 
-    private readonly editorActionsService = inject(AbstractEditorElementActionsService<SectionPageElement>) as AbstractSectionEditorActionsService;
+    private readonly editorActionsService = inject(AbstractEditorElementActionsService) as AbstractSectionEditorActionsService;
 
     private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
 
     private readonly selectionService = inject(AbstractEditorSelectionService) as SectionSelectionService;
 
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
+
+    public readonly connectListsId = inject(AbstractDragService).getConnectedDropListsId();
 
     public element: Signal<SectionPageElement> = toSignal(this.editorActionsService.selectElement(this.ELEMENT_ID), {
         initialValue: {} as SectionPageElement,

@@ -1,36 +1,27 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
-
+import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { NgForOf } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
+    AbstractDragService,
     AbstractEditorElementActionsService,
     AbstractSaveEditorElementsService,
     EDITOR_SELECTED_ELEMENT,
-    ElementButton,
     LZEditorElementComponent,
-    ROOT_ELEMENT_ID,
-    SectionPageElement,
 } from "@modules/constructor";
+import { CdkDropList } from "@angular/cdk/drag-drop";
 import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { DroppableDirective } from "@shared-directives/drag-and-drop";
-import { LZDropEvent } from "@shared-directives/drag-and-drop/types";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
 
 @Component({
     selector: "lz-root-element",
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
-    imports: [ElementResolverDirective, LZEditorElementComponent, DroppableDirective],
-    hostDirectives: [
-        ToggleSelectionDirective,
-        DeleteSelectedElementDirective,
-        TabSelectionDirective,
-        {
-            directive: DroppableDirective,
-            outputs: ["itemDropped"],
-        },
-    ],
+    imports: [NgForOf, ElementResolverDirective, LZEditorElementComponent, LZEditorElementFlexComponent, CdkDropList],
+    hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective],
 })
 export class RootComponent implements OnInit, OnDestroy {
     @HostBinding("class")
@@ -39,19 +30,11 @@ export class RootComponent implements OnInit, OnDestroy {
         "editor-element": true,
     };
 
-    @HostListener("itemDropped", ["$event"])
-    public createNewElement(event: LZDropEvent<string, ElementButton>): void {
-        const { type } = event.data;
-        if (this.selectedElement() === ROOT_ELEMENT_ID) {
-            this.service.addPageElement(type);
+    public readonly connectListsId = inject(AbstractDragService).getConnectedDropListsId();
 
-            return;
-        }
+    public console1 = console;
 
-        this.service.addElementByType(type);
-    }
-
-    private readonly service = inject(AbstractEditorElementActionsService<SectionPageElement>);
+    private readonly service = inject(AbstractEditorElementActionsService);
 
     private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
 

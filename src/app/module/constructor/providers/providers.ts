@@ -20,6 +20,7 @@ import {
     SitePreviewDataService,
     editorSelectedElementFactory,
     editorSelectedPageFactory,
+    provideDragService,
     providePreviewService,
 } from "@modules/constructor";
 import { LzStateKey, createStoreProviders, providePreviewDataService } from "@core";
@@ -37,6 +38,7 @@ export const EDITOR_PROVIDERS: Provider[] = [
     { provide: AbstractCampaignService, useClass: SinglePageCampaignService },
     { provide: EDITOR_SELECTED_ELEMENT, useFactory: editorSelectedElementFactory() },
     { provide: EDITOR_SELECTED_PAGE, useFactory: editorSelectedPageFactory() },
+    provideDragService(),
     providePreviewDataService(SitePreviewDataService),
     providePreviewService(),
 ];

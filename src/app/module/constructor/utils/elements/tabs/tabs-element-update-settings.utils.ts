@@ -47,7 +47,7 @@ export function processUpdateTabsElementSettings<K extends SitePageElementSettin
                 };
             }, items);
 
-            updatedItems = deleteElementFromTree(updatedItems, deletedItemId);
+            updatedItems = deleteElementFromTree(updatedItems, deletedItemId).items;
             const processedChildrenSettings = updatedChildren.map(child => {
                 return {
                     ...child.settings,

@@ -1,5 +1,5 @@
-import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
 import {
+    AbstractDragService,
     ElementActionsConfigItem,
     ROOT_ELEMENT_ID,
     SitePageElement,
@@ -10,16 +10,19 @@ import {
     processDuplicateElementsById,
     processElementCreation,
 } from "@modules/constructor";
-import { Inject, Injectable } from "@angular/core";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
+import { Inject, Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
-export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion> {
+export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion = SitePageElementUnion> {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
     ) {}
+
+    private readonly dragService = inject(AbstractDragService);
 
     public selectElement(id: string): Observable<T> {
         return this.query.select(state => state.items[id] as T);
@@ -52,7 +55,9 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
     public addPageElement(type: SitePageElementType): void {
         this.service.updateState(state => {
-            const stateData = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
+            const { createdElementIds, ...stateData } = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
+
+            this.dragService.addConnectedElement(createdElementIds);
 
             const updatedPages = state.pages.map(page => {
                 if (page.id === state.selectedPage) {
@@ -76,18 +81,32 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         this.service.updateState(state => {
             parentId = parentId ?? state.selectedElement;
 
-            return processElementCreation(type, state.items, parentId);
+            const { createdElementIds, ...processedStore } = processElementCreation(type, state.items, parentId);
+
+            if (["section", "inner"].includes(type)) {
+                this.dragService.addConnectedElement(createdElementIds);
+            }
+
+            if (["tabs", "accordion"].includes(type)) {
+                this.dragService.addConnectedElement(createdElementIds.slice(1));
+            }
+
+            return processedStore;
         });
     }
 
     public addElement(element: SitePageElementUnion, parentId?: string): void {
         this.service.updateState(state => {
             parentId = parentId ?? state.selectedElement;
-            const { type, id: elementID } = element;
+            const { type, id: elementID, isExtendable } = element;
 
             logAction(`Add element with id: ${elementID} type: ${type}`);
             const items = state.items;
             const parentElement = items[parentId];
+
+            if (isExtendable) {
+                this.dragService.addConnectedElement(elementID);
+            }
 
             return {
                 selectedElement: elementID,
@@ -105,6 +124,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
     public deleteElement(elementId: string): void {
         logAction(`Delete element with id: ${elementId}`, [], { id: elementId });
+        this.dragService.removeConnectedList(elementId);
 
         this.service.updateState(state => {
             let items = { ...state.items };
@@ -122,7 +142,13 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
             const parentElement: SitePageElementUnion = items[parentId];
 
-            items = deleteElementFromTree(state.items, elementId);
+            const result = deleteElementFromTree(state.items, elementId);
+
+            result.itemsToRemove.forEach(itemToRemove => {
+                this.dragService.removeConnectedList(itemToRemove);
+            });
+
+            items = result.items;
 
             return {
                 items: {
@@ -154,6 +180,8 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     protected deleteItemFromPage(elementId: string): Page[] {
         const state = this.query.getValue();
         const { pages, selectedPage } = state;
+
+        this.dragService.removeConnectedList(elementId);
 
         return pages.map(page => {
             if (page.id === selectedPage) {

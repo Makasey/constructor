@@ -13,7 +13,7 @@ function getInnerItemByType(type: ColumnStructure, parentId: string): InnerPageE
     const count = columnStructureCountMap[type];
     const elementId = getRandomId();
 
-    const elementWidth = Math.floor(100 / count);
+    const elementWidth = Math.floor(100 / count) === 100 / count ? Math.floor(100 / count) - 1 : Math.floor(100 / count);
     const element = defaultPageElementSettingsMap[SitePageElementType.INNER]();
 
     return {
@@ -21,7 +21,7 @@ function getInnerItemByType(type: ColumnStructure, parentId: string): InnerPageE
         id: elementId,
         parentId: parentId,
         children: [],
-        isExtendable: false,
+        isExtendable: true,
         settings: {
             ...element.settings,
             width: { value: elementWidth, unit: StyleUnit.PERCENT },

@@ -1,6 +1,13 @@
-import { AbstractEditorOperationService, ROOT_ELEMENT_ID, SitePageElement, deleteElementFromTree, duplicateTreeElement } from "@modules/constructor";
+import {
+    AbstractDragService,
+    AbstractEditorOperationService,
+    ROOT_ELEMENT_ID,
+    SitePageElement,
+    deleteElementFromTree,
+    duplicateTreeElement,
+} from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
-import { Inject, Injectable } from "@angular/core";
+import { Inject, Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
 import { getRandomId } from "@shared-utils";
 
@@ -12,6 +19,8 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
     ) {
         super(query, service);
     }
+
+    private readonly dragService = inject(AbstractDragService);
 
     public addPage(): void {
         this.service.updateState(() => {
@@ -52,7 +61,10 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
                 let updatedItems: Record<string, SitePageElement> = { ...items };
 
                 if (children) {
-                    updatedItems = deleteElementFromTree(items, children);
+                    const result = deleteElementFromTree(items, children);
+                    updatedItems = result.items;
+
+                    result.itemsToRemove.forEach(child => this.dragService.removeConnectedList(child));
                 }
 
                 return {

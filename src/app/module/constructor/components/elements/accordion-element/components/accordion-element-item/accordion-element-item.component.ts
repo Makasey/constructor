@@ -4,19 +4,19 @@ import {
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
     ELEMENT_ID,
-    LZEditorElementComponent,
     processBackgroundValue,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 
-import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
 import { Observable, map } from "rxjs";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion-element-item",
-    imports: [ElementResolverDirective, LZEditorElementComponent],
+    imports: [LZEditorElementFlexComponent],
     templateUrl: "./accordion-element-item.component.html",
     styleUrl: "./accordion-element-item.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,

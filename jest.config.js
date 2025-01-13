@@ -1,5 +1,5 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-const { pathsToModuleNameMapper } = require("ts-jest");
+import { pathsToModuleNameMapper } from "ts-jest";
 
 const aliases = {
     "@shared-types/*": ["<rootDir>/src/app/types/*"],
@@ -26,7 +26,7 @@ const aliases = {
     "@shared-enums": ["<rootDir>/src/app/enums/index.ts"],
 };
 
-module.exports = {
+export default {
     preset: "jest-preset-angular",
     verbose: true,
     setupFilesAfterEnv: ["./setup-jest.ts"],

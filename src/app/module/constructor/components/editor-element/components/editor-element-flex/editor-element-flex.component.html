@@ -1,0 +1,17 @@
+<div
+    class="drop-list-wrapper"
+    cdkDropList
+    [id]="elementID()"
+    [cdkDropListConnectedTo]="connectedLists()"
+    [cdkDropListData]="elementID()"
+>
+    @for (child of children(); track child.id) {
+        <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child.id" [parentId]="elementID()">
+            <ng-container *lzElementResolver="child.id; parent: elementID()"></ng-container>
+        </lz-editor-element>
+
+        <div *cdkDragPlaceholder>
+            {{ child }}
+        </div>
+    }
+</div>

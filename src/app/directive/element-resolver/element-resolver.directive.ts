@@ -2,7 +2,7 @@ import { AbstractEditorElementActionsService, ELEMENT_ID, PARENT_ID, SitePageEle
 import { Directive, Injector, OnChanges, Type, ViewContainerRef, inject, input } from "@angular/core";
 
 @Directive({
-    selector: "[lzElementResolver]",
+    selector: "[lzElementResolver],[*lzElementResolver]",
     standalone: true,
 })
 export class ElementResolverDirective implements OnChanges {

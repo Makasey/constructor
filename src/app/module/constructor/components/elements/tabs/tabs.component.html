@@ -1,18 +1,20 @@
 @if (element(); as editorElement) {
     <header class="nav">
-        @for (item of items$ | async; track item.id) {
+        @for (item of editorElement.settings.items; track item.id) {
             <button
                 class="nav-item"
                 [class._active]="editorElement.settings.selectedElement === item.id"
                 (click.stop)="selectTabItem(item.id)"
             >
-                {{ item.settings.title }}
+                {{ item.title }}
             </button>
         }
     </header>
     <section>
-       <lz-editor-element [elementId]="editorElement.settings.selectedElement">
-            <ng-container *lzElementResolver="editorElement.settings.selectedElement; parent: editorElement.id"></ng-container>
-       </lz-editor-element>
+        <lz-editor-element [elementId]="editorElement.settings.selectedElement" [parentId]="editorElement.id">
+            <ng-container
+                *lzElementResolver="editorElement.settings.selectedElement; parent: editorElement.id"
+            ></ng-container>
+        </lz-editor-element>
     </section>
 }
