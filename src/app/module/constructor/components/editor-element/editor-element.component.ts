@@ -50,9 +50,9 @@ export class LZEditorElementComponent implements OnInit {
     private readonly injector = inject(Injector);
 
     public ngOnInit(): void {
-        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.height", this.injector);
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.--element-height", this.injector);
 
-        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.--element-width", this.injector);
     }
 
     private selectSlice<T extends keyof SitePageElementSizeSettings, V = SitePageElementSettingsUnion[T]>(

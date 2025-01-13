@@ -7,7 +7,7 @@ export function processAccordionElementCreation(
     type: SitePageElementType,
     items: Record<string, SitePageElementUnion>,
     parentId: string,
-): Partial<EditorState> {
+): Pick<EditorState, "selectedElement" | "items"> & { createdElementIds: string[] } {
     const newElement = getNewElement<AccordionPageElement>(type, parentId);
     const parentElement = items[newElement.parentId!];
 
@@ -16,11 +16,14 @@ export function processAccordionElementCreation(
     );
 
     const childrenIds = accordionItems.map(item => item.id);
-    const updatedItems = accordionItems.reduce((result, item) => {
-        result[item.id] = item;
+    const updatedItems = accordionItems.reduce(
+        (result, item) => {
+            result[item.id] = item;
 
-        return result;
-    }, items);
+            return result;
+        },
+        { ...items },
+    );
 
     const updatedElement: AccordionPageElement = {
         ...newElement,
@@ -38,6 +41,7 @@ export function processAccordionElementCreation(
     };
 
     return {
+        createdElementIds: [newElement.id, ...childrenIds],
         selectedElement: newElement.id,
         items: {
             ...updatedItems,

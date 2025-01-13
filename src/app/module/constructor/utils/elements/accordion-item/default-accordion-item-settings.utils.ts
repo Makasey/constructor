@@ -23,7 +23,7 @@ export function defaultAccordionItemElementSettings(): () => Omit<AccordionItemP
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 50,
+                    value: 500,
                     unit: StyleUnit.PX,
                 },
                 title: `Асскордин-${uniqueCounter}`,

@@ -1,12 +1,12 @@
 @if (element(); as editorElement) {
     <header class="nav">
-        @for (item of items$ | async; track item.id) {
+        @for (item of editorElement.settings.items; track item.id) {
             <button
                 class="nav-item"
                 [class._active]="editorElement.settings.selectedElement === item.id"
                 (click.stop)="selectTabItem(item.id)"
             >
-                {{ item.settings.title }}
+                {{ item.title }}
             </button>
         }
     </header>

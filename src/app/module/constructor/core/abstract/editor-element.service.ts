@@ -55,9 +55,9 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
     public addPageElement(type: SitePageElementType): void {
         this.service.updateState(state => {
-            const stateData = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
+            const { createdElementIds, ...stateData } = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
 
-            this.dragService.addConnectedElement(stateData.selectedElement!);
+            this.dragService.addConnectedElement(createdElementIds);
 
             const updatedPages = state.pages.map(page => {
                 if (page.id === state.selectedPage) {
@@ -81,10 +81,14 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         this.service.updateState(state => {
             parentId = parentId ?? state.selectedElement;
 
-            const processedStore = processElementCreation(type, state.items, parentId);
+            const { createdElementIds, ...processedStore } = processElementCreation(type, state.items, parentId);
 
             if (["section", "inner"].includes(type)) {
-                this.dragService.addConnectedElement(processedStore.selectedElement!);
+                this.dragService.addConnectedElement(createdElementIds);
+            }
+
+            if (["tabs", "accordion"].includes(type)) {
+                this.dragService.addConnectedElement(createdElementIds.slice(1));
             }
 
             return processedStore;

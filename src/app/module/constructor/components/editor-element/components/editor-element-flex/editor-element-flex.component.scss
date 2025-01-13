@@ -1,9 +1,11 @@
 .editor-element-flex {
     display: flex;
+    flex-direction: column;
     flex-basis: 100%;
     width: 100%;
     flex-grow: 1;
     flex-wrap: wrap;
+    height: 100%;
 
     .drop-list-wrapper {
         display: flex;

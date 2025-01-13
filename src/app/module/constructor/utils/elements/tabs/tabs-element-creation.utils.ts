@@ -7,7 +7,7 @@ export function processTabsElementCreation(
     type: SitePageElementType,
     items: Record<string, SitePageElementUnion>,
     parentId: string,
-): Partial<EditorState> {
+): Pick<EditorState, "selectedElement" | "items"> & { createdElementIds: string[] } {
     const newElement = getNewElement<TabsPageElement>(type, parentId);
     const parentElement = items[newElement.parentId!];
 
@@ -15,11 +15,14 @@ export function processTabsElementCreation(
         getNewElement(SitePageElementType.TABS_ITEM, newElement.id),
     );
     const childrenIds = tabItems.map(item => item.id);
-    const updatedItems = tabItems.reduce((result, item) => {
-        result[item.id] = item;
+    const updatedItems = tabItems.reduce(
+        (result, item) => {
+            result[item.id] = item;
 
-        return result;
-    }, items);
+            return result;
+        },
+        { ...items },
+    );
 
     const updatedElement: TabsPageElement = {
         ...newElement,
@@ -37,6 +40,7 @@ export function processTabsElementCreation(
     };
 
     return {
+        createdElementIds: [newElement.id, ...childrenIds],
         selectedElement: tabItems[0].id,
         items: {
             ...updatedItems,

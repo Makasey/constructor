@@ -30,7 +30,7 @@ export function processElementCreation(
     type: SitePageElementType,
     items: Record<string, SitePageElementUnion>,
     parentId: string,
-): Partial<EditorState> {
+): Pick<EditorState, "selectedElement" | "items"> & { createdElementIds: string[] } {
     switch (type) {
         case SitePageElementType.TABS: {
             return processTabsElementCreation(type, items, parentId);
@@ -54,6 +54,7 @@ export function processElementCreation(
                     },
                     [newElement.id]: newElement,
                 },
+                createdElementIds: [newElement.id],
             };
         }
     }

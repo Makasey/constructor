@@ -1,6 +1,7 @@
 import { AbstractEditorOperationService } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable, Provider, Signal, WritableSignal, computed, signal } from "@angular/core";
+import { coerceArray } from "@datorama/akita";
 
 @Injectable()
 export abstract class AbstractDragService<T> extends AbstractEditorOperationService {
@@ -15,7 +16,7 @@ export abstract class AbstractDragService<T> extends AbstractEditorOperationServ
 
     public abstract getDraggableItem(): T | null;
 
-    public abstract addConnectedElement(element: string): void;
+    public abstract addConnectedElement(elementOrElements: string | string[]): void;
 
     public abstract getConnectedDropListsId(): Signal<string[]>;
 
@@ -43,8 +44,10 @@ export class DefaultDragService<T> extends AbstractDragService<T> {
         return this.draggableItem();
     }
 
-    public addConnectedElement(element: string): void {
-        this.connectedDropListsIds.update(value => value.concat(element));
+    public addConnectedElement(elementOrElements: string | string[]): void {
+        elementOrElements = coerceArray(elementOrElements);
+
+        this.connectedDropListsIds.update(value => value.concat(elementOrElements));
     }
 
     public removeConnectedList(id: string): void {

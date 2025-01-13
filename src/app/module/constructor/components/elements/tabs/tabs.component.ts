@@ -1,4 +1,3 @@
-import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 
 import { Observable, combineLatest, filter, map } from "rxjs";
@@ -20,7 +19,7 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
 
 @Component({
     selector: "lz-tabs-element",
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
+    imports: [ElementResolverDirective, LZEditorElementComponent],
     templateUrl: "./tabs.component.html",
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -64,7 +63,11 @@ export class TabsComponent implements OnInit {
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
     }
 
-    public selectTabItem(id: string): void {
+    public selectTabItem(id?: string): void {
+        if (!id) {
+            return;
+        }
+
         if (this.element().settings.selectedElement === id) {
             return;
         }
