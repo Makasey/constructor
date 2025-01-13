@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 import { Observable, combineLatest, filter, map } from "rxjs";
 import { switchMap } from "rxjs/operators";
-import { toSignal } from "@angular/core/rxjs-interop";
 
 import {
     AbstractEditorElementActionsService,
