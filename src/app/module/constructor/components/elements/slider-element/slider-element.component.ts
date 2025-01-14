@@ -15,8 +15,10 @@ import {
     HostBinding,
     HostListener,
     OnInit,
+    Renderer2,
     Signal,
     ViewEncapsulation,
+    WritableSignal,
     computed,
     inject,
     signal,
@@ -60,6 +62,7 @@ export class SliderElementComponent implements OnInit {
 
     private elementRef = inject(ElementRef);
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
+    private readonly renderer = inject(Renderer2);
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
@@ -69,7 +72,9 @@ export class SliderElementComponent implements OnInit {
 
     public readonly showItemsCount: Signal<number> = computed(() => this.element().settings.showItemsCount);
 
-    public position = signal(0);
+    public readonly sliderItemsCount: Signal<number> = computed(() => this.element().settings.items.length);
+
+    public position: WritableSignal<number> = signal(0);
 
     public autoSlide: Signal<boolean> = computed(() => this.element().settings.autoSlide);
 
@@ -77,20 +82,38 @@ export class SliderElementComponent implements OnInit {
 
     public convertedPosition = computed(() => `translateX(${this.position()}px)`);
 
-    private settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+    public sliderWidth: WritableSignal<number> = signal(0);
+
+    public sliderItemWidth: WritableSignal<number> = signal(200);
+
+    private readonly settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
         this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
         this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
+
+        this.sliderWidth.set(this.elementRef.nativeElement.offsetWidth);
     }
 
     public onNext(): void {
-        return;
+        const leftItems = this.sliderItemsCount() - (Math.abs(this.position() / this.sliderItemWidth()) + this.showItemsCount());
+
+        const position =
+            this.position() -
+            (leftItems > this.showItemsCount() ? this.scrollingItemsCount() * this.sliderItemWidth() : leftItems * this.sliderItemWidth());
+
+        this.position.set(position);
     }
 
     public onPrev(): void {
-        return;
+        const leftItems = Math.abs(this.position() / this.sliderItemWidth());
+
+        const position =
+            this.position() +
+            (leftItems > this.showItemsCount() ? this.showItemsCount() * this.sliderItemWidth() : leftItems * this.sliderItemWidth());
+
+        this.position.set(position);
     }
 }

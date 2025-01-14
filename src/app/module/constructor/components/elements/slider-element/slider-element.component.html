@@ -5,7 +5,7 @@
                 <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
             </lz-editor-element>
         }
-        <button class="slider-control prev" (click)="onPrev()">prev</button>
-        <button class="slider-control next" (click)="onNext()">next</button>
     </div>
+    <button class="slider-control prev" (click.stop)="onPrev()">prev</button>
+    <button class="slider-control next" (click.stop)="onNext()">next</button>
 }

@@ -1,11 +1,10 @@
 .lz-slider-element {
     border: 2px solid #cc1ba4;
+    position: relative;
 
     .slider-wrapper {
         display: flex;
         overflow: hidden;
-        position: relative;
-
         justify-content: space-between;
         flex-grow: 1;
         border: 2px solid #c3f608;
@@ -26,11 +25,11 @@
         transform: translateY(-50%);
 
         &.prev {
-            left: 5px;
+            left: 10px;
         }
 
         &.next {
-            right: 5px;
+            right: 10px;
         }
     }
 }
