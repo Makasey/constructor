@@ -26,14 +26,6 @@ import { toSignal } from "@angular/core/rxjs-interop";
     imports: [LZEditorElementComponent, ElementResolverDirective],
 })
 export class SliderElementItemComponent implements OnInit {
-    // @HostBinding("$.style.height")
-    // @HostListener("$.style.height")
-    // public height$: Observable<string>;
-    //
-    // @HostBinding("$.style.width")
-    // @HostListener("$.style.width")
-    // public width$: Observable<string>;
-
     @HostBinding("$.style.background")
     @HostListener("$.style.background")
     public background$: Observable<string>;
@@ -46,8 +38,6 @@ export class SliderElementItemComponent implements OnInit {
     private settings$: Observable<SliderPageElementItemSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
-        // this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-        // this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
         this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));
     }
 }
