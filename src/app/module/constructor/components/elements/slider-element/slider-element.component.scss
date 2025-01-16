@@ -5,8 +5,8 @@
 
     .slider-wrapper {
         display: flex;
-        overflow: hidden;
         justify-content: space-between;
+        height: 100%;
         flex-grow: 1;
         border: 2px solid #c3f608;
         transition: 0.4s transform;

@@ -7,9 +7,7 @@ import {
     SliderPageElementItemSettings,
     processBackgroundValue,
     processDirectionValue,
-    processSettingValueWithUnit,
 } from "@modules/constructor";
-import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map } from "rxjs";
@@ -26,16 +24,16 @@ import { toSignal } from "@angular/core/rxjs-interop";
     host: {
         class: "lz-slider-element-item",
     },
-    imports: [AsyncPipe, LZEditorElementComponent, ElementResolverDirective],
+    imports: [LZEditorElementComponent, ElementResolverDirective],
 })
 export class SliderElementItemComponent implements OnInit {
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
-    public height$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public width$: Observable<string>;
+    // @HostBinding("$.style.height")
+    // @HostListener("$.style.height")
+    // public height$: Observable<string>;
+    //
+    // @HostBinding("$.style.width")
+    // @HostListener("$.style.width")
+    // public width$: Observable<string>;
 
     @HostBinding("$.style.padding")
     @HostListener("$.style.padding")
@@ -57,8 +55,8 @@ export class SliderElementItemComponent implements OnInit {
     private settings$: Observable<SliderPageElementItemSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
-        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        // this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
+        // this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
         this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
         this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
         this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));

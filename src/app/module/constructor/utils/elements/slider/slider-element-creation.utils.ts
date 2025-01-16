@@ -1,5 +1,5 @@
 import { EditorState } from "@core";
-import { SitePageElementType, SitePageElementUnion, SliderItemPageElement, SliderPageElement } from "@modules/constructor";
+import { SitePageElementType, SitePageElementUnion, SliderItemPageElement, SliderPageElement, StyleUnit } from "@modules/constructor";
 import { arrayAdd } from "@datorama/akita";
 import { getNewElement } from "@modules/constructor/utils/element-creation/element-creation.utils";
 
@@ -15,10 +15,20 @@ export function processSliderElementCreation(
     );
     const childrenIds = sliderItems.map(item => item.id);
     const updatedItems = sliderItems.reduce((result, item) => {
-        result[item.id] = item;
+        result[item.id] = {
+            ...item,
+            settings: {
+                ...item.settings,
+                width: {
+                    unit: StyleUnit.PERCENT,
+                    value: Math.floor(100 / newElement.settings.showItemsCount),
+                },
+            },
+        };
 
         return result;
     }, items);
+
     const updatedElement: SliderPageElement = {
         ...newElement,
         settings: {

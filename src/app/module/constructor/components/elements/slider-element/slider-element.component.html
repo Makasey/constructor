@@ -1,11 +1,17 @@
 @if (element(); as editorElement) {
-    <div #wrapper class="slider-wrapper" [style.transform]="convertedPosition()">
+    <div
+        #wrapper
+        class="slider-wrapper"
+        [style.transform]="convertedPosition()"
+        [style.--wrapper-width.px]="wrapper.offsetWidth * totalPages()"
+        [style.--wrapper-visible-count]="showItemsCount()"
+    >
         @for (child of editorElement.children; track child) {
-            <lz-editor-element [elementId]="child">
+            <lz-editor-element [elementId]="child" [style.min-width.px]="wrapper.offsetWidth / showItemsCount()">
                 <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
             </lz-editor-element>
         }
     </div>
-    <button class="slider-control prev" (click.stop)="onPrev()">prev</button>
-    <button class="slider-control next" (click.stop)="onNext()">next</button>
+    <button [disabled]="isLeftBoundary()" class="slider-control prev" (click.stop)="onPrev()">prev</button>
+    <button [disabled]="isRightBoundary()" class="slider-control next" (click.stop)="onNext()">next</button>
 }
