@@ -17,7 +17,7 @@ function getSliderElementItemsControls(element: SliderPageElement): APFormContro
         valueTemplateKey: APFormDefaultTemplateKeys.ITEMS_CONTROL_FIELD,
         options: {
             label: "Элементы",
-            defaultItemFn: () => defaultPageElementSettingsMap[SitePageElementType.SLIDER]().settings,
+            defaultItemFn: () => defaultPageElementSettingsMap[SitePageElementType.SLIDER_ITEM]().settings,
         },
     };
 }

@@ -1,6 +1,7 @@
 .lz-slider-element {
     border: 2px solid #cc1ba4;
     position: relative;
+    overflow: hidden;
 
     .slider-wrapper {
         display: flex;

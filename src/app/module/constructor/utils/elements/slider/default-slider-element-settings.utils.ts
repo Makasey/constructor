@@ -27,12 +27,12 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
                     unit: StyleUnit.PX,
                 },
                 selectedElement: "",
-                count: 3,
+                count: 5,
                 items: [],
                 scrollingItemsCount: 1,
-                showItemsCount: 3,
+                showItemsCount: 1,
                 autoSlide: true,
-                autoSlideTimeout: 5000,
+                autoSlideTimeout: 1000,
             },
         };
     };

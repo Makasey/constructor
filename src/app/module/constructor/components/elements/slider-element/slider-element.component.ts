@@ -8,6 +8,7 @@ import {
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { AsyncPipe } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
@@ -25,7 +26,7 @@ import {
     viewChild,
 } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { Observable, map } from "rxjs";
+import { Observable, interval, map, tap } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -35,7 +36,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
-    imports: [ElementResolverDirective, LZEditorElementComponent],
+    imports: [ElementResolverDirective, LZEditorElementComponent, AsyncPipe],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     host: {
         class: "lz-slider-element",
@@ -86,6 +87,36 @@ export class SliderElementComponent implements OnInit {
 
     public sliderItemWidth: WritableSignal<number> = signal(200);
 
+    public processLeftPosition = computed(() => this.position() === 0);
+
+    public processRightPosition = computed(() => {
+        const rightPosition = (this.sliderItemsCount() - this.showItemsCount()) * this.sliderItemWidth();
+
+        return Math.abs(this.position()) === rightPosition;
+    });
+
+    public isRightSide: boolean;
+
+    public initAutoSlide = toSignal(
+        interval(this.autoSlideTimeout()).pipe(
+            tap(() => {
+                if (this.processRightPosition()) {
+                    this.isRightSide = true;
+                }
+
+                if (this.processLeftPosition()) {
+                    this.isRightSide = false;
+                }
+
+                if (this.isRightSide) {
+                    this.onPrev();
+                }
+
+                this.onNext();
+            }),
+        ),
+    );
+
     private readonly settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
@@ -95,6 +126,8 @@ export class SliderElementComponent implements OnInit {
         this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
 
         this.sliderWidth.set(this.elementRef.nativeElement.offsetWidth);
+
+        this.initAutoSlide();
     }
 
     public onNext(): void {
