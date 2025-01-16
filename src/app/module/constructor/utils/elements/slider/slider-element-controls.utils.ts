@@ -5,7 +5,6 @@ import {
     SliderElementSettingsGroup,
     SliderPageElement,
     defaultPageElementSettingsMap,
-    defaultSizeControlUnit,
     getDefaultSizeSettings,
 } from "@modules/constructor";
 
@@ -46,45 +45,9 @@ function getSliderElementScrollingItemsControl(element: SliderPageElement): APFo
     };
 }
 
-function getSliderPaddingControl(element: SliderPageElement): APFormControl {
-    return {
-        id: "padding",
-        name: "padding",
-        value: element.settings.padding,
-        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
-        options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            max: 1000,
-            min: 0,
-            items: defaultSizeControlUnit,
-            label: "Padding",
-        },
-    };
-}
-
-function getAccordionMarginControl(element: SliderPageElement): APFormControl {
-    return {
-        id: "margin",
-        name: "margin",
-        value: element.settings.margin,
-        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
-        options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            max: 1000,
-            min: -1000,
-            items: defaultSizeControlUnit,
-            label: "Margin",
-        },
-    };
-}
-
 function getSliderElementSettingsControls(element: SliderPageElement): APFormControl[] {
     return [
         ...getDefaultSizeSettings(element),
-        getSliderPaddingControl(element),
-        getAccordionMarginControl(element),
         getSliderElementItemsControls(element),
         getSliderElementShowItemsControl(element),
         getSliderElementScrollingItemsControl(element),

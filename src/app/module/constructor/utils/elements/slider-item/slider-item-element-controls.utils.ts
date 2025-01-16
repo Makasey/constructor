@@ -1,39 +1,5 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
-import { DEFAULT_UPSERT_CONFIG, SliderItemPageElement, defaultSizeControlUnit, getDefaultSizeSettings } from "@modules/constructor";
-
-function getSliderItemPaddingControl(element: SliderItemPageElement): APFormControl {
-    return {
-        id: "padding",
-        name: "padding",
-        value: element.settings.padding,
-        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
-        options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            max: 1000,
-            min: 0,
-            items: defaultSizeControlUnit,
-            label: "Padding",
-        },
-    };
-}
-
-function getSliderItemMarginControl(element: SliderItemPageElement): APFormControl {
-    return {
-        id: "margin",
-        name: "margin",
-        value: element.settings.margin,
-        valueTemplateKey: APFormDefaultTemplateKeys.DIRECTION_FIELD,
-        options: {
-            selectLabelKey: "label",
-            selectValueKey: "value",
-            max: 1000,
-            min: -1000,
-            items: defaultSizeControlUnit,
-            label: "Margin",
-        },
-    };
-}
+import { DEFAULT_UPSERT_CONFIG, SliderItemPageElement, getDefaultSizeSettings } from "@modules/constructor";
 
 function getSliderItemColorControl(element: SliderItemPageElement): APFormControl {
     return {
@@ -48,12 +14,7 @@ function getSliderItemColorControl(element: SliderItemPageElement): APFormContro
 }
 
 function getSliderItemSettingsControls(element: SliderItemPageElement): APFormControl[] {
-    return [
-        ...getDefaultSizeSettings(element),
-        getSliderItemPaddingControl(element),
-        getSliderItemMarginControl(element),
-        getSliderItemColorControl(element),
-    ];
+    return [...getDefaultSizeSettings(element), getSliderItemColorControl(element)];
 }
 
 export function getSliderItemElementSettings(element: SliderItemPageElement): APFormModel {

@@ -6,7 +6,6 @@ import {
     SliderItemPageElement,
     SliderPageElementItemSettings,
     processBackgroundValue,
-    processDirectionValue,
 } from "@modules/constructor";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
@@ -35,14 +34,6 @@ export class SliderElementItemComponent implements OnInit {
     // @HostListener("$.style.width")
     // public width$: Observable<string>;
 
-    @HostBinding("$.style.padding")
-    @HostListener("$.style.padding")
-    public padding$: Observable<string>;
-
-    @HostBinding("$.style.margin")
-    @HostListener("$.style.margin")
-    public margin$: Observable<string>;
-
     @HostBinding("$.style.background")
     @HostListener("$.style.background")
     public background$: Observable<string>;
@@ -57,8 +48,6 @@ export class SliderElementItemComponent implements OnInit {
     public ngOnInit(): void {
         // this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
         // this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-        this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
-        this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
         this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));
     }
 }

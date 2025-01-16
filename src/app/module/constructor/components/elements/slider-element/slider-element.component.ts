@@ -5,7 +5,6 @@ import {
     LZEditorElementComponent,
     SliderPageElement,
     SliderPageElementSettings,
-    processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import {
@@ -50,14 +49,6 @@ export class SliderElementComponent implements OnInit {
     @HostBinding("$.style.width")
     @HostListener("$.style.width")
     public width$: Observable<string>;
-
-    // @HostBinding("$.style.padding")
-    // @HostListener("$.style.padding")
-    public padding$: Observable<string>;
-
-    // @HostBinding("$.style.margin")
-    // @HostListener("$.style.margin")
-    public margin$: Observable<string>;
 
     public children = viewChildren(LZEditorElementComponent);
 
@@ -142,11 +133,8 @@ export class SliderElementComponent implements OnInit {
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-        this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
-        this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
 
         this.sliderWidth.set(this.elementRef.nativeElement.offsetWidth);
-
         // this.initAutoSlide();
     }
 

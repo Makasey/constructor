@@ -1,5 +1,5 @@
+import { EditorState } from "@core";
 import {
-    AccordionItemPageElement,
     SitePageElementSettingsUnion,
     SitePageElementType,
     SliderItemPageElement,
@@ -9,7 +9,6 @@ import {
     deleteElementFromTree,
     duplicateTreeElement,
 } from "@modules/constructor";
-import { EditorState } from "@core";
 import { arrayAdd } from "@datorama/akita";
 
 export function processUpdateSliderSettings<K extends SitePageElementSettingsUnion>(
@@ -149,7 +148,7 @@ export function processUpdateSliderSettings<K extends SitePageElementSettingsUni
                 };
             }
 
-            const processedItem: AccordionItemPageElement = {
+            const processedItem: SliderItemPageElement = {
                 ...(defaultPageElementSettingsMap[SitePageElementType.SLIDER_ITEM]() as SliderItemPageElement),
                 id: newItemID!,
                 parentId: item.id,
