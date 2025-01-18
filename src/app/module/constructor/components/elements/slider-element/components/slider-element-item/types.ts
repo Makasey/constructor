@@ -2,4 +2,8 @@ import { SitePageElement, SitePageElementBackground, SitePageElementSizeSettings
 
 export type SliderItemPageElement = SitePageElement<SliderPageElementItemSettings>;
 
-export type SliderPageElementItemSettings = SitePageElementSizeSettings & SitePageElementBackground;
+export type SliderPageElementItemSettings = Readonly<{
+    title?: string;
+}> &
+    SitePageElementSizeSettings &
+    SitePageElementBackground;

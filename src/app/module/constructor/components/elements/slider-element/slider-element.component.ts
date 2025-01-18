@@ -10,22 +10,19 @@ import {
 import {
     ChangeDetectionStrategy,
     Component,
-    ElementRef,
     HostBinding,
     HostListener,
     OnInit,
-    Renderer2,
     Signal,
     ViewEncapsulation,
     WritableSignal,
     computed,
     inject,
     signal,
-    viewChild,
     viewChildren,
 } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { Observable, interval, map } from "rxjs";
+import { Observable, interval, map, tap } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -51,12 +48,7 @@ export class SliderElementComponent implements OnInit {
     public width$: Observable<string>;
 
     public children = viewChildren(LZEditorElementComponent);
-
-    private wrapRef = viewChild("wrapper");
-
-    private elementRef = inject(ElementRef);
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
-    private readonly renderer = inject(Renderer2);
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
@@ -87,16 +79,6 @@ export class SliderElementComponent implements OnInit {
 
     public sliderWidth: WritableSignal<number> = signal(0);
 
-    public sliderItemWidth: WritableSignal<number> = signal(200);
-
-    public processLeftPosition = computed(() => this.position() === 0);
-
-    public processRightPosition = computed(() => {
-        const rightPosition = (this.sliderItemsCount() - this.showItemsCount()) * this.sliderItemWidth();
-
-        return Math.abs(this.position()) === rightPosition;
-    });
-
     public isRightSide: boolean;
 
     public isRightBoundary = computed(() => {
@@ -108,24 +90,20 @@ export class SliderElementComponent implements OnInit {
     });
 
     public initAutoSlide = toSignal(
-        interval(this.autoSlideTimeout())
-            .pipe
-            // tap(() => {
-            //     if (this.processRightPosition()) {
-            //         this.isRightSide = true;
-            //     }
-            //
-            //     if (this.processLeftPosition()) {
-            //         this.isRightSide = false;
-            //     }
-            //
-            //     if (this.isRightSide) {
-            //         this.onPrev();
-            //     }
-            //
-            //     this.onNext();
-            // }),
-            (),
+        interval(this.autoSlideTimeout()).pipe(
+            tap(() => {
+                if (this.isRightBoundary()) {
+                    this.isRightSide = true;
+                }
+
+                if (this.isLeftBoundary()) {
+                    this.isRightSide = false;
+                }
+
+                // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+                this.isRightSide ? this.onPrev() : this.onNext();
+            }),
+        ),
     );
 
     private readonly settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
@@ -134,30 +112,32 @@ export class SliderElementComponent implements OnInit {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
 
-        this.sliderWidth.set(this.elementRef.nativeElement.offsetWidth);
-        // this.initAutoSlide();
+        this.initAutoSlide();
     }
 
     public onNext(): void {
-        // const leftItems = this.sliderItemsCount() - (Math.abs(this.position() / this.sliderItemWidth()) + this.showItemsCount());
         const page = this.currentPage();
         const visibleChildren = this.children().slice(page * this.showItemsCount(), page * this.showItemsCount() + this.showItemsCount());
 
         const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
 
         const position = this.position() - childrenWidth;
-
         this.currentPage.update(value => value + 1);
         this.position.set(position);
     }
 
     public onPrev(): void {
-        const leftItems = Math.abs(this.position() / this.sliderItemWidth());
-
-        const position =
-            this.position() +
-            (leftItems > this.showItemsCount() ? this.showItemsCount() * this.sliderItemWidth() : leftItems * this.sliderItemWidth());
-
+        const childrenWidth = this.processCalculationChildrenWidth();
+        const position = this.position() + childrenWidth;
+        this.currentPage.update(value => value - 1);
         this.position.set(position);
+    }
+
+    private processCalculationChildrenWidth(): number {
+        const page = this.currentPage();
+        const visibleChildren = this.children().slice(page * this.showItemsCount(), page * this.showItemsCount() + this.showItemsCount());
+        const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
+
+        return childrenWidth;
     }
 }
