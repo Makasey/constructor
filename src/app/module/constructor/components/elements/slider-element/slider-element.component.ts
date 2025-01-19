@@ -64,29 +64,35 @@ export class SliderElementComponent implements OnInit {
 
     public readonly sliderItemsCount: Signal<number> = computed(() => this.element().settings.items.length);
 
-    public readonly sliderGap = computed(() => this.element().settings.gap);
+    public readonly sliderGap: Signal<number> = computed(() => this.element().settings.gap);
+
+    public readonly sliderGapWidth: Signal<number> = computed(() => this.sliderGap() * this.showItemsCount());
 
     public readonly autoSlide: Signal<boolean> = computed(() => this.element().settings.autoSlide);
 
     public readonly autoSlideTimeout: Signal<number> = computed(() => this.element().settings.autoSlideTimeout);
 
-    public readonly wrapperWidth = computed(() => this.wrapper()?.nativeElement.offsetWidth);
+    public readonly wrapperWidth: Signal<number | undefined> = computed(() => this.wrapper()?.nativeElement.offsetWidth);
 
-    public readonly calculateWrapperWidth = computed(() => this.wrapperWidth()! * this.totalPages());
+    public readonly calculateWrapperWidth: Signal<number> = computed(() => this.wrapperWidth()! * this.totalPages());
 
-    public readonly sliderItemWidth = computed(() => this.wrapperWidth()! / this.showItemsCount());
+    public readonly sliderItemWidth: Signal<number> = computed(() => this.wrapperWidth()! / this.showItemsCount());
 
-    public readonly convertedPosition = computed(() => `translateX(${this.position()}px)`);
+    public readonly convertedPosition: Signal<string> = computed(() => `translateX(${this.position()}px)`);
 
-    public readonly isRightBoundary = computed(() => {
-        return this.currentPage() >= this.totalPages() - 1;
+    // public readonly isRightBoundary: Signal<boolean> = computed(() => {
+    //     return this.currentPage() >= this.totalPages() - 1;
+    // });
+
+    public readonly isRightBoundary: Signal<boolean> = computed(() => {
+        return this.currentPage() >= this.sliderItemsCount() - 1;
     });
 
-    public readonly isLeftBoundary = computed(() => {
+    public readonly isLeftBoundary: Signal<boolean> = computed(() => {
         return this.currentPage() === 0;
     });
 
-    public readonly totalPages = computed(() => {
+    public readonly totalPages: Signal<number> = computed(() => {
         const items = this.sliderItemsCount();
         const showItemsCount = this.showItemsCount();
 
@@ -121,23 +127,43 @@ export class SliderElementComponent implements OnInit {
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
     }
 
+    // public onNext(): void {
+    //     const page = this.currentPage();
+    //     const visibleChildren = this.children().slice(page * this.showItemsCount(), page * this.showItemsCount() + this.showItemsCount());
+    //     const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
+    //
+    //     const position = this.position() - childrenWidth - this.sliderGapWidth();
+    //     this.currentPage.update(value => value + 1);
+    //     this.position.set(position);
+    // }
+
     public onNext(): void {
         const page = this.currentPage();
-        const visibleChildren = this.children().slice(page * this.showItemsCount(), page * this.showItemsCount() + this.showItemsCount());
+        const visibleChildren = this.children().slice(page, page + this.scrollingItemsCount());
         const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
 
-        const position = this.position() - childrenWidth;
-        this.currentPage.update(value => value + 1);
+        const position = this.position() - childrenWidth - this.sliderGapWidth();
+        this.currentPage.update(value => value + this.scrollingItemsCount());
         this.position.set(position);
     }
 
     public onPrev(): void {
         const page = this.currentPage();
-        const visibleChildren = this.children().slice(page * this.showItemsCount() - this.showItemsCount(), page * this.showItemsCount());
+        const visibleChildren = this.children().slice(page - this.scrollingItemsCount(), page);
         const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
 
-        const position = this.position() + childrenWidth;
-        this.currentPage.update(value => value - 1);
+        const position = this.position() + childrenWidth + this.sliderGapWidth();
+        this.currentPage.update(value => value - this.scrollingItemsCount());
         this.position.set(position);
     }
+
+    // public onPrev(): void {
+    //     const page = this.currentPage();
+    //     const visibleChildren = this.children().slice(page * this.showItemsCount() - this.showItemsCount(), page * this.showItemsCount());
+    //     const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
+    //
+    //     const position = this.position() + childrenWidth + this.sliderGapWidth();
+    //     this.currentPage.update(value => value - 1);
+    //     this.position.set(position);
+    // }
 }
