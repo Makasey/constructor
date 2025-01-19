@@ -10,6 +10,7 @@ export type SliderPageElementSettings = Readonly<{
     showItemsCount: number;
     autoSlide: boolean;
     autoSlideTimeout: number;
+    gap: number;
     items: (SliderPageElementItemSettings & { id?: string; duplicatedId?: string })[];
 }> &
     SitePageElementSizeSettings;

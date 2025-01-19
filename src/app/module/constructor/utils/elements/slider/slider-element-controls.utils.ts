@@ -4,6 +4,7 @@ import {
     SitePageElementType,
     SliderElementSettingsGroup,
     SliderPageElement,
+    defaultAutoSlideItems,
     defaultPageElementSettingsMap,
     getDefaultSizeSettings,
 } from "@modules/constructor";
@@ -45,12 +46,53 @@ function getSliderElementScrollingItemsControl(element: SliderPageElement): APFo
     };
 }
 
+function getSliderElementGapItemsControl(element: SliderPageElement): APFormControl {
+    return {
+        id: "gap",
+        name: "gap",
+        value: element.settings.gap,
+        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+        options: {
+            label: "Gap элементов",
+        },
+    };
+}
+
+function getSectionAutoSlideControl(element: SliderPageElement): APFormControl {
+    return {
+        id: "autoSlide",
+        name: "autoSlide",
+        value: element.settings.autoSlide,
+        valueTemplateKey: APFormDefaultTemplateKeys.RADIO_GROUP_FIELD,
+        options: {
+            label: "Авто слайд",
+            items: defaultAutoSlideItems,
+        },
+    };
+}
+
+function getSliderAutoSlideTimeoutControl(element: SliderPageElement): APFormControl {
+    return {
+        id: "autoSlideTimeout",
+        name: "autoSlideTimeout",
+        value: element.settings.autoSlideTimeout,
+        valueTemplateKey: APFormDefaultTemplateKeys.NUMBER_FIELD,
+        options: {
+            label: "Время прокрутки",
+            min: 1000,
+        },
+    };
+}
+
 function getSliderElementSettingsControls(element: SliderPageElement): APFormControl[] {
     return [
         ...getDefaultSizeSettings(element),
-        getSliderElementItemsControls(element),
         getSliderElementShowItemsControl(element),
         getSliderElementScrollingItemsControl(element),
+        getSliderElementGapItemsControl(element),
+        getSectionAutoSlideControl(element),
+        getSliderAutoSlideTimeoutControl(element),
+        getSliderElementItemsControls(element),
     ];
 }
 

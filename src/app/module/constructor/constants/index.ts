@@ -367,3 +367,8 @@ export const deleteElementActionConfig: ElementActionsConfigItem = {
 };
 
 export const SAVE_ELEMENTS_LOCALE_STORAGE_KEY = "sections";
+
+export const defaultAutoSlideItems = [
+    { label: "true", value: true, image: "eicon-plus-square" },
+    { label: "false", value: false, image: "eicon-minus-square" },
+];

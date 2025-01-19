@@ -71,6 +71,7 @@ export {
     accordionPageElementSettingsStyleKeys,
     spacerPageElementSettingsStyleKeys,
     SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
+    defaultAutoSlideItems,
 } from "./constants";
 export {
     getDefaultSizeSettings,
