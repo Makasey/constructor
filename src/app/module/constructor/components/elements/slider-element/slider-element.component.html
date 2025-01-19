@@ -3,11 +3,12 @@
         #wrapper
         class="slider-wrapper"
         [style.transform]="convertedPosition()"
-        [style.--wrapper-width.px]="wrapper.offsetWidth * totalPages()"
+        [style.gap.px]="sliderGap()"
+        [style.--wrapper-width.px]="calculateWrapperWidth()"
         [style.--wrapper-visible-count]="showItemsCount()"
     >
         @for (child of editorElement.children; track child) {
-            <lz-editor-element [elementId]="child" [style.min-width.px]="wrapper.offsetWidth / showItemsCount()">
+            <lz-editor-element [elementId]="child" [style.min-width.px]="sliderItemWidth()">
                 <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
             </lz-editor-element>
         }
