@@ -13,18 +13,21 @@ import {
     ElementRef,
     HostBinding,
     HostListener,
+    Injector,
     OnInit,
     Signal,
     ViewEncapsulation,
     WritableSignal,
     computed,
+    effect,
     inject,
     signal,
+    untracked,
     viewChild,
     viewChildren,
 } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { Observable, map } from "rxjs";
+import { Observable, Subscription, interval, map, tap } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -55,6 +58,7 @@ export class SliderElementComponent implements OnInit {
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
+    private readonly injector = inject(Injector);
 
     public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
@@ -80,10 +84,6 @@ export class SliderElementComponent implements OnInit {
 
     public readonly convertedPosition: Signal<string> = computed(() => `translateX(${this.position()}px)`);
 
-    // public readonly isRightBoundary: Signal<boolean> = computed(() => {
-    //     return this.currentPage() >= this.totalPages() - 1;
-    // });
-
     public readonly isRightBoundary: Signal<boolean> = computed(() => {
         return this.currentPage() >= this.sliderItemsCount() - 1;
     });
@@ -103,39 +103,14 @@ export class SliderElementComponent implements OnInit {
 
     public currentPage: WritableSignal<number> = signal(0);
 
-    // public initAutoSlide = toSignal(
-    //     interval(this.autoSlideTimeout()).pipe(
-    //         tap(() => {
-    //             if (this.isRightBoundary()) {
-    //                 this.isRightSide = true;
-    //             }
-    //
-    //             if (this.isLeftBoundary()) {
-    //                 this.isRightSide = false;
-    //             }
-    //
-    //             // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    //             this.isRightSide ? this.onPrev() : this.onNext();
-    //         }),
-    //     ),
-    // );
-
     private readonly settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
 
     public ngOnInit(): void {
         this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
         this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-    }
 
-    // public onNext(): void {
-    //     const page = this.currentPage();
-    //     const visibleChildren = this.children().slice(page * this.showItemsCount(), page * this.showItemsCount() + this.showItemsCount());
-    //     const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
-    //
-    //     const position = this.position() - childrenWidth - this.sliderGapWidth();
-    //     this.currentPage.update(value => value + 1);
-    //     this.position.set(position);
-    // }
+        this.initAutoSlide();
+    }
 
     public onNext(): void {
         const page = this.currentPage();
@@ -157,13 +132,40 @@ export class SliderElementComponent implements OnInit {
         this.position.set(position);
     }
 
-    // public onPrev(): void {
-    //     const page = this.currentPage();
-    //     const visibleChildren = this.children().slice(page * this.showItemsCount() - this.showItemsCount(), page * this.showItemsCount());
-    //     const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
-    //
-    //     const position = this.position() + childrenWidth + this.sliderGapWidth();
-    //     this.currentPage.update(value => value - 1);
-    //     this.position.set(position);
-    // }
+    private subscription: Subscription | null = null;
+
+    private initAutoSlide(): void {
+        let isRightSide: boolean;
+        effect(
+            () => {
+                if (this.subscription) {
+                    this.subscription.unsubscribe();
+                    this.subscription = null;
+                }
+
+                if (this.autoSlide()) {
+                    this.subscription = interval(this.autoSlideTimeout())
+                        .pipe(
+                            tap(() => {
+                                if (untracked(() => this.isRightBoundary())) {
+                                    isRightSide = true;
+                                }
+
+                                if (untracked(() => this.isLeftBoundary())) {
+                                    isRightSide = false;
+                                }
+
+                                if (isRightSide) {
+                                    this.onPrev();
+                                } else {
+                                    this.onNext();
+                                }
+                            }),
+                        )
+                        .subscribe();
+                }
+            },
+            { injector: this.injector },
+        );
+    }
 }
