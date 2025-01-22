@@ -6,7 +6,7 @@ export function defaultInnerElementSettings(): () => Omit<InnerPageElement, "id"
         return {
             type: SitePageElementType.INNER,
             children: [],
-            isExtendable: false,
+            isExtendable: true,
             settings: {
                 width: {
                     value: 100,

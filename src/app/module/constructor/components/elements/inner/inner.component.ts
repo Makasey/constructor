@@ -1,16 +1,18 @@
-import { AsyncPipe } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit, ViewEncapsulation } from "@angular/core";
 
 import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
-import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { InnerPageElement, LZEditorElementComponent, processBackgroundValue, processSettingValueWithUnit } from "@modules/constructor";
+import { DragDropModule } from "@angular/cdk/drag-drop";
+import { InnerPageElement, processBackgroundValue } from "@modules/constructor";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-inner-element",
     templateUrl: "./inner.component.html",
     styleUrls: ["./inner.component.scss"],
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
+    standalone: true,
+    imports: [DragDropModule, LZEditorElementFlexComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,10 +25,6 @@ export class InnerComponent extends BaseElementAbstract<InnerPageElement> implem
     };
 
     public ngOnInit(): void {
-        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
-
-        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.min-height", this.injector);
-
         hostBinding(this.selectSlice("background", processBackgroundValue), "style.background", this.injector);
 
         hostBinding(this.selectSlice("justifyContent"), "style.justify-content", this.injector);

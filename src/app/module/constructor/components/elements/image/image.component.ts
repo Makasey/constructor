@@ -20,6 +20,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
 })
 export class ImageComponent implements OnInit {

@@ -1,9 +1,5 @@
-@if (element(); as element) {
-    @if (element.children.length) {
-        @for (child of element.children; track child) {
-            <lz-editor-element [elementId]="child">
-                <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
-            </lz-editor-element>
-        }
-    }
+@let id = element().id;
+
+@if (id) {
+    <lz-editor-element-flex [elementID]="element().id" [parentID]="element().parentId"></lz-editor-element-flex>
 }

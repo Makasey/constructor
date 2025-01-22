@@ -27,6 +27,7 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [AsyncPipe],
+    standalone: true,
 })
 export class LZElementActionsComponent implements OnInit {
     @HostBinding("class.element-actions")

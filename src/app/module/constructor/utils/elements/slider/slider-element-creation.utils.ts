@@ -7,7 +7,7 @@ export function processSliderElementCreation(
     type: SitePageElementType,
     items: Record<string, SitePageElementUnion>,
     parentId: string,
-): Partial<EditorState> {
+): Pick<EditorState, "selectedElement" | "items"> & { createdElementIds: string[] } {
     const newElement = getNewElement<SliderPageElement>(type, parentId);
     const parentElement = items[newElement.parentId!];
     const sliderItems: SliderItemPageElement[] = Array.from({ length: newElement.settings.count }).map(() =>
@@ -45,6 +45,7 @@ export function processSliderElementCreation(
     };
 
     return {
+        createdElementIds: [...childrenIds],
         selectedElement: newElement.id,
         items: {
             ...updatedItems,

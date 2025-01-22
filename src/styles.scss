@@ -298,10 +298,13 @@ router-outlet + * {
 
     height: fit-content;
     border: none;
+
+    outline: 1px solid lightgray;
+    outline-offset: -1px;
 }
 
 .editor-element._selected {
-    border: 1px solid var(--selected-element-color);
+    outline: 1px solid var(--selected-element-color);
 
     --selected-element-color: lightblue;
     --root-selected-color: green;

@@ -5,6 +5,7 @@ import { DayOfWeek, LZDay, LZMonth, getDayFromMonthRowCol } from "@components";
 @Pipe({
     name: "lzMonthSheet",
     pure: true,
+    standalone: true,
 })
 export class LZMonthSheetPipe implements PipeTransform {
     private currentMonth: LZMonth | null = null;
@@ -35,15 +36,15 @@ export class LZMonthSheetPipe implements PipeTransform {
                 const isNextMonthDay = (day: LZDay, relativeToMonth = month): boolean =>
                     day.year > relativeToMonth.year || day.month > relativeToMonth.month;
 
-                if (isPrevMonthDay(day) && !showAdjacentDays) {
-                    continue;
-                }
-
                 if (isNextMonthDay(day) && !showAdjacentDays) {
                     break;
                 }
 
-                row.push(day);
+                const condition = isPrevMonthDay(day) && !showAdjacentDays;
+
+                if (!condition) {
+                    row.push(day);
+                }
             }
 
             sheet.push(row);

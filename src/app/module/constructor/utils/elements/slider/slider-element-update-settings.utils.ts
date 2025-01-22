@@ -47,7 +47,7 @@ export function processUpdateSliderSettings<K extends SitePageElementSettingsUni
                 };
             }, items);
 
-            updatedItems = deleteElementFromTree(updatedItems, deletedItemId);
+            updatedItems = deleteElementFromTree(updatedItems, deletedItemId).items;
 
             const processedChildrenSettings = updatedChildren.map(child => {
                 return {

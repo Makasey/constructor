@@ -7,16 +7,16 @@ import {
     AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     ELEMENT_ID,
-    LZEditorElementComponent,
     TabsItemPageElement,
     TabsItemPageElementSettings,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
+import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 
 @Component({
     selector: "lz-tab-element-item",
-    imports: [ElementResolverDirective, AsyncPipe, LZEditorElementComponent],
+    imports: [AsyncPipe, LZEditorElementFlexComponent],
     templateUrl: "./tab-element-item.component.html",
     styleUrls: ["./tab-element-item.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,

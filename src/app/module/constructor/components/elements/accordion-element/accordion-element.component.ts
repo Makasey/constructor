@@ -16,7 +16,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion-element",
-    imports: [ElementResolverDirective, LZEditorElementComponent],
+    imports: [LZEditorElementComponent, ElementResolverDirective],
     templateUrl: "./accordion-element.component.html",
     styleUrl: "./accordion-element.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
