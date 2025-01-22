@@ -8,8 +8,10 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     ElementRef,
     HostBinding,
     HostListener,
@@ -28,7 +30,7 @@ import {
 } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, Subscription, interval, map, tap } from "rxjs";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-slider-element",
@@ -43,7 +45,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
         class: "lz-slider-element",
     },
 })
-export class SliderElementComponent implements OnInit {
+export class SliderElementComponent implements OnInit, AfterViewInit {
     @HostBinding("$.style.height")
     @HostListener("$.style.height")
     public height$: Observable<string>;
@@ -59,6 +61,8 @@ export class SliderElementComponent implements OnInit {
     private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
     private readonly injector = inject(Injector);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly elementRef = inject(ElementRef);
 
     public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
@@ -70,17 +74,17 @@ export class SliderElementComponent implements OnInit {
 
     public readonly sliderGap: Signal<number> = computed(() => this.element().settings.gap);
 
-    public readonly sliderGapWidth: Signal<number> = computed(() => this.sliderGap() * this.showItemsCount());
+    public readonly sliderGapWidth: Signal<number> = computed(() => this.sliderGap() * (this.showItemsCount() - 1));
 
     public readonly autoSlide: Signal<boolean> = computed(() => this.element().settings.autoSlide);
 
     public readonly autoSlideTimeout: Signal<number> = computed(() => this.element().settings.autoSlideTimeout);
 
-    public readonly wrapperWidth: Signal<number | undefined> = computed(() => this.wrapper()?.nativeElement.offsetWidth);
+    public readonly wrapperWidth: WritableSignal<number | undefined> = signal(this.elementRef.nativeElement.offsetWidth);
 
     public readonly calculateWrapperWidth: Signal<number> = computed(() => this.wrapperWidth()! * this.totalPages());
 
-    public readonly sliderItemWidth: Signal<number> = computed(() => this.wrapperWidth()! / this.showItemsCount());
+    public readonly sliderItemWidth: Signal<number> = computed(() => (this.wrapperWidth()! - this.sliderGapWidth()) / this.showItemsCount());
 
     public readonly convertedPosition: Signal<string> = computed(() => `translateX(${this.position()}px)`);
 
@@ -112,14 +116,19 @@ export class SliderElementComponent implements OnInit {
         this.initAutoSlide();
     }
 
+    public ngAfterViewInit(): void {
+        this.wrapperWidth.set(this.elementRef.nativeElement.offsetWidth);
+    }
+
     public onNext(): void {
         const page = this.currentPage();
         const visibleChildren = this.children().slice(page, page + this.scrollingItemsCount());
         const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
 
-        const position = this.position() - childrenWidth - this.sliderGapWidth();
+        const position = this.position() - childrenWidth - this.sliderGap() * this.scrollingItemsCount();
         this.currentPage.update(value => value + this.scrollingItemsCount());
         this.position.set(position);
+        this.initAutoSlide();
     }
 
     public onPrev(): void {
@@ -127,9 +136,10 @@ export class SliderElementComponent implements OnInit {
         const visibleChildren = this.children().slice(page - this.scrollingItemsCount(), page);
         const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
 
-        const position = this.position() + childrenWidth + this.sliderGapWidth();
+        const position = this.position() + childrenWidth + this.sliderGap() * this.scrollingItemsCount();
         this.currentPage.update(value => value - this.scrollingItemsCount());
         this.position.set(position);
+        this.initAutoSlide();
     }
 
     private subscription: Subscription | null = null;
@@ -161,6 +171,7 @@ export class SliderElementComponent implements OnInit {
                                     this.onNext();
                                 }
                             }),
+                            takeUntilDestroyed(this.destroyRef),
                         )
                         .subscribe();
                 }

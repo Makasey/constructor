@@ -31,7 +31,7 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
                 items: [],
                 scrollingItemsCount: 1,
                 showItemsCount: 1,
-                autoSlide: true,
+                autoSlide: false,
                 autoSlideTimeout: 2000,
                 gap: 0,
             },
