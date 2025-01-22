@@ -14,20 +14,23 @@ export function processSliderElementCreation(
         getNewElement(SitePageElementType.SLIDER_ITEM, newElement.id),
     );
     const childrenIds = sliderItems.map(item => item.id);
-    const updatedItems = sliderItems.reduce((result, item) => {
-        result[item.id] = {
-            ...item,
-            settings: {
-                ...item.settings,
-                width: {
-                    unit: StyleUnit.PERCENT,
-                    value: Math.floor(100 / newElement.settings.showItemsCount),
+    const updatedItems = sliderItems.reduce(
+        (result, item) => {
+            result[item.id] = {
+                ...item,
+                settings: {
+                    ...item.settings,
+                    width: {
+                        unit: StyleUnit.PERCENT,
+                        value: Math.floor(100 / newElement.settings.showItemsCount),
+                    },
                 },
-            },
-        };
+            };
 
-        return result;
-    }, items);
+            return result;
+        },
+        { ...items },
+    );
 
     const updatedElement: SliderPageElement = {
         ...newElement,

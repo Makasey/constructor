@@ -8,7 +8,7 @@
         [style.--wrapper-visible-count]="showItemsCount()"
     >
         @for (child of editorElement.children; track child) {
-            <lz-editor-element [elementId]="child" [style.min-width.px]="sliderItemWidth()">
+            <lz-editor-element [elementId]="child" [parentId]="editorElement.id" [style.min-width.px]="sliderItemWidth()" [style.max-width.px]="sliderItemWidth()">
                 <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
             </lz-editor-element>
         }
