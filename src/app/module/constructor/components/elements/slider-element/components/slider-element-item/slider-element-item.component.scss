@@ -3,4 +3,12 @@
     border: 1px solid palevioletred;
     width: 100%;
     height: 100%;
+    position: relative;
+
+    &-title {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        z-index: 3;
+    }
 }

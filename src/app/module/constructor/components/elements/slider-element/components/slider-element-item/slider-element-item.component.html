@@ -1,10 +1,4 @@
-{{ element().settings.title }}
+<h2 class="lz-slider-element-item-title">{{ element().settings.title }}</h2>
 @if (element(); as element) {
-    @if (element.children.length) {
-        @for (child of element.children; track child) {
-            <lz-editor-element [elementId]="child" [parentId]="element.id">
-                <ng-container *lzElementResolver="child; parent: element.id"></ng-container>
-            </lz-editor-element>
-        }
-    }
+    <lz-editor-element-flex [elementID]="element.id" [parentID]="parentId"></lz-editor-element-flex>
 }

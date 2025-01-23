@@ -246,7 +246,7 @@ export {
     LZElementActionsComponent,
     PageElementsTreeComponent,
     LZEditorElementComponent,
-    LZEditorElementBlockComponent,
+    LZEditorElementFlexComponent,
     SliderElementItemComponent,
     SliderElementComponent,
     SliderItemPageElement,

@@ -8,7 +8,6 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import {
-    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
@@ -45,7 +44,7 @@ import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
         class: "lz-slider-element",
     },
 })
-export class SliderElementComponent implements OnInit, AfterViewInit {
+export class SliderElementComponent implements OnInit {
     @HostBinding("$.style.height")
     @HostListener("$.style.height")
     public height$: Observable<string>;
@@ -84,6 +83,11 @@ export class SliderElementComponent implements OnInit, AfterViewInit {
 
     public readonly calculateWrapperWidth: Signal<number> = computed(() => this.wrapperWidth()! * this.totalPages());
 
+    @HostListener("resize", ["$event"])
+    public onResize([element]: ResizeObserverEntry[]): void {
+        this.wrapperWidth.set(element.contentRect.width);
+    }
+
     public readonly sliderItemWidth: Signal<number> = computed(() => (this.wrapperWidth()! - this.sliderGapWidth()) / this.showItemsCount());
 
     public readonly convertedPosition: Signal<string> = computed(() => `translateX(${this.position()}px)`);
@@ -116,29 +120,34 @@ export class SliderElementComponent implements OnInit, AfterViewInit {
         this.initAutoSlide();
     }
 
-    public ngAfterViewInit(): void {
-        this.wrapperWidth.set(this.elementRef.nativeElement.offsetWidth);
-    }
-
     public onNext(): void {
-        const page = this.currentPage();
-        const visibleChildren = this.children().slice(page, page + this.scrollingItemsCount());
-        const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
+        const itemWidth = this.sliderItemWidth();
+        const itemsCount = this.sliderItemsCount();
+        const showItemsCount = this.showItemsCount();
+        const scrollingItemsCount = this.scrollingItemsCount();
+        const gap = this.sliderGap();
+        const position = this.position();
 
-        const position = this.position() - childrenWidth - this.sliderGap() * this.scrollingItemsCount();
-        this.currentPage.update(value => value + this.scrollingItemsCount());
-        this.position.set(position);
+        const leftItems = itemsCount - (Math.abs(position / (itemWidth + gap)) + showItemsCount);
+
+        const calculatedPosition = leftItems > scrollingItemsCount ? (itemWidth + gap) * scrollingItemsCount : (itemWidth + gap) * leftItems;
+
+        this.currentPage.update(value => value + scrollingItemsCount);
+        this.position.update(position => position - calculatedPosition);
         this.initAutoSlide();
     }
 
     public onPrev(): void {
-        const page = this.currentPage();
-        const visibleChildren = this.children().slice(page - this.scrollingItemsCount(), page);
-        const childrenWidth = visibleChildren.reduce((acc, item) => acc + item.element.nativeElement.offsetWidth, 0);
+        const itemWidth = this.sliderItemWidth();
+        const scrollingItemsCount = this.scrollingItemsCount();
+        const gap = this.sliderGap();
+        const position = this.position();
 
-        const position = this.position() + childrenWidth + this.sliderGap() * this.scrollingItemsCount();
+        const leftItems = Math.abs(position / (itemWidth + gap));
+        const calculatedPosition = leftItems > scrollingItemsCount ? (itemWidth + gap) * scrollingItemsCount : (itemWidth + gap) * leftItems;
+
         this.currentPage.update(value => value - this.scrollingItemsCount());
-        this.position.set(position);
+        this.position.update(position => position + calculatedPosition);
         this.initAutoSlide();
     }
 

@@ -2,7 +2,6 @@ import { AbstractDragService, AbstractEditorElementActionsService, LZEditorEleme
 import { CdkDrag, CdkDragPlaceholder, CdkDropList } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewEncapsulation, computed, inject, input, signal } from "@angular/core";
 import { ElementResolverDirective } from "@shared-directives";
-import { NgTemplateOutlet } from "@angular/common";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
@@ -11,7 +10,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
     providers: [],
-    imports: [CdkDrag, NgTemplateOutlet, CdkDragPlaceholder, CdkDropList, LZEditorElementComponent, ElementResolverDirective],
+    imports: [CdkDrag, CdkDragPlaceholder, CdkDropList, LZEditorElementComponent, ElementResolverDirective],
     host: {
         "[class.editor-element-flex]": "true",
     },

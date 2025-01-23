@@ -1,11 +1,13 @@
 .lz-slider-element {
     border: 2px solid #cc1ba4;
     position: relative;
+    min-width: 100%;
     overflow: hidden;
 
     .slider-wrapper {
         display: flex;
         justify-content: space-between;
+        min-width: 100%;
         height: 100%;
         flex-grow: 1;
         border: 2px solid #c3f608;

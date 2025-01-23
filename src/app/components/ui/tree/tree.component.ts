@@ -31,7 +31,7 @@ export class TreeComponent {
 
     @HostListener("click.stop", ["$event"])
     public toggleTree(): void {
-        this.closed = !this.closed;
+        // this.closed = !this.closed;
     }
 
     public readonly tree = input.required<Tree>();
