@@ -1,5 +1,5 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
-import { DEFAULT_UPSERT_CONFIG, SliderItemPageElement, getDefaultSizeSettings } from "@modules/constructor";
+import { DEFAULT_UPSERT_CONFIG, SliderItemPageElement } from "@modules/constructor";
 
 function getSliderItemColorControl(element: SliderItemPageElement): APFormControl {
     return {
@@ -14,7 +14,7 @@ function getSliderItemColorControl(element: SliderItemPageElement): APFormContro
 }
 
 function getSliderItemSettingsControls(element: SliderItemPageElement): APFormControl[] {
-    return [...getDefaultSizeSettings(element), getSliderItemColorControl(element)];
+    return [getSliderItemColorControl(element)];
 }
 
 export function getSliderItemElementSettings(element: SliderItemPageElement): APFormModel {

@@ -17,6 +17,8 @@ import {
     SectionPageElementSettings,
     SitePageElementType,
     SitePageElementUnion,
+    SliderPageElementItemSettings,
+    SliderPageElementSettings,
     SpacerPageElementSettings,
     StyleUnit,
     TabsItemPageElementSettings,
@@ -235,6 +237,10 @@ export const accordionItemPageElementSettingsStyleKeys: TypeKeys<AccordionItemPa
     "background",
     "title",
 ];
+
+export const sliderPageElementSettingsStyleKeys: TypeKeys<SliderPageElementSettings> = ["width", "height", "gap"];
+
+export const sliderItemPageElementSettingsStyleKeys: TypeKeys<SliderPageElementItemSettings> = ["background"];
 
 export const objectFitMap: Record<ObjectFit, string> = {
     [ObjectFit.DEFAULT]: "none",

@@ -72,6 +72,8 @@ export {
     spacerPageElementSettingsStyleKeys,
     SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
     defaultAutoSlideItems,
+    sliderPageElementSettingsStyleKeys,
+    sliderItemPageElementSettingsStyleKeys,
 } from "./constants";
 export {
     getDefaultSizeSettings,
