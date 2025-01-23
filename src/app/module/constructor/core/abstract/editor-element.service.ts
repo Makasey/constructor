@@ -12,7 +12,7 @@ import {
 } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
 import { Inject, Injectable, inject } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { Observable, map, startWith } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
 
 @Injectable()
@@ -25,7 +25,9 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     private readonly dragService = inject(AbstractDragService);
 
     public selectElement(id: string): Observable<T> {
-        return this.query.select(state => state.items[id] as T);
+        const element = this.getElement(id);
+
+        return this.query.select(state => state.items[id] as T).pipe(startWith(element));
     }
 
     public selectPageElements(): Observable<string[]> {
