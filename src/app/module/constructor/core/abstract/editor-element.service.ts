@@ -89,7 +89,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                 this.dragService.addConnectedElement(createdElementIds);
             }
 
-            if (["tabs", "accordion"].includes(type)) {
+            if (["tabs", "accordion", "slider"].includes(type)) {
                 this.dragService.addConnectedElement(createdElementIds.slice(1));
             }
 
