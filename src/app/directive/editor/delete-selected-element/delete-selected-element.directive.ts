@@ -1,4 +1,4 @@
-import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, ROOT_ELEMENT_ID } from "@modules/constructor";
+import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, EDITOR_SELECTED_PAGE } from "@modules/constructor";
 import { Directive, HostListener, inject } from "@angular/core";
 
 @Directive({
@@ -8,11 +8,13 @@ import { Directive, HostListener, inject } from "@angular/core";
 export class DeleteSelectedElementDirective {
     private readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
+    private readonly selectedPage = inject(EDITOR_SELECTED_PAGE);
+
     private readonly service = inject(AbstractEditorElementActionsService);
 
     @HostListener("document:keydown.delete.stop.silent")
     public deleteElement(): void {
-        if (this.selectedElement() === ROOT_ELEMENT_ID) {
+        if (this.selectedElement() === this.selectedPage()) {
             return;
         }
 

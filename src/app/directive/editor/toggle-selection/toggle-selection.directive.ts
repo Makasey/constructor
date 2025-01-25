@@ -1,5 +1,5 @@
-import { AbstractEditorSelectionService, EDITOR_SELECTED_ELEMENT, ELEMENT_ID, ROOT_ELEMENT_ID } from "@modules/constructor";
-import { ChangeDetectorRef, Directive, HostListener, Injector, OnInit, computed, inject } from "@angular/core";
+import { AbstractEditorSelectionService, EDITOR_SELECTED_ELEMENT, EDITOR_SELECTED_PAGE, ELEMENT_ID } from "@modules/constructor";
+import { Directive, HostListener, Injector, OnInit, computed, inject } from "@angular/core";
 import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Directive({
@@ -11,7 +11,7 @@ export class ToggleSelectionDirective implements OnInit {
 
     private readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    private readonly cdr = inject(ChangeDetectorRef);
+    private readonly selectedPage = inject(EDITOR_SELECTED_PAGE);
 
     private readonly injector = inject(Injector);
 
@@ -19,13 +19,13 @@ export class ToggleSelectionDirective implements OnInit {
 
     @HostListener("click.stop")
     public toggleSelection(): void {
-        const selectionCondition = this.elementId === ROOT_ELEMENT_ID && this.selectedElement() === ROOT_ELEMENT_ID;
+        const selectionCondition = this.elementId === this.selectedPage() && this.selectedElement() === this.selectedPage();
 
         if (selectionCondition) {
             return;
         }
 
-        this.service.updateSelection(this.elementId ?? ROOT_ELEMENT_ID);
+        this.service.updateSelection(this.elementId ?? this.selectedPage());
     }
 
     public ngOnInit(): void {
