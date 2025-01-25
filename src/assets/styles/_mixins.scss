@@ -16,3 +16,21 @@
     gap: $gap;
     flex-grow: $flex-grow;
 }
+
+@mixin thin-blue-scrollbar {
+    scrollbar-color: #35baff #d8d8d8;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        background-color: #d8d8d8;
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #35baff;
+
+        &:hover {
+            background-color: #2996cf;
+        }
+    }
+}

@@ -1,5 +1,3 @@
 <ng-content></ng-content>
 
-@if (selectedElement() === elementId()) {
-    <lz-element-actions></lz-element-actions>
-}
+<lz-element-actions [elementId]="elementId()"></lz-element-actions>

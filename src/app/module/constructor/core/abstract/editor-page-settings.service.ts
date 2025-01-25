@@ -4,6 +4,7 @@ import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzS
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
 import { Observable, distinctUntilChanged, map, skip, tap } from "rxjs";
+import { RootElement, RootElementSettings } from "@modules/constructor/components/elements/root/types";
 import { getRandomId, isObjectEquals } from "@shared-utils";
 import { logAction } from "@datorama/akita";
 
@@ -20,11 +21,9 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
     public selectFormModel(): Observable<APFormModel> {
         return this.query
             .select(state => {
-                const { selectedPage, pages } = state;
+                const { selectedPage } = state;
 
-                const page = pages.find(page => page.id === selectedPage)!;
-
-                return page.settings;
+                return this.getElement(selectedPage).settings as RootElementSettings;
             })
             .pipe(
                 map(settings => {
@@ -89,28 +88,26 @@ export abstract class AbstractEditorPageSettingsService extends AbstractEditorOp
     }
 
     protected updatePageSettings(value: PageSettings): void {
-        logAction("Update page settings", [], value);
-
         this.service.updateState(() => {
             const selectedPage = this.getStoreElement("selectedPage");
-            const pages = this.getStoreElement("pages");
 
-            const updatedPages = pages.map(page => {
-                if (page.id === selectedPage) {
-                    return {
-                        ...page,
-                        settings: {
-                            ...page.settings,
-                            ...value,
-                        },
-                    };
-                }
+            logAction("Update page settings", [selectedPage], value);
 
-                return page;
-            });
+            const items = this.getStoreElement("items");
+            const page: RootElement = this.getElement(selectedPage);
+            const updatedPage: RootElement = {
+                ...page,
+                settings: {
+                    ...page.settings,
+                    ...value,
+                },
+            };
 
             return {
-                pages: updatedPages,
+                items: {
+                    ...items,
+                    [selectedPage]: updatedPage,
+                },
             };
         });
     }

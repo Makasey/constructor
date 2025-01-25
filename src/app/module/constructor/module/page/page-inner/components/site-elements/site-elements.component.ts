@@ -6,6 +6,7 @@ import {
     AbstractDragService,
     AbstractEditorElementActionsService,
     EDITOR_SELECTED_ELEMENT,
+    EDITOR_SELECTED_PAGE,
     ElementButton,
     SitePageElementType,
     SitePageElementUnion,
@@ -29,6 +30,8 @@ export class SiteElementsComponent {
     private readonly dragService: AbstractDragService<SitePageElementType> = inject(AbstractDragService);
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
+
+    public readonly selectedPage = inject(EDITOR_SELECTED_PAGE);
 
     private readonly actionService = inject(AbstractEditorElementActionsService);
 
@@ -58,14 +61,14 @@ export class SiteElementsComponent {
         const { data: parentId } = container;
         const { type } = data;
 
-        console.log(event, type);
+        // console.log(event, type);
+        //
+        // if (parentId === this.selectedPage()) {
+        //     this.actionService.addPageElement(type);
+        //
+        //     return;
+        // }
 
-        if (parentId === "rootID") {
-            this.actionService.addPageElement(type);
-
-            return;
-        }
-
-        this.actionService.addElementByType(type, parentId);
+        this.actionService.addElementByType(type, parentId === "rootID" ? this.selectedPage() : parentId);
     }
 }

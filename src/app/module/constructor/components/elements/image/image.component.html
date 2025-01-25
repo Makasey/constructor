@@ -2,7 +2,7 @@
     <img
         [ngStyle]="{
             'object-fit': objectFit$ | async,
-            'object-position': objectPosition$ | async
+            'object-position': objectPosition$ | async,
         }"
         [src]="src$ | async"
         [alt]="alt$ | async"
@@ -11,5 +11,3 @@
         <figcaption class="title">{{ title }}</figcaption>
     }
 </figure>
-
-<lz-element-actions></lz-element-actions>

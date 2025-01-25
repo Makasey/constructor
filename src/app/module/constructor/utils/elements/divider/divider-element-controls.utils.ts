@@ -150,7 +150,7 @@ export function getDividerElementSettings(element: DividerPageElement): APFormMo
             },
             {
                 id: DividerElementSettingsGroup.BORDER_SETTINGS,
-                name: DividerElementSettingsGroup.SIZE_SETTINGS,
+                name: DividerElementSettingsGroup.BORDER_SETTINGS,
                 upsertConfig: DEFAULT_UPSERT_CONFIG,
                 controls: getDividerElementBorderControls(element),
                 headerText: "Настройка бордера",

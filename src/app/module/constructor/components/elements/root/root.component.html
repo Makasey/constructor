@@ -1,1 +1,17 @@
-<lz-editor-element-flex [elementID]="'rootID'" [parentID]="null"></lz-editor-element-flex>
+<div
+    class="drop-list-wrapper"
+    cdkDropList
+    [id]="'rootID'"
+    [cdkDropListConnectedTo]="connectListsId()"
+    [cdkDropListData]="selectedPage()"
+>
+    @for (child of rootElements(); track trackByChild($index, child)) {
+        <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child" [parentId]="selectedPage()">
+            <ng-container *lzElementResolver="child; parent: selectedPage()"></ng-container>
+        </lz-editor-element>
+
+        <div *cdkDragPlaceholder>
+            {{ child }}
+        </div>
+    }
+</div>

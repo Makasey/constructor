@@ -2,7 +2,7 @@ import { EditorState } from "@core";
 import { SitePageElementType, duplicateTreeElement, processDuplicateSectionElement } from "@modules/constructor";
 import { getRandomId } from "@shared-utils";
 
-export function processDuplicateElementsById(state: EditorState, id: string): Partial<EditorState> {
+export function processDuplicateElementsById(state: EditorState, id: string): Pick<EditorState, "items" | "selectedElement" | "pages"> {
     const { items, selectedPage, pages } = state;
     const newId = getRandomId();
     const element = items[id];
@@ -20,6 +20,7 @@ export function processDuplicateElementsById(state: EditorState, id: string): Pa
                 items: {
                     ...updateTree,
                 },
+                pages,
                 selectedElement: newId,
             };
         }

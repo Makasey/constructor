@@ -1,8 +1,16 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 
-import { AbstractSaveEditorElementsService, EDITOR_SELECTED_ELEMENT } from "@modules/constructor";
-import { DeleteSelectedElementDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import {
+    AbstractDragService,
+    AbstractEditorElementActionsService,
+    AbstractSaveEditorElementsService,
+    EDITOR_SELECTED_ELEMENT,
+    EDITOR_SELECTED_PAGE,
+    LZEditorElementComponent,
+} from "@modules/constructor";
+import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
+import { DeleteSelectedElementDirective, ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
 
 @Component({
@@ -12,7 +20,7 @@ import { LZEditorElementFlexComponent } from "@modules/constructor/components/ed
     encapsulation: ViewEncapsulation.None,
     styleUrls: ["./root.component.scss"],
     templateUrl: "./root.component.html",
-    imports: [LZEditorElementFlexComponent],
+    imports: [LZEditorElementFlexComponent, CdkDrag, ElementResolverDirective, CdkDropList, LZEditorElementComponent],
     hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective],
 })
 export class RootComponent implements OnInit, OnDestroy {
@@ -22,11 +30,19 @@ export class RootComponent implements OnInit, OnDestroy {
         "editor-element": true,
     };
 
+    public readonly connectListsId = inject(AbstractDragService).getConnectedDropListsId();
+
+    private readonly service = inject(AbstractEditorElementActionsService);
+
     private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
+
+    public readonly autoSaveInLocaleStorage = toSignal(this.saveEditorElementsService.autoSaveElementsInLocaleStorage());
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    public readonly autoSaveInLocaleStorage = toSignal(this.saveEditorElementsService.autoSaveElementsInLocaleStorage());
+    public readonly selectedPage = inject(EDITOR_SELECTED_PAGE);
+
+    public rootElements = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
 
     public ngOnInit(): void {
         this.autoSaveInLocaleStorage();
@@ -34,5 +50,9 @@ export class RootComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.saveEditorElementsService.clearSaveElements();
+    }
+
+    public trackByChild(_: number, item: string): string {
+        return item;
     }
 }

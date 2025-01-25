@@ -26,7 +26,7 @@ export type Page = Readonly<{
 export type EditorState = Readonly<
     {
         items: Record<string, SitePageElementUnion>;
-        pages: Page[];
+        pages: string[];
         selectedPage: string;
         selectedElement: string;
         id: number | undefined;

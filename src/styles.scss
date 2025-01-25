@@ -1,6 +1,7 @@
 @import "./assets/styles/reset";
 @import "./assets/styles/fonts";
 @import "./assets/styles/icons";
+@import "./assets/styles/_mixins";
 @import "@angular/cdk/overlay-prebuilt.css";
 
 @import "app/components/ui/toastr/toastr.component";
@@ -8,24 +9,6 @@
 @import "app/components/ui/slider/slider.component";
 @import "app/components/ui/calendar/calendar.component";
 @import "app/components/ui/controls/text-field/text-field.component";
-
-@mixin thin-blue-scrollbar {
-    scrollbar-color: #35baff #d8d8d8;
-    scrollbar-width: thin;
-
-    &::-webkit-scrollbar {
-        background-color: #d8d8d8;
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #35baff;
-
-        &:hover {
-            background-color: #2996cf;
-        }
-    }
-}
 
 /* You can add global styles to this file, and also import other style files */
 * {

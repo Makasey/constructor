@@ -26,6 +26,7 @@ import {
     processSettingValueWithUnit,
 } from "@modules/constructor";
 
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
 import { CdkDropList } from "@angular/cdk/drag-drop";
 import { ImageLinkPipe } from "@shared-pipes";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
@@ -46,7 +47,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
     imports: [ImageLinkPipe, NgTemplateOutlet, LZEditorElementFlexComponent, CdkDropList],
     standalone: true,
 })
-export class SectionComponent implements OnInit {
+export class SectionComponent extends BaseElementAbstract<SectionPageElement> implements OnInit {
     @HostBinding("$.style.min-height")
     @HostListener("$.style.min-height")
     public sectionHeight$: Observable<string>;

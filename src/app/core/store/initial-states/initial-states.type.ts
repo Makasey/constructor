@@ -1,5 +1,5 @@
 import { CampaignListState, EditorState, FilesState, ModuleState, TableModuleState, TableState, UIDataState } from "@core";
-import { ROOT_ELEMENT_ID, SitePageElementType, StyleUnit } from "@modules/constructor";
+import { SitePageElementType, StyleUnit } from "@modules/constructor";
 import { getRandomId } from "@shared-utils";
 
 export function initialTableModuleState(): TableModuleState {
@@ -21,8 +21,8 @@ export function initialEditorState(): EditorState {
     return {
         dataState: UIDataState.LOADED,
         items: {
-            [ROOT_ELEMENT_ID]: {
-                id: ROOT_ELEMENT_ID,
+            [pageID]: {
+                id: pageID,
                 type: SitePageElementType.PAGE,
                 children: [],
                 isExtendable: true,
@@ -36,25 +36,18 @@ export function initialEditorState(): EditorState {
                         value: 1080,
                         unit: StyleUnit.PX,
                     },
-                },
-            },
-        },
-        campaignName: "My best campaign",
-        selectedElement: ROOT_ELEMENT_ID,
-        selectedPage: pageID,
-        savedItems: [],
-        pages: [
-            {
-                id: pageID,
-                settings: {
                     title: "My best site",
                     logotype: null,
                     siteDescription: "My best site",
                     siteMetaTags: "",
                 },
-                children: [],
             },
-        ],
+        },
+        campaignName: "My best campaign",
+        selectedElement: pageID,
+        selectedPage: pageID,
+        savedItems: [],
+        pages: [pageID],
         id: undefined,
     };
 }

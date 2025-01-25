@@ -1,7 +1,6 @@
 import {
     AbstractDragService,
     ElementActionsConfigItem,
-    ROOT_ELEMENT_ID,
     SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
@@ -10,7 +9,7 @@ import {
     processDuplicateElementsById,
     processElementCreation,
 } from "@modules/constructor";
-import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey } from "@core";
 import { Inject, Injectable, inject } from "@angular/core";
 import { Observable, map, startWith } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
@@ -31,20 +30,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     }
 
     public selectPageElements(): Observable<string[]> {
-        return this.query
-            .select(state => {
-                return {
-                    selectedPage: state.selectedPage,
-                    pages: state.pages,
-                };
-            })
-            .pipe(
-                map(({ selectedPage, pages }) => {
-                    const page = pages.find(page => page.id === selectedPage);
-
-                    return page?.children ?? [];
-                }),
-            );
+        return this.query.select(["selectedPage", "items"]).pipe(map(({ selectedPage, items }) => items[selectedPage]?.children ?? []));
     }
 
     public getElement(id: string): T {
@@ -56,27 +42,27 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     }
 
     public addPageElement(type: SitePageElementType): void {
-        this.service.updateState(state => {
-            const { createdElementIds, ...stateData } = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
-
-            this.dragService.addConnectedElement(createdElementIds);
-
-            const updatedPages = state.pages.map(page => {
-                if (page.id === state.selectedPage) {
-                    return {
-                        ...page,
-                        children: arrayAdd(page.children, stateData.selectedElement),
-                    };
-                }
-
-                return page;
-            });
-
-            return {
-                ...stateData,
-                pages: updatedPages,
-            };
-        });
+        // this.service.updateState(state => {
+        //     const { createdElementIds, ...stateData } = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
+        //
+        //     this.dragService.addConnectedElement(createdElementIds);
+        //
+        //     const updatedPages = state.pages.map(page => {
+        //         if (page === state.selectedPage) {
+        //             return {
+        //                 ...page,
+        //                 children: arrayAdd(page.children, stateData.selectedElement),
+        //             };
+        //         }
+        //
+        //         return page;
+        //     });
+        //
+        //     return {
+        //         ...stateData,
+        //         pages: updatedPages,
+        //     };
+        // });
     }
 
     public addElementByType(type: SitePageElementType, parentId?: string): void {
@@ -130,7 +116,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
         this.service.updateState(state => {
             let items = { ...state.items };
-            let updatedPages = state.pages;
+            // const updatedPages = state.pages;
 
             const { parentId } = items[elementId];
 
@@ -138,9 +124,9 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                 return state;
             }
 
-            if (parentId === ROOT_ELEMENT_ID) {
-                updatedPages = this.deleteItemFromPage(elementId);
-            }
+            // if (parentId === ROOT_ELEMENT_ID) {
+            //     updatedPages = this.deleteItemFromPage(elementId);
+            // }
 
             const parentElement: SitePageElementUnion = items[parentId];
 
@@ -160,8 +146,8 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                         children: arrayRemove(parentElement.children, item => item === elementId),
                     },
                 },
-                pages: updatedPages,
-                selectedElement: state.selectedElement === elementId ? parentId : ROOT_ELEMENT_ID,
+                // pages: updatedPages,
+                selectedElement: state.selectedElement === elementId ? parentId : state.selectedPage,
             };
         });
     }
@@ -169,7 +155,19 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     public duplicateElementById(id: string): void {
         logAction(`Duplicate element with id: ${id}`);
         this.service.updateState(state => {
-            return processDuplicateElementsById(state, id);
+            const { items, selectedElement, pages } = processDuplicateElementsById(state, id);
+
+            const element = items[selectedElement];
+
+            if (element.isExtendable) {
+                this.dragService.addConnectedElement(element.id);
+            }
+
+            return {
+                items,
+                selectedElement,
+                pages,
+            };
         });
     }
 
@@ -179,23 +177,23 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         return processCreateElementActions(type);
     }
 
-    protected deleteItemFromPage(elementId: string): Page[] {
-        const state = this.query.getValue();
-        const { pages, selectedPage } = state;
-
-        this.dragService.removeConnectedList(elementId);
-
-        return pages.map(page => {
-            if (page.id === selectedPage) {
-                return {
-                    ...page,
-                    children: arrayRemove(page.children, elementId),
-                };
-            }
-
-            return page;
-        });
-    }
+    // protected deleteItemFromPage(elementId: string): Page[] {
+    // const state = this.query.getValue();
+    // const { pages, selectedPage } = state;
+    //
+    // this.dragService.removeConnectedList(elementId);
+    //
+    // return pages.map(page => {
+    //     if (page === selectedPage) {
+    //         return {
+    //             ...page,
+    //             children: arrayRemove(page.children, elementId),
+    //         };
+    //     }
+    //
+    //     return page;
+    // });
+    // }
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {
         return this.query.getValue()[key];

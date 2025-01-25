@@ -201,7 +201,7 @@ export function processCampaignResponse(campaign: CreateCampaignModel & { id: nu
         items: processedItems,
         dataState: UIDataState.LOADED,
         pages: pages,
-        selectedPage: pages[0].id,
+        selectedPage: pages[0],
         selectedElement: ROOT_ELEMENT_ID,
         id: id,
         campaignName: campaignName,

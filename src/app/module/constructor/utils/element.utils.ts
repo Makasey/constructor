@@ -66,14 +66,21 @@ export function duplicateTreeElement(
 
         parentCache[duplicatedElement.id] = newElement.id;
 
-        items = {
-            ...items,
-            [parentId]: {
-                ...items[parentId],
-                children: arrayAdd(items[parentId].children, newElementId),
-            },
-            [newElementId]: newElement,
-        };
+        if (!parentId) {
+            items = {
+                ...items,
+                [newElementId]: newElement,
+            };
+        } else {
+            items = {
+                ...items,
+                [parentId]: {
+                    ...items[parentId],
+                    children: arrayAdd(items[parentId].children, newElementId),
+                },
+                [newElementId]: newElement,
+            };
+        }
 
         duplicatedElement.children.forEach(child => {
             queue.push(items[child]);
@@ -117,14 +124,18 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
     }
 }
 
-export function mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree {
+export function mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree | null {
+    if (!items[element]) {
+        return null;
+    }
+
     const { id, children, type } = items[element];
 
     return {
         value: id,
         label: type,
         children: children.map(child => {
-            return mapElementsToTreeModel(items, child);
+            return mapElementsToTreeModel(items, child)!;
         }),
     };
 }

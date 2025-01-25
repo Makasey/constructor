@@ -1,246 +1,244 @@
-@if(!!valueChanges()){}
-
-  <div class="form-inner">
+<div class="form-inner">
     <ng-container
-      [ngTemplateOutlet]="groupTemplate"
+        [ngTemplateOutlet]="groupTemplate"
         [ngTemplateOutletContext]="{
-            formModel: convertedFormModel()
+            formModel: convertedFormModel(),
         }"
-      >
+    >
     </ng-container>
-  </div>
+</div>
 
-  <ng-template #groupTemplate let-formModel="formModel" let-index="index">
+<ng-template #groupTemplate let-formModel="formModel" let-index="index">
     @if (formModel) {
-      <ng-container
-        [ngTemplateOutlet]="defaultGroupTemplate"
+        <ng-container
+            [ngTemplateOutlet]="defaultGroupTemplate"
             [ngTemplateOutletContext]="{
                 formModel: formModel,
                 formGroup: formModel.path ? mainFormGroup()?.get(formModel.path) : mainFormGroup(),
                 defaultTemplate: defaultGroupTemplate,
-                index: index
+                index: index,
             }"
         >
-      </ng-container>
+        </ng-container>
     }
     @if (formModel?.innerGroups) {
-      @for (group of formModel.innerGroups; track group.id; let i = $index) {
-        <ng-container
-          [ngTemplateOutlet]="groupTemplate"
+        @for (group of formModel.innerGroups; track group.id; let i = $index) {
+            <ng-container
+                [ngTemplateOutlet]="groupTemplate"
                 [ngTemplateOutletContext]="{
                     formModel: group,
-                    index: i
+                    index: i,
                 }"
-          >
-        </ng-container>
-      }
+            >
+            </ng-container>
+        }
     }
-  </ng-template>
+</ng-template>
 
-  <ng-template #defaultGroupTemplate let-formModel="formModel" let-formGroup="formGroup" let-index="index">
+<ng-template #defaultGroupTemplate let-formModel="formModel" let-formGroup="formGroup" let-index="index">
     @if (formModel?.innerControls?.length) {
-      <div class="form__wrapper">
-        <form class="form" [formGroup]="formGroup">
-          <div class="form-controls">
-            @if (formModel.innerControls) {
-              @for (control of formModel.innerControls; track control.name) {
-                @if (control && !control.hidden) {
-                  <div [ngClass]="control.controlClass">
-                    @if (control.options?.title) {
-                      <h2 [ngClass]="control.options?.titleClass">{{ control.options.title }}</h2>
-                    }
-                    <ng-template
+        <div class="form__wrapper">
+            <form class="form" [formGroup]="formGroup">
+                <div class="form-controls">
+                    @if (formModel.innerControls) {
+                        @for (control of formModel.innerControls; track control.name) {
+                            @if (control && !control.hidden) {
+                                <div [ngClass]="control.controlClass">
+                                    @if (control.options?.title) {
+                                        <h2 [ngClass]="control.options?.titleClass">{{ control.options.title }}</h2>
+                                    }
+                                    <ng-template
                                         [ngTemplateOutlet]="
                                             (control.valueTemplateKey && _templatesMap[control.valueTemplateKey]) ||
                                             defaultFieldTemplate
                                         "
                                         [ngTemplateOutletContext]="{
                                             controlModel: control,
-                                            nativeControl: mainFormGroup()!.get(control.path)
+                                            nativeControl: mainFormGroup()!.get(control.path),
                                         }"
-                      >
-                    </ng-template>
-                  </div>
-                }
-              }
-            }
-          </div>
-        </form>
-      </div>
+                                    >
+                                    </ng-template>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </form>
+        </div>
     }
-  </ng-template>
+</ng-template>
 
-  <ng-template
+<ng-template
     #textFieldTemplate
     let-controlModel="controlModel"
     let-nativeControl="nativeControl"
     let-formModel="formModel"
-    >
+>
     <ap-text-field
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [formControl]="nativeControl"
     ></ap-text-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #numberFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #numberFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <ap-number-field
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [formControl]="nativeControl"
-      [label]="controlModel.options?.label"
-      [max]="controlModel.options?.max"
-      [min]="controlModel.options?.min"
-      [step]="controlModel.options?.step"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [formControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+        [step]="controlModel.options?.step"
     ></ap-number-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #textAreaFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #textAreaFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-textarea
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
     ></lz-textarea>
-  </ng-template>
+</ng-template>
 
-  <ng-template #dropdownFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #dropdownFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <ap-dropdown-field
-      [multi]="controlModel.options?.multi ?? false"
-      [formControl]="nativeControl"
-      [value]="controlModel.value || []"
-      [label]="controlModel.options?.label"
-      [customClass]="controlModel.options?.customClass"
-      [selectValueKey]="controlModel.options?.selectValueKey"
-      [selectLabelKey]="controlModel.options?.selectLabelKey"
-      [items]="controlModel.options?.items ?? []"
-      >
+        [multi]="controlModel.options?.multi ?? false"
+        [formControl]="nativeControl"
+        [value]="controlModel.value || []"
+        [label]="controlModel.options?.label"
+        [customClass]="controlModel.options?.customClass"
+        [selectValueKey]="controlModel.options?.selectValueKey"
+        [selectLabelKey]="controlModel.options?.selectLabelKey"
+        [items]="controlModel.options?.items ?? []"
+    >
     </ap-dropdown-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #numberWithDropdownField let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #numberWithDropdownField let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-number-with-dropdown-field
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [selectValueKey]="controlModel.options?.selectValueKey"
-      [selectLabelKey]="controlModel.options?.selectLabelKey"
-      [label]="controlModel.options?.label"
-      [min]="controlModel.options?.min"
-      [max]="controlModel.options?.max"
-      [items]="controlModel.options?.items"
-      >
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [selectValueKey]="controlModel.options?.selectValueKey"
+        [selectLabelKey]="controlModel.options?.selectLabelKey"
+        [label]="controlModel.options?.label"
+        [min]="controlModel.options?.min"
+        [max]="controlModel.options?.max"
+        [items]="controlModel.options?.items"
+    >
     </lz-number-with-dropdown-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #directionFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #directionFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-direction-field
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [label]="controlModel.options?.label"
-      [items]="controlModel.options?.items"
-      [max]="controlModel.options?.max"
-      [min]="controlModel.options?.min"
-      >
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [items]="controlModel.options?.items"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+    >
     </lz-direction-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #colorPickerTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #colorPickerTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-color-picker
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
     ></lz-color-picker>
-  </ng-template>
+</ng-template>
 
-  <ng-template #borderControlTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #borderControlTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-border-field
-      [formControl]="nativeControl"
-      [nativeControl]="nativeControl"
-      [controlModel]="controlModel"
+        [formControl]="nativeControl"
+        [nativeControl]="nativeControl"
+        [controlModel]="controlModel"
     ></lz-border-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #fileUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #fileUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-file-upload [formControl]="nativeControl" [nativeControl]="nativeControl" [controlModel]="controlModel" />
-  </ng-template>
+</ng-template>
 
-  <ng-template #imageUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #imageUploadTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-image-field
-      [formControl]="nativeControl"
-      [nativeControl]="nativeControl"
-      [controlModel]="controlModel"
-      [label]="controlModel.options?.label"
-      [maxLength]="controlModel.options?.maxLength"
-      [minLength]="controlModel.options?.minLength"
+        [formControl]="nativeControl"
+        [nativeControl]="nativeControl"
+        [controlModel]="controlModel"
+        [label]="controlModel.options?.label"
+        [maxLength]="controlModel.options?.maxLength"
+        [minLength]="controlModel.options?.minLength"
     ></lz-image-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #backgroundColorTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #backgroundColorTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <lz-background-field
-      [formControl]="nativeControl"
-      [nativeControl]="nativeControl"
-      [controlModel]="controlModel"
+        [formControl]="nativeControl"
+        [nativeControl]="nativeControl"
+        [controlModel]="controlModel"
     ></lz-background-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
+<ng-template #defaultFieldTemplate let-controlModel="controlModel" let-nativeControl="nativeControl">
     <span class="form-default-text">
-      {{ "label: " + controlModel?.options.label }}
+        {{ "label: " + controlModel?.options.label }}
     </span>
-  </ng-template>
+</ng-template>
 
-  <ng-template #defaultHeaderTemplate let-formModel="formModel">
+<ng-template #defaultHeaderTemplate let-formModel="formModel">
     @if (formModel?.headerText) {
-      <div class="form__default-header _font-ui13-normal">
-        {{ formModel.headerText }}
-      </div>
+        <div class="form__default-header _font-ui13-normal">
+            {{ formModel.headerText }}
+        </div>
     }
-  </ng-template>
-  <ng-template #rangeFieldWithUnitTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+</ng-template>
+<ng-template #rangeFieldWithUnitTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
     <lz-range-with-unit-field
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [label]="controlModel.options?.label"
-      [items]="controlModel.options?.items"
-      [max]="controlModel.options?.max"
-      [step]="controlModel.options?.step"
-      [min]="controlModel.options?.min"
-      >
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [items]="controlModel.options?.items"
+        [max]="controlModel.options?.max"
+        [step]="controlModel.options?.step"
+        [min]="controlModel.options?.min"
+    >
     </lz-range-with-unit-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+<ng-template #rangeFieldTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
     <lz-range-field
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [label]="controlModel.options?.label"
-      [max]="controlModel.options?.max"
-      [min]="controlModel.options?.min"
-      [step]="controlModel.options?.step"
-      >
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options?.label"
+        [max]="controlModel.options?.max"
+        [min]="controlModel.options?.min"
+        [step]="controlModel.options?.step"
+    >
     </lz-range-field>
-  </ng-template>
+</ng-template>
 
-  <ng-template #radioGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+<ng-template #radioGroupTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
     <lz-radio-group
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [items]="controlModel.options?.items"
-      [label]="controlModel.options?.label"
-      >
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [items]="controlModel.options?.items"
+        [label]="controlModel.options?.label"
+    >
     </lz-radio-group>
-  </ng-template>
+</ng-template>
 
-  <ng-template #itemsControlTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
+<ng-template #itemsControlTemplate let-nativeControl="nativeControl" let-controlModel="controlModel">
     <lz-items-control-field
-      [formControl]="nativeControl"
-      [controlModel]="controlModel"
-      [nativeControl]="nativeControl"
-      [label]="controlModel.options.label"
-      [defaultItemFn]="controlModel.options.defaultItemFn"
+        [formControl]="nativeControl"
+        [controlModel]="controlModel"
+        [nativeControl]="nativeControl"
+        [label]="controlModel.options.label"
+        [defaultItemFn]="controlModel.options.defaultItemFn"
     ></lz-items-control-field>
-  </ng-template>
+</ng-template>

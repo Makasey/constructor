@@ -25,12 +25,14 @@ import {
 import { BackgroundFieldModel, BorderFieldModel } from "@components/ui";
 import { File } from "@shared-types";
 import { Page } from "@core";
+import { RootElement } from "@modules/constructor/components/elements/root/types";
 import { ViewContainerRef } from "@angular/core";
 
 export type SitePageElementUnion =
     | TabsItemPageElement
     | SectionPageElement
     | SitePageElement
+    | RootElement
     | TitlePageElement
     | TextPageElement
     | InnerPageElement
@@ -122,7 +124,7 @@ export type CampaignModel = Readonly<{
 }>;
 
 export type CreateCampaignModel = Readonly<{
-    pages: Page[];
+    pages: string[];
     elements: Record<string, SitePageRequestElement>;
     campaignName: string;
 }>;
@@ -130,7 +132,7 @@ export type CreateCampaignModel = Readonly<{
 export type CreatePreviewModel = Readonly<{
     type: "page";
     body: {
-        pages: Page[];
+        pages: string[];
         elements: Record<string, SitePageElement>;
     };
 }>;
