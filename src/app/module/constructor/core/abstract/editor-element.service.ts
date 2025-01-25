@@ -13,6 +13,7 @@ import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzS
 import { Inject, Injectable, inject } from "@angular/core";
 import { Observable, map, startWith } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { moveItemsInArray } from "@shared-utils/array/array.utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion = SitePageElementUnion> {
@@ -80,6 +81,25 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
             }
 
             return processedStore;
+        });
+    }
+
+    public changeElementPosition(previousPosition: number, position: number, parentId: string): void {
+        logAction(`Move element from ${previousPosition} to ${position}`);
+
+        this.service.updateState(({ items }) => {
+            const parent = items[parentId];
+            const updatedChildren = moveItemsInArray(position, previousPosition, parent.children);
+
+            return {
+                items: {
+                    ...items,
+                    [parentId]: {
+                        ...parent,
+                        children: updatedChildren,
+                    },
+                },
+            };
         });
     }
 
@@ -167,6 +187,42 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                 items,
                 selectedElement,
                 pages,
+            };
+        });
+    }
+
+    public moveItemBetweenElements({
+        currentIndex,
+        elementId,
+        parentId,
+        oldParentId,
+    }: {
+        previousIndex: number;
+        currentIndex: number;
+        elementId: string;
+        oldParentId: string;
+        parentId: string;
+    }): void {
+        logAction(`Move element with id: ${elementId} from ${oldParentId} to ${parentId}`);
+
+        this.service.updateState(state => {
+            const oldParent = this.getElement(oldParentId);
+            const parent = this.getElement(parentId);
+            const children = parent.children.concat(elementId);
+            const updatedChildren = moveItemsInArray(currentIndex, children.length - 1, children);
+
+            return {
+                items: {
+                    ...state.items,
+                    [oldParentId]: {
+                        ...oldParent,
+                        children: arrayRemove(oldParent.children, item => item === elementId),
+                    },
+                    [parentId]: {
+                        ...parent,
+                        children: updatedChildren,
+                    },
+                },
             };
         });
     }

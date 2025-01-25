@@ -34,7 +34,7 @@ export class DefaultDragService<T> extends AbstractDragService<T> {
 
     private readonly draggableItem: WritableSignal<T | null> = signal(null);
 
-    private readonly connectedDropListsIds: WritableSignal<string[]> = signal(["elements", "rootID"]);
+    private readonly connectedDropListsIds: WritableSignal<string[]> = signal(["elements", this.query.getValue().selectedElement]);
 
     public setDraggableItem(element: T): void {
         this.draggableItem.set(element);
