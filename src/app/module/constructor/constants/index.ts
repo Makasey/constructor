@@ -62,7 +62,7 @@ export const defaultRequestElementSettingsKey = "default";
 
 export const ELEMENT_ID = new InjectionToken<string>("ELEMENT_ID", {
     factory: () => {
-        return ROOT_ELEMENT_ID;
+        return "";
     },
 });
 

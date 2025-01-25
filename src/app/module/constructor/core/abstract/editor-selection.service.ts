@@ -24,7 +24,7 @@ export abstract class AbstractEditorSelectionService {
         this.selectElement(elementId);
     }
 
-    protected selectElement(elementId: string): void {
+    public selectElement(elementId: string): void {
         logAction(`Select element with id: ${elementId}`, [elementId]);
 
         this.service.updateState(() => {
@@ -34,7 +34,7 @@ export abstract class AbstractEditorSelectionService {
         });
     }
 
-    protected deselectElement(elementId: string): void {
+    public deselectElement(elementId: string): void {
         logAction(`Deselect element with id: ${elementId}`, [elementId]);
 
         this.service.updateState(() => {

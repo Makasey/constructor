@@ -59,6 +59,7 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
                 },
                 pages: pages.concat(newPageId),
                 selectedPage: newPageId,
+                selectedElement: newPageId,
             };
         });
     }

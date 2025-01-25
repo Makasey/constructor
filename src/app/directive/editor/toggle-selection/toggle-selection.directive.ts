@@ -21,6 +21,12 @@ export class ToggleSelectionDirective implements OnInit {
     public toggleSelection(): void {
         const selectionCondition = this.elementId === this.selectedPage() && this.selectedElement() === this.selectedPage();
 
+        if (this.elementId === "") {
+            this.service.selectElement(this.selectedPage());
+
+            return;
+        }
+
         if (selectionCondition) {
             return;
         }
