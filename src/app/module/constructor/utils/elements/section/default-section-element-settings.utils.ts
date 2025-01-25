@@ -22,7 +22,7 @@ export function defaultSectionElementSettings(): () => Omit<SectionPageElement, 
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 200,
+                    value: 500,
                     unit: StyleUnit.PX,
                 },
                 margin: {

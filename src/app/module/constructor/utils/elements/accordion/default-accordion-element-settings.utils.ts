@@ -9,12 +9,12 @@ export function defaultAccordionElementSettings(): () => Omit<AccordionPageEleme
             isExtendable: false,
             settings: {
                 width: {
-                    value: 50,
+                    value: 100,
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: 400,
+                    unit: StyleUnit.PX,
                 },
                 margin: {
                     ...defaultDirectionValue,

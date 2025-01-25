@@ -74,15 +74,14 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
                 const items = this.getStoreElement("items");
 
-                let updatedItems: Record<string, SitePageElement> = { ...items };
+                const updatedItems: Record<string, SitePageElement> = { ...items };
 
-                const result = deleteElementFromTree(items, selectedPageId);
-                updatedItems = result.items;
+                const result = deleteElementFromTree(updatedItems, id);
 
                 result.itemsToRemove.forEach(child => this.dragService.removeConnectedList(child));
 
                 return {
-                    items: updatedItems,
+                    items: result.items,
                     pages: updatePages,
                     selectedPage: selectedPageId,
                     selectedElement: selectedPageId,
@@ -113,17 +112,14 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
     }
 
     public selectPages(): Observable<string[]> {
-        return this.query.select(state => {
-            console.log(state.pages);
-
-            return state.pages;
-        });
+        return this.query.select(state => state.pages);
     }
 
     public updateSelectPage(id: string): void {
         this.service.updateState(() => {
             return {
                 selectedPage: id,
+                selectedElement: id,
             };
         });
     }

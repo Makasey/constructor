@@ -61,14 +61,6 @@ export class SiteElementsComponent {
         const { data: parentId } = container;
         const { type } = data;
 
-        // console.log(event, type);
-        //
-        // if (parentId === this.selectedPage()) {
-        //     this.actionService.addPageElement(type);
-        //
-        //     return;
-        // }
-
         this.actionService.addElementByType(type, parentId === "rootID" ? this.selectedPage() : parentId);
     }
 }

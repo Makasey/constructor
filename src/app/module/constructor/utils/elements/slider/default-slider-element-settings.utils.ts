@@ -13,7 +13,7 @@ export function defaultSliderElementSettings(): () => Omit<SliderPageElement, "i
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 180,
+                    value: 250,
                     unit: StyleUnit.PX,
                 },
                 margin: {

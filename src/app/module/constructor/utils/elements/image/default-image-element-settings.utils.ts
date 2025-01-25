@@ -12,8 +12,8 @@ export function defaultImageElementSettings(): () => Omit<ImagePageElement, "id"
                     unit: StyleUnit.PERCENT,
                 },
                 height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: 350,
+                    unit: StyleUnit.PX,
                 },
                 image: {
                     alt: "",
