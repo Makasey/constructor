@@ -1,15 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    HostListener,
-    Inject,
-    Optional,
-    SkipSelf,
-    ViewEncapsulation,
-    input,
-    output,
-} from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Inject, Optional, SkipSelf, ViewEncapsulation, input, output } from "@angular/core";
 
 export type Tree<V = string> = {
     value: V;
@@ -24,14 +13,14 @@ export type Tree<V = string> = {
     imports: [],
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./tree.component.html",
+    standalone: true,
 })
 export class TreeComponent {
     @HostBinding("class.lz-tree")
     public hostClass = true;
 
-    @HostListener("click.stop", ["$event"])
     public toggleTree(): void {
-        // this.closed = !this.closed;
+        this.closed = !this.closed;
     }
 
     public readonly tree = input.required<Tree>();
