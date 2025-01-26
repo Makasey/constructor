@@ -5,7 +5,6 @@ export function processDuplicateSectionElement(
     updateTree: Record<string, SitePageElementUnion>,
     pages: string[],
     newId: string,
-    selectedPage: string,
 ): Pick<EditorState, "items" | "selectedElement" | "pages"> {
     return {
         items: {

@@ -24,7 +24,6 @@ import {
 } from "@modules/constructor";
 import { BackgroundFieldModel, BorderFieldModel } from "@components/ui";
 import { File } from "@shared-types";
-import { Page } from "@core";
 import { RootElement } from "@modules/constructor/components/elements/root/types";
 import { ViewContainerRef } from "@angular/core";
 
@@ -120,7 +119,7 @@ export type CampaignModel = Readonly<{
     id: number;
     elements: Record<string, SitePageElement>;
     campaignName: string;
-    pages: Page[];
+    pages: RootElement[];
 }>;
 
 export type CreateCampaignModel = Readonly<{

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input, output } from "@angular/core";
 import { NgClass } from "@angular/common";
-import { Page } from "@core";
+import { RootElement } from "@modules/constructor/components/elements/root/types";
 
 @Component({
     selector: "lz-pages-bar",
@@ -15,7 +15,7 @@ export class PagesBarComponent {
     @HostBinding("class.pages-bar")
     public hostClass = true;
 
-    public readonly items = input<Page[]>();
+    public readonly items = input<RootElement[]>();
 
     public readonly activeItem = input<string>();
 

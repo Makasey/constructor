@@ -40,7 +40,7 @@ export function processTabsElementCreation(
     };
 
     return {
-        createdElementIds: [newElement.id, ...childrenIds],
+        createdElementIds: [...childrenIds],
         selectedElement: tabItems[0].id,
         items: {
             ...updatedItems,

@@ -42,42 +42,14 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         return this.query.select(state => state.items);
     }
 
-    public addPageElement(type: SitePageElementType): void {
-        // this.service.updateState(state => {
-        //     const { createdElementIds, ...stateData } = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
-        //
-        //     this.dragService.addConnectedElement(createdElementIds);
-        //
-        //     const updatedPages = state.pages.map(page => {
-        //         if (page === state.selectedPage) {
-        //             return {
-        //                 ...page,
-        //                 children: arrayAdd(page.children, stateData.selectedElement),
-        //             };
-        //         }
-        //
-        //         return page;
-        //     });
-        //
-        //     return {
-        //         ...stateData,
-        //         pages: updatedPages,
-        //     };
-        // });
-    }
-
     public addElementByType(type: SitePageElementType, parentId?: string): void {
         this.service.updateState(state => {
             parentId = parentId ?? state.selectedElement;
 
             const { createdElementIds, ...processedStore } = processElementCreation(type, state.items, parentId);
 
-            if (["section", "inner"].includes(type)) {
+            if (["section", "inner", "tabs", "accordion", "slider"].includes(type)) {
                 this.dragService.addConnectedElement(createdElementIds);
-            }
-
-            if (["tabs", "accordion", "slider"].includes(type)) {
-                this.dragService.addConnectedElement(createdElementIds.slice(1));
             }
 
             return processedStore;
@@ -136,17 +108,12 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
         this.service.updateState(state => {
             let items = { ...state.items };
-            // const updatedPages = state.pages;
 
             const { parentId } = items[elementId];
 
             if (!parentId) {
                 return state;
             }
-
-            // if (parentId === ROOT_ELEMENT_ID) {
-            //     updatedPages = this.deleteItemFromPage(elementId);
-            // }
 
             const parentElement: SitePageElementUnion = items[parentId];
 
@@ -166,7 +133,6 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                         children: arrayRemove(parentElement.children, item => item === elementId),
                     },
                 },
-                // pages: updatedPages,
                 selectedElement: state.selectedElement === elementId ? parentId : state.selectedPage,
             };
         });
@@ -232,24 +198,6 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         const { type } = this.getStoreElement("items")[elementId];
         return processCreateElementActions(type);
     }
-
-    // protected deleteItemFromPage(elementId: string): Page[] {
-    // const state = this.query.getValue();
-    // const { pages, selectedPage } = state;
-    //
-    // this.dragService.removeConnectedList(elementId);
-    //
-    // return pages.map(page => {
-    //     if (page === selectedPage) {
-    //         return {
-    //             ...page,
-    //             children: arrayRemove(page.children, elementId),
-    //         };
-    //     }
-    //
-    //     return page;
-    // });
-    // }
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {
         return this.query.getValue()[key];

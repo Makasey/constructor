@@ -48,6 +48,8 @@ export class DefaultDragService<T> extends AbstractDragService<T> {
         elementOrElements = coerceArray(elementOrElements);
 
         this.connectedDropListsIds.update(value => value.concat(elementOrElements));
+
+        console.log(this.connectedDropListsIds());
     }
 
     public removeConnectedList(id: string): void {

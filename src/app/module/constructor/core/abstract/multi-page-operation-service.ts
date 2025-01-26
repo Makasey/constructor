@@ -113,7 +113,7 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
     }
 
     public selectPages(): Observable<string[]> {
-        return this.query.select(state => state.pages);
+        return this.query.select(["items", "pages"]).pipe(map(({ pages }) => pages));
     }
 
     public updateSelectPage(id: string): void {
@@ -130,18 +130,7 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
     }
 
     public selectActivePage(): Observable<string> {
-        return this.query
-            .select(state => {
-                return {
-                    selectedPage: state.selectedPage,
-                    pages: state.pages,
-                };
-            })
-            .pipe(
-                map(({ selectedPage, pages }) => {
-                    return pages.find(page => page === selectedPage)!;
-                }),
-            );
+        return this.query.select(["selectedPage", "items"]).pipe(map(({ selectedPage }) => selectedPage));
     }
 }
 

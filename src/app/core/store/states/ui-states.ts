@@ -4,7 +4,7 @@ import { TableExtra, TableMeta, TableRow, TableValueExtraInternal } from "@compo
 
 import { UIDataState } from "@core";
 
-import { CampaignModel, PageSettings, SitePageElementUnion } from "@modules/constructor";
+import { CampaignModel, SitePageElementUnion } from "@modules/constructor";
 
 export type UIDataStateful = Readonly<{
     dataState: UIDataState;
@@ -15,12 +15,6 @@ export type ModuleState = UIDataStateful;
 export type TableModuleState = Readonly<{
     tableMeta: TableMeta[];
     tableValues: TableRow[];
-}>;
-
-export type Page = Readonly<{
-    settings: PageSettings;
-    children: string[];
-    id: string;
 }>;
 
 export type EditorState = Readonly<
