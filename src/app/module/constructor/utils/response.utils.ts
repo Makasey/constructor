@@ -14,6 +14,8 @@ import {
     SitePageElementType,
     SitePageElementUnion,
     SitePageRequestElement,
+    SliderItemPageElement,
+    SliderPageElement,
     SpacerPageElement,
     TabsItemPageElement,
     TabsPageElement,
@@ -27,6 +29,8 @@ import {
     imagePageElementSettingsStylesKeys,
     innerPageElementSettingsStyleKeys,
     sectionPageElementSettingsStylesKeys,
+    sliderItemPageElementSettingsStyleKeys,
+    sliderPageElementSettingsStyleKeys,
     spacerPageElementSettingsStyleKeys,
     tabsItemPageElementSettingsStyleKeys,
     tabsPageElementSettingsStyleKeys,
@@ -132,6 +136,14 @@ export function processElementDataCreation(item: SitePageElementUnion): SitePage
 
         case SitePageElementType.SPACER: {
             return processRequestElementData(item as SpacerPageElement, { styles: spacerPageElementSettingsStyleKeys, default: [] });
+        }
+
+        case SitePageElementType.SLIDER: {
+            return processRequestElementData(item as SliderPageElement, { styles: sliderPageElementSettingsStyleKeys, default: [] });
+        }
+
+        case SitePageElementType.SLIDER_ITEM: {
+            return processRequestElementData(item as SliderItemPageElement, { styles: sliderItemPageElementSettingsStyleKeys, default: [] });
         }
 
         default: {

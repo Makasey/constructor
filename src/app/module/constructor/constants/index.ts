@@ -17,6 +17,8 @@ import {
     SectionPageElementSettings,
     SitePageElementType,
     SitePageElementUnion,
+    SliderPageElementItemSettings,
+    SliderPageElementSettings,
     SpacerPageElementSettings,
     StyleUnit,
     TabsItemPageElementSettings,
@@ -31,6 +33,8 @@ import {
     defaultInnerElementSettings,
     defaultPageElementSettings,
     defaultSectionElementSettings,
+    defaultSliderElementSettings,
+    defaultSliderItemElementSettings,
     defaultSpacerElementSettings,
     defaultTabsElementSettings,
     defaultTabsItemElementSettings,
@@ -40,6 +44,7 @@ import {
     possibleInnerSiteElements,
     possiblePageSiteElements,
     possibleSectionSiteElements,
+    possibleSliderItemSiteElements,
     possibleTabsItemSiteElements,
 } from "@modules/constructor";
 import { BorderFieldModel, defaultDirectionValue } from "@components";
@@ -233,6 +238,10 @@ export const accordionItemPageElementSettingsStyleKeys: TypeKeys<AccordionItemPa
     "title",
 ];
 
+export const sliderPageElementSettingsStyleKeys: TypeKeys<SliderPageElementSettings> = ["width", "height", "gap"];
+
+export const sliderItemPageElementSettingsStyleKeys: TypeKeys<SliderPageElementItemSettings> = ["background"];
+
 export const objectFitMap: Record<ObjectFit, string> = {
     [ObjectFit.DEFAULT]: "none",
     [ObjectFit.CONTAIN]: "contain",
@@ -338,6 +347,8 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.ACCORDION]: defaultAccordionElementSettings(),
     [SitePageElementType.ACCORDION_ITEM]: defaultAccordionItemElementSettings(),
     [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
+    [SitePageElementType.SLIDER]: defaultSliderElementSettings(),
+    [SitePageElementType.SLIDER_ITEM]: defaultSliderItemElementSettings(),
 };
 
 export const possibleSiteElementsMap: Record<string, ElementButton[]> = {
@@ -346,6 +357,7 @@ export const possibleSiteElementsMap: Record<string, ElementButton[]> = {
     [SitePageElementType.INNER]: possibleInnerSiteElements(),
     [SitePageElementType.ACCORDION_ITEM]: possibleAccordionItemSiteElements(),
     [SitePageElementType.TABS_ITEM]: possibleTabsItemSiteElements(),
+    [SitePageElementType.SLIDER_ITEM]: possibleSliderItemSiteElements(),
 };
 
 export const duplicateElementActionConfig: ElementActionsConfigItem = {
@@ -361,3 +373,8 @@ export const deleteElementActionConfig: ElementActionsConfigItem = {
 };
 
 export const SAVE_ELEMENTS_LOCALE_STORAGE_KEY = "sections";
+
+export const defaultAutoSlideItems = [
+    { label: "true", value: true, image: "eicon-plus-square" },
+    { label: "false", value: false, image: "eicon-minus-square" },
+];

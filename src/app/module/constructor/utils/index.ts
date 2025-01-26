@@ -38,6 +38,13 @@ export {
     possibleAccordionItemSiteElements,
     possibleTabsItemSiteElements,
     processDuplicateSectionElement,
+    defaultSliderElementSettings,
+    defaultSliderItemElementSettings,
+    processSliderElementCreation,
+    getSliderItemElementSettings,
+    processUpdateSliderSettings,
+    processUpdateSliderItemElementSettings,
+    possibleSliderItemSiteElements,
 } from "./elements";
 export { linkPattern, linkValidator } from "./validators";
 export {

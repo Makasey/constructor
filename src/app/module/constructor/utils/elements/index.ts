@@ -29,3 +29,10 @@ export {
 } from "./accordion-item";
 export { getDividerElementSettings, defaultDividerElementSettings } from "./divider";
 export { defaultPageElementSettings, possiblePageSiteElements } from "./page";
+export { defaultSliderElementSettings, processSliderElementCreation, processUpdateSliderSettings } from "./slider";
+export {
+    defaultSliderItemElementSettings,
+    getSliderItemElementSettings,
+    processUpdateSliderItemElementSettings,
+    possibleSliderItemSiteElements,
+} from "./slider-item";

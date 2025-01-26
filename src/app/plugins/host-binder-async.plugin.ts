@@ -1,4 +1,4 @@
-import { EMPTY, ObservableInput, of } from "rxjs";
+import { EMPTY, ObservableInput } from "rxjs";
 import { EventManager } from "@angular/platform-browser";
 import { switchMap, take } from "rxjs/operators";
 
@@ -17,8 +17,9 @@ export class HostBinderAsyncPlugin {
         element[event] = EMPTY;
 
         const method = this.getMethod(element, event);
-        const sub = of(null)
-            .pipe(
+        const sub = this.manager
+            .getZone()
+            .onStable.pipe(
                 take(1),
                 switchMap(() => element[event] as ObservableInput<unknown>),
             )

@@ -5,9 +5,12 @@ import {
     SitePageElementUnion,
     defaultPageElementSettingsMap,
     processAccordionElementCreation,
+    processSliderElementCreation,
     processTabsElementCreation,
     processUpdateAccordionElementSettings,
     processUpdateAccordionItemElementSettings,
+    processUpdateSliderItemElementSettings,
+    processUpdateSliderSettings,
     processUpdateTabsElementSettings,
     processUpdateTabsItemElementSettings,
 } from "@modules/constructor";
@@ -38,6 +41,10 @@ export function processElementCreation(
 
         case SitePageElementType.ACCORDION: {
             return processAccordionElementCreation(type, items, parentId);
+        }
+
+        case SitePageElementType.SLIDER: {
+            return processSliderElementCreation(type, items, parentId);
         }
 
         default: {
@@ -83,6 +90,14 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
 
         case SitePageElementType.ACCORDION_ITEM: {
             return processUpdateAccordionItemElementSettings(value, state, id);
+        }
+
+        case SitePageElementType.SLIDER: {
+            return processUpdateSliderSettings(value, state, id);
+        }
+
+        case SitePageElementType.SLIDER_ITEM: {
+            return processUpdateSliderItemElementSettings(value, state, id);
         }
 
         default: {

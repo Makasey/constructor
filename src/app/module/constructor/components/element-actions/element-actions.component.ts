@@ -1,4 +1,3 @@
-import { AsyncPipe } from "@angular/common";
 import {
     ChangeDetectionStrategy,
     Component,
@@ -26,7 +25,7 @@ import {
     styleUrl: "./element-actions.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [AsyncPipe],
+    imports: [],
     standalone: true,
 })
 export class LZElementActionsComponent implements OnInit {

@@ -19,6 +19,7 @@ import { Tree, TreeComponent } from "@components/ui/tree/tree.component";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     imports: [TreeComponent],
+    standalone: true,
 })
 export class PageElementsTreeComponent {
     @HostBinding("class.lz-page-elements-tree")

@@ -1,0 +1,4 @@
+<h2 class="lz-slider-element-item-title">{{ element().settings.title }}</h2>
+@if (element(); as element) {
+    <lz-editor-element-flex [elementID]="element.id" [parentID]="parentId"></lz-editor-element-flex>
+}

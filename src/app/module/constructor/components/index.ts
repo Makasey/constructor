@@ -1,4 +1,4 @@
-export { LZEditorElementComponent, LZEditorElementBlockComponent } from "./editor-element";
+export { LZEditorElementComponent, LZEditorElementFlexComponent } from "./editor-element";
 export { PageElementsTreeComponent } from "./page-elements-tree";
 export { PagesBarComponent } from "./pages-bar";
 
@@ -58,6 +58,13 @@ export {
     DividerPageElementSettings,
     DividerElementSettingsGroup,
     DividerComponent,
+    SliderElementItemComponent,
+    SliderItemPageElement,
+    SliderPageElementSettings,
+    SliderPageElement,
+    SliderPageElementItemSettings,
+    SliderElementComponent,
+    SliderElementSettingsGroup,
 } from "./elements";
 
 export { LZElementActionsComponent } from "./element-actions";

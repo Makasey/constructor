@@ -22,6 +22,7 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    standalone: true,
 })
 export class TabElementItemComponent implements OnInit {
     @HostBinding("class.lz-tab-element-item")

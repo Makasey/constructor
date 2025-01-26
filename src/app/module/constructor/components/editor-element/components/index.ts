@@ -1,1 +1,1 @@
-export { LZEditorElementBlockComponent } from "./editor-element-block/editor-element-block.component";
+export { LZEditorElementFlexComponent } from "./editor-element-flex";

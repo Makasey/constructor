@@ -35,6 +35,6 @@ export function isArrayEquals<T = unknown>(target: ArrayOrIterable<T>, other: Ar
 
     return (
         targetArray.length === otherArray.length &&
-        targetArray.every(element => !!otherArray.find(otherElement => isObjectEquals(element, otherElement)))
+        targetArray.every(element => otherArray.findIndex(otherElement => isObjectEquals(element, otherElement)) !== -1)
     );
 }

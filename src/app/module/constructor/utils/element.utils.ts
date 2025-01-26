@@ -107,6 +107,10 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
         //     return possibleSiteElementsMap[SitePageElementType.ACCORDION_ITEM];
         // }
 
+        case SitePageElementType.SLIDER_ITEM: {
+            return possibleSiteElementsMap[SitePageElementType.SLIDER_ITEM];
+        }
+
         default: {
             return possibleSiteElementsMap[SitePageElementType.INNER];
         }

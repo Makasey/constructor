@@ -71,6 +71,9 @@ export {
     accordionPageElementSettingsStyleKeys,
     spacerPageElementSettingsStyleKeys,
     SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
+    defaultAutoSlideItems,
+    sliderPageElementSettingsStyleKeys,
+    sliderItemPageElementSettingsStyleKeys,
 } from "./constants";
 export {
     getDefaultSizeSettings,
@@ -138,6 +141,13 @@ export {
     processDuplicateSectionElement,
     processCreateElementActions,
     mapElementsToTreeModel,
+    defaultSliderElementSettings,
+    defaultSliderItemElementSettings,
+    processSliderElementCreation,
+    getSliderItemElementSettings,
+    processUpdateSliderSettings,
+    processUpdateSliderItemElementSettings,
+    possibleSliderItemSiteElements,
 } from "./utils";
 
 export {
@@ -236,7 +246,14 @@ export {
     LZElementActionsComponent,
     PageElementsTreeComponent,
     LZEditorElementComponent,
-    LZEditorElementBlockComponent,
+    LZEditorElementFlexComponent,
+    SliderElementItemComponent,
+    SliderElementComponent,
+    SliderItemPageElement,
+    SliderPageElementSettings,
+    SliderPageElementItemSettings,
+    SliderPageElement,
+    SliderElementSettingsGroup,
 } from "./components";
 
 export {
