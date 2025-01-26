@@ -94,26 +94,6 @@ export function duplicateTreeElement(
 
 export function processPossibleElements(type: SitePageElementType): ElementButton[] {
     switch (type) {
-        // case SitePageElementType.PAGE: {
-        //     return possibleSiteElementsMap[SitePageElementType.INNER];
-        // }
-        //
-        // case SitePageElementType.SECTION: {
-        //     return possibleSiteElementsMap[SitePageElementType.SECTION];
-        // }
-        //
-        // case SitePageElementType.INNER: {
-        //     return possibleSiteElementsMap[SitePageElementType.INNER];
-        // }
-        //
-        // case SitePageElementType.TABS_ITEM: {
-        //     return possibleSiteElementsMap[SitePageElementType.TABS_ITEM];
-        // }
-        //
-        // case SitePageElementType.ACCORDION_ITEM: {
-        //     return possibleSiteElementsMap[SitePageElementType.ACCORDION_ITEM];
-        // }
-
         case SitePageElementType.SLIDER_ITEM: {
             return possibleSiteElementsMap[SitePageElementType.SLIDER_ITEM];
         }

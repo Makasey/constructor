@@ -37,6 +37,7 @@ import {
     titlePageElementSettingsStylesKeys,
 } from "@modules/constructor";
 import { EditorState, UIDataState } from "@core";
+import { RootElement } from "@modules/constructor/components/elements/root/types";
 
 export function getPreviewData(state: EditorState): CreatePreviewModel {
     const { pages, items } = state;
@@ -145,8 +146,8 @@ export function processElementDataCreation(item: SitePageElementUnion): SitePage
             return processRequestElementData(item as SliderItemPageElement, { styles: sliderItemPageElementSettingsStyleKeys, default: [] });
         }
 
-        default: {
-            return processRequestElementData(item, {});
+        case SitePageElementType.PAGE: {
+            return processRequestElementData(item as RootElement, {});
         }
     }
 }
