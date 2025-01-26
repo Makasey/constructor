@@ -1,10 +1,16 @@
+@import "assets/styles/_mixins.scss";
+
 .lz-editor-element {
     position: relative;
     display: flex;
-    width: 100%;
+    width: var(--element-width);
+    height: var(--element-height);
+    //overflow-y: auto;
+    //
+    //@include thin-blue-scrollbar();
 
     & > *:first-child {
-      height: 100%;
-      width: 100%;
+        height: 100%;
+        width: 100%;
     }
 }

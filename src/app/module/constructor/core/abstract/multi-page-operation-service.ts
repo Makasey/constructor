@@ -1,14 +1,16 @@
 import {
     AbstractDragService,
     AbstractEditorOperationService,
-    ROOT_ELEMENT_ID,
     SitePageElement,
+    SitePageElementType,
+    StyleUnit,
     deleteElementFromTree,
     duplicateTreeElement,
 } from "@modules/constructor";
-import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey, Page } from "@core";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable, inject } from "@angular/core";
 import { Observable, map } from "rxjs";
+import { RootElement } from "@modules/constructor/components/elements/root/types";
 import { getRandomId } from "@shared-utils";
 
 @Injectable()
@@ -24,53 +26,66 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
     public addPage(): void {
         this.service.updateState(() => {
-            const pages: Page[] = this.getStoreElement("pages");
+            const items = this.getStoreElement("items");
+            const pages = this.getStoreElement("pages");
 
-            const newPage: Page = {
+            const newPage: RootElement = {
                 id: getRandomId(),
+                isExtendable: true,
+                parentId: null,
+                type: SitePageElementType.PAGE,
                 settings: {
                     title: "My best page",
                     logotype: null,
                     siteDescription: "My best page",
                     siteMetaTags: "",
+                    width: {
+                        value: 1920,
+                        unit: StyleUnit.PX,
+                    },
+                    height: {
+                        value: 1080,
+                        unit: StyleUnit.PX,
+                    },
                 },
                 children: [],
             };
             const newPageId = newPage.id;
 
             return {
-                pages: [...pages, newPage],
+                items: {
+                    ...items,
+                    [newPage.id]: newPage,
+                },
+                pages: pages.concat(newPageId),
                 selectedPage: newPageId,
+                selectedElement: newPageId,
             };
         });
     }
 
     public deletePageById(id: string): void {
         this.service.updateState(() => {
-            const pages: Page[] = this.getStoreElement("pages");
+            const pages: string[] = this.getStoreElement("pages");
 
             if (pages.length > 1) {
-                const updatePages: Page[] = pages.filter(page => page.id !== id);
+                const updatePages: string[] = pages.filter(page => page !== id);
 
-                const selectedPageId = updatePages[0].id;
+                const selectedPageId = updatePages[0];
 
                 const items = this.getStoreElement("items");
 
-                const children = pages.find(page => page.id === id)?.children[0] as string;
+                const updatedItems: Record<string, SitePageElement> = { ...items };
 
-                let updatedItems: Record<string, SitePageElement> = { ...items };
+                const result = deleteElementFromTree(updatedItems, id);
 
-                if (children) {
-                    const result = deleteElementFromTree(items, children);
-                    updatedItems = result.items;
-
-                    result.itemsToRemove.forEach(child => this.dragService.removeConnectedList(child));
-                }
+                result.itemsToRemove.forEach(child => this.dragService.removeConnectedList(child));
 
                 return {
-                    items: updatedItems,
+                    items: result.items,
                     pages: updatePages,
                     selectedPage: selectedPageId,
+                    selectedElement: selectedPageId,
                 };
             }
 
@@ -80,76 +95,32 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
     public copyPageById(id: string): void {
         this.service.updateState(() => {
-            const pages: Page[] = this.getStoreElement("pages");
+            const pages: string[] = this.getStoreElement("pages");
             const items = this.getStoreElement("items");
+            const element: RootElement = this.getElement(id);
+            const newElementId = getRandomId();
+            const result = duplicateTreeElement(items, element, null!, newElementId);
 
-            const page: Page = pages.find(page => page.id === id)!;
-
-            const pageCopy: Page = {
-                ...page,
-                id: getRandomId(),
-                settings: {
-                    ...page?.settings,
-                    title: page?.settings.title + " копия",
-                },
-            };
-
-            if (!page.children.length) {
-                const pageCopyId = pageCopy.id;
-
-                const updatePages = [...pages, pageCopy];
-
-                return {
-                    pages: updatePages,
-                    selectedPage: pageCopyId,
-                };
-            }
-
-            let updatedTree: Record<string, SitePageElement> = { ...items };
-            const children: string[] = [];
-
-            pageCopy.children.forEach(child => {
-                const item = { ...items[child] };
-
-                const duplicatedItem = {
-                    ...item,
-                };
-                const newElementId = getRandomId();
-
-                children.push(newElementId);
-
-                updatedTree = {
-                    ...updatedTree,
-                    ...duplicateTreeElement(items, duplicatedItem, ROOT_ELEMENT_ID, newElementId),
-                };
-            });
-
-            const updatePages: Page[] = [
-                ...pages,
-                {
-                    ...pageCopy,
-                    children: children,
-                },
-            ];
+            const updatePages: string[] = pages.concat(newElementId);
 
             return {
-                items: updatedTree,
+                items: result,
                 pages: updatePages,
-                selectedPage: pageCopy.id,
+                selectedPage: newElementId,
+                selectedElement: newElementId,
             };
         });
     }
 
-    public selectPages(): Observable<Page[]> {
-        return this.query.select(state => {
-            return state.pages;
-        });
+    public selectPages(): Observable<string[]> {
+        return this.query.select(["items", "pages"]).pipe(map(({ pages }) => pages));
     }
 
     public updateSelectPage(id: string): void {
         this.service.updateState(() => {
             return {
                 selectedPage: id,
+                selectedElement: id,
             };
         });
     }
@@ -158,19 +129,8 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
         return this.query.select(state => state.selectedPage);
     }
 
-    public selectActivePage(): Observable<Page> {
-        return this.query
-            .select(state => {
-                return {
-                    selectedPage: state.selectedPage,
-                    pages: state.pages,
-                };
-            })
-            .pipe(
-                map(({ selectedPage, pages }) => {
-                    return pages.find(page => page.id === selectedPage)!;
-                }),
-            );
+    public selectActivePage(): Observable<string> {
+        return this.query.select(["selectedPage", "items"]).pipe(map(({ selectedPage }) => selectedPage));
     }
 }
 

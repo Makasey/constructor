@@ -1,10 +1,8 @@
-import { AsyncPipe, NgTemplateOutlet } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, contentChildren, input } from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
 import { LZAccordionItemDirective } from "@components";
-import { Observable } from "rxjs";
-import { toObservable } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-accordion",
@@ -12,7 +10,7 @@ import { toObservable } from "@angular/core/rxjs-interop";
     styleUrls: ["./accordion.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [AsyncPipe, NgTemplateOutlet],
+    imports: [NgTemplateOutlet],
     animations: [
         trigger("contentExpansion", [
             state("expanded", style({ height: "*", opacity: 1, visibility: "visible" })),
@@ -28,8 +26,6 @@ export class AccordionComponent {
     public readonly items = contentChildren(LZAccordionItemDirective);
 
     public readonly collapsing = input(true);
-
-    public itemsChanges$: Observable<readonly LZAccordionItemDirective[]> = toObservable(this.items);
 
     public toggleState(item: LZAccordionItemDirective): void {
         if (item.disabled()) {

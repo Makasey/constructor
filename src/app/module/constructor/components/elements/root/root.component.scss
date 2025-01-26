@@ -7,6 +7,10 @@
     flex-direction: column;
     flex-grow: 1;
     max-width: 1280px;
+
+    .drop-list-wrapper {
+        height: 100%;
+    }
 }
 
 .add-element,

@@ -5,8 +5,9 @@
         cdkDropList
         cdkDropListOrientation="horizontal"
         [id]="'elements'"
+        [cdkDropListEnterPredicate]="canDropPredicate"
         [cdkDropListSortingDisabled]="true"
-        [cdkDropListConnectedTo]="test()"
+        [cdkDropListConnectedTo]="connectedDropListsId()"
         [cdkDropListData]="elements()"
     >
         @for (element of elements(); track element.type) {
@@ -14,7 +15,6 @@
                 cdkDrag
                 [cdkDragData]="element"
                 (cdkDragStarted)="onDragStart(element.type)"
-                (cdkDragDropped)="onDrop($event)"
                 (cdkDragEnded)="onDragEnd()"
                 class="element"
             >

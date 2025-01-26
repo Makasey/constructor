@@ -1,4 +1,4 @@
-import { CdkDrag, CdkDragDrop, CdkDropList } from "@angular/cdk/drag-drop";
+import { CdkDrag, CdkDropList } from "@angular/cdk/drag-drop";
 import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, WritableSignal, computed, inject, signal } from "@angular/core";
 import { NgClass } from "@angular/common";
 
@@ -6,9 +6,8 @@ import {
     AbstractDragService,
     AbstractEditorElementActionsService,
     EDITOR_SELECTED_ELEMENT,
-    ElementButton,
+    EDITOR_SELECTED_PAGE,
     SitePageElementType,
-    SitePageElementUnion,
     processPossibleElements,
 } from "@modules/constructor";
 
@@ -25,14 +24,15 @@ export class SiteElementsComponent {
     @HostBinding("class.lz-site-elements")
     public hostClass = true;
 
-    private readonly service: AbstractEditorElementActionsService<SitePageElementUnion> = inject(AbstractEditorElementActionsService);
+    private readonly service: AbstractEditorElementActionsService = inject(AbstractEditorElementActionsService);
+
     private readonly dragService: AbstractDragService<SitePageElementType> = inject(AbstractDragService);
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    private readonly actionService = inject(AbstractEditorElementActionsService);
+    public readonly selectedPage = inject(EDITOR_SELECTED_PAGE);
 
-    public test = this.dragService.getConnectedDropListsId();
+    public connectedDropListsId = this.dragService.getConnectedDropListsId();
 
     public elements = computed(() => {
         const { type } = this.service.getElement(this.selectedElement());
@@ -52,20 +52,7 @@ export class SiteElementsComponent {
         this.dragService.setDraggableItem(null);
     }
 
-    public onDrop(event: CdkDragDrop<string, string, ElementButton>): void {
-        const { item, container } = event;
-        const { data } = item;
-        const { data: parentId } = container;
-        const { type } = data;
-
-        console.log(event, type);
-
-        if (parentId === "rootID") {
-            this.actionService.addPageElement(type);
-
-            return;
-        }
-
-        this.actionService.addElementByType(type, parentId);
+    public canDropPredicate(drag: CdkDrag): boolean {
+        return typeof drag.data !== "string";
     }
 }

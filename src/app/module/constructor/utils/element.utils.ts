@@ -66,14 +66,21 @@ export function duplicateTreeElement(
 
         parentCache[duplicatedElement.id] = newElement.id;
 
-        items = {
-            ...items,
-            [parentId]: {
-                ...items[parentId],
-                children: arrayAdd(items[parentId].children, newElementId),
-            },
-            [newElementId]: newElement,
-        };
+        if (!parentId) {
+            items = {
+                ...items,
+                [newElementId]: newElement,
+            };
+        } else {
+            items = {
+                ...items,
+                [parentId]: {
+                    ...items[parentId],
+                    children: arrayAdd(items[parentId].children, newElementId),
+                },
+                [newElementId]: newElement,
+            };
+        }
 
         duplicatedElement.children.forEach(child => {
             queue.push(items[child]);
@@ -87,26 +94,6 @@ export function duplicateTreeElement(
 
 export function processPossibleElements(type: SitePageElementType): ElementButton[] {
     switch (type) {
-        // case SitePageElementType.PAGE: {
-        //     return possibleSiteElementsMap[SitePageElementType.INNER];
-        // }
-        //
-        // case SitePageElementType.SECTION: {
-        //     return possibleSiteElementsMap[SitePageElementType.SECTION];
-        // }
-        //
-        // case SitePageElementType.INNER: {
-        //     return possibleSiteElementsMap[SitePageElementType.INNER];
-        // }
-        //
-        // case SitePageElementType.TABS_ITEM: {
-        //     return possibleSiteElementsMap[SitePageElementType.TABS_ITEM];
-        // }
-        //
-        // case SitePageElementType.ACCORDION_ITEM: {
-        //     return possibleSiteElementsMap[SitePageElementType.ACCORDION_ITEM];
-        // }
-
         case SitePageElementType.SLIDER_ITEM: {
             return possibleSiteElementsMap[SitePageElementType.SLIDER_ITEM];
         }
@@ -117,14 +104,18 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
     }
 }
 
-export function mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree {
+export function mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree | null {
+    if (!items[element]) {
+        return null;
+    }
+
     const { id, children, type } = items[element];
 
     return {
         value: id,
         label: type,
         children: children.map(child => {
-            return mapElementsToTreeModel(items, child);
+            return mapElementsToTreeModel(items, child)!;
         }),
     };
 }

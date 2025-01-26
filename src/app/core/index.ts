@@ -43,7 +43,6 @@ export {
     isUIDateStateful,
     TableState,
     initialTableState,
-    Page,
     createStoreProviders,
 } from "./store";
 export { WebsocketService, provideWebsocket, WEBSOCKET_CONFIG_TOKEN, WebsocketConfig, WebsocketCallback, defaultWebsocketConfig } from "./socket";

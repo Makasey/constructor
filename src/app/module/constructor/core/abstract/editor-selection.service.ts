@@ -1,7 +1,6 @@
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ROOT_ELEMENT_ID } from "@modules/constructor";
 import { logAction } from "@datorama/akita";
 
 @Injectable()
@@ -25,7 +24,7 @@ export abstract class AbstractEditorSelectionService {
         this.selectElement(elementId);
     }
 
-    protected selectElement(elementId: string): void {
+    public selectElement(elementId: string): void {
         logAction(`Select element with id: ${elementId}`, [elementId]);
 
         this.service.updateState(() => {
@@ -35,12 +34,12 @@ export abstract class AbstractEditorSelectionService {
         });
     }
 
-    protected deselectElement(elementId: string): void {
+    public deselectElement(elementId: string): void {
         logAction(`Deselect element with id: ${elementId}`, [elementId]);
 
         this.service.updateState(() => {
             return {
-                selectedElement: ROOT_ELEMENT_ID,
+                selectedElement: this.getStoreElement("selectedPage"),
             };
         });
     }
@@ -51,13 +50,14 @@ export abstract class AbstractEditorSelectionService {
 
     public tabSelection(currentId?: string, previousId?: string): void {
         const id = this.getStoreElement("selectedElement");
+        const selectedPage = this.getStoreElement("selectedPage");
         const items = this.getStoreElement("items");
         const { children, parentId } = items[id];
 
         if (currentId === null) {
             this.service.updateState(() => {
                 return {
-                    selectedElement: ROOT_ELEMENT_ID,
+                    selectedElement: selectedPage,
                 };
             });
 
@@ -97,10 +97,10 @@ export abstract class AbstractEditorSelectionService {
             return;
         }
 
-        if (id === ROOT_ELEMENT_ID) {
+        if (id === selectedPage) {
             this.service.updateState(() => {
                 return {
-                    selectedElement: ROOT_ELEMENT_ID,
+                    selectedElement: selectedPage,
                 };
             });
 

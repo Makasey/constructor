@@ -1,7 +1,6 @@
 import { APFormModel } from "@components";
 import {
     AbstractEditorOperationService,
-    ROOT_ELEMENT_ID,
     SitePageElementSettingsUnion,
     processElementSettings,
     processUpdateElementSettings,
@@ -51,7 +50,7 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSettin
             .pipe(
                 distinctUntilChanged(isObjectEquals),
                 map(({ selectedElement }) => {
-                    if (selectedElement === ROOT_ELEMENT_ID) {
+                    if (selectedElement === this.getStoreElement("selectedPage")) {
                         return null;
                     }
 

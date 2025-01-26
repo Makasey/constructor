@@ -53,7 +53,7 @@ import { SelectItem } from "@shared-types";
 import { UpsertConfig } from "@ngneat/forms-manager/lib/types";
 
 export const DEFAULT_UPSERT_CONFIG: UpsertConfig = {
-    debounceTime: 200,
+    debounceTime: undefined,
 };
 
 export const ROOT_ELEMENT_ID = "rootID";
@@ -62,7 +62,7 @@ export const defaultRequestElementSettingsKey = "default";
 
 export const ELEMENT_ID = new InjectionToken<string>("ELEMENT_ID", {
     factory: () => {
-        return ROOT_ELEMENT_ID;
+        return "";
     },
 });
 

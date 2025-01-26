@@ -6,11 +6,10 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
-    Signal,
     SimpleChanges,
     TemplateRef,
     ViewEncapsulation,
-    computed,
+    effect,
     inject,
     input,
     output,
@@ -130,10 +129,8 @@ export class APFormComponent implements OnChanges, OnInit, OnDestroy {
 
     public formValue = this.service.valueChanges;
 
-    public readonly valueChanges: Signal<undefined> = computed(() => {
+    public readonly valueChanges = effect(() => {
         this.submitForm.emit(this.formValue());
-
-        return undefined;
     });
 
     public _defaultTemplatesMap: Record<APFormDefaultTemplateKeys | string, TemplateRef<ControlTemplate | unknown>>;

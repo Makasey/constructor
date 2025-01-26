@@ -3,7 +3,7 @@ export { InitialStateFunctions, isUIDateStateful, StateCallbackOrPart, CallbackO
 export { LzService } from "./lz.service";
 export { LzQuery } from "./lz.query";
 export { LzStore } from "./lz.store";
-export { CampaignListState, FilesState, ModuleState, TableModuleState, EditorState, UIDataStateful, TableState, Page } from "./states/ui-states";
+export { CampaignListState, FilesState, ModuleState, TableModuleState, EditorState, UIDataStateful, TableState } from "./states/ui-states";
 export {
     LzAbstractQuery,
     LzQueryInjectionTokensMap,

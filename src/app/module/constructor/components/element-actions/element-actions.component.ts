@@ -8,16 +8,11 @@ import {
     WritableSignal,
     computed,
     inject,
+    input,
     signal,
 } from "@angular/core";
 
-import {
-    AbstractEditorElementActionsService,
-    EDITOR_SELECTED_ELEMENT,
-    ELEMENT_ID,
-    ElementActionType,
-    ElementActionsConfigItem,
-} from "@modules/constructor";
+import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, ElementActionType, ElementActionsConfigItem } from "@modules/constructor";
 
 @Component({
     selector: "lz-element-actions",
@@ -34,26 +29,26 @@ export class LZElementActionsComponent implements OnInit {
 
     public configItems: WritableSignal<ElementActionsConfigItem[]> = signal<ElementActionsConfigItem[]>([]);
 
-    public showActions: Signal<boolean> = computed(() => this.selectedElement() === this.elementId);
+    public showActions: Signal<boolean> = computed(() => this.selectedElement() === this.elementId());
 
-    public readonly elementId: string = inject(ELEMENT_ID);
+    public readonly elementId = input.required<string>();
 
     public readonly selectedElement: Signal<string> = inject(EDITOR_SELECTED_ELEMENT);
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService);
 
     public ngOnInit(): void {
-        this.configItems.set(this.editorActionsService.processElementActions(this.elementId));
+        this.configItems.set(this.editorActionsService.processElementActions(this.elementId()));
     }
 
     public applyAction(action: ElementActionType): void {
         switch (action) {
             case ElementActionType.DUPLICATE: {
-                this.editorActionsService.duplicateElementById(this.elementId);
+                this.editorActionsService.duplicateElementById(this.elementId());
                 break;
             }
             case ElementActionType.DELETE: {
-                this.editorActionsService.deleteElement(this.elementId);
+                this.editorActionsService.deleteElement(this.elementId());
                 break;
             }
         }

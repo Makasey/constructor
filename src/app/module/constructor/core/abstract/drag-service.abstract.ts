@@ -34,7 +34,7 @@ export class DefaultDragService<T> extends AbstractDragService<T> {
 
     private readonly draggableItem: WritableSignal<T | null> = signal(null);
 
-    private readonly connectedDropListsIds: WritableSignal<string[]> = signal(["elements", "rootID"]);
+    private readonly connectedDropListsIds: WritableSignal<string[]> = signal(["elements", this.query.getValue().selectedElement]);
 
     public setDraggableItem(element: T): void {
         this.draggableItem.set(element);
@@ -48,6 +48,8 @@ export class DefaultDragService<T> extends AbstractDragService<T> {
         elementOrElements = coerceArray(elementOrElements);
 
         this.connectedDropListsIds.update(value => value.concat(elementOrElements));
+
+        console.log(this.connectedDropListsIds());
     }
 
     public removeConnectedList(id: string): void {

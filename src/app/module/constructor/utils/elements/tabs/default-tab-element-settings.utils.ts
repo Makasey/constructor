@@ -14,8 +14,8 @@ export function defaultTabsElementSettings(): () => Omit<TabsPageElement, "id" |
                 selectedElement: "",
                 items: [],
                 height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: 350,
+                    unit: StyleUnit.PX,
                 },
                 count: 2,
             },

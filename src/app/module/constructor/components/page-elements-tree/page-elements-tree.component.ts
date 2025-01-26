@@ -37,14 +37,19 @@ export class PageElementsTreeComponent {
         initialValue: {} as Record<string, SitePageElement>,
     });
 
-    public pageTitle: Signal<string> = toSignal(this.multiPageOperationService.selectActivePage().pipe(map(page => page.settings.title)), {
-        initialValue: "",
-    });
+    public pageTitle: Signal<string> = toSignal(
+        this.multiPageOperationService.selectActivePage().pipe(map(page => this.service.getElement(page)?.settings?.title)),
+        {
+            initialValue: "",
+        },
+    );
 
     public elements: Signal<Tree[]> = computed(() => {
-        return this.rootElements().map(element => ({
-            ...mapElementsToTreeModel(this.items(), element),
-        }));
+        return this.rootElements()
+            .map(element => ({
+                ...mapElementsToTreeModel(this.items(), element)!,
+            }))
+            .filter(Boolean);
     });
 
     public updateSelection(item: Tree): void {

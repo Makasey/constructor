@@ -6,7 +6,6 @@ import {
     DividerPageElement,
     ImagePageElement,
     InnerPageElement,
-    ROOT_ELEMENT_ID,
     RequestElementSettings,
     SectionPageElement,
     SitePageElement,
@@ -38,6 +37,7 @@ import {
     titlePageElementSettingsStylesKeys,
 } from "@modules/constructor";
 import { EditorState, UIDataState } from "@core";
+import { RootElement } from "@modules/constructor/components/elements/root/types";
 
 export function getPreviewData(state: EditorState): CreatePreviewModel {
     const { pages, items } = state;
@@ -146,8 +146,8 @@ export function processElementDataCreation(item: SitePageElementUnion): SitePage
             return processRequestElementData(item as SliderItemPageElement, { styles: sliderItemPageElementSettingsStyleKeys, default: [] });
         }
 
-        default: {
-            return processRequestElementData(item, {});
+        case SitePageElementType.PAGE: {
+            return processRequestElementData(item as RootElement, {});
         }
     }
 }
@@ -201,8 +201,8 @@ export function processCampaignResponse(campaign: CreateCampaignModel & { id: nu
         items: processedItems,
         dataState: UIDataState.LOADED,
         pages: pages,
-        selectedPage: pages[0].id,
-        selectedElement: ROOT_ELEMENT_ID,
+        selectedPage: pages[0],
+        selectedElement: pages[0],
         id: id,
         campaignName: campaignName,
         savedItems: [],

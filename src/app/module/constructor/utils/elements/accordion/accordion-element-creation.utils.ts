@@ -41,7 +41,7 @@ export function processAccordionElementCreation(
     };
 
     return {
-        createdElementIds: [newElement.id, ...childrenIds],
+        createdElementIds: [...childrenIds],
         selectedElement: newElement.id,
         items: {
             ...updatedItems,

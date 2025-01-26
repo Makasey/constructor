@@ -1,7 +1,6 @@
 import {
     AbstractDragService,
     ElementActionsConfigItem,
-    ROOT_ELEMENT_ID,
     SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
@@ -10,10 +9,11 @@ import {
     processDuplicateElementsById,
     processElementCreation,
 } from "@modules/constructor";
-import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey, Page } from "@core";
+import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzState, LzStateKey } from "@core";
 import { Inject, Injectable, inject } from "@angular/core";
 import { Observable, map, startWith } from "rxjs";
 import { arrayAdd, arrayRemove, logAction } from "@datorama/akita";
+import { moveItemsInArray } from "@shared-utils/array/array.utils";
 
 @Injectable()
 export abstract class AbstractEditorElementActionsService<T extends SitePageElementUnion = SitePageElementUnion> {
@@ -31,20 +31,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     }
 
     public selectPageElements(): Observable<string[]> {
-        return this.query
-            .select(state => {
-                return {
-                    selectedPage: state.selectedPage,
-                    pages: state.pages,
-                };
-            })
-            .pipe(
-                map(({ selectedPage, pages }) => {
-                    const page = pages.find(page => page.id === selectedPage);
-
-                    return page?.children ?? [];
-                }),
-            );
+        return this.query.select(["selectedPage", "items"]).pipe(map(({ selectedPage, items }) => items[selectedPage]?.children ?? []));
     }
 
     public getElement(id: string): T {
@@ -55,45 +42,36 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         return this.query.select(state => state.items);
     }
 
-    public addPageElement(type: SitePageElementType): void {
-        this.service.updateState(state => {
-            const { createdElementIds, ...stateData } = processElementCreation(type, state.items, ROOT_ELEMENT_ID);
-
-            this.dragService.addConnectedElement(createdElementIds);
-
-            const updatedPages = state.pages.map(page => {
-                if (page.id === state.selectedPage) {
-                    return {
-                        ...page,
-                        children: arrayAdd(page.children, stateData.selectedElement),
-                    };
-                }
-
-                return page;
-            });
-
-            return {
-                ...stateData,
-                pages: updatedPages,
-            };
-        });
-    }
-
     public addElementByType(type: SitePageElementType, parentId?: string): void {
         this.service.updateState(state => {
             parentId = parentId ?? state.selectedElement;
 
             const { createdElementIds, ...processedStore } = processElementCreation(type, state.items, parentId);
 
-            if (["section", "inner"].includes(type)) {
+            if (["section", "inner", "tabs", "accordion", "slider"].includes(type)) {
                 this.dragService.addConnectedElement(createdElementIds);
             }
 
-            if (["tabs", "accordion", "slider"].includes(type)) {
-                this.dragService.addConnectedElement(createdElementIds.slice(1));
-            }
-
             return processedStore;
+        });
+    }
+
+    public changeElementPosition(previousPosition: number, position: number, parentId: string): void {
+        logAction(`Move element from ${previousPosition} to ${position}`);
+
+        this.service.updateState(({ items }) => {
+            const parent = items[parentId];
+            const updatedChildren = moveItemsInArray(position, previousPosition, parent.children);
+
+            return {
+                items: {
+                    ...items,
+                    [parentId]: {
+                        ...parent,
+                        children: updatedChildren,
+                    },
+                },
+            };
         });
     }
 
@@ -130,16 +108,11 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
 
         this.service.updateState(state => {
             let items = { ...state.items };
-            let updatedPages = state.pages;
 
             const { parentId } = items[elementId];
 
             if (!parentId) {
                 return state;
-            }
-
-            if (parentId === ROOT_ELEMENT_ID) {
-                updatedPages = this.deleteItemFromPage(elementId);
             }
 
             const parentElement: SitePageElementUnion = items[parentId];
@@ -160,8 +133,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
                         children: arrayRemove(parentElement.children, item => item === elementId),
                     },
                 },
-                pages: updatedPages,
-                selectedElement: state.selectedElement === elementId ? parentId : ROOT_ELEMENT_ID,
+                selectedElement: state.selectedElement === elementId ? parentId : state.selectedPage,
             };
         });
     }
@@ -169,7 +141,55 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
     public duplicateElementById(id: string): void {
         logAction(`Duplicate element with id: ${id}`);
         this.service.updateState(state => {
-            return processDuplicateElementsById(state, id);
+            const { items, selectedElement, pages } = processDuplicateElementsById(state, id);
+
+            const element = items[selectedElement];
+
+            if (element.isExtendable) {
+                this.dragService.addConnectedElement(element.id);
+            }
+
+            return {
+                items,
+                selectedElement,
+                pages,
+            };
+        });
+    }
+
+    public moveItemBetweenElements({
+        currentIndex,
+        elementId,
+        parentId,
+        oldParentId,
+    }: {
+        previousIndex: number;
+        currentIndex: number;
+        elementId: string;
+        oldParentId: string;
+        parentId: string;
+    }): void {
+        logAction(`Move element with id: ${elementId} from ${oldParentId} to ${parentId}`);
+
+        this.service.updateState(state => {
+            const oldParent = this.getElement(oldParentId);
+            const parent = this.getElement(parentId);
+            const children = parent.children.concat(elementId);
+            const updatedChildren = moveItemsInArray(currentIndex, children.length - 1, children);
+
+            return {
+                items: {
+                    ...state.items,
+                    [oldParentId]: {
+                        ...oldParent,
+                        children: arrayRemove(oldParent.children, item => item === elementId),
+                    },
+                    [parentId]: {
+                        ...parent,
+                        children: updatedChildren,
+                    },
+                },
+            };
         });
     }
 
@@ -177,24 +197,6 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         logAction(`Process create  element actions with id: ${elementId}`);
         const { type } = this.getStoreElement("items")[elementId];
         return processCreateElementActions(type);
-    }
-
-    protected deleteItemFromPage(elementId: string): Page[] {
-        const state = this.query.getValue();
-        const { pages, selectedPage } = state;
-
-        this.dragService.removeConnectedList(elementId);
-
-        return pages.map(page => {
-            if (page.id === selectedPage) {
-                return {
-                    ...page,
-                    children: arrayRemove(page.children, elementId),
-                };
-            }
-
-            return page;
-        });
     }
 
     protected getStoreElement<T extends keyof LzState[LzStateKey.EDITOR_STATE]>(key: T): LzState[LzStateKey.EDITOR_STATE][T] {

@@ -1,5 +1,3 @@
-@if (itemsChanges$ | async) {}
-
 <section class="accordion">
     @for (item of items();  track item.title(); let i = $index;) {
         <div
@@ -34,6 +32,6 @@
         </button>
     </header>
     <ng-template #defaultTitle>
-        <p class="accordion__title">{{ item?.title }}</p>
+        <p class="accordion__title">{{ item?.title() }}</p>
     </ng-template>
 </ng-template>

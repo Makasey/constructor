@@ -8,7 +8,8 @@ import {
     PagesBarComponent,
     RootComponent,
 } from "@modules/constructor";
-import { Page } from "@core";
+import { RootElement } from "@modules/constructor/components/elements/root/types";
+import { map } from "rxjs";
 
 @Component({
     selector: "lz-edit-area",
@@ -29,7 +30,14 @@ export class EditAreaComponent {
 
     private readonly service = inject(AbstractMultiPageOperationService);
 
-    public pages: Signal<Page[]> = toSignal(this.service.selectPages(), { initialValue: [] });
+    public pages: Signal<RootElement[]> = toSignal(
+        this.service.selectPages().pipe(
+            map(pages => {
+                return pages.map(page => this.service.getElement(page));
+            }),
+        ),
+        { initialValue: [] as RootElement[] },
+    );
 
     public addPage(): void {
         this.service.addPage();

@@ -1,4 +1,4 @@
-import { AbstractMultiPageOperationService, ROOT_ELEMENT_ID } from "@modules/constructor";
+import { AbstractMultiPageOperationService } from "@modules/constructor";
 import { InjectionToken, Injector, Signal, inject } from "@angular/core";
 import { shareReplay } from "rxjs";
 import { toSignal } from "@angular/core/rxjs-interop";
@@ -7,9 +7,12 @@ export const EDITOR_SELECTED_PAGE = new InjectionToken<Signal<string>>("EDITOR_S
 
 export function editorSelectedPageFactory(): () => Signal<string> {
     return () => {
-        return toSignal(inject(AbstractMultiPageOperationService).selectSelectedPage().pipe(shareReplay(1)), {
+        const service = inject(AbstractMultiPageOperationService);
+        const selectedPage = service.getStoreElement("selectedPage");
+
+        return toSignal(service.selectSelectedPage().pipe(shareReplay(1)), {
             injector: inject(Injector),
-            initialValue: ROOT_ELEMENT_ID,
+            initialValue: selectedPage,
         });
     };
 }

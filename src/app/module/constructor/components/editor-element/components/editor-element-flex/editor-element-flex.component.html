@@ -3,15 +3,18 @@
     cdkDropList
     [id]="elementID()"
     [cdkDropListConnectedTo]="connectedLists()"
+    [cdkDropListSortingDisabled]="false"
     [cdkDropListData]="elementID()"
+    (cdkDropListDropped)="onDrop($event)"
 >
     @for (child of children(); track child.id) {
-        <lz-editor-element cdkDrag [cdkDragData]="child" [elementId]="child.id" [parentId]="elementID()">
+        <lz-editor-element cdkDrag [cdkDragData]="child.id" [elementId]="child.id" [parentId]="elementID()">
             <ng-container *lzElementResolver="child.id; parent: elementID()"></ng-container>
         </lz-editor-element>
 
         <div *cdkDragPlaceholder>
             {{ child }}
+          43242432432
         </div>
     }
 </div>

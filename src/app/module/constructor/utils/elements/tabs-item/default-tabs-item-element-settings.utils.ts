@@ -24,8 +24,8 @@ export function defaultTabsItemElementSettings(): () => Omit<TabsItemPageElement
                 },
                 title: `Таб-${uniqueCounter}`,
                 height: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: 250,
+                    unit: StyleUnit.PX,
                 },
             },
         };
