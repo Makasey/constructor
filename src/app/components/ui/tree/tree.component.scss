@@ -3,10 +3,22 @@
     flex-direction: column;
 
     .lz-tree-value {
+        display: flex;
+        align-items: center;
         font-size: 16px;
         line-height: 1.5;
         font-family: "TT Norms Regular", sans-serif;
         cursor: pointer;
+    }
+
+    .shevron {
+        color: white;
+        margin-left: 14px;
+        transition: transform 0.3s ease-in;
+    }
+
+    .closed {
+        transform: rotate(180deg);
     }
 
     & > .lz-tree {
