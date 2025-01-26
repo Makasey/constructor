@@ -10,7 +10,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "jest --verbose --maxConcurrency=1024",
     "test:watch": "jest --watch",
-    "eslint:fix": "eslint **/*.{js,ts} --fix --quiet",
+    "eslint:fix": "eslint src/**/*.{js,ts} --fix --quiet",
     "eslint-all": "eslint . --ext .ts,.js --quiet",
     "prepare": "husky install"
   },
