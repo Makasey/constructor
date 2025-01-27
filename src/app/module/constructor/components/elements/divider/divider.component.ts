@@ -3,13 +3,12 @@ import {
     Directions,
     DividerPageElementSettings,
     ELEMENT_ID,
-    LZElementActionsComponent,
     processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
-import { AsyncPipe, NgClass, NgStyle } from "@angular/common";
+import { AsyncPipe, NgClass } from "@angular/common";
 import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { LZInitVarDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { Observable, map, shareReplay } from "rxjs";
@@ -21,7 +20,7 @@ import { Observable, map, shareReplay } from "rxjs";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
-    imports: [AsyncPipe, NgStyle, NgClass, LZInitVarDirective, LZElementActionsComponent],
+    imports: [AsyncPipe, NgClass, LZInitVarDirective],
 })
 export class DividerComponent implements OnInit {
     @HostBinding("class.lz-divider")
@@ -59,10 +58,10 @@ export class DividerComponent implements OnInit {
     @HostListener("$.style.border-right")
     public borderRight$: Observable<string>;
 
-    @HostBinding("$.style.--border-color")
     @HostListener("$.style.--border-color")
-    @HostBinding("$.style.border-top")
     @HostListener("$.style.border-top")
+    @HostBinding("$.style.border-top")
+    @HostBinding("$.style.--border-color")
     public borderTop$: Observable<string>;
 
     @HostBinding("$.style.border-bottom")

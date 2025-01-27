@@ -1,10 +1,10 @@
 @let elementValue = element();
 
-@if (elementValue.children?.length) {
-    <lz-editor-element-flex [elementID]="elementValue.id" [parentID]="elementValue.parentId"></lz-editor-element-flex>
-} @else {
+@if (!elementValue.children?.length) {
     Сейчас тут нет элементов...
 }
+
+<lz-editor-element-flex [elementID]="elementValue.id" [parentID]="elementValue.parentId"></lz-editor-element-flex>
 
 <ng-template
     [ngTemplateOutlet]="!elementValue.settings?.isInit ? selectStructureTemplate : emptyStructureTemplate"

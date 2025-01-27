@@ -1,0 +1,7 @@
+.image img {
+    height: 100%;
+}
+
+.image:has(figcaption) img {
+    height: calc(100% - 24px);
+}

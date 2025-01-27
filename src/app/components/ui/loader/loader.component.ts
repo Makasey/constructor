@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation, input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from "@angular/core";
 
 @Component({
     selector: "lz-loader",
@@ -12,6 +12,7 @@ export class LZLoaderComponent {
     @HostBinding("class.lz-loader")
     public hostClass = true;
 
+    @Input()
     @HostBinding("class")
-    public readonly customClass = input("test");
+    public readonly customClass = "test";
 }

@@ -21,13 +21,14 @@
                 content: "";
                 border-bottom: var(--border-bottom);
                 width: 100%;
-                border-bottom: var(--border-bottom);
+                border-color: var(--border-color);
             }
 
             &:before {
                 content: "";
                 display: block;
                 width: 100%;
+                border-color: var(--border-color);
                 border-bottom: var(--border-bottom);
             }
         }
