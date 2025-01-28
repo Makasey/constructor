@@ -1,17 +1,9 @@
-import {
-    AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
-    ELEMENT_ID,
-    PARENT_ID,
-    SliderItemPageElement,
-    SliderPageElementItemSettings,
-    processBackgroundValue,
-} from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
-import { Observable, map } from "rxjs";
+import { PARENT_ID, SliderItemPageElement, processBackgroundValue } from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-slider-element-item",
@@ -26,21 +18,9 @@ import { toSignal } from "@angular/core/rxjs-interop";
     },
     imports: [LZEditorElementFlexComponent],
 })
-export class SliderElementItemComponent implements OnInit {
-    @HostBinding("$.style.background")
-    @HostListener("$.style.background")
-    public background$: Observable<string>;
-
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
+export class SliderElementItemComponent extends BaseElementAbstract<SliderItemPageElement> implements OnInit {
     protected readonly parentId = inject(PARENT_ID);
-    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
-    public readonly element: Signal<SliderItemPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
-    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
-
-    private settings$: Observable<SliderPageElementItemSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
-
     public ngOnInit(): void {
-        this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));
+        hostBinding(this.selectSlice("background", processBackgroundValue), "style.background", this.injector);
     }
 }

@@ -1,21 +1,16 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
-import { toSignal } from "@angular/core/rxjs-interop";
-
-import { Observable, combineLatest, filter, map } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject } from "@angular/core";
 
 import {
-    AbstractEditorElementActionsService,
     AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
     ELEMENT_ID,
     LZEditorElementComponent,
-    TabsItemPageElement,
     TabsPageElement,
-    TabsPageElementSettings,
     processSettingValueWithUnit,
 } from "@modules/constructor";
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-tabs-element",
@@ -26,42 +21,21 @@ import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirecti
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     standalone: true,
+    host: {
+        class: "lz-tabs-element",
+    },
 })
-export class TabsComponent implements OnInit {
-    @HostBinding("class.lz-tabs-element")
-    public hostClass = true;
-
-    @HostBinding("$.style.min-height")
-    @HostListener("$.style.min-height")
-    public height$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public width$: Observable<string>;
-
+export class TabsComponent extends BaseElementAbstract<TabsPageElement> implements OnInit {
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
 
     private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
 
     private readonly elementSelectionService = inject(AbstractEditorSelectionService);
 
-    private settings$: Observable<TabsPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
-
-    public element: Signal<TabsPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
-
-    public items$: Observable<TabsItemPageElement[]> = this.editorElementActionsService.selectElement(this.ELEMENT_ID).pipe(
-        filter(item => !!item),
-        switchMap((item: TabsPageElement) => {
-            return combineLatest(item.children.map(id => this.editorElementActionsService.selectElement(id) as Observable<TabsItemPageElement>));
-        }),
-    );
-
     public ngOnInit(): void {
-        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.min-height", this.injector);
 
-        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
     }
 
     public selectTabItem(id?: string): void {

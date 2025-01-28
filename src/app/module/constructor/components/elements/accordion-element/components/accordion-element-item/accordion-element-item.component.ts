@@ -1,27 +1,24 @@
-import {
-    AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
-    AccordionItemPageElement,
-    AccordionItemPageElementSettings,
-    ELEMENT_ID,
-    processBackgroundValue,
-} from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { AccordionItemPageElement, processBackgroundValue } from "@modules/constructor";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from "@angular/core";
 
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
-import { Observable, map } from "rxjs";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
 import { animate, state, style, transition, trigger } from "@angular/animations";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-accordion-element-item",
-    imports: [LZEditorElementFlexComponent],
     templateUrl: "./accordion-element-item.component.html",
     styleUrl: "./accordion-element-item.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    imports: [LZEditorElementFlexComponent],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    standalone: true,
+    host: {
+        class: "lz-accordion-element-item",
+    },
     animations: [
         trigger("contentExpansion", [
             state("expanded", style({ "min-height": "100px", opacity: 1, visibility: "visible" })),
@@ -29,30 +26,12 @@ import { toSignal } from "@angular/core/rxjs-interop";
             transition("expanded <=> collapsed", animate("500ms cubic-bezier(.37,1.04,.68,.98)")),
         ]),
     ],
-    standalone: true,
 })
-export class AccordionElementItemComponent implements OnInit {
-    @HostBinding("class.lz-accordion-element-item")
-    public hostClass = true;
-
-    @HostBinding("$.style.background")
-    @HostListener("$.style.background")
-    public background$: Observable<string>;
-
+export class AccordionElementItemComponent extends BaseElementAbstract<AccordionItemPageElement> implements OnInit {
     public expanded = false;
 
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
-
-    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
-
-    private settings$: Observable<AccordionItemPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
-
-    public element: Signal<AccordionItemPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
-
     public ngOnInit(): void {
-        this.background$ = this.settings$.pipe(map(settings => processBackgroundValue(settings.background)));
+        hostBinding(this.selectSlice("background", processBackgroundValue), "style.background", this.injector);
     }
 
     public toggleState(): void {

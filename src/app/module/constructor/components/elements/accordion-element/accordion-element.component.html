@@ -1,7 +1,7 @@
-@if (element(); as editorElement) {
-    @for (child of editorElement.children; track child) {
-        <lz-editor-element [elementId]="child" [parentId]="editorElement.id">
-            <ng-container *lzElementResolver="child; parent: editorElement.id"></ng-container>
-        </lz-editor-element>
-    }
+@let elementValue = element();
+
+@for (child of elementValue.children; track child) {
+    <lz-editor-element [elementId]="child" [parentId]="elementValue.id">
+        <ng-container *lzElementResolver="child; parent: elementValue.id"></ng-container>
+    </lz-editor-element>
 }

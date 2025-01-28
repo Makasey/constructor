@@ -1,20 +1,10 @@
-import {
-    AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
-    ELEMENT_ID,
-    LZEditorElementComponent,
-    SliderPageElement,
-    SliderPageElementSettings,
-    processSettingValueWithUnit,
-} from "@modules/constructor";
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
 import {
     ChangeDetectionStrategy,
     Component,
     DestroyRef,
     ElementRef,
-    HostBinding,
     HostListener,
-    Injector,
     OnInit,
     Signal,
     ViewEncapsulation,
@@ -28,8 +18,10 @@ import {
     viewChildren,
 } from "@angular/core";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { Observable, Subscription, interval, map, tap } from "rxjs";
-import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
+import { LZEditorElementComponent, SliderPageElement, processSettingValueWithUnit } from "@modules/constructor";
+import { Subscription, interval, tap } from "rxjs";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
+import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 @Component({
     selector: "lz-slider-element",
@@ -44,26 +36,12 @@ import { takeUntilDestroyed, toSignal } from "@angular/core/rxjs-interop";
         class: "lz-slider-element",
     },
 })
-export class SliderElementComponent implements OnInit {
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
-    public height$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public width$: Observable<string>;
-
+export class SliderElementComponent extends BaseElementAbstract<SliderPageElement> implements OnInit {
     public children: Signal<readonly LZEditorElementComponent[]> = viewChildren(LZEditorElementComponent);
     public wrapper: Signal<ElementRef<HTMLDivElement> | undefined> = viewChild("wrapper");
 
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
-    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
-    private readonly injector = inject(Injector);
     private readonly destroyRef = inject(DestroyRef);
     private readonly elementRef = inject(ElementRef);
-
-    public readonly element: Signal<SliderPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
 
     public readonly scrollingItemsCount: Signal<number> = computed(() => this.element().settings.scrollingItemsCount);
 
@@ -111,11 +89,10 @@ export class SliderElementComponent implements OnInit {
 
     public currentPage: WritableSignal<number> = signal(0);
 
-    private readonly settings$: Observable<SliderPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
-
     public ngOnInit(): void {
-        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.height", this.injector);
+
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
 
         this.initAutoSlide();
     }

@@ -1,37 +1,27 @@
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { NgTemplateOutlet } from "@angular/common";
 
-import { Observable, map } from "rxjs";
-
 import {
-    AbstractDragService,
     AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
     AbstractEditorSelectionService,
-    AbstractSaveEditorElementsService,
     AbstractSectionEditorActionsService,
     ColumnStructure,
     Directions,
-    EDITOR_SELECTED_ELEMENT,
     ELEMENT_ID,
     SECTION_PROVIDERS,
     SectionPageElement,
-    SectionPageElementSettings,
     SectionSelectionService,
-    SitePageElementType,
     columnStructureElements,
-    processBackgroundValue,
     processBorderSideData,
     processDirectionValue,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 
 import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
-import { CdkDropList } from "@angular/cdk/drag-drop";
 import { ImageLinkPipe } from "@shared-pipes";
 import { LZEditorElementFlexComponent } from "@modules/constructor/components/editor-element/components/editor-element-flex/editor-element-flex.component";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-section-element",
@@ -40,164 +30,75 @@ import { toSignal } from "@angular/core/rxjs-interop";
     templateUrl: `./section.component.html`,
     styleUrls: ["./section.component.scss"],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    providers: [...SECTION_PROVIDERS],
+    imports: [ImageLinkPipe, NgTemplateOutlet, LZEditorElementFlexComponent],
+    standalone: true,
     host: {
         "[attr.id]": "ELEMENT_ID",
+        "[class.editor-element]": "true",
+        "[class.lz-section-element]": "true",
     },
-    providers: [...SECTION_PROVIDERS],
-    imports: [ImageLinkPipe, NgTemplateOutlet, LZEditorElementFlexComponent, CdkDropList],
-    standalone: true,
 })
 export class SectionComponent extends BaseElementAbstract<SectionPageElement> implements OnInit {
-    @HostBinding("$.style.min-height")
-    @HostListener("$.style.min-height")
-    public sectionHeight$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public sectionWidth$: Observable<string>;
-
-    @HostBinding("$.style.color")
-    @HostListener("$.style.color")
-    public sectionColor$: Observable<string>;
-
-    @HostBinding("$.style.background")
-    @HostListener("$.style.background")
-    public sectionBackground$: Observable<string>;
-
-    @HostBinding("$.style.padding")
-    @HostListener("$.style.padding")
-    public sectionPadding$: Observable<string>;
-
-    @HostBinding("$.style.margin")
-    @HostListener("$.style.margin")
-    public sectionMargin$: Observable<string>;
-
-    @HostBinding("$.style.letter-spacing")
-    @HostListener("$.style.letter-spacing")
-    public sectionLetterSpacing$: Observable<string>;
-
-    @HostBinding("$.style.opacity")
-    @HostListener("$.style.opacity")
-    public sectionOpacity$: Observable<number>;
-
-    @HostBinding("$.style.gap")
-    @HostListener("$.style.gap")
-    public gap$: Observable<string>;
-
-    @HostBinding("$.style.justify-content")
-    @HostListener("$.style.justify-content")
-    public justifyContent$: Observable<string>;
-
-    @HostBinding("$.style.flex-wrap")
-    @HostListener("$.style.flex-wrap")
-    public flexWrap$: Observable<string>;
-
-    @HostBinding("$.style.align-items")
-    @HostListener("$.style.align-items")
-    public alignItems$: Observable<string>;
-
-    @HostBinding("$.style.border-radius")
-    @HostListener("$.style.border-radius")
-    public borderRadius$: Observable<string>;
-
-    @HostBinding("$.style.border-left")
-    @HostListener("$.style.border-left")
-    public borderLeft$: Observable<string>;
-
-    @HostBinding("$.style.border-right")
-    @HostListener("$.style.border-right")
-    public borderRight$: Observable<string>;
-
-    @HostBinding("$.style.border-top")
-    @HostListener("$.style.border-top")
-    public borderTop$: Observable<string>;
-
-    @HostBinding("$.style.border-bottom")
-    @HostListener("$.style.border-bottom")
-    public borderBottom$: Observable<string>;
-
-    @HostBinding("class")
-    public readonly classes = {
-        "editor-element": true,
-        "lz-section-element": true,
-    };
-
-    private readonly service = inject(AbstractEditorElementSettingsService);
-
     private readonly editorActionsService = inject(AbstractEditorElementActionsService) as AbstractSectionEditorActionsService;
-
-    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
-
     private readonly selectionService = inject(AbstractEditorSelectionService) as SectionSelectionService;
-
     public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    public readonly connectListsId = inject(AbstractDragService).getConnectedDropListsId();
-
-    public element: Signal<SectionPageElement> = toSignal(this.editorActionsService.selectElement(this.ELEMENT_ID), {
-        initialValue: {} as SectionPageElement,
-    });
-
-    public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
     public readonly columnStructureElement = ColumnStructure;
 
     public readonly columnStructureElements = columnStructureElements;
 
-    public readonly sitePageElementType = SitePageElementType;
-
-    private sectionSettings$: Observable<SectionPageElementSettings>;
-
     public ngOnInit(): void {
-        // this.element$ = this.editorActionsService.selectElement(this.ELEMENT_ID);
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.min-height", this.injector);
 
-        this.sectionSettings$ = this.service.selectSettings(this.ELEMENT_ID);
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
 
-        this.sectionHeight$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        hostBinding(this.selectSlice("margin", processDirectionValue), "style.margin", this.injector);
 
-        this.sectionWidth$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
+        hostBinding(this.selectSlice("padding", processDirectionValue), "style.padding", this.injector);
 
-        this.sectionColor$ = this.sectionSettings$.pipe(map(settings => settings.color));
+        hostBinding(this.selectSlice("color"), "style.color", this.injector);
 
-        this.sectionBackground$ = this.sectionSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
+        hostBinding(this.selectSlice("letterSpacing", processSettingValueWithUnit), "style.letter-spacing", this.injector);
 
-        this.sectionPadding$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.padding)));
+        hostBinding(this.selectSlice("opacity"), "style.opacity", this.injector);
 
-        this.sectionMargin$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.margin)));
+        hostBinding(this.selectSlice("background"), "style.background", this.injector);
 
-        this.sectionLetterSpacing$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.letterSpacing)));
+        hostBinding(this.selectSlice("gap", processSettingValueWithUnit), "style.gap", this.injector);
 
-        this.sectionOpacity$ = this.sectionSettings$.pipe(map(settings => settings.opacity));
+        hostBinding(this.selectSlice("justifyContent"), "style.justify-content", this.injector);
 
-        this.gap$ = this.sectionSettings$.pipe(map(settings => processSettingValueWithUnit(settings.gap)));
+        hostBinding(this.selectSlice("flexWrap"), "style.flex-wrap", this.injector);
 
-        this.justifyContent$ = this.sectionSettings$.pipe(map(settings => settings.justifyContent));
+        hostBinding(this.selectSlice("alignItems"), "style.align-items", this.injector);
 
-        this.flexWrap$ = this.sectionSettings$.pipe(map(settings => settings.flexWrap));
+        hostBinding(
+            this.selectSlice("border", border => processDirectionValue(border.borderRadius)),
+            "style.border-radius",
+            this.injector,
+        );
 
-        this.alignItems$ = this.sectionSettings$.pipe(map(settings => settings.alignItems));
-
-        this.borderLeft$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.LEFT)));
-
-        this.borderRight$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.RIGHT)));
-
-        this.borderTop$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.TOP)));
-
-        this.borderBottom$ = this.sectionSettings$.pipe(map(settings => processBorderSideData(settings.border, Directions.BOTTOM)));
-
-        this.borderRadius$ = this.sectionSettings$.pipe(map(settings => processDirectionValue(settings.border.borderRadius)));
-    }
-
-    public addElement(type: SitePageElementType): void {
-        this.editorActionsService.addElementByType(type, this.ELEMENT_ID);
-    }
-
-    public deleteElement(): void {
-        this.editorActionsService.deleteElement(this.ELEMENT_ID);
-    }
-
-    public duplicateElement(): void {
-        this.editorActionsService.duplicateElementById(this.ELEMENT_ID);
+        hostBinding(
+            this.selectSlice("border", border => processBorderSideData(border, Directions.LEFT)),
+            "style.border-left",
+            this.injector,
+        );
+        hostBinding(
+            this.selectSlice("border", border => processBorderSideData(border, Directions.RIGHT)),
+            "style.border-right",
+            this.injector,
+        );
+        hostBinding(
+            this.selectSlice("border", border => processBorderSideData(border, Directions.TOP)),
+            "style.border-top",
+            this.injector,
+        );
+        hostBinding(
+            this.selectSlice("border", border => processBorderSideData(border, Directions.BOTTOM)),
+            "style.border-bottom",
+            this.injector,
+        );
     }
 
     public chooseStructure(type: ColumnStructure): void {
@@ -207,9 +108,5 @@ export class SectionComponent extends BaseElementAbstract<SectionPageElement> im
 
     public selectElement(): void {
         this.selectionService.updateSectionSelection(this.ELEMENT_ID);
-    }
-
-    public saveElement(): void {
-        this.saveEditorElementsService.saveElement(this.ELEMENT_ID);
     }
 }

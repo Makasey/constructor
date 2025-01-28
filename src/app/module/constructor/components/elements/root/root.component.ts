@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation, inject } from "@angular/core";
 import { toSignal } from "@angular/core/rxjs-interop";
 
 import { AbstractSaveEditorElementsService, EDITOR_SELECTED_ELEMENT, EDITOR_SELECTED_PAGE } from "@modules/constructor";
@@ -14,20 +14,15 @@ import { LZEditorElementFlexComponent } from "@modules/constructor/components/ed
     templateUrl: "./root.component.html",
     imports: [LZEditorElementFlexComponent],
     hostDirectives: [ToggleSelectionDirective, DeleteSelectedElementDirective, TabSelectionDirective],
+    host: {
+        "[class.lz-root-element]": "true",
+        "[class.editor-element]": "true",
+    },
 })
 export class RootComponent implements OnInit, OnDestroy {
-    @HostBinding("class")
-    public readonly hostClass = {
-        "lz-root-element": true,
-        "editor-element": true,
-    };
-
     private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
-
     public readonly autoSaveInLocaleStorage = toSignal(this.saveEditorElementsService.autoSaveElementsInLocaleStorage());
-
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
-
     public readonly selectedPage = inject(EDITOR_SELECTED_PAGE);
 
     public ngOnInit(): void {

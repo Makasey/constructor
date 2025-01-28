@@ -1,17 +1,8 @@
-import {
-    AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
-    ELEMENT_ID,
-    LZElementActionsComponent,
-    TextPageElement,
-    TextPageElementSettings,
-    processBackgroundValue,
-    processSettingValueWithUnit,
-} from "@modules/constructor";
-import { AsyncPipe, JsonPipe, NgTemplateOutlet } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { TextPageElement, processBackgroundValue, processSettingValueWithUnit } from "@modules/constructor";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-text-element",
@@ -19,57 +10,21 @@ import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directi
     encapsulation: ViewEncapsulation.None,
     templateUrl: "./text.component.html",
     styleUrls: ["./text.component.scss"],
-    imports: [JsonPipe, AsyncPipe, NgTemplateOutlet, LZElementActionsComponent],
+    imports: [],
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    host: {
+        "[class.lz-text-element]": "true",
+        "[class.editor-element]": "true",
+    },
 })
-export class TextComponent implements OnInit {
-    private readonly service = inject(AbstractEditorElementSettingsService);
-
-    @HostBinding("class")
-    public readonly hostClasses = {
-        "lz-text-element": true,
-        "editor-element": true,
-    };
-
-    @HostBinding("$.style.min-height")
-    @HostListener("$.style.min-height")
-    public textHeight$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public textWidth$: Observable<string>;
-
-    @HostBinding("$.style.color")
-    @HostListener("$.style.color")
-    public textColor$: Observable<string>;
-
-    @HostBinding("$.style.background")
-    @HostListener("$.style.background")
-    public background$: Observable<string>;
-
-    private readonly editorActionsService = inject(AbstractEditorElementActionsService<TextPageElement>);
-
-    public textText$: Observable<string>;
-
-    public element$: Observable<TextPageElement>;
-
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    private textSettings$: Observable<TextPageElementSettings>;
-
+export class TextComponent extends BaseElementAbstract<TextPageElement> implements OnInit {
     public ngOnInit(): void {
-        this.element$ = this.editorActionsService.selectElement(this.ELEMENT_ID);
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.min-height", this.injector);
 
-        this.textSettings$ = this.service.selectSettings(this.ELEMENT_ID);
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
 
-        this.textHeight$ = this.textSettings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
+        hostBinding(this.selectSlice("color"), "style.color", this.injector);
 
-        this.textWidth$ = this.textSettings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-
-        this.textColor$ = this.textSettings$.pipe(map(settings => settings.color));
-
-        this.background$ = this.textSettings$.pipe(map(settings => processBackgroundValue(settings.background)));
-
-        this.textText$ = this.textSettings$.pipe(map(settings => settings.text ?? ""));
+        hostBinding(this.selectSlice("background", processBackgroundValue), "style.background", this.injector);
     }
 }

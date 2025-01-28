@@ -1,18 +1,9 @@
-import {
-    AbstractEditorElementActionsService,
-    AbstractEditorElementSettingsService,
-    AccordionPageElement,
-    AccordionPageElementSettings,
-    ELEMENT_ID,
-    LZEditorElementComponent,
-    processDirectionValue,
-    processSettingValueWithUnit,
-} from "@modules/constructor";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, Signal, ViewEncapsulation, inject } from "@angular/core";
+import { AccordionPageElement, LZEditorElementComponent, processDirectionValue, processSettingValueWithUnit } from "@modules/constructor";
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from "@angular/core";
 
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
 import { ElementResolverDirective, TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
-import { Observable, map } from "rxjs";
-import { toSignal } from "@angular/core/rxjs-interop";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-accordion-element",
@@ -23,43 +14,15 @@ import { toSignal } from "@angular/core/rxjs-interop";
     encapsulation: ViewEncapsulation.None,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
     standalone: true,
+    host: {
+        class: "lz-accordion-element",
+    },
 })
-export class AccordionElementComponent implements OnInit {
-    @HostBinding("class.lz-accordion-element")
-    public hostClass = true;
-
-    @HostBinding("$.style.min-height")
-    @HostListener("$.style.min-height")
-    public height$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public width$: Observable<string>;
-
-    @HostBinding("$.style.padding")
-    @HostListener("$.style.padding")
-    public padding$: Observable<string>;
-
-    @HostBinding("$.style.margin")
-    @HostListener("$.style.margin")
-    public margin$: Observable<string>;
-
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    private readonly editorElementActionsService = inject(AbstractEditorElementActionsService);
-
-    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
-
-    private settings$: Observable<AccordionPageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
-
-    public element: Signal<AccordionPageElement> = toSignal(this.editorElementActionsService.selectElement(this.ELEMENT_ID));
+export class AccordionElementComponent extends BaseElementAbstract<AccordionPageElement> implements OnInit {
     public ngOnInit(): void {
-        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-
-        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-
-        this.padding$ = this.settings$.pipe(map(settings => processDirectionValue(settings.padding)));
-
-        this.margin$ = this.settings$.pipe(map(settings => processDirectionValue(settings.margin)));
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.min-height", this.injector);
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
+        hostBinding(this.selectSlice("padding", processDirectionValue), "style.padding", this.injector);
+        hostBinding(this.selectSlice("margin", processDirectionValue), "style.margin", this.injector);
     }
 }

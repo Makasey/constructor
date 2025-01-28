@@ -1,4 +1,4 @@
-@if (element$ | async; as element) {
+@if (element(); as element) {
     <h1>
         <ng-template
             [ngTemplateOutlet]="element.settings.link ? linkTemplate : textTemplate"

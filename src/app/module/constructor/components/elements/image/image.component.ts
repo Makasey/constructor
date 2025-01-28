@@ -1,78 +1,34 @@
-import { AsyncPipe, NgOptimizedImage, NgStyle } from "@angular/common";
-import { ChangeDetectionStrategy, Component, HostBinding, HostListener, OnInit, ViewEncapsulation, inject } from "@angular/core";
-import { Observable, map } from "rxjs";
+import { ChangeDetectionStrategy, Component, OnInit, Signal, ViewEncapsulation } from "@angular/core";
 
-import {
-    AbstractEditorElementSettingsService,
-    ELEMENT_ID,
-    ImagePageElementSettings,
-    LZElementActionsComponent,
-    processObjectFitPositionValue,
-    processObjectFitValue,
-    processSettingValueWithUnit,
-} from "@modules/constructor";
+import { BaseElementAbstract } from "@modules/constructor/components/elements/base-element/base-element.abstract";
+import { ImagePageElement, ObjectFit, processSettingValueWithUnit } from "@modules/constructor";
 import { TabSelectionDirective, ToggleSelectionDirective } from "@shared-directives";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-image-element",
-    imports: [NgOptimizedImage, LZElementActionsComponent, AsyncPipe, NgStyle],
+    imports: [],
     templateUrl: "./image.component.html",
     styleUrls: ["./image.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     standalone: true,
     hostDirectives: [TabSelectionDirective, ToggleSelectionDirective],
+    host: {
+        "[class.editor-element]": "true",
+        "[class.lz-image]": "true",
+    },
 })
-export class ImageComponent implements OnInit {
-    @HostBinding("class")
-    public readonly classes = {
-        "editor-element": true,
-        "lz-image": true,
-    };
-
-    @HostBinding("$.style.height")
-    @HostListener("$.style.height")
-    public height$: Observable<string>;
-
-    @HostBinding("$.style.width")
-    @HostListener("$.style.width")
-    public width$: Observable<string>;
-
-    @HostBinding("$.style.max-width")
-    @HostListener("$.style.max-width")
-    public maxWidth$: Observable<string>;
-
-    public objectFit$: Observable<string>;
-
-    public objectPosition$: Observable<string>;
-
-    public title$: Observable<string>;
-
-    public alt$: Observable<string>;
-
-    public src$: Observable<string>;
-
-    public readonly ELEMENT_ID = inject(ELEMENT_ID);
-
-    private readonly elementSettingsService = inject(AbstractEditorElementSettingsService);
-
-    private readonly settings$: Observable<ImagePageElementSettings> = this.elementSettingsService.selectSettings(this.ELEMENT_ID);
+export class ImageComponent extends BaseElementAbstract<ImagePageElement> implements OnInit {
+    public objectFit: Signal<ObjectFit> = this.selectSlice("objectFit");
+    public objectPosition: Signal<string> = this.selectSlice("objectPosition");
+    public title: Signal<string> = this.selectSlice("image", image => image.title);
+    public alt: Signal<string> = this.selectSlice("image", image => image.alt);
+    public src: Signal<string> = this.selectSlice("image", image => image.src);
 
     public ngOnInit(): void {
-        this.width$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.width)));
-
-        this.height$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.height)));
-
-        this.title$ = this.settings$.pipe(map(settings => settings.image.title));
-
-        this.alt$ = this.settings$.pipe(map(settings => settings.image.alt));
-
-        this.src$ = this.settings$.pipe(map(settings => settings.image.src));
-
-        this.maxWidth$ = this.settings$.pipe(map(settings => processSettingValueWithUnit(settings.maxWidth)));
-
-        this.objectPosition$ = this.settings$.pipe(map(settings => processObjectFitPositionValue(settings.objectPosition)));
-
-        this.objectFit$ = this.settings$.pipe(map(settings => processObjectFitValue(settings.objectFit)));
+        hostBinding(this.selectSlice("height", processSettingValueWithUnit), "style.height", this.injector);
+        hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.width", this.injector);
+        hostBinding(this.selectSlice("maxWidth", processSettingValueWithUnit), "style.max-width", this.injector);
     }
 }
