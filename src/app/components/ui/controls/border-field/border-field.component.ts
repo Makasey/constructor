@@ -5,9 +5,6 @@ import {
     Direction,
     DirectionFieldComponent,
     LZColorPickerComponent,
-    LZFileUploadComponent,
-    LZImageFieldComponent,
-    RadioGroupComponent,
     defaultDirectionValue,
 } from "@components";
 import { BorderType, defaultBorderTypeControls, defaultSizeControlUnit } from "@modules/constructor";
@@ -20,15 +17,7 @@ import { FormControl, FormsModule, NG_VALUE_ACCESSOR } from "@angular/forms";
     styleUrl: "./border-field.component.scss",
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [
-        LZColorPickerComponent,
-        FormsModule,
-        RadioGroupComponent,
-        LZImageFieldComponent,
-        LZFileUploadComponent,
-        APDropdownFieldComponent,
-        DirectionFieldComponent,
-    ],
+    imports: [LZColorPickerComponent, FormsModule, APDropdownFieldComponent, DirectionFieldComponent],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

@@ -9,7 +9,7 @@ import { TabsItemComponent } from "@components";
     styleUrls: ["./tabs.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [TabsItemComponent, NgClass, NgTemplateOutlet, CommonModule, NgClass],
+    imports: [NgClass, NgTemplateOutlet, CommonModule, NgClass],
 })
 export class LzTabsComponent implements AfterContentInit {
     @HostBinding("class.lz-tabs")

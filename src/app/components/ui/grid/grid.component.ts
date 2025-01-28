@@ -2,15 +2,17 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    HostBinding,
     Input,
+    OnInit,
     Renderer2,
     RendererStyleFlags2,
     TemplateRef,
+    computed,
     input,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName } from "@components";
+import { hostBinding } from "@modules/constructor/utils/host-binding";
 
 @Component({
     selector: "lz-grid",
@@ -18,21 +20,23 @@ import { LZGridItem, LZGridTemplateData, ViewModeTypes, columnsCountVariableName
     styleUrls: ["./grid.component.scss"],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [CommonModule],
+    host: {
+        class: "lz-grid",
+    },
 })
-export class LZGridListComponent {
-    @HostBinding("class.list-view")
-    public get selectedView(): boolean {
-        return this.viewMode() === ViewModeTypes.LIST;
-    }
-
-    @HostBinding("class.lz-grid")
-    public hostClass = true;
-
+export class LZGridListComponent implements OnInit {
     public readonly items = input.required<LZGridItem[]>();
 
     @Input({ required: true })
     public set columns(value: number) {
         this.renderer.setStyle(this.host.nativeElement, columnsCountVariableName, value, RendererStyleFlags2.DashCase);
+    }
+
+    public ngOnInit(): void {
+        hostBinding(
+            computed(() => this.viewMode() === ViewModeTypes.LIST),
+            "class.list-view",
+        );
     }
 
     public readonly itemTemplate = input<TemplateRef<LZGridTemplateData>>();
