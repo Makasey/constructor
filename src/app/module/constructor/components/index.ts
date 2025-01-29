@@ -65,6 +65,9 @@ export {
     SliderPageElementItemSettings,
     SliderElementComponent,
     SliderElementSettingsGroup,
+    LinkPageElement,
+    LinkPageElementSettings,
+    LinkElementComponent,
 } from "./elements";
 
 export { LZElementActionsComponent } from "./element-actions";

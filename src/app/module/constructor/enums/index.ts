@@ -76,6 +76,7 @@ export enum SitePageElementType {
     DIVIDER = "divider",
     SLIDER = "slider",
     SLIDER_ITEM = "slider-item",
+    LINK = "link",
 }
 
 export enum ElementHTMLTag {

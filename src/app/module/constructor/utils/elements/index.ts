@@ -36,3 +36,5 @@ export {
     processUpdateSliderItemElementSettings,
     possibleSliderItemSiteElements,
 } from "./slider-item";
+
+export { defaultLinkElementSettingsUtils, getLinkElementSettings } from "./link";

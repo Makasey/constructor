@@ -149,6 +149,10 @@ export function processElementDataCreation(item: SitePageElementUnion): SitePage
         case SitePageElementType.PAGE: {
             return processRequestElementData(item as RootElement, {});
         }
+
+        case SitePageElementType.LINK: {
+            return processRequestElementData(item as RootElement, {});
+        }
     }
 }
 

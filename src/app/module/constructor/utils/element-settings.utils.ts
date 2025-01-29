@@ -8,6 +8,7 @@ import {
     ElementSettingsWithUnit,
     ImagePageElement,
     InnerPageElement,
+    LinkPageElement,
     ObjectFit,
     ObjectFitPosition,
     SectionPageElement,
@@ -26,6 +27,7 @@ import {
     getDividerElementSettings,
     getImageSettings,
     getInnerSettings,
+    getLinkElementSettings,
     getSectionSettings,
     getSliderItemElementSettings,
     getSpacerElementSettings,
@@ -93,6 +95,9 @@ export function processElementSettings<T extends SitePageElementUnion>(type: Sit
         }
         case SitePageElementType.SLIDER_ITEM: {
             return getSliderItemElementSettings(element as SliderItemPageElement);
+        }
+        case SitePageElementType.LINK: {
+            return getLinkElementSettings(element as LinkPageElement);
         }
 
         default: {

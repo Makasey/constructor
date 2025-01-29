@@ -31,6 +31,7 @@ import {
     defaultDividerElementSettings,
     defaultImageElementSettings,
     defaultInnerElementSettings,
+    defaultLinkElementSettingsUtils,
     defaultPageElementSettings,
     defaultSectionElementSettings,
     defaultSliderElementSettings,
@@ -349,6 +350,7 @@ export const defaultPageElementSettingsMap: Record<SitePageElementType, () => Om
     [SitePageElementType.DIVIDER]: defaultDividerElementSettings(),
     [SitePageElementType.SLIDER]: defaultSliderElementSettings(),
     [SitePageElementType.SLIDER_ITEM]: defaultSliderItemElementSettings(),
+    [SitePageElementType.LINK]: defaultLinkElementSettingsUtils(),
 };
 
 export const possibleSiteElementsMap: Record<string, ElementButton[]> = {

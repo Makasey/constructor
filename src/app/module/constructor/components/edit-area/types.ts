@@ -4,6 +4,7 @@ import {
     DividerComponent,
     ImageComponent,
     InnerComponent,
+    LinkElementComponent,
     RootComponent,
     SectionComponent,
     SitePageElementType,
@@ -32,4 +33,5 @@ export const sitePageElementMap: Record<SitePageElementType, Type<unknown>> = {
     [SitePageElementType.DIVIDER]: DividerComponent,
     [SitePageElementType.SLIDER]: SliderElementComponent,
     [SitePageElementType.SLIDER_ITEM]: SliderElementItemComponent,
+    [SitePageElementType.LINK]: LinkElementComponent,
 };

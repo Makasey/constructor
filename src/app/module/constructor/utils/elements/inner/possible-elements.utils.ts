@@ -47,5 +47,10 @@ export function possibleInnerSiteElements(): ElementButton[] {
             type: SitePageElementType.SLIDER,
             icon: "bx-list-check",
         },
+        {
+            title: "Ссылка",
+            type: SitePageElementType.LINK,
+            icon: "bx-highlight",
+        },
     ];
 }

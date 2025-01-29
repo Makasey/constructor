@@ -6,6 +6,7 @@ import {
     ImagePageElementSettings,
     InnerPageElement,
     InnerPageElementSettings,
+    LinkPageElement,
     SectionPageElement,
     SectionPageElementSettings,
     SitePageElementType,
@@ -41,7 +42,8 @@ export type SitePageElementUnion =
     | AccordionPageElement
     | AccordionItemPageElement
     | SliderPageElement
-    | SliderItemPageElement;
+    | SliderItemPageElement
+    | LinkPageElement;
 
 export type SitePageElementSettingsUnion =
     | TabsPageElementSettings

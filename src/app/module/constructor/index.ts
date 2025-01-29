@@ -148,6 +148,8 @@ export {
     processUpdateSliderSettings,
     processUpdateSliderItemElementSettings,
     possibleSliderItemSiteElements,
+    defaultLinkElementSettingsUtils,
+    getLinkElementSettings,
 } from "./utils";
 
 export {
@@ -254,6 +256,9 @@ export {
     SliderPageElementItemSettings,
     SliderPageElement,
     SliderElementSettingsGroup,
+    LinkElementComponent,
+    LinkPageElement,
+    LinkPageElementSettings,
 } from "./components";
 
 export {
