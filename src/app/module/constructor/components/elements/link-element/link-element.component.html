@@ -1,1 +1,16 @@
-<p>link-element works!</p>
+@if (element(); as element) {
+    <ng-template
+        [ngTemplateOutlet]="element.settings.link ? linkTemplate : textTemplate"
+        [ngTemplateOutletContext]="{
+            text: element.settings.text,
+            value: element.settings.link,
+            target: element.settings.target,
+        }"
+    ></ng-template>
+}
+
+<ng-template #textTemplate let-text="text"> {{ text }} </ng-template>
+
+<ng-template #linkTemplate let-value="value" let-text="text" let-target="target">
+    <a [href]="value" [target]="target" [title]="value"> {{ text }} </a>
+</ng-template>

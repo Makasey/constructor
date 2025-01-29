@@ -1,8 +1,8 @@
 import { EditorState } from "@core";
-import { SitePageElementSettingsUnion, TabsPageElement } from "@modules/constructor";
+import { SitePageElementUnion, TabsPageElement } from "@modules/constructor";
 
-export function processUpdateTabsItemElementSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateTabsItemElementSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -32,7 +32,7 @@ export function processUpdateTabsItemElementSettings<K extends SitePageElementSe
                     ...item.settings,
                     ...value,
                 },
-            },
+            } as K,
             [parentId]: {
                 ...parentElement,
                 settings: {

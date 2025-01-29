@@ -51,15 +51,15 @@ export function getPreviewData(state: EditorState): CreatePreviewModel {
     };
 }
 
-export function processRequestElementSettings<T extends SitePageElementSettingsUnion>(
-    settings: T,
-    styleKeys: Record<string, TypeKeys<T>>,
-): RequestElementSettings<T> {
-    const defaultValue: RequestElementSettings<T> = {
+export function processRequestElementSettings<T extends SitePageElementUnion>(
+    settings: T["settings"],
+    styleKeys: Record<string, TypeKeys<T["settings"]>>,
+): RequestElementSettings<T["settings"]> {
+    const defaultValue: RequestElementSettings<T["settings"]> = {
         default: {},
     };
 
-    return (Object.keys(settings) as TypeKeys<T>).reduce((result, key) => {
+    return (Object.keys(settings) as TypeKeys<T["settings"]>).reduce((result, key) => {
         const settingsKey = Object.keys(styleKeys).reduce((resultKey, currentKey) => {
             const item = styleKeys[currentKey];
 
@@ -84,7 +84,7 @@ export function processRequestElementData<T extends SitePageElementUnion>(
     item: T,
     stylesKeys: Record<string, TypeKeys<T["settings"]>>,
 ): SitePageRequestElement<Partial<T["settings"]>> {
-    const processedSettings = processRequestElementSettings<T["settings"]>(item.settings, stylesKeys);
+    const processedSettings = processRequestElementSettings<T>(item.settings, stylesKeys);
 
     return {
         ...item,

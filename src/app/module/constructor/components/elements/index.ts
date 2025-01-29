@@ -50,4 +50,4 @@ export {
     SliderPageElementSettings,
     SliderElementSettingsGroup,
 } from "./slider-element";
-export { LinkElementComponent, LinkPageElement, LinkPageElementSettings } from "./link-element";
+export { LinkElementComponent, LinkPageElement, LinkPageElementSettings, defaultLinkTargetControls } from "./link-element";

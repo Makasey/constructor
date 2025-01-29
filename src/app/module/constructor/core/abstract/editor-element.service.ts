@@ -1,7 +1,6 @@
 import {
     AbstractDragService,
     ElementActionsConfigItem,
-    SitePageElement,
     SitePageElementType,
     SitePageElementUnion,
     deleteElementFromTree,
@@ -38,7 +37,7 @@ export abstract class AbstractEditorElementActionsService<T extends SitePageElem
         return this.getStoreElement("items")[id] as T;
     }
 
-    public selectItems(): Observable<Record<string, SitePageElement>> {
+    public selectItems(): Observable<Record<string, SitePageElementUnion>> {
         return this.query.select(state => state.items);
     }
 

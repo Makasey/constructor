@@ -3,7 +3,6 @@ import {
     AbstractEditorElementSettingsService,
     ColumnStructure,
     SectionPageElement,
-    SectionPageElementSettings,
     processStructureType,
 } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
@@ -26,7 +25,7 @@ export class SectionEditorActionsService extends AbstractSectionEditorActionsSer
     constructor(
         @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
-        private elementSettingsService: AbstractEditorElementSettingsService<SectionPageElementSettings>,
+        private elementSettingsService: AbstractEditorElementSettingsService<SectionPageElement>,
     ) {
         super(query, service);
     }

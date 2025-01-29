@@ -1,4 +1,4 @@
-import { BackgroundType, LinkPageElement, SitePageElementType, StyleUnit } from "@modules/constructor";
+import { BackgroundType, LinkPageElement, LinkTargetType, SitePageElementType, StyleUnit } from "@modules/constructor";
 
 export function defaultLinkElementSettingsUtils(): () => Omit<LinkPageElement, "id" | "parentId"> {
     return () => {
@@ -10,10 +10,11 @@ export function defaultLinkElementSettingsUtils(): () => Omit<LinkPageElement, "
                 text: "Hello Link",
                 link: "",
                 color: "#1b1c21",
+                target: LinkTargetType.BLANK,
                 background: { backgroundType: BackgroundType.CLASSIC },
                 width: {
-                    value: 100,
-                    unit: StyleUnit.PERCENT,
+                    value: "fit-content",
+                    unit: StyleUnit.EMPTY,
                 },
                 height: {
                     value: 40,

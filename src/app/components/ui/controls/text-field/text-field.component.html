@@ -1,7 +1,7 @@
 <ng-container>
     <div class="form-control">
         <label class="form-control-label text-field" [for]="controlModel()?.id">
-            @if (label()) {
+            @if (label() || _options.label) {
                 <span class="form-control-text" [class.focused]="!!_value || touched || _options.placeholder">
                     {{ label() || _options.label }}
                 </span>

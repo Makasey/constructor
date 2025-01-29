@@ -12,6 +12,7 @@ export {
     ObjectFitPosition,
     BackgroundType,
     ElementActionType,
+    LinkTargetType,
 } from "./enums";
 export {
     ElementSettingsWithUnit,
@@ -259,6 +260,7 @@ export {
     LinkElementComponent,
     LinkPageElement,
     LinkPageElementSettings,
+    defaultLinkTargetControls,
 } from "./components";
 
 export {

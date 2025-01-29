@@ -1,10 +1,5 @@
 import { APFormModel } from "@components";
-import {
-    AbstractEditorOperationService,
-    SitePageElementSettingsUnion,
-    processElementSettings,
-    processUpdateElementSettings,
-} from "@modules/constructor";
+import { AbstractEditorOperationService, SitePageElementUnion, processElementSettings, processUpdateElementSettings } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
 import { Inject, Injectable } from "@angular/core";
 import { NgFormsManager } from "@ngneat/forms-manager";
@@ -13,7 +8,9 @@ import { filterNilValue, logAction } from "@datorama/akita";
 import { isObjectEquals } from "@shared-utils";
 
 @Injectable()
-export abstract class AbstractEditorElementSettingsService<K = SitePageElementSettingsUnion> extends AbstractEditorOperationService {
+export abstract class AbstractEditorElementSettingsService<
+    K extends SitePageElementUnion = SitePageElementUnion,
+> extends AbstractEditorOperationService {
     protected constructor(
         protected query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
@@ -24,13 +21,13 @@ export abstract class AbstractEditorElementSettingsService<K = SitePageElementSe
 
     public abstract selectElementSettingsFormModel(): Observable<APFormModel | null>;
 
-    public abstract selectSettings(id: string): Observable<K>;
+    public abstract selectSettings(id: string): Observable<K["settings"]>;
 
-    public abstract updateElementSettings(settings: K | Partial<K>, elementId?: string): void;
+    public abstract updateElementSettings(settings: K["settings"] | Partial<K["settings"]>, elementId?: string): void;
 }
 
 @Injectable()
-export class DefaultEditorElementSettingsService<K extends SitePageElementSettingsUnion> extends AbstractEditorElementSettingsService<K> {
+export class DefaultEditorElementSettingsService<K extends SitePageElementUnion> extends AbstractEditorElementSettingsService<K> {
     constructor(
         @Inject(LzQueryInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly query: LzAbstractQuery<LzStateKey.EDITOR_STATE>,
         @Inject(LzServiceInjectionTokensMap[LzStateKey.EDITOR_STATE]) protected readonly service: AbstractLzStoreService<LzStateKey.EDITOR_STATE>,
@@ -61,7 +58,7 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSettin
             );
     }
 
-    public updateElementSettings(value: K | Partial<K>, elementId?: string): void {
+    public updateElementSettings(value: K["settings"] | Partial<K["settings"]>, elementId?: string): void {
         const id = elementId ?? this.getStoreElement("selectedElement");
 
         logAction(`Update element settings`, id, value);
@@ -71,7 +68,7 @@ export class DefaultEditorElementSettingsService<K extends SitePageElementSettin
         });
     }
 
-    public selectSettings(id: string): Observable<K> {
-        return this.query.select(state => state.items[id]?.settings as K).pipe(filterNilValue(), shareReplay(1));
+    public selectSettings(id: string): Observable<K["settings"]> {
+        return this.query.select(state => state.items[id]?.settings as K["settings"]).pipe(filterNilValue(), shareReplay(1));
     }
 }

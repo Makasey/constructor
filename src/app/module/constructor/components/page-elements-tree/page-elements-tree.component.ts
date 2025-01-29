@@ -7,7 +7,7 @@ import {
     AbstractEditorSelectionService,
     AbstractMultiPageOperationService,
     SectionPageElement,
-    SitePageElement,
+    SitePageElementUnion,
     mapElementsToTreeModel,
 } from "@modules/constructor";
 import { Tree, TreeComponent } from "@components/ui/tree/tree.component";
@@ -33,8 +33,8 @@ export class PageElementsTreeComponent {
 
     public rootElements: Signal<string[]> = toSignal(this.service.selectPageElements(), { initialValue: [] as string[] });
 
-    public items: Signal<Record<string, SitePageElement>> = toSignal(this.service.selectItems(), {
-        initialValue: {} as Record<string, SitePageElement>,
+    public items: Signal<Record<string, SitePageElementUnion>> = toSignal(this.service.selectItems(), {
+        initialValue: {} as Record<string, SitePageElementUnion>,
     });
 
     public pageTitle: Signal<string> = toSignal(

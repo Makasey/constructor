@@ -1,5 +1,5 @@
 import { APFormControl, APFormDefaultTemplateKeys, APFormModel } from "@components";
-import { DEFAULT_UPSERT_CONFIG, LinkPageElement } from "@modules/constructor";
+import { DEFAULT_UPSERT_CONFIG, LinkPageElement, defaultLinkTargetControls, linkValidator } from "@modules/constructor";
 
 function getLinkBackgroundColorControl(element: LinkPageElement): APFormControl {
     return {
@@ -38,8 +38,43 @@ function getLinkColorControl(element: LinkPageElement): APFormControl {
     };
 }
 
+function getLinkLinkElementControl(element: LinkPageElement): APFormControl {
+    return {
+        id: "link",
+        name: "link",
+        value: element.settings.link ?? "",
+        valueTemplateKey: APFormDefaultTemplateKeys.TEXT_FIELD,
+        validators: [linkValidator],
+        options: {
+            label: "Ссылка для текста",
+            maxLength: 50,
+        },
+    };
+}
+
+function getLinkElementTargetSettings(element: LinkPageElement): APFormControl {
+    return {
+        id: "target",
+        name: "target",
+        value: element.settings.target,
+        valueTemplateKey: APFormDefaultTemplateKeys.DROPDOWN_FIELD,
+        options: {
+            label: "Переход по ссылке",
+            selectLabelKey: "label",
+            selectValueKey: "value",
+            items: defaultLinkTargetControls,
+        },
+    };
+}
+
 function getLinkElementSettingsControls(element: LinkPageElement): APFormControl[] {
-    return [getLinkBackgroundColorControl(element), getLinkTextControl(element), getLinkColorControl(element)];
+    return [
+        getLinkTextControl(element),
+        getLinkLinkElementControl(element),
+        getLinkElementTargetSettings(element),
+        getLinkBackgroundColorControl(element),
+        getLinkColorControl(element),
+    ];
 }
 
 export function getLinkElementSettings(element: LinkPageElement): APFormModel {

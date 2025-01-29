@@ -76,6 +76,7 @@ export const styleUnitMap: Record<StyleUnit, string> = {
     [StyleUnit.VH]: StyleUnit.VH,
     [StyleUnit.VW]: StyleUnit.VW,
     [StyleUnit.REM]: StyleUnit.REM,
+    [StyleUnit.EMPTY]: "",
 };
 
 export const defaultSpacerElementBorderSettings: BorderFieldModel = {

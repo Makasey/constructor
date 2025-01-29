@@ -1,7 +1,7 @@
 import { EditorState } from "@core";
 import {
-    SitePageElementSettingsUnion,
     SitePageElementType,
+    SitePageElementUnion,
     TabsItemPageElement,
     TabsItemPageElementSettings,
     TabsPageElementSettings,
@@ -11,8 +11,8 @@ import {
 } from "@modules/constructor";
 import { arrayAdd } from "@datorama/akita";
 
-export function processUpdateTabsElementSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateTabsElementSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -241,7 +241,7 @@ export function processUpdateTabsElementSettings<K extends SitePageElementSettin
                     ...item.settings,
                     ...value,
                 },
-            },
+            } as K,
         },
     };
 }

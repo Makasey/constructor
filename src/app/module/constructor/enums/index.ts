@@ -9,6 +9,7 @@ export enum StyleUnit {
     REM = "rem",
     VW = "vw",
     VH = "vh",
+    EMPTY = "empty",
 }
 
 export enum ObjectFit {
@@ -114,4 +115,11 @@ export enum BorderType {
 export enum ElementActionType {
     DUPLICATE = "duplicate",
     DELETE = "delete",
+}
+
+export enum LinkTargetType {
+    BLANK = "_blank",
+    SELF = "_self",
+    PARENT = "_parent",
+    TOP = "_top",
 }

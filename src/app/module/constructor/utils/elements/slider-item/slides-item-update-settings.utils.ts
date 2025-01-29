@@ -1,8 +1,8 @@
 import { EditorState } from "@core";
-import { SitePageElementSettingsUnion, SliderPageElement } from "@modules/constructor";
+import { SitePageElementUnion, SliderPageElement } from "@modules/constructor";
 
-export function processUpdateSliderItemElementSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateSliderItemElementSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -32,7 +32,7 @@ export function processUpdateSliderItemElementSettings<K extends SitePageElement
                     ...item.settings,
                     ...value,
                 },
-            },
+            } as K,
             [parentId]: {
                 ...parentElement,
                 settings: {

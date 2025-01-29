@@ -68,6 +68,7 @@ export {
     LinkPageElement,
     LinkPageElementSettings,
     LinkElementComponent,
+    defaultLinkTargetControls,
 } from "./elements";
 
 export { LZElementActionsComponent } from "./element-actions";

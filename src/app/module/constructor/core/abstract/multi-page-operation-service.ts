@@ -1,8 +1,8 @@
 import {
     AbstractDragService,
     AbstractEditorOperationService,
-    SitePageElement,
     SitePageElementType,
+    SitePageElementUnion,
     StyleUnit,
     deleteElementFromTree,
     duplicateTreeElement,
@@ -75,7 +75,7 @@ export abstract class AbstractMultiPageOperationService extends AbstractEditorOp
 
                 const items = this.getStoreElement("items");
 
-                const updatedItems: Record<string, SitePageElement> = { ...items };
+                const updatedItems: Record<string, SitePageElementUnion> = { ...items };
 
                 const result = deleteElementFromTree(updatedItems, id);
 

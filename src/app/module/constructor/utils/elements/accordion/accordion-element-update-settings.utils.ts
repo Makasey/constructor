@@ -2,8 +2,8 @@ import {
     AccordionItemPageElement,
     AccordionItemPageElementSettings,
     AccordionPageElementSettings,
-    SitePageElementSettingsUnion,
     SitePageElementType,
+    SitePageElementUnion,
     TabsItemPageElement,
     TabsItemPageElementSettings,
     defaultPageElementSettingsMap,
@@ -13,8 +13,8 @@ import {
 import { EditorState } from "@core";
 import { arrayAdd } from "@datorama/akita";
 
-export function processUpdateAccordionElementSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateAccordionElementSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -244,7 +244,7 @@ export function processUpdateAccordionElementSettings<K extends SitePageElementS
                     ...item.settings,
                     ...value,
                 },
-            },
+            } as K,
         },
     };
 }

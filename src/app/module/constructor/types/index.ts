@@ -134,7 +134,7 @@ export type CreatePreviewModel = Readonly<{
     type: "page";
     body: {
         pages: string[];
-        elements: Record<string, SitePageElement>;
+        elements: Record<string, SitePageElementUnion>;
     };
 }>;
 

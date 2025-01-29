@@ -14,8 +14,9 @@ import {
 
 import {
     EDITOR_SELECTED_ELEMENT,
+    SitePageElement,
+    SitePageElementSettings,
     SitePageElementSettingsUnion,
-    SitePageElementSizeSettings,
     processSettingValueWithUnit,
 } from "@modules/constructor";
 import { LZElementActionsComponent } from "../element-actions";
@@ -45,7 +46,7 @@ export class LZEditorElementComponent implements OnInit {
 
     public readonly selectedElement = inject(EDITOR_SELECTED_ELEMENT);
 
-    public readonly elementSettings = provideElementSettings(this.elementId);
+    public readonly elementSettings = provideElementSettings<SitePageElement>(this.elementId);
 
     private readonly injector = inject(Injector);
 
@@ -55,12 +56,14 @@ export class LZEditorElementComponent implements OnInit {
         hostBinding(this.selectSlice("width", processSettingValueWithUnit), "style.--element-width", this.injector);
     }
 
-    private selectSlice<T extends keyof SitePageElementSizeSettings, V = SitePageElementSettingsUnion[T]>(
+    private selectSlice<T extends keyof SitePageElementSettingsUnion, V = SitePageElementSettings[T]>(
         key: T,
-        reducer: (item: SitePageElementSizeSettings[T]) => V = item => item as V,
+        reducer: (item: SitePageElementSettings[T]) => V = item => item as V,
     ): Signal<V> {
         return computed(() => {
-            const setting = this.elementSettings()[key];
+            const settings = this.elementSettings();
+
+            const setting = settings[key];
 
             return reducer(setting);
         });

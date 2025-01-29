@@ -1,8 +1,8 @@
-import { AccordionPageElement, SitePageElementSettingsUnion } from "@modules/constructor";
+import { AccordionPageElement, SitePageElementUnion } from "@modules/constructor";
 import { EditorState } from "@core";
 
-export function processUpdateAccordionItemElementSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateAccordionItemElementSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -32,7 +32,7 @@ export function processUpdateAccordionItemElementSettings<K extends SitePageElem
                     ...item.settings,
                     ...value,
                 },
-            },
+            } as K,
             [parentId]: {
                 ...parentElement,
                 settings: {

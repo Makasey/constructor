@@ -1,7 +1,7 @@
 import { EditorState } from "@core";
 import {
-    SitePageElementSettingsUnion,
     SitePageElementType,
+    SitePageElementUnion,
     SliderItemPageElement,
     SliderPageElementItemSettings,
     SliderPageElementSettings,
@@ -11,8 +11,8 @@ import {
 } from "@modules/constructor";
 import { arrayAdd } from "@datorama/akita";
 
-export function processUpdateSliderSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateSliderSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -242,7 +242,7 @@ export function processUpdateSliderSettings<K extends SitePageElementSettingsUni
                     ...item.settings,
                     ...value,
                 },
-            },
+            } as K,
         },
     };
 }

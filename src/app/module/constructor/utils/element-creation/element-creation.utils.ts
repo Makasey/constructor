@@ -1,6 +1,5 @@
 import { EditorState } from "@core";
 import {
-    SitePageElementSettingsUnion,
     SitePageElementType,
     SitePageElementUnion,
     defaultPageElementSettingsMap,
@@ -67,8 +66,8 @@ export function processElementCreation(
     }
 }
 
-export function processUpdateElementSettings<K extends SitePageElementSettingsUnion>(
-    value: K | Partial<K>,
+export function processUpdateElementSettings<K extends SitePageElementUnion>(
+    value: K["settings"] | Partial<K["settings"]>,
     state: EditorState,
     id: string,
 ): Partial<EditorState> {
@@ -110,7 +109,7 @@ export function processUpdateElementSettings<K extends SitePageElementSettingsUn
                             ...item.settings,
                             ...value,
                         },
-                    },
+                    } as K,
                 },
             };
         }

@@ -3,8 +3,8 @@ import {
     EDITOR_SELECTED_ELEMENT,
     ElementButton,
     SitePageElement,
-    SitePageElementSettingsUnion,
     SitePageElementType,
+    SitePageElementUnion,
     possibleSiteElementsMap,
 } from "@modules/constructor";
 import { DestroyRef, Injector, Signal, WritableSignal, effect, inject, runInInjectionContext, signal } from "@angular/core";
@@ -16,10 +16,10 @@ import { getRandomId } from "@shared-utils";
 import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
 
 export function deleteElementFromTree(
-    items: Record<string, SitePageElement>,
+    items: Record<string, SitePageElementUnion>,
     element: string,
     itemsToRemove: string[] = [],
-): { items: Record<string, SitePageElement>; itemsToRemove: string[] } {
+): { items: Record<string, SitePageElementUnion>; itemsToRemove: string[] } {
     const { id, children } = items[element];
 
     itemsToRemove.push(id);
@@ -41,11 +41,11 @@ export function deleteElementFromTree(
 }
 
 export function duplicateTreeElement(
-    items: Record<string, SitePageElement>,
-    targetElement: SitePageElement,
+    items: Record<string, SitePageElementUnion>,
+    targetElement: SitePageElementUnion,
     parentId: string,
     newElementId: string | null = null,
-): Record<string, SitePageElement> {
+): Record<string, SitePageElementUnion> {
     const queue = [targetElement];
     let itemId: string | null = newElementId ?? getRandomId();
     const parentCache = {
@@ -104,7 +104,7 @@ export function processPossibleElements(type: SitePageElementType): ElementButto
     }
 }
 
-export function mapElementsToTreeModel(items: Record<string, SitePageElement>, element: string): Tree | null {
+export function mapElementsToTreeModel(items: Record<string, SitePageElementUnion>, element: string): Tree | null {
     if (!items[element]) {
         return null;
     }
@@ -120,17 +120,17 @@ export function mapElementsToTreeModel(items: Record<string, SitePageElement>, e
     };
 }
 
-export function provideElementSettings<TElementSettings extends SitePageElementSettingsUnion>(
+export function provideElementSettings<TElement extends SitePageElementUnion>(
     element?: Signal<string>,
     injector?: Injector,
-): Signal<TElementSettings> {
+): Signal<TElement["settings"]> {
     injector = assertInjector(provideElementSettings, injector);
 
     return runInInjectionContext(injector, () => {
         const selectedElement = element ?? inject(EDITOR_SELECTED_ELEMENT);
-        const elementSettingsService = inject<AbstractEditorElementSettingsService<TElementSettings>>(AbstractEditorElementSettingsService);
+        const elementSettingsService = inject<AbstractEditorElementSettingsService<TElement>>(AbstractEditorElementSettingsService);
         const destroyRef = inject(DestroyRef);
-        const resultSignal: WritableSignal<TElementSettings> = signal({} as TElementSettings);
+        const resultSignal: WritableSignal<TElement["settings"]> = signal({} as TElement["settings"]);
 
         let subscription: Subscription | null = null;
 
