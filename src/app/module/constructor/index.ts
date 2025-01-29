@@ -71,10 +71,12 @@ export {
     dividerPageElementSettingsStyleKeys,
     accordionPageElementSettingsStyleKeys,
     spacerPageElementSettingsStyleKeys,
-    SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
+    SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY,
     defaultAutoSlideItems,
     sliderPageElementSettingsStyleKeys,
     sliderItemPageElementSettingsStyleKeys,
+    saveElementActionConfig,
+    SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY,
 } from "./constants";
 export {
     getDefaultSizeSettings,

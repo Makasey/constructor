@@ -375,7 +375,14 @@ export const deleteElementActionConfig: ElementActionsConfigItem = {
     action: ElementActionType.DELETE,
 };
 
-export const SAVE_ELEMENTS_LOCALE_STORAGE_KEY = "sections";
+export const saveElementActionConfig: ElementActionsConfigItem = {
+    title: "Save",
+    icon: "bx bx-save",
+    action: ElementActionType.SAVE,
+};
+
+export const SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY = "showSavedItems";
+export const SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY = "savedUpdateItems";
 
 export const defaultAutoSlideItems = [
     { label: "true", value: true, image: "eicon-plus-square" },

@@ -1,7 +1,8 @@
 import {
     AbstractEditorOperationService,
     LocalStorageService,
-    SAVE_ELEMENTS_LOCALE_STORAGE_KEY,
+    SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY,
+    SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY,
     SitePageElementUnion,
     processDuplicateElementsById,
 } from "@modules/constructor";
@@ -25,7 +26,7 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
         logAction(`Auto save elements in locale storage`);
         return interval(20000).pipe(
             tap(() => {
-                const savedElements = this.getItems();
+                const savedElements = this.getItems(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
 
                 if (!savedElements.length) {
                     return;
@@ -40,7 +41,7 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
                     return element;
                 });
 
-                this.setItems(data);
+                this.setItems(data, SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
                 this.setSaveElementsToState();
             }),
         );
@@ -55,7 +56,7 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
 
     public setSaveElementsToState(): void {
         logAction(`Set save elements from locale storage to store`);
-        const elements: SitePageElementUnion[] = this.getItems();
+        const elements: SitePageElementUnion[] = this.getItems(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
 
         this.service.updateState(state => {
             return {
@@ -76,7 +77,7 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
             };
         });
 
-        this.setItems(data);
+        this.setItems(data, SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
     }
 
     public getSavedElements(): Observable<SitePageElementUnion[]> {
@@ -85,29 +86,34 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
 
     public saveElement(id: string): void {
         logAction(`Save element ${id} to localStorage`);
-        const sections = this.getItems();
+        const showItems = this.getItems(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
         const element = this.getElement(id);
-        const isElementExists = sections.some((section: SitePageElementUnion) => section.id === id);
+        const isElementExists = showItems.some((item: SitePageElementUnion) => item.id === id);
 
         if (isElementExists) {
             return;
         }
 
-        this.setItems([...sections, element]);
+        this.setItems([...showItems, element], SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
         this.setSaveElementsToState();
     }
 
+    public getCurrentEditorItems(): SitePageElementUnion[] {
+        return Object.values(this.getStoreElement("items"));
+    }
+
     public clearSaveElements(): void {
-        this.localStorageService.removeItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY);
+        this.localStorageService.removeItem(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
+        this.localStorageService.removeItem(SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY);
     }
 
-    public getItems(): SitePageElementUnion[] {
-        const sectionsString = this.localStorageService.getItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY);
-        return sectionsString ? JSON.parse(sectionsString) : [];
+    public getItems(key: string): SitePageElementUnion[] {
+        const itemsString = this.localStorageService.getItem(key);
+        return itemsString ? JSON.parse(itemsString) : [];
     }
 
-    public setItems(sections: SitePageElementUnion[]): void {
-        this.localStorageService.setItem(SAVE_ELEMENTS_LOCALE_STORAGE_KEY, JSON.stringify(sections));
+    public setItems(items: SitePageElementUnion[], key: string): void {
+        this.localStorageService.setItem(key, JSON.stringify(items));
     }
 }
 

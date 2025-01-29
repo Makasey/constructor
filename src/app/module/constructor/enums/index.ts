@@ -115,6 +115,7 @@ export enum BorderType {
 export enum ElementActionType {
     DUPLICATE = "duplicate",
     DELETE = "delete",
+    SAVE = "save",
 }
 
 export enum LinkTargetType {

@@ -12,7 +12,13 @@ import {
     signal,
 } from "@angular/core";
 
-import { AbstractEditorElementActionsService, EDITOR_SELECTED_ELEMENT, ElementActionType, ElementActionsConfigItem } from "@modules/constructor";
+import {
+    AbstractEditorElementActionsService,
+    AbstractSaveEditorElementsService,
+    EDITOR_SELECTED_ELEMENT,
+    ElementActionType,
+    ElementActionsConfigItem,
+} from "@modules/constructor";
 
 @Component({
     selector: "lz-element-actions",
@@ -37,6 +43,8 @@ export class LZElementActionsComponent implements OnInit {
 
     private readonly editorActionsService = inject(AbstractEditorElementActionsService);
 
+    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
+
     public ngOnInit(): void {
         this.configItems.set(this.editorActionsService.processElementActions(this.elementId()));
     }
@@ -49,6 +57,10 @@ export class LZElementActionsComponent implements OnInit {
             }
             case ElementActionType.DELETE: {
                 this.editorActionsService.deleteElement(this.elementId());
+                break;
+            }
+            case ElementActionType.SAVE: {
+                this.saveEditorElementsService.saveElement(this.elementId());
                 break;
             }
         }
