@@ -46,7 +46,8 @@ export function initialEditorState(): EditorState {
         campaignName: "My best campaign",
         selectedElement: pageID,
         selectedPage: pageID,
-        savedItems: [],
+        savedShowItems: [],
+        savedUpdatedItems: {},
         pages: [pageID],
         id: undefined,
     };

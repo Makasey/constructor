@@ -21,7 +21,8 @@ export class SavedElementsComponent implements OnInit {
     public savedElements: Signal<SitePageElementUnion[] | undefined> = toSignal(this.saveEditorElementsService.getSavedElements());
 
     public ngOnInit(): void {
-        this.saveEditorElementsService.setSaveElementsToState();
+        this.saveEditorElementsService.setShowElementsToState();
+        this.saveEditorElementsService.setSavedElementsToState();
     }
 
     public addElement(elementId: string): void {

@@ -92,6 +92,59 @@ export function duplicateTreeElement(
     return items;
 }
 
+export function duplicateRelatedElements(
+    items: Record<string, SitePageElementUnion>,
+    targetElement: SitePageElementUnion,
+    parentId: string | null = null,
+    newElementId: string | null = null,
+): Record<string, SitePageElementUnion> {
+    const queue = [targetElement];
+    let itemId: string | null = newElementId ?? getRandomId();
+    const parentCache = {
+        [targetElement.parentId!]: parentId,
+    };
+    let result: Record<string, SitePageElementUnion> = {};
+
+    while (queue.length) {
+        const duplicatedElement = queue.shift()!;
+        const newElementId = itemId ?? getRandomId();
+        const parentId = parentCache[duplicatedElement.parentId!];
+
+        const newElement = {
+            ...duplicatedElement,
+            children: [],
+            parentId: parentId,
+            id: newElementId,
+        } as SitePageElement;
+
+        parentCache[duplicatedElement.id] = newElement.id;
+
+        if (!parentId) {
+            result = {
+                ...result,
+                [newElementId]: newElement,
+            };
+        } else {
+            result = {
+                ...result,
+                [parentId]: {
+                    ...result[parentId],
+                    children: arrayAdd(result[parentId]?.children, newElementId),
+                },
+                [newElementId]: newElement,
+            };
+        }
+
+        duplicatedElement.children.forEach(child => {
+            queue.push(items[child]);
+        });
+
+        itemId = null;
+    }
+
+    return result;
+}
+
 export function processPossibleElements(type: SitePageElementType): ElementButton[] {
     switch (type) {
         case SitePageElementType.SLIDER_ITEM: {

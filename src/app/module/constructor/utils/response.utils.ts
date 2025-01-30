@@ -209,6 +209,7 @@ export function processCampaignResponse(campaign: CreateCampaignModel & { id: nu
         selectedElement: pages[0],
         id: id,
         campaignName: campaignName,
-        savedItems: [],
+        savedShowItems: [],
+        savedUpdatedItems: {},
     };
 }

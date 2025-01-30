@@ -59,7 +59,13 @@ export {
     processBorderValue,
     processBorderSideData,
 } from "./element-settings.utils";
-export { deleteElementFromTree, processPossibleElements, duplicateTreeElement, mapElementsToTreeModel } from "./element.utils";
+export {
+    deleteElementFromTree,
+    processPossibleElements,
+    duplicateTreeElement,
+    mapElementsToTreeModel,
+    duplicateRelatedElements,
+} from "./element.utils";
 export { getDefaultSizeSettings } from "./element-size-settings.utils";
 export {
     getPreviewData,
