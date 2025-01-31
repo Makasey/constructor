@@ -6,7 +6,7 @@ import { switchMap } from "rxjs/operators";
 
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
-import { AbstractEditAreaService } from "@modules/constructor";
+import { AbstractEditAreaService, AbstractSaveEditorElementsService } from "@modules/constructor";
 
 import { RouteParams } from "@shared-enums";
 
@@ -27,6 +27,8 @@ export class PageComponent implements OnInit, OnDestroy {
 
     private readonly activatedRoute = inject(ActivatedRoute);
 
+    private readonly saveEditorElementsService = inject(AbstractSaveEditorElementsService);
+
     public ngOnInit(): void {
         this.activatedRoute.params
             .pipe(
@@ -42,5 +44,6 @@ export class PageComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.service.resetState();
+        this.saveEditorElementsService.clearSaveElements();
     }
 }

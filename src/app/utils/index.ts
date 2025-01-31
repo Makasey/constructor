@@ -13,3 +13,4 @@ export { filterToQueryParameter, convertRouteParamsToParamsWithConditions } from
 export { hasIntersection, defaultCollectFn, isArrayEquals } from "./array";
 export { getPaginationRequestParams, mapPaginationResponseToListModel } from "./pagination";
 export { applyPatch } from "./drag-and-drop";
+export { getLocalstorageItem, getSaveValueFromLocalStorage } from "./locale-storage";

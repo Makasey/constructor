@@ -1,15 +1,17 @@
 import {
     AbstractEditorOperationService,
+    EDITOR_SELECTED_PAGE,
     LocalStorageService,
     SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY,
     SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY,
     SitePageElementUnion,
-    processDuplicateElementsById,
+    deleteElementFromTree,
 } from "@modules/constructor";
 import { AbstractLzStoreService, LzAbstractQuery, LzQueryInjectionTokensMap, LzServiceInjectionTokensMap, LzStateKey } from "@core";
-import { Inject, Injectable, inject } from "@angular/core";
-import { Observable, interval, tap } from "rxjs";
+import { Inject, Injectable, Signal, inject } from "@angular/core";
+import { Observable } from "rxjs";
 import { duplicateRelatedElements } from "@modules/constructor/utils";
+import { getRandomId, getSaveValueFromLocalStorage } from "@shared-utils";
 import { logAction } from "@datorama/akita";
 
 @Injectable()
@@ -22,36 +24,60 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
     }
 
     public readonly localStorageService = inject(LocalStorageService);
-
-    public autoSaveElementsInLocaleStorage(): Observable<number> {
-        logAction(`Auto save elements in locale storage`);
-        return interval(20000).pipe(
-            tap(() => {
-                const savedElements = this.getItems(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
-
-                if (!savedElements.length) {
-                    return;
-                }
-
-                const currentElements = this.getStoreElement("items");
-                const data = savedElements.map(element => {
-                    if (currentElements[element.id]) {
-                        return currentElements[element.id];
-                    }
-
-                    return element;
-                });
-
-                this.setItems(data, SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
-                this.setShowElementsToState();
-            }),
-        );
-    }
+    public readonly selectedPage: Signal<string> = inject(EDITOR_SELECTED_PAGE);
 
     public setSavedElementIntoEditor(elementId: string): void {
-        logAction(`Set saved element with id: ${elementId}`);
+        const showItems = this.getItems(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
+        const savedItems = this.getItems(SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY);
+        const showItem = showItems.find(item => item.id === elementId)!;
+
+        const stack = [showItem];
+        const parentMap: Record<string, string> = {
+            null: this.selectedPage(),
+        };
+        const result: Record<string, SitePageElementUnion> = {};
+        let itemId: string | null = getRandomId();
+        const childElementId = itemId;
+
+        logAction(`Set saved element with id: ${childElementId}`);
+
+        while (stack.length) {
+            const item = stack.pop()!;
+            const parentId = parentMap[item.parentId!];
+
+            if (item?.children?.length) {
+                stack.push(...item.children.map(item => savedItems[item]));
+            }
+
+            const updatedItem = {
+                ...item,
+                parentId: parentMap[item.parentId!],
+                children: [],
+                id: itemId ?? getRandomId(),
+            };
+
+            result[updatedItem.id] = updatedItem;
+
+            if (result[parentId]) {
+                result[parentId].children.unshift(updatedItem.id);
+            }
+
+            parentMap[item.id] = updatedItem.id;
+
+            itemId = null;
+        }
+
         this.service.updateState(state => {
-            return processDuplicateElementsById(state, elementId);
+            return {
+                items: {
+                    ...state.items,
+                    ...result,
+                    [state.selectedPage]: {
+                        ...state.items[state.selectedPage],
+                        children: state.items[state.selectedPage].children.concat(childElementId),
+                    },
+                },
+            };
         });
     }
 
@@ -81,17 +107,21 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
     }
 
     public removeSavedElementById(elementId: string): void {
-        const savedElements: SitePageElementUnion[] = this.getStoreElement("savedShowItems");
-        const data: SitePageElementUnion[] = savedElements.filter(el => el.id !== elementId);
+        const savedShowElements: SitePageElementUnion[] = this.getStoreElement("savedShowItems");
+        const filteredShowElements: SitePageElementUnion[] = savedShowElements.filter(el => el.id !== elementId);
+        const savedUpdatedItems: Record<string, SitePageElementUnion> = this.getStoreElement("savedUpdatedItems");
+        const filteredSavedUpdatedItems: Record<string, SitePageElementUnion> = deleteElementFromTree(savedUpdatedItems, elementId).items;
 
         this.service.updateState(state => {
             return {
                 ...state,
-                savedShowItems: data,
+                savedShowItems: filteredShowElements,
+                savedUpdatedItems: filteredSavedUpdatedItems,
             };
         });
 
-        this.setItems(data, SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
+        this.setItems(filteredShowElements, SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
+        this.setItems(filteredSavedUpdatedItems, SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY);
     }
 
     public getSavedElements(): Observable<SitePageElementUnion[]> {
@@ -102,7 +132,6 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
         logAction(`Save element ${id} to localStorage`);
         const showItems = this.getItems(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
         const savedItems = this.getItems(SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY);
-        const element = this.getElement(id);
         const isElementExists = showItems.some((item: SitePageElementUnion) => item.id === id);
 
         if (isElementExists) {
@@ -111,10 +140,11 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
 
         const currentEditorItems = this.getCurrentEditorItems();
 
-        const filteredEditorItems = duplicateRelatedElements(currentEditorItems, currentEditorItems[id]);
+        const rootTreeElementId = getRandomId();
+        const filteredEditorItems = duplicateRelatedElements(currentEditorItems, currentEditorItems[id], null, rootTreeElementId);
 
-        this.setItems([...showItems, element], SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
-        this.setItems({ ...savedItems, filteredEditorItems }, SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY);
+        this.setItems([...showItems, filteredEditorItems[rootTreeElementId]], SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY);
+        this.setItems({ ...savedItems, ...filteredEditorItems }, SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY);
         this.setShowElementsToState();
         this.setSavedElementsToState();
     }
@@ -133,10 +163,10 @@ export abstract class AbstractSaveEditorElementsService extends AbstractEditorOp
     public getItems(key: "savedUpdateItems" | "showSavedItems"): SitePageElementUnion[] | Record<string, SitePageElementUnion> {
         const itemsString = this.localStorageService.getItem(key);
         if (key === "savedUpdateItems") {
-            return itemsString ? JSON.parse(itemsString) : ({} as Record<string, SitePageElementUnion>);
+            return getSaveValueFromLocalStorage(itemsString) ?? ({} as Record<string, SitePageElementUnion>);
         }
 
-        return itemsString ? JSON.parse(itemsString) : [];
+        return getSaveValueFromLocalStorage(itemsString) ?? [];
     }
 
     public setItems(items: unknown, key: string): void {

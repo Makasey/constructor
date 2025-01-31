@@ -1,6 +1,12 @@
 import { CampaignListState, EditorState, FilesState, ModuleState, TableModuleState, TableState, UIDataState } from "@core";
-import { SitePageElementType, StyleUnit } from "@modules/constructor";
-import { getRandomId } from "@shared-utils";
+import {
+    SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY,
+    SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY,
+    SitePageElementType,
+    SitePageElementUnion,
+    StyleUnit,
+} from "@modules/constructor";
+import { getLocalstorageItem, getRandomId } from "@shared-utils";
 
 export function initialTableModuleState(): TableModuleState {
     return {
@@ -17,6 +23,8 @@ export function initialModuleDataState(): ModuleState {
 
 export function initialEditorState(): EditorState {
     const pageID = getRandomId();
+    const savedItems = getLocalstorageItem<SitePageElementUnion[]>(SAVE_SHOW_ELEMENTS_LOCALE_STORAGE_KEY) ?? [];
+    const savedUpdatedItems = getLocalstorageItem<Record<string, SitePageElementUnion>>(SAVE_UPDATE_ITEMS_LOCALE_STORAGE_KEY) ?? {};
 
     return {
         dataState: UIDataState.LOADED,
@@ -46,8 +54,8 @@ export function initialEditorState(): EditorState {
         campaignName: "My best campaign",
         selectedElement: pageID,
         selectedPage: pageID,
-        savedShowItems: [],
-        savedUpdatedItems: {},
+        savedShowItems: savedItems,
+        savedUpdatedItems: savedUpdatedItems,
         pages: [pageID],
         id: undefined,
     };
